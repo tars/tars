@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+}
+
+.pageWrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+
+* html .pageWrapper {
+    height: 100%;
+}
+
+.pageBuffer {
+    height: 50px;
+}

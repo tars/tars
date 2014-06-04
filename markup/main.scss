@@ -1,0 +1,31 @@
+// Main styles
+
+@import 'scss/reset';
+@import 'scss/mixins';
+@import 'scss/sprite';
+@import 'scss/vars';
+@import 'scss/GUI';
+@import 'scss/common';
+
+// End main styles
+
+// Plugins stylies
+
+@import 'modules/fancybox/fancybox';
+
+// End plugins stylies
+
+
+// Site stylies
+
+@import 'modules/header/header';
+@import 'modules/footer/footer';
+
+// End site stylies
+
+
+// Custom plugins stylies
+
+@import 'modules/fancybox/fancybox-custom';
+
+// End custom plugins stylies

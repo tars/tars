@@ -1,0 +1,32 @@
+{
+  "name": "markupBuilder",
+  "version": "0.1.0",
+  "description": "markup builder on gulp",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "event-stream": "^3.1.5",
+    "gulp-clean": "^0.2.4",
+    "gulp": "^3.6.2",
+    "gulp-concat": "^2.2.0",
+    "gulp-csso": "^0.2.8",
+    "gulp-jade": "^0.5.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^0.7.1",
+    "gulp-uglifyjs": "^0.3.0",
+    "path": "^0.4.9",
+    "gulp.spritesmith": "^0.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "gulp dev, gulp clean-all, gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artem-malko"
+  },
+  "keywords": [
+    "gulp"
+  ],
+  "author": "Artem Malko",
+  "license": "ISC"
+}

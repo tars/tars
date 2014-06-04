@@ -1,0 +1,56 @@
+  $appWorld-x: 0px;
+  $appWorld-y: 0px;
+  $appWorld-offset-x: 0px;
+  $appWorld-offset-y: 0px;
+  $appWorld-width: 60px;
+  $appWorld-height: 45px;
+  $appWorld-total-width: 60px;
+  $appWorld-total-height: 157px;
+  $appWorld-image: 'sprite.png';
+  $appWorld: 0px 0px 0px 0px 60px 45px 60px 157px 'sprite.png';
+  $googlePlay-x: 0px;
+  $googlePlay-y: 45px;
+  $googlePlay-offset-x: 0px;
+  $googlePlay-offset-y: -45px;
+  $googlePlay-width: 51px;
+  $googlePlay-height: 56px;
+  $googlePlay-total-width: 60px;
+  $googlePlay-total-height: 157px;
+  $googlePlay-image: 'sprite.png';
+  $googlePlay: 0px 45px 0px -45px 51px 56px 60px 157px 'sprite.png';
+  $marketPlace-x: 0px;
+  $marketPlace-y: 101px;
+  $marketPlace-offset-x: 0px;
+  $marketPlace-offset-y: -101px;
+  $marketPlace-width: 54px;
+  $marketPlace-height: 56px;
+  $marketPlace-total-width: 60px;
+  $marketPlace-total-height: 157px;
+  $marketPlace-image: 'sprite.png';
+  $marketPlace: 0px 101px 0px -101px 54px 56px 60px 157px 'sprite.png';
+
+  @mixin sprite-width($sprite) {
+    width: nth($sprite, 5);
+  }
+
+  @mixin sprite-height($sprite) {
+    height: nth($sprite, 6);
+  }
+
+  @mixin sprite-position($sprite) {
+    $sprite-offset-x: nth($sprite, 3);
+    $sprite-offset-y: nth($sprite, 4);
+    background-position: $sprite-offset-x  $sprite-offset-y;
+  }
+
+  @mixin sprite-image($sprite) {
+    $sprite-image: nth($sprite, 9);
+    background-image: url(#{$sprite-image});
+  }
+
+  @mixin sprite($sprite) {
+    @include sprite-image($sprite);
+    @include sprite-position($sprite);
+    @include sprite-width($sprite);
+    @include sprite-height($sprite);
+  }
