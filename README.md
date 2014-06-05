@@ -18,7 +18,7 @@ Even module is a part of page, for example — «header».
 Even module has it's own temaplte, scss-files, js and images.
 In root directory of markup there are templates of pages. To create new page just create new file with the name of the page.
 
-Modules have to been included into the pages templates. Also modules colud be include into other modules.
+Modules have to been included into the pages templates. Also modules colud include other modules.
 
 
 Main commands
