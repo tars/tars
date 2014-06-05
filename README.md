@@ -30,11 +30,11 @@ Main commands
 
 `gulp clean-all` — clean dev and build directories.
 
-`gulp dev` — development task. Create compiled project and watch for changes in project's files. Call clean-dev and build -public. 
+`gulp dev` — development task. Create compiled project and watch for changes in project's files. Call clean-dev and build-dev. 
 
-`gulp build-public` — just generate public version of project.
+`gulp build-dev` — just generate public version of project.
 
-`gulp build` — create build version of project. You have to generate dev version at first (use gulp dev or gulp build-public).
+`gulp build` — create build version of project. You have to generate dev version at first (use gulp dev or gulp build-dev).
 
 File structure
 --------------
