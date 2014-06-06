@@ -16,9 +16,9 @@ Descritpion
 Main folder of project is markup. There are modules, scss-files and templates of pages.
 Even module is a part of page, for example — «header».
 Even module has it's own temaplte, scss-files, js and images.
-In root directory of markup there are templates of pages. To create new page just create new file with the name of the page.
+There are templates of pages in root directory of markup. To create new page just create new file with the name of the page.
 
-Modules have to been included into the pages templates. Also modules colud include other modules.
+Modules have to be included into the pages templates. Also modules could include other modules.
 
 
 Main commands
