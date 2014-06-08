@@ -1,6 +1,6 @@
 {
   "name": "markupBuilder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "markup builder on gulp",
   "main": "gulpfile.js",
   "dependencies": {
@@ -11,10 +11,14 @@
     "gulp-csso": "^0.2.8",
     "gulp-jade": "^0.5.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^0.7.1",
+    "gulp-sass": "0.7.1",
     "gulp-uglifyjs": "^0.3.0",
     "path": "^0.4.9",
-    "gulp.spritesmith": "^0.5.0"
+    "gulp.spritesmith": "^0.5.0",
+    "gulp-autoprefixer": "^0.0.7",
+    "gulp-jshint": "^1.6.2",
+    "gulp-strip-debug": "^0.3.0",
+    "map-stream": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
