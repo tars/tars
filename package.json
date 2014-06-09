@@ -22,7 +22,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "gulp dev, gulp clean-all, gulp build"
+    "test": "gulp dev, gulp clean-all, gulp build",
+    "preinstall": "npm i -g gulp"
   },
   "repository": {
     "type": "git",
