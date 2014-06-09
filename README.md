@@ -20,6 +20,8 @@ There are templates of pages in root directory of markup. To create new page jus
 
 Modules have to be included into the pages templates. Also modules could include other modules.
 
+You shouldn't use prefixes, autoprefixer do it itself. JSHint will check yor js-code.
+
 
 Main commands
 -------------
@@ -79,7 +81,7 @@ File structure
     - template.html — generated template
 
 
-* Build version is a copy of dev version, but has minified version of css and js files.
+* Build version is a copy of dev version, but has minified version of css and js files. There are no any console.log and debugger code in js.
 
 
 TODO

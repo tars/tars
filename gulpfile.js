@@ -1,5 +1,4 @@
 // @TODO: Внедрить gulp-changed
-
 var gulp = require('gulp'), // Сообственно Gulp JS
     jade = require('gulp-jade'), // Плагин для Jade
     sass = require('gulp-sass'), // Плагин для scss
@@ -83,6 +82,7 @@ gulp.task('plugins-and-modules-js', ['lint'], function() {
         .pipe(gulp.dest('./public/js'));
 });
 
+// Проверяем JS
 gulp.task('lint', function() {
   return gulp.src('./markup/modules/**/*.js')
     .pipe(jshint())
@@ -113,6 +113,7 @@ gulp.task('move-plugins-img', function(){
         .pipe(gulp.dest('./public/img/for-plugins'));
 });
 
+// Вырезаем console.log и debugger
 gulp.task('strip-debug', function() {
     return gulp.src('./build/js/main.js')
         .pipe(stripDebug())
@@ -131,6 +132,7 @@ gulp.task('compress-main-js', ['strip-debug'], function() {
         .pipe(gulp.dest('./build/js/'));
 });
 
+// Сжимаем css
 gulp.task('compress-css', function() {
     return gulp.src('./build/css/main.css')
         .pipe(csso('main.min.css'))
@@ -166,6 +168,7 @@ gulp.task('clean-dev', function() {
 gulp.task('clean-all', ['clean-dev', 'clean-build'], function() {
 });
 
+// Сборка версии для разработки без вотчеров
 gulp.task('build-dev', ['clean-dev'], function() {
     gulp.start('sprite');
     gulp.start('scss');    
@@ -193,7 +196,6 @@ gulp.task('dev', function() {
     });
     gulp.watch('./markup/modules/**/*.js', function() {
         gulp.start('plugins-and-modules-js');
-        gulp.start('lint');
     });
     gulp.watch('./js/plugins/*.js', function() {
         gulp.start('plugins-and-modules-js');
