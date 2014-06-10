@@ -1,6 +1,6 @@
 {
   "name": "markupBuilder",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "markup builder on gulp",
   "main": "gulpfile.js",
   "dependencies": {
@@ -18,7 +18,11 @@
     "gulp-autoprefixer": "^0.0.7",
     "gulp-jshint": "^1.6.2",
     "gulp-strip-debug": "^0.3.0",
-    "map-stream": "^0.1.0"
+    "map-stream": "^0.1.0",
+    "jshint-stylish": "^0.2.0",
+    "gulp-util": "^2.2.16",
+    "gulp-jscs": "^0.5.0"
+
   },
   "devDependencies": {},
   "scripts": {
@@ -27,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artem-malko"
+    "url": "https://github.com/artem-malko/markupBuilder"
   },
   "keywords": [
     "gulp"

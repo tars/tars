@@ -1,4 +1,4 @@
-// @TODO: Внедрить gulp-changed
+// @TODO: Внедрить gulp-changed, использовать gulp-util на полную
 var gulp = require('gulp'), // Сообственно Gulp JS
     jade = require('gulp-jade'), // Плагин для Jade
     sass = require('gulp-sass'), // Плагин для scss
@@ -10,32 +10,26 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     path = require('path'), // Управление путями
     rename = require('gulp-rename'), // Переименовывание файлов
     jshint = require('gulp-jshint'), // Следим за js
-    map = require('map-stream'),  // Утилитка для мапинга
     stripDebug = require('gulp-strip-debug'), // Вырезаем console.log, debugger
-    autoprefix = require('gulp-autoprefixer'); // Автопрефиксер для css
+    autoprefix = require('gulp-autoprefixer'), // Автопрефиксер для css
+    jscs = require('gulp-jscs'),
+    gutil = require('gulp-util'),
 
-// Пути, для копирования файлов из dev в build
-// @TODO: Избавиться от этого треша!!!
-var filesToMove = [
+    dev = gutil.env.dev,
+    relese = gutil.env.dev,
+    all = gutil.env.all,
+    build = gutil.env.build,
+
+    // Пути, для копирования файлов изx dev в build
+    // @TODO: Избавиться от этого треша!!!
+    filesToMove = [
         './public/*.*',
         './public/**/*.*',
         './public/**/**/*.*',
         './public/**/**/**/*.*',
-        './public/**/**/**/**/*.*'
+        './public/**/**/**/**/*.*',
+        './public/**/**/**/**/**/*.*'
     ]; 
-
-// Кастомный репортер ошибок jshint
-var myReporter = map(function (file, cb) {
-  if (!file.jshint.success) {
-    console.log('JSHINT fail in file: '+file.path);
-    file.jshint.results.forEach(function (err) {
-      if (err) {
-        console.log(' '+file.path + ': line ' + err.error.line + ', col ' + err.error.character + ', ' + err.error.reason);
-      }
-    });
-  }
-  cb(null, file);
-});    
 
 // Собираем спрайт
 gulp.task('sprite', function () {
@@ -52,8 +46,9 @@ gulp.task('sprite', function () {
 gulp.task('scss', function() {
     gulp.src('./markup/*.scss')
         .pipe(sass())
-        .pipe(autoprefix("last 2 version", "> 1%", "ie 8", { cascade: true })) // Поддерживаем ie8 и последние 2 версии всех браузеров
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+    .pipe(autoprefix('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4', { cascade: true })) 
+    .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
     .pipe(gulp.dest('./public/css/'));
 });
 
@@ -63,14 +58,14 @@ gulp.task('jade', function() {
         .pipe(jade({
             pretty: true
         }))
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
     .pipe(gulp.dest('./public/'));
 });
 
 // Собираем JS доп. библиотек и плагинов, которые должны быть в отдельных файлах
 gulp.task('vendors-js', function() {
     return gulp.src('./js/vendors/*.js')
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/js/vendors'));
 });
 
@@ -78,7 +73,7 @@ gulp.task('vendors-js', function() {
 gulp.task('plugins-and-modules-js', ['lint'], function() {
     return gulp.src(['./js/plugins/*.js', './markup/modules/**/*.js'])
         .pipe(concat('main.js'))
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/js'));
 });
 
@@ -86,7 +81,8 @@ gulp.task('plugins-and-modules-js', ['lint'], function() {
 gulp.task('lint', function() {
   return gulp.src('./markup/modules/**/*.js')
     .pipe(jshint())
-    .pipe(myReporter);
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jscs());
 });
 
 // Переносим картинки из assets модулей
@@ -95,21 +91,21 @@ gulp.task('move-assets', function(){
         .pipe(rename(function(path) {
             path.dirname = path.dirname.replace(new RegExp("[a-zA-Z0-9]+\/assets",'g'), '');
         }))
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/img/assets'));
 }); 
 
 // Переносим картинки из папки content
 gulp.task('move-content-img', function(){
     return gulp.src('./images/content/*.*')
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/img/content'));
 });
 
 // Переносим картинки из папки for-plugins
 gulp.task('move-plugins-img', function(){
     return gulp.src(['./images/for-plugins/*.*', './images/for-plugins/**/*.*'])
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/img/for-plugins'));
 });
 
@@ -117,7 +113,7 @@ gulp.task('move-plugins-img', function(){
 gulp.task('strip-debug', function() {
     return gulp.src('./build/js/main.js')
         .pipe(stripDebug())
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./build/js/'));
 });
 
@@ -128,7 +124,7 @@ gulp.task('compress-main-js', ['strip-debug'], function() {
         .pipe(uglify('main.min.js', {
             mangle: false
         }))
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./build/js/'));
 });
 
@@ -139,28 +135,28 @@ gulp.task('compress-css', function() {
         .pipe(rename({
             suffix: ".min"
         }))
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./build/css/'));
 })
 
 // Переносим файлы из рабзработки в продакшн
 gulp.task('pre-build', ['clean-build'], function(){
     return gulp.src(filesToMove, { base: './public/' })
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./build'));
 });
 
 // Чистим директорию для продакшена 
 gulp.task('clean-build', function() {
     return gulp.src('./build/', {read: false})
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(clean());
 });
 
 // Чистим директорию для разработки 
 gulp.task('clean-dev', function() {
     return gulp.src('./public/', {read: false})
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(clean());
 });
 
