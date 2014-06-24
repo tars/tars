@@ -1,16 +1,3 @@
-@mixin user-select($user-select: none){
-    -ms-user-select: $user-select;
-    -webkit-user-select: $user-select;
-    -moz-user-select: $user-select;
-    user-select: $user-select;
-}
-    
-@mixin box-sizing($box-sizing: border-box) {
-    -webkit-box-sizing: $box-sizing;
-    -moz-box-sizing: $box-sizing;
-    box-sizing: $box-sizing;
-}
-
 @mixin nl {
     margin: 0;
     padding: 0;

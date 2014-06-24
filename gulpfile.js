@@ -81,7 +81,7 @@ gulp.task('vendors-js', function() {
 
 // Собираем JS модулей и плагинов
 gulp.task('plugins-and-modules-js', ['lint'], function() {
-    return gulp.src(['./js/plugins/*.js', './markup/modules/**/*.js'])
+    return gulp.src(['./js/plugins/*.js', './js/plugins/**/*.js', './markup/modules/**/*.js'])
         .pipe(concat('main.js'))
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/js'));
