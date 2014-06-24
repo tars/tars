@@ -1,41 +1,45 @@
 {
   "name": "markupBuilder",
   "version": "0.2.1",
-  "description": "markup builder on gulp",
+  "description": "markupBuilder =============",
   "main": "gulpfile.js",
   "dependencies": {
     "event-stream": "^3.1.5",
-    "gulp-clean": "^0.2.4",
-    "gulp": "^3.6.2",
-    "gulp-concat": "^2.2.0",
-    "gulp-csso": "^0.2.8",
-    "gulp-jade": "^0.5.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-sass": "0.7.1",
-    "gulp-uglifyjs": "^0.3.0",
-    "path": "^0.4.9",
-    "gulp.spritesmith": "^0.5.0",
     "gulp-autoprefixer": "^0.0.7",
-    "gulp-jshint": "^1.6.2",
+    "gulp": "^3.8.1",
+    "gulp-clean": "^0.2.4",
+    "gulp-concat": "^2.2.0",
+    "gulp-csso": "^0.2.9",
+    "gulp-jade": "^0.5.0",
+    "gulp-jscs": "^0.5.0",
+    "gulp-jshint": "^1.6.3",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "0.7.0",
     "gulp-strip-debug": "^0.3.0",
-    "map-stream": "^0.1.0",
+    "gulp-uglifyjs": "^0.3.0",
+    "gulp-util": "^2.2.17",
+    "gulp.spritesmith": "^0.5.1",
     "jshint-stylish": "^0.2.0",
-    "gulp-util": "^2.2.16",
-    "gulp-jscs": "^0.5.0"
-
+    "map-stream": "^0.1.0",
+    "path": "^0.4.9",
+    "run-sequence": "^0.3.6",
+    "gulp-cached": "^0.0.3"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "gulp dev, gulp clean-all, gulp build",
-    "preinstall": "npm i -g gulp"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artem-malko/markupBuilder"
+    "url": "https://github.com/artem-malko/markupBuilder.git"
   },
+  "author": "Artem Malko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artem-malko/markupBuilder/issues"
+  },
+  "homepage": "https://github.com/artem-malko/markupBuilder",
   "keywords": [
     "gulp"
-  ],
-  "author": "Artem Malko",
-  "license": "ISC"
+  ]
 }

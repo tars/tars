@@ -1,4 +1,4 @@
-// @TODO: Внедрить gulp-changed, использовать gulp-util на полную
+// @TODO: Использовать gulp-util на полную
 var gulp = require('gulp'), // Сообственно Gulp JS
     jade = require('gulp-jade'), // Плагин для Jade
     sass = require('gulp-sass'), // Плагин для scss
@@ -14,6 +14,8 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     autoprefix = require('gulp-autoprefixer'), // Автопрефиксер для css
     jscs = require('gulp-jscs'),
     gutil = require('gulp-util'),
+    cache = require('gulp-cached'),
+    runSequence = require('run-sequence'),
 
     dev = gutil.env.dev,
     relese = gutil.env.dev,
@@ -31,9 +33,17 @@ var gulp = require('gulp'), // Сообственно Gulp JS
         './public/**/**/**/**/**/*.*'
     ]; 
 
+
+    cache.caches = {};
+
+function clearCaches() {
+    delete cache.caches['linting', 'move-assets', 'move-content-img', 'move-plugins-img'];
+}    
+
 // Собираем спрайт
 gulp.task('sprite', function () {
   var spriteData = gulp.src('./images/for-sprite/*.png')
+
     .pipe(spritesmith({
         imgName: 'sprite.png',
         cssName: 'sprite.scss'
@@ -80,6 +90,7 @@ gulp.task('plugins-and-modules-js', ['lint'], function() {
 // Проверяем JS
 gulp.task('lint', function() {
   return gulp.src('./markup/modules/**/*.js')
+    .pipe(cache('linting'))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jscs());
@@ -88,6 +99,7 @@ gulp.task('lint', function() {
 // Переносим картинки из assets модулей
 gulp.task('move-assets', function(){
     return gulp.src('./markup/modules/**/assets/*.*')
+        .pipe(cache('move-assets'))
         .pipe(rename(function(path) {
             path.dirname = path.dirname.replace(new RegExp("[a-zA-Z0-9]+\/assets",'g'), '');
         }))
@@ -98,6 +110,7 @@ gulp.task('move-assets', function(){
 // Переносим картинки из папки content
 gulp.task('move-content-img', function(){
     return gulp.src('./images/content/*.*')
+        .pipe(cache('move-content-img'))
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/img/content'));
 });
@@ -105,6 +118,7 @@ gulp.task('move-content-img', function(){
 // Переносим картинки из папки for-plugins
 gulp.task('move-plugins-img', function(){
     return gulp.src(['./images/for-plugins/*.*', './images/for-plugins/**/*.*'])
+        .pipe(cache('move-plugins-img'))
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/img/for-plugins'));
 });
@@ -155,6 +169,8 @@ gulp.task('clean-build', function() {
 
 // Чистим директорию для разработки 
 gulp.task('clean-dev', function() {
+    clearCaches();
+
     return gulp.src('./public/', {read: false})
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(clean());
@@ -165,15 +181,21 @@ gulp.task('clean-all', ['clean-dev', 'clean-build'], function() {
 });
 
 // Сборка версии для разработки без вотчеров
-gulp.task('build-dev', ['clean-dev'], function() {
-    gulp.start('sprite');
-    gulp.start('scss');    
-    gulp.start('vendors-js');
-    gulp.start('plugins-and-modules-js');
-    gulp.start('jade');
-    gulp.start('move-assets');
-    gulp.start('move-content-img');
-    gulp.start('move-plugins-img');
+gulp.task('build-dev', function(callback) {
+    runSequence(
+        'clean-dev',
+        'sprite',
+        'scss', 
+        [
+            'vendors-js', 
+            'plugins-and-modules-js', 
+            'jade',
+            'move-assets',
+            'move-content-img',
+            'move-plugins-img'
+        ], 
+        callback
+    );
 });
 
 // Запуск gulp dev
