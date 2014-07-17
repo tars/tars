@@ -46,7 +46,8 @@ gulp.task('sprite', function () {
 
     .pipe(spritesmith({
         imgName: 'sprite.png',
-        cssName: 'sprite.scss'
+        cssName: 'sprite.scss',
+        padding: 4
   }));
   spriteData.img.pipe(gulp.dest('./public/img/'));
   spriteData.css.pipe(gulp.dest('./markup/scss/'));
