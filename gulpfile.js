@@ -6,7 +6,7 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     csso = require('gulp-csso'), // Минификация css
     concat = require('gulp-concat'), // Склейка файлов
     spritesmith = require('gulp.spritesmith'), // Склейка спрайтов
-    clean = require('gulp-clean'), // Удаление файлов
+    rimraf = require('gulp-rimraf'), // Удаление файлов
     path = require('path'), // Управление путями
     rename = require('gulp-rename'), // Переименовывание файлов
     jshint = require('gulp-jshint'), // Следим за js
@@ -171,7 +171,7 @@ gulp.task('pre-build', ['clean-build'], function(){
 gulp.task('clean-build', function() {
     return gulp.src('./build/', {read: false})
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(clean());
+        .pipe(rimraf());
 });
 
 // Чистим директорию для разработки 
@@ -180,7 +180,7 @@ gulp.task('clean-dev', function() {
 
     return gulp.src('./public/', {read: false})
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(clean());
+        .pipe(rimraf());
 });
 
 // Чистим и продакшн и разработку
