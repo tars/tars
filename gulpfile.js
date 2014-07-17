@@ -123,6 +123,13 @@ gulp.task('move-plugins-img', function(){
         .pipe(gulp.dest('./public/img/for-plugins'));
 });
 
+// Переносим шрифты
+gulp.task('move-fonts', function(){
+    return gulp.src(['./fonts/*.*', './fonts/**/*.*'])
+        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(gulp.dest('./public/fonts'));
+});
+
 // Вырезаем console.log и debugger
 gulp.task('strip-debug', function() {
     return gulp.src('./build/js/main.js')
@@ -181,7 +188,7 @@ gulp.task('clean-all', ['clean-dev', 'clean-build'], function() {
 });
 
 // Сборка версии для разработки без вотчеров
-gulp.task('build-dev', function(callback) {
+gulp.task('build-dev', function(cb) {
     runSequence(
         'clean-dev',
         'sprite',
@@ -192,9 +199,10 @@ gulp.task('build-dev', function(callback) {
             'jade',
             'move-assets',
             'move-content-img',
-            'move-plugins-img'
+            'move-plugins-img',
+            'move-fonts'
         ], 
-        callback
+        cb
     );
 });
 
@@ -227,11 +235,19 @@ gulp.task('dev', function() {
     gulp.watch(['./images/for-plugins/*.*', './images/for-plugins/**/*.*'], function() {
         gulp.start('move-plugins-img');
     });
+    gulp.watch(['./fonts/*.*', './fonts/**/*.*'], function() {
+        gulp.start('move-fonts');
+    });
 });
 
 // Сборка всей верстки на выкладку
-gulp.task('build', ['pre-build'], function() {
-    gulp.start('strip-debug');
-    gulp.start('compress-main-js');
-    gulp.start('compress-css'); 
+gulp.task('build', function(cb) {
+    runSequence(
+        'build-dev',
+        'pre-build',
+        'strip-debug',
+        'compress-main-js',
+        'compress-css',
+        cb
+    );
 });

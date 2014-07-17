@@ -36,7 +36,7 @@ Main commands
 
 `gulp build-dev` — just generate public version of project.
 
-`gulp build` — create build version of project. You have to generate dev version at first (use gulp dev or gulp build-dev).
+`gulp build` — create build version of project.
 
 File structure
 --------------
@@ -48,6 +48,7 @@ File structure
         - for-plugins — images for plugins. There are could be files and directories
         - for-sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
     - js — folder for js.
+    - fonts — folder for fonts.
     - markup — main folder, has modules, scss and templates of pages.
         - modules — folder with modules.
             - simple-module — folder with module.
@@ -69,6 +70,7 @@ File structure
 * Dev version of compiled project
     
     - css — folder with css.
+    - fonts — folder with fonts.
     - img — folder with images.
         - assets — folder with images for modules.
         - content — folder with images for content.
@@ -91,4 +93,8 @@ TODO
 * Watch new files (Mac OS)
 * Livereload (may be)
 * Creating zip-archive of build version
-
+* Font-generator
+* Notify including
+* Each task in their own folders
+* Jshint for scss
+* Less (may be)
