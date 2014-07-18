@@ -40,7 +40,7 @@ Main commands
 
 `gulp build` — create build version of project.
 
-You can use key `--gf`, if you need to generate woff, eot and svg files of your font. 
+If you need to generate woff, eot and svg files of your font, you can use key `--gf`. 
 Example: `gulp build --gf`. This command build project and generate fonts files into font folder in build. All you is ttf-file of your font in folder fonts in root directory.
 
 File structure
