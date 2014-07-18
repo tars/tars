@@ -16,11 +16,14 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     gutil = require('gulp-util'),
     cache = require('gulp-cached'),
     runSequence = require('run-sequence'),
+    run = require('gulp-run'),
+    gulpif = require('gulp-if'),
 
     dev = gutil.env.dev,
     relese = gutil.env.dev,
     all = gutil.env.all,
     build = gutil.env.build,
+    gf = gutil.env.gf,
 
     // Пути, для копирования файлов изx dev в build
     // @TODO: Избавиться от этого треша!!!
@@ -36,9 +39,10 @@ var gulp = require('gulp'), // Сообственно Gulp JS
 
     cache.caches = {};
 
+// Сброс кеша
 function clearCaches() {
     delete cache.caches['linting', 'move-assets', 'move-content-img', 'move-plugins-img'];
-}    
+}   
 
 // Собираем спрайт
 gulp.task('sprite', function () {
@@ -124,9 +128,16 @@ gulp.task('move-plugins-img', function(){
         .pipe(gulp.dest('./public/img/for-plugins'));
 });
 
+
+// Генерируем файлы шрифта
+gulp.task('generate-fonts', function () {
+  return gulp.src('./fonts/')             
+            .pipe(gulpif(gf, run('webfonts "./public/fonts/"')));
+});
+
 // Переносим шрифты
 gulp.task('move-fonts', function(){
-    return gulp.src(['./fonts/*.*', './fonts/**/*.*'])
+    return gulp.src('./fonts/*.*')
         .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/fonts'));
 });
@@ -200,9 +211,10 @@ gulp.task('build-dev', function(cb) {
             'jade',
             'move-assets',
             'move-content-img',
-            'move-plugins-img',
-            'move-fonts'
-        ], 
+            'move-plugins-img'
+        ],
+        'move-fonts',
+        'generate-fonts',
         cb
     );
 });
@@ -212,32 +224,44 @@ gulp.task('dev', function() {
     // Предварительная сборка проекта
     gulp.start('build-dev');
 
-    gulp.watch('./images/for-sprite/*.png', function() {
-        gulp.start('sprite');
-    });    
-    gulp.watch(['./markup/**/**/*.scss', './markup/*.scss'], function() {
+    gulp.watch(['./markup/modules/**/*.scss', './markup/*.scss'], function() {
         gulp.start('scss');
     });
+
+    gulp.watch('./images/for-sprite/*.png', function() {
+        gulp.start('sprite');
+    });
+
     gulp.watch(['./markup/*.jade', './markup/**/**/*.jade'], function() {
         gulp.start('jade');
     });
+
     gulp.watch('./markup/modules/**/*.js', function() {
         gulp.start('plugins-and-modules-js');
     });
+
     gulp.watch('./js/plugins/*.js', function() {
         gulp.start('plugins-and-modules-js');
     });
+
     gulp.watch('./markup/modules/**/assets/*.*', function() {
         gulp.start('move-assets');
     });
+
     gulp.watch('./images/content/*.*', function() {
         gulp.start('move-content-img');
     });
+
     gulp.watch(['./images/for-plugins/*.*', './images/for-plugins/**/*.*'], function() {
         gulp.start('move-plugins-img');
     });
-    gulp.watch(['./fonts/*.*', './fonts/**/*.*'], function() {
-        gulp.start('move-fonts');
+
+    gulp.watch(['./fonts/*.*'], function(cb) {
+        runSequence(
+            'move-fonts',
+            'generate-fonts',
+            cb
+        );
     });
 });
 

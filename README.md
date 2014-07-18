@@ -10,6 +10,8 @@ Installation
 
     npm i or npm install
 
+Install gulp and webfonts globaly and all dependencies.    
+
 Descritpion
 -----------
 
@@ -37,6 +39,9 @@ Main commands
 `gulp build-dev` — just generate public version of project.
 
 `gulp build` — create build version of project.
+
+You can use key `--gf`, if you need to generate woff, eot and svg files of your font. 
+Example: `gulp build --gf`. This command build project and generate fonts files into font folder in build. All you is ttf-file of your font in folder fonts in root directory.
 
 File structure
 --------------

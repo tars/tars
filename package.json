@@ -23,11 +23,14 @@
     "map-stream": ">=0.1.0",
     "path": ">=0.4.9",
     "run-sequence": ">=0.3.6",
-    "gulp-cached": ">=0.0.3"
+    "gulp-cached": ">=0.0.3",
+    "gulp-run": ">=1.6.2",
+    "gulp-if": ">=1.2.2"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "npm i -g gulp",
+    "preinstall": "npm i -g webfonts"
   },
   "repository": {
     "type": "git",
