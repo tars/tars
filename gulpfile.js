@@ -255,7 +255,7 @@ gulp.task('build-dev', function(cb) {
 gulp.task('init', function() {
     gulp.src('')
         .pipe(gulpif(ms, 
-            run('mkdir js\plugins images images\content images\plugins images\sprite fonts markup\modules\_template\assets'), 
+            run('mkdir js\\plugins images images\\content images\\plugins images\\sprite fonts markup\\modules\\_template\\assets'), 
             run('mkdir js/plugins images images/content images/plugins images/sprite fonts markup/modules/_template/assets')
             )
         );
