@@ -2,6 +2,7 @@ markupBuilder
 =============
 
 Markup builder on gulp
+Use Jade as templater, scss as preprocessor for css.
 
 You have to install `nodeJS` and `npm` for using markupBuilder.
 
