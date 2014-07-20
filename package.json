@@ -1,6 +1,6 @@
 {
   "name": "markupBuilder",
-  "version": "0.5.0",
+  "version": "0.3.0",
   "description": "markupBuilder =============",
   "main": "gulpfile.js",
   "dependencies": {
