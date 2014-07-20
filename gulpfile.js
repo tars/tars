@@ -86,6 +86,7 @@ gulp.task('make-sprite', function () {
 
     .pipe(spritesmith({
         imgName: 'sprite.png',
+        imgPath: '../img/sprite.png',
         cssName: 'sprite.scss',
         padding: 4
   }));
@@ -97,9 +98,9 @@ gulp.task('make-sprite', function () {
 gulp.task('compile-scss', function() {
     gulp.src('./markup/*.scss')
         .pipe(sass())
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
     .pipe(autoprefix('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4', { cascade: true })) 
-    .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+    .on('error', gutil.log) // Output errors and continue
     .pipe(gulp.dest('./dev/css/'));
 });
 
@@ -109,14 +110,14 @@ gulp.task('compile-jade', function() {
         .pipe(jade({
             pretty: true
         }))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
     .pipe(gulp.dest('./dev/'));
 });
 
 // Copy JS-files for libs that have to be in separate files
 gulp.task('copy-vendors-js', function() {
     return gulp.src('./js/vendors/*.js')
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/js/vendors'));
 });
 
@@ -124,7 +125,7 @@ gulp.task('copy-vendors-js', function() {
 gulp.task('concat-lint-plugins-and-modules-js', ['lint'], function() {
     return gulp.src(['./js/plugins/*.js', './js/plugins/**/*.js', './markup/modules/**/*.js'])
         .pipe(concat('main.js'))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/js'));
 });
 
@@ -144,7 +145,7 @@ gulp.task('move-assets', function(){
         .pipe(rename(function(path) {
             path.dirname = path.dirname.replace(new RegExp("[a-zA-Z0-9]+\/assets",'g'), '');
         }))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/img/assets'));
 }); 
 
@@ -152,7 +153,7 @@ gulp.task('move-assets', function(){
 gulp.task('move-content-img', function(){
     return gulp.src('./images/content/*.*')
         .pipe(cache('move-content-img'))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/img/content'));
 });
 
@@ -160,7 +161,7 @@ gulp.task('move-content-img', function(){
 gulp.task('move-plugins-img', function(){
     return gulp.src(['./images/plugins/*.*', './images/plugins/**/*.*'])
         .pipe(cache('move-plugins-img'))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/img/plugins'));
 });
 
@@ -174,7 +175,7 @@ gulp.task('generate-fonts', function () {
 // Move ttf-files fonts to dev directory
 gulp.task('move-fonts', function(){
     return gulp.src('./fonts/*.*')
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./dev/fonts'));
 });
 
@@ -182,7 +183,7 @@ gulp.task('move-fonts', function(){
 gulp.task('strip-debug', function() {
     return gulp.src('./build' + buildVersion + '/js/main.js')
         .pipe(stripDebug())
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./build' + buildVersion + '/js/'));
 });
 
@@ -192,7 +193,7 @@ gulp.task('compress-main-js', ['strip-debug'], function() {
         .pipe(uglify('main.min.js', {
             mangle: false
         }))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./build' + buildVersion + '/js/'));
 });
 
@@ -203,7 +204,7 @@ gulp.task('compress-css', function() {
         .pipe(rename({
             suffix: ".min"
         }))
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./build' + buildVersion + '/css/'));
 })
 
@@ -216,7 +217,7 @@ gulp.task('pre-build', function(){
     gutil.log('Build version is: ',buildVersion);
 
     return gulp.src(filesToMove, { base: './dev/' })
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(gulp.dest('./build' + buildVersion));
 });
 
@@ -225,7 +226,7 @@ gulp.task('clean', function() {
     clearCaches();
 
     return gulp.src('./dev/', {read: false})
-        .on('error', gutil.log) // Если есть ошибки, выводим и продолжаем
+        .on('error', gutil.log) // Output errors and continue
         .pipe(rimraf());
 });
 

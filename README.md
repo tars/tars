@@ -3,45 +3,42 @@ markupBuilder
 
 Markup builder on gulp
 
-You have to install `nodeJS` and `npm` to use markupBuilder.
+You have to install `nodeJS` and `npm` for using markupBuilder.
 
 Installation
 ------------
 
     npm i or npm install
 
-Install gulp and webfonts globaly and all dependencies.    
+Install gulp and webfonts globaly and all dependencies.  
+Also create fonts, images (with subdirs) and js/plugins directories. Create assets folder inside template module.  
 
 Descritpion
 -----------
 
-Main folder of project is markup. There are modules, scss-files and templates of pages.
+Markup is the main folder of project. There are modules, scss-files and templates of pages.
 Even module is a part of page, for example — «header».
 Even module has it's own temaplte, scss-files, js and images.
 There are templates of pages in root directory of markup. To create new page just create new file with the name of the page.
 
 Modules have to be included into the pages templates. Also modules could include other modules.
 
-You shouldn't use prefixes, autoprefixer do it itself. JSHint will check yor js-code.
+You shouldn't use prefixes in css, autoprefixer do it itself. JSHint will check yor js-code.
 
 
 Main commands
 -------------
 
-`gulp clean-dev` — clean dev directory (public). Delete this directory.
+`gulp clean` — clean dev directory.
 
-`gulp clean-build` — clean build directory (build). Delete this directory.
+`gulp dev` — development task. Create compiled project and watch for changes in project's files. Call clean task.
 
-`gulp clean-all` — clean dev and build directories.
-
-`gulp dev` — development task. Create compiled project and watch for changes in project's files. Call clean-dev and build-dev. 
-
-`gulp build-dev` — just generate public version of project.
+`gulp build-dev` — just generate dev version of project.
 
 `gulp build` — create build version of project.
 
 If you need to generate woff, eot and svg files of your font, you can use key `--gf`. 
-Example: `gulp build --gf`. This command build project and generate fonts files into font folder in build. All you is ttf-file of your font in folder fonts in root directory.
+Example: `gulp build --gf`. This command build project and generate fonts files into fonts folder in build. All you need is ttf-file of your font in folder fonts in root directory.
 
 File structure
 --------------
@@ -50,8 +47,8 @@ File structure
 
     - images — folder for images.
         - content — images in content (images in articles and etc.)
-        - for-plugins — images for plugins. There are could be files and directories
-        - for-sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
+        - plugins — images for plugins. There are could be files and directories
+        - sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
     - js — folder for js.
     - fonts — folder for fonts.
     - markup — main folder, has modules, scss and templates of pages.
@@ -79,26 +76,25 @@ File structure
     - img — folder with images.
         - assets — folder with images for modules.
         - content — folder with images for content.
-        - for-plugins — folder with images for plugins.
+        - plugins — folder with images for plugins.
         - sprite.png — sprite image.
     - js — folder with js.
-        - vendors — folder with js-files which have to be as single files.
+        - vendors — folder with js-files which have to be separate.
         - main.js — main.js file.
 
     - template.html — generated template
 
 
-* Build version is a copy of dev version, but has minified version of css and js files. There are no any console.log and debugger code in js.
+* Build version is a copy of dev version, but it has minified version of css and js files. There are no any console.log and debugger code in js.
+Each build dir has it's own version. Version is a date of building.
 
 
 TODO
 ----
 
 * Image optimazer.
-* Watch new files (Mac OS)
 * Livereload (may be)
 * Creating zip-archive of build version
-* Font-generator
 * Notify including
 * Each task in their own folders
 * Jshint for scss
