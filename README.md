@@ -5,6 +5,7 @@ Markup builder on gulp
 Use Jade as templater, scss as preprocessor for css.
 
 You have to install `nodeJS` and `npm` for using markupBuilder.
+Also you need Java for webfont generator. If you are not going to generate fonts, you don't need it.
 
 Installation
 ------------
