@@ -32,8 +32,7 @@
   "devDependencies": {},
   "scripts": {
     "preinstall": "npm i -g gulp",
-    "preinstall": "npm i -g webfonts",
-    "preinstall": "mkdir js/plugins images images/content images/plugins images/sprite fonts markup/modules/_template/assets"
+    "preinstall": "npm i -g webfonts"
   },
   "repository": {
     "type": "git",

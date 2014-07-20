@@ -12,7 +12,12 @@ Installation
     npm i or npm install
 
 Install gulp and webfonts globaly and all dependencies.  
-Also create fonts, images (with subdirs) and js/plugins directories. Create assets folder inside template module.  
+
+    gulp init
+
+Create fonts, images (with subdirs) and js/plugins directories. Create assets folder inside template module.      
+
+If you use Windows, you have to add key `--ms`.
 
 Descritpion
 -----------

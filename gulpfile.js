@@ -23,6 +23,7 @@ var gulp = require('gulp'),                     // Gulp JS
 
     // Env vars
     gf = gutil.env.gf,                          // Generate font-files or not
+    ms = gutil.env.ms,                          // Use builder in Windows
 
     buildVersion = '',                          // build version var
 
@@ -248,6 +249,16 @@ gulp.task('build-dev', function(cb) {
         'generate-fonts',
         cb
     );
+});
+
+// Task to init project. Create FS
+gulp.task('init', function() {
+    gulp.src('')
+        .pipe(gulpif(ms, 
+            run('mkdir js\plugins images images\content images\plugins images\sprite fonts markup\modules\_template\assets'), 
+            run('mkdir js/plugins images images/content images/plugins images/sprite fonts markup/modules/_template/assets')
+            )
+        );
 });
 
 // Build dev-version with watchers
