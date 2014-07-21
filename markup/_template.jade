@@ -1,3 +1,5 @@
+//- This is a template of html-page. Just dublicate it with new name.
+
 doctype html
 |<!--[if IE 7]><html class="ie7 lt-ie10 lt-ie9 lt-ie8 no-js" lang="ru"><![endif]-->
 |<!--[if IE 8]><html class="ie8 lt-ie10 lt-ie9 no-js" lang="ru"><![endif]-->
@@ -9,10 +11,9 @@ head
 body.pageBody
 
     section.pageWrapper
+        
+        //- Your modules including here
 
         .pageBuffer
-        
-    footer.pageFooter
 
-    script(src='js/main.js')    
-        
+    include modules/footer/footer

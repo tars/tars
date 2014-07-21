@@ -31,8 +31,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "npm i -g gulp",
-    "preinstall": "npm i -g webfonts"
+    "preinstall": "npm i -g gulp webfonts"
   },
   "repository": {
     "type": "git",

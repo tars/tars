@@ -12,7 +12,7 @@ Installation
 
     npm i or npm install
 
-Install gulp and webfonts globaly and all dependencies.  
+Install gulp, webfonts globaly and all dependencies.  
 
     gulp init
 
@@ -23,8 +23,8 @@ If you use Windows, you have to add key `--ms`.
 Descritpion
 -----------
 
-Markup is the main folder of project. There are modules, scss-files and templates of pages.
-Even module is a part of page, for example — «header».
+Markup is the main folder of project. There are modules, scss-files and templates of pages. Also you can find images, fonts and js folders.
+Even module is a part of page, for example — «header». 
 Even module has it's own temaplte, scss-files, js and images.
 There are templates of pages in root directory of markup. To create new page just create new file with the name of the page.
 
@@ -52,16 +52,19 @@ File structure
 
 * Project file structure
 
-    - images — folder for images.
-        - content — images in content (images in articles and etc.)
-        - plugins — images for plugins. There are could be files and directories
-        - sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
-    - js — folder for js.
-    - fonts — folder for fonts.
     - markup — main folder, has modules, scss and templates of pages.
+        - fonts — folder for fonts.
+        - images — folder for images.
+            - content — images in content (images in articles and etc.)
+            - plugins — images for plugins. There are could be files and directories
+            - sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
+        - js — folder for js.
+            - html5shiv — folder with htm5shiv. 
+            - libs - folder for js-libs like jquery
+            - plugins — folder for plugins js
         - modules — folder with modules.
             - simple-module — folder with module.
-                - assets — (not required) for the module.
+                - assets — for the module.
                 - simple-module.jade — template of the module.
                 - simple-module.js — js file of the module.
                 - simple-module.scss — scss file of the module.
@@ -86,7 +89,8 @@ File structure
         - plugins — folder with images for plugins.
         - sprite.png — sprite image.
     - js — folder with js.
-        - vendors — folder with js-files which have to be separate.
+        - html5shiv — folder with js-files which have to be separate. There are htm5shiv. 
+        - libs - folder for js-libs like jquery
         - main.js — main.js file.
 
     - template.html — generated template
