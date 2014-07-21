@@ -16,7 +16,7 @@ Install gulp, webfonts globaly and all dependencies.
 
     gulp init
 
-Create fonts, images (with subdirs) and js/plugins directories. Create assets folder inside template module.      
+Create fonts, images (with subdirs), js/libs and js/plugins directories. Create assets folder inside template module.      
 
 If you use Windows, you have to add key `--ms`.
 
@@ -63,11 +63,11 @@ File structure
             - libs - folder for js-libs like jquery
             - plugins — folder for plugins js
         - modules — folder with modules.
-            - simple-module — folder with module.
+            - _template — folder with module.
                 - assets — for the module.
-                - simple-module.jade — template of the module.
-                - simple-module.js — js file of the module.
-                - simple-module.scss — scss file of the module.
+                - _template.jade — template of the module.
+                - _template.js — js file of the module.
+                - _template.scss — scss file of the module.
         - scss — folder with scss.
             - common.scss — common stylies for project (not required)
             - GUI.scss — GUI-elements stylies (not required)
@@ -77,7 +77,7 @@ File structure
             - vars.scss — vars of the project (not required)
         - developer.scss — scss file for developers stylies. Required! 
         - main.scss — main file for scss. All scss files include into this file.
-        - template.jade — template of the page.
+        - _template.jade — template of the page.
 
 * Dev version of compiled project
     
@@ -90,7 +90,7 @@ File structure
         - sprite.png — sprite image.
     - js — folder with js.
         - html5shiv — folder with js-files which have to be separate. There are htm5shiv. 
-        - libs - folder for js-libs like jquery
+        - libs - folder for js-libs like jquery.
         - main.js — main.js file.
 
     - template.html — generated template
