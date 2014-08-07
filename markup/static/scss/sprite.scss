@@ -1,0 +1,207 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+$geoLocation_preloader-x: 0px;
+$geoLocation_preloader-y: 42px;
+$geoLocation_preloader-offset-x: 0px;
+$geoLocation_preloader-offset-y: -42px;
+$geoLocation_preloader-width: 24px;
+$geoLocation_preloader-height: 24px;
+$geoLocation_preloader-total-width: 32px;
+$geoLocation_preloader-total-height: 534px;
+$geoLocation_preloader-image: '../img/sprite.png';
+$geoLocation_preloader: 0px 42px 0px -42px 24px 24px 32px 534px '../img/sprite.png';
+$pin_commercial_active-x: 0px;
+$pin_commercial_active-y: 292px;
+$pin_commercial_active-offset-x: 0px;
+$pin_commercial_active-offset-y: -292px;
+$pin_commercial_active-width: 28px;
+$pin_commercial_active-height: 42px;
+$pin_commercial_active-total-width: 32px;
+$pin_commercial_active-total-height: 534px;
+$pin_commercial_active-image: '../img/sprite.png';
+$pin_commercial_active: 0px 292px 0px -292px 28px 42px 32px 534px '../img/sprite.png';
+$pin_commercial_czar-x: 0px;
+$pin_commercial_czar-y: 484px;
+$pin_commercial_czar-offset-x: 0px;
+$pin_commercial_czar-offset-y: -484px;
+$pin_commercial_czar-width: 32px;
+$pin_commercial_czar-height: 50px;
+$pin_commercial_czar-total-width: 32px;
+$pin_commercial_czar-total-height: 534px;
+$pin_commercial_czar-image: '../img/sprite.png';
+$pin_commercial_czar: 0px 484px 0px -484px 32px 50px 32px 534px '../img/sprite.png';
+$pin_commercial_hover-x: 0px;
+$pin_commercial_hover-y: 384px;
+$pin_commercial_hover-offset-x: 0px;
+$pin_commercial_hover-offset-y: -384px;
+$pin_commercial_hover-width: 28px;
+$pin_commercial_hover-height: 42px;
+$pin_commercial_hover-total-width: 32px;
+$pin_commercial_hover-total-height: 534px;
+$pin_commercial_hover-image: '../img/sprite.png';
+$pin_commercial_hover: 0px 384px 0px -384px 28px 42px 32px 534px '../img/sprite.png';
+$pin_commercial_ini-x: 0px;
+$pin_commercial_ini-y: 338px;
+$pin_commercial_ini-offset-x: 0px;
+$pin_commercial_ini-offset-y: -338px;
+$pin_commercial_ini-width: 28px;
+$pin_commercial_ini-height: 42px;
+$pin_commercial_ini-total-width: 32px;
+$pin_commercial_ini-total-height: 534px;
+$pin_commercial_ini-image: '../img/sprite.png';
+$pin_commercial_ini: 0px 338px 0px -338px 28px 42px 32px 534px '../img/sprite.png';
+$pin_regular_active-x: 0px;
+$pin_regular_active-y: 188px;
+$pin_regular_active-offset-x: 0px;
+$pin_regular_active-offset-y: -188px;
+$pin_regular_active-width: 22px;
+$pin_regular_active-height: 30px;
+$pin_regular_active-total-width: 32px;
+$pin_regular_active-total-height: 534px;
+$pin_regular_active-image: '../img/sprite.png';
+$pin_regular_active: 0px 188px 0px -188px 22px 30px 32px 534px '../img/sprite.png';
+$pin_regular_czar-x: 0px;
+$pin_regular_czar-y: 430px;
+$pin_regular_czar-offset-x: 0px;
+$pin_regular_czar-offset-y: -430px;
+$pin_regular_czar-width: 32px;
+$pin_regular_czar-height: 50px;
+$pin_regular_czar-total-width: 32px;
+$pin_regular_czar-total-height: 534px;
+$pin_regular_czar-image: '../img/sprite.png';
+$pin_regular_czar: 0px 430px 0px -430px 32px 50px 32px 534px '../img/sprite.png';
+$pin_regular_hover-x: 0px;
+$pin_regular_hover-y: 154px;
+$pin_regular_hover-offset-x: 0px;
+$pin_regular_hover-offset-y: -154px;
+$pin_regular_hover-width: 22px;
+$pin_regular_hover-height: 30px;
+$pin_regular_hover-total-width: 32px;
+$pin_regular_hover-total-height: 534px;
+$pin_regular_hover-image: '../img/sprite.png';
+$pin_regular_hover: 0px 154px 0px -154px 22px 30px 32px 534px '../img/sprite.png';
+$pin_regular_ini-x: 0px;
+$pin_regular_ini-y: 222px;
+$pin_regular_ini-offset-x: 0px;
+$pin_regular_ini-offset-y: -222px;
+$pin_regular_ini-width: 22px;
+$pin_regular_ini-height: 30px;
+$pin_regular_ini-total-width: 32px;
+$pin_regular_ini-total-height: 534px;
+$pin_regular_ini-image: '../img/sprite.png';
+$pin_regular_ini: 0px 222px 0px -222px 22px 30px 32px 534px '../img/sprite.png';
+$pin_tile_active-x: 0px;
+$pin_tile_active-y: 28px;
+$pin_tile_active-offset-x: 0px;
+$pin_tile_active-offset-y: -28px;
+$pin_tile_active-width: 10px;
+$pin_tile_active-height: 10px;
+$pin_tile_active-total-width: 32px;
+$pin_tile_active-total-height: 534px;
+$pin_tile_active-image: '../img/sprite.png';
+$pin_tile_active: 0px 28px 0px -28px 10px 10px 32px 534px '../img/sprite.png';
+$pin_tile_hover-x: 0px;
+$pin_tile_hover-y: 14px;
+$pin_tile_hover-offset-x: 0px;
+$pin_tile_hover-offset-y: -14px;
+$pin_tile_hover-width: 10px;
+$pin_tile_hover-height: 10px;
+$pin_tile_hover-total-width: 32px;
+$pin_tile_hover-total-height: 534px;
+$pin_tile_hover-image: '../img/sprite.png';
+$pin_tile_hover: 0px 14px 0px -14px 10px 10px 32px 534px '../img/sprite.png';
+$pin_tile_ini-x: 0px;
+$pin_tile_ini-y: 0px;
+$pin_tile_ini-offset-x: 0px;
+$pin_tile_ini-offset-y: 0px;
+$pin_tile_ini-width: 10px;
+$pin_tile_ini-height: 10px;
+$pin_tile_ini-total-width: 32px;
+$pin_tile_ini-total-height: 534px;
+$pin_tile_ini-image: '../img/sprite.png';
+$pin_tile_ini: 0px 0px 0px 0px 10px 10px 32px 534px '../img/sprite.png';
+$rec_active-x: 0px;
+$rec_active-y: 126px;
+$rec_active-offset-x: 0px;
+$rec_active-offset-y: -126px;
+$rec_active-width: 24px;
+$rec_active-height: 24px;
+$rec_active-total-width: 32px;
+$rec_active-total-height: 534px;
+$rec_active-image: '../img/sprite.png';
+$rec_active: 0px 126px 0px -126px 24px 24px 32px 534px '../img/sprite.png';
+$rec_czar-x: 0px;
+$rec_czar-y: 256px;
+$rec_czar-offset-x: 0px;
+$rec_czar-offset-y: -256px;
+$rec_czar-width: 32px;
+$rec_czar-height: 32px;
+$rec_czar-total-width: 32px;
+$rec_czar-total-height: 534px;
+$rec_czar-image: '../img/sprite.png';
+$rec_czar: 0px 256px 0px -256px 32px 32px 32px 534px '../img/sprite.png';
+$rec_hover-x: 0px;
+$rec_hover-y: 98px;
+$rec_hover-offset-x: 0px;
+$rec_hover-offset-y: -98px;
+$rec_hover-width: 24px;
+$rec_hover-height: 24px;
+$rec_hover-total-width: 32px;
+$rec_hover-total-height: 534px;
+$rec_hover-image: '../img/sprite.png';
+$rec_hover: 0px 98px 0px -98px 24px 24px 32px 534px '../img/sprite.png';
+$rec_ini-x: 0px;
+$rec_ini-y: 70px;
+$rec_ini-offset-x: 0px;
+$rec_ini-offset-y: -70px;
+$rec_ini-width: 24px;
+$rec_ini-height: 24px;
+$rec_ini-total-width: 32px;
+$rec_ini-total-height: 534px;
+$rec_ini-image: '../img/sprite.png';
+$rec_ini: 0px 70px 0px -70px 24px 24px 32px 534px '../img/sprite.png';
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}

@@ -1,1 +1,0 @@
-// Module %Module Name% JS

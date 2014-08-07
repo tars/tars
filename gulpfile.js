@@ -1,346 +1,226 @@
 // Using modules
 var gulp = require('gulp'),                     // Gulp JS
-    jade = require('gulp-jade'),                // Jade compilation
-    sass = require('gulp-sass'),                // Scss compilation
-    uglify = require('gulp-uglifyjs'),          // JS minify
-    csso = require('gulp-csso'),                // Css minify
-    concat = require('gulp-concat'),            // Files concat
-    spritesmith = require('gulp.spritesmith'),  // Sprite generator
-    rimraf = require('gulp-rimraf'),            // Clean module
-    path = require('path'),                     // Path module
-    rename = require('gulp-rename'),            // File rename
-    jshint = require('gulp-jshint'),            // JS linter
-    stripDebug = require('gulp-strip-debug'),   // Console.log and debugger striper
-    autoprefix = require('gulp-autoprefixer'),  // Autoprefixer for css
-    jscs = require('gulp-jscs'),                // JS-style checker
     gutil = require('gulp-util'),               // Gulp util module
-    cache = require('gulp-cached'),             // Gulp cache module
     runSequence = require('run-sequence'),      // Run sequence module for run task in queue
-    run = require('gulp-run'),                  // Run bash-scripts from gulp
-    gulpif = require('gulp-if'),                // Gulp if module
-    minimatch = require('minimatch'),           // Service nodule for node-watch
-    watch = require('node-watch'),              // Watcher
+    browserSync = require('browser-sync'),      // Plugin for sync with browser
 
-    // Env vars
-    gf = gutil.env.gf,                          // Generate font-files or not
-    ms = gutil.env.ms,                          // Use builder in Windows
+    // Flags
+    useLiveReload = gutil.env.lr,
 
-    buildVersion = '',                          // build version var
+    // Configs
+    browserSyncConfig = require('./projectConfig').browserSyncConfig;
 
-    // Paths for copy files from dev to build directory
-    // @TODO: Remove this stuff!!!
-    filesToMove = [
-        './dev/*.*',
-        './dev/**/*.*',
-        './dev/**/**/*.*',
-        './dev/**/**/**/*.*',
-        './dev/**/**/**/**/*.*',
-        './dev/**/**/**/**/**/*.*'
-    ]; 
 
-    // Cache for cache module
-    cache.caches = {};    
 
-// Clear cache
-function clearCaches() {
-    delete cache.caches['linting', 'move-assets', 'move-content-img', 'move-plugins-img'];
-}
+/* HELPERS */
+
+// You can add your own helpers here. Helpers folder is gulpy/helpers
 
 // Watcher by node-watch
-var watchByPattern = (function() {
-  var parsePattern = function(input) {
-    var current = './';
-    var segments = input.split(/\*/);
-    return {
-      dir: (/^\*/.test(input) ? current : (segments[0] || current)),
-      pat: ('*' + segments.slice(1).join('*'))
-    }
-  }
-  var watchStack = {}
-  return function(pattern, fn) {
-    var input = parsePattern(pattern);
-    var stack = { pat: input.pat, callback: fn };
-    if (watchStack[input.dir]) {
-      watchStack[input.dir].push(stack);
-    } else {
-      watchStack[input.dir] = [stack];
-      watch(input.dir, function(filename) {
-        watchStack[input.dir].forEach(function(stack) {
-          if (minimatch(filename, stack.pat)) {
-            stack.callback(filename);
-          }
-        });
-      });
-    };
-  }
-}());
+var watchByPattern = require('./gulpy/helpers/watcher');
 
-// Notify for changed files
-function fileChangedNotify(filename) {
-    gutil.log('file: "',filename,'" was changed');
-}
- 
+// Notify for changed files in console
+var fileChangedNotify = require('./gulpy/helpers/fileChangedNotify');
 
-// Sprite task
-gulp.task('make-sprite', function () {
-  var spriteData = gulp.src('./markup/images/sprite/*.png')
+// Generate new version of  build
+var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
-    .pipe(spritesmith({
-        imgName: 'sprite.png',
-        imgPath: '../img/sprite.png',
-        cssName: 'sprite.scss',
-        padding: 4
-  }));
-  spriteData.img.pipe(gulp.dest('./dev/img/'));
-  spriteData.css.pipe(gulp.dest('./markup/scss/'));
-});
+/* END HELPERS */
 
-// Scss compilation
-gulp.task('compile-scss', function() {
-    gulp.src('./markup/*.scss')
-        .pipe(sass())
-        .on('error', gutil.log) // Output errors and continue
-    .pipe(autoprefix('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4', { cascade: true })) 
-    .on('error', gutil.log) // Output errors and continue
-    .pipe(gulp.dest('./dev/css/'));
-});
+
+
+/* TASKS */
+
+
+// You can add your own task.
+// There is a template of gulp-task
+// Function of task have to be in gulpy/taskFunctions folder
+// Example:
+// gulp.task('example-task', require('./gulpy/taskFunctions/exampleTask'));
+
 
 // Jade compilation
-gulp.task('compile-jade', function() {
-    return gulp.src('./markup/*.jade')
-        .pipe(jade({
-            pretty: true
-        }))
-        .on('error', gutil.log) // Output errors and continue
-    .pipe(gulp.dest('./dev/'));
-});
+gulp.task('compile-jade', require('./gulpy/taskFunctions/compileJade'));
+
+// Make sprite task    
+gulp.task('make-sprite', require('./gulpy/taskFunctions/makeSprite'));
+
+// Scss compilation
+gulp.task('compile-scss', require('./gulpy/taskFunctions/compileScss'));
+
+// Scss compilation for ie8
+gulp.task('compile-scss-for-ie8', require('./gulpy/taskFunctions/compileScssForIe8'));
+
+// Scss compilation for ie9
+gulp.task('compile-scss-for-ie9', require('./gulpy/taskFunctions/compileScssForIe9'));
 
 // Copy JS-files for libs that have to be in separate files
-gulp.task('copy-html5shiv-js', function() {
-    return gulp.src('./markup/js/html5shiv/*.js')
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/js/html5shiv'));
-});
+gulp.task('copy-html5shiv-js', require('./gulpy/taskFunctions/copyHtml5shivJs'));
 
-// Concat JS for modules and plugins to 1 file
-gulp.task('concat-plugins-libs-and-modules-lint-modules-js', ['lint'], function() {
-    return gulp.src(['./markup/js/libs/*.js', './markup/js/libs/**/*.js', './markup/js/plugins/*.js', './markup/js/plugins/**/*.js', './markup/modules/**/*.js'])
-        .pipe(concat('main.js'))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/js'));
-});
+// Concat JS for modules, libs and plugins to 1 file.
+// Also lint modules' js
+gulp.task(
+    'concat-plugins-libs-and-modules-lint-modules-js', 
+    ['lint'], 
+    require('./gulpy/taskFunctions/concatPluginsLibsAndModulesLintModulesJs')
+);
 
-// Check JS (style and errors)
-gulp.task('lint', function() {
-  return gulp.src('./markup/modules/**/*.js')
-    .pipe(cache('linting'))
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jscs());
-});
+// Check JS (code style and errors)
+gulp.task('lint', require('./gulpy/taskFunctions/lint'));
+
+// Move misc files
+gulp.task('move-misc-files', require('./gulpy/taskFunctions/moveMiscFiles'));
 
 // Move images from assets modules of modules
-gulp.task('move-assets', function(){
-    return gulp.src('./markup/modules/**/assets/*.*')
-        .pipe(cache('move-assets'))
-        .pipe(rename(function(path) {
-            path.dirname = path.dirname.replace(new RegExp("[a-zA-Z0-9]+\/assets",'g'), '');
-        }))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/img/assets'));
-}); 
+gulp.task('move-assets', require('./gulpy/taskFunctions/moveAssets'));
 
 // Move images for content
-gulp.task('move-content-img', function(){
-    return gulp.src('./markup/images/content/*.*')
-        .pipe(cache('move-content-img'))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/img/content'));
-});
+gulp.task('move-content-img', require('./gulpy/taskFunctions/moveContentImg'));
 
 // Move images for plugins
-gulp.task('move-plugins-img', function(){
-    return gulp.src(['./markup/images/plugins/*.*', './markup/images/plugins/**/*.*'])
-        .pipe(cache('move-plugins-img'))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/img/plugins'));
-});
-
+gulp.task('move-plugins-img', require('./gulpy/taskFunctions/movePluginsImg'));
 
 // Generate font-files (eot, woff, svg) from .ttf-file
-gulp.task('generate-fonts', function () {
-  return gulp.src('./markup/fonts/')             
-            .pipe(gulpif(gf, run('webfonts "./dev/fonts/"')));
-});
+gulp.task('generate-fonts', require('./gulpy/taskFunctions/generateFonts'));
 
-// Move ttf-files fonts to dev directory
-gulp.task('move-fonts', function(){
-    return gulp.src('./markup/fonts/*.*')
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./dev/fonts'));
-});
+// Move fonts-files to dev directory
+gulp.task('move-fonts', require('./gulpy/taskFunctions/moveFonts'));
 
 // Strip console.log and debugger from main.js
-gulp.task('strip-debug', function() {
-    return gulp.src('./builds/build' + buildVersion + '/js/main.js')
-        .pipe(stripDebug())
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./builds/build' + buildVersion + '/js/'));
-});
+gulp.task('strip-debug', require('./gulpy/taskFunctions/stripDebug'));
 
-// Compress js-files (and start 'strip-debug' task)
-gulp.task('compress-main-js', ['strip-debug'], function() {
-    return gulp.src('./builds/build' + buildVersion + '/js/main.js')
-        .pipe(uglify('main.min.js', {
-            mangle: false
-        }))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./builds/build' + buildVersion + '/js/'));
-});
+// Compress js-files and strip debug
+gulp.task('compress-main-js', ['strip-debug'], require('./gulpy/taskFunctions/compressMainJs'));
 
 // Compress css
-gulp.task('compress-css', function() {
-    return gulp.src('./builds/build' + buildVersion + '/css/main.css')
-        .pipe(csso('main.min.css'))
-        .pipe(rename({
-            suffix: ".min"
-        }))
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./builds/build' + buildVersion + '/css/'));
-})
+gulp.task('compress-css', require('./gulpy/taskFunctions/compressCss'));
+
+// Sprite minification
+gulp.task('sprite-minification', require('./gulpy/taskFunctions/spriteMinification'));
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-gulp.task('pre-build', function(){
-    buildVersion = '_ver-' + (new Date()).toString();
-    buildVersion = buildVersion.replace(/ /g,'_');
-    buildVersion = buildVersion.replace(/:/g,'-');
-
-    gutil.log('Build version is: ',buildVersion);
-
-    return gulp.src(filesToMove, { base: './dev/' })
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(gulp.dest('./builds/build' + buildVersion));
-});
+gulp.task('pre-build', require('./gulpy/taskFunctions/preBuild'));
 
 // Clean dev directory and cache
-gulp.task('clean', function() {
-    clearCaches();
+gulp.task('clean', require('./gulpy/taskFunctions/clean'));
 
-    return gulp.src('./dev/', {read: false})
-        .on('error', gutil.log) // Output errors and continue
-        .pipe(rimraf());
-});
+// Init builder. Make folders
+gulp.task('init', require('./gulpy/taskFunctions/init'));
 
-// Build dev-version (without watchers)
-gulp.task('build-dev', function(cb) {
-    runSequence(
-        'clean',
-        'make-sprite',
-        'compile-scss', 
-        [
-            'copy-html5shiv-js', 
-            'concat-plugins-libs-and-modules-lint-modules-js', 
-            'compile-jade',
-            'move-assets',
-            'move-content-img',
-            'move-plugins-img'
-        ],
-        'move-fonts',
-        'generate-fonts',
-        cb
-    );
-});
+/* END TASKS */
 
-// Task to init project. Create FS
-gulp.task('init', function() {
-    gulp.src('')
-        .pipe(gulpif(ms, 
-            run('mkdir markup\\js\\libs markup\\js\\plugins markup\\images markup\\images\\content markup\\images\\plugins markup\\images\\sprite markup\\fonts markup\\modules\\_template\\assets'), 
-            run('mkdir markup/js/libs markup/js/plugins markup/images markup/images/content markup/images/plugins markup/images/sprite markup/fonts markup/modules/_template/assets')
-            )
-        );
-});
 
-// Build dev-version with watchers
-gulp.task('dev', function() {
-    gulp.start('build-dev');
+/* WATHERS */
 
-    // Watch for images for sprite
-    watchByPattern('./markup/images/sprite/**/*.png', function(filename) {
+// Build dev-version with watchers and livereloader
+gulp.task('dev', ['build-dev'], function() {
+
+    if (useLiveReload) {
+        gulp.start('browsersync');
+    }
+
+
+    // You can add you own watcher
+    // Example:
+    // watchByPattern( path-string to files, that you'd like to watch for, function(filename) {
+    //      fileChangedNotify(filename);
+    //      gulp.start('example-task'); 
+    // });
+
+
+    // Watcher for images for sprite
+    watchByPattern('./markup/static/images/sprite/**/*.png', function(filename) {
         fileChangedNotify(filename);
         gulp.start('make-sprite'); 
     });
 
-    // Watch for modules' scss-files
-    watchByPattern('./markup/**/**/*.scss', function(filename) {
+    // Watcher for common scss-files and scss-files of plugins
+    watchByPattern('./markup/static/scss/**/*.scss', function(filename) {
         fileChangedNotify(filename);
         gulp.start('compile-scss');
     }); 
 
-    // Watch for main scss-files
+    // Watcher for scss-files of modules
     watchByPattern('./markup/modules/**/*.scss', function(filename) {
         fileChangedNotify(filename);
-        gulp.start('compile-scss');
+        if (filename.indexOf('ie8.scss') > -1) {
+            // Compile scss-files for ie8 of modules
+            gulp.start('compile-scss-for-ie8');
+        } else if (filename.indexOf('ie9.scss') > -1) {
+            // Compile scss-files for ie9 of modules
+            gulp.start('compile-scss-for-ie9');
+        } else {
+            // Compile scss-files of modules
+            gulp.start('compile-scss');
+        }
+        
     });
 
-    // Watch for templates jade-files
-    watchByPattern('./markup/**/*.jade', function(filename) {
+    // Watcher for jade-files of templates
+    watchByPattern('./markup/pages/**/*.jade', function(filename) {
         fileChangedNotify(filename);
         gulp.start('compile-jade');
     });
 
-    // Watch for modules jade-files
+    // Watcher for jade-files of modules
     watchByPattern('./markup/modules/**/*.jade', function(filename) {
         fileChangedNotify(filename);
         gulp.start('compile-jade');
     });
 
-    // Watch for modules js-files
+    // Watcher for js-files of modules
     watchByPattern('./markup/modules/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
-    // Watch for plugins js-files
-    watchByPattern('./markup/js/plugins/**/*.js', function(filename) {
+    // Watcher for js-files of plugins
+    watchByPattern('./markup/static/js/plugins/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
-    // Watch for libs js-files
-    watchByPattern('./markup/js/libs/**/*.js', function(filename) {
+    // Watcher for js-files of libs
+    watchByPattern('./markup/static/js/libs/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
-    // Watch for html5shiv js-files
-    watchByPattern('./markup/js/html5shiv/**/*.js', function(filename) {
+    // Watcher for html5shiv js-files
+    watchByPattern('./markup/static/js/html5shiv/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('copy-html5shiv-js');
     });
 
-    // Watch for images in assets dir of modules
+    // Watcher for images in assets dir of modules
     watchByPattern('./markup/modules/**/assets/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-assets');
     });
 
-    // Watch for content images
-    watchByPattern('./markup/images/content/**/*.*', function(filename) {
+    // Watcher for content images
+    watchByPattern('./markup/static/images/content/**/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-content-img');
     });
 
-    // Watch for plugins images
-    watchByPattern('./markup/images/plugins/**/*.*', function(filename) {
+    // Watcher for images of plugins
+    watchByPattern('./markup/static/images/plugins/**/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-plugins-img');
     });
 
+    // Watcher for misc files
+    watchByPattern('./markup/static/misc/**/*.*', function(filename) {
+        fileChangedNotify(filename);
+        gulp.start('move-misc-files');
+    });
+
+
     // Default gulp watcher for font files.
     // Need restart gulp dev, if new fonts have been added
-    gulp.watch('./markup/fonts/*.*', function(cb) {
+    gulp.watch('./markup/static/fonts/*.*', function(cb) {
         runSequence(
             'move-fonts',
             'generate-fonts',
@@ -349,14 +229,60 @@ gulp.task('dev', function() {
     });
 });
 
+/* END WATHERS */
+
+
+/* MAIN TASKS */
+
+// Build dev-version (without watchers)
+// You can add your own tasks in queue
+
+gulp.task('build-dev', function(cb) {
+    runSequence(
+        'clean',
+        'make-sprite',
+        ['compile-scss', 'compile-scss-for-ie8', 'compile-scss-for-ie9'],
+        [
+            'copy-html5shiv-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-jade',
+            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
+        ],
+        'move-fonts',
+        'generate-fonts',
+        cb
+    );
+});
+
 // Build release version
+
+// Also you can add your own tasks in queue of build task
+
 gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
         'pre-build',
-        'strip-debug',
-        'compress-main-js',
-        'compress-css',
+        ['sprite-minification', 'compress-main-js', 'compress-css'],
         cb
     );
 });
+
+gulp.task('browsersync', function (cb) {
+   
+    // Serve files and connect browsers
+    browserSync({
+        server: {
+            baseDir: './dev'
+        },
+        logConnections: true,
+        debugInfo: true,
+        injectChanges: false,
+        port: browserSyncConfig.port,
+        open: browserSyncConfig.open,
+        browser: browserSyncConfig.browser,
+        startPath: browserSyncConfig.startPath,
+        notify: browserSyncConfig.useNotifyInBrowser
+    });  
+
+    cb(null);
+});
+
+/* END MAIN TASKS */

@@ -4,9 +4,15 @@ meta(content="" name="author")
 meta(content="" name="description")
 meta(content="" name="keywords")
 meta(content="telephone=no" name="format-detection")
+meta(name="robots" content="noodp, noydir")
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
+//- This make sence for mobile browsers. It means, that content has been optimized for mobile browsers
+meta(name="HandheldFriendly" content="true")
 |<!--[if lt IE 9 ]><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="no" http-equiv="imagetoolbar"><![endif]-->
-link(href="css/main.css" rel="stylesheet" type="text/css")
-link(href="css/developer.css" rel="stylesheet" type="text/css")
+link(href="static/css/main.css" rel="stylesheet" type="text/css")
+link(rel="icon" type="image/png" href="favicon.ico")
 script.
     (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-|<!--[if lt IE 9 ]><script src="/js/html5shiv/html5shiv-3.7.2.min.js" type="text/javascript"></script><meta content="no" http-equiv="imagetoolbar"><![endif]-->
+|<!--[if lt IE 9 ]><script src="static/js/html5shiv/html5shiv-3.7.2.min.js" type="text/javascript"></script><meta content="no" http-equiv="imagetoolbar"><![endif]-->
+|<!--[if IE 8 ]><link href="static/css/main_ie8.css" rel="stylesheet" type="text/css"><![endif]-->
+|<!--[if IE 9 ]><link href="static/css/main_ie9.css" rel="stylesheet" type="text/css"><![endif]-->
