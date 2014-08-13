@@ -53,7 +53,7 @@ Main commands
 
 If you need to generate woff, eot and svg files of your font, you can use key `--gf`. 
 Example: `gulp build --gf`. This command build project and generate fonts files into fonts folder in build. All you need is ttf-file of your font in folder fonts in static directory.
-Unfortunately, you can't generate fonts, if you use Windows. That'll be repeared it soon.
+Unfortunately, you can generate fonts in OS X only. That'll be repeared it soon.
 
 If you'd like to use livereload, add `--lr` key with dev task
 Example: `gulp dev --lr`. Don't forget ro configure browser-sync config in projectConfig.js file.
