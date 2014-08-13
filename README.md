@@ -111,9 +111,9 @@ File structure
             - content — folder with images for content.
             - plugins — folder with images for plugins.
             - pngSprite
-                — 96dpi
-                — ...
-                — 288dpi — sprites with different dpi
+                - 96dpi
+                - ...
+                - 288dpi — sprites with different dpi
             — rasterSvg — raster svg-files
             — rasterSvgSprite — sprite of raster svg-files    
             — svg — svg images
