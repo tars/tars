@@ -3,12 +3,15 @@ var gulp = require('gulp'),                     // Gulp JS
     gutil = require('gulp-util'),               // Gulp util module
     runSequence = require('run-sequence'),      // Run sequence module for run task in queue
     browserSync = require('browser-sync'),      // Plugin for sync with browser
+    gulpRename = require('gulp-rename'),
+    path = require('path'),
 
     // Flags
     useLiveReload = gutil.env.lr,
 
     // Configs
-    browserSyncConfig = require('./projectConfig').browserSyncConfig;
+    projectConfig = require('./projectConfig');
+    browserSyncConfig = projectConfig.browserSyncConfig;
 
 
 
@@ -41,6 +44,12 @@ var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
 // Jade compilation
 gulp.task('compile-jade', require('./gulpy/taskFunctions/compileJade'));
+
+// Make sprite task    
+gulp.task('raster-svg', require('./gulpy/taskFunctions/rasterSvg'));
+
+// Make sprite task    
+gulp.task('make-sprite-for-svg-fallback', require('./gulpy/taskFunctions/makeSpriteForSvgFallback'));
 
 // Make sprite task    
 gulp.task('make-sprite', require('./gulpy/taskFunctions/makeSprite'));
@@ -92,6 +101,9 @@ gulp.task('strip-debug', require('./gulpy/taskFunctions/stripDebug'));
 // Compress js-files and strip debug
 gulp.task('compress-main-js', ['strip-debug'], require('./gulpy/taskFunctions/compressMainJs'));
 
+// Convert svg includes to base64 in css
+gulp.task('svg-to-base64', require('./gulpy/taskFunctions/svgToBase64'));
+
 // Compress css
 gulp.task('compress-css', require('./gulpy/taskFunctions/compressCss'));
 
@@ -107,6 +119,9 @@ gulp.task('clean', require('./gulpy/taskFunctions/clean'));
 
 // Init builder. Make folders
 gulp.task('init', require('./gulpy/taskFunctions/init'));
+
+// Move SVG-files to dev directory
+gulp.task('move-svg', require('./gulpy/taskFunctions/moveSvg'));
 
 /* END TASKS */
 
@@ -129,11 +144,17 @@ gulp.task('dev', ['build-dev'], function() {
     // });
 
 
-    // Watcher for images for sprite
     watchByPattern('./markup/static/images/sprite/**/*.png', function(filename) {
         fileChangedNotify(filename);
-        gulp.start('make-sprite'); 
+        gulp.start('make-sprite');
     });
+
+    if (projectConfig.useSVG) {
+        watchByPattern('./markup/static/images/svg/**/*.svg', function(filename, cb) {
+            fileChangedNotify(filename);
+            gulp.start('svg-actions');
+        });
+    }
 
     // Watcher for common scss-files and scss-files of plugins
     watchByPattern('./markup/static/scss/**/*.scss', function(filename) {
@@ -240,13 +261,14 @@ gulp.task('dev', ['build-dev'], function() {
 gulp.task('build-dev', function(cb) {
     runSequence(
         'clean',
-        'make-sprite',
+        'move-svg',
+        'raster-svg',
+        ['make-sprite-for-svg-fallback', 'make-sprite'],
         ['compile-scss', 'compile-scss-for-ie8', 'compile-scss-for-ie9'],
         [
             'copy-html5shiv-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-jade',
-            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
+            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
         ],
-        'move-fonts',
         'generate-fonts',
         cb
     );
@@ -260,6 +282,7 @@ gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
         'pre-build',
+        'svg-to-base64',
         ['sprite-minification', 'compress-main-js', 'compress-css'],
         cb
     );
@@ -286,3 +309,15 @@ gulp.task('browsersync', function (cb) {
 });
 
 /* END MAIN TASKS */
+
+
+/* HELPERS TASKS */
+gulp.task('svg-actions', function (cb) {
+    runSequence(
+        'move-svg',
+        'raster-svg',
+        'make-sprite-for-svg-fallback',
+        cb
+    );
+})
+/* END HELPERS TASKS */

@@ -7,16 +7,16 @@ var gulp = require('gulp'),                                     // Gulp JS
     modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
     buildVersionGenerator = require('../helpers/buildVersionGenerator'),
     os = require('os'),                                         // Node os module
-    notMs = false;                                              // Windows System Detect
+    notMs = true;                                              // Windows System Detect
 
 // Minify sprite img
 module.exports = function() {
 
-    if (os.platform() != 'win32') {
-        notMs = true;
-    }
+    // if (os.platform() != 'win32') {
+    //     notMs = true;
+    // }
 
-    return gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/img/*.png')
+    return gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/img/**/sprite.png')
         .pipe(gulpif(notMs, 
                 imagemin(
                     {

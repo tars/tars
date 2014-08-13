@@ -4,23 +4,40 @@ var gulp = require('gulp'),                                     // Gulp JS
     gulpif = require('gulp-if'),                                // Gulp if module
     autoprefix = require('gulp-autoprefixer'),                  // Autoprefixer for css
     notify = require('gulp-notify'),                            // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig,           // Notify config
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
     browserSync = require('browser-sync'),                      // Plugin for sync with browser
 
     scssFilesToConcatinate = [
+        './markup/static/scss/reset.scss',
         './markup/static/scss/mixins.scss',
-        './markup/static/scss/sprite.scss',
-        './markup/static/scss/vars.scss',
-        './markup/static/scss/GUI',
-        './markup/static/scss/common',
-        './markup/modules/**/ie/ie8.scss'
+        './markup/static/scss/spritesScss/sprite96.scss'
     ];
 
-// Scss compilation for ie8
-module.exports = function(cb) {
+    if (projectConfig.useSVG) {
+        scssFilesToConcatinate.push(
+            './markup/static/scss/spritesScss/svg-fallback-sprite.scss',
+            './markup/static/scss/spritesScss/svg-sprite-ie.scss'
+        );
+    }
 
-    gulp.src(scssFilesToConcatinate)
+    scssFilesToConcatinate.push(
+        './markup/static/scss/spritesScss/sprite-ie.scss',
+        './markup/static/scss/fonts.scss',
+        './markup/static/scss/vars.scss',
+        './markup/static/scss/GUI.scss',
+        './markup/static/scss/common.scss',
+        './markup/static/scss/plugins/*.scss',
+        './markup/static/scss/plugins/**/*.scss',
+        './markup/modules/**/*.scss',
+        './markup/modules/**/ie/ie8.scss'
+    );
+
+// Scss compilation for ie8
+module.exports = function() {
+
+    return gulp.src(scssFilesToConcatinate)
         .pipe(concat('main_ie8.css'))
         .pipe(sass())
         .on('error', notify.onError(function (error) {
@@ -45,6 +62,4 @@ module.exports = function(cb) {
                 })
             )
         );
-
-        cb(null);
 };   

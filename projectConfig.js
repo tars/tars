@@ -1,5 +1,17 @@
 var projectConfig = {
 
+    // Sprites config
+    // Switch to true, if you're going to use svg images
+    useSVG: false,
+
+    // What kind of size of images are you going to you.
+    // 96 — 1 dppx (regular)
+    // 144 — 1.5 dppx
+    // 192 — 2 dppx (retina)
+    // 288 - 3 dppx (nexus 5, for example)
+    // Example if using for all displays: useDpi: [96, 144, 192, 288]
+    useDpi: [96],
+
     //Config for Notify module
     notifyConfig: {
     

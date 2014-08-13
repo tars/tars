@@ -1,0 +1,14 @@
+@mixin bg-svg($svg-sprite, $repeat: no-repeat) {
+
+    $svg-sprite-image: nth($svg-sprite, 9);
+    background-image: url(../img/rasterSvgSprite/#{$svg-sprite-image});
+    
+    $svg-sprite-offset-x: nth($svg-sprite, 3);
+    $svg-sprite-offset-y: nth($svg-sprite, 4);
+    background-position: $svg-sprite-offset-x  $svg-sprite-offset-y;
+    
+    @include svg-sprite-width($svg-sprite);
+    @include svg-sprite-height($svg-sprite);
+    
+    background-repeat: $repeat;
+  }
