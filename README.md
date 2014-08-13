@@ -178,6 +178,7 @@ Another mixin is:
 It's like the first mixin, but include svg file to your block (and png file for ie8. This file will be rastered from svg file). $imageName is a image name (svg).
 The second param is not required. This param is for background-repeat option. It's 'no-repeat' in default.
 
+You can repeat image (svg and png) only in one direction in one time — horizontal or vertical.
 
 !Note, that you can't use bg-svg mixin, if you have not switched useSvg option to true in projectConfig.
 !Raster-task and sprite-compressor can take a lot of time, if you use many images. I'll fix it asap.

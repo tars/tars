@@ -37,6 +37,7 @@ module.exports = function(cb) {
                     {
                         imgName: 'sprite.png',
                         cssName: 'sprite' + dpi[i] + '.scss',
+                        Algorithms: 'diagonal',
                         // padding: 4 * dpi[i],
                         engineOpts: {
                             imagemagick: true

@@ -23,7 +23,8 @@ module.exports = function() {
                     {
                         imgName: 'svg-fallback-sprite.png',
                         cssName: 'svg-fallback-sprite.scss',
-                        padding: 4,
+                        Algorithms: 'diagonal',
+                        // padding: 4,
                         engineOpts: {
                             imagemagick: true
                         },
