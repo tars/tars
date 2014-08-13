@@ -7,7 +7,7 @@ It uses Jade as templater, scss as preprocessor for css, lint for js files, font
 You have to install `nodeJS` version >= 0.8 and `npm` for using markupBuilder.
 Also you need Java for webfont generator. If you are not going to generate fonts, you don't need it.
 
-There are not any js-libs like jquery and soon (only html5shiv for old ie). You can add all what you want.
+There are no js-libs like jquery and soon (only html5shiv for old ie). You can add all what you want.
 
 Installation
 ------------
