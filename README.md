@@ -71,10 +71,10 @@ File structure
                 - content — images in content (images in articles and etc.)
                 - plugins — images for plugins. There are could be files and directories
                 - sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
-                    - 96 
-                    - 144 
-                    - 192 
-                    - 288 - folders for images for sprite with diffirent dppx
+                    - 96dpi 
+                    - 144dpi 
+                    - 192dpi 
+                    - 288dpi - folders for images for sprite with diffirent dppx
                 - svg — folder for svg images    
             - js — folder for js.
                 - html5shiv — folder with htm5shiv. 
@@ -141,7 +141,7 @@ The basic idea is — use SVG for web. It's vector, works on all platforms (ie8,
 
 Icon-font is god idea, but not for all images. There are a lot of problems with smoothing in different operation system (ms windows for example).
 
-So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi of 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch)
+So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi or 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch)
 
 You have to have png images in 4 resolutions (It's for all type of displays): 96dpi (1dppx), 144dpi (1.5dppx), 192dpi (2dppx) and 288dpi (3dppx). Of course, you can use only 96dpi with 144dpi images, but it'll be bad for high resolution displays.
 
