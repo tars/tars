@@ -148,15 +148,17 @@ You have to have png images in 4 resolutions (It's for all type of displays): 96
 So, practise!
 
 First of all, check projectConfig (projectConfig.js n root directory). There are two important options, which we need:
-    * useSVG
-    * useDpi
+
+* useSVG
+* useDpi
 
 So, if you'd like to use SVG, just switch to true this option. And that is all)
 if useDpi you can choose dpi, which you're going to use in you project.
 
 After that, you can add images to your project:
-    * svg-files to svg directory in static
-    * png files to sprite directory (each png-file have to be in appropriate folder (depends on it's dpi))
+
+* svg-files to svg directory in static
+* png files to sprite directory (each png-file have to be in appropriate folder (depends on it's dpi))
 
 When, you can you two mixins on you modules:
 
