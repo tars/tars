@@ -129,7 +129,7 @@ File structure
 Each build dir has it's own version. Version is a date of building, but you can change it.
 
 
-Working with images
+Work with images
 -------------------
 
 I've developed builder, which can works with png-images and svg-images.
