@@ -175,7 +175,7 @@ The second param is not required. This param is for background-repeat option. It
 
 
 !Note, that you can't use bg-svg mixin, if you have not switched useSvg option to true in projectConfig.
-
+!Raster-task and sprite-compressor can take a lot of time, if you use many images. I'll fix it asap.
 
 Custom tasks
 ------------
