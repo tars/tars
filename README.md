@@ -1,7 +1,7 @@
 markupBuilder
 =============
 
-Markup builder on gulp
+Markup builder on gulp.
 It uses Jade as templater, scss as preprocessor for css, lint for js files, font-generator and many other things.
 
 You have to install `nodeJS` version >= 0.8 and `npm` for using markupBuilder.
@@ -47,7 +47,7 @@ Main commands
 
 `gulp clean` — clean dev directory.
 
-`gulp dev` — development task. Create compiled dev-version of project and watch for changes in project's files. Call clean task in the begining.
+`gulp dev` — development task. Create compiled dev-version of project and watch for changes in project's files. Call clean task in the beginning.
 
 `gulp build-dev` — just generate dev version of project, without watchers.
 
@@ -55,7 +55,7 @@ Main commands
 
 If you need to generate woff, eot and svg files of your font, you can use key `--gf`. 
 Example: `gulp build --gf`. This command build project and generate fonts files into fonts folder in build. All you need is ttf-file of your font in folder fonts in static directory.
-Unfortunately, you can generate fonts in OS X only. That'll be repeared it soon.
+Unfortunately, you can generate fonts in OS X only. I'll try to do it for all platforms.
 
 If you'd like to use livereload, add `--lr` key with dev task
 Example: `gulp dev --lr`. Don't forget ro configure browser-sync config in projectConfig.js file.
@@ -72,7 +72,7 @@ File structure
             - images — folder for images.
                 - content — images in content (images in articles and etc.)
                 - plugins — images for plugins. There are could be files and directories
-                - sprite — images for sprite. Even image has to be named with unique name, which will be use in css to paste sprited image.
+                - sprite — images for sprite. Even image has to be named with unique name, which will be used in css to paste sprited image.
                     - 96dpi 
                     - 144dpi 
                     - 192dpi 
@@ -138,13 +138,13 @@ Work with images
 -------------------
 
 I've developed builder, which can works with png-images and svg-images.
-Nowadays, we've got displays with really bif resolutions and small size. For example: smartphones with HD defenition (or 4k), monitors and so on. So, when you've done images for regular resolution (1920 x 1080 on 22 inch monitor). And then you open your site (with thats images) on MacBook Pro with retina, and see, your images is really ugly(
+Nowadays, we've got displays with really big resolutions and small size. For example: smartphones with HD-display (or 4k), monitors with hight resolution and so on. So, when you've done images for regular resolution (1920 x 1080 on 22 inch monitor). Then you open your site (with thats images) on MacBook Pro with retina, and see, your images is really ugly(
 
 There are many ways to decide it. I've recommend you to read [one presentation](http://www.slideshare.net/codefest/codefest-2014-2) from russian developer [Tim Chaptykov](https://github.com/Chaptykov). This presentation on Russian, but i'm sure, you'll understand the basic idea.
 
-The basic idea is — use SVG for web. It's vector, works on all platforms (ie8, shame on you)! But not all images can be on svg. Complex gradients are not so good in svg, so, you still have to use png for with.
+The basic idea is — use SVG for web. It's vector, works on all platforms (ie8, shame on you)! But not all images can be in svg. Complex gradients are not so good in svg, so, you still have to use png for this.
 
-Icon-font is god idea, but not for all images. There are a lot of problems with smoothing in different operation system (ms windows for example).
+Icon-font is good idea, but not for all images. There are a lot of problems with smoothing in different operation system (ms windows for example).
 
 So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi or 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch)
 
@@ -165,7 +165,7 @@ After that, you can add images to your project:
 * svg-files to svg directory in static
 * png files to sprite directory (each png-file have to be in appropriate folder (depends on it's dpi))
 
-When, you can you two mixins on you modules:
+When, you can use two mixins into your modules:
 
 @include bg($imageName, $repeat) for png-sprite.
 $imageName is a image name (png) with $-sign in the beginning.
@@ -186,7 +186,7 @@ You can repeat image (svg and png) only in one direction in one time — horizon
 Custom tasks
 ------------
 
-You can add your own task to builder. All examples are already exist. 
+You can add your own task in builder. All examples are already exist. 
 You can find Examples of watchers and task declaration in gulpfile.js In gylpy/taskFunctions you can find example of task function.
 
 
