@@ -37,7 +37,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "npm i -g gulp browser-sync webfonts"
+    
   },
   "repository": {
     "type": "git",

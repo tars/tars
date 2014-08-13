@@ -12,12 +12,15 @@ There are no js-libs like jquery and soon (only html5shiv for old ie). You can a
 Installation
 ------------
 
-    npm i or npm install
+You have to install gulp, webfonts, browser-sync globaly.
 
-Install gulp, webfonts, browser-sync globaly and all dependencies. 
-If you need superuser rights to install packages globaly, you need to run:
-    
     sudo npm i -g gulp browser-sync webfonts
+    or 
+    npm i -g gulp browser-sync webfonts in Windows
+
+Then you need to install dependencies    
+
+    npm i or npm install
 
 After installing of all packages:    
 

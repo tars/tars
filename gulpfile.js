@@ -108,7 +108,7 @@ gulp.task('svg-to-base64', require('./gulpy/taskFunctions/svgToBase64'));
 gulp.task('compress-css', require('./gulpy/taskFunctions/compressCss'));
 
 // Sprite minification
-gulp.task('sprite-minification', require('./gulpy/taskFunctions/spriteMinification'));
+// gulp.task('sprite-minification', require('./gulpy/taskFunctions/spriteMinification'));
 
 // Copy files from dev to build directory
 // Create build directory with new build version
@@ -283,7 +283,7 @@ gulp.task('build', function(cb) {
         'build-dev',
         'pre-build',
         'svg-to-base64',
-        ['sprite-minification', 'compress-main-js', 'compress-css'],
+        ['compress-main-js', 'compress-css'],
         cb
     );
 });
