@@ -130,7 +130,7 @@ File structure
     - template.html — generated template
 
 
-* Build version is a copy of dev version, but it has minified version of css and js files. There are no any console.log and debugger code in js. Sprite image is minified, svg includes convert to base64.
+* Build version is a copy of dev version, but it has minified version of css and js files. There are no any console.log and debugger code in js. Svg includes convert to base64.
 Each build dir has it's own version. Version is a date of building, but you can change it.
 
 You can add your own script or css including anywhere. I just can recommend you to do it, like it's been done in default. You can change everything, except File System. You have to use current File System, cause watchers and tasks are depend on it. I'll add config for it in future.
