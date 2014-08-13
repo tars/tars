@@ -8,9 +8,9 @@ var gulp = require('gulp'),                                     // Gulp JS
 
 // Concat JS for modules, libs and plugins in common file.
 // Also lint modules' js
-module.exports = function(cb) {
+module.exports = function() {
 
-    gulp.src(['./markup/static/js/libs/*.js', 
+    return gulp.src(['./markup/static/js/libs/*.js', 
               './markup/static/js/libs/**/*.js', 
               './markup/static/js/plugins/*.js', 
               './markup/static/js/plugins/**/*.js', 
@@ -34,7 +34,5 @@ module.exports = function(cb) {
                     }
                 })
             )
-        );
-
-    cb(null);    
+        );  
 };   
