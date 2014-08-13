@@ -114,8 +114,8 @@ File structure
                 - 96dpi
                 - ...
                 - 288dpi — sprites with different dpi
-            — rasterSvg — raster svg-files
-            — rasterSvgSprite — sprite of raster svg-files    
+            - rasterSvg — raster svg-files
+            - rasterSvgSprite — sprite of raster svg-files    
             — svg — svg images
         - js — folder with js.
             - html5shiv — folder with js-files which have to be separate. There are htm5shiv. 
