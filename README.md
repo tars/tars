@@ -13,7 +13,7 @@ Installation
     npm i or npm install
 
 Install gulp, webfonts, browser-sync globaly and all dependencies. 
-If you need superuser rights to install packages globaly, you nned to launch 
+If you need superuser rights to install packages globaly, you need to run:
     
     sudo npm i -g gulp browser-sync webfonts
 
