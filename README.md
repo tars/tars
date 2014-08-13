@@ -147,7 +147,7 @@ You have to have png images in 4 resolutions (It's for all type of displays): 96
 
 So, practise!
 
-First of all, check projectConfig (projectConfig.js n root directory). There are two important options, which we need:
+First of all, check projectConfig (projectConfig.js in root directory). There are two important options, which we need:
 
 * useSVG
 * useDpi
@@ -175,6 +175,16 @@ The second param is not required. This param is for background-repeat option. It
 
 
 !Note, that you can't use bg-svg mixin, if you have not switched useSvg option to true in projectConfig.
+
+
+Custom tasks
+------------
+
+You can add your own task to builder. All examples are already exist. 
+You can find Examples of watchers and task declaration in gulpfile.js In gylpy/taskFunctions you can find example of task function.
+
+
+
 
 
 
