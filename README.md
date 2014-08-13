@@ -16,7 +16,8 @@ You have to install gulp, webfonts, browser-sync globaly.
 
     sudo npm i -g gulp browser-sync webfonts
     or 
-    npm i -g gulp browser-sync webfonts in Windows
+    npm i -g gulp browser-sync webfonts 
+    For Windows user
 
 Then you need to install dependencies    
 
