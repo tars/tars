@@ -14,10 +14,10 @@ var gulp = require('gulp'),                                     // Gulp JS
             'markup/static/images/content ' + 
             'markup/static/images/plugins ' + 
             'markup/static/images/sprite ' + 
-            'markup/static/images/sprite/96 ' + 
-            'markup/static/images/sprite/144 ' + 
-            'markup/static/images/sprite/192 ' + 
-            'markup/static/images/sprite/288 ' + 
+            'markup/static/images/sprite/96dpi ' + 
+            'markup/static/images/sprite/144dpi ' + 
+            'markup/static/images/sprite/192dpi ' + 
+            'markup/static/images/sprite/288dpi ' + 
             'markup/static/images/svg ' + 
             'markup/static/fonts ' + 
             'markup/static/scss/plugins ' + 
