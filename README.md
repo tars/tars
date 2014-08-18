@@ -150,9 +150,11 @@ The basic idea is — use SVG for web. It's vector, works on all platforms (ie8,
 
 Icon-font is good idea, but not for all images. There are a lot of problems with smoothing in different operation system (ms windows for example).
 
-So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi or 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch)
+So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi or 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch) And of course you have to read about it [here](http://www.w3.org/TR/css3-values/#absolute-lengths)
 
-You have to have png images in 4 resolutions (It's for all type of displays): 96dpi (1dppx), 144dpi (1.5dppx), 192dpi (2dppx) and 288dpi (3dppx). Of course, you can use only 96dpi with 144dpi images, but it'll be bad for high resolution displays.
+You have to have png images in 4 resolutions (It's for all type of displays): 96dpi (1dppx), 144dpi (1.5dppx), 192dpi (2dppx) and 288dpi (3dppx). Of course, you can use only 96dpi images, but it'll be bad for high resolution displays.
+What does it mean, image in resolution 144dpi? It means, that you need to do a picture larger in 1,5 times, than regular picture. So, 192 — 2 times, and 288 — 3 times larger. Really simple.
+Then take a retina display with dppx = 2. Our image with 192dpi will be small like 96dpi image, but have 2 pixels on each 1 real pixel, so, image will be much sharper.
 
 So, practise!
 

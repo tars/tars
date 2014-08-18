@@ -9,7 +9,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 // Compress js-files
 module.exports = function() {
 
-    gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/js/main.js')
+    return gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/js/main.js')
         .pipe(uglify('main.min.js', {
             mangle: false
         }))

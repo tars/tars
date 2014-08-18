@@ -9,7 +9,7 @@ var projectConfig = {
     // 144 — 1.5 dppx
     // 192 — 2 dppx (retina)
     // 288 - 3 dppx (nexus 5, for example)
-    // Example if using for all displays: useDpi: [96, 144, 192, 288]
+    // Example if using for all displays: usePpi: [96, 144, 192, 288]
     useDpi: [96],
 
     //Config for Notify module
@@ -53,7 +53,7 @@ var projectConfig = {
         // Choose browser to open
         browser: "google chrome",
         // Choose the page to open in browser at first opening
-        startPath: "/index.html",
+        startUrl: "/index.html",
         // If you don't need to see notification in browser, switch to false
         useNotifyInBrowser: true
     }

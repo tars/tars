@@ -3,7 +3,8 @@
 var gulp = require('gulp'),                                     // Gulp JS
     gulpif = require('gulp-if'),                                // Gulp if module
     notify = require('gulp-notify'),                            // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig,           // Notify config
+    projectConfig = require('../../projectConfig'),             // Project config
+    notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
     // Include browserSync, if you need to reload browser
     // browserSync = require('browser-sync');                      // Plugin for sync with browser
@@ -11,7 +12,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 // Task description
 module.exports = function(cb) {
 
-    gulp.src(/* path-string or array of path-strings to files */)
+    return gulp.src(/* path-string or array of path-strings to files */)
         // Do stuff here
         .on('error', notify.onError(function (error) {
             return notifyConfig.errorMessage(error);
@@ -35,5 +36,6 @@ module.exports = function(cb) {
             )
         );
 
-    cb(null);    
+    // You can return callback, if you can't return pipe
+    // cb(null);    
 };   

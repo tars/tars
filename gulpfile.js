@@ -107,8 +107,8 @@ gulp.task('svg-to-base64', require('./gulpy/taskFunctions/svgToBase64'));
 // Compress css
 gulp.task('compress-css', require('./gulpy/taskFunctions/compressCss'));
 
-// Sprite minification
-// gulp.task('sprite-minification', require('./gulpy/taskFunctions/spriteMinification'));
+// SVG minification
+gulp.task('svg-minification', require('./gulpy/taskFunctions/svgMinification'));
 
 // Copy files from dev to build directory
 // Create build directory with new build version
@@ -122,6 +122,10 @@ gulp.task('init', require('./gulpy/taskFunctions/init'));
 
 // Move SVG-files to dev directory
 gulp.task('move-svg', require('./gulpy/taskFunctions/moveSvg'));
+
+// Create zip-archive
+gulp.task('zip-build', require('./gulpy/taskFunctions/zipBuild'));
+
 
 /* END TASKS */
 
@@ -166,14 +170,16 @@ gulp.task('dev', ['build-dev'], function() {
     watchByPattern('./markup/modules/**/*.scss', function(filename) {
         fileChangedNotify(filename);
         if (filename.indexOf('ie8.scss') > -1) {
-            // Compile scss-files for ie8 of modules
+            // Compile scss-files for ie8
             gulp.start('compile-scss-for-ie8');
         } else if (filename.indexOf('ie9.scss') > -1) {
-            // Compile scss-files for ie9 of modules
+            // Compile scss-files for ie9
             gulp.start('compile-scss-for-ie9');
         } else {
-            // Compile scss-files of modules
+            // Compile scss-files for all browsers
             gulp.start('compile-scss');
+            gulp.start('compile-scss-for-ie8');
+            gulp.start('compile-scss-for-ie9');
         }
         
     });
@@ -281,9 +287,11 @@ gulp.task('build-dev', function(cb) {
 gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
+        'svg-minification',
         'pre-build',
         'svg-to-base64',
         ['compress-main-js', 'compress-css'],
+        'zip-build',
         cb
     );
 });
@@ -301,7 +309,7 @@ gulp.task('browsersync', function (cb) {
         port: browserSyncConfig.port,
         open: browserSyncConfig.open,
         browser: browserSyncConfig.browser,
-        startPath: browserSyncConfig.startPath,
+        startPath: browserSyncConfig.startUrl,
         notify: browserSyncConfig.useNotifyInBrowser
     });  
 

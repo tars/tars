@@ -6,8 +6,7 @@ var gulp = require('gulp'),                                     // Gulp JS
     projectConfig = require('../../projectConfig')              // Project config
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    browserSync = require('browser-sync'),                      // Plugin for sync with browser
-    dpi = projectConfig.useDpi;                                 // Array of used dpi
+    browserSync = require('browser-sync');                      // Plugin for sync with browser
 
 // Make sprite and scss for this sprite
 module.exports = function() {
