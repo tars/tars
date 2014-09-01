@@ -45,7 +45,9 @@
 
   @mixin bg($sprite, $repeat: no-repeat) {
     @include sprite-mixin-template($sprite);
-    background-size: 100%;
+    $sprite-total-width: nth($sprite, 7); 
+    $sprite-total-height: nth($sprite, 8);
+    background-size: $sprite-total-width, $sprite-total-height;
     background-repeat: $repeat;
     
     {{#options.dpi144}}
