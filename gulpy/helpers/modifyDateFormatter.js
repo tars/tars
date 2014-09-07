@@ -1,30 +1,23 @@
 // Date formatter for Gulp notify. It showes only hours, minutes and seconds
+function formatTime(timeItem) {
+    if (timeItem < 10) {
+        timeItem = '0' + timeItem;
+    }
+    return timeItem;
+}
+
 var dateFormatter = {
     getTimeOfModify: function() {
         var modifyDate = '',
-        currentDate = new Date(),
-        hours = currentDate.getHours(),
-        minutes = currentDate.getMinutes(),
-        seconds = currentDate.getSeconds();
+            currentDate = new Date(),
+            hours = currentDate.getHours(),
+            minutes = currentDate.getMinutes(),
+            seconds = currentDate.getSeconds();
 
-        if (hours < 10) {
-            hours = '0' + hours;
-        }
-
-        if (minutes < 10) {
-            minutes = '0' + minutes;
-        }
-
-        if (seconds < 10) {
-            seconds = '0' + seconds;
-        }
-
-        modifyDate = hours + ':' + minutes + ':' + seconds;
+        modifyDate = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
 
         return modifyDate;
     }
 }
 
-if (typeof module != 'undefined') {
-    module.exports = dateFormatter;
-}
+module.exports = dateFormatter;

@@ -4,15 +4,19 @@ html, body {
     height: 100%;
 }
 
-.pageWrapper {
+.page {
+    
+}
+
+.page__wrapper {
     min-height: 100%;
     margin-bottom: -50px;
 }
 
-* html .pageWrapper {
+* html .page__wrapper {
     height: 100%;
 }
 
-.pageBuffer {
+.page__buffer {
     height: 50px;
 }

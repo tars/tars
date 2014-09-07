@@ -1,7 +1,7 @@
 {
   "name": "markupBuilder",
-  "version": "0.7.0",
-  "description": "markupBuilder =============",
+  "version": "0.8.0",
+  "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
     "gulp-autoprefixer": ">=0.0.7",
@@ -33,7 +33,9 @@
     "gulp-imagemin": ">=0.6.2",
     "gulp-base64": ">= 0.1.1",
     "gulp-raster": ">=0.1.0",
-    "gulp-zip": "1.0.0"
+    "gulp-zip": "1.0.0",
+    "github-download": "0.3.0",
+    "ncp": "0.6.0"
   },
   "devDependencies": {},
   "scripts": {

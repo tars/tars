@@ -33,6 +33,4 @@ var watchByPattern = (function() {
     }
 }());
 
-if (typeof module != 'undefined') {
-    module.exports = watchByPattern;
-}
+module.exports = watchByPattern;

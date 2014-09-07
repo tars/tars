@@ -1,8 +1,25 @@
 var projectConfig = {
 
-    // Sprites config
-    // Switch to true, if you're going to use svg images
-    useSVG: false,
+//////////////////////////////////////////////
+// YOU CAN'T CHANGE THIS OPTIONS AFTER INIT //
+//////////////////////////////////////////////
+
+    // File structure settings
+    fs: {
+        //Name of folder with static files, such *.css, *.js and so on
+        staticFolderName: 'static',
+
+        //Name of folder with images
+        imagesFolderName: 'img'
+    },
+
+    // What kind of templater would you like to use
+    // String: 'jade' or 'handlebars'
+    templater: 'jade',
+
+    // What kind of css-preprocessor would you like to use
+    // String: 'scss' or 'less'
+    cssPreprocessor: 'scss',
 
     // What kind of size of images are you going to you.
     // 96 — 1 dppx (regular)
@@ -10,7 +27,42 @@ var projectConfig = {
     // 192 — 2 dppx (retina)
     // 288 - 3 dppx (nexus 5, for example)
     // Example if using for all displays: usePpi: [96, 144, 192, 288]
-    useDpi: [96],
+    useImageWithDpi: [96],
+
+//////////////////////////////////////////////
+// YOU CAN'T CHANGE THIS OPTIONS AFTER INIT //
+//////////////////////////////////////////////
+
+
+
+
+/////////////////////
+// MUTABLE OPTIONS /////////////////////////
+// YOU CAN CHANGE THIS OPTIONS AFTER INIT //
+////////////////////////////////////////////
+
+    // Sprites config
+    // Switch to true, if you're going to use svg images
+    useSVG: true,
+
+    // Minify html true/false
+    minifyHtml: false,
+
+
+    // Array of string of paths
+    // Example: ['./markup/pages/controller/**/*.js']
+    jsPathsToConcatBeforeModulesJs: [],
+
+    // Lint additional js before modules
+    lintJsCodeBeforeModules: false,
+
+    // Array of string of paths
+    // Example: ['./markup/pages/controller/**/*.js']
+    jsPathsToConcatAfterModulesJs: [],
+
+    // Lint additional js after modules
+    lintJsCodeAfterModules: false,
+
 
     //Config for Notify module
     notifyConfig: {
@@ -23,26 +75,18 @@ var projectConfig = {
         // String
         title: 'MarkupBuilder notification',
 
-        // Error view
-        // Function, returns string
-        errorMessage: function(error) {
-            return 'Something is wrong.\nLook in console.\n' + error;
-        },
-
         // Sounds notifactions
         // String (name of system sound) or undefined, if you don't need to hear any sounds
         sounds: {
 
             // Sound after successfull finishing of task
             onSuccess: undefined, // For example 'Glass' in OS X
-
-            // Sound after unsuccessfull finishing of task
-            onError: undefined //Don't work yet :(
         },
 
         // Label for timestamp of task finishing time
         taskFinishedText: 'Task finished at: '
     },
+
 
     // Config for browser-sync module
     browserSyncConfig: {
@@ -57,8 +101,10 @@ var projectConfig = {
         // If you don't need to see notification in browser, switch to false
         useNotifyInBrowser: true
     }
-}
+};
 
-if (typeof module != 'undefined') {
-    module.exports = projectConfig;
-}
+////////////////////////////////////////////
+// YOU CAN CHANGE THIS OPTIONS AFTER INIT //
+////////////////////////////////////////////
+
+module.exports = projectConfig;

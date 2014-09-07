@@ -1,39 +1,35 @@
 var gulp = require('gulp'),                                     // Gulp JS
     gulpif = require('gulp-if'),                                // Gulp if module
-    gutil = require('gulp-util'),                               // Gulp util module
     notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig');
+    projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    raster = require('gulp-raster'),
-    rename = require('gulp-rename'),
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
+    browserSync = require('browser-sync');                      // Plugin for sync with browser
 
-// Raster SVG-files
-module.exports = function() {
+// Move misc files
+module.exports = function(cb) {
 
-    if (projectConfig.useSVG) {
-
-        return gulp.src('./dev/static/img/svg/*.svg')
-            .pipe(raster())
-            .pipe(rename({extname: '.png'}))
+    return gulp.task('move-misc-files', function(cb) {
+        gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
-                return notifyConfig.errorMessage(error);
+                return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/static/img/rasterSvgImages/'))
+            .pipe(gulp.dest('./dev/'))
+            .pipe(browserSync.reload({stream:true}))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
                         title: notifyConfig.title,
-                        message: 'SVG\'ve been rastered \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                        message: 'Misc files\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
                         templateOptions: {
                             date: modifyDate.getTimeOfModify()
                         }
                     })
                 )
             );
-    } else {
-        gutil.log('!SVG is not used!');
-    }  
+
+        cb(null);
+    });   
 };   

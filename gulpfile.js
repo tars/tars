@@ -10,9 +10,21 @@ var gulp = require('gulp'),                     // Gulp JS
     useLiveReload = gutil.env.lr,
 
     // Configs
-    projectConfig = require('./projectConfig');
-    browserSyncConfig = projectConfig.browserSyncConfig;
+    projectConfig = require('./projectConfig'),
+    browserSyncConfig = projectConfig.browserSyncConfig,
+    templateExtension = '',
+    projectConfigTemlater = projectConfig.templater.toLowerCase();
 
+if (projectConfigTemlater === 'jade') {
+    templateExtension = 'jade';
+} else if (projectConfigTemlater === 'hadlebars' 
+        || projectConfigTemlater === 'hadelbars' 
+        || projectConfigTemlater === 'hdb' 
+        || projectConfigTemlater === 'hb') {
+    templateExtension = 'html';
+} else {
+    templateExtension = 'jade';
+}
 
 
 /* HELPERS */
@@ -37,94 +49,93 @@ var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
 // You can add your own task.
 // There is a template of gulp-task
-// Function of task have to be in gulpy/taskFunctions folder
+// Task have to be in gulpy/tasks folder
 // Example:
-// gulp.task('example-task', require('./gulpy/taskFunctions/exampleTask'));
+// require('./gulpy/tasks/exampleTask')();
 
 
-// Jade compilation
-gulp.task('compile-jade', require('./gulpy/taskFunctions/compileJade'));
+// Create file-structure
+gulp.task('create-fs', require('./gulpy/tasks/createFs'));
+
+// Init builder. Make folders
+require('./gulpy/tasks/init')();
+
+// Clean dev directory and cache
+require('./gulpy/tasks/clean')();
+
+// Template compilation
+require('./gulpy/tasks/compileTemplates')();
 
 // Make sprite task    
-gulp.task('raster-svg', require('./gulpy/taskFunctions/rasterSvg'));
+require('./gulpy/tasks/rasterSvg')();
+
+// Make png-sprite task for svg files for old browsers
+require('./gulpy/tasks/makeSpriteForSvgFallback')();
+
+// SVG minification
+require('./gulpy/tasks/svgMinification')();
+
+// Move SVG-files to dev directory
+require('./gulpy/tasks/moveSvg')();
+
+// Convert svg includes to base64 in css
+require('./gulpy/tasks/svgToBase64')();
 
 // Make sprite task    
-gulp.task('make-sprite-for-svg-fallback', require('./gulpy/taskFunctions/makeSpriteForSvgFallback'));
+require('./gulpy/tasks/makeSprite')();
 
-// Make sprite task    
-gulp.task('make-sprite', require('./gulpy/taskFunctions/makeSprite'));
+// Css compilation
+require('./gulpy/tasks/compileCss')();
 
-// Scss compilation
-gulp.task('compile-scss', require('./gulpy/taskFunctions/compileScss'));
+// Css compilation for ie8
+require('./gulpy/tasks/compileCssForIe8')();
 
-// Scss compilation for ie8
-gulp.task('compile-scss-for-ie8', require('./gulpy/taskFunctions/compileScssForIe8'));
+// Css compilation for ie9
+require('./gulpy/tasks/compileCssForIe9')();
 
-// Scss compilation for ie9
-gulp.task('compile-scss-for-ie9', require('./gulpy/taskFunctions/compileScssForIe9'));
+// Compress css
+require('./gulpy/tasks/compressCss')();
 
 // Copy JS-files for libs that have to be in separate files
-gulp.task('copy-html5shiv-js', require('./gulpy/taskFunctions/copyHtml5shivJs'));
+require('./gulpy/tasks/copySeparateJs')();
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
-gulp.task(
-    'concat-plugins-libs-and-modules-lint-modules-js', 
-    ['lint'], 
-    require('./gulpy/taskFunctions/concatPluginsLibsAndModulesLintModulesJs')
-);
+require('./gulpy/tasks/concatPluginsLibsAndModulesLintModulesJs')();
 
 // Check JS (code style and errors)
-gulp.task('lint', require('./gulpy/taskFunctions/lint'));
-
-// Move misc files
-gulp.task('move-misc-files', require('./gulpy/taskFunctions/moveMiscFiles'));
-
-// Move images from assets modules of modules
-gulp.task('move-assets', require('./gulpy/taskFunctions/moveAssets'));
-
-// Move images for content
-gulp.task('move-content-img', require('./gulpy/taskFunctions/moveContentImg'));
-
-// Move images for plugins
-gulp.task('move-plugins-img', require('./gulpy/taskFunctions/movePluginsImg'));
-
-// Generate font-files (eot, woff, svg) from .ttf-file
-gulp.task('generate-fonts', require('./gulpy/taskFunctions/generateFonts'));
-
-// Move fonts-files to dev directory
-gulp.task('move-fonts', require('./gulpy/taskFunctions/moveFonts'));
+require('./gulpy/tasks/lint')();
 
 // Strip console.log and debugger from main.js
-gulp.task('strip-debug', require('./gulpy/taskFunctions/stripDebug'));
+require('./gulpy/tasks/stripDebug')();
 
 // Compress js-files and strip debug
-gulp.task('compress-main-js', ['strip-debug'], require('./gulpy/taskFunctions/compressMainJs'));
+require('./gulpy/tasks/compressMainJs')();
 
-// Convert svg includes to base64 in css
-gulp.task('svg-to-base64', require('./gulpy/taskFunctions/svgToBase64'));
+// Move misc files
+require('./gulpy/tasks/moveMiscFiles')();
 
-// Compress css
-gulp.task('compress-css', require('./gulpy/taskFunctions/compressCss'));
+// Move images from assets modules of modules
+require('./gulpy/tasks/moveAssets')();
 
-// SVG minification
-gulp.task('svg-minification', require('./gulpy/taskFunctions/svgMinification'));
+// Move images for content
+require('./gulpy/tasks/moveContentImg')();
+
+// Move images for plugins
+require('./gulpy/tasks/movePluginsImg')();
+
+// Move fonts-files to dev directory
+require('./gulpy/tasks/moveFonts')();
+
+// Generate font-files (eot, woff, svg) from .ttf-file
+require('./gulpy/tasks/generateFonts')();
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-gulp.task('pre-build', require('./gulpy/taskFunctions/preBuild'));
-
-// Clean dev directory and cache
-gulp.task('clean', require('./gulpy/taskFunctions/clean'));
-
-// Init builder. Make folders
-gulp.task('init', require('./gulpy/taskFunctions/init'));
-
-// Move SVG-files to dev directory
-gulp.task('move-svg', require('./gulpy/taskFunctions/moveSvg'));
+require('./gulpy/tasks/preBuild')();
 
 // Create zip-archive
-gulp.task('zip-build', require('./gulpy/taskFunctions/zipBuild'));
+require('./gulpy/tasks/zipBuild')();
 
 
 /* END TASKS */
@@ -140,7 +151,7 @@ gulp.task('dev', ['build-dev'], function() {
     }
 
 
-    // You can add you own watcher
+    // You can add your own watcher
     // Example:
     // watchByPattern( path-string to files, that you'd like to watch for, function(filename) {
     //      fileChangedNotify(filename);
@@ -148,53 +159,63 @@ gulp.task('dev', ['build-dev'], function() {
     // });
 
 
-    watchByPattern('./markup/static/images/sprite/**/*.png', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/**/*.png', function(filename) {
         fileChangedNotify(filename);
         gulp.start('make-sprite');
     });
 
     if (projectConfig.useSVG) {
-        watchByPattern('./markup/static/images/svg/**/*.svg', function(filename, cb) {
+        watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/**/*.svg', function(filename, cb) {
             fileChangedNotify(filename);
             gulp.start('svg-actions');
         });
     }
 
-    // Watcher for common scss-files and scss-files of plugins
-    watchByPattern('./markup/static/scss/**/*.scss', function(filename) {
+    // Watcher for common scss(or less)-files and scss(or less)-files of plugins
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + projectConfig.cssPreprocessor, function(filename) {
         fileChangedNotify(filename);
-        gulp.start('compile-scss');
+        gulp.start('compile-css');
     }); 
 
-    // Watcher for scss-files of modules
-    watchByPattern('./markup/modules/**/*.scss', function(filename) {
+    // Watcher for scss(or less)-files of modules
+    watchByPattern('./markup/modules/**/*.' + projectConfig.cssPreprocessor, function(filename) {
         fileChangedNotify(filename);
-        if (filename.indexOf('ie8.scss') > -1) {
-            // Compile scss-files for ie8
-            gulp.start('compile-scss-for-ie8');
-        } else if (filename.indexOf('ie9.scss') > -1) {
-            // Compile scss-files for ie9
-            gulp.start('compile-scss-for-ie9');
+        if (filename.indexOf('ie8.' + projectConfig.cssPreprocessor) > -1) {
+            // Compile css-files for ie8
+            gulp.start('compile-css-for-ie8');
+        } else if (filename.indexOf('ie9.' + projectConfig.cssPreprocessor) > -1) {
+            // Compile css-files for ie9
+            gulp.start('compile-css-for-ie9');
         } else {
-            // Compile scss-files for all browsers
-            gulp.start('compile-scss');
-            gulp.start('compile-scss-for-ie8');
-            gulp.start('compile-scss-for-ie9');
+            // Compile css-files for all browsers
+            gulp.start('compile-css');
+            gulp.start('compile-css-for-ie8');
+            gulp.start('compile-css-for-ie9');
         }
         
     });
 
-    // Watcher for jade-files of templates
-    watchByPattern('./markup/pages/**/*.jade', function(filename) {
+    // Watcher for templates-files of templates
+    watchByPattern('./markup/pages/**/*.' + templateExtension, function(filename) {
         fileChangedNotify(filename);
-        gulp.start('compile-jade');
+        gulp.start('compile-templates');
     });
 
-    // Watcher for jade-files of modules
-    watchByPattern('./markup/modules/**/*.jade', function(filename) {
+    // Watcher for templates-files of modules
+    watchByPattern('./markup/modules/**/*.' + templateExtension, function(filename) {
         fileChangedNotify(filename);
-        gulp.start('compile-jade');
+        gulp.start('compile-templates');
     });
+
+    if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
+        // Watcher for js-files after modules js
+        projectConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
+            watchByPattern(path, function(filename) {
+                fileChangedNotify(filename);
+                gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+            }); 
+        });
+    }   
 
     // Watcher for js-files of modules
     watchByPattern('./markup/modules/**/*.js', function(filename) {
@@ -202,22 +223,26 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
+    if (projectConfig.jsPathsToConcatAfterModulesJs.length) {
+        // Watcher for js-files after modules js
+        projectConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
+            watchByPattern(path, function(filename) {
+                fileChangedNotify(filename);
+                gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+            }); 
+        });
+    }
+
     // Watcher for js-files of plugins
-    watchByPattern('./markup/static/js/plugins/**/*.js', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
     // Watcher for js-files of libs
-    watchByPattern('./markup/static/js/libs/**/*.js', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
-    });
-
-    // Watcher for html5shiv js-files
-    watchByPattern('./markup/static/js/html5shiv/**/*.js', function(filename) {
-        fileChangedNotify(filename);
-        gulp.start('copy-html5shiv-js');
     });
 
     // Watcher for images in assets dir of modules
@@ -227,32 +252,33 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for content images
-    watchByPattern('./markup/static/images/content/**/*.*', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content/**/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-content-img');
     });
 
     // Watcher for images of plugins
-    watchByPattern('./markup/static/images/plugins/**/*.*', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-plugins-img');
     });
 
     // Watcher for misc files
-    watchByPattern('./markup/static/misc/**/*.*', function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*', function(filename) {
         fileChangedNotify(filename);
         gulp.start('move-misc-files');
     });
 
+    // Watcher for font files.
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.*', function(filename) {
+        fileChangedNotify(filename);
+        gulp.start('fonts-actions');
+    });
 
-    // Default gulp watcher for font files.
-    // Need restart gulp dev, if new fonts have been added
-    gulp.watch('./markup/static/fonts/*.*', function(cb) {
-        runSequence(
-            'move-fonts',
-            'generate-fonts',
-            cb
-        );
+    // Watcher for separate Js files files
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js', function(filename) {
+        fileChangedNotify(filename);
+        gulp.start('copy-separate-js');
     });
 });
 
@@ -270,9 +296,9 @@ gulp.task('build-dev', function(cb) {
         'move-svg',
         'raster-svg',
         ['make-sprite-for-svg-fallback', 'make-sprite'],
-        ['compile-scss', 'compile-scss-for-ie8', 'compile-scss-for-ie9'],
+        ['compile-css', 'compile-css-for-ie8', 'compile-css-for-ie9'],
         [
-            'copy-html5shiv-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-jade',
+            'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
         ],
         'generate-fonts',
@@ -294,6 +320,11 @@ gulp.task('build', function(cb) {
         'zip-build',
         cb
     );
+});
+
+// Default task. Just start build task
+gulp.task('default', function() {
+    gulp.start('build');
 });
 
 gulp.task('browsersync', function (cb) {
@@ -325,6 +356,14 @@ gulp.task('svg-actions', function (cb) {
         'move-svg',
         'raster-svg',
         'make-sprite-for-svg-fallback',
+        cb
+    );
+});
+
+gulp.task('fonts-actions', function (cb) {
+    runSequence(
+        'move-fonts',
+        'generate-fonts',
         cb
     );
 })

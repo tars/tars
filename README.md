@@ -193,7 +193,7 @@ Custom tasks
 ------------
 
 You can add your own task in builder. All examples are already exist. 
-You can find Examples of watchers and task declaration in gulpfile.js In gulpy/taskFunctions you can find example of task function.
+You can find Examples of watchers and task declaration in gulpfile.js In gulpy/tasks you can find example of task function.
 
 
 

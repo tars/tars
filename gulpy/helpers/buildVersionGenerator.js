@@ -6,6 +6,7 @@ var buildVersion = {
         generatedBuildVersion = '_ver-' + (new Date()).toString();
         generatedBuildVersion = generatedBuildVersion.replace(/ /g,'_');
         generatedBuildVersion = generatedBuildVersion.replace(/:/g,'-');
+        generatedBuildVersion = generatedBuildVersion.match(/.*\d\d-\d\d-\d\d/)[0];
 
         this.newBuildVersion = generatedBuildVersion;
     },
@@ -13,6 +14,4 @@ var buildVersion = {
     newBuildVersion: generatedBuildVersion
 }
 
-if (typeof module != 'undefined') {
-    module.exports = buildVersion;
-}
+module.exports = buildVersion;
