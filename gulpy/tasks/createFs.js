@@ -22,6 +22,7 @@ var paths = 'markup/' + projectConfig.fs.staticFolderName + '/js/libs ' +
 
     paths += 'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg ' + 
             'markup/' + projectConfig.fs.staticFolderName + '/fonts ' + 
+            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + ' ' +
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/plugins ' + 
             'markup/modules/_template/assets ' + 
             'markup/modules/_template/ie';

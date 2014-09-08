@@ -1,7 +1,0 @@
-@mixin bg-svg($svg-sprite, $repeat: no-repeat) {
-    $svg-sprite-name: nth($svg-sprite, 10);
-    background-image: url(../img/svg/#{$svg-sprite-name}.svg);
-    @include svg-sprite-width($svg-sprite);
-    @include svg-sprite-height($svg-sprite);
-    background-repeat: $repeat;
-}

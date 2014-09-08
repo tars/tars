@@ -17,8 +17,8 @@ var gulp = require('gulp'),                     // Gulp JS
 
 if (projectConfigTemlater === 'jade') {
     templateExtension = 'jade';
-} else if (projectConfigTemlater === 'hadlebars' 
-        || projectConfigTemlater === 'hadelbars' 
+} else if (projectConfigTemlater === 'handlebars' 
+        || projectConfigTemlater === 'handelbars' 
         || projectConfigTemlater === 'hdb' 
         || projectConfigTemlater === 'hb') {
     templateExtension = 'html';

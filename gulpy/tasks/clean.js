@@ -17,7 +17,7 @@ module.exports = function() {
     return gulp.task('clean', function() {
         clearCaches(cache);
 
-        return gulp.src('./dev/', {read: false})
+        return gulp.src(['./dev/', './.tmpTemplater/', './.tmpPreproc/'], {read: false})
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))

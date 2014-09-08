@@ -15,7 +15,7 @@ var projectConfig = {
 
     // What kind of templater would you like to use
     // String: 'jade' or 'handlebars'
-    templater: 'jade',
+    templater: 'handlebars',
 
     // What kind of css-preprocessor would you like to use
     // String: 'scss' or 'less'
@@ -44,9 +44,6 @@ var projectConfig = {
     // Sprites config
     // Switch to true, if you're going to use svg images
     useSVG: true,
-
-    // Minify html true/false
-    minifyHtml: false,
 
 
     // Array of string of paths

@@ -9,8 +9,10 @@ var gulp = require('gulp'),                                     // Gulp JS
     ghdownload = require('github-download');
     ncp = require('ncp').ncp,
     templateExtension = '',
-    projectConfigTemlater = projectConfig.templater.toLowerCase();
+    projectConfigTemlater = projectConfig.templater.toLowerCase(),
+    rmdir = require('../../node_modules/gulp-rimraf/node_modules/rimraf');
 
+ncp.limit = 16;
 require('./createFs')();
 
 var githubConfig = {
@@ -21,11 +23,11 @@ var githubConfig = {
 
 if (projectConfigTemlater === 'jade') {
     templateExtension = 'jade';
-} else if (projectConfigTemlater === 'hadlebars' 
-        || projectConfigTemlater === 'hadelbars' 
+} else if (projectConfigTemlater === 'handlebars' 
+        || projectConfigTemlater === 'handelbars' 
         || projectConfigTemlater === 'hdb' 
         || projectConfigTemlater === 'hb') {
-    templateExtension = 'hadlebars';
+    templateExtension = 'handlebars';
 } else {
     templateExtension = 'jade';
 }
@@ -36,17 +38,50 @@ module.exports = function() {
     return gulp.task('init', ['create-fs'], function() {
 
         // Including templater
-        ghdownload({user: githubConfig.user, repo: githubConfig.repo, ref: 'mkExt-' + templateExtension + '-templater'}, process.cwd() + '/.tmp-templater')
-        .on('end', function() {
-            ncp(process.cwd() + '/.tmp-templater', process.cwd(), function (err) {
+        ghdownload({user: githubConfig.user, repo: githubConfig.repo, ref: 'mkExt-' + templateExtension + '-templater'}, '.tmpTemplater')
+            .on('error', function(err) {
+                    console.error(err);
+            })
+            .on('end', function() {
 
+                console.log('End downloading');
+
+                ncp('./.tmpTemplater/markup', './markup', function (err) {
                     if (err) {
-                        console.log('error');
+                        console.log('error markup templater');
                     }
+                    console.log('done markup');
+                });
+
+                ncp('./.tmpTemplater/gulpy', './gulpy', function (err) {
+                    if (err) {
+                        console.log('error gulpy templater');
+                    }
+                    console.log('done gulpy');
                 });
         });
 
-        // return gulp.src('./.tmp', { read: false })
-        //     .pipe(rimraf({ force: true }));
-        // });
-};   
+        // Including css-preprocessor
+        ghdownload({user: githubConfig.user, repo: githubConfig.repo, ref: 'mkExt-' + projectConfig.cssPreprocessor + '-preproc'}, '.tmpPreproc')
+        .on('end', function() {
+            ncp('./.tmpPreproc/gulpy', './gulpy', function (err) {
+                if (err) {
+                    console.log('error gulpy css preproc');
+                }
+            });
+
+            ncp('./.tmpPreproc/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
+                if (err) {
+                    console.log('error static  css preproc');
+                }
+            });
+
+            ncp('./.tmpPreproc/markup/modules/_template', './markup/modules/_template/', function (err) {
+                if (err) {
+                    console.log('error modules  css preproc');
+                }
+            });
+        });
+
+    });
+};
