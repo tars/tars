@@ -43,21 +43,23 @@ module.exports = function() {
             })
             .on('end', function() {
 
-                console.log('End downloading');
-
                 ncp('./.tmpTemplater/markup', './markup', function (err) {
                     if (err) {
-                        console.log('error markup templater');
+                        console.log('Error while copy markup templater');
+                        return;
                     }
-                    console.log('done markup');
+                    console.log('Done copy markup templater');
                 });
 
                 ncp('./.tmpTemplater/gulpy', './gulpy', function (err) {
                     if (err) {
-                        console.log('error gulpy templater');
+                        console.log('Error while copy gulpy templater task');
+                        return;
                     }
-                    console.log('done gulpy');
+                    console.log('Done copy gulpy templater task');
                 });
+
+                console.log('End downloading templater');
         });
 
         // Including css-preprocessor
@@ -65,21 +67,35 @@ module.exports = function() {
         .on('end', function() {
             ncp('./.tmpPreproc/gulpy', './gulpy', function (err) {
                 if (err) {
-                    console.log('error gulpy css preproc');
+                    console.log('Error while copy gulpy css preproc task');
+                    console.log('Please, repost to developer with message.');
+                    return;
                 }
+
+                console.log('Done copy gulpy css-preproc task');
             });
 
             ncp('./.tmpPreproc/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
                 if (err) {
-                    console.log('error static  css preproc');
+                    console.log('Error while copy static for css preproc :(');
+                    console.log('Please, repost to developer with message.');
+                    return;
                 }
+
+                console.log('Done copy static css-files');
             });
 
             ncp('./.tmpPreproc/markup/modules/_template', './markup/modules/_template/', function (err) {
                 if (err) {
-                    console.log('error modules  css preproc');
+                    console.log('Error while copy modules for css preproc');
+                    console.log('Please, repost to developer with message.');
+                    return;
                 }
+
+                console.log('Done copy css-files for moduels');
             });
+
+            console.log('End downloading css-preproc');
         });
 
     });
