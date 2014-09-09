@@ -337,7 +337,6 @@ gulp.task('build-dev', function(cb) {
             'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
         ],
-        'rename-path-to-static-in-templates',
         'generate-fonts',
         cb
     );
