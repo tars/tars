@@ -28,6 +28,7 @@
     "gulp-jshint": ">=1.6.3",
     "gulp-notify": ">=1.4.1",
     "gulp-cached": ">=0.0.3",
+    "gulp-replace-task": "0.0.6",
     "jshint-stylish": ">=0.2.0",
     "run-sequence": ">=0.3.6",
     "minimatch": ">=0.4.0",

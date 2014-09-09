@@ -325,6 +325,7 @@ gulp.task('build-dev', function(cb) {
             'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
         ],
+        'rename-path-to-static-in-templates',
         'generate-fonts',
         cb
     );
@@ -351,7 +352,7 @@ gulp.task('default', function() {
 });
 
 // Task for starting browsersync module
-gulp.task('browsersync', function (cb) {
+gulp.task('browsersync', function(cb) {
    
     // Serve files and connect browsers
     browserSync({
@@ -381,7 +382,7 @@ gulp.task('browsersync', function (cb) {
 /* HELPERS TASKS */
 /*****************/
 
-gulp.task('svg-actions', function (cb) {
+gulp.task('svg-actions', function(cb) {
     runSequence(
         'move-svg',
         'raster-svg',
@@ -390,7 +391,7 @@ gulp.task('svg-actions', function (cb) {
     );
 });
 
-gulp.task('fonts-actions', function (cb) {
+gulp.task('fonts-actions', function(cb) {
     runSequence(
         'move-fonts',
         'generate-fonts',
