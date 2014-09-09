@@ -6,11 +6,10 @@ var gulp = require('gulp'),                                     // Gulp JS
     projectConfig = require('../../projectConfig'),             // Project config
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    ghdownload = require('github-download');
+    ghdownload = require('github-download'),
     ncp = require('ncp').ncp,
     templateExtension = '',
-    projectConfigTemlater = projectConfig.templater.toLowerCase(),
-    rmdir = require('../../node_modules/gulp-rimraf/node_modules/rimraf');
+    projectConfigTemlater = projectConfig.templater.toLowerCase();
 
 ncp.limit = 16;
 require('./createFs')();

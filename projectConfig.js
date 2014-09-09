@@ -15,7 +15,7 @@ var projectConfig = {
 
     // What kind of templater would you like to use
     // String: 'jade' or 'handlebars'
-    templater: 'handlebars',
+    templater: 'jade',
 
     // What kind of css-preprocessor would you like to use
     // String: 'scss' or 'less'

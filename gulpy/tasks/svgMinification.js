@@ -6,9 +6,7 @@ var gulp = require('gulp'),                                         // Gulp JS
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                      // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),         // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator'),
-    os = require('os'),                                             // Node os module
-    notMs = true;                                                   // Windows System Detect
+    buildVersionGenerator = require('../helpers/buildVersionGenerator');
 
 // Minify sprite img
 module.exports = function() {

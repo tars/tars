@@ -3,8 +3,6 @@ var gulp = require('gulp'),                     // Gulp JS
     gutil = require('gulp-util'),               // Gulp util module
     runSequence = require('run-sequence'),      // Run sequence module for run task in queue
     browserSync = require('browser-sync'),      // Plugin for sync with browser
-    gulpRename = require('gulp-rename'),
-    path = require('path'),
 
     // Flags
     useLiveReload = gutil.env.lr,
@@ -14,6 +12,7 @@ var gulp = require('gulp'),                     // Gulp JS
     browserSyncConfig = projectConfig.browserSyncConfig,
     templateExtension = '',
     projectConfigTemlater = projectConfig.templater.toLowerCase();
+
 
 if (projectConfigTemlater === 'jade') {
     templateExtension = 'jade';
@@ -27,8 +26,10 @@ if (projectConfigTemlater === 'jade') {
 }
 
 
-/* HELPERS */
 
+/***********/
+/* HELPERS */
+/***********/
 // You can add your own helpers here. Helpers folder is gulpy/helpers
 
 // Watcher by node-watch
@@ -40,22 +41,30 @@ var fileChangedNotify = require('./gulpy/helpers/fileChangedNotify');
 // Generate new version of  build
 var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
+/***************/
 /* END HELPERS */
+/***************/
 
 
 
+/*********/
 /* TASKS */
+/*********/
 
+// USERS TASKS
 
 // You can add your own task.
 // There is a template of gulp-task
-// Task have to be in gulpy/tasks folder
+// Task have to be in gulpy/userTasks folder
 // Example:
-// require('./gulpy/tasks/exampleTask')();
+// require('./gulpy/userTasks/exampleTask')();
 
+
+// SYSTEM TASKS
+// Default tasks
 
 // Create file-structure
-gulp.task('create-fs', require('./gulpy/tasks/createFs'));
+require('./gulpy/tasks/createFs')();
 
 // Init builder. Make folders
 require('./gulpy/tasks/init')();
@@ -137,11 +146,15 @@ require('./gulpy/tasks/preBuild')();
 // Create zip-archive
 require('./gulpy/tasks/zipBuild')();
 
-
+/*************/
 /* END TASKS */
+/*************/
 
 
-/* WATHERS */
+
+/***********/
+/* WATCHERS */
+/***********/
 
 // Build dev-version with watchers and livereloader
 gulp.task('dev', ['build-dev'], function() {
@@ -151,6 +164,8 @@ gulp.task('dev', ['build-dev'], function() {
     }
 
 
+    // USERS WATCHERS
+
     // You can add your own watcher
     // Example:
     // watchByPattern( path-string to files, that you'd like to watch for, function(filename) {
@@ -159,11 +174,15 @@ gulp.task('dev', ['build-dev'], function() {
     // });
 
 
+    // SYSTEM WATCHERS
+
+    // Watcher for images for sprite (png)
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/**/*.png', function(filename) {
         fileChangedNotify(filename);
         gulp.start('make-sprite');
     });
 
+    // Watcher for svg-images
     if (projectConfig.useSVG) {
         watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/**/*.svg', function(filename, cb) {
             fileChangedNotify(filename);
@@ -208,7 +227,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
-        // Watcher for js-files after modules js
+        // Watcher for js-files before modules js
         projectConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
             watchByPattern(path, function(filename) {
                 fileChangedNotify(filename);
@@ -282,10 +301,15 @@ gulp.task('dev', ['build-dev'], function() {
     });
 });
 
-/* END WATHERS */
+/***************/
+/* END WATCHERS */
+/***************/
 
 
+
+/**************/
 /* MAIN TASKS */
+/***************/
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
@@ -307,7 +331,6 @@ gulp.task('build-dev', function(cb) {
 });
 
 // Build release version
-
 // Also you can add your own tasks in queue of build task
 
 gulp.task('build', function(cb) {
@@ -327,6 +350,7 @@ gulp.task('default', function() {
     gulp.start('build');
 });
 
+// Task for starting browsersync module
 gulp.task('browsersync', function (cb) {
    
     // Serve files and connect browsers
@@ -347,10 +371,16 @@ gulp.task('browsersync', function (cb) {
     cb(null);
 });
 
+/******************/
 /* END MAIN TASKS */
+/******************/
 
 
+
+/*****************/
 /* HELPERS TASKS */
+/*****************/
+
 gulp.task('svg-actions', function (cb) {
     runSequence(
         'move-svg',
@@ -366,5 +396,8 @@ gulp.task('fonts-actions', function (cb) {
         'generate-fonts',
         cb
     );
-})
+});
+
+/*********************/
 /* END HELPERS TASKS */
+/*********************/

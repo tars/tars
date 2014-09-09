@@ -5,7 +5,7 @@ var gulp = require('gulp'),                                     // Gulp JS
     cache = require('gulp-cached'),                             // Gulp cache module
     path = require('path'),
     notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig');
+    projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
