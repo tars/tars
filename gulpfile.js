@@ -172,6 +172,18 @@ gulp.task('dev', ['build-dev'], function() {
     //      fileChangedNotify(filename);
     //      gulp.start('example-task'); 
     // });
+    //
+    // If you need to watch for array of paths, you have to add watcher for each path separately.
+    // Example:
+    //
+    // pathsArray = ['path_1', 'path_2']
+    //
+    // pathsArray.forEach(function(path) {
+    //     watchByPattern(path, function(filename) {
+    //         fileChangedNotify(filename);
+    //         gulp.start('example-task');
+    //     }); 
+    // });
 
 
     // SYSTEM WATCHERS
