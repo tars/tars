@@ -27,7 +27,12 @@ var paths = 'markup/' + projectConfig.fs.staticFolderName + '/js/libs ' +
             'markup/modules/_template/assets ' + 
             'markup/modules/_template/ie';
 
-    windowsPaths = paths.replace(/\//g,"\\\\");
+    windowsPaths = paths.replace(/\//g,"\\\\"),
+    renameStaticPath = false;
+
+    if (projectConfig.fs.staticFolderName != 'static') {
+        renameStaticPath = true;
+    }
 
 
 // Create FS.
@@ -39,9 +44,15 @@ module.exports = function() {
         }
 
         gulp.src('')
-            .pipe(gulpif(ms, 
-                run('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
-                run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths)
+            .pipe(gulpif(ms,
+                gulpif(renameStaticPath,
+                    run('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
+                    run('mkdir ' + windowsPaths),
+                    )
+                gulpif(renameStaticPath,
+                    run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths)
+                    run('mkdir ' + paths),
+                    )                  
                 )
             )
             .pipe(
