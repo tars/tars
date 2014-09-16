@@ -47,11 +47,11 @@ module.exports = function() {
             .pipe(gulpif(ms,
                 gulpif(renameStaticPath,
                     run('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
-                    run('mkdir ' + windowsPaths),
+                    run('mkdir ' + windowsPaths)
                     )
                 gulpif(renameStaticPath,
                     run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths)
-                    run('mkdir ' + paths),
+                    run('mkdir ' + paths)
                     )                  
                 )
             )
