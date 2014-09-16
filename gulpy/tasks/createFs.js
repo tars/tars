@@ -48,9 +48,9 @@ module.exports = function() {
                 gulpif(renameStaticPath,
                     run('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
                     run('mkdir ' + windowsPaths)
-                    )
+                    ),
                 gulpif(renameStaticPath,
-                    run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths)
+                    run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths),
                     run('mkdir ' + paths)
                     )                  
                 )
