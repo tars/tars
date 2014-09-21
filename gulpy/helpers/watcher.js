@@ -3,33 +3,93 @@ var     minimatch = require('minimatch'),           // Service module for node-w
 
 // Watcher by node-watch
 var watchByPattern = (function() {
-    var parsePattern = function(input) {
-        var current = './',
-        segments = input.split(/\*/);
-        return {
-            dir: (/^\*/.test(input) ? current : (segments[0] || current)),
-            pat: ('*' + segments.slice(1).join('*'))
-        }
-    }
-  
-    var watchStack = {}
-  
-    return function(pattern, fn) {
-        var input = parsePattern(pattern),
-        stack = { pat: input.pat, callback: fn };
     
+    var watchStack = {};
+
+    var parsePattern = function(input, filter) {
+        var current = './',
+            filterSegment = '',
+            segments = input.split(/\*/),
+            dir = '',
+            pat = '',
+            filterPattern = '';
+
+            if (/^\*/.test(input)) {
+                dir = current
+            } else {
+                dir = segments[0] || current;
+            }
+
+            pat = '*' + segments.slice(1).join('*');
+
+            filterPattern = filter || false;
+
+            if (filterPattern) {
+                filterSegment = filter.split(/\*/);
+                filterPattern = '*' + filterSegment.slice(1).join('*');
+            }
+
+        return {
+            dir: dir,
+            pat: pat,
+            filter: filterPattern
+        }
+    };
+
+    var patternProcessing = function(pattern, filter, fn) {
+        
+        var input = parsePattern(pattern, filter),
+            stack = { pat: input.pat, callback: fn, filter: input.filter };
+
+        console.log(stack);
         if (watchStack[input.dir]) {
             watchStack[input.dir].push(stack);
         } else {
             watchStack[input.dir] = [stack];
             watch(input.dir, function(filename) {
                 watchStack[input.dir].forEach(function(stack) {
+                    var useFilter = false;
                     if (minimatch(filename, stack.pat)) {
-                        stack.callback(filename);
+
+                        if (stack.filter) {
+                            if (stack.filter instanceof Array) {
+                                stack.filter.forEach(function(filterItem) {
+                                    if (minimatch(filename, filterItem)) {
+                                        useFilter = true;
+                                    }
+                                });
+
+                                if (useFilter) {
+                                    return;
+                                } else {
+                                    stack.callback(filename);
+                                }
+                            } else {
+                                if (minimatch(filename, stack.filter)) {
+                                    return;
+                                } else {
+                                    stack.callback(filename);   
+                                }
+                            }
+
+                        } else {
+                            stack.callback(filename);
+                        }
                     }
                 });
             });
         }
+    };
+  
+    return function(pattern, filter, fn) {
+
+        if (pattern instanceof Array) {
+            pattern.forEach(function(patternItem) {
+                patternProcessing(patternItem, filter, fn);
+            });
+        } else {
+            patternProcessing(pattern, filter, fn);
+        } 
     }
 }());
 
