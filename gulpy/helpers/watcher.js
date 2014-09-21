@@ -25,8 +25,17 @@ var watchByPattern = (function() {
             filterPattern = filter || false;
 
             if (filterPattern) {
-                filterSegment = filter.split(/\*/);
-                filterPattern = '*' + filterSegment.slice(1).join('*');
+
+                if (filterPattern instanceof Array) {
+
+                    for (var i = 0; i < filterPattern.length; i++ ) {
+                        filterSegment = filterPattern[i].split(/\*/);
+                        filterPattern[i] = '*' + filterSegment.slice(1).join('*');
+                    }
+                } else {
+                    filterSegment = filter.split(/\*/);
+                    filterPattern = '*' + filterSegment.slice(1).join('*');
+                }
             }
 
         return {
@@ -41,7 +50,6 @@ var watchByPattern = (function() {
         var input = parsePattern(pattern, filter),
             stack = { pat: input.pat, callback: fn, filter: input.filter };
 
-        console.log(stack);
         if (watchStack[input.dir]) {
             watchStack[input.dir].push(stack);
         } else {
