@@ -1,5 +1,3 @@
-// This is example of task function
-
 var gulp = require('gulp'),                                     // Gulp JS
     gulpif = require('gulp-if'),                                // Gulp if module
     notify = require('gulp-notify'),                            // Plugin for notify
