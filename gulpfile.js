@@ -228,6 +228,12 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('compile-templates');
     });
 
+    // Watcher for data-files of modules
+    watchByPattern('./markup/modules/**/moduleData.js', false, function(filename) {
+        fileChangedNotify(filename);
+        gulp.start('compile-templates');
+    });
+
     if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
         // Watcher for js-files before modules js
         watchByPattern(projectConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
@@ -237,7 +243,7 @@ gulp.task('dev', ['build-dev'], function() {
     }   
 
     // Watcher for js-files of modules
-    watchByPattern('./markup/modules/**/*.js', false, function(filename) {
+    watchByPattern('./markup/modules/**/*.js', './markup/modules/**/moduleData.js', function(filename) {
         fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
