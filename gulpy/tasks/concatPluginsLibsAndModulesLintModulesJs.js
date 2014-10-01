@@ -25,6 +25,8 @@ var gulp = require('gulp'),                                     // Gulp JS
         });
     }
 
+    jsPaths.push('!./markup/modules/**/moduleData.js');
+
 // Require lint task
 require('./lint')();
 

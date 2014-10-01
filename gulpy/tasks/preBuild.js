@@ -17,7 +17,7 @@ module.exports = function() {
 
         gutil.log('Build version is: ',buildVersionGenerator.newBuildVersion);
 
-        return gulp.src(['./dev/**/*.*', '!./dev/temp/'], { base: './dev/' })
+        return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
