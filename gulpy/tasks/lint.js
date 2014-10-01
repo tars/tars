@@ -1,4 +1,5 @@
 var gulp = require('gulp'),                                     // Gulp JS
+    gutil = require('gulp-util'),                               // Gulp util module
     jshint = require('gulp-jshint'),                            // JS linter
     cache = require('gulp-cached'),                             // Gulp cache module
     jscs = require('gulp-jscs'),                                // JS-style checker
@@ -29,13 +30,17 @@ if (projectConfig.lintJsCodeAfterModules) {
 module.exports = function() {
 
     return gulp.task('lint', function() {
-        return gulp.src(jsPathsToLint)
+        if (projectConfig.useJsLintAndHint) {
+            return gulp.src(jsPathsToLint)
             .pipe(cache('linting'))
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
             .pipe(jscs())
             .on('error', notify.onError(function (error) {
                 return 'There are some errors in JS.\nLook in console!';
-            }));
+            }));    
+        } else {
+            gutil.log('!JS-lint and hint is not used!');
+        }
     });
 };   

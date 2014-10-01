@@ -16,7 +16,7 @@ About
 
 It has got file structure (FS) for making (-t понятную), well and easy-scalable markup. Current FS is required, but you could (-t расширять) it. But you have to write your own tasks and watchers to act with your folders and files.
 
-%NAME% uses gulp, so you can watch for file changing, all tasks work in (-t потоках). Gulp is really fast and well-understanding task-manager.
+%NAME% uses gulp, so you can watch for file changing, all tasks work in pipes. Gulp is really fast and well-understanding task-manager.
 
 
 Top features
@@ -24,10 +24,10 @@ Top features
 
 — HTML5 framework (use html5shiv for old browsers, meta and etc.)
 — Quite clear, well-understanding file structure (more info %LINK%)
-— Use Jade as HTML-templater
-— SCSS for css (mixins, vars and many other things)
+— Use Jade or Handlebars as HTML-templater
+— SCSS or LESS for css (mixins, vars and many other things)
 — Autoprefixer. So you don't need to write vendor prefixes in your css
-— (-t отдельные) css for ie9 and ie8. So, your main file is quite clean
+— Separate css for ie9 and ie8. So, your main file is quite clean
 — JS hinting and linting (could be configurated in .jscs.json)
 — Css and js minification (you have got dev and production version of your css and js)
 — Encourages one-file CSS/JS in the view (HTML) for performance

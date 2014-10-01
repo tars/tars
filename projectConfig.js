@@ -16,9 +16,7 @@ var projectConfig = {
     },
 
 ////////////////////////////////////////////////////
-// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT //
 ////////////////////////////////////////////////////
-
 
 
 ////////////////////////////////////////////////
@@ -42,9 +40,7 @@ var projectConfig = {
     useImageWithDpi: [96],
 
 ////////////////////////////////////////////////
-// YOU CAN CHANGE THIS OPTIONS AND USE REINIT //
 ////////////////////////////////////////////////
-
 
 
 /////////////////////
@@ -57,11 +53,16 @@ var projectConfig = {
     useSVG: true,
 
 
+    // Use linting and hinting of js-files
+    useJsLintAndHint: true,
+
+
     // Array of string of paths
     // Example: ['./markup/pages/controller/**/*.js']
     jsPathsToConcatBeforeModulesJs: [],
 
     // Lint additional js before modules
+    // If useJsLintAndHint is false, with option is disabled
     lintJsCodeBeforeModules: false,
 
     // Array of string of paths
@@ -69,6 +70,7 @@ var projectConfig = {
     jsPathsToConcatAfterModulesJs: [],
 
     // Lint additional js after modules
+    // If useJsLintAndHint is false, with option is disabled
     lintJsCodeAfterModules: false,
 
 
@@ -113,9 +115,8 @@ var projectConfig = {
     useArchiver: true
 };
 
-/////////////////////
-// MUTABLE OPTIONS ///////////////////////////
-// YOU CAN CHANGE THIS OPTIONS ALL THE TIME //
+
+//////////////////////////////////////////////
 //////////////////////////////////////////////
 
 module.exports = projectConfig;
