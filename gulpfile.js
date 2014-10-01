@@ -62,7 +62,7 @@ require('./gulpy/tasks/createFs')();
 // Init builder. Make folders
 require('./gulpy/tasks/init')();
 
-// Init builder. Make folders
+// Re-init builder. Make folders
 require('./gulpy/tasks/reInit')();
 
 // Clean dev directory and cache

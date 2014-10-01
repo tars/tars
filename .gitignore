@@ -3,3 +3,6 @@ dev
 .DS_Store
 .tmpTemplater
 .tmpPreproc
+.idea
+npm-debug.log
+phantomjsdriver.log

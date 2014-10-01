@@ -2,7 +2,8 @@ var gulp = require('gulp'),                                             // Gulp 
     gulpif = require('gulp-if'),                                        // Gulp if module
     zip = require('gulp-zip'),
     notify = require('gulp-notify'),                                    // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig,         // Notify config
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,         // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),             // Date formatter for notify
     buildVersionGenerator = require('../helpers/buildVersionGenerator');
 
@@ -10,7 +11,8 @@ var gulp = require('gulp'),                                             // Gulp 
 module.exports = function() {
 
     return gulp.task('zip-build', function(cb) {
-        gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion +'/**', { base : "." })
+        if (projectConfig.useArchiver) {
+            gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion +'/**', { base : "." })
             .pipe(zip('build' + buildVersionGenerator.newBuildVersion + '.zip'))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
@@ -27,8 +29,11 @@ module.exports = function() {
                         }
                     })
                 )
-            );
-
+            );    
+        } else {
+            gutil.log('!Archiver is not used!');
+        }
+        
         cb(null);
     });
 };   

@@ -1,9 +1,8 @@
 var projectConfig = {
 
-//////////////////////////////////////////////
-// YOU CAN'T CHANGE THIS OPTIONS AFTER INIT //
-// REINIT CAN'T CHANGE WITH OPTIONS         //
-//////////////////////////////////////////////
+////////////////////////////////////////////////////
+// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT //
+////////////////////////////////////////////////////
 
     // File structure settings
     fs: {
@@ -14,10 +13,9 @@ var projectConfig = {
         imagesFolderName: 'img'
     },
 
-//////////////////////////////////////////////
-// YOU CAN'T CHANGE THIS OPTIONS AFTER INIT //
-// REINIT CAN'T CHANGE WITH OPTIONS         //
-//////////////////////////////////////////////
+////////////////////////////////////////////////////
+// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT //
+////////////////////////////////////////////////////
 
 
 
@@ -108,7 +106,9 @@ var projectConfig = {
         startUrl: "/index.html",
         // If you don't need to see notification in browser, switch to false
         useNotifyInBrowser: true
-    }
+    },
+
+    useArchiver: true
 };
 
 /////////////////////

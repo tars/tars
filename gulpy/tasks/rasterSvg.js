@@ -13,7 +13,6 @@ var gulp = require('gulp'),                                     // Gulp JS
 module.exports = function() {
 
     return gulp.task('raster-svg', function() {
-
         if (projectConfig.useSVG) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
