@@ -6,11 +6,29 @@ var gulp = require('gulp'),                                     // Gulp JS
     notifyConfig = require('../../projectConfig').notifyConfig, // Notify config
     modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
+var jsPathsToLint = [
+                     './markup/modules/**/*.js',
+                     '!./markup/modules/**/_*.js',
+                     '!./markup/modules/**/moduleData.js'
+                    ];
+
+if (projectConfig.lintJsCodeBeforeModules) {
+    projectConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
+        jsPathsToLint.push(path)
+    });
+}
+
+if (projectConfig.lintJsCodeAfterModules) {
+    projectConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
+        jsPathsToLint.push(path)
+    });
+}
+
 // Check JS (code style and errors)
 module.exports = function() {
 
     return gulp.task('lint', function() {
-        return gulp.src(['./markup/modules/**/*.js', '!./markup/modules/**/_no-hint*.js', '!./markup/modules/**/moduleData.js'])
+        return gulp.src(jsPathsToLint)
             .pipe(cache('linting'))
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))

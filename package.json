@@ -34,7 +34,7 @@
     "minimatch": ">=0.4.0",
     "node-watch": ">=0.3.4",
     "browser-sync": ">=1.2.3",
-    "github-download": "0.3.0",
+    "download": ">=3.0.1",
     "event-stream": ">=3.1.5",
     "ncp": "0.6.0",
     "map-stream": ">=0.1.0",

@@ -5,11 +5,9 @@ var gulp = require('gulp'),                                     // Gulp JS
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
     templateExtension = require('../helpers/templateExtensionSetter'),
-    gutil = require('gulp-util');                               // Gulp util module
-    ncp = require('ncp').ncp;
-
-var Download = require('download');
-var progress = require('download-status');
+    gutil = require('gulp-util'),                               // Gulp util module
+    ncp = require('ncp').ncp,
+    Download = require('download');
 
 var githubConfig = {
     user: 'artem-malko',
