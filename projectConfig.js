@@ -7,9 +7,11 @@ var projectConfig = {
     // File structure settings
     fs: {
         //Name of folder with static files, such *.css, *.js and so on
+        // 'static' by default
         staticFolderName: 'static',
 
         //Name of folder with images
+        // 'img' by default
         imagesFolderName: 'img'
     },
 
