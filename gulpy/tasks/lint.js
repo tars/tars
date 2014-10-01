@@ -3,7 +3,8 @@ var gulp = require('gulp'),                                     // Gulp JS
     cache = require('gulp-cached'),                             // Gulp cache module
     jscs = require('gulp-jscs'),                                // JS-style checker
     notify = require('gulp-notify'),                            // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig, // Notify config
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig, // Notify config
     modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
 var jsPathsToLint = [
