@@ -60,7 +60,7 @@ module.exports = function() {
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
                         title: notifyConfig.title,
-                        message: 'FS\'s been inited \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                        message: 'FS\'s been created \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
                         templateOptions: {
                             date: modifyDate.getTimeOfModify()
                         }

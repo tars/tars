@@ -10,21 +10,14 @@ var gulp = require('gulp'),                     // Gulp JS
     // Configs
     projectConfig = require('./projectConfig'),
     browserSyncConfig = projectConfig.browserSyncConfig,
-    templateExtension = '',
+    templateExtension = require('./gulpy/helpers/templateExtensionSetter')(),
     projectConfigTemlater = projectConfig.templater.toLowerCase();
 
-
-if (projectConfigTemlater === 'jade') {
-    templateExtension = 'jade';
-} else if (projectConfigTemlater === 'handlebars' 
-        || projectConfigTemlater === 'handelbars' 
-        || projectConfigTemlater === 'hdb' 
-        || projectConfigTemlater === 'hb') {
-    templateExtension = 'html';
-} else {
-    templateExtension = 'jade';
-}
-
+    if (templateExtension === 'handlebars') {
+        templateExtension = 'html';
+    } else {
+        templateExtension = 'jade';
+    }
 
 
 /***********/
@@ -77,6 +70,9 @@ require('./gulpy/tasks/clean')();
 
 // Template compilation
 require('./gulpy/tasks/compileTemplates')();
+
+// Concat data for modules
+require('./gulpy/tasks/concatModulesData')();
 
 // Make sprite task    
 require('./gulpy/tasks/rasterSvg')();
@@ -234,7 +230,7 @@ gulp.task('dev', ['build-dev'], function() {
     // Watcher for data-files of modules
     watchByPattern('./markup/modules/**/moduleData.js', false, function(filename) {
         fileChangedNotify(filename);
-        gulp.start('compile-templates');
+        gulp.start('compile-templates-with-data-reloading');
     });
 
     if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
@@ -328,6 +324,7 @@ gulp.task('build-dev', function(cb) {
         'raster-svg',
         ['make-sprite-for-svg-fallback', 'make-sprite'],
         ['compile-css', 'compile-css-for-ie8', 'compile-css-for-ie9'],
+        'concat-modules-data',
         [
             'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
@@ -403,6 +400,13 @@ gulp.task('fonts-actions', function(cb) {
         'generate-fonts',
         cb
     );
+});
+
+gulp.task('compile-templates-with-data-reloading', function(cb) {
+    runSequence(
+        'concat-modules-data',
+        'compile-templates',
+    cb);
 });
 
 /*********************/

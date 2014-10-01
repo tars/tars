@@ -10,7 +10,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 module.exports = function() {
 
     return gulp.task('lint', function() {
-        return gulp.src(['./markup/modules/**/*.js', '!./markup/modules/**/_no-hint*.js'])
+        return gulp.src(['./markup/modules/**/*.js', '!./markup/modules/**/_no-hint*.js', '!./markup/modules/**/moduleData.js'])
             .pipe(cache('linting'))
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
