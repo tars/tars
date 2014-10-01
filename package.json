@@ -15,7 +15,7 @@
     "gulp-data": ">=1.0.2",
     "gulp-jade": "0.6.1",
     "gulp-compile-handlebars": "git://github.com/kaanon/gulp-compile-handlebars#48d31b4dc0c921db6cfd0e02e6ace961daa2c783",
-    "gulp-sass": "0.7.0",
+    "gulp-sass": ">=0.7.0",
     "gulp-less": ">=1.3.5",
     "gulp-autoprefixer": ">=0.0.7",
     "gulp-csso": ">=0.2.9",
