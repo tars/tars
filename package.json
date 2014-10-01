@@ -12,6 +12,7 @@
     "gulp-concat": ">=2.2.0",
     "gulp-rename": ">=1.2.0",
     "gulp-zip": "1.0.0",
+    "gulp-data": ">=1.0.2",
     "gulp-jade": "0.6.1",
     "gulp-compile-handlebars": "git://github.com/kaanon/gulp-compile-handlebars#48d31b4dc0c921db6cfd0e02e6ace961daa2c783",
     "gulp-sass": "0.7.0",
