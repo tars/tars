@@ -1,8 +1,18 @@
 var projectConfig = {
 
-////////////////////////////////////////////////////
-// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT //
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT  //
+//                                                 //
+// If you rename static and img folder manually,   //
+// you can change with options.                    //
+// !IMPORTANT!: you can't change with options      //
+// before reinit.                                  //
+// If you'd like to change with options            //
+// and do reinit:                                  //
+// 1) rename static directory and img to default;  //
+// 2) reinit builder with new options;             //
+// 3) rename static directory and img as you wish. //
+/////////////////////////////////////////////////////
 
     // File structure settings
     fs: {
@@ -19,11 +29,13 @@ var projectConfig = {
 ////////////////////////////////////////////////////
 
 
-////////////////////////////////////////////////
-// YOU CAN CHANGE THIS OPTIONS AND USE REINIT //
-////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// YOU CAN CHANGE THIS OPTIONS AND USE REINIT         //
+//                                                    //
+// Options for technologies, which you'd like to use. //
+////////////////////////////////////////////////////////
 
-// What kind of templater would you like to use
+    // What kind of templater would you like to use
     // String: 'jade' or 'handlebars'
     templater: 'jade',
 
@@ -37,6 +49,9 @@ var projectConfig = {
     // 192 — 2 dppx (retina)
     // 288 - 3 dppx (nexus 5, for example)
     // Example if using for all displays: usePpi: [96, 144, 192, 288]
+    // You can change with options not only on init or reinit,
+    // but at with time you have to create new directories 
+    // and delete unused.
     useImageWithDpi: [96],
 
 ////////////////////////////////////////////////
@@ -46,6 +61,9 @@ var projectConfig = {
 /////////////////////
 // MUTABLE OPTIONS ///////////////////////////
 // YOU CAN CHANGE THIS OPTIONS ALL THE TIME //
+//                                          //
+// You need to restart builder to apply     //
+// new options.                             //
 //////////////////////////////////////////////
 
     // Sprites config
@@ -58,7 +76,7 @@ var projectConfig = {
 
 
     // Array of string of paths
-    // Example: ['./markup/pages/controller/**/*.js']
+    // Example: ['./markup/controller/**/*.js']
     jsPathsToConcatBeforeModulesJs: [],
 
     // Lint additional js before modules
@@ -66,7 +84,7 @@ var projectConfig = {
     lintJsCodeBeforeModules: false,
 
     // Array of string of paths
-    // Example: ['./markup/pages/controller/**/*.js']
+    // Example: ['./markup/controller/**/*.js']
     jsPathsToConcatAfterModulesJs: [],
 
     // Lint additional js after modules
