@@ -1,19 +1,19 @@
 // Set templates extension
 var projectConfig = require('../../projectConfig'),                 // Project config
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
-    templateExtension = '';
+    templaterName = '';
 
 module.exports = function() {
     if (projectConfigTemlater === 'jade') {
-        templateExtension = 'jade';
+        templaterName = 'jade';
     } else if (projectConfigTemlater === 'handlebars' 
             || projectConfigTemlater === 'handelbars' 
             || projectConfigTemlater === 'hdb' 
             || projectConfigTemlater === 'hb') {
-        templateExtension = 'handlebars';
+        templaterName = 'handlebars';
     } else {
-        templateExtension = 'jade';
+        templaterName = 'jade';
     }
 
-    return templateExtension;
+    return templaterName;
 }

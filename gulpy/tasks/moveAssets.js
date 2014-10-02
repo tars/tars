@@ -16,7 +16,7 @@ module.exports = function(cb) {
         gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))
             .pipe(rename(function(path) {
-                path.dirname = '';
+                path.dirname = '/' + path.dirname.match(/[a-zA-Z0-9]+\//)[0];
             }))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;

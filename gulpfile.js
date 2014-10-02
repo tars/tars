@@ -10,7 +10,7 @@ var gulp = require('gulp'),                     // Gulp JS
     // Configs
     projectConfig = require('./projectConfig'),
     browserSyncConfig = projectConfig.browserSyncConfig,
-    templateExtension = require('./gulpy/helpers/templateExtensionSetter')(),
+    templateExtension = require('./gulpy/helpers/templaterNameSetter')(),
     projectConfigTemlater = projectConfig.templater.toLowerCase();
 
     if (templateExtension === 'handlebars') {
