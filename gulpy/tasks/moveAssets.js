@@ -16,12 +16,12 @@ module.exports = function(cb) {
         gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))
             .pipe(rename(function(path) {
-                path.dirname = '/' + path.dirname.match(/[a-zA-Z0-9]+\//)[0];
+                path.dirname = path.dirname.match(/[a-zA-Z0-9]+\//)[0];
             }))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/assets'))
+            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/assets/'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
