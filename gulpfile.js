@@ -327,9 +327,9 @@ gulp.task('build-dev', function(cb) {
         'concat-modules-data',
         [
             'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
-            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
+            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
         ],
-        'generate-fonts',
+        'fonts-actions',
         cb
     );
 });
@@ -396,8 +396,8 @@ gulp.task('svg-actions', function(cb) {
 
 gulp.task('fonts-actions', function(cb) {
     runSequence(
-        'move-fonts',
         'generate-fonts',
+        'move-fonts',
         cb
     );
 });

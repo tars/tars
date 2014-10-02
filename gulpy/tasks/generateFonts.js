@@ -13,7 +13,7 @@ module.exports = function() {
 
     return gulp.task('generate-fonts', function() {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/fonts/')             
-            .pipe(gulpif(gf, run('webfonts "./dev/' + projectConfig.fs.staticFolderName + '/fonts/"')))
+            .pipe(gulpif(gf, run('webfonts "./markup/' + projectConfig.fs.staticFolderName + '/fonts/"')))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({
