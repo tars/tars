@@ -206,6 +206,14 @@ gulp.task('dev', ['build-dev'], function() {
             ], function(filename) {
         fileChangedNotify(filename);
         gulp.start('compile-css');
+
+        if (projectConfig.useIE8Stylies) {
+            gulp.start('compile-css-for-ie8');    
+        }
+        
+        if (projectConfig.useIE9Stylies) {
+            gulp.start('compile-css-for-ie9');
+        }
     });
 
     // Watcher for ie8 stylies
