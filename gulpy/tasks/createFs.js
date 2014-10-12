@@ -1,5 +1,5 @@
 var gulp = require('gulp'),                                     // Gulp JS
-    run = require('gulp-run'),                                  // Run bash-scripts from gulp
+    exec = require('gulp-exec'),                                  // Run bash-scripts from gulp
     gulpif = require('gulp-if'),                                // Gulp if module
     gutil = require('gulp-util'),                               // Gulp util module
     os = require('os'),                                         // Node os module
@@ -45,12 +45,12 @@ module.exports = function() {
         gulp.src('')
             .pipe(gulpif(ms,
                 gulpif(renameStaticPath,
-                    run('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
-                    run('mkdir ' + windowsPaths)
+                    exec('move ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + windowsPaths),
+                    exec('mkdir ' + windowsPaths)
                     ),
                 gulpif(renameStaticPath,
-                    run('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths),
-                    run('mkdir ' + paths)
+                    exec('mv ./markup/static ./markup/' + projectConfig.fs.staticFolderName + '\n mkdir ' + paths),
+                    exec('mkdir ' + paths)
                     )                  
                 )
             )

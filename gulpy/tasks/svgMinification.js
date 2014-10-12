@@ -11,7 +11,7 @@ var gulp = require('gulp'),                                         // Gulp JS
 // Minify sprite img
 module.exports = function() {
 
-    return gulp.task('svg-minification', function() {
+    return gulp.task('svg-minification', function(cb) {
         if (projectConfig.useSVG) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(imagemin(
@@ -43,5 +43,7 @@ module.exports = function() {
         } else {
             gutil.log('!SVG is not used!');
         }
+
+        cb(null);
     });
 };

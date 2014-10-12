@@ -12,7 +12,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 // Move svg to dev directory
 module.exports = function() {
 
-    return gulp.task('move-svg', function() {
+    return gulp.task('move-svg', function(cb) {
 
         if (projectConfig.useSVG) {
 
@@ -42,5 +42,7 @@ module.exports = function() {
         } else {
             gutil.log('!SVG is not used!');
         }
+
+        cb(null);
     });  
 };   

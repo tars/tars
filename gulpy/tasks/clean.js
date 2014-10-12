@@ -1,5 +1,5 @@
 var gulp = require('gulp'),                                             // Gulp JS
-    rimraf = require('gulp-rimraf'),                                    // Clean module
+    del = require('del'),                                    // Clean module
     cache = require('gulp-cached'),                                     // Gulp cache
     gulpif = require('gulp-if'),                                        // Gulp if module
     notify = require('gulp-notify'),                                    // Plugin for notify
@@ -14,26 +14,9 @@ cache.caches = {};
 // Clean dev directory and cache
 module.exports = function() {
 
-    return gulp.task('clean', function() {
+    return gulp.task('clean', function(cb) {
         clearCaches(cache);
 
-        return gulp.src(['./dev/', './.tmpTemplater/', './.tmpPreproc/'], {read: false})
-            .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
-            }))
-            .pipe(rimraf())
-            .pipe(
-                gulpif(notifyConfig.useNotify, 
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Clear task complited \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
-            );
-        });
+        del(['./dev/', './.tmpTemplater/', './.tmpPreproc/'], cb);
+    });
 };   

@@ -11,7 +11,7 @@ var gulp = require('gulp'),                                             // Gulp 
 // Convert included svg files to base64 in css
 module.exports = function() {
     
-    return gulp.task('svg-to-base64', function() {
+    return gulp.task('svg-to-base64', function(cb) {
         if (projectConfig.useSVG) {
             return gulp.src(['./builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main.css', './builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main_ie9.css'])
                 .pipe(base64({
@@ -36,5 +36,7 @@ module.exports = function() {
         } else {
             gutil.log('!SVG is not used!');
         }
+
+        cb(null);
     });
 };   

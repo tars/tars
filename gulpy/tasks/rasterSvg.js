@@ -12,8 +12,8 @@ var gulp = require('gulp'),                                     // Gulp JS
 // Raster SVG-files
 module.exports = function() {
 
-    return gulp.task('raster-svg', function() {
-        if (projectConfig.useSVG) {
+    return gulp.task('raster-svg', function(cb) {
+        if (projectConfig.useSVG && projectConfig.useIE8Stylies) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
                 .pipe(raster())
@@ -38,5 +38,7 @@ module.exports = function() {
         } else {
             gutil.log('!SVG is not used!');
         }
+
+        cb(null);
     });  
 };   

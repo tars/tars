@@ -1,8 +1,6 @@
 var projectConfig = {
 
 /////////////////////////////////////////////////////
-// YOU CAN'T CHANGE THIS OPTIONS AFTER FIRST INIT  //
-//                                                 //
 // If you rename static and img folder manually,   //
 // you can change with options.                    //
 // !IMPORTANT!: you can't change with options      //
@@ -59,12 +57,20 @@ var projectConfig = {
 
 
 /////////////////////
-// MUTABLE OPTIONS ///////////////////////////
-// YOU CAN CHANGE THIS OPTIONS ALL THE TIME //
-//                                          //
-// You need to restart builder to apply     //
-// new options.                             //
-//////////////////////////////////////////////
+// MUTABLE OPTIONS ////////////////////////////////
+// YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
+//                                               //
+// You need to restart builder to apply options. //
+///////////////////////////////////////////////////
+    
+    
+
+    // Generate stylies for ie8
+    useIE8Stylies: true,
+
+    // Generate stylies for ie9
+    useIE9Stylies: true,    
+
 
     // Sprites config
     // Switch to true, if you're going to use svg images
@@ -130,6 +136,7 @@ var projectConfig = {
         useNotifyInBrowser: true
     },
 
+    // Use archiver for your build
     useArchiver: true
 };
 

@@ -1,6 +1,6 @@
 var gulp = require('gulp'),                                     // Gulp JS
     gutil = require('gulp-util'),                               // Gulp util module
-    run = require('gulp-run'),                                  // Run bash-scripts from gulp
+    exec = require('gulp-exec'),                                  // Run bash-scripts from gulp
     gulpif = require('gulp-if'),                                // Gulp if module
     notify = require('gulp-notify'),                            // Plugin for notify
     projectConfig = require('../../projectConfig'),             // Project config
@@ -13,7 +13,7 @@ module.exports = function() {
 
     return gulp.task('generate-fonts', function() {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/fonts/')             
-            .pipe(gulpif(gf, run('webfonts "./markup/' + projectConfig.fs.staticFolderName + '/fonts/"')))
+            .pipe(gulpif(gf, exec('webfonts "./markup/' + projectConfig.fs.staticFolderName + '/fonts/"')))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({

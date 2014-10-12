@@ -197,23 +197,32 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('compile-css');
     }); 
 
-    // Watcher for scss(or less)-files of modules
-    watchByPattern('./markup/modules/**/*.' + projectConfig.cssPreprocessor, false, function(filename) {
+    // Watcher for modyles stylies
+    watchByPattern(
+            './markup/modules/**/*.' + projectConfig.cssPreprocessor, 
+            [
+                './markup/modules/**/ie9.' + projectConfig.cssPreprocessor,
+                './markup/modules/**/ie8.' + projectConfig.cssPreprocessor
+            ], function(filename) {
         fileChangedNotify(filename);
-        if (filename.indexOf('ie8.' + projectConfig.cssPreprocessor) > -1) {
-            // Compile css-files for ie8
-            gulp.start('compile-css-for-ie8');
-        } else if (filename.indexOf('ie9.' + projectConfig.cssPreprocessor) > -1) {
-            // Compile css-files for ie9
-            gulp.start('compile-css-for-ie9');
-        } else {
-            // Compile css-files for all browsers
-            gulp.start('compile-css');
-            gulp.start('compile-css-for-ie8');
-            gulp.start('compile-css-for-ie9');
-        }
-        
+        gulp.start('compile-css');
     });
+
+    // Watcher for ie8 stylies
+    if (projectConfig.useIE8Stylies) {
+        watchByPattern('./markup/modules/**/ie8.' + projectConfig.cssPreprocessor, false, function(filename) {
+            fileChangedNotify(filename);
+            gulp.start('compile-css-for-ie8');
+        });
+    }
+
+    // Watcher for ie9 stylies
+    if (projectConfig.useIE9Stylies) {
+        watchByPattern('./markup/modules/**/ie9.' + projectConfig.cssPreprocessor, false, function(filename) {
+            fileChangedNotify(filename);
+            gulp.start('compile-css-for-ie9');
+        });
+    }
 
     // Watcher for templates-files of templates
     watchByPattern('./markup/pages/**/*.' + templateExtension, false, function(filename) {
@@ -292,7 +301,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for font files.
-    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.*', false, function(filename) {
+    watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.ttf', false, function(filename) {
         fileChangedNotify(filename);
         gulp.start('fonts-actions');
     });
