@@ -11,7 +11,11 @@ var gulp = require('gulp'),                     // Gulp JS
     projectConfig = require('./projectConfig'),
     browserSyncConfig = projectConfig.browserSyncConfig,
     templateExtension = require('./gulpy/helpers/templaterNameSetter')(),
-    projectConfigTemlater = projectConfig.templater.toLowerCase();
+    projectConfigTemlater = projectConfig.templater.toLowerCase(),
+    buildOptions = {};
+
+    buildOptions.buildVersion = '_ver-' + (new Date()).toString();
+    buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
 
     if (templateExtension === 'handlebars') {
         templateExtension = 'html';
@@ -27,9 +31,6 @@ var gulp = require('gulp'),                     // Gulp JS
 
 // Watcher by node-watch
 var watchByPattern = require('./gulpy/helpers/watcher');
-
-// Generate new version of  build
-var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
 /***************/
 /* END HELPERS */
@@ -54,93 +55,93 @@ var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 // Default tasks
 
 // Create file-structure
-require('./gulpy/tasks/createFs')();
+require('./gulpy/tasks/createFs')(buildOptions);
 
 // Init builder. Make folders
-require('./gulpy/tasks/init')();
+require('./gulpy/tasks/init')(buildOptions);
 
 // Re-init builder. Make folders
-require('./gulpy/tasks/reInit')();
+require('./gulpy/tasks/reInit')(buildOptions);
 
 // Clean dev directory and cache
-require('./gulpy/tasks/clean')();
+require('./gulpy/tasks/clean')(buildOptions);
 
 // Template compilation
-require('./gulpy/tasks/compileTemplates')();
+require('./gulpy/tasks/compileTemplates')(buildOptions);
 
 // Concat data for modules
-require('./gulpy/tasks/concatModulesData')();
+require('./gulpy/tasks/concatModulesData')(buildOptions);
 
 // Make sprite task    
-require('./gulpy/tasks/rasterSvg')();
+require('./gulpy/tasks/rasterSvg')(buildOptions);
 
 // Make png-sprite task for svg files for old browsers
-require('./gulpy/tasks/makeSpriteForSvgFallback')();
+require('./gulpy/tasks/makeSpriteForSvgFallback')(buildOptions);
 
 // SVG minification
-require('./gulpy/tasks/svgMinification')();
+require('./gulpy/tasks/svgMinification')(buildOptions);
 
 // Move SVG-files to dev directory
-require('./gulpy/tasks/moveSvg')();
+require('./gulpy/tasks/moveSvg')(buildOptions);
 
 // Convert svg includes to base64 in css
-require('./gulpy/tasks/svgToBase64')();
+require('./gulpy/tasks/svgToBase64')(buildOptions);
 
 // Make sprite task    
-require('./gulpy/tasks/makeSprite')();
+require('./gulpy/tasks/makeSprite')(buildOptions);
 
 // Css compilation
-require('./gulpy/tasks/compileCss')();
+require('./gulpy/tasks/compileCss')(buildOptions);
 
 // Css compilation for ie8
-require('./gulpy/tasks/compileCssForIe8')();
+require('./gulpy/tasks/compileCssForIe8')(buildOptions);
 
 // Css compilation for ie9
-require('./gulpy/tasks/compileCssForIe9')();
+require('./gulpy/tasks/compileCssForIe9')(buildOptions);
 
 // Compress css
-require('./gulpy/tasks/compressCss')();
+require('./gulpy/tasks/compressCss')(buildOptions);
 
 // Copy JS-files for libs that have to be in separate files
-require('./gulpy/tasks/copySeparateJs')();
+require('./gulpy/tasks/copySeparateJs')(buildOptions);
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
-require('./gulpy/tasks/concatPluginsLibsAndModulesLintModulesJs')();
+require('./gulpy/tasks/concatPluginsLibsAndModulesLintModulesJs')(buildOptions);
 
 // Check JS (code style and errors)
-require('./gulpy/tasks/lint')();
+require('./gulpy/tasks/lint')(buildOptions);
 
 // Strip console.log and debugger from main.js
-require('./gulpy/tasks/stripDebug')();
+require('./gulpy/tasks/stripDebug')(buildOptions);
 
 // Compress js-files and strip debug
-require('./gulpy/tasks/compressMainJs')();
+require('./gulpy/tasks/compressMainJs')(buildOptions);
 
 // Move misc files
-require('./gulpy/tasks/moveMiscFiles')();
+require('./gulpy/tasks/moveMiscFiles')(buildOptions);
 
 // Move images from assets modules of modules
-require('./gulpy/tasks/moveAssets')();
+require('./gulpy/tasks/moveAssets')(buildOptions);
 
 // Move images for content
-require('./gulpy/tasks/moveContentImg')();
+require('./gulpy/tasks/moveContentImg')(buildOptions);
 
 // Move images for plugins
-require('./gulpy/tasks/movePluginsImg')();
+require('./gulpy/tasks/movePluginsImg')(buildOptions);
 
 // Move fonts-files to dev directory
-require('./gulpy/tasks/moveFonts')();
+require('./gulpy/tasks/moveFonts')(buildOptions);
 
 // Generate font-files (eot, woff, svg) from .ttf-file
-require('./gulpy/tasks/generateFonts')();
+require('./gulpy/tasks/generateFonts')(buildOptions);
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-require('./gulpy/tasks/preBuild')();
+require('./gulpy/tasks/preBuild')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/zipBuild')();
+require('./gulpy/tasks/zipBuild')(buildOptions);
 
 /*************/
 /* END TASKS */

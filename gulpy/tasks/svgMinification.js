@@ -5,8 +5,7 @@ var gulp = require('gulp'),                                         // Gulp JS
     notify = require('gulp-notify'),                                // Plugin for notify
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                      // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),         // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');
+    modifyDate = require('../helpers/modifyDateFormatter');         // Date formatter for notify
 
 // Minify sprite img
 module.exports = function() {

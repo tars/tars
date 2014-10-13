@@ -5,22 +5,21 @@ var gulp = require('gulp'),                                             // Gulp 
     gutil = require('gulp-util'),                                       // Gulp util module
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                          // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),             // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');
+    modifyDate = require('../helpers/modifyDateFormatter');             // Date formatter for notify
 
 // Convert included svg files to base64 in css
-module.exports = function() {
+module.exports = function(buildOptions) {
     
     return gulp.task('svg-to-base64', function(cb) {
         if (projectConfig.useSVG) {
-            return gulp.src(['./builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main.css', './builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main_ie9.css'])
+            return gulp.src(['./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main.css', './builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main_ie9.css'])
                 .pipe(base64({
                     extensions: ['svg']
                 }))
                 .on('error', notify.onError(function (error) {
                     return 'Something is wrong.\nLook in console.\n' + error;
                 }))
-                .pipe(gulp.dest('./builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
+                .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify, 
                         notify({

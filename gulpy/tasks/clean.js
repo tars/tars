@@ -5,7 +5,6 @@ var gulp = require('gulp'),                                             // Gulp 
     notify = require('gulp-notify'),                                    // Plugin for notify
     notifyConfig = require('../../projectConfig').notifyConfig,         // Notify config
     modifyDate = require('../helpers/modifyDateFormatter'),             // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator'),
     clearCaches = require('../helpers/clearCaches');                    // Clear caches for gulp-cache plugin
     
 

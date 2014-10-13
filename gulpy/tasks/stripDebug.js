@@ -4,19 +4,18 @@ var gulp = require('gulp'),                                     // Gulp JS
     notify = require('gulp-notify'),                            // Plugin for notify
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');
+    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
 // Strip console.log and debugger from main.js
-module.exports = function() {
-
-    return gulp.task('strip-debug', function() {
-        return gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/js/main.js')
+module.exports = function(buildOptions) {
+    
+    return gulp.task('strip-debug', function(buildOptions) {
+        return gulp.src('./builds/build' + buildOptions.buildVersion + '/static/js/main.js')
             .pipe(stripDebug())
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildVersionGenerator.newBuildVersion + '/static/js/'))
+            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/static/js/'))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({

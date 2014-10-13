@@ -5,23 +5,21 @@ var gulp = require('gulp'),                                     // Gulp JS
     fs = require('fs'),
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');
+    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-module.exports = function() {
+module.exports = function(buildOptions) {
 
     return gulp.task('pre-build', function() {
-        buildVersionGenerator.generateBuildVersion();    
 
-        gutil.log('Build version is: ',buildVersionGenerator.newBuildVersion);
+        gutil.log('Build version is: ', buildOptions.buildVersion);
 
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildVersionGenerator.newBuildVersion))
+            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({

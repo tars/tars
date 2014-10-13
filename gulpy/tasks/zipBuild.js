@@ -3,21 +3,21 @@ var gulp = require('gulp'),                                             // Gulp 
     zip = require('gulp-zip'),
     notify = require('gulp-notify'),                                    // Plugin for notify
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,         // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),             // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');
+    notifyConfig = projectConfig.notifyConfig,                          // Notify config
+    modifyDate = require('../helpers/modifyDateFormatter');             // Date formatter for notify
+
 
 // Create zip archive of build
-module.exports = function() {
+module.exports = function(buildOptions) {
 
     return gulp.task('zip-build', function(cb) {
         if (projectConfig.useArchiver) {
-            gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion +'/**', { base : "." })
-            .pipe(zip('build' + buildVersionGenerator.newBuildVersion + '.zip'))
+            gulp.src('./builds/build' + buildOptions.buildVersion +'/**', { base : "." })
+            .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildVersionGenerator.newBuildVersion + '/'))
+            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/'))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({

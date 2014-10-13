@@ -5,14 +5,13 @@ var gulp = require('gulp'),                                     // Gulp JS
     notify = require('gulp-notify'),                            // Plugin for notify
     projectConfig = require('../../projectConfig'),
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    buildVersionGenerator = require('../helpers/buildVersionGenerator');    
+    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
 // Compress css-files
-module.exports = function() {
+module.exports = function(buildOptions) {
 
     return gulp.task('compress-css', function() {
-        return gulp.src('./builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/*.css')
+        return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/*.css')
             .pipe(csso())
             .pipe(rename({
                 suffix: ".min"
@@ -20,7 +19,7 @@ module.exports = function() {
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildVersionGenerator.newBuildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
+            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({
