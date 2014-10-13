@@ -1,5 +1,7 @@
-var     minimatch = require('minimatch'),           // Service module for node-watch
-        watch = require('node-watch');              // Watcher
+var minimatch = require('minimatch'),           // Service module for node-watch
+    watch = require('node-watch'),              // Watcher
+    gutil = require('gulp-util');               // Gulp util module
+
 
 // Watcher by node-watch
 var watchByPattern = (function() {
@@ -58,6 +60,7 @@ var watchByPattern = (function() {
                 watchStack[input.dir].forEach(function(stack) {
                     var useFilter = false;
                     if (minimatch(filename, stack.pat)) {
+                        gutil.log('File was changed: ', gutil.colors.cyan(filename));
 
                         if (stack.filter) {
                             if (stack.filter instanceof Array) {

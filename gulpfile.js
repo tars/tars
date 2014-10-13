@@ -28,9 +28,6 @@ var gulp = require('gulp'),                     // Gulp JS
 // Watcher by node-watch
 var watchByPattern = require('./gulpy/helpers/watcher');
 
-// Notify for changed files in console
-var fileChangedNotify = require('./gulpy/helpers/fileChangedNotify');
-
 // Generate new version of  build
 var buildVersionGenerator = require('./gulpy/helpers/buildVersionGenerator');
 
@@ -170,7 +167,6 @@ gulp.task('dev', ['build-dev'], function() {
     // watchByPattern( path-string or array of paths to files that you'd like to watch for, 
     //                 filter path-string or array of paths to files taht you'd like to unwatch,
     //                 function(filename) {
-    //                      fileChangedNotify(filename);
     //                      gulp.start('example-task'); 
     //                  });
 
@@ -179,21 +175,18 @@ gulp.task('dev', ['build-dev'], function() {
 
     // Watcher for images for sprite (png)
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/**/*.png', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('make-sprite');
     });
 
     // Watcher for svg-images
     if (projectConfig.useSVG) {
         watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/**/*.svg', false, function(filename, cb) {
-            fileChangedNotify(filename);
             gulp.start('svg-actions');
         });
     }
 
     // Watcher for common scss(or less)-files and scss(or less)-files of plugins
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + projectConfig.cssPreprocessor, false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('compile-css');
     }); 
 
@@ -204,7 +197,6 @@ gulp.task('dev', ['build-dev'], function() {
                 './markup/modules/**/ie9.' + projectConfig.cssPreprocessor,
                 './markup/modules/**/ie8.' + projectConfig.cssPreprocessor
             ], function(filename) {
-        fileChangedNotify(filename);
         gulp.start('compile-css');
 
         if (projectConfig.useIE8Stylies) {
@@ -219,7 +211,6 @@ gulp.task('dev', ['build-dev'], function() {
     // Watcher for ie8 stylies
     if (projectConfig.useIE8Stylies) {
         watchByPattern('./markup/modules/**/ie8.' + projectConfig.cssPreprocessor, false, function(filename) {
-            fileChangedNotify(filename);
             gulp.start('compile-css-for-ie8');
         });
     }
@@ -227,96 +218,81 @@ gulp.task('dev', ['build-dev'], function() {
     // Watcher for ie9 stylies
     if (projectConfig.useIE9Stylies) {
         watchByPattern('./markup/modules/**/ie9.' + projectConfig.cssPreprocessor, false, function(filename) {
-            fileChangedNotify(filename);
             gulp.start('compile-css-for-ie9');
         });
     }
 
     // Watcher for templates-files of templates
     watchByPattern('./markup/pages/**/*.' + templateExtension, false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('compile-templates');
     });
 
     // Watcher for templates-files of modules
     watchByPattern('./markup/modules/**/*.' + templateExtension, false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('compile-templates');
     });
 
     // Watcher for data-files of modules
     watchByPattern('./markup/modules/**/moduleData.js', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('compile-templates-with-data-reloading');
     });
 
     if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
         // Watcher for js-files before modules js
         watchByPattern(projectConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
-            fileChangedNotify(filename);
             gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
         });
     }   
 
     // Watcher for js-files of modules
     watchByPattern('./markup/modules/**/*.js', './markup/modules/**/moduleData.js', function(filename) {
-        fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
     if (projectConfig.jsPathsToConcatAfterModulesJs.length) {
         // Watcher for js-files after modules js
         watchByPattern(projectConfig.jsPathsToConcatAfterModulesJs, false, function(filename) {
-            fileChangedNotify(filename);
             gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
         }); 
     }
 
     // Watcher for js-files of plugins
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
     // Watcher for js-files of libs
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 
     // Watcher for images in assets dir of modules
     watchByPattern('./markup/modules/**/assets/**/*.*', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('move-assets');
     });
 
     // Watcher for content images
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content/**/*.*', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('move-content-img');
     });
 
     // Watcher for images of plugins
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('move-plugins-img');
     });
 
     // Watcher for misc files
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('move-misc-files');
     });
 
     // Watcher for font files.
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.ttf', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('fonts-actions');
     });
 
     // Watcher for separate Js files files
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js', false, function(filename) {
-        fileChangedNotify(filename);
         gulp.start('copy-separate-js');
     });
 });
