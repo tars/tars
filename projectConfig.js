@@ -136,6 +136,10 @@ var projectConfig = {
         useNotifyInBrowser: true
     },
 
+    // Use build versioning
+    // Build version is a date ot building
+    useBuildVersioning: true,
+
     // Use archiver for your build
     useArchiver: true
 };

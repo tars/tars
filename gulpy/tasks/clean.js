@@ -1,11 +1,17 @@
 var gulp = require('gulp'),                                             // Gulp JS
-    del = require('del'),                                    // Clean module
+    del = require('del'),                                               // Clean module
     cache = require('gulp-cached'),                                     // Gulp cache
-    gulpif = require('gulp-if'),                                        // Gulp if module
-    notify = require('gulp-notify'),                                    // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig,         // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),             // Date formatter for notify
-    clearCaches = require('../helpers/clearCaches');                    // Clear caches for gulp-cache plugin
+    projectConfig = require('../../projectConfig'),
+    clearCaches = require('../helpers/clearCaches'),                    // Clear caches for gulp-cache plugin
+    pathsToDel = [
+        './dev/',
+        './.tmpTemplater/',
+        './.tmpPreproc/'
+    ];
+
+    if (!projectConfig.useBuildVersioning) {
+        pathsToDel.push('./builds/build/');
+    }
     
 
 cache.caches = {};
@@ -16,6 +22,6 @@ module.exports = function() {
     return gulp.task('clean', function(cb) {
         clearCaches(cache);
 
-        del(['./dev/', './.tmpTemplater/', './.tmpPreproc/'], cb);
+        del(pathsToDel, cb);
     });
 };   

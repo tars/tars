@@ -14,8 +14,13 @@ var gulp = require('gulp'),                     // Gulp JS
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
     buildOptions = {};
 
-    buildOptions.buildVersion = '_ver-' + (new Date()).toString();
-    buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
+    if (projectConfig.useBuildVersioning) {
+        buildOptions.buildVersion = '_ver-' + (new Date()).toString();
+        buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];    
+    } else {
+        buildOptions.buildVersion = '';
+    }
+    
 
     if (templateExtension === 'handlebars') {
         templateExtension = 'html';
