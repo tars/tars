@@ -39,7 +39,8 @@
     "event-stream": ">=3.1.5",
     "ncp": "0.6.0",
     "map-stream": ">=0.1.0",
-    "path": ">=0.4.9"
+    "path": ">=0.4.9",
+    "mkdirp": ">=0.5.0"
   },
   "devDependencies": {},
   "scripts": {
