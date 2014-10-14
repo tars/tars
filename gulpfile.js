@@ -38,6 +38,8 @@ var gulp = require('gulp'),                     // Gulp JS
 // Watcher by node-watch
 var watchByPattern = require('./gulpy/helpers/watcher');
 
+require('./gulpy/helpers/setUlimit')(2048);
+
 /***************/
 /* END HELPERS */
 /***************/
