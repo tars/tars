@@ -10,7 +10,8 @@ var gulp = require('gulp'),                     // Gulp JS
     // Configs
     projectConfig = require('./projectConfig'),
     browserSyncConfig = projectConfig.browserSyncConfig,
-    templateExtension = require('./gulpy/helpers/templaterNameSetter')(),
+    templaterName = require('./gulpy/helpers/templaterNameSetter')(),
+    templateExtension = 'jade',
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
     buildOptions = {};
 
@@ -22,7 +23,7 @@ var gulp = require('gulp'),                     // Gulp JS
     }
     
 
-    if (templateExtension === 'handlebars') {
+    if (templaterName === 'handlebars') {
         templateExtension = 'html';
     } else {
         templateExtension = 'jade';
