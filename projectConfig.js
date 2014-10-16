@@ -50,7 +50,7 @@ var projectConfig = {
     // You can change with options not only on init or reinit,
     // but at with time you have to create new directories 
     // and delete unused.
-    useImageWithDpi: [96],
+    useImageForDisplayWithDpi: [96],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
@@ -69,7 +69,11 @@ var projectConfig = {
     useIE8Stylies: true,
 
     // Generate stylies for ie9
-    useIE9Stylies: true,    
+    useIE9Stylies: true, 
+
+
+    // Autoprefixer config
+    autoprefixerConfig: ['last 2 version', 'safari 5', 'opera 12.1', 'ios 6', 'android 4'],
 
 
     // Sprites config
