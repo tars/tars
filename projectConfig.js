@@ -50,7 +50,7 @@ var projectConfig = {
     // You can change with options not only on init or reinit,
     // but at with time you have to create new directories 
     // and delete unused.
-    useImageForDisplayWithDpi: [96],
+    useImagesForDisplayWithDpi: [96],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
