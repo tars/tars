@@ -11,7 +11,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 var jsPathsToLint = [
                      './markup/modules/**/*.js',
                      '!./markup/modules/**/_*.js',
-                     '!./markup/modules/**/moduleData.js'
+                     '!./markup/modules/**/mData.js'
                     ];
 
 if (projectConfig.lintJsCodeBeforeModules) {

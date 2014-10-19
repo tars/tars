@@ -242,7 +242,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for data-files of modules
-    watchByPattern('./markup/modules/**/moduleData.js', false, function(filename) {
+    watchByPattern('./markup/modules/**/mData.js', false, function(filename) {
         gulp.start('compile-templates-with-data-reloading');
     });
 
@@ -254,7 +254,7 @@ gulp.task('dev', ['build-dev'], function() {
     }   
 
     // Watcher for js-files of modules
-    watchByPattern('./markup/modules/**/*.js', './markup/modules/**/moduleData.js', function(filename) {
+    watchByPattern('./markup/modules/**/*.js', './markup/modules/**/mData.js', function(filename) {
         gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
     });
 

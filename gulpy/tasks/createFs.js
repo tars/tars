@@ -14,8 +14,8 @@ var paths = [
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite'
         ];
 
-    for (var i = 0; i < projectConfig.useImageWithDpi.length; i++) {
-        paths.push('markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/' + projectConfig.useImageWithDpi[i] + 'dpi');
+    for (var i = 0; i < projectConfig.useImagesForDisplayWithDpi.length; i++) {
+        paths.push('markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/' + projectConfig.useImagesForDisplayWithDpi[i] + 'dpi');
     }
 
     paths.push(

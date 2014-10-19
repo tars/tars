@@ -12,7 +12,7 @@ var gulp = require('gulp'),                                     // Gulp JS
 module.exports = function(cb) {
 
     return gulp.task('concat-modules-data', function(cb) {
-        return gulp.src('./markup/modules/**/moduleData.js')
+        return gulp.src('./markup/modules/**/mData.js')
             .pipe(concat('modulesData.js', {newLine: ',\n\n'}))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
