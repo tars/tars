@@ -149,6 +149,9 @@ require('./gulpy/tasks/generateFonts')(buildOptions);
 require('./gulpy/tasks/preBuild')(buildOptions);
 
 // Create zip-archive
+require('./gulpy/tasks/minifyHtml')(buildOptions);
+
+// Create zip-archive
 require('./gulpy/tasks/zipBuild')(buildOptions);
 
 /*************/
@@ -342,7 +345,7 @@ gulp.task('build-dev', function(cb) {
 gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
-        'svg-minification',
+        ['svg-minification', 'minify-html'],
         'pre-build',
         'svg-to-base64',
         ['compress-main-js', 'compress-css'],

@@ -140,6 +140,9 @@ var projectConfig = {
         useNotifyInBrowser: true
     },
 
+    // Minify result html in build version
+    minifyHtml: false,
+
     // Use build versioning
     // Build version is a date ot building
     useBuildVersioning: true,
