@@ -12,7 +12,7 @@ module.exports = function() {
 
     return gulp.task('svg-minification', function(cb) {
         if (projectConfig.useSVG) {
-            return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
+            return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/**/*.svg')
                 .pipe(imagemin(
                         {
                             progressive: true,
@@ -24,7 +24,7 @@ module.exports = function() {
                 .on('error', notify.onError(function (error) {
                     return 'Something is wrong.\nLook in console.\n' + error;
                 }))
-                .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/'))
+                .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify, 
                         notify({
