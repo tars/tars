@@ -1,5 +1,5 @@
 // Set templates extension
-var projectConfig = require('../../projectConfig'),                 // Project config
+var projectConfig = require('../../projectConfig'),
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
     templaterName = '';
 

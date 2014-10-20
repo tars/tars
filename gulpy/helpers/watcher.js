@@ -1,6 +1,6 @@
-var minimatch = require('minimatch'),           // Service module for node-watch
-    watch = require('node-watch'),              // Watcher
-    gutil = require('gulp-util');               // Gulp util module
+var minimatch = require('minimatch'),
+    watch = require('node-watch'),
+    gutil = require('gulp-util');
 
 
 // Watcher by node-watch
