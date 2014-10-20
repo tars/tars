@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    gutil = require('gulp-util'),                               // Gulp util module
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    gutil = require('gulp-util'),
     fs = require('fs'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Copy files from dev to build directory
 // Create build directory with new build version

@@ -1,10 +1,10 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    uglify = require('gulp-uglifyjs'),                          // JS minify
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    uglify = require('gulp-uglifyjs'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 require('./strip-debug')();
 

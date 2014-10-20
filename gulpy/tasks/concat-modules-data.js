@@ -1,14 +1,12 @@
-// This is example of task function
+var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
-var gulp = require('gulp'),                                     // Gulp JS
-    concat = require('gulp-concat'),                            // Files concat
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig'),             // Project config
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
-
-// Task description
+// conact data for modules to one file
 module.exports = function(cb) {
 
     return gulp.task('concat-modules-data', function(cb) {

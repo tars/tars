@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    cache = require('gulp-cached'),                             // Gulp cache module
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    cache = require('gulp-cached'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    browserSync = require('browser-sync');                      // Plugin for sync with browser
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
+    browserSync = require('browser-sync');
 
 // Move fonts-files to dev directory
 module.exports = function() {

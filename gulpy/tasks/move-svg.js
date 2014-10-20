@@ -1,13 +1,13 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    gutil = require('gulp-util'),                               // Gulp util module
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    gutil = require('gulp-util'),
     rename = require('gulp-rename'),
-    cache = require('gulp-cached'),                             // Gulp cache module
+    cache = require('gulp-cached'),
     path = require('path'),
-    notify = require('gulp-notify'),                            // Plugin for notify
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Move svg to dev directory
 module.exports = function() {

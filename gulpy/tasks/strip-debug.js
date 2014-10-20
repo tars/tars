@@ -1,10 +1,10 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    stripDebug = require('gulp-strip-debug'),                   // Console.log and debugger striper
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    stripDebug = require('gulp-strip-debug'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Strip console.log and debugger from main.js
 module.exports = function(buildOptions) {

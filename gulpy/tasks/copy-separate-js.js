@@ -1,9 +1,9 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    cache = require('gulp-cached'),                             // Gulp cache module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    notifyConfig = require('../../projectConfig').notifyConfig, // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    cache = require('gulp-cached'),
+    notify = require('gulp-notify'),
+    notifyConfig = require('../../projectConfig').notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Copy separate Js to dev directory
 module.exports = function() {

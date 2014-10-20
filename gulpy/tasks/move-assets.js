@@ -1,13 +1,13 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    path = require('path'),                                     // Path module
-    rename = require('gulp-rename'),                            // File rename
-    cache = require('gulp-cached'),                             // Gulp cache module
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    path = require('path'),
+    rename = require('gulp-rename'),
+    cache = require('gulp-cached'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    browserSync = require('browser-sync');                      // Plugin for sync with browser
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
+    browserSync = require('browser-sync');
 
 // Move images from assets modules of modules
 module.exports = function(cb) {

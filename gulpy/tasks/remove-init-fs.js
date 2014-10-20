@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    del = require('del'),                            // Clean module
-    gulpif = require('gulp-if'),                                // Gulp if module
-    gutil = require('gulp-util'),                               // Gulp util module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    del = require('del'),
+    gulpif = require('gulp-if'),
+    gutil = require('gulp-util'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig, // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
 
     pathToDel = [
                  'markup/' + projectConfig.fs.staticFolderName + '/js/libs', 

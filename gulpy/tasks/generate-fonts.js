@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gutil = require('gulp-util'),                               // Gulp util module
-    exec = require('gulp-exec'),                                  // Run bash-scripts from gulp
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig'),             // Project config
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
+var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    exec = require('gulp-exec'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
     gf = gutil.env.gf;
 
 // Generate font-files (eot, woff, svg) from .ttf-file

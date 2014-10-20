@@ -1,13 +1,13 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    gutil = require('gulp-util'),                               // Gulp util module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    cache = require('gulp-cached'),                             // Gulp cache module
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    gutil = require('gulp-util'),
+    notify = require('gulp-notify'),
+    cache = require('gulp-cached'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
+    notifyConfig = projectConfig.notifyConfig,
     raster = require('gulp-raster'),
     rename = require('gulp-rename'),
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Raster SVG-files
 module.exports = function() {

@@ -1,8 +1,8 @@
-var gulp = require('gulp'),                                             // Gulp JS
-    del = require('del'),                                               // Clean module
-    cache = require('gulp-cached'),                                     // Gulp cache
+var gulp = require('gulp'),
+    del = require('del'),
+    cache = require('gulp-cached'),
     projectConfig = require('../../projectConfig'),
-    clearCaches = require('../helpers/clearCaches'),                    // Clear caches for gulp-cache plugin
+    clearCaches = require('../helpers/clearCaches'),
     pathsToDel = [
         './dev/',
         './.tmpTemplater/',

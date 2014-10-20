@@ -1,12 +1,12 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gutil = require('gulp-util'),                               // Gulp util module
-    jshint = require('gulp-jshint'),                            // JS linter
-    cache = require('gulp-cached'),                             // Gulp cache module
-    jscs = require('gulp-jscs'),                                // JS-style checker
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    jshint = require('gulp-jshint'),
+    cache = require('gulp-cached'),
+    jscs = require('gulp-jscs'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig, // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 var jsPathsToLint = [
                      './markup/modules/**/*.js',

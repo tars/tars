@@ -1,6 +1,6 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    projectConfig = require('../../projectConfig'),             // Project config
-    gutil = require('gulp-util');                               // Gulp util module
+var gulp = require('gulp'),
+    projectConfig = require('../../projectConfig'),
+    gutil = require('gulp-util');
 
 require('./remove-init-fs')();
 require('./init')();

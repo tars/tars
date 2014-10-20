@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    concat = require('gulp-concat'),                            // Files concat
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
-    browserSync = require('browser-sync'),                      // Plugin for sync with browser
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
+    browserSync = require('browser-sync'),
     jsPaths = [
         './markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', 
         './markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js'

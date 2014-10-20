@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    csso = require('gulp-csso'),                                // Css minify
-    rename = require('gulp-rename'),                            // File rename
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
+var gulp = require('gulp'),
+    csso = require('gulp-csso'),
+    rename = require('gulp-rename'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Compress css-files
 module.exports = function(buildOptions) {

@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig'),             // Project config
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter'),     // Date formatter for notify
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter'),
     templaterName = require('../helpers/templaterNameSetter'),
-    gutil = require('gulp-util'),                               // Gulp util module
+    gutil = require('gulp-util'),
     ncp = require('ncp').ncp,
     Download = require('download');
 
@@ -47,23 +47,23 @@ module.exports = function() {
             ncp('./.tmpTemplater/markupBuilder-extensions-mkExt-' + templaterName() + '-templater/markup', './markup', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red(err));
-                    gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
+                    gutil.log(gutil.colors.red('x'),
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-                gutil.log(gutil.colors.green('✔'), ' Done copy markup templater');
+                gutil.log(gutil.colors.green('✔'),
             });
 
             ncp('./.tmpTemplater/markupBuilder-extensions-mkExt-' + templaterName() + '-templater/gulpy', './gulpy', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy gulpy templater task');
+                    gutil.log(gutil.colors.red('x'),
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-                gutil.log(gutil.colors.green('✔'), ' Done copy gulpy templater task');
+                gutil.log(gutil.colors.green('✔'),
             });
 
-            gutil.log(gutil.colors.green('✔'), ' End downloading templater', gutil.colors.cyan(templaterName()));
+            gutil.log(gutil.colors.green('✔'),
         });
 
         
@@ -77,35 +77,35 @@ module.exports = function() {
 
             ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/gulpy', './gulpy', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy gulpy css preproc task');
+                    gutil.log(gutil.colors.red('x'),
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
 
-                gutil.log(gutil.colors.green('✔'), ' Done copy gulpy css-preproc task');
+                gutil.log(gutil.colors.green('✔'),
             });
 
             ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
+                    gutil.log(gutil.colors.red('x'),
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
 
-                gutil.log(gutil.colors.green('✔'), ' Done copy static css-files');
+                gutil.log(gutil.colors.green('✔'),
             });
 
             ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/markup/modules/_template', './markup/modules/_template/', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
+                    gutil.log(gutil.colors.red('x'),
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
 
-                gutil.log(gutil.colors.green('✔'), ' Done copy css-files for modules');
+                gutil.log(gutil.colors.green('✔'),
             });
 
-            gutil.log(gutil.colors.green('✔'), ' End downloading css-preproc', gutil.colors.cyan(projectConfig.cssPreprocessor));
+            gutil.log(gutil.colors.green('✔'),
         });
 
     });

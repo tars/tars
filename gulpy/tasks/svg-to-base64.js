@@ -1,11 +1,11 @@
-var gulp = require('gulp'),                                             // Gulp JS
+var gulp = require('gulp'),
     base64 = require('gulp-base64'),
-    gulpif = require('gulp-if'),                                        // Gulp if module
-    notify = require('gulp-notify'),                                    // Plugin for notify
-    gutil = require('gulp-util'),                                       // Gulp util module
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    gutil = require('gulp-util'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                          // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');             // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 // Convert included svg files to base64 in css
 module.exports = function(buildOptions) {

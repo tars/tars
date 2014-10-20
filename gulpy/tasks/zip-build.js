@@ -1,10 +1,10 @@
-var gulp = require('gulp'),                                             // Gulp JS
-    gulpif = require('gulp-if'),                                        // Gulp if module
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
     zip = require('gulp-zip'),
-    notify = require('gulp-notify'),                                    // Plugin for notify
+    notify = require('gulp-notify'),
     projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,                          // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');             // Date formatter for notify
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
 
 
 // Create zip archive of build

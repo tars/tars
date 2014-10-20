@@ -1,8 +1,8 @@
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    gutil = require('gulp-util'),                               // Gulp util module
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    gutil = require('gulp-util'),
     mkdirp = require('mkdirp'),
-    fs = require('fs'),                                         // Node fs module
+    fs = require('fs'),
     projectConfig = require('../../projectConfig');
 
 var paths = [
