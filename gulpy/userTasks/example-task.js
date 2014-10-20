@@ -1,13 +1,13 @@
 // This is example of task function
 
-var gulp = require('gulp'),                                     // Gulp JS
-    gulpif = require('gulp-if'),                                // Gulp if module
-    notify = require('gulp-notify'),                            // Plugin for notify
-    projectConfig = require('../../projectConfig'),             // Project config
-    notifyConfig = projectConfig.notifyConfig,                  // Notify config
-    modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    notify = require('gulp-notify'),
+    projectConfig = require('../../projectConfig'),
+    notifyConfig = projectConfig.notifyConfig,
+    modifyDate = require('../helpers/modifyDateFormatter');
     // Include browserSync, if you need to reload browser
-    // browserSync = require('browser-sync');                   // Plugin for sync with browser
+    // browserSync = require('browser-sync');
 
 // require('./ path to task file, which have to be done before current task');
 
