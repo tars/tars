@@ -63,96 +63,96 @@ require('./gulpy/helpers/setUlimit')(2048);
 // Default tasks
 
 // Create file-structure
-require('./gulpy/tasks/createFs')(buildOptions);
+require('./gulpy/tasks/create-fs')(buildOptions);
 
 // Init builder. Make folders
 require('./gulpy/tasks/init')(buildOptions);
 
 // Re-init builder. Make folders
-require('./gulpy/tasks/reInit')(buildOptions);
+require('./gulpy/tasks/re-init')(buildOptions);
 
 // Clean dev directory and cache
 require('./gulpy/tasks/clean')(buildOptions);
 
 // Template compilation
-require('./gulpy/tasks/compileTemplates')(buildOptions);
+require('./gulpy/tasks/compile-templates')(buildOptions);
 
 // Concat data for modules
-require('./gulpy/tasks/concatModulesData')(buildOptions);
+require('./gulpy/tasks/concat-modules-data')(buildOptions);
 
 // Make sprite task    
-require('./gulpy/tasks/rasterSvg')(buildOptions);
+require('./gulpy/tasks/raster-svg')(buildOptions);
 
 // Make png-sprite task for svg files for old browsers
-require('./gulpy/tasks/makeSpriteForSvgFallback')(buildOptions);
+require('./gulpy/tasks/make-fallback-for-svg')(buildOptions);
 
 // SVG minification
-require('./gulpy/tasks/svgMinification')(buildOptions);
+require('./gulpy/tasks/svg-minification')(buildOptions);
 
 // Move SVG-files to dev directory
-require('./gulpy/tasks/moveSvg')(buildOptions);
+require('./gulpy/tasks/move-svg')(buildOptions);
 
 // Convert svg includes to base64 in css
-require('./gulpy/tasks/svgToBase64')(buildOptions);
+require('./gulpy/tasks/svg-to-base64')(buildOptions);
 
 // Make sprite task    
-require('./gulpy/tasks/makeSprite')(buildOptions);
+require('./gulpy/tasks/make-sprite')(buildOptions);
 
 // Css compilation
-require('./gulpy/tasks/compileCss')(buildOptions);
+require('./gulpy/tasks/compile-css')(buildOptions);
 
 // Css compilation for ie8
-require('./gulpy/tasks/compileCssForIe8')(buildOptions);
+require('./gulpy/tasks/compile-css-for-ie8')(buildOptions);
 
 // Css compilation for ie9
-require('./gulpy/tasks/compileCssForIe9')(buildOptions);
+require('./gulpy/tasks/compile-css-for-ie9')(buildOptions);
 
 // Compress css
-require('./gulpy/tasks/compressCss')(buildOptions);
+require('./gulpy/tasks/compress-css')(buildOptions);
 
 // Copy JS-files for libs that have to be in separate files
-require('./gulpy/tasks/copySeparateJs')(buildOptions);
+require('./gulpy/tasks/copy-separate-js')(buildOptions);
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
-require('./gulpy/tasks/concatPluginsLibsAndModulesLintModulesJs')(buildOptions);
+require('./gulpy/tasks/js-processing')(buildOptions);
 
 // Check JS (code style and errors)
 require('./gulpy/tasks/lint')(buildOptions);
 
 // Strip console.log and debugger from main.js
-require('./gulpy/tasks/stripDebug')(buildOptions);
+require('./gulpy/tasks/strip-debug')(buildOptions);
 
 // Compress js-files and strip debug
-require('./gulpy/tasks/compressMainJs')(buildOptions);
+require('./gulpy/tasks/compress-main-js')(buildOptions);
 
 // Move misc files
-require('./gulpy/tasks/moveMiscFiles')(buildOptions);
+require('./gulpy/tasks/move-misc-files')(buildOptions);
 
 // Move images from assets modules of modules
-require('./gulpy/tasks/moveAssets')(buildOptions);
+require('./gulpy/tasks/move-assets')(buildOptions);
 
 // Move images for content
-require('./gulpy/tasks/moveContentImg')(buildOptions);
+require('./gulpy/tasks/move-content-img')(buildOptions);
 
 // Move images for plugins
-require('./gulpy/tasks/movePluginsImg')(buildOptions);
+require('./gulpy/tasks/move-plugins-img')(buildOptions);
 
 // Move fonts-files to dev directory
-require('./gulpy/tasks/moveFonts')(buildOptions);
+require('./gulpy/tasks/move-fonts')(buildOptions);
 
 // Generate font-files (eot, woff, svg) from .ttf-file
-require('./gulpy/tasks/generateFonts')(buildOptions);
+require('./gulpy/tasks/generate-fonts')(buildOptions);
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-require('./gulpy/tasks/preBuild')(buildOptions);
+require('./gulpy/tasks/pre-build')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/minifyHtml')(buildOptions);
+require('./gulpy/tasks/minify-html')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/zipBuild')(buildOptions);
+require('./gulpy/tasks/zip-build')(buildOptions);
 
 /*************/
 /* END TASKS */
@@ -252,30 +252,30 @@ gulp.task('dev', ['build-dev'], function() {
     if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
         // Watcher for js-files before modules js
         watchByPattern(projectConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
-            gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+            gulp.start('js-processing');
         });
     }   
 
     // Watcher for js-files of modules
     watchByPattern('./markup/modules/**/*.js', './markup/modules/**/mData.js', function(filename) {
-        gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+        gulp.start('js-processing');
     });
 
     if (projectConfig.jsPathsToConcatAfterModulesJs.length) {
         // Watcher for js-files after modules js
         watchByPattern(projectConfig.jsPathsToConcatAfterModulesJs, false, function(filename) {
-            gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+            gulp.start('js-processing');
         }); 
     }
 
     // Watcher for js-files of plugins
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js', false, function(filename) {
-        gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+        gulp.start('js-processing');
     });
 
     // Watcher for js-files of libs
     watchByPattern('./markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', false, function(filename) {
-        gulp.start('concat-plugins-libs-and-modules-lint-modules-js');
+        gulp.start('js-processing');
     });
 
     // Watcher for images in assets dir of modules
@@ -327,11 +327,11 @@ gulp.task('build-dev', function(cb) {
         'clean',
         'move-svg',
         'raster-svg',
-        ['make-sprite-for-svg-fallback', 'make-sprite'],
+        ['make-fallback', 'make-sprite'-for-svg],
         ['compile-css', 'compile-css-for-ie8', 'compile-css-for-ie9'],
         'concat-modules-data',
         [
-            'copy-separate-js', 'concat-plugins-libs-and-modules-lint-modules-js', 'compile-templates',
+            'copy-separate-js', 'js-processing', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
         ],
         'fonts-actions',
@@ -394,7 +394,7 @@ gulp.task('svg-actions', function(cb) {
     runSequence(
         'move-svg',
         'raster-svg',
-        'make-sprite-for-svg-fallback',
+        'make-fallback-for-svg',
         cb
     );
 });
