@@ -327,7 +327,7 @@ gulp.task('build-dev', function(cb) {
         'clean',
         'move-svg',
         'raster-svg',
-        ['make-fallback', 'make-sprite'-for-svg],
+        ['make-fallback-for-svg', 'make-sprite'],
         ['compile-css', 'compile-css-for-ie8', 'compile-css-for-ie9'],
         'concat-modules-data',
         [

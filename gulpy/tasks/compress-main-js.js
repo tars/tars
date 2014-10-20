@@ -6,7 +6,7 @@ var gulp = require('gulp'),                                     // Gulp JS
     notifyConfig = projectConfig.notifyConfig,                  // Notify config
     modifyDate = require('../helpers/modifyDateFormatter');     // Date formatter for notify
 
-require('./stripDebug')();
+require('./strip-debug')();
 
 // Compress js-files
 module.exports = function(buildOptions) {

@@ -2,7 +2,7 @@ var gulp = require('gulp'),                                     // Gulp JS
     projectConfig = require('../../projectConfig'),             // Project config
     gutil = require('gulp-util');                               // Gulp util module
 
-require('./removeInitFs')();
+require('./remove-init-fs')();
 require('./init')();
 
 // Re-init builder
