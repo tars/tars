@@ -19,7 +19,7 @@ var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfi
 var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repo + '/archive/mkExt-' + projectConfig.cssPreprocessor + '-preproc.zip';
 
 ncp.limit = 16;
-require('./createFs')();
+require('./create-fs')();
 
 
 // Task description
