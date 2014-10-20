@@ -34,7 +34,7 @@ require('./lint')();
 // Also lint modules' js
 module.exports = function() {
 
-    return gulp.task('concat-plugins-libs-and-modules-lint-modules-js', ['lint'], function() {
+    return gulp.task('js-processing', ['lint'], function() {
         return gulp.src(jsPaths)
             .pipe(concat('main.js'))
             .on('error', notify.onError(function (error) {
