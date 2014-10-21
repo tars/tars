@@ -13,7 +13,7 @@ var gulp = require('gulp'),
 module.exports = function(cb) {
 
     return gulp.task('move-assets', function(cb) {
-        gulp.src('./markup/modules/**/assets/**/*.*')
+        return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))
             .pipe(rename(function(path) {
                 path.dirname = path.dirname.match(/[a-zA-Z0-9]+\//)[0];
@@ -36,7 +36,5 @@ module.exports = function(cb) {
                     })
                 )
             );
-
-        cb(null);
     });
 };   

@@ -18,13 +18,11 @@
     "requireSpaceAfterBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!=="],
     "disallowKeywords": ["with"],
     "disallowMultipleLineBreaks": true,
-    "validateLineBreaks": "LF",
     "validateQuoteMarks": "'",
     "disallowMixedSpacesAndTabs": true,
     "disallowTrailingWhitespace": true,
     "disallowKeywordsOnNewLine": ["else"],
     "maximumLineLength": 120,
     "requireCapitalizedConstructors": true,
-    "requireDotNotation": true,
     "excludeFiles": ["node_modules/**"]
 }

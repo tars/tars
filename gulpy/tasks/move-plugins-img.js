@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 module.exports = function(cb) {
 
     return gulp.task('move-plugins-img', function(cb) {
-        gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*')
+        return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*')
             .pipe(cache('move-plugins-img'))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;
@@ -31,7 +31,5 @@ module.exports = function(cb) {
                     })
                 )
             );
-
-        cb(null);
     }); 
 };   
