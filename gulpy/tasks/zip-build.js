@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     gulpif = require('gulp-if'),
     zip = require('gulp-zip'),
     notify = require('gulp-notify'),

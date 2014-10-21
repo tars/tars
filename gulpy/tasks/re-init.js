@@ -9,7 +9,6 @@ require('./init')();
 module.exports = function() {
     
     return gulp.task('re-init', ['remove-init-fs'], function() {
-        gutil.log(gutil.colors.red('!NOTE, YOU CAN\'T CHANGE staticFolderName AND imagesFolderName NOW!'));
         gulp.start('init');
     });
 };

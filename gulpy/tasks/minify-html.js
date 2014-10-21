@@ -10,7 +10,8 @@ var gulp = require('gulp'),
 // Minify HTML
 module.exports = function(buildOptions) {
     var opts = {
-        conditionals: true
+        conditionals: true,
+        quotes: true
     };
     
     return gulp.task('minify-html', function(cb) {
