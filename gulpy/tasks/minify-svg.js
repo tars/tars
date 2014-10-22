@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 // Minify sprite img
 module.exports = function() {
 
-    return gulp.task('svg-minification', function(cb) {
+    return gulp.task('minify-svg', function(cb) {
         if (projectConfig.useSVG) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/**/*.svg')
                 .pipe(imagemin(

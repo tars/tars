@@ -89,7 +89,7 @@ require('./gulpy/tasks/raster-svg')(buildOptions);
 require('./gulpy/tasks/make-fallback-for-svg')(buildOptions);
 
 // SVG minification
-require('./gulpy/tasks/svg-minification')(buildOptions);
+require('./gulpy/tasks/minify-svg')(buildOptions);
 
 // Move SVG-files to dev directory
 require('./gulpy/tasks/move-svg')(buildOptions);
@@ -355,7 +355,7 @@ gulp.task('build-dev', function(cb) {
 gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
-        ['svg-minification', 'minify-html'],
+        ['minify-svg', 'minify-html'],
         'pre-build',
         'svg-to-base64',
         ['compress-main-js', 'compress-css'],
