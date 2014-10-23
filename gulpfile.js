@@ -16,15 +16,15 @@ var gulp = require('gulp'),
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
     buildOptions = {};
 
+    // Generate build version
     if (projectConfig.useBuildVersioning) {
         buildOptions.buildVersion = '_ver-' + (new Date()).toString();
         buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];    
     } else {
         buildOptions.buildVersion = '';
     }
-    
-    buildOptions.tunnelUrl = null;
 
+    // Set template's extension
     if (templaterName === 'handlebars') {
         templateExtension = 'html';
     } else {
@@ -40,6 +40,7 @@ var gulp = require('gulp'),
 // Watcher by node-watch
 var watcher = require('./gulpy/helpers/watcher');
 
+// Set ulimit to 2048 for *nix FS. It needs to work with big amount of files
 require('./gulpy/helpers/setUlimit')(2048);
 
 /***************/
@@ -156,8 +157,6 @@ require('./gulpy/tasks/minify-html')(buildOptions);
 // Create zip-archive
 require('./gulpy/tasks/zip-build')(buildOptions);
 
-// Tunnel your markup to web
-require('./gulpy/tasks/tunnel-to-web')(buildOptions);
 
 /*************/
 /* END TASKS */
@@ -173,12 +172,8 @@ require('./gulpy/tasks/tunnel-to-web')(buildOptions);
 // Also could tunnel your markup to web, if you use flag --tunnel
 gulp.task('dev', ['build-dev'], function() {
 
-    if (useLiveReload || useTunnelToWeb) {
+    if (useLiveReload) {
         gulp.start('browsersync');
-    }
-
-    if (useTunnelToWeb) {
-        gulp.start('tunnel-to-web');
     }
 
 
@@ -384,7 +379,8 @@ gulp.task('browsersync', function(cb) {
         open: browserSyncConfig.open,
         browser: browserSyncConfig.browser,
         startPath: browserSyncConfig.startUrl,
-        notify: browserSyncConfig.useNotifyInBrowser
+        notify: browserSyncConfig.useNotifyInBrowser,
+        tunnel: useTunnelToWeb
     });  
 
     cb(null);
