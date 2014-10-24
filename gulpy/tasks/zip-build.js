@@ -16,7 +16,7 @@ module.exports = function(buildOptions) {
             gulp.src('./builds/build' + buildOptions.buildVersion +'/**', { base : "." })
             .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while creating zip-archive.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/'))
             .pipe(

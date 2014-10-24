@@ -19,7 +19,7 @@ module.exports = function(cb) {
                 path.dirname = path.dirname.match(/[a-zA-Z0-9]+\//)[0];
             }))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while moving assets.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/assets/'))
             .pipe(browserSync.reload({stream:true}))

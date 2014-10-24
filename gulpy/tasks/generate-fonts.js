@@ -14,6 +14,9 @@ module.exports = function() {
     return gulp.task('generate-fonts', function() {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/fonts/')             
             .pipe(gulpif(gf, exec('webfonts "./markup/' + projectConfig.fs.staticFolderName + '/fonts/"')))
+            .on('error', notify.onError(function (error) {
+                return '\nAn error occurred while generating fonts.\nLook in the console for details.\n' + error;
+            }))
             .pipe(
                 gulpif(notifyConfig.useNotify, 
                     notify({

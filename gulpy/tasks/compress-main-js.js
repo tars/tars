@@ -17,7 +17,7 @@ module.exports = function(buildOptions) {
                 mangle: false
             }))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while compressing js.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/'))
             .pipe(

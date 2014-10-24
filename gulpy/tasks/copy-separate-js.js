@@ -11,6 +11,9 @@ module.exports = function() {
     return gulp.task('copy-separate-js', function(cb) {
         gulp.src('./markup/static/js/separateJs/**/*.js')
             .pipe(cache('separate-js'))
+            .on('error', notify.onError(function (error) {
+                return '\nAn error occurred while moving separate js-files.\'s data.\nLook in the console for details.\n' + error;
+            }))
             .pipe(gulp.dest('./dev/static/js/separateJs'))
             .pipe(
                 gulpif(notifyConfig.useNotify, 

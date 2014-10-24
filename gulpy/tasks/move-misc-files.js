@@ -12,7 +12,7 @@ module.exports = function(cb) {
     return gulp.task('move-misc-files', function(cb) {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/'))
             .pipe(browserSync.reload({stream:true}))

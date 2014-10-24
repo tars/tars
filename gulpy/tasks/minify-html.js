@@ -20,7 +20,7 @@ module.exports = function(buildOptions) {
             return gulp.src('./dev/*.html')
                 .pipe(minifyHTML(opts))
                 .on('error', notify.onError(function (error) {
-                    return notifyConfig.errorMessage(error);
+                    return 'Html-minify error.\nLook in the console for details.' + error;
                 }))
                 .pipe(gulp.dest('./dev/'))
                 .pipe(

@@ -17,7 +17,7 @@ module.exports = function(buildOptions) {
                 suffix: '.min'
             }))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while compressing css.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
             .pipe(

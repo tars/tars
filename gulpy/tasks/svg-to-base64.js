@@ -17,8 +17,8 @@ module.exports = function(buildOptions) {
                     extensions: ['svg']
                 }))
                 .on('error', notify.onError(function (error) {
-                    return 'Something is wrong.\nLook in console.\n' + error;
-                }))
+                return '\nAn error occurred while converting svg to base64.\nLook in the console for details.\n' + error;
+            }))
                 .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify, 

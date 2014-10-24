@@ -38,7 +38,7 @@ module.exports = function(buildOptions) {
         return gulp.src(jsPaths)
             .pipe(concat('main' + buildOptions.hash + '.js'))
             .on('error', notify.onError(function (error) {
-                return notifyConfig.errorMessage;
+                return '\nAn error occurred while concating js-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/js'))
             .pipe(browserSync.reload({stream:true}))

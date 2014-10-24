@@ -37,7 +37,7 @@ module.exports = function(buildOptions) {
             .pipe(jshint.reporter('jshint-stylish'))
             .pipe(jscs())
             .on('error', notify.onError(function (error) {
-                return 'There are some errors in JS.\nLook in console!';
+                return 'An error occurred while linting js.\nLook in the console for details.\n';
             }));    
         } else {
             gutil.log('!JS-lint and hint is not used!');

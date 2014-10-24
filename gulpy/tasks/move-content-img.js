@@ -14,7 +14,7 @@ module.exports = function(cb) {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content/**/*.*')
             .pipe(cache('move-content-img'))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while moving content imgs.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content'))
             .pipe(browserSync.reload({stream:true}))

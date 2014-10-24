@@ -14,7 +14,7 @@ module.exports = function(cb) {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*')
             .pipe(cache('move-plugins-img'))
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while moving plugin\'s imgs.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins'))
             .pipe(browserSync.reload({stream:true}))

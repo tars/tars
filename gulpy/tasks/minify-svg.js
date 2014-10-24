@@ -22,7 +22,7 @@ module.exports = function() {
                     )
                 )
                 .on('error', notify.onError(function (error) {
-                    return 'Something is wrong.\nLook in console.\n' + error;
+                    return '\nAn error occurred while minifying svg.\nLook in the console for details.\n' + error;
                 }))
                 .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
                 .pipe(

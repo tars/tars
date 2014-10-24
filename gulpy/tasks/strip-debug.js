@@ -13,7 +13,7 @@ module.exports = function(buildOptions) {
         return gulp.src('./builds/build' + buildOptions.buildVersion + '/static/js/main' + buildOptions.hash + '.js')
             .pipe(stripDebug())
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while stripping debug.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/static/js/'))
             .pipe(

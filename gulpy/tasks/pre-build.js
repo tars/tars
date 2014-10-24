@@ -17,7 +17,7 @@ module.exports = function(buildOptions) {
 
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while running pre-build task.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion))
             .pipe(
