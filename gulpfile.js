@@ -119,8 +119,8 @@ require('./gulpy/tasks/compile-css-for-ie9')(buildOptions);
 // Compress css
 require('./gulpy/tasks/compress-css')(buildOptions);
 
-// Copy JS-files for libs that have to be in separate files
-require('./gulpy/tasks/copy-separate-js')(buildOptions);
+// Move JS-files for libs that have to be in separate files
+require('./gulpy/tasks/move-separate-js')(buildOptions);
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
@@ -133,7 +133,7 @@ require('./gulpy/tasks/lint')(buildOptions);
 require('./gulpy/tasks/strip-debug')(buildOptions);
 
 // Compress js-files and strip debug
-require('./gulpy/tasks/compress-main-js')(buildOptions);
+require('./gulpy/tasks/compress-js')(buildOptions);
 
 // Move misc files
 require('./gulpy/tasks/move-misc-files')(buildOptions);
@@ -316,7 +316,7 @@ gulp.task('dev', ['build-dev'], function() {
 
     // Watcher for separate Js files files
     watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js', false, function(filename) {
-        gulp.start('copy-separate-js');
+        gulp.start('move-separate-js');
     });
 });
 
@@ -342,7 +342,7 @@ gulp.task('build-dev', function(cb) {
         ['compile-css', 'compile-css-for-ie8', 'compile-css-for-ie9'],
         'concat-modules-data',
         [
-            'copy-separate-js', 'js-processing', 'compile-templates',
+            'move-separate-js', 'js-processing', 'compile-templates',
             'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
         ],
         'fonts-actions',
@@ -359,7 +359,7 @@ gulp.task('build', function(cb) {
         ['minify-svg', 'minify-html'],
         'pre-build',
         'svg-to-base64',
-        ['compress-main-js', 'compress-css'],
+        ['compress-js', 'compress-css'],
         'zip-build',
         cb
     );

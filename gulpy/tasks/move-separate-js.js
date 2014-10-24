@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 // Copy separate Js to dev directory
 module.exports = function() {
 
-    return gulp.task('copy-separate-js', function(cb) {
+    return gulp.task('move-separate-js', function(cb) {
         gulp.src('./markup/static/js/separateJs/**/*.js')
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
