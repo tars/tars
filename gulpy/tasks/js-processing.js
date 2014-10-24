@@ -32,11 +32,11 @@ require('./lint')();
 
 // Concat JS for modules, libs and plugins in common file.
 // Also lint modules' js
-module.exports = function() {
+module.exports = function(buildOptions) {
 
     return gulp.task('js-processing', ['lint'], function() {
         return gulp.src(jsPaths)
-            .pipe(concat('main.js'))
+            .pipe(concat('main' + buildOptions.hash + '.js'))
             .on('error', notify.onError(function (error) {
                 return notifyConfig.errorMessage;
             }))

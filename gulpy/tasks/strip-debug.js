@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 module.exports = function(buildOptions) {
     
     return gulp.task('strip-debug', function(buildOptions) {
-        return gulp.src('./builds/build' + buildOptions.buildVersion + '/static/js/main.js')
+        return gulp.src('./builds/build' + buildOptions.buildVersion + '/static/js/main' + buildOptions.hash + '.js')
             .pipe(stripDebug())
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;

@@ -27,7 +27,7 @@ if (projectConfig.lintJsCodeAfterModules) {
 }
 
 // Check JS (code style and errors)
-module.exports = function() {
+module.exports = function(buildOptions) {
 
     return gulp.task('lint', function() {
         if (projectConfig.useJsLintAndHint) {

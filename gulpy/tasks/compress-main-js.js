@@ -12,8 +12,8 @@ require('./strip-debug')();
 module.exports = function(buildOptions) {
 
     return gulp.task('compress-main-js', ['strip-debug'], function() {
-        return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/main.js')
-            .pipe(uglify('main.min.js', {
+        return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
+            .pipe(uglify('main' + buildOptions.hash + '.min.js', {
                 mangle: false
             }))
             .on('error', notify.onError(function (error) {

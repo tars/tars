@@ -14,7 +14,7 @@ module.exports = function(buildOptions) {
         return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/*.css')
             .pipe(csso())
             .pipe(rename({
-                suffix: ".min"
+                suffix: '.min'
             }))
             .on('error', notify.onError(function (error) {
                 return 'Something is wrong.\nLook in console.\n' + error;

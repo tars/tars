@@ -31,6 +31,12 @@ var gulp = require('gulp'),
         templateExtension = 'jade';
     }
 
+    if (gutil.env.release) {
+        buildOptions.hash = Math.random().toString(36).substring(7);
+    } else {
+        buildOptions.hash = '';
+    }
+
 
 /***********/
 /* HELPERS */
