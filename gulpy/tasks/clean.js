@@ -8,13 +8,8 @@ var gulp = require('gulp'),
         './.tmpPreproc/'
     ];
 
-    if (gutil.env.clean) {
-        pathsToDel.push('./builds/');
-    } else {
-        pathsToDel.push(
-            './builds/build/*.*',
-            './builds/build/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'
-        );
+    if (!projectConfig.useBuildVersioning) {
+        pathsToDel.push('./builds/build/');
     }
 
 // Clean dev directory and cache
