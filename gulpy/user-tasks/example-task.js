@@ -18,7 +18,7 @@ module.exports = function(cb) {
         return gulp.src(/* path-string or array of path-strings to files */)
             // Do stuff here
             .on('error', notify.onError(function (error) {
-                return 'Something is wrong.\nLook in console.\n' + error;
+                return '\nAn error occurred while something.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest(/* path-string to destanation directory. Only directory, not a file! */))
 
