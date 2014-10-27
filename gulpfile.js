@@ -178,7 +178,7 @@ require('./gulpy/tasks/zip-build')(buildOptions);
 // Also could tunnel your markup to web, if you use flag --tunnel
 gulp.task('dev', ['build-dev'], function() {
 
-    if (useLiveReload) {
+    if (useLiveReload || useTunnelToWeb) {
         gulp.start('browsersync');
     }
 
