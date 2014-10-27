@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     del = require('del'),
     projectConfig = require('../../projectConfig'),
     pathsToDel = [
@@ -7,8 +8,13 @@ var gulp = require('gulp'),
         './.tmpPreproc/'
     ];
 
-    if (!projectConfig.useBuildVersioning) {
-        pathsToDel.push('./builds/build/');
+    if (gutil.env.clean) {
+        pathsToDel.push('./builds/');
+    } else {
+        pathsToDel.push(
+            './builds/build/*.*',
+            './builds/build/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'
+        );
     }
 
 // Clean dev directory and cache
