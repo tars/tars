@@ -26,7 +26,7 @@ module.exports = function() {
                 }))
                 .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify, 
+                    gulpif(notifyConfig.useNotify,
                         notify({
                             onLast: true,
                             sound: notifyConfig.sounds.onSuccess,

@@ -19,7 +19,7 @@ var gulp = require('gulp'),
     // Generate build version
     if (projectConfig.useBuildVersioning) {
         buildOptions.buildVersion = '_ver-' + (new Date()).toString();
-        buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];    
+        buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
     } else {
         buildOptions.buildVersion = '';
     }
@@ -89,7 +89,7 @@ require('./gulpy/tasks/compile-templates')(buildOptions);
 // Concat data for modules
 require('./gulpy/tasks/concat-modules-data')(buildOptions);
 
-// Make sprite task    
+// Make sprite task
 require('./gulpy/tasks/raster-svg')(buildOptions);
 
 // Make png-sprite task for svg files for old browsers
@@ -98,13 +98,16 @@ require('./gulpy/tasks/make-fallback-for-svg')(buildOptions);
 // SVG minification
 require('./gulpy/tasks/minify-svg')(buildOptions);
 
+// PNG, JPG minification
+require('./gulpy/tasks/minify-raster-img')(buildOptions);
+
 // Move SVG-files to dev directory
 require('./gulpy/tasks/move-svg')(buildOptions);
 
 // Convert svg includes to base64 in css
 require('./gulpy/tasks/svg-to-base64')(buildOptions);
 
-// Make sprite task    
+// Make sprite task
 require('./gulpy/tasks/make-sprite')(buildOptions);
 
 // Css compilation
@@ -187,10 +190,10 @@ gulp.task('dev', ['build-dev'], function() {
 
     // You can add your own watcher
     // Example:
-    // watcher( path-string or array of paths to files that you'd like to watch for, 
+    // watcher( path-string or array of paths to files that you'd like to watch for,
     //                 filter path-string or array of paths to files taht you'd like to unwatch,
     //                 function(filename) {
-    //                      gulp.start('example-task'); 
+    //                      gulp.start('example-task');
     //                  });
 
 
@@ -211,11 +214,11 @@ gulp.task('dev', ['build-dev'], function() {
     // Watcher for common scss(or less)-files and scss(or less)-files of plugins
     watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + projectConfig.cssPreprocessor, false, function(filename) {
         gulp.start('compile-css');
-    }); 
+    });
 
     // Watcher for modyles stylies
     watcher(
-            './markup/modules/**/*.' + projectConfig.cssPreprocessor, 
+            './markup/modules/**/*.' + projectConfig.cssPreprocessor,
             [
                 './markup/modules/**/ie9.' + projectConfig.cssPreprocessor,
                 './markup/modules/**/ie8.' + projectConfig.cssPreprocessor
@@ -223,9 +226,9 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('compile-css');
 
         if (projectConfig.useIE8Stylies) {
-            gulp.start('compile-css-for-ie8');    
+            gulp.start('compile-css-for-ie8');
         }
-        
+
         if (projectConfig.useIE9Stylies) {
             gulp.start('compile-css-for-ie9');
         }
@@ -265,7 +268,7 @@ gulp.task('dev', ['build-dev'], function() {
         watcher(projectConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
             gulp.start('js-processing');
         });
-    }   
+    }
 
     // Watcher for js-files of modules
     watcher('./markup/modules/**/*.js', './markup/modules/**/mData.js', function(filename) {
@@ -276,7 +279,7 @@ gulp.task('dev', ['build-dev'], function() {
         // Watcher for js-files after modules js
         watcher(projectConfig.jsPathsToConcatAfterModulesJs, false, function(filename) {
             gulp.start('js-processing');
-        }); 
+        });
     }
 
     // Watcher for js-files of plugins
@@ -356,7 +359,7 @@ gulp.task('build-dev', function(cb) {
 gulp.task('build', function(cb) {
     runSequence(
         'build-dev',
-        ['minify-svg', 'minify-html'],
+        ['minify-html', 'minify-raster-img', 'minify-svg'],
         'pre-build',
         'svg-to-base64',
         ['compress-js', 'compress-css'],
@@ -372,7 +375,7 @@ gulp.task('default', function() {
 
 // Task for starting browsersync module
 gulp.task('browsersync', function(cb) {
-   
+
     // Serve files and connect browsers
     browserSync({
         server: {
@@ -387,7 +390,7 @@ gulp.task('browsersync', function(cb) {
         startPath: browserSyncConfig.startUrl,
         notify: browserSyncConfig.useNotifyInBrowser,
         tunnel: useTunnelToWeb
-    });  
+    });
 
     cb(null);
 });
