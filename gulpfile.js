@@ -191,7 +191,7 @@ gulp.task('dev', ['build-dev'], function() {
     // You can add your own watcher
     // Example:
     // watcher( path-string or array of paths to files that you'd like to watch for,
-    //                 filter path-string or array of paths to files taht you'd like to unwatch,
+    //                 filter path-string or array of paths to files that you'd like to unwatch or false,
     //                 function(filename) {
     //                      gulp.start('example-task');
     //                  });
