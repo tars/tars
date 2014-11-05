@@ -39,7 +39,7 @@ var projectConfig = {
 
     // What kind of css-preprocessor would you like to use
     // String: 'scss' or 'less' or 'stylus'
-    cssPreprocessor: 'stylus',
+    cssPreprocessor: 'scss',
 
     // What kind of size of images are you going to you.
     // 96 — 1 dppx (regular)
@@ -50,7 +50,7 @@ var projectConfig = {
     // You can change with options not only on init or reinit,
     // but at with time you have to create new directories
     // and delete unused.
-    useImagesForDisplayWithDpi: [96, 144, 192, 288],
+    useImagesForDisplayWithDpi: [96],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
@@ -82,7 +82,7 @@ var projectConfig = {
 
 
     // Use linting and hinting of js-files
-    useJsLintAndHint: false,
+    useJsLintAndHint: true,
 
 
     // Array of string of paths
@@ -145,7 +145,7 @@ var projectConfig = {
 
     // Use build versioning
     // Build version is a date ot building
-    useBuildVersioning: false,
+    useBuildVersioning: true,
 
     // Use archiver for your build
     useArchiver: true
