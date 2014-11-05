@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     browserSyncConfig = projectConfig.browserSyncConfig,
     templaterName = require('./gulpy/helpers/templaterNameSetter')(),
     templateExtension = 'jade',
+    cssPreprocExtension = projectConfig.cssPreprocessor.toLowerCase(),
     projectConfigTemlater = projectConfig.templater.toLowerCase(),
     buildOptions = {};
 
@@ -29,6 +30,10 @@ var gulp = require('gulp'),
         templateExtension = 'html';
     } else {
         templateExtension = 'jade';
+    }
+
+    if (cssPreprocExtension === 'stylus') {
+        cssPreprocExtension = 'styl';
     }
 
     if (gutil.env.release) {
@@ -212,16 +217,16 @@ gulp.task('dev', ['build-dev'], function() {
     }
 
     // Watcher for common scss(or less)-files and scss(or less)-files of plugins
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + projectConfig.cssPreprocessor, false, function(filename) {
+    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
         gulp.start('compile-css');
     });
 
-    // Watcher for modyles stylies
+    // Watcher for modules stylies
     watcher(
-            './markup/modules/**/*.' + projectConfig.cssPreprocessor,
+            './markup/modules/**/*.' + cssPreprocExtension,
             [
-                './markup/modules/**/ie9.' + projectConfig.cssPreprocessor,
-                './markup/modules/**/ie8.' + projectConfig.cssPreprocessor
+                './markup/modules/**/ie9.' + cssPreprocExtension,
+                './markup/modules/**/ie8.' + cssPreprocExtension
             ], function(filename) {
         gulp.start('compile-css');
 
@@ -236,14 +241,14 @@ gulp.task('dev', ['build-dev'], function() {
 
     // Watcher for ie8 stylies
     if (projectConfig.useIE8Stylies) {
-        watcher('./markup/modules/**/ie8.' + projectConfig.cssPreprocessor, false, function(filename) {
+        watcher('./markup/modules/**/ie8.' + cssPreprocExtension, false, function(filename) {
             gulp.start('compile-css-for-ie8');
         });
     }
 
     // Watcher for ie9 stylies
     if (projectConfig.useIE9Stylies) {
-        watcher('./markup/modules/**/ie9.' + projectConfig.cssPreprocessor, false, function(filename) {
+        watcher('./markup/modules/**/ie9.' + cssPreprocExtension, false, function(filename) {
             gulp.start('compile-css-for-ie9');
         });
     }

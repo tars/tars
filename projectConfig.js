@@ -38,8 +38,8 @@ var projectConfig = {
     templater: 'jade',
 
     // What kind of css-preprocessor would you like to use
-    // String: 'scss' or 'less'
-    cssPreprocessor: 'scss',
+    // String: 'scss' or 'less' or 'stylus'
+    cssPreprocessor: 'stylus',
 
     // What kind of size of images are you going to you.
     // 96 — 1 dppx (regular)
@@ -48,9 +48,9 @@ var projectConfig = {
     // 288 - 3 dppx (nexus 5, for example)
     // Example if using for all displays: usePpi: [96, 144, 192, 288]
     // You can change with options not only on init or reinit,
-    // but at with time you have to create new directories 
+    // but at with time you have to create new directories
     // and delete unused.
-    useImagesForDisplayWithDpi: [96],
+    useImagesForDisplayWithDpi: [96, 144, 192, 288],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
@@ -62,14 +62,14 @@ var projectConfig = {
 //                                               //
 // You need to restart builder to apply options. //
 ///////////////////////////////////////////////////
-    
-    
+
+
 
     // Generate stylies for ie8
     useIE8Stylies: true,
 
     // Generate stylies for ie9
-    useIE9Stylies: true, 
+    useIE9Stylies: true,
 
 
     // Autoprefixer config
@@ -82,7 +82,7 @@ var projectConfig = {
 
 
     // Use linting and hinting of js-files
-    useJsLintAndHint: true,
+    useJsLintAndHint: false,
 
 
     // Array of string of paths
@@ -104,7 +104,7 @@ var projectConfig = {
 
     //Config for Notify module
     notifyConfig: {
-    
+
         // Do you need to use notify?
         // true/false
         useNotify: true,
@@ -145,7 +145,7 @@ var projectConfig = {
 
     // Use build versioning
     // Build version is a date ot building
-    useBuildVersioning: true,
+    useBuildVersioning: false,
 
     // Use archiver for your build
     useArchiver: true
