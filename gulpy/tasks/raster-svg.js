@@ -17,7 +17,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('raster-svg', function(cb) {
 
-        if (projectConfig.useSVG && projectConfig.useIE8Stylies) {
+        if (projectConfig.useSVG && gutil.env.ie8) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
                 .pipe(raster())

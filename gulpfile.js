@@ -227,24 +227,24 @@ gulp.task('dev', ['build-dev'], function() {
             ], function(filename) {
         gulp.start('compile-css');
 
-        if (projectConfig.useIE8Stylies) {
+        if (gutil.env.ie8) {
             gulp.start('compile-css-for-ie8');
         }
 
-        if (projectConfig.useIE9Stylies) {
+        if (gutil.env.ie9) {
             gulp.start('compile-css-for-ie9');
         }
     });
 
     // Watcher for ie8 stylies
-    if (projectConfig.useIE8Stylies) {
+    if (gutil.env.ie8) {
         watcher('./markup/modules/**/ie8.' + cssPreprocExtension, false, function(filename) {
             gulp.start('compile-css-for-ie8');
         });
     }
 
     // Watcher for ie9 stylies
-    if (projectConfig.useIE9Stylies) {
+    if (gutil.env.ie9) {
         watcher('./markup/modules/**/ie9.' + cssPreprocExtension, false, function(filename) {
             gulp.start('compile-css-for-ie9');
         });

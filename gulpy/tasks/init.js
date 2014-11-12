@@ -15,7 +15,7 @@ var githubConfig = {
 };
 
 var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/master.zip';
-var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + projectConfig.cssPreprocessor '/archive/master.zip';
+var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + projectConfig.cssPreprocessor + '/archive/master.zip';
 
 ncp.limit = 16;
 require('./create-fs')();
@@ -51,7 +51,7 @@ module.exports = function(buildOptions) {
                 throw err;
             }
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '/markup', './markup', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/markup', './markup', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red(err));
                     gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
@@ -61,7 +61,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy gulpy templater task');
             });
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '/gulpy', './gulpy', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/gulpy', './gulpy', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy templater task');
                     gutil.log('Please, repost with message to developer.');
@@ -85,7 +85,7 @@ module.exports = function(buildOptions) {
                 throw err;
             }
 
-            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/gulpy', './gulpy', function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/gulpy', './gulpy', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy css preproc task');
                     gutil.log('Please, repost with message to developer.');
@@ -95,7 +95,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy gulpy css-preproc task');
             });
 
-            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
                     gutil.log('Please, repost with message to developer.');
@@ -105,7 +105,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy static css-files');
             });
 
-            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/markup/modules/_template', './markup/modules/_template/', function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/markup/modules/_template', './markup/modules/_template/', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
                     gutil.log('Please, repost with message to developer.');

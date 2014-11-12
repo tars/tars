@@ -75,12 +75,6 @@ var projectConfig = {
 // You need to restart builder to apply options. //
 ///////////////////////////////////////////////////
 
-    // Generate stylies for ie8
-    useIE8Stylies: true,
-
-    // Generate stylies for ie9
-    useIE9Stylies: true,
-
     /**
      * Autoprefixer config
      * @type {Array}
