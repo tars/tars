@@ -1,14 +1,17 @@
-var gulp = require('gulp'),
-    imagemin = require('gulp-imagemin'),
-    gutil = require('gulp-util'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var imagemin = require('gulp-imagemin');
+var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Minify sprite img
-module.exports = function() {
+/**
+ * Minify svg-images (optional task)
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('minify-svg', function(cb) {
         if (projectConfig.useSVG) {
@@ -38,11 +41,9 @@ module.exports = function() {
                         })
                     )
                 );
-
         } else {
             gutil.log('!SVG is not used!');
+            cb(null);
         }
-
-        cb(null);
     });
 };

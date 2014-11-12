@@ -1,13 +1,16 @@
-var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
-    browserSync = require('browser-sync');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
+var browserSync = require('browser-sync');
 
-// Move misc files
-module.exports = function(cb) {
+/**
+ * Move misc files
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('move-misc-files', function(cb) {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
@@ -17,7 +20,7 @@ module.exports = function(cb) {
             .pipe(gulp.dest('./dev/'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -29,5 +32,5 @@ module.exports = function(cb) {
                     })
                 )
             );
-    });   
-};   
+    });
+};

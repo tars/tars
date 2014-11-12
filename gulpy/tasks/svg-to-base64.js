@@ -1,16 +1,20 @@
-var gulp = require('gulp'),
-    base64 = require('gulp-base64'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    gutil = require('gulp-util'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var base64 = require('gulp-base64');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var gutil = require('gulp-util');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Convert included svg files to base64 in css
+/**
+ * Convert included svg-files to base64 in css
+ * @param  {object} buildOptions
+ */
 module.exports = function(buildOptions) {
-    
+
     return gulp.task('svg-to-base64', function(cb) {
+
         if (projectConfig.useSVG) {
             return gulp.src(['./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main.css', './builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main_ie9.css'])
                 .pipe(base64({
@@ -21,11 +25,11 @@ module.exports = function(buildOptions) {
             }))
                 .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify, 
+                    gulpif(notifyConfig.useNotify,
                         notify({
                             sound: notifyConfig.sounds.onSuccess,
                             title: notifyConfig.title,
-                            message: 'SVG\'ve been converted to base64 \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                            message: 'SVG includes\'ve been converted to base64 \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
                             templateOptions: {
                                 date: modifyDate.getTimeOfModify()
                             }
@@ -34,8 +38,7 @@ module.exports = function(buildOptions) {
                 );
         } else {
             gutil.log('!SVG is not used!');
+            cb(null);
         }
-
-        cb(null);
     });
-};   
+};

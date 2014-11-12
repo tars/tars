@@ -1,18 +1,22 @@
-var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
-    gutil = require('gulp-util'),
-    notify = require('gulp-notify'),
-    cache = require('gulp-cached'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    raster = require('gulp-raster'),
-    rename = require('gulp-rename'),
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
+var notify = require('gulp-notify');
+var cache = require('gulp-cached');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var raster = require('gulp-raster');
+var rename = require('gulp-rename');
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Raster SVG-files
-module.exports = function() {
+/**
+ * Raster SVG-files (optional task)
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('raster-svg', function(cb) {
+
         if (projectConfig.useSVG && projectConfig.useIE8Stylies) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
@@ -23,7 +27,7 @@ module.exports = function() {
                 }))
                 .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/rasterSvgImages/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify, 
+                    gulpif(notifyConfig.useNotify,
                         notify({
                             onLast: true,
                             sound: notifyConfig.sounds.onSuccess,
@@ -37,8 +41,7 @@ module.exports = function() {
                 );
         } else {
             gutil.log('!SVG is not used!');
+            cb(null);
         }
-
-        cb(null);
-    });  
-};   
+    });
+};

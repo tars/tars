@@ -1,13 +1,14 @@
-var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
-    browserSync = require('browser-sync'),
-    jsPaths = [
-        './markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', 
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
+var browserSync = require('browser-sync');
+
+var jsPaths = [
+        './markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js',
         './markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js'
     ];
 
@@ -27,11 +28,12 @@ var gulp = require('gulp'),
 
     jsPaths.push('!./markup/modules/**/mData.js');
 
-// Require lint task
 require('./lint')();
 
-// Concat JS for modules, libs and plugins in common file.
-// Also lint modules' js
+/**
+ * Concat JS for modules, libs and plugins in common file. Also lint modules' js
+ * @param  {objects} buildOptions
+ */
 module.exports = function(buildOptions) {
 
     return gulp.task('js-processing', ['lint'], function() {
@@ -43,7 +45,7 @@ module.exports = function(buildOptions) {
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/js'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -54,6 +56,6 @@ module.exports = function(buildOptions) {
                         }
                     })
                 )
-            ); 
-    }); 
-};   
+            );
+    });
+};

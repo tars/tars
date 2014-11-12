@@ -1,4 +1,7 @@
-// Set ulimit to 2048 by default
+/**
+ * Set ulimit to 2048 by default
+ * @param  {number} limit ulimit value
+ */
 module.exports = function(limit) {
     limit = limit || 2048;
     var posix;

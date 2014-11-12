@@ -1,13 +1,16 @@
-var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// conact data for modules to one file
-module.exports = function(cb) {
+/**
+ * conact data for modules to one file
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('concat-modules-data', function(cb) {
         return gulp.src('./markup/modules/**/mData.js')
@@ -17,7 +20,7 @@ module.exports = function(cb) {
             }))
             .pipe(gulp.dest('./dev/temp/'))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -30,4 +33,4 @@ module.exports = function(cb) {
                 )
             );
     });
-};   
+};

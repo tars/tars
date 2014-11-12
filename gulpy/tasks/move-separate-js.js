@@ -1,12 +1,15 @@
-var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
-    cache = require('gulp-cached'),
-    notify = require('gulp-notify'),
-    notifyConfig = require('../../projectConfig').notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var cache = require('gulp-cached');
+var notify = require('gulp-notify');
+var notifyConfig = require('../../projectConfig').notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Copy separate Js to dev directory
-module.exports = function() {
+/**
+ * Copy separate Js-files to dev directory
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('move-separate-js', function(cb) {
         gulp.src('./markup/static/js/separateJs/**/*.js')
@@ -16,7 +19,7 @@ module.exports = function() {
             }))
             .pipe(gulp.dest('./dev/static/js/separateJs'))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -30,5 +33,5 @@ module.exports = function() {
             );
 
         cb(null);
-    });  
-};   
+    });
+};

@@ -1,11 +1,11 @@
 // Using modules
-var gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    runSequence = require('run-sequence'),
-    browserSync = require('browser-sync'),
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var runSequence = require('run-sequence');
+var browserSync = require('browser-sync');
 
     // Flags
-    useLiveReload = gutil.env.lr || false,
+var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
@@ -157,9 +157,6 @@ require('./gulpy/tasks/move-plugins-img')(buildOptions);
 
 // Move fonts-files to dev directory
 require('./gulpy/tasks/move-fonts')(buildOptions);
-
-// Generate font-files (eot, woff, svg) from .ttf-file
-require('./gulpy/tasks/generate-fonts')(buildOptions);
 
 // Copy files from dev to build directory
 // Create build directory with new build version
@@ -318,8 +315,8 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for font files.
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.ttf', false, function(filename) {
-        gulp.start('fonts-actions');
+    watcher('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.*', false, function(filename) {
+        gulp.start('move-fonts');
     });
 
     // Watcher for separate Js files files
@@ -351,9 +348,8 @@ gulp.task('build-dev', function(cb) {
         'concat-modules-data',
         [
             'move-separate-js', 'js-processing', 'compile-templates',
-            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img'
+            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
         ],
-        'fonts-actions',
         cb
     );
 });
@@ -415,14 +411,6 @@ gulp.task('svg-actions', function(cb) {
         'move-svg',
         'raster-svg',
         'make-fallback-for-svg',
-        cb
-    );
-});
-
-gulp.task('fonts-actions', function(cb) {
-    runSequence(
-        'generate-fonts',
-        'move-fonts',
         cb
     );
 });

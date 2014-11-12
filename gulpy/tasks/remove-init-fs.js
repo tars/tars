@@ -1,13 +1,13 @@
-var gulp = require('gulp'),
-    del = require('del'),
-    gulpif = require('gulp-if'),
-    gutil = require('gulp-util'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
+var gulp = require('gulp');
+var del = require('del');
+var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-    pathToDel = [
+var pathToDel = [
                  'markup/' + projectConfig.fs.staticFolderName + '/js/libs',
                  'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
                  'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/',
@@ -29,8 +29,12 @@ var gulp = require('gulp'),
                  './.tmpPreproc/'
                 ];
 
-// Remove inited file structure.
-module.exports = function() {
+/**
+ * Remove inited file structure.
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
+
     return gulp.task('remove-init-fs', function(cb) {
         del(pathToDel, cb);
     });

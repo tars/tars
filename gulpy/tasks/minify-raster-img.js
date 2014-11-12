@@ -1,13 +1,16 @@
-var gulp = require('gulp'),
-    imagemin = require('gulp-imagemin'),
-    gutil = require('gulp-util'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var imagemin = require('gulp-imagemin');
+var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Minify sprite img
+/**
+ * Minify png and jpg images
+ * @param  {object} buildOptions
+ */
 module.exports = function(buildOptions) {
 
     return gulp.task('minify-raster-img', function(cb) {
@@ -15,7 +18,8 @@ module.exports = function(buildOptions) {
             .pipe(imagemin())
             .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifying raster images.\nLook in the console for details.\n' + error;
-                }))
+                })
+            )
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
             .pipe(
                 gulpif(notifyConfig.useNotify,

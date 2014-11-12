@@ -1,15 +1,18 @@
-var gulp = require('gulp'),
-    uglify = require('gulp-uglifyjs'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var uglify = require('gulp-uglifyjs');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-require('./strip-debug')();
-
-// Compress js-files
+/**
+ * Compress js-files
+ * @param  {object} buildOptions
+ */
 module.exports = function(buildOptions) {
+
+    require('./strip-debug')(buildOptions);
 
     return gulp.task('compress-js', ['strip-debug'], function() {
         return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
@@ -21,7 +24,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/'))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -34,4 +37,4 @@ module.exports = function(buildOptions) {
                 )
             );
         });
-};   
+};

@@ -1,13 +1,16 @@
-var gulp = require('gulp'),
-    csso = require('gulp-csso'),
-    rename = require('gulp-rename'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var csso = require('gulp-csso');
+var rename = require('gulp-rename');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Compress css-files
+/**
+ * Compress css-files
+ * @param  {object} buildOptions
+ */
 module.exports = function(buildOptions) {
 
     return gulp.task('compress-css', function() {
@@ -21,7 +24,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -34,4 +37,4 @@ module.exports = function(buildOptions) {
                 )
             );
         });
-};   
+};

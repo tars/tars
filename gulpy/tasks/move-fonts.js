@@ -1,14 +1,17 @@
-var gulp = require('gulp'),
-    cache = require('gulp-cached'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
-    browserSync = require('browser-sync');
+var gulp = require('gulp');
+var cache = require('gulp-cached');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
+var browserSync = require('browser-sync');
 
-// Move fonts-files to dev directory
-module.exports = function() {
+/**
+ * Move fonts-files to dev directory
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('move-fonts', function() {
         return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.*')
@@ -19,7 +22,7 @@ module.exports = function() {
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/fonts'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -32,4 +35,4 @@ module.exports = function() {
                 )
             );
     });
-};   
+};

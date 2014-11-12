@@ -1,13 +1,20 @@
-var minimatch = require('minimatch'),
-    watch = require('node-watch'),
-    gutil = require('gulp-util');
+var minimatch = require('minimatch');
+var watch = require('node-watch');
+var gutil = require('gulp-util');
 
-
-// Watcher by node-watch
+/**
+ * Watcher by node-watch
+ */
 var watchByPattern = (function() {
-    
+
     var watchStack = {};
 
+    /**
+     * Parse pattern. Extract path, extensions and etc from pattern
+     * @param  {string} input  watch path pattern
+     * @param  {string} filter unwatch path pattern
+     * @return {object}        directory, pattern and unwatch paths
+     */
     var parsePattern = function(input, filter) {
         var current = './',
             filterSegment = '',
@@ -23,13 +30,11 @@ var watchByPattern = (function() {
             }
 
             pat = '*' + segments.slice(1).join('*');
-
             filterPattern = filter || false;
 
             if (filterPattern) {
 
                 if (filterPattern instanceof Array) {
-
                     for (var i = 0; i < filterPattern.length; i++ ) {
                         filterSegment = filterPattern[i].split(/\*/);
                         filterPattern[i] = '*' + filterSegment.slice(1).join('*');
@@ -47,8 +52,14 @@ var watchByPattern = (function() {
         }
     };
 
+    /**
+     * Create watcher for each path pattern
+     * @param  {string} pattern  watch path pattern
+     * @param  {string} filter   unwatch path pattern
+     * @param  {Function} fn     callback on each path pattern
+     */
     var patternProcessing = function(pattern, filter, fn) {
-        
+
         var input = parsePattern(pattern, filter),
             stack = { pat: input.pat, callback: fn, filter: input.filter };
 
@@ -79,7 +90,7 @@ var watchByPattern = (function() {
                                 if (minimatch(filename, stack.filter)) {
                                     return;
                                 } else {
-                                    stack.callback(filename);   
+                                    stack.callback(filename);
                                 }
                             }
 
@@ -91,7 +102,7 @@ var watchByPattern = (function() {
             });
         }
     };
-  
+
     return function(pattern, filter, fn) {
 
         if (pattern instanceof Array) {
@@ -100,7 +111,7 @@ var watchByPattern = (function() {
             });
         } else {
             patternProcessing(pattern, filter, fn);
-        } 
+        }
     }
 }());
 

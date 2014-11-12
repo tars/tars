@@ -1,13 +1,13 @@
-var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
-    templaterName = require('../helpers/templaterNameSetter'),
-    gutil = require('gulp-util'),
-    ncp = require('ncp').ncp,
-    Download = require('download');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
+var templaterName = require('../helpers/templaterNameSetter');
+var gutil = require('gulp-util');
+var ncp = require('ncp').ncp;
+var Download = require('download');
 
 var githubConfig = {
     user: 'artem-malko',
@@ -22,8 +22,11 @@ ncp.limit = 16;
 require('./create-fs')();
 
 
-// Task description
-module.exports = function() {
+/**
+ * Init builder, download css-preprocessor and templater
+ * @param  {Object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('init', ['create-fs'], function() {
 
@@ -35,7 +38,7 @@ module.exports = function() {
         var downloadCssPreprocessor = new Download({ extract: true})
             .get(cssPreprocessorUrl)
             .dest('./.tmpPreproc')
-            .use();    
+            .use();
 
         // Including templater
         downloadTemplater.run(function (err, files, stream) {
@@ -65,8 +68,6 @@ module.exports = function() {
 
             gutil.log(gutil.colors.green('✔'), ' End downloading templater', gutil.colors.cyan(templaterName()));
         });
-
-        
 
         // Including css-preprocessor
         downloadCssPreprocessor.run(function (err, files, stream) {
@@ -107,6 +108,5 @@ module.exports = function() {
 
             gutil.log(gutil.colors.green('✔'), ' End downloading css-preproc', gutil.colors.cyan(projectConfig.cssPreprocessor));
         });
-
     });
 };

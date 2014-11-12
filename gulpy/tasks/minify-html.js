@@ -1,22 +1,25 @@
-var gulp = require('gulp'),
-    minifyHTML = require('gulp-minify-html'),
-    gutil = require('gulp-util'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var minifyHtml = require('gulp-minify-html');
+var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 
-// Minify HTML
+/**
+ * Minify HTML (optional task)
+ * @param  {object} buildOptions
+ */
 module.exports = function(buildOptions) {
     var opts = {
         conditionals: true,
         quotes: true
     };
-    
-    return gulp.task('minify-html', function(cb) {
-        if (projectConfig.minifyHtml) {
 
+    return gulp.task('minify-html', function(cb) {
+
+        if (projectConfig.minifyHtml) {
             return gulp.src('./dev/*.html')
                 .pipe(minifyHTML(opts))
                 .on('error', notify.onError(function (error) {
@@ -24,7 +27,7 @@ module.exports = function(buildOptions) {
                 }))
                 .pipe(gulp.dest('./dev/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify, 
+                    gulpif(notifyConfig.useNotify,
                         notify({
                             onLast: true,
                             sound: notifyConfig.sounds.onSuccess,
@@ -37,9 +40,8 @@ module.exports = function(buildOptions) {
                     )
                 );
         } else {
-            gutil.log('!HTML-minify disabled!');
+            gutil.log('!Html-minify disabled!');
             cb(null);
-        }        
-
+        }
     });
-};   
+};

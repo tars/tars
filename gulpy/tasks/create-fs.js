@@ -1,9 +1,9 @@
-var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
-    gutil = require('gulp-util'),
-    mkdirp = require('mkdirp'),
-    fs = require('fs'),
-    projectConfig = require('../../projectConfig');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
+var projectConfig = require('../../projectConfig');
 
 var paths = [
             'markup/' + projectConfig.fs.staticFolderName + '/js/libs ',
@@ -26,9 +26,12 @@ var paths = [
         'markup/modules/_template/ie'
     );
 
-// Create FS.
-module.exports = function() {
-    
+/**
+ * Create fs for project
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
+
     return gulp.task('create-fs', function(cb) {
 
         if (projectConfig.fs.staticFolderName != 'static') {
@@ -40,7 +43,7 @@ module.exports = function() {
                 if (err) {
                     console.error(err);
                 } else {
-                    console.log(path, 'is created.')
+                    gutil.log(gutil.colors.green('✔'), path, gutil.colors.green('is created.'));
                 }
             });
         });
@@ -48,5 +51,5 @@ module.exports = function() {
         gutil.log('Don\'t forget to check project config in root directory (projectConfig.js)');
 
         cb(null);
-    });   
-};   
+    });
+};

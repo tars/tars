@@ -1,16 +1,19 @@
-var gulp = require('gulp'),
-    path = require('path'),
-    rename = require('gulp-rename'),
-    cache = require('gulp-cached'),
-    gulpif = require('gulp-if'),
-    notify = require('gulp-notify'),
-    projectConfig = require('../../projectConfig'),
-    notifyConfig = projectConfig.notifyConfig,
-    modifyDate = require('../helpers/modifyDateFormatter'),
-    browserSync = require('browser-sync');
+var gulp = require('gulp');
+var path = require('path');
+var rename = require('gulp-rename');
+var cache = require('gulp-cached');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
+var browserSync = require('browser-sync');
 
-// Move images from assets modules of modules
-module.exports = function(cb) {
+/**
+ * Move images from assets modules of modules
+ * @param  {object} buildOptions
+ */
+module.exports = function(buildOptions) {
 
     return gulp.task('move-assets', function(cb) {
         return gulp.src('./markup/modules/**/assets/**/*.*')
@@ -24,7 +27,7 @@ module.exports = function(cb) {
             .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/assets/'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify, 
+                gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
@@ -37,4 +40,4 @@ module.exports = function(cb) {
                 )
             );
     });
-};   
+};
