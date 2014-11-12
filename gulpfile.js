@@ -432,18 +432,12 @@ gulp.task('check-update', function() {
     });
 
     if (notifier.update) {
-        gutil.log('\n\n┌──────────────────────────────────────────┐\n|');
         gutil.log(gutil.colors.green('Update available: '));
         gutil.log(notifier.update.latest);
-        gutil.log(gutil.colors.grey(' (current: ' + notifier.update.current + ') ');
-        gutil.log('\nInformation about update is in tars repository!');
-        gutil.log('|\n');
-        gutil.log('└──────────────────────────────────────────┘\n');
+        gutil.log(gutil.colors.grey(' (current: ' + notifier.update.current + ') '));
+        gutil.log('Information about update is in tars repository!');
     } else {
-        gutil.log('\n\n┌──────────────────────────────────────────┐\n|');
-        gutil.log(gutil.colors.green('Update unavailable. You use latest version!'));
-        gutil.log('|\n') +
-        gutil.log('└──────────────────────────────────────────┘\n')
+        gutil.log(gutil.colors.green('Update unavailable. You are using latest version!'));
     }
 });
 
