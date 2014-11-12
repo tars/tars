@@ -3,6 +3,9 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
+var updateNotifier = require('update-notifier');
+
+var pkg = require('./package.json');
 
     // Flags
 var useLiveReload = gutil.env.lr || false,
@@ -420,6 +423,28 @@ gulp.task('compile-templates-with-data-reloading', function(cb) {
         'concat-modules-data',
         'compile-templates',
     cb);
+});
+
+gulp.task('check-update', function() {
+    var notifier = updateNotifier({
+        packageName:    pkg.name,
+        packageVersion: pkg.version
+    });
+
+    if (notifier.update) {
+        gutil.log('\n\n┌──────────────────────────────────────────┐\n|');
+        gutil.log(gutil.colors.green('Update available: '));
+        gutil.log(notifier.update.latest);
+        gutil.log(gutil.colors.grey(' (current: ' + notifier.update.current + ') ');
+        gutil.log('\nInformation about update is in tars repository!');
+        gutil.log('|\n');
+        gutil.log('└──────────────────────────────────────────┘\n');
+    } else {
+        gutil.log('\n\n┌──────────────────────────────────────────┐\n|');
+        gutil.log(gutil.colors.green('Update unavailable. You use latest version!'));
+        gutil.log('|\n') +
+        gutil.log('└──────────────────────────────────────────┘\n')
+    }
 });
 
 /*********************/
