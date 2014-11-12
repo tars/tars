@@ -11,12 +11,11 @@ var Download = require('download');
 
 var githubConfig = {
     user: 'artem-malko',
-    repo: 'markupBuilder-extensions',
-    ref: 'master'
+    repoPrefix: 'tars-'
 };
 
-var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repo + '/archive/mkExt-' + templaterName() + '-templater.zip';
-var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repo + '/archive/mkExt-' + projectConfig.cssPreprocessor + '-preproc.zip';
+var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/master.zip';
+var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + projectConfig.cssPreprocessor '/archive/master.zip';
 
 ncp.limit = 16;
 require('./create-fs')();
@@ -40,14 +39,19 @@ module.exports = function(buildOptions) {
             .dest('./.tmpPreproc')
             .use();
 
-        // Including templater
+        /**
+         * Including templater
+         * @param  {Object} err
+         * @param  {Array} files
+         * @param  {Stream} stream
+         */
         downloadTemplater.run(function (err, files, stream) {
 
             if (err) {
                 throw err;
             }
 
-            ncp('./.tmpTemplater/markupBuilder-extensions-mkExt-' + templaterName() + '-templater/markup', './markup', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '/markup', './markup', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red(err));
                     gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
@@ -57,7 +61,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy gulpy templater task');
             });
 
-            ncp('./.tmpTemplater/markupBuilder-extensions-mkExt-' + templaterName() + '-templater/gulpy', './gulpy', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '/gulpy', './gulpy', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy templater task');
                     gutil.log('Please, repost with message to developer.');
@@ -69,14 +73,19 @@ module.exports = function(buildOptions) {
             gutil.log(gutil.colors.green('✔'), ' End downloading templater', gutil.colors.cyan(templaterName()));
         });
 
-        // Including css-preprocessor
+        /**
+         * Including css-preprocessor
+         * @param  {Object} err
+         * @param  {Array} files
+         * @param  {Stream} stream
+         */
         downloadCssPreprocessor.run(function (err, files, stream) {
 
             if (err) {
                 throw err;
             }
 
-            ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/gulpy', './gulpy', function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/gulpy', './gulpy', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy css preproc task');
                     gutil.log('Please, repost with message to developer.');
@@ -86,7 +95,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy gulpy css-preproc task');
             });
 
-            ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
                     gutil.log('Please, repost with message to developer.');
@@ -96,7 +105,7 @@ module.exports = function(buildOptions) {
                 gutil.log(gutil.colors.green('✔'), ' Done copy static css-files');
             });
 
-            ncp('./.tmpPreproc/markupBuilder-extensions-mkExt-' + projectConfig.cssPreprocessor + '-preproc/markup/modules/_template', './markup/modules/_template/', function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '/markup/modules/_template', './markup/modules/_template/', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
                     gutil.log('Please, repost with message to developer.');
