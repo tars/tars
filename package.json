@@ -42,8 +42,7 @@
     "map-stream": ">=0.1.0",
     "path": ">=0.4.9",
     "mkdirp": ">=0.5.0",
-    "digits": ">=0.1.4",
-    "update-notifier": ">=0.2.1"
+    "digits": ">=0.1.4"
   },
   "devDependencies": {},
   "optionalDependencies": {
@@ -54,14 +53,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artem-malko/markupBuilder.git"
+    "url": "https://github.com/artem-malko/tars.git"
   },
   "author": "Artem Malko",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/artem-malko/markupBuilder/issues"
+    "url": "https://github.com/artem-malko/tars/issues"
   },
-  "homepage": "https://github.com/artem-malko/markupBuilder",
+  "homepage": "https://github.com/artem-malko/tars",
   "keywords": [
     "gulp"
   ]
