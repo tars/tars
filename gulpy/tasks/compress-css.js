@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var csso = require('gulp-csso');
+var cmq = require('gulp-combine-media-queries');
 var rename = require('gulp-rename');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
@@ -15,6 +16,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('compress-css', function() {
         return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/*.css')
+            .pipe(cmq())
             .pipe(csso())
             .pipe(rename({
                 suffix: '.min'

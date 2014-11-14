@@ -17,7 +17,7 @@ var modifyDate = require('../helpers/modifyDateFormatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task(/* task name, String in quotes */, [/* tasks names, which have to be done before current task */], function(cb) {
+    return gulp.task('task-name', ['required-task-name'], function(cb) {
         return gulp.src(/* path-string or array of path-strings to files */)
             // Do stuff here
             .on('error', notify.onError(function (error) {
