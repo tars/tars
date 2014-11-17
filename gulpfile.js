@@ -3,8 +3,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var pkg = require('./package.json');
-var updateNotifier = require('update-notifier');
 
     // Flags
 var useLiveReload = gutil.env.lr || false,
@@ -342,7 +340,6 @@ gulp.task('dev', ['build-dev'], function() {
 
 gulp.task('build-dev', function(cb) {
     runSequence(
-        'check-update',
         'builder-start-screen',
         'clean',
         'move-svg',
@@ -476,33 +473,6 @@ gulp.task('builder-start-screen', function(cb) {
     cb();
 });
 
-
-gulp.task('check-update', function(cb) {
-    var notifier = updateNotifier({
-        packageName:    pkg.name,
-        packageVersion: pkg.version
-    });
-
-    if (notifier.update) {
-        // Inlined from the update-notifier source for more control
-        console.log(
-            gutil.color.yellow('\n\n┌──────────────────────────────────────────┐\n|') +
-            gutil.color.white(' Update available: ') +
-            gutil.color.green(notifier.update.latest) +
-            gutil.color.grey(' (current: ' + notifier.update.current + ') ') +
-            gutil.color.yellow('|\n|') +
-            gutil.color.white(' Instructions can be found on:            ') +
-            gutil.color.yellow('|\n|') +
-            gutil.color.magenta(' http://headstart.io/upgrading-guide   ') +
-            gutil.color.yellow('|\n') +
-            gutil.color.yellow('└──────────────────────────────────────────┘\n')
-        );
-    } else {
-        console.log('no updates');
-    }
-
-    cb();
-});
 
 /*********************/
 /* END HELPERS TASKS */

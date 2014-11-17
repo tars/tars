@@ -32,7 +32,6 @@
     "gulp-cached": ">=0.0.3",
     "gulp-replace-task": "0.0.6",
     "gulp-plumber": ">=0.6.6",
-    "update-notifier": ">=0.2.2",
     "jshint-stylish": ">=0.2.0",
     "run-sequence": ">=0.3.6",
     "minimatch": ">=0.4.0",
