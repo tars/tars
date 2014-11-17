@@ -1,10 +1,10 @@
-markupBuilder
+TARS
 =============
 
 Markup builder on gulp.
 It uses Jade as templater, scss as preprocessor for css, lint for js files, font-generator and many other things.
 
-You have to install `nodeJS` version >= 0.8 and `npm` for using markupBuilder.
+You have to install `nodeJS` version >= 0.8 and `npm` for using TARS.
 Also you need Java for webfont generator. If you are not going to generate fonts, you don't need it.
 
 There are no js-libs like jquery and soon (only html5shiv for old ie). You can add all what you want.
@@ -14,10 +14,7 @@ Installation
 
 You have to install gulp, webfonts, browser-sync globaly.
 
-    sudo npm i -g gulp browser-sync webfonts
-    or 
-    npm i -g gulp browser-sync webfonts 
-    For Windows user
+    npm i -g gulp
 
 Then you need to install dependencies    
 
@@ -30,7 +27,7 @@ After installing of all packages:
 Create fonts, images (with subdirs), js/libs and js/plugins directories and so on.
 
 If you use Linux: Notify-send should be installed (On Ubuntu this is installed per default).
-If you use Windows: Growl for Windows (http://www.growlforwindows.com/gfw/default.aspx) should be installed. Don't forget to run Growl before using markupBuilder
+If you use Windows: Growl for Windows (http://www.growlforwindows.com/gfw/default.aspx) should be installed. Don't forget to run Growl before using TARS
 
     !Don't forget to check projectConfig in root directory!
 
@@ -57,9 +54,6 @@ Main commands
 
 `gulp build` — create build version of project.
 
-If you need to generate woff, eot and svg files of your font, you can use key `--gf`. 
-Example: `gulp build --gf`. This command build project and generate fonts files into fonts folder in build. All you need is ttf-file of your font in folder fonts in static directory.
-Unfortunately, you can generate fonts in OS X only. I'll try to do it for all platforms.
 
 If you'd like to use livereload, add `--lr` key with dev task
 Example: `gulp dev --lr`. Don't forget ro configure browser-sync config in projectConfig.js file.

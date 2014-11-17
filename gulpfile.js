@@ -340,6 +340,7 @@ gulp.task('dev', ['build-dev'], function() {
 
 gulp.task('build-dev', function(cb) {
     runSequence(
+        'builder-start-screen',
         'clean',
         'move-svg',
         'raster-svg',
@@ -357,7 +358,7 @@ gulp.task('build-dev', function(cb) {
 // Build release version
 // Also you can add your own tasks in queue of build task
 
-gulp.task('build', function(cb) {
+gulp.task('build', function() {
     runSequence(
         'build-dev',
         ['minify-html', 'minify-raster-img', 'minify-svg'],
@@ -365,7 +366,11 @@ gulp.task('build', function(cb) {
         'svg-to-base64',
         ['compress-js', 'compress-css'],
         'zip-build',
-        cb
+        function() {
+            console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
+            gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
+            console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
+        }
     );
 });
 
@@ -420,6 +425,52 @@ gulp.task('compile-templates-with-data-reloading', function(cb) {
         'concat-modules-data',
         'compile-templates',
     cb);
+});
+
+gulp.task('builder-start-screen', function(cb) {
+    var i = 0;
+
+    console.log('\n------------------------------------------------------------');
+    console.log(gutil.colors.green.bold('Build have been started. You are using:\n'));
+
+    if (gutil.env.release) {
+        console.log(gutil.colors.black.bold('• release mode;'));
+    }
+
+    if (gutil.env.min) {
+        console.log(gutil.colors.black.bold('• minify mode;'));
+    }
+
+    if (gutil.env.lr) {
+        console.log(gutil.colors.black.bold('• livereload mode;'));
+    }
+
+    if (gutil.env.tunnel) {
+        console.log(gutil.colors.black.bold('• tunnel mode;'));
+    }
+
+    if (gutil.env.ie8) {
+        console.log(gutil.colors.black.bold('• ie8 maintenance;'));
+    }
+
+    if (gutil.env.ie9) {
+        console.log(gutil.colors.black.bold('• ie9 maintenance;'));
+    }
+
+    for (key in gutil.env) {
+        i++;
+    }
+
+    if (i <= 1) {
+        console.log(gutil.colors.black.bold('No modes.'));
+    }
+
+    console.log(gutil.colors.green.bold('\nHave a nice work.'));
+    console.log(gutil.colors.green.bold('Let\'s go & create something awesome!'));
+
+    console.log('------------------------------------------------------------\n');
+
+    cb();
 });
 
 /*********************/

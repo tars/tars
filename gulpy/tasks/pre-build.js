@@ -16,7 +16,9 @@ module.exports = function(buildOptions) {
     return gulp.task('pre-build', function() {
 
         if (projectConfig.useBuildVersioning) {
-            gutil.log('Build version is: ', buildOptions.buildVersion);
+            console.log('\n----------------------------------------------------------------------');
+            gutil.log(gutil.colors.magenta.bold('Build version is: ', buildOptions.buildVersion));
+            console.log('----------------------------------------------------------------------\n');
         }
 
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })

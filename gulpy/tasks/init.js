@@ -27,7 +27,7 @@ require('./create-fs')();
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('init', ['create-fs'], function() {
+    return gulp.task('init', ['create-fs'], function(cb) {
 
         var downloadTemplater = new Download({ extract: true})
             .get(templaterUrl)
@@ -38,6 +38,9 @@ module.exports = function(buildOptions) {
             .get(cssPreprocessorUrl)
             .dest('./.tmpPreproc')
             .use();
+
+        console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
+        console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
 
         /**
          * Including templater
@@ -58,7 +61,6 @@ module.exports = function(buildOptions) {
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-                gutil.log(gutil.colors.green('✔'), ' Done copy gulpy templater task');
             });
 
             ncp('./.tmpTemplater/tars-' + templaterName() + '-master/gulpy', './gulpy', function (err) {
@@ -67,10 +69,10 @@ module.exports = function(buildOptions) {
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-                gutil.log(gutil.colors.green('✔'), ' Done copy gulpy templater task');
             });
 
-            gutil.log(gutil.colors.green('✔'), ' End downloading templater', gutil.colors.cyan(templaterName()));
+            console.log(gutil.colors.green('✔'), ' End downloading templater');
+            console.log(gutil.colors.magenta('\nYou choose '), gutil.colors.magenta.bold(templaterName()), gutil.colors.magenta(' as templater\n'));
         });
 
         /**
@@ -91,8 +93,6 @@ module.exports = function(buildOptions) {
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-
-                gutil.log(gutil.colors.green('✔'), ' Done copy gulpy css-preproc task');
             });
 
             ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/markup/static', './markup/' + projectConfig.fs.staticFolderName, function (err) {
@@ -101,8 +101,6 @@ module.exports = function(buildOptions) {
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
-
-                gutil.log(gutil.colors.green('✔'), ' Done copy static css-files');
             });
 
             ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/markup/modules/_template', './markup/modules/_template/', function (err) {
@@ -112,10 +110,13 @@ module.exports = function(buildOptions) {
                     return;
                 }
 
-                gutil.log(gutil.colors.green('✔'), ' Done copy css-files for modules');
+                console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
+                gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('TARS have been inited successfully!'));
+                console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
             });
 
-            gutil.log(gutil.colors.green('✔'), ' End downloading css-preproc', gutil.colors.cyan(projectConfig.cssPreprocessor));
+            console.log(gutil.colors.green('✔'), ' End downloading css-preproc');
+            console.log(gutil.colors.magenta('\nYou choose '), gutil.colors.magenta.bold(projectConfig.cssPreprocessor), gutil.colors.magenta(' as css-preprocessor\n'));
         });
     });
 };

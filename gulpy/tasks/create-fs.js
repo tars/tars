@@ -42,13 +42,9 @@ module.exports = function(buildOptions) {
             mkdirp(path, function (err) {
                 if (err) {
                     console.error(err);
-                } else {
-                    gutil.log(gutil.colors.green('✔'), path, gutil.colors.green('is created.'));
                 }
             });
         });
-
-        gutil.log('Don\'t forget to check project config in root directory (projectConfig.js)');
 
         cb(null);
     });
