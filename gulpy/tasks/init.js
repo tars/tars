@@ -72,7 +72,7 @@ module.exports = function(buildOptions) {
             });
 
             console.log(gutil.colors.green('✔'), ' End downloading templater');
-            console.log(gutil.colors.magenta('\nYou choose '), gutil.colors.magenta.bold(templaterName()), gutil.colors.magenta(' as templater\n'));
+
         });
 
         /**
@@ -111,12 +111,15 @@ module.exports = function(buildOptions) {
                 }
 
                 console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
-                gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('TARS have been inited successfully!'));
+                console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
+                console.log('You choose:');
+                console.log(gutil.colors.magenta.bold(projectConfig.cssPreprocessor), ' as css-preprocessor');
+                console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
                 console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
             });
 
             console.log(gutil.colors.green('✔'), ' End downloading css-preproc');
-            console.log(gutil.colors.magenta('\nYou choose '), gutil.colors.magenta.bold(projectConfig.cssPreprocessor), gutil.colors.magenta(' as css-preprocessor\n'));
+
         });
     });
 };
