@@ -4,9 +4,9 @@ var jshint = require('gulp-jshint');
 var cache = require('gulp-cached');
 var jscs = require('gulp-jscs');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 var jsPathsToLint = [
                      './markup/modules/**/*.js',

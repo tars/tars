@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var gutil = require('gulp-util');
 
 require('./remove-init-fs')();

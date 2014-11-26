@@ -5,9 +5,9 @@ var rename = require('gulp-rename');
 var cache = require('gulp-cached');
 var path = require('path');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
  * Move svg to dev directory (optional task)

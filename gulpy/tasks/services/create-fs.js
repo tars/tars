@@ -3,10 +3,10 @@ var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 
 var paths = [
-            'markup/' + projectConfig.fs.staticFolderName + '/js/libs ',
+            'markup/' + projectConfig.fs.staticFolderName + '/js/libraries ',
             'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName,
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content',

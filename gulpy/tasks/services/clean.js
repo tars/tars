@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 
 var pathsToDel = [
         './dev/',

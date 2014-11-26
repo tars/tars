@@ -2,13 +2,13 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 var browserSync = require('browser-sync');
 
 var jsPaths = [
-        './markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js',
+        './markup/' + projectConfig.fs.staticFolderName + '/js/libraries/**/*.js',
         './markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js'
     ];
 

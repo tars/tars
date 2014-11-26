@@ -77,96 +77,96 @@ require('./gulpy/helpers/setUlimit')(2048);
 // Default tasks
 
 // Create file-structure
-require('./gulpy/tasks/create-fs')(buildOptions);
+require('./gulpy/tasks/services/create-fs')(buildOptions);
 
 // Init builder. Make folders
-require('./gulpy/tasks/init')(buildOptions);
+require('./gulpy/tasks/services/init')(buildOptions);
 
 // Re-init builder. Make folders
-require('./gulpy/tasks/re-init')(buildOptions);
+require('./gulpy/tasks/services/re-init')(buildOptions);
 
 // Clean dev directory and cache
-require('./gulpy/tasks/clean')(buildOptions);
+require('./gulpy/tasks/services/clean')(buildOptions);
 
 // Template compilation
-require('./gulpy/tasks/compile-templates')(buildOptions);
+require('./gulpy/tasks/html/compile-templates')(buildOptions);
 
 // Concat data for modules
-require('./gulpy/tasks/concat-modules-data')(buildOptions);
+require('./gulpy/tasks/html/concat-modules-data')(buildOptions);
 
 // Make sprite task
-require('./gulpy/tasks/raster-svg')(buildOptions);
+require('./gulpy/tasks/images/raster-svg')(buildOptions);
 
 // Make png-sprite task for svg files for old browsers
-require('./gulpy/tasks/make-fallback-for-svg')(buildOptions);
+require('./gulpy/tasks/css/make-fallback-for-svg')(buildOptions);
 
 // SVG minification
-require('./gulpy/tasks/minify-svg')(buildOptions);
+require('./gulpy/tasks/images/minify-svg')(buildOptions);
 
 // PNG, JPG minification
-require('./gulpy/tasks/minify-raster-img')(buildOptions);
+require('./gulpy/tasks/images/minify-raster-img')(buildOptions);
 
 // Move SVG-files to dev directory
-require('./gulpy/tasks/move-svg')(buildOptions);
+require('./gulpy/tasks/images/move-svg')(buildOptions);
 
 // Convert svg includes to base64 in css
-require('./gulpy/tasks/svg-to-base64')(buildOptions);
+require('./gulpy/tasks/images/svg-to-base64')(buildOptions);
 
 // Make sprite task
-require('./gulpy/tasks/make-sprite')(buildOptions);
+require('./gulpy/tasks/css/make-sprite')(buildOptions);
 
 // Css compilation
-require('./gulpy/tasks/compile-css')(buildOptions);
+require('./gulpy/tasks/css/compile-css')(buildOptions);
 
 // Css compilation for ie8
-require('./gulpy/tasks/compile-css-for-ie8')(buildOptions);
+require('./gulpy/tasks/css/compile-css-for-ie8')(buildOptions);
 
 // Css compilation for ie9
-require('./gulpy/tasks/compile-css-for-ie9')(buildOptions);
+require('./gulpy/tasks/css/compile-css-for-ie9')(buildOptions);
 
 // Compress css
-require('./gulpy/tasks/compress-css')(buildOptions);
+require('./gulpy/tasks/css/compress-css')(buildOptions);
 
 // Move JS-files for libs that have to be in separate files
-require('./gulpy/tasks/move-separate-js')(buildOptions);
+require('./gulpy/tasks/js/move-separate-js')(buildOptions);
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
-require('./gulpy/tasks/js-processing')(buildOptions);
+require('./gulpy/tasks/js/js-processing')(buildOptions);
 
 // Check JS (code style and errors)
-require('./gulpy/tasks/lint')(buildOptions);
+require('./gulpy/tasks/js/lint')(buildOptions);
 
 // Strip console.log and debugger from main.js
-require('./gulpy/tasks/strip-debug')(buildOptions);
+require('./gulpy/tasks/js/strip-debug')(buildOptions);
 
 // Compress js-files and strip debug
-require('./gulpy/tasks/compress-js')(buildOptions);
+require('./gulpy/tasks/js/compress-js')(buildOptions);
 
 // Move misc files
-require('./gulpy/tasks/move-misc-files')(buildOptions);
+require('./gulpy/tasks/other/move-misc-files')(buildOptions);
 
 // Move images from assets modules of modules
-require('./gulpy/tasks/move-assets')(buildOptions);
+require('./gulpy/tasks/images/move-assets')(buildOptions);
 
 // Move images for content
-require('./gulpy/tasks/move-content-img')(buildOptions);
+require('./gulpy/tasks/images/move-content-img')(buildOptions);
 
 // Move images for plugins
-require('./gulpy/tasks/move-plugins-img')(buildOptions);
+require('./gulpy/tasks/images/move-plugins-img')(buildOptions);
 
 // Move fonts-files to dev directory
-require('./gulpy/tasks/move-fonts')(buildOptions);
+require('./gulpy/tasks/other/move-fonts')(buildOptions);
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-require('./gulpy/tasks/pre-build')(buildOptions);
+require('./gulpy/tasks/services/pre-build')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/minify-html')(buildOptions);
+require('./gulpy/tasks/html/minify-html')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/zip-build')(buildOptions);
+require('./gulpy/tasks/services/zip-build')(buildOptions);
 
 
 /*************/

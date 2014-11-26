@@ -1,13 +1,14 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
-var templaterName = require('../helpers/templaterNameSetter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
+var templaterName = require('../../helpers/templaterNameSetter');
 var gutil = require('gulp-util');
 var ncp = require('ncp').ncp;
 var Download = require('download');
+var os = require('os');
 
 var githubConfig = {
     user: 'artem-malko',
@@ -39,7 +40,11 @@ module.exports = function(buildOptions) {
             .dest('./.tmpPreproc')
             .use();
 
-        console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
+        if (os.platform() === 'darwin') {
+            console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
+        } else {
+            console.log('\n\n' + gutil.colors.bold('T A R S\n'));
+        }
         console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
 
         /**
@@ -63,7 +68,7 @@ module.exports = function(buildOptions) {
                 }
             });
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/gulpy', './gulpy', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/gulpy/tasks', './gulpy/tasks/html', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy templater task');
                     gutil.log('Please, repost with message to developer.');
@@ -87,7 +92,7 @@ module.exports = function(buildOptions) {
                 throw err;
             }
 
-            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/gulpy', './gulpy', function (err) {
+            ncp('./.tmpPreproc/tars-' + projectConfig.cssPreprocessor + '-master/gulpy/tasks', './gulpy/tasks/css', function (err) {
                 if (err) {
                     gutil.log(gutil.colors.red('x'), ' Error while copy gulpy css preproc task');
                     gutil.log('Please, repost with message to developer.');

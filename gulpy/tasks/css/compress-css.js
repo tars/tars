@@ -4,9 +4,9 @@ var cmq = require('gulp-combine-media-queries');
 var rename = require('gulp-rename');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
  * Compress css-files

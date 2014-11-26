@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var stripDebug = require('gulp-strip-debug');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
  * Strip console.log and debugger from main.js (optional task)

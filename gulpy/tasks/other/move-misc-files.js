@@ -1,31 +1,31 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
+var browserSync = require('browser-sync');
 
 /**
- * conact data for modules to one file
+ * Move misc files
  * @param  {object} buildOptions
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('concat-modules-data', function(cb) {
-        return gulp.src('./markup/modules/**/mData.js')
-            .pipe(concat('modulesData.js', {newLine: ',\n\n'}))
+    return gulp.task('move-misc-files', function(cb) {
+        return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while concating module\'s data.\nLook in the console for details.\n' + error;
+                return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/temp/'))
+            .pipe(gulp.dest('./dev/'))
+            .pipe(browserSync.reload({stream:true}))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
                         title: notifyConfig.title,
-                        message: 'Data for modules ready \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                        message: 'Misc files\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
                         templateOptions: {
                             date: modifyDate.getTimeOfModify()
                         }

@@ -1,36 +1,37 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
+var cache = require('gulp-cached');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
-var browserSync = require('browser-sync');
+var notifyConfig = require('../../../projectConfig').notifyConfig;
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
- * Move misc files
+ * Copy separate Js-files to dev directory
  * @param  {object} buildOptions
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-misc-files', function(cb) {
-        return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
+    return gulp.task('move-separate-js', function(cb) {
+        gulp.src('./markup/static/js/separateJs/**/*.js')
+            .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
+                return '\nAn error occurred while moving separate js-files.\'s data.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(gulp.dest('./dev/static/js/separateJs'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
                         title: notifyConfig.title,
-                        message: 'Misc files\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                        message: 'Separate js files\'s been copied \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
                         templateOptions: {
                             date: modifyDate.getTimeOfModify()
                         }
                     })
                 )
             );
+
+        cb(null);
     });
 };

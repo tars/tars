@@ -3,12 +3,12 @@ var del = require('del');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 
 var pathToDel = [
-                 'markup/' + projectConfig.fs.staticFolderName + '/js/libs',
+                 'markup/' + projectConfig.fs.staticFolderName + '/js/libraries',
                  'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
                  'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/',
                  'markup/' + projectConfig.fs.staticFolderName + '/fonts/',

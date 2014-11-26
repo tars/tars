@@ -4,10 +4,11 @@ var rename = require('gulp-rename');
 var cache = require('gulp-cached');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
+var projectConfig = require('../../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modifyDateFormatter');
 var browserSync = require('browser-sync');
+var os = require('os');
 
 /**
  * Move images from assets modules of modules
@@ -19,7 +20,11 @@ module.exports = function(buildOptions) {
         return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))
             .pipe(rename(function(path) {
-                path.dirname = path.dirname.match(/[a-zA-Z0-9]+\//)[0];
+                if (os.platform() === 'win32') {
+                    path.dirname = path.dirname.match(/[a-zA-Z0-9]+\\/)[0];
+                } else {
+                    path.dirname = path.dirname.match(/[a-zA-Z0-9]+\//)[0];
+                }
             }))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving assets.\nLook in the console for details.\n' + error;
