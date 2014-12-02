@@ -1,200 +1,88 @@
-🅃 🄰 🅁 🅂
+<img height="34" width="97" src="https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png">
 =============
 
-Markup builder on gulp.
-It uses Jade as templater, scss as preprocessor for css, lint for js files, font-generator and many other things.
+Сборщик верстки, основанный на gulp. Облегчает и ускоряет процесс верстки сайтов любой сложности. Подойдет как командам, так и отдельному разработчику.
 
-You have to install `nodeJS` version >= 0.8 and `npm` for using TARS.
-Also you need Java for webfont generator. If you are not going to generate fonts, you don't need it.
+TARS — сборщик-фреймворк, включающий в себя набор gulp-тасков, предоставляющий возможность легкого расширения (создания новых тасков) и модифицирования уже существующих.
 
-There are no js-libs like jquery and soon (only html5shiv for old ie). You can add all what you want.
+Основные фичи
+-------------
 
-Installation
-------------
+— Понятная и легко масштабируемая файловая структура.
+— Jade или Handlebars на выбор в качестве html-шаблонизатора.
+— Использование json для передачи данных в шаблоны (опционально, но очень крутая штука, которая позволит избавиться от копипаста).
+— SCSS, LESS или Stylus в качестве препроцессора для css. Также в комплекте идет небольшой набор миксинов.
+— Autoprefixer. Можно забыть о вендорных префиксах, автопрефиксер сделает всю работу за вас.
+— Отдельная сборка css для ie8 и ie9. Основной css-файл больше не будет содержать ненужного кода.
+— JS-hinting и linting (можно настроить под себя в .jscsrc в корне).
+— Css и js минификация.
+— Никаких внешних библиотек и плагинов (кроме html5shiv). И да, это фича, так как вы вольны сами выбирать, какие библиотеки использовать.
+— Watching за изменениями файлов (создания и удаления). В текущей версии gulp вотчер не умеет отслеживать создание и удаление файлов кроссплатформенно. Блы написан свой плагин для этого. С 4 версией gulp будем использовать встроенный, так как планируется, что он избавится от всех недостатков.
+— Уведомления о выполнении тасков. Может даже иметь звуковое сопровождение, если включиьт соответствующую опцию.
+— Livereload с помощью browserSync, так же опционально.
+— Расшаривание верстки во внешний веб, опционально.
+— Можно легко добавлять новые таски. Есть примеры того, как создать и использовать новый таск внутри TARS.
+— Умная работа с изображениями. В первую очередь с вектором (svg).
+— Несколько режимов сборки (обычная, с минифицированными файлами, с хешем в названии css- и js-файлов для выкладки в продакшн).
+— Создание архива с готовой сборкой.
 
-You have to install gulp, webfonts, browser-sync globaly.
+Установка
+----------
+
+Необходимо установить `nodeJS` версии выше или равной 0.8
+Далее необходимо установить gulp глобально. (Возможно потребуются права суперюзера или администратора)
 
     npm i -g gulp
 
-Then you need to install dependencies    
+Затем устанавливаем зависимости.
 
     npm i or npm install
 
-After installing of all packages:    
+Если не все зависимости были установлены, то последнюю оперция нужно повторить.
+
+После установки всех зависимостей необходимо открыть projectConfig и настроить проект под себя. В конфиге вы можете выбрать шаблонизатор, css-препроцессор, использование уведомлений и т.д.
+После того, как выполнена настройка проекта, выполняем следующую команду:    
 
     gulp init
 
-Create fonts, images (with subdirs), js/libs and js/plugins directories and so on.
+Данная команда создаст базовую файловую систему, подтянет таски для выбранных вами шаблонизатора и css-препроцессора.
 
-If you use Linux: Notify-send should be installed (On Ubuntu this is installed per default).
-If you use Windows: Growl for Windows (http://www.growlforwindows.com/gfw/default.aspx) should be installed. Don't forget to run Growl before using TARS
+Основные команды
+----------------
 
-    !Don't forget to check projectConfig in root directory!
+`gulp init` — Инициализирует проект с заданными опциями в projectConfig.js
 
-Descritpion
------------
+`gulp re-init` — Переинициализирует проект с заданными опциями в projectConfig.js. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. При переинициализации все папки и файлы удаляются, поэтому не рекомендуется выполнять эту команду, если вы уже начали выполнение работы.
 
-`Markup` is the main folder of project. There are `modules`, `static` folder for static-files and templates of `pages`. 
-Even module is a part of page, for example — «header».
-Even module has it's own temaplte, scss-files, js-files and images. Also it could has `ie` folder for scss files for ie9 and ie8 (For example: ie8.scss, ie9.scss).
-There are templates of pages in `pages` directory of markup. To create new page just create new file with the name of the page or dublicate _template.jade file.
+`gulp` или `gulp build` — делает сборку проекта. Подключаются не минимизированные файлы. Тип сборки зависит от переданных ключей вместе с этой командой. Доступные ключи:
 
-Modules have to be included into the pages templates. Also modules could include other modules.
+* `--min` – в html подключаются минимизирвоанные файлы.
+* `--release` – в html подключаются  минимизированные файлы, в названии которых есть hash. Данный режим полезен, если вы напрямую выкладываете верстку на сервер. 
 
-You shouldn't use prefixes in css, autoprefixer do it itself. JSHint and lint will check yor js-code for errors and code style. You could configure jsLint config (.jscs.json file in the root directory).
+`gulp dev` — инициализация сборщика в режиме разработки. Создается dev-версия проекта, без всех минификаций. Также запускает вотчеры за файлами проекта. Доступные ключи:
 
-Main commands
--------------
+* `--lr` – инициализация livereload, если он включен в конфиге проекта.
+* `--tunnel` – инициализация проекта с расшаривание верстки во внешний веб. Ссылка будет указана в консоли.
 
-`gulp clean` — clean dev directory.
+`gulp build-dev` — генерация dev-версии проекта без вотчеров.
 
-`gulp dev` — development task. Create compiled dev-version of project and watch for changes in project's files. Call clean task in the beginning.
+Ключи, доступные при любом режиме сборки:
+* `--ie9` – включить в сборку стили для ie9.
+* `--ie8` – включить в сборку стили для ie8.
 
-`gulp build-dev` — just generate dev version of project, without watchers.
+`gulp update` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды.
 
-`gulp build` — create build version of project.
+Краткое описание файловой структуры
+-----------------------------------
 
+`markup` – основная папка проекта, где находятся все исходники для верстки. Внутри находятся папки:
+    * `modules` — папка с модулями.
+    * `static` — папка для статики.
+    * `pages` — папка с шаблонами страниц.
 
-If you'd like to use livereload, add `--lr` key with dev task
-Example: `gulp dev --lr`. Don't forget ro configure browser-sync config in projectConfig.js file.
+Каждая страница состоит из модулей, например — «header». Каждый модуль имеет свое html-, css- и js-представление. Также, каждый модуль может иметь подпапку `ie`, в которой можно разместить стили для ie8 и ie9. Модули могут включать в себя другие модули.
+В `pages` находятся шаблоны страниц, в которые в итоге будут включены модули. Они являются лэйаутом и должны содеражть в себе как можно меньше кода, чтобы структура страницы была как можно более прозрачная.
+Чтобы создать новую страницу, просто скопируйте существующую (или _template), и переименуйте.
 
-File structure
---------------
-
-* Project file structure
-    
-    - gulpy - usefull functions for gulp and tasks' functions
-    - markup — main folder, has modules, scss and templates of pages.
-        - static - folder for static files
-            - fonts — folder for fonts.
-            - images — folder for images.
-                - content — images in content (images in articles and etc.)
-                - plugins — images for plugins. There are could be files and directories
-                - sprite — images for sprite. Even image has to be named with unique name, which will be used in css to paste sprited image.
-                    - 96dpi 
-                    - 144dpi 
-                    - 192dpi 
-                    - 288dpi - folders for images for sprite with diffirent dppx
-                - svg — folder for svg images    
-            - js — folder for js.
-                - html5shiv — folder with htm5shiv. 
-                - libs - folder for js-libs like jquery
-                - plugins — folder for plugins js
-            - misc - folder for misc files    
-            - scss — folder with scss.
-                - spritesScss - folder with scss for sprites
-                - spriteGeneratorTemplates - folder with templastes for sprite generator
-                - plugins - folder fo scss for plugins (colud have subdirectories)
-                - common.scss — common stylies for project (not required)
-                - GUI.scss — GUI-elements stylies (not required)
-                - mixins.scss — mixins (not required)
-                - reset.scss — reset css (not required)
-                - vars.scss — vars of the project (not required)
-                - fonts.scss — scss for fonts of the project (not required)    
-        - modules — folder with modules.
-            - _template — folder with template module.
-                - assets — for the module.
-                - ie - scss-files for old ie browsers (ie8.scss and ie9.scss could be here) 
-                - _template.jade — template of the module.
-                - _template.js — js file of the module.
-                - _template.scss — scss file of the module.
-        - pages - pages folder
-            - _template.jade — template of the page.
-
-* Dev version of compiled project
-    
-    - static
-        - css — folder with css.
-        - fonts — folder with fonts.
-        - img — folder with images.
-            - assets — folder with images for modules.
-            - content — folder with images for content.
-            - plugins — folder with images for plugins.
-            - pngSprite
-                - 96dpi
-                - ...
-                - 288dpi — sprites with different dpi
-            - rasterSvg — raster svg-files
-            - rasterSvgSprite — sprite of raster svg-files    
-            — svg — svg images
-        - js — folder with js.
-            - html5shiv — folder with js-files which have to be separate. There are htm5shiv. 
-            - libs - folder for js-libs like jquery.
-            - main.js — main.js file.
-
-    - template.html — generated template
-
-
-* Build version is a copy of dev version, but it has minified version of css and js files. There are no any console.log and debugger code in js. Svg includes convert to base64.
-Each build dir has it's own version. Version is a date of building, but you can change it.
-
-You can add your own script or css including anywhere. I just can recommend you to do it, like it's been done in default. You can change everything, except File System. You have to use current File System, cause watchers and tasks are depend on it. I'll add config for it in future.
-It's a framework, so file system is like a law :)
-
-
-Work with images
--------------------
-
-I've developed builder, which can works with png-images and svg-images.
-Nowadays, we've got displays with really big resolutions and small size. For example: smartphones with HD-display (or 4k), monitors with hight resolution and so on. So, when you've done images for regular resolution (1920 x 1080 on 22 inch monitor). Then you open your site (with thats images) on MacBook Pro with retina, and see, your images is really ugly(
-
-There are many ways to decide it. I've recommend you to read [one presentation](http://www.slideshare.net/codefest/codefest-2014-2) from russian developer [Tim Chaptykov](https://github.com/Chaptykov). This presentation on Russian, but i'm sure, you'll understand the basic idea.
-
-The basic idea is — use SVG for web. It's vector, works on all platforms (ie8, shame on you)! But not all images can be in svg. Complex gradients are not so good in svg, so, you still have to use png for this.
-
-Icon-font is good idea, but not for all images. There are a lot of problems with smoothing in different operation system (ms windows for example).
-
-So, SVG and png. It's clear about svg, just use. But there are some problems with png. What will we do with displays with 2 or 3 dppx (192dpi or 288dpi)? You can read about dpi and dppx [here](http://stackoverflow.com/questions/21971331/what-is-dots-per-css-inch-and-dots-per-physical-inch) And of course you have to read about it [here](http://www.w3.org/TR/css3-values/#absolute-lengths)
-
-You have to have png images in 4 resolutions (It's for all type of displays): 96dpi (1dppx), 144dpi (1.5dppx), 192dpi (2dppx) and 288dpi (3dppx). Of course, you can use only 96dpi images, but it'll be bad for high resolution displays.
-What does it mean, image in resolution 144dpi? It means, that you need to do a picture larger in 1,5 times, than regular picture. So, 192 — 2 times, and 288 — 3 times larger. Really simple.
-Then take a retina display with dppx = 2. Our image with 192dpi will be small like 96dpi image, but have 2 pixels on each 1 real pixel, so, image will be much sharper.
-
-So, practise!
-
-First of all, check projectConfig (projectConfig.js in root directory). There are two important options, which we need:
-
-* useSVG
-* useDpi
-
-So, if you'd like to use SVG, just switch to true this option. And that is all)
-if useDpi you can choose dpi, which you're going to use in you project.
-
-After that, you can add images to your project:
-
-* svg-files to svg directory in static
-* png files to sprite directory (each png-file have to be in appropriate folder (depends on it's dpi))
-
-When, you can use two mixins into your modules:
-
-@include bg($imageName, $repeat) for png-sprite.
-$imageName is a image name (png) with $-sign in the beginning.
-The second param is not required. This param is for background-repeat option. It's 'no-repeat' in default.
-
-This mixin include image from sprite to your block, and include media queries for different resolutions.
-
-Another mixin is:
-@include bg-svg($imageName, $repeat)
-It's like the first mixin, but include svg file to your block (and png file for ie8. This file will be rastered from svg file). $imageName is a image name (svg).
-The second param is not required. This param is for background-repeat option. It's 'no-repeat' in default.
-
-You can repeat image (svg and png) only in one direction in one time — horizontal or vertical.
-
-!Note, that you can't use bg-svg mixin, if you have not switched useSvg option to true in projectConfig.
-!Raster-task and sprite-compressor can take a lot of time, if you use many images. I'll fix it asap.
-
-Custom tasks
+Документация
 ------------
-
-You can add your own task in builder. All examples are already exist. 
-You can find Examples of watchers and task declaration in gulpfile.js In gulpy/tasks you can find example of task function.
-
-
-
-
-
-
-
-
-
-
