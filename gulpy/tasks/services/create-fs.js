@@ -10,6 +10,7 @@ var paths = [
             'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName,
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content',
+            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/general',
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins',
             'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite'
         ];
