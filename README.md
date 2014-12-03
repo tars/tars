@@ -1,4 +1,4 @@
-<img height="34" width="97" src="https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png">
+<img height="67" width="192" src="https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png">
 =============
 
 Сборщик html-верстки, основанный на <a href="http://gulpjs.com/" target="_blank">gulp.js</a>. Облегчает и ускоряет процесс html-верстки любой сложности. Подойдет как командам, так и отдельному разработчику.
