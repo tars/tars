@@ -51,8 +51,8 @@ var useLiveReload = gutil.env.lr || false,
 // Watcher by node-watch
 var watcher = require('./gulpy/helpers/watcher');
 
-// Set ulimit to 2048 for *nix FS. It needs to work with big amount of files
-require('./gulpy/helpers/setUlimit')(2048);
+// Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
+require('./gulpy/helpers/setUlimit')(4096);
 
 /***************/
 /* END HELPERS */
@@ -168,6 +168,8 @@ require('./gulpy/tasks/html/minify-html')(buildOptions);
 // Create zip-archive
 require('./gulpy/tasks/services/zip-build')(buildOptions);
 
+// Update deps
+require('./gulpy/tasks/services/update')(buildOptions);
 
 /*************/
 /* END TASKS */
