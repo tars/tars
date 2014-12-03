@@ -155,6 +155,9 @@ require('./gulpy/tasks/images/move-content-img')(buildOptions);
 // Move images for plugins
 require('./gulpy/tasks/images/move-plugins-img')(buildOptions);
 
+// Move general images
+require('./gulpy/tasks/images/move-general-img')(buildOptions);
+
 // Move fonts-files to dev directory
 require('./gulpy/tasks/other/move-fonts')(buildOptions);
 
@@ -311,6 +314,11 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('move-plugins-img');
     });
 
+    // Watcher for general images
+    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/general/**/*.*', false, function(filename) {
+        gulp.start('move-general-img');
+    });
+
     // Watcher for misc files
     watcher('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*', false, function(filename) {
         gulp.start('move-misc-files');
@@ -351,7 +359,7 @@ gulp.task('build-dev', function(cb) {
         'concat-modules-data',
         [
             'move-separate-js', 'js-processing', 'compile-templates',
-            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-fonts'
+            'move-misc-files', 'move-assets', 'move-content-img', 'move-plugins-img', 'move-general-img', 'move-fonts'
         ],
         cb
     );
