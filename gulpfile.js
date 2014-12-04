@@ -70,7 +70,7 @@ require('./gulpy/helpers/setUlimit')(4096);
 // There is a template of gulp-task
 // Task have to be in gulpy/userTasks folder
 // Example:
-// require('./gulpy/userTasks/exampleTask')();
+// require('./gulpy/user-tasks/example-task')();
 
 
 // SYSTEM TASKS

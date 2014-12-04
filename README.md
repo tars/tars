@@ -82,7 +82,7 @@ TARS — сборщик-фреймворк, включающий в себя н�
 Документация
 ------------
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/file-structure.md">Файловая структура</a>
-* Работа с тасками
+* <a href="https://github.com/artem-malko/tars/blob/master/docs/tasks-workflow.md">Работа с тасками и вотчерами</a>
 * Опции
 * Html
 * Css

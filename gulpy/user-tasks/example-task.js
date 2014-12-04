@@ -7,7 +7,7 @@ var projectConfig = require('../../projectConfig');
 var notifyConfig = projectConfig.notifyConfig;
 var modifyDate = require('../helpers/modifyDateFormatter');
     // Include browserSync, if you need to reload browser
-    // browserSync = require('browser-sync');
+    // var browserSync = require('browser-sync');
 
 // require('./ path to task file, which have to be done before current task');
 
