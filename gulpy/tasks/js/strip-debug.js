@@ -15,12 +15,12 @@ module.exports = function(buildOptions) {
     return gulp.task('strip-debug', function(cb) {
 
         if (projectConfig.removeConsoleLog) {
-            return gulp.src('./builds/build' + buildOptions.buildVersion + '/static/js/main' + buildOptions.hash + '.js')
+            return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
                 .pipe(stripDebug())
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while stripping debug.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/static/js/'))
+                .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

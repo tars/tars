@@ -12,12 +12,12 @@ var modifyDate = require('../../helpers/modifyDateFormatter');
 module.exports = function(buildOptions) {
 
     return gulp.task('move-separate-js', function(cb) {
-        gulp.src('./markup/static/js/separateJs/**/*.js')
+        gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js')
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving separate js-files.\'s data.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/static/js/separateJs'))
+            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/js/separateJs'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({
