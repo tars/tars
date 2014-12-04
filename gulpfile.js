@@ -221,6 +221,14 @@ gulp.task('dev', ['build-dev'], function() {
     // Watcher for common scss(or less)-files and scss(or less)-files of plugins
     watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
         gulp.start('compile-css');
+
+        if (gutil.env.ie8) {
+            gulp.start('compile-css-for-ie8');
+        }
+
+        if (gutil.env.ie9) {
+            gulp.start('compile-css-for-ie9');
+        }
     });
 
     // Watcher for modules stylies
