@@ -77,9 +77,6 @@ module.exports = function(buildOptions) {
                     return;
                 }
             });
-
-            console.log(gutil.colors.green('✔'), ' End downloading templater');
-
         });
 
         /**
@@ -124,9 +121,6 @@ module.exports = function(buildOptions) {
                 console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
                 console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
             });
-
-            console.log(gutil.colors.green('✔'), ' End downloading css-preproc');
-
         });
     });
 };
