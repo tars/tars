@@ -2,7 +2,8 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var cache = require('gulp-cached');
 var notify = require('gulp-notify');
-var notifyConfig = require('../../../projectConfig').notifyConfig;
+var projectConfig = require('../../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**

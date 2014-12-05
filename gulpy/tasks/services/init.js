@@ -46,6 +46,8 @@ module.exports = function(buildOptions) {
             console.log('\n\n' + gutil.colors.bold('T A R S\n'));
         }
         console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
+        console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
+        console.log('Start your work with \'gulp dev\'\n\n');
 
         /**
          * Including templater
