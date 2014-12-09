@@ -303,7 +303,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for js-files of libs
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/libs/**/*.js', false, function(filename) {
+    watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/libraries/**/*.js', false, function(filename) {
         gulp.start('js-processing');
     });
 
