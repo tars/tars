@@ -214,10 +214,11 @@ var projectConfig = {
      * Beginning of path for static files
      * You have to use %=staticPrefix=% placeholder in paths to static
      * Example: %=staticPrefix=%/img/logo.png
-     * Will be replaced to '/static/img/logo.png'
+     * Will be replaced to 'static/img/logo.png'
+     * In css you have to use relative path: /%=staticPrefix=%/img/logo.png
      * @type {String}
      */
-    staticPrefix: '/static',
+    staticPrefix: 'static',
 
     /**
      * Path to build version of project

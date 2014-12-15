@@ -9,15 +9,15 @@ var pathsToDel = [
         './.tmpPreproc/'
     ];
 
-    if (!projectConfig.useBuildVersioning) {
-        pathsToDel.push(buildOptions.buildPath);
-    }
-
 /**
  * Clean dev directory and cache
  * @param  {object} buildOptions
  */
 module.exports = function(buildOptions) {
+
+    if (!projectConfig.useBuildVersioning) {
+        pathsToDel.push(buildOptions.buildPath);
+    }
 
     return gulp.task('clean', function(cb) {
         del(pathsToDel, cb);
