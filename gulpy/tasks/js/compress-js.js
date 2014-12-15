@@ -15,14 +15,14 @@ module.exports = function(buildOptions) {
     require('./strip-debug')(buildOptions);
 
     return gulp.task('compress-js', ['strip-debug'], function() {
-        return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
+        return gulp.src(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
             .pipe(uglify('main' + buildOptions.hash + '.min.js', {
                 mangle: false
             }))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while compressing js.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/js/'))
+            .pipe(gulp.dest(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/js/'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({

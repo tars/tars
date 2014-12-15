@@ -16,14 +16,14 @@ module.exports = function(buildOptions) {
     return gulp.task('svg-to-base64', function(cb) {
 
         if (projectConfig.useSVG) {
-            return gulp.src(['./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main.css', './builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/main_ie9.css'])
+            return gulp.src([buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/main' + buildOptions.hash + '.css', buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/main_ie9' + buildOptions.hash + '.css'])
                 .pipe(base64({
                     extensions: ['svg']
                 }))
                 .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while converting svg to base64.\nLook in the console for details.\n' + error;
             }))
-                .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
+                .pipe(gulp.dest(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

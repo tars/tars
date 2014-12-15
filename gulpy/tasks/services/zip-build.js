@@ -15,12 +15,12 @@ module.exports = function(buildOptions) {
 
     return gulp.task('zip-build', function(cb) {
         if (projectConfig.useArchiver) {
-            return gulp.src('./builds/build' + buildOptions.buildVersion +'/**', { base : "." })
+            return gulp.src(buildOptions.buildPath + '**', { base : "." })
                 .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while creating zip-archive.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/'))
+                .pipe(gulp.dest(buildOptions.buildPath))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

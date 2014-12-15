@@ -1,9 +1,11 @@
 var projectConfig = {
 
-/////////////////////////////////////////////////////
-// If you rename static and img folder manually,   //
-// you have to change with options.                //
-/////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// You have to hange with options after manually      //
+// renaming static and img folder                     //
+//                                                    //
+// Do not rename these dirs before reinit             //
+////////////////////////////////////////////////////////
 
     /**
      * File structure settings
@@ -41,7 +43,7 @@ var projectConfig = {
      * Available 'jade' and 'handlebars'
      * @type {String}
      */
-    templater: 'jade',
+    templater: 'handlebars',
 
     /**
      * Css-preprocessor
@@ -53,10 +55,10 @@ var projectConfig = {
     /**
      * What kind of size of images are you going to use.
      * 96 — 1 dppx (regular)
-     * 144 — 1.5 dppx
      * 192 — 2 dppx (retina)
-     * 288 - 3 dppx (nexus 5, for example)
-     * Example if using for all displays: usePpi: [96, 144, 192, 288]
+     * 288 — 3 dppx (nexus 5, for example)
+     * 384 - 4 dppx (nexus 6, for example)
+     * Example if using for all displays: usePpi: [96, 192, 288, 384]
      * You can change with options not only on init or reinit,
      * but at with time you have to create new directories
      * and delete unused.
@@ -181,13 +183,13 @@ var projectConfig = {
          * Choose browser to open
          * @type {String}
          */
-        browser: "google chrome",
+        browser: 'google chrome',
 
         /**
          * Choose the page to open in browser at first opening
          * @type {String}
          */
-        startUrl: "/index.html",
+        startUrl: '/index.html',
 
         /**
          * If you don't need to see notification in browser, switch to false
@@ -207,6 +209,22 @@ var projectConfig = {
      * @type {Boolean}
      */
     minifyHtml: false,
+
+    /**
+     * Beginning of path for static files
+     * You have to use %=staticPrefix=% placeholder in paths to static
+     * Example: %=staticPrefix=%/img/logo.png
+     * Will be replaced to '/static/img/logo.png'
+     * @type {String}
+     */
+    staticPrefix: '/static',
+
+    /**
+     * Path to build version of project
+     * Could be like '../../../build' or absolute path
+     * @type {String}
+     */
+    buildPath: './builds/',
 
     /**
      * Use build versioning

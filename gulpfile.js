@@ -21,9 +21,12 @@ var useLiveReload = gutil.env.lr || false,
     if (projectConfig.useBuildVersioning) {
         buildOptions.buildVersion = '_ver-' + (new Date()).toString();
         buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
+        buildOptions.buildPath = projectConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
     } else {
         buildOptions.buildVersion = '';
+        buildOptions.buildPath = projectConfig.buildPath;
     }
+
 
     // Set template's extension
     if (templaterName === 'handlebars') {

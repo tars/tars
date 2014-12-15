@@ -10,7 +10,7 @@ var pathsToDel = [
     ];
 
     if (!projectConfig.useBuildVersioning) {
-        pathsToDel.push('./builds/build/');
+        pathsToDel.push(buildOptions.buildPath);
     }
 
 /**

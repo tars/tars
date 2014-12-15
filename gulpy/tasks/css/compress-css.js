@@ -15,7 +15,7 @@ var modifyDate = require('../../helpers/modifyDateFormatter');
 module.exports = function(buildOptions) {
 
     return gulp.task('compress-css', function() {
-        return gulp.src('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/*.css')
+        return gulp.src(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/*.css')
             .pipe(cmq())
             .pipe(csso())
             .pipe(rename({
@@ -24,7 +24,7 @@ module.exports = function(buildOptions) {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while compressing css.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion + '/' + projectConfig.fs.staticFolderName + '/css/'))
+            .pipe(gulp.dest(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({

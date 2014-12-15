@@ -20,7 +20,7 @@ module.exports = function(buildOptions) {
     return gulp.task('minify-html', function(cb) {
 
         if (projectConfig.minifyHtml) {
-            return gulp.src('./dev/*.html')
+            return gulp.src('./dev/**/*.html')
                 .pipe(minifyHTML(opts))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifing html-files.\nLook in the console for details.\n' + error;

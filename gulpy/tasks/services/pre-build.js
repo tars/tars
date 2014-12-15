@@ -25,7 +25,7 @@ module.exports = function(buildOptions) {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while running pre-build task.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./builds/build' + buildOptions.buildVersion))
+            .pipe(gulp.dest(buildOptions.buildPath))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({
