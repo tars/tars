@@ -4,7 +4,6 @@
     "requireParenthesesAroundIIFE": true,
     "requireSpacesInFunctionExpression": { "beforeOpeningCurlyBrace": true },
     "disallowSpacesInFunctionExpression": { "beforeOpeningRoundBrace": true },
-    "requireMultipleVarDecl": true,
     "disallowEmptyBlocks": true,
     "disallowSpacesInsideObjectBrackets": true,
     "disallowSpacesInsideArrayBrackets": true,
