@@ -30,6 +30,7 @@
     "gulp-jshint": "1.9.0",
     "gulp-notify": "2.0.1",
     "gulp-cached": "1.0.1",
+    "gulp-changed": "1.1.0",
     "gulp-replace-task": "0.0.6",
     "gulp-plumber": "0.6.6",
     "jshint-stylish": "1.0.0",

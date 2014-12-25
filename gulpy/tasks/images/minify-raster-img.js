@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
+var changed = require('gulp-changed');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
@@ -15,6 +16,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('minify-raster-img', function(cb) {
         return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
+            .pipe(changed('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
             .pipe(imagemin())
             .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifying raster images.\nLook in the console for details.\n' + error;

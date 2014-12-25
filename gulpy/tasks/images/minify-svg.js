@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
+var changed = require('gulp-changed');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
@@ -16,6 +17,7 @@ module.exports = function(buildOptions) {
     return gulp.task('minify-svg', function(cb) {
         if (projectConfig.useSVG) {
             return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/**/*.svg')
+                .pipe(changed('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
                 .pipe(imagemin(
                         {
                             progressive: true,
