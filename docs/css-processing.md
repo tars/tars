@@ -1,11 +1,13 @@
 CSS
 ===
 
-В качестве css-препроцессора можно использовать scss, less или stylus. Css-препроцессор выбирается в projectConfig.js
+В качестве css-препроцессора можно использовать <a href="http://sass-lang.com/" target="_blank">scss</a>, <a href="http://www.lesscss.ru/" target="_blank">less</a> или <a href="http://learnboost.github.io/stylus/" target="_blank">stylus</a>. Css-препроцессор выбирается в projectConfig.js
 
 В целом, нет каких-либо неожиданностей при использовании css-препроцессора. Используем все возможности, которые предоставляет выбранный инструмент.
 
-Есть пара моментов по организации css-файлов:
+Если вы привыкли к обычному css, то можно выбрать less или scss и использовать в файлах стилей обычный css,
+
+Есть пара моментов по организации scss|less|styl-файлов:
 
 * Каждый модуль имеет свое css-представление.
 * Общие стили для проекта рекомендуется складывать в common.scss|less|styl в static/scss|less|styl
