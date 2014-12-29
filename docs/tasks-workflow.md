@@ -15,18 +15,18 @@ TARS – набор gulp-тасков, организованных особым
 По умолчанию каждому таску требуется набор модулей для корректной работы:
 
 ```javascript
-    var gulp = require('gulp');
-    var gulpif = require('gulp-if');
-    var notify = require('gulp-notify');
-    var projectConfig = require('../../projectConfig');
-    var notifyConfig = projectConfig.notifyConfig;
-    var modifyDate = require('../helpers/modifyDateFormatter');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
+var projectConfig = require('../../projectConfig');
+var notifyConfig = projectConfig.notifyConfig;
+var modifyDate = require('../helpers/modifyDateFormatter');
 ```
 
 Также, если требуется использовать livereload для данного таска, подключаем модуль browserSync:
 
 ```javascript
-    var browserSync = require('browser-sync');
+var browserSync = require('browser-sync');
 ```
 
 Если требуются какие-либо еще зависимости, подключаем их тут же.
@@ -34,7 +34,7 @@ TARS – набор gulp-тасков, организованных особым
 Далее, если есть зависимости от других тасков, то подключаем их в текущий:
 
 ```javascript
-    require('./ path to task file from current task');
+require('./ path to task file from current task');
 ```
 
 Затем идет тело модуля, который будет экспортировать таск. Каждый таск описывается внутри экспортируемой функции, которая получает в качестве параметра конфиг сборки (buildOptions). В конфиге сборки находится хеш (если происходит сборка с ключом `--release`), а также версия текущей сборки, если используется версионирование. Экспортируемая функция возвращает полноценный gulp-таск. Далее делаем все как и с обычным таском для gulp.
@@ -42,22 +42,22 @@ TARS – набор gulp-тасков, организованных особым
 Если требуется нотификация, то таск должен оканчиваться следующим образом:
 
 ```javascript
-    // If you need to reload browser, uncomment the row below
-    // .pipe(browserSync.reload({stream:true}))
-    .pipe(
-        gulpif(notifyConfig.useNotify,
-            notify({
-                onLast: true, // Use this, if you need notify only after last file will be processed
-                sound: notifyConfig.sounds.onSuccess,
-                title: notifyConfig.title,
-                // You can change text of success message
-                message: 'Example task is finished \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                templateOptions: {
-                    date: modifyDate.getTimeOfModify()
-                }
-            })
-        )
-    );
+// If you need to reload browser, uncomment the row below
+// .pipe(browserSync.reload({stream:true}))
+.pipe(
+    gulpif(notifyConfig.useNotify,
+        notify({
+            onLast: true, // Use this, if you need notify only after last file will be processed
+            sound: notifyConfig.sounds.onSuccess,
+            title: notifyConfig.title,
+            // You can change text of success message
+            message: 'Example task is finished \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+            templateOptions: {
+                date: modifyDate.getTimeOfModify()
+            }
+        })
+    )
+);
 ```
 
 Также можно вызвать callback, или вернуть основной поток, если требуется выполнять таски в определенном порядке. Более подробно <a href="http://frontender.info/handling-sync-tasks-with-gulp-js/" target="_blank">здесь</a>.
@@ -65,7 +65,7 @@ TARS – набор gulp-тасков, организованных особым
 Также не забываем подключить таск в gulpfile.
 
 ```javascript
-    require('./gulpy/user-tasks/example-task')();
+require('./gulpy/user-tasks/example-task')();
 ```
 
 Вотчеры в TARS
@@ -74,12 +74,12 @@ TARS – набор gulp-тасков, организованных особым
 Как уже было сказанно выше, все вотчеры описывются внутри gulpfile.js в dev-таске. Вотчер имеет следующую структуру:
 
 ```javascript
-    watcher(
-        строка или массив строк с путями или паттернами путей до файлов, за которыми нужно следить,
-        строка или массив строк с путями или паттернами путей до файлов, которые нужно отфильтровать или false, если фильтрация не требуется,
-        function(filename) {
-            gulp.start('example-task');
-        });
+watcher(
+    строка или массив строк с путями или паттернами путей до файлов, за которыми нужно следить,
+    строка или массив строк с путями или паттернами путей до файлов, которые нужно отфильтровать или false, если фильтрация не требуется,
+    function(filename) {
+        gulp.start('example-task');
+    });
 ```
 
 Если вы хотите добавить вотчер, который следит за файлами в статике, то рекомендуется использовать переменные:

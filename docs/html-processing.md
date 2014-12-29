@@ -26,28 +26,35 @@ moduleName: {
 Подключение модуля на странице:
 
 ```handlebars
-    {{> modules/moduleFolderName/moduleName}}
+{{> modules/moduleFolderName/moduleName}}
 ```
 
 Подключение модуля с передачей данных в шаблон:
 
 ```handlebars
-    {{> modules/moduleFolderName/moduleName moduleName.dataType}}
+{{> modules/moduleFolderName/moduleName moduleName.dataType}}
 ```
 
 Пример подключения модуля head с дефолтными данными:
 
 ```handlebars
-    {{> modules/head/head head.defaults}}
+{{> modules/head/head head.defaults}}
 ```
 
-Handlebars известен, как очень простой шаблонизатор, logicless. Но при использовании handlebars в статической верстке в таком виде он не очень удобен. Поэтому был добавлен метод для создания цикла. Пожалуй это то единственное, чего не хватало handlebars.
+
+Внутри самого модуля данные выводятся средствами handlebars:
+
+```handlebars
+<title>{{title}}</title>
+```
+
+Handlebars известен, как очень простой шаблонизатор, logicless. Но при использовании handlebars в статической верстке в таком виде он не очень удобен. Поэтому был добавлен метод для создания простого цикла (цикл для обхода масиива данных есть в handlebars по-умолчанию). Пожалуй это то единственное, чего не хватало handlebars.
 
 Синтаксис цикла:
 ```handlebars
-    {{#repeat n}}
-        Do something
-    {{/repeat}}
+{{#repeat n}}
+    Do something
+{{/repeat}}
 ```
 
 n — количество повторений.
@@ -55,3 +62,36 @@ n — количество повторений.
 Работа с модулями и данными в jade
 ----------------------------------
 
+При использовании jade, каждый модуль — миксин, который подключается в файл со страницей. Миксины в jade могут принимать данные, этим и воспользуемся.
+
+Подключение модуля на странице:
+
+```jade
+include ../modules/moduleFolderName/moduleName  // В начале шаблона страницы (пример — index.jade)
+
++moduleName(moduleName.dataType)  // Подключение модуля
+```
+
+Подключение модуля с передачей данных в шаблон:
+
+```jade
+include ../modules/moduleFolderName/moduleName  // В начале шаблона страницы (пример — index.jade)
+
++moduleName()  // Подключение модуля
+```
+
+Пример подключения модуля head с дефолтными данными:
+
+```jade
+include ../modules/head/head
++head(head.defaults)
+```
+
+Внутри самого модуля данные выводятся средствами jade (например, модуль head):
+
+```jade
+mixin head(data)
+    title. #{data.title}
+```
+
+Можно использовать любые средства, доступные в jade.
