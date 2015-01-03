@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var minifyHtml = require('gulp-minify-html');
+var HtmlMin = require('gulp-minify-html');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
@@ -21,7 +21,7 @@ module.exports = function(buildOptions) {
 
         if (projectConfig.minifyHtml) {
             return gulp.src('./dev/**/*.html')
-                .pipe(minifyHTML(opts))
+                .pipe(HtmlMin(opts))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifing html-files.\nLook in the console for details.\n' + error;
                 }))

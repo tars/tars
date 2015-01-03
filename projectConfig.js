@@ -1,75 +1,5 @@
 var projectConfig = {
 
-////////////////////////////////////////////////////////
-// You have to hange with options after manually      //
-// renaming static and img folder                     //
-//                                                    //
-// Do not rename these dirs before reinit             //
-////////////////////////////////////////////////////////
-
-    /**
-     * File structure settings
-     * @type {Object}
-     */
-    fs: {
-
-        /**
-         * Name of folder with static files, such *.css, *.js and so on
-         * 'static' by default
-         * @type {String}
-         */
-        staticFolderName: 'static',
-
-        /**
-         * Name of folder with images
-         * 'img' by default
-         * @type {String}
-         */
-        imagesFolderName: 'img'
-    },
-
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////
-// YOU CAN CHANGE THIS OPTIONS AND USE REINIT         //
-//                                                    //
-// Options for technologies, which you'd like to use. //
-////////////////////////////////////////////////////////
-
-    /**
-     * Templater
-     * Available 'jade' and 'handlebars'
-     * @type {String}
-     */
-    templater: 'handlebars',
-
-    /**
-     * Css-preprocessor
-     * Available 'scss', 'less' or 'stylus'
-     * @type {String}
-     */
-    cssPreprocessor: 'scss',
-
-    /**
-     * What kind of size of images are you going to use.
-     * 96 — 1 dppx (regular)
-     * 192 — 2 dppx (retina)
-     * 288 — 3 dppx (nexus 5, for example)
-     * 384 - 4 dppx (nexus 6, for example)
-     * Example if using for all displays: usePpi: [96, 192, 288, 384]
-     * You can change with options not only on init or reinit,
-     * but at with time you have to create new directories
-     * and delete unused.
-     * @type {Array}
-     */
-    useImagesForDisplayWithDpi: [96],
-
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-
-
 /////////////////////
 // MUTABLE OPTIONS ////////////////////////////////
 // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
@@ -81,7 +11,7 @@ var projectConfig = {
      * Autoprefixer config
      * @type {Array}
      */
-    autoprefixerConfig: ['last 2 version', 'safari 5', 'opera 12.1', 'ios 6', 'android 4'],
+    autoprefixerConfig: ['> 1%', 'last 2 version', 'safari 5', 'opera 12.1', 'ios 5', 'android 4'],
 
     /**
      * Use svg images
@@ -138,7 +68,7 @@ var projectConfig = {
          * Title for notifier
          * @type {String}
          */
-        title: 'MarkupBuilder notification',
+        title: 'TARS notification',
 
         /**
          * Sounds notifactions
@@ -181,7 +111,9 @@ var projectConfig = {
 
         /**
          * Choose browser to open
-         * @type {String}
+         * @type {String|Array}
+         * Example: ['google chrome', 'firefox']
+         * Avalible: safari, internet explorer, google chrome, firefox, opera
          */
         browser: 'google chrome',
 
@@ -242,6 +174,76 @@ var projectConfig = {
 
 //////////////////////////////////////////////
 //////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////
+// YOU CAN CHANGE THIS OPTIONS AND USE REINIT         //
+//                                                    //
+// Options for technologies, which you'd like to use. //
+////////////////////////////////////////////////////////
+
+    /**
+     * Templater
+     * Available 'jade' and 'handlebars'
+     * @type {String}
+     */
+    templater: 'handlebars',
+
+    /**
+     * Css-preprocessor
+     * Available 'scss', 'less' or 'stylus'
+     * @type {String}
+     */
+    cssPreprocessor: 'scss',
+
+    /**
+     * What kind of size of images are you going to use.
+     * 96 — 1 dppx (regular)
+     * 192 — 2 dppx (retina)
+     * 288 — 3 dppx (nexus 5, for example)
+     * 384 - 4 dppx (nexus 6, for example)
+     * Example if using for all displays: usePpi: [96, 192, 288, 384]
+     * You can change with options not only on init or reinit,
+     * but at with time you have to create new directories
+     * and delete unused.
+     * @type {Array}
+     */
+    useImagesForDisplayWithDpi: [96],
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////
+// You have to hange with options after manually      //
+// renaming static and img folder                     //
+//                                                    //
+// Do not rename these dirs before reinit             //
+////////////////////////////////////////////////////////
+
+    /**
+     * File structure settings
+     * @type {Object}
+     */
+    fs: {
+
+        /**
+         * Name of folder with static files, such *.css, *.js and so on
+         * 'static' by default
+         * @type {String}
+         */
+        staticFolderName: 'static',
+
+        /**
+         * Name of folder with images
+         * 'img' by default
+         * @type {String}
+         */
+        imagesFolderName: 'img'
+    },
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 };
 
 module.exports = projectConfig;
