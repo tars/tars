@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var tarsConfig = require('../../../tars-сonfig');
+var tarsConfig = require('../../../tars-config');
 var gutil = require('gulp-util');
 
 require('./remove-init-fs')();

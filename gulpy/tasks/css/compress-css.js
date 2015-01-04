@@ -4,7 +4,7 @@ var cmq = require('gulp-combine-media-queries');
 var rename = require('gulp-rename');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-сonfig');
+var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 

@@ -3,7 +3,7 @@ var HtmlMin = require('gulp-minify-html');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-сonfig');
+var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 

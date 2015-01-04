@@ -3,7 +3,7 @@ var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
-var tarsConfig = require('../../../tars-сonfig');
+var tarsConfig = require('../../../tars-config');
 
 var paths = [
             'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',

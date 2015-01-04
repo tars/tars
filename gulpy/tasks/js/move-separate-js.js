@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var cache = require('gulp-cached');
 var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-сonfig');
+var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 

@@ -170,13 +170,13 @@ var tarsConfig = {
      * Use archiver for your build
      * @type {Boolean}
      */
-    useArchiver: true
+    useArchiver: true,
 
     /**
      * Set ulimit. Topical for Linux-family OS and OSX.
      * @type {Number}
      */
-    ulimit: 4096
+    ulimit: 4096,
 
 //////////////////////////////////////////////
 //////////////////////////////////////////////
