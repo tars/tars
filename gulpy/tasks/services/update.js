@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var exec = require('child_process').exec;
 var Download = require('download');
 var fs = require('fs');
-var projectConfig = require('../../../projectConfig');
+var tarsConfig = require('../../../tars-сonfig');
 
 /**
  * Update dependencies

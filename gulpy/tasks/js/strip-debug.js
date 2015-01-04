@@ -3,8 +3,8 @@ var stripDebug = require('gulp-strip-debug');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -15,13 +15,13 @@ module.exports = function(buildOptions) {
 
     return gulp.task('strip-debug', function(cb) {
 
-        if (projectConfig.removeConsoleLog) {
-            return gulp.src(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
+        if (tarsConfig.removeConsoleLog) {
+            return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
                 .pipe(stripDebug())
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while stripping debug.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/js/'))
+                .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

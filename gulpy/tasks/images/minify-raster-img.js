@@ -4,8 +4,8 @@ var changed = require('gulp-changed');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -15,14 +15,14 @@ var modifyDate = require('../../helpers/modifyDateFormatter');
 module.exports = function(buildOptions) {
 
     return gulp.task('minify-raster-img', function(cb) {
-        return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
-            .pipe(changed('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
+        return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
+            .pipe(changed('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))
             .pipe(imagemin())
             .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifying raster images.\nLook in the console for details.\n' + error;
                 })
             )
-            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/'))
+            .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({

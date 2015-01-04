@@ -9,22 +9,22 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
-    projectConfig = require('./projectConfig'),
-    browserSyncConfig = projectConfig.browserSyncConfig,
+    tarsConfig = require('./tars-config'),
+    browserSyncConfig = tarsConfig.browserSyncConfig,
     templaterName = require('./gulpy/helpers/templaterNameSetter')(),
     templateExtension = 'jade',
-    cssPreprocExtension = projectConfig.cssPreprocessor.toLowerCase(),
-    projectConfigTemlater = projectConfig.templater.toLowerCase(),
+    cssPreprocExtension = tarsConfig.cssPreprocessor.toLowerCase(),
+    tarsConfigTemlater = tarsConfig.templater.toLowerCase(),
     buildOptions = {};
 
     // Generate build version
-    if (projectConfig.useBuildVersioning) {
+    if (tarsConfig.useBuildVersioning) {
         buildOptions.buildVersion = '_ver-' + (new Date()).toString();
         buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
-        buildOptions.buildPath = projectConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
+        buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
     } else {
         buildOptions.buildVersion = '';
-        buildOptions.buildPath = projectConfig.buildPath;
+        buildOptions.buildPath = tarsConfig.buildPath;
     }
 
 
@@ -55,7 +55,7 @@ var useLiveReload = gutil.env.lr || false,
 var watcher = require('./gulpy/helpers/watcher');
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-require('./gulpy/helpers/setUlimit')(4096);
+require('./gulpy/helpers/setUlimit')();
 
 /***************/
 /* END HELPERS */
@@ -210,19 +210,19 @@ gulp.task('dev', ['build-dev'], function() {
     // SYSTEM WATCHERS
 
     // Watcher for images for sprite (png)
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/**/*.png', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/**/*.png', false, function(filename) {
         gulp.start('make-sprite');
     });
 
     // Watcher for svg-images
-    if (projectConfig.useSVG) {
-        watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/**/*.svg', false, function(filename, cb) {
+    if (tarsConfig.useSVG) {
+        watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/**/*.svg', false, function(filename, cb) {
             gulp.start('svg-actions');
         });
     }
 
     // Watcher for common scss(or less)-files and scss(or less)-files of plugins
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
         gulp.start('compile-css');
 
         if (gutil.env.ie8) {
@@ -281,9 +281,9 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('compile-templates-with-data-reloading');
     });
 
-    if (projectConfig.jsPathsToConcatBeforeModulesJs.length) {
+    if (tarsConfig.jsPathsToConcatBeforeModulesJs.length) {
         // Watcher for js-files before modules js
-        watcher(projectConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
+        watcher(tarsConfig.jsPathsToConcatBeforeModulesJs, false, function(filename) {
             gulp.start('js-processing');
         });
     }
@@ -293,20 +293,20 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('js-processing');
     });
 
-    if (projectConfig.jsPathsToConcatAfterModulesJs.length) {
+    if (tarsConfig.jsPathsToConcatAfterModulesJs.length) {
         // Watcher for js-files after modules js
-        watcher(projectConfig.jsPathsToConcatAfterModulesJs, false, function(filename) {
+        watcher(tarsConfig.jsPathsToConcatAfterModulesJs, false, function(filename) {
             gulp.start('js-processing');
         });
     }
 
     // Watcher for js-files of plugins
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/plugins/**/*.js', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/plugins/**/*.js', false, function(filename) {
         gulp.start('js-processing');
     });
 
     // Watcher for js-files of libs
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/libraries/**/*.js', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/libraries/**/*.js', false, function(filename) {
         gulp.start('js-processing');
     });
 
@@ -316,32 +316,32 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for content images
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content/**/*.*', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content/**/*.*', false, function(filename) {
         gulp.start('move-content-img');
     });
 
     // Watcher for images of plugins
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins/**/*.*', false, function(filename) {
         gulp.start('move-plugins-img');
     });
 
     // Watcher for general images
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/general/**/*.*', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general/**/*.*', false, function(filename) {
         gulp.start('move-general-img');
     });
 
     // Watcher for misc files
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*', false, function(filename) {
         gulp.start('move-misc-files');
     });
 
     // Watcher for font files.
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/fonts/**/*.*', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*', false, function(filename) {
         gulp.start('move-fonts');
     });
 
     // Watcher for separate Js files files
-    watcher('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/separateJs/**/*.js', false, function(filename) {
         gulp.start('move-separate-js');
     });
 });

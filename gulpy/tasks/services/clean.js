@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
-var projectConfig = require('../../../projectConfig');
+var tarsConfig = require('../../../tars-сonfig');
 
 var pathsToDel = [
         './dev/',
@@ -15,7 +15,7 @@ var pathsToDel = [
  */
 module.exports = function(buildOptions) {
 
-    if (!projectConfig.useBuildVersioning) {
+    if (!tarsConfig.useBuildVersioning) {
         pathsToDel.push(buildOptions.buildPath);
     }
 

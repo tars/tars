@@ -42,7 +42,7 @@ npm install
 
 Если не все зависимости были установлены, то последнюю операцию нужно повторить.
 
-После установки всех зависимостей необходимо открыть projectConfig (подробное описание опций <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md">здесь</a>) и настроить проект под себя. В конфиге вы можете выбрать шаблонизатор, css-препроцессор, использование уведомлений, имена папок для различной статики и т.д.
+После установки всех зависимостей необходимо открыть tars-config (подробное описание опций <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md">здесь</a>) и настроить проект под себя. В конфиге вы можете выбрать шаблонизатор, css-препроцессор, использование уведомлений, имена папок для различной статики и т.д.
 После настройки проекта, выполняем следующую команду:    
 
 ```shell
@@ -56,9 +56,9 @@ gulp init
 Основные команды
 ----------------
 
-`gulp init` — Инициализирует проект с заданными опциями в projectConfig. Создает файловую структуру.
+`gulp init` — Инициализирует проект с заданными опциями в tars-config. Создает файловую структуру.
 
-`gulp re-init` — Переинициализирует проект с заданными опциями в projectConfig. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. При переинициализации все папки и файлы удаляются.
+`gulp re-init` — Переинициализирует проект с заданными опциями в tars-config. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. При переинициализации все папки и файлы удаляются.
 
 `gulp` или `gulp build` — делает сборку проекта. Подключаются не минимизированные файлы. Тип сборки зависит от переданных ключей вместе с этой командой. Доступные ключи:
 
@@ -88,7 +88,7 @@ gulp init
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/html-processing.md">Html</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/css-processing.md">Css</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/js-processing.md">Js</a>
-* <a href="https://github.com/artem-malko/tars/blob/master/docs/images-processing.md">Images</a>
+* <a href="https://github.com/artem-malko/tars/blob/master/docs/images-processing.md">Работа с изображениями</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/scenarios.md">Сценарии использования</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/faq.md">FAQ</a>
 

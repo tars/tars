@@ -1,9 +1,10 @@
+var tarsConfig = require('../../tars-config');
+
 /**
- * Set ulimit to 2048 by default
- * @param  {number} limit ulimit value
+ * Set ulimit to tarsConfig.ulimit
  */
-module.exports = function(limit) {
-    limit = limit || 2048;
+module.exports = function() {
+    var limit = tarsConfig.ulimit;
     var posix;
 
     try {

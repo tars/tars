@@ -3,18 +3,18 @@ var del = require('del');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 var pathToDel = [
-                 'markup/' + projectConfig.fs.staticFolderName + '/js/libraries',
-                 'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
-                 'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/',
-                 'markup/' + projectConfig.fs.staticFolderName + '/fonts/',
-                 'markup/' + projectConfig.fs.staticFolderName + '/scss/',
-                 'markup/' + projectConfig.fs.staticFolderName + '/stylus/',
-                 'markup/' + projectConfig.fs.staticFolderName + '/less/',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/fonts/',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/scss/',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/stylus/',
+                 'markup/' + tarsConfig.fs.staticFolderName + '/less/',
                  'markup/modules/_template/assets/',
                  'markup/modules/_template/ie/',
                  './markup/modules/head/',

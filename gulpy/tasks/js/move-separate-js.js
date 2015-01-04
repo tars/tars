@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var cache = require('gulp-cached');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -13,12 +13,12 @@ var modifyDate = require('../../helpers/modifyDateFormatter');
 module.exports = function(buildOptions) {
 
     return gulp.task('move-separate-js', function(cb) {
-        gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/js/separateJs/**/*.js')
+        gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/js/separateJs/**/*.js')
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving separate js-files.\'s data.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/js/separateJs'))
+            .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js/separateJs'))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({

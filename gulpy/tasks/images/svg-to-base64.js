@@ -3,8 +3,8 @@ var base64 = require('gulp-base64');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var gutil = require('gulp-util');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -15,15 +15,15 @@ module.exports = function(buildOptions) {
 
     return gulp.task('svg-to-base64', function(cb) {
 
-        if (projectConfig.useSVG) {
-            return gulp.src([buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/main' + buildOptions.hash + '.css', buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/main_ie9' + buildOptions.hash + '.css'])
+        if (tarsConfig.useSVG) {
+            return gulp.src([buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main' + buildOptions.hash + '.css', buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main_ie9' + buildOptions.hash + '.css'])
                 .pipe(base64({
                     extensions: ['svg']
                 }))
                 .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while converting svg to base64.\nLook in the console for details.\n' + error;
             }))
-                .pipe(gulp.dest(buildOptions.buildPath + projectConfig.fs.staticFolderName + '/css/'))
+                .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

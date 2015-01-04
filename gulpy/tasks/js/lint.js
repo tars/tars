@@ -4,8 +4,8 @@ var jshint = require('gulp-jshint');
 var cache = require('gulp-cached');
 var jscs = require('gulp-jscs');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 var jsPathsToLint = [
@@ -14,14 +14,14 @@ var jsPathsToLint = [
                      '!./markup/modules/**/mData.js'
                     ];
 
-if (projectConfig.lintJsCodeBeforeModules) {
-    projectConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
+if (tarsConfig.lintJsCodeBeforeModules) {
+    tarsConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
         jsPathsToLint.push(path)
     });
 }
 
-if (projectConfig.lintJsCodeAfterModules) {
-    projectConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
+if (tarsConfig.lintJsCodeAfterModules) {
+    tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
         jsPathsToLint.push(path)
     });
 }
@@ -33,7 +33,7 @@ if (projectConfig.lintJsCodeAfterModules) {
 module.exports = function(buildOptions) {
 
     return gulp.task('lint', function(cb) {
-        if (projectConfig.useJsLintAndHint) {
+        if (tarsConfig.useJsLintAndHint) {
             return gulp.src(jsPathsToLint)
                 .pipe(cache('linting'))
                 .pipe(jshint())

@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 var browserSync = require('browser-sync');
 
@@ -13,7 +13,7 @@ var browserSync = require('browser-sync');
 module.exports = function(buildOptions) {
 
     return gulp.task('move-misc-files', function(cb) {
-        return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/misc/**/*.*')
+        return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
             }))

@@ -3,8 +3,8 @@ var HtmlMin = require('gulp-minify-html');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -19,7 +19,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('minify-html', function(cb) {
 
-        if (projectConfig.minifyHtml) {
+        if (tarsConfig.minifyHtml) {
             return gulp.src('./dev/**/*.html')
                 .pipe(HtmlMin(opts))
                 .on('error', notify.onError(function (error) {

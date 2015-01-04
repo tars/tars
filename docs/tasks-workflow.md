@@ -18,8 +18,8 @@ TARS – набор gulp-тасков, организованных особым
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../tars-config');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../helpers/modifyDateFormatter');
 ```
 
@@ -85,8 +85,8 @@ watcher(
 ```
 
 Если вы хотите добавить вотчер, который следит за файлами в статике, то рекомендуется использовать переменные:
-* projectConfig.fs.staticFolderName — для имени папки со статикой
-* projectConfig.fs.imagesFolderName — для имени папки с изображениями
+* tarsConfig.fs.staticFolderName — для имени папки со статикой
+* tarsConfig.fs.imagesFolderName — для имени папки с изображениями
 
 Вотчер практически лишен тех недостатков, которые имеет встроенный вотчер в gulp, за исключением двух моментов:
 * Нельзя отслеживать, какое именно событие произошло. Любая операция с файлами по умолчанию помечается как changed.

@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var cache = require('gulp-cached');
 var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 var browserSync = require('browser-sync');
 
@@ -14,12 +14,12 @@ var browserSync = require('browser-sync');
 module.exports = function(buildOptions) {
 
     return gulp.task('move-plugins-img', function(cb) {
-        return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins/**/*.*')
+        return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins/**/*.*')
             .pipe(cache('move-plugins-img'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving plugin\'s imgs.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins'))
+            .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
                 gulpif(notifyConfig.useNotify,

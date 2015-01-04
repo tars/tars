@@ -3,8 +3,8 @@ var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var zip = require('gulp-zip');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -14,7 +14,7 @@ var modifyDate = require('../../helpers/modifyDateFormatter');
 module.exports = function(buildOptions) {
 
     return gulp.task('zip-build', function(cb) {
-        if (projectConfig.useArchiver) {
+        if (tarsConfig.useArchiver) {
             return gulp.src(buildOptions.buildPath + '**', { base : "." })
                 .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
                 .on('error', notify.onError(function (error) {

@@ -1,4 +1,4 @@
-var projectConfig = {
+var tarsConfig = {
 
 /////////////////////
 // MUTABLE OPTIONS ////////////////////////////////
@@ -172,6 +172,12 @@ var projectConfig = {
      */
     useArchiver: true
 
+    /**
+     * Set ulimit. Topical for Linux-family OS and OSX.
+     * @type {Number}
+     */
+    ulimit: 4096
+
 //////////////////////////////////////////////
 //////////////////////////////////////////////
 
@@ -215,7 +221,7 @@ var projectConfig = {
 
 
 ////////////////////////////////////////////////////////
-// You have to hange with options after manually      //
+// You have to change with options after manually      //
 // renaming static and img folder                     //
 //                                                    //
 // Do not rename these dirs before reinit             //
@@ -246,4 +252,4 @@ var projectConfig = {
 ////////////////////////////////////////////////////
 };
 
-module.exports = projectConfig;
+module.exports = tarsConfig;

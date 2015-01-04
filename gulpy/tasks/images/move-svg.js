@@ -5,8 +5,8 @@ var rename = require('gulp-rename');
 var cache = require('gulp-cached');
 var path = require('path');
 var notify = require('gulp-notify');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -17,8 +17,8 @@ module.exports = function(buildOptions) {
 
     return gulp.task('move-svg', function(cb) {
 
-        if (projectConfig.useSVG) {
-            return gulp.src('./markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
+        if (tarsConfig.useSVG) {
+            return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('move-svg'))
                 .pipe(rename(function(path) {
                     path.dirname = '';
@@ -26,7 +26,7 @@ module.exports = function(buildOptions) {
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while moving svg.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg'))
+                .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({

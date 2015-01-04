@@ -3,8 +3,8 @@ var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var gutil = require('gulp-util');
 var fs = require('fs');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -15,7 +15,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('pre-build', function() {
 
-        if (projectConfig.useBuildVersioning) {
+        if (tarsConfig.useBuildVersioning) {
             console.log('\n----------------------------------------------------------------------');
             gutil.log(gutil.colors.magenta.bold('Build version is: ', buildOptions.buildVersion));
             console.log('----------------------------------------------------------------------\n');

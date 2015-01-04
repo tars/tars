@@ -1,7 +1,7 @@
 HTML
 ====
 
-В качестве шаблонизатора для html можно использовать <a href="http://jade-lang.com/" target="_blank">jade</a> или <a href="http://handlebarsjs.com/" target="_blank">handlebars</a>. Шаблонизатор выбирается в projectConfig.js
+В качестве шаблонизатора для html можно использовать <a href="http://jade-lang.com/" target="_blank">jade</a> или <a href="http://handlebarsjs.com/" target="_blank">handlebars</a>. Шаблонизатор выбирается в tars-config.js
 
 Можно использовать любые средства данных шаблонизаторов. Если вам не нравится учить какой-либо синтаксис, и вы привыкли к ламповому html, то смело выбирайте handlebars и просто пишите html как раньше.
 

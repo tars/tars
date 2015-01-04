@@ -3,26 +3,26 @@ var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
-var projectConfig = require('../../../projectConfig');
+var tarsConfig = require('../../../tars-сonfig');
 
 var paths = [
-            'markup/' + projectConfig.fs.staticFolderName + '/js/libraries',
-            'markup/' + projectConfig.fs.staticFolderName + '/js/plugins',
-            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName,
-            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/content',
-            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/general',
-            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/plugins',
-            'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite'
+            'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
+            'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
+            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName,
+            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content',
+            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general',
+            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins',
+            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite'
         ];
 
-    for (var i = 0; i < projectConfig.useImagesForDisplayWithDpi.length; i++) {
-        paths.push('markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/sprite/' + projectConfig.useImagesForDisplayWithDpi[i] + 'dpi');
+    for (var i = 0; i < tarsConfig.useImagesForDisplayWithDpi.length; i++) {
+        paths.push('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/' + tarsConfig.useImagesForDisplayWithDpi[i] + 'dpi');
     }
 
     paths.push(
-        'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg',
-        'markup/' + projectConfig.fs.staticFolderName + '/fonts',
-        'markup/' + projectConfig.fs.staticFolderName + '/' + projectConfig.cssPreprocessor,
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg',
+        'markup/' + tarsConfig.fs.staticFolderName + '/fonts',
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor,
         'markup/modules/_template/assets',
         'markup/modules/_template/ie'
     );
@@ -35,8 +35,8 @@ module.exports = function(buildOptions) {
 
     return gulp.task('create-fs', function(cb) {
 
-        if (projectConfig.fs.staticFolderName != 'static') {
-            fs.renameSync('./markup/static/', './markup/' + projectConfig.fs.staticFolderName);
+        if (tarsConfig.fs.staticFolderName != 'static') {
+            fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);
         }
 
         paths.forEach(function(path) {

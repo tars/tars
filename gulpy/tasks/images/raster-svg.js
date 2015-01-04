@@ -3,8 +3,8 @@ var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
 var cache = require('gulp-cached');
-var projectConfig = require('../../../projectConfig');
-var notifyConfig = projectConfig.notifyConfig;
+var tarsConfig = require('../../../tars-сonfig');
+var notifyConfig = tarsConfig.notifyConfig;
 var svg2png = require('gulp-svg2png');
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
@@ -16,14 +16,14 @@ module.exports = function(buildOptions) {
 
     return gulp.task('raster-svg', function(cb) {
 
-        if (projectConfig.useSVG && gutil.env.ie8) {
-            return gulp.src('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/svg/*.svg')
+        if (tarsConfig.useSVG && gutil.env.ie8) {
+            return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
                 .pipe(svg2png())
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while rastering svg.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./dev/' + projectConfig.fs.staticFolderName + '/' + projectConfig.fs.imagesFolderName + '/rasterSvgImages/'))
+                .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rasterSvgImages/'))
                 .pipe(
                     gulpif(notifyConfig.useNotify,
                         notify({
