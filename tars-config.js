@@ -11,7 +11,7 @@ var tarsConfig = {
      * Autoprefixer config
      * @type {Array}
      */
-    autoprefixerConfig: ['> 1%', 'last 2 version', 'safari 5', 'opera 12.1', 'ios 5', 'android 4'],
+    autoprefixerConfig: ['> 1%', 'last 2 versions', 'opera 12.1', 'ios 5', 'android 4'],
 
     /**
      * Use svg images
