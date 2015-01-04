@@ -33,7 +33,7 @@ Default: `true`
 
 ### jsPathsToConcatBeforeModulesJs и jsPathsToConcatAfterModulesJs
 
-Type: `String or Array`
+Type: `String or Array`<br/>
 Default: `[]`
 
 По умолчание, весь js-код проекта собирается в 1 файл, кроме js-файлов, которые находятся в директории separate-js. Если необходимо включить в сборку файлы из других мест (например, вы создали отдельную директорию для js-файлов), то можно прописать в эту опцию путь или массив путей (паттернов путей) до js-файлов, которые должны попасть в сборку до js-модулей (jsPathsToConcatBeforeModulesJs) и js-файлов, которые должны быть подключены после js модулей (jsPathsToConcatAfterModulesJs). 
