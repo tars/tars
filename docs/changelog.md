@@ -1,2 +1,2 @@
-ChangeLog
+Changelog
 =========

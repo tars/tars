@@ -5,7 +5,7 @@ var notify = require('gulp-notify');
 var cache = require('gulp-cached');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var svg2png = require('gulp-svg2png');
+var rsvg = require('gulp-rsvg');
 var modifyDate = require('../../helpers/modifyDateFormatter');
 
 /**
@@ -19,7 +19,7 @@ module.exports = function(buildOptions) {
         if (tarsConfig.useSVG && gutil.env.ie8) {
             return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
-                .pipe(svg2png())
+                .pipe(rsvg())
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while rastering svg.\nLook in the console for details.\n' + error;
                 }))
