@@ -89,6 +89,7 @@ gulp init
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/css-processing.md">Css</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/js-processing.md">Js</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/images-processing.md">Работа с изображениями</a>
+* * <a href="https://github.com/artem-malko/tars/blob/master/docs/fonts-and-misc.md">Работа со шрифтами и misc-файлами</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/scenarios.md">Сценарии использования</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/faq.md">FAQ</a>
 

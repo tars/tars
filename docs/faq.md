@@ -4,7 +4,7 @@ FAQ
 <ol>
     <li>
         <strong>У меня OS X (Ubuntu, Linux Mint ...) В готовую сборку попадают не все файлы проекта.</strong><br/>
-        Нужно увеличить <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md#ulimit">ulimit</a> в `tars-config.js`
+        Нужно увеличить <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md#ulimit">ulimit</a> в tars-config.js
     </li>
     <li>
         <strong>Я ничего не понимаю в gulp, могу ли я комфортно пользоваться данным сборщиком?</strong><br/>
