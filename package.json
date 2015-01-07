@@ -23,7 +23,7 @@
     "gulp-csso": "0.2.9",
     "gulp-imagemin": "2.0.0",
     "gulp.spritesmith": "1.0.0",
-    "gulp-rsvg": "0.4.1",
+    "gulp-svg2png": "0.3.0",
     "gulp-base64": "0.1.2",
     "gulp-strip-debug": "1.0.1",
     "gulp-uglifyjs": "0.5.0",
