@@ -70,9 +70,9 @@ module.exports = function(buildOptions) {
                 }
             });
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/gulpy/tasks', './gulpy/tasks/html', function (err) {
+            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/tars/tasks', './tars/tasks/html', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy gulpy templater task');
+                    gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }
@@ -91,9 +91,9 @@ module.exports = function(buildOptions) {
                 throw err;
             }
 
-            ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-master/gulpy/tasks', './gulpy/tasks/css', function (err) {
+            ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-master/tars/tasks', './tars/tasks/css', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy gulpy css preproc task');
+                    gutil.log(gutil.colors.red('x'), ' Error while copy tars css preproc task');
                     gutil.log('Please, repost with message to developer.');
                     return;
                 }

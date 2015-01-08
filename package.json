@@ -49,11 +49,8 @@
     "through2": "0.6.3"
   },
   "devDependencies": {},
-  "optionalDependencies": {
-    "posix": "1.0.4"
-  },
   "scripts": {
-
+    "install": "node ./tars/helpers/install-additional-deps.js"
   },
   "repository": {
     "type": "git",

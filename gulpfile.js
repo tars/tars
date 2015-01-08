@@ -11,7 +11,7 @@ var useLiveReload = gutil.env.lr || false,
     // Configs
     tarsConfig = require('./tars-config'),
     browserSyncConfig = tarsConfig.browserSyncConfig,
-    templaterName = require('./gulpy/helpers/templaterNameSetter')(),
+    templaterName = require('./tars/helpers/templaterNameSetter')(),
     templateExtension = 'jade',
     cssPreprocExtension = tarsConfig.cssPreprocessor.toLowerCase(),
     tarsConfigTemlater = tarsConfig.templater.toLowerCase(),
@@ -49,13 +49,13 @@ var useLiveReload = gutil.env.lr || false,
 /***********/
 /* HELPERS */
 /***********/
-// You can add your own helpers here. Helpers folder is gulpy/helpers
+// You can add your own helpers here. Helpers folder is tars/helpers
 
 // Watcher by node-watch
-var watcher = require('./gulpy/helpers/watcher');
+var watcher = require('./tars/helpers/watcher');
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-require('./gulpy/helpers/setUlimit')();
+require('./tars/helpers/setUlimit')();
 
 /***************/
 /* END HELPERS */
@@ -71,111 +71,111 @@ require('./gulpy/helpers/setUlimit')();
 
 // You can add your own task.
 // There is a template of gulp-task
-// Task have to be in gulpy/userTasks folder
+// Task have to be in tars/userTasks folder
 // Example:
-// require('./gulpy/user-tasks/example-task')();
+// require('./tars/user-tasks/example-task')();
 
 
 // SYSTEM TASKS
 // Default tasks
 
 // Create file-structure
-require('./gulpy/tasks/services/create-fs')(buildOptions);
+require('./tars/tasks/services/create-fs')(buildOptions);
 
 // Init builder. Make folders
-require('./gulpy/tasks/services/init')(buildOptions);
+require('./tars/tasks/services/init')(buildOptions);
 
 // Re-init builder. Make folders
-require('./gulpy/tasks/services/re-init')(buildOptions);
+require('./tars/tasks/services/re-init')(buildOptions);
 
 // Clean dev directory and cache
-require('./gulpy/tasks/services/clean')(buildOptions);
+require('./tars/tasks/services/clean')(buildOptions);
 
 // Template compilation
-require('./gulpy/tasks/html/compile-templates')(buildOptions);
+require('./tars/tasks/html/compile-templates')(buildOptions);
 
 // Concat data for modules
-require('./gulpy/tasks/html/concat-modules-data')(buildOptions);
+require('./tars/tasks/html/concat-modules-data')(buildOptions);
 
 // Make sprite task
-require('./gulpy/tasks/images/raster-svg')(buildOptions);
+require('./tars/tasks/images/raster-svg')(buildOptions);
 
 // Make png-sprite task for svg files for old browsers
-require('./gulpy/tasks/css/make-fallback-for-svg')(buildOptions);
+require('./tars/tasks/css/make-fallback-for-svg')(buildOptions);
 
 // SVG minification
-require('./gulpy/tasks/images/minify-svg')(buildOptions);
+require('./tars/tasks/images/minify-svg')(buildOptions);
 
 // PNG, JPG minification
-require('./gulpy/tasks/images/minify-raster-img')(buildOptions);
+require('./tars/tasks/images/minify-raster-img')(buildOptions);
 
 // Move SVG-files to dev directory
-require('./gulpy/tasks/images/move-svg')(buildOptions);
+require('./tars/tasks/images/move-svg')(buildOptions);
 
 // Convert svg includes to base64 in css
-require('./gulpy/tasks/images/svg-to-base64')(buildOptions);
+require('./tars/tasks/images/svg-to-base64')(buildOptions);
 
 // Make sprite task
-require('./gulpy/tasks/css/make-sprite')(buildOptions);
+require('./tars/tasks/css/make-sprite')(buildOptions);
 
 // Css compilation
-require('./gulpy/tasks/css/compile-css')(buildOptions);
+require('./tars/tasks/css/compile-css')(buildOptions);
 
 // Css compilation for ie8
-require('./gulpy/tasks/css/compile-css-for-ie8')(buildOptions);
+require('./tars/tasks/css/compile-css-for-ie8')(buildOptions);
 
 // Css compilation for ie9
-require('./gulpy/tasks/css/compile-css-for-ie9')(buildOptions);
+require('./tars/tasks/css/compile-css-for-ie9')(buildOptions);
 
 // Compress css
-require('./gulpy/tasks/css/compress-css')(buildOptions);
+require('./tars/tasks/css/compress-css')(buildOptions);
 
 // Move JS-files for libs that have to be in separate files
-require('./gulpy/tasks/js/move-separate-js')(buildOptions);
+require('./tars/tasks/js/move-separate-js')(buildOptions);
 
 // Concat JS for modules, libs and plugins to 1 file.
 // Also lint modules' js
-require('./gulpy/tasks/js/js-processing')(buildOptions);
+require('./tars/tasks/js/js-processing')(buildOptions);
 
 // Check JS (code style and errors)
-require('./gulpy/tasks/js/lint')(buildOptions);
+require('./tars/tasks/js/lint')(buildOptions);
 
 // Strip console.log and debugger from main.js
-require('./gulpy/tasks/js/strip-debug')(buildOptions);
+require('./tars/tasks/js/strip-debug')(buildOptions);
 
 // Compress js-files and strip debug
-require('./gulpy/tasks/js/compress-js')(buildOptions);
+require('./tars/tasks/js/compress-js')(buildOptions);
 
 // Move misc files
-require('./gulpy/tasks/other/move-misc-files')(buildOptions);
+require('./tars/tasks/other/move-misc-files')(buildOptions);
 
 // Move images from assets modules of modules
-require('./gulpy/tasks/images/move-assets')(buildOptions);
+require('./tars/tasks/images/move-assets')(buildOptions);
 
 // Move images for content
-require('./gulpy/tasks/images/move-content-img')(buildOptions);
+require('./tars/tasks/images/move-content-img')(buildOptions);
 
 // Move images for plugins
-require('./gulpy/tasks/images/move-plugins-img')(buildOptions);
+require('./tars/tasks/images/move-plugins-img')(buildOptions);
 
 // Move general images
-require('./gulpy/tasks/images/move-general-img')(buildOptions);
+require('./tars/tasks/images/move-general-img')(buildOptions);
 
 // Move fonts-files to dev directory
-require('./gulpy/tasks/other/move-fonts')(buildOptions);
+require('./tars/tasks/other/move-fonts')(buildOptions);
 
 // Copy files from dev to build directory
 // Create build directory with new build version
-require('./gulpy/tasks/services/pre-build')(buildOptions);
+require('./tars/tasks/services/pre-build')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/html/minify-html')(buildOptions);
+require('./tars/tasks/html/minify-html')(buildOptions);
 
 // Create zip-archive
-require('./gulpy/tasks/services/zip-build')(buildOptions);
+require('./tars/tasks/services/zip-build')(buildOptions);
 
 // Update deps
-require('./gulpy/tasks/services/update')(buildOptions);
+require('./tars/tasks/services/update')(buildOptions);
 
 /*************/
 /* END TASKS */
