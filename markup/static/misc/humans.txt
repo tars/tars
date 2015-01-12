@@ -1,5 +1,5 @@
 # humanstxt.org/
-# The humans responsible & technology colophon
+# The humans responsible & technologies
 
 # TEAM
 
@@ -9,7 +9,7 @@
 
     <name>
 
-# TECHNOLOGY COLOPHON
+# TECHNOLOGIES
 
     HTML5, CSS3, JS
     
