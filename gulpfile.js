@@ -221,7 +221,7 @@ gulp.task('dev', ['build-dev'], function() {
         });
     }
 
-    // Watcher for common scss(or less)-files and scss(or less)-files of plugins
+    // Watcher for common scss(less or stylus)-files and scss(less or stylus)-files of plugins
     watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
         gulp.start('compile-css');
 
@@ -266,7 +266,7 @@ gulp.task('dev', ['build-dev'], function() {
         });
     }
 
-    // Watcher for templates-files of templates
+    // Watcher for templates-files of pages
     watcher('./markup/pages/**/*.' + templateExtension, false, function(filename) {
         gulp.start('compile-templates');
     });
@@ -305,7 +305,7 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('js-processing');
     });
 
-    // Watcher for js-files of libs
+    // Watcher for js-files of libraries
     watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/libraries/**/*.js', false, function(filename) {
         gulp.start('js-processing');
     });
@@ -346,15 +346,15 @@ gulp.task('dev', ['build-dev'], function() {
     });
 });
 
-/***************/
+/****************/
 /* END WATCHERS */
-/***************/
+/****************/
 
 
 
 /**************/
 /* MAIN TASKS */
-/***************/
+/**************/
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
