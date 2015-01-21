@@ -13,7 +13,7 @@
     "gulp-zip": "2.0.2",
     "gulp-minify-html": "0.1.8",
     "gulp-data": "1.1.1",
-    "gulp-jade": "0.6.1",
+    "gulp-jade": "0.11.0",
     "gulp-compile-handlebars": "git://github.com/kaanon/gulp-compile-handlebars#48d31b4dc0c921db6cfd0e02e6ace961daa2c783",
     "gulp-sass": "1.2.3",
     "gulp-less": "2.0.1",
