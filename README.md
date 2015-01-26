@@ -2,6 +2,8 @@
 =============
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Сборщик html-верстки, основанный на <a href="http://gulpjs.com/" target="_blank">gulp.js</a>. Облегчает и ускоряет процесс html-верстки любой сложности. Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
 
 TARS — сборщик-фреймворк, включающий в себя набор gulp-тасков, предоставляющий возможность легкого расширения (создания новых тасков) и модифицирования уже существующих.
