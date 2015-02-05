@@ -6,7 +6,7 @@ var jscs = require('gulp-jscs');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 var jsPathsToLint = [
                      './markup/modules/**/*.js',

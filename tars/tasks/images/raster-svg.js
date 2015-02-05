@@ -6,7 +6,7 @@ var cache = require('gulp-cached');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
 var svg2png = require('gulp-svg2png');
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Raster SVG-files (optional task)

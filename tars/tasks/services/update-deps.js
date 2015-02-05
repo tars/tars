@@ -11,7 +11,7 @@ var tarsConfig = require('../../../tars-config');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('update', function(cb) {
+    return gulp.task('update-deps', function(cb) {
         var downloadPackage = new Download({ extract: true})
             .get('https://raw.githubusercontent.com/artem-malko/tars/master/package.json')
             .dest('./')

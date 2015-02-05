@@ -7,7 +7,7 @@ var path = require('path');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Move svg to dev directory (optional task)

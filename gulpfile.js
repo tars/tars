@@ -11,7 +11,7 @@ var useLiveReload = gutil.env.lr || false,
     // Configs
     tarsConfig = require('./tars-config'),
     browserSyncConfig = tarsConfig.browserSyncConfig,
-    templaterName = require('./tars/helpers/templaterNameSetter')(),
+    templaterName = require('./tars/helpers/templater-name-setter')(),
     templateExtension = 'jade',
     cssPreprocExtension = tarsConfig.cssPreprocessor.toLowerCase(),
     tarsConfigTemlater = tarsConfig.templater.toLowerCase(),
@@ -19,8 +19,7 @@ var useLiveReload = gutil.env.lr || false,
 
     // Generate build version
     if (tarsConfig.useBuildVersioning) {
-        buildOptions.buildVersion = '_ver-' + (new Date()).toString();
-        buildOptions.buildVersion = buildOptions.buildVersion.replace(/ /g,'_').replace(/:/g,'-').match(/.*\d\d-\d\d-\d\d/)[0];
+        buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
         buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
     } else {
         buildOptions.buildVersion = '';
@@ -55,7 +54,7 @@ var useLiveReload = gutil.env.lr || false,
 var watcher = require('./tars/helpers/watcher');
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-require('./tars/helpers/setUlimit')();
+require('./tars/helpers/set-ulimit')();
 
 /***************/
 /* END HELPERS */
@@ -67,13 +66,13 @@ require('./tars/helpers/setUlimit')();
 /* TASKS */
 /*********/
 
-// USERS TASKS
+// USER'S TASKS
 
 // You can add your own task.
 // There is a template of gulp-task
-// Task have to be in tars/userTasks folder
+// Task have to be in tars/user-tasks folder
 // Example:
-// require('./tars/user-tasks/example-task')();
+// require('./tars/user-tasks/example-task')(buildOptions);
 
 
 // SYSTEM TASKS
@@ -175,7 +174,7 @@ require('./tars/tasks/html/minify-html')(buildOptions);
 require('./tars/tasks/services/zip-build')(buildOptions);
 
 // Update deps
-require('./tars/tasks/services/update')(buildOptions);
+require('./tars/tasks/services/update-deps')(buildOptions);
 
 /*************/
 /* END TASKS */
@@ -493,7 +492,6 @@ gulp.task('builder-start-screen', function(cb) {
 
     cb();
 });
-
 
 /*********************/
 /* END HELPERS TASKS */

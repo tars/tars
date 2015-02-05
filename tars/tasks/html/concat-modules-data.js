@@ -4,7 +4,7 @@ var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * conact data for modules to one file

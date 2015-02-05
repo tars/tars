@@ -5,7 +5,7 @@ var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../tars-сonfig');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
+var modifyDate = require('../helpers/modify-date-formatter');
     // Include browserSync, if you need to reload browser
     // var browserSync = require('browser-sync');
 

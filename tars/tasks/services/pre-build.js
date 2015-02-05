@@ -5,7 +5,7 @@ var gutil = require('gulp-util');
 var fs = require('fs');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Copy files from dev to build directory. Create build directory with new build version

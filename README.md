@@ -79,7 +79,8 @@ gulp init
 * `--ie9` – включить в сборку стили для ie9.
 * `--ie8` – включить в сборку стили для ie8.
 
-`gulp update` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды. Желательно выполнять раз в неделю. Команда скопирует текущий package.json, добавит к его имени подчеркивание, скачает новый package.json с репозитория и выполнит npm install. Таким образом, если у вас что-то сломалось с новыми пакетами, то всегда можно вернуться на прошлую версию, просто вернув прошлый package.json
+`gulp update-deps` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды. Желательно выполнять раз в неделю. Команда скопирует текущий package.json, добавит к его имени подчеркивание, скачает новый package.json с репозитория и выполнит npm install. Таким образом, если у вас что-то сломалось с новыми пакетами, то всегда можно вернуться на прошлую версию, просто вернув прошлый package.json
+Также вы можете ознакомиться с <a href="https://github.com/artem-malko/tars/blob/master/docs/update-guide.md" target="_blank">руководством пообновлению</a>.
 
 Документация
 ------------
@@ -92,6 +93,7 @@ gulp init
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/images-processing.md">Работа с изображениями</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/fonts-and-misc.md">Работа со шрифтами и misc-файлами</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/scenarios.md">Сценарии использования</a>
+* <a href="https://github.com/artem-malko/tars/blob/master/docs/update-guide.md">Руководство по обновлению</a>
 * <a href="https://github.com/artem-malko/tars/blob/master/docs/faq.md">FAQ</a>
 
 Последние изменения

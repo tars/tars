@@ -5,7 +5,7 @@ var notify = require('gulp-notify');
 var gutil = require('gulp-util');
 var tarsConfig = require('../../../tars-config');
 var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modifyDateFormatter');
+var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Convert included svg-files to base64 in css
