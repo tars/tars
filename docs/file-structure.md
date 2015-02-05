@@ -104,7 +104,7 @@ dev/
 
 build-версия проекта не содержит папки temp, включает минимизированные css- и js-файлы. Содержит оптимизированные картинки и архив с собранным проектом (опционально).
 
-Если включена опция useBuildVersioning, то каждый билд лежит в отдельной папке под названием build_ver%дата сборки% (или так, как вы сами настроите в tars/helpers/set-build-version.js). Если useBuildVersioning отключен, то готовый проект находится по пути, который указан в опции <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md#buildpath" target="_blank">buildPath</a>
+Если включена опция useBuildVersioning, то каждый билд лежит в отдельной папке по пути, который указан в опции <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md#buildpath" target="_blank">buildPath</a>, под названием build_ver%дата сборки% (или так, как вы сами настроите в tars/helpers/set-build-version.js). Если useBuildVersioning отключен, то готовый проект находится по пути, который указан в опции <a href="https://github.com/artem-malko/tars/blob/master/docs/options.md#buildpath" target="_blank">buildPath</a>, в папке build.
 
 При подключении картинок необходимо использовать именно тот путь, по которому они лежат в собранном проекте.
 
