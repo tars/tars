@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
