@@ -340,7 +340,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // Watcher for separate Js files files
-    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/separateJs/**/*.js', false, function(filename) {
+    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js', false, function(filename) {
         gulp.start('move-separate-js');
     });
 });
