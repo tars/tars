@@ -221,17 +221,21 @@ gulp.task('dev', ['build-dev'], function() {
     }
 
     // Watcher for common scss(less or stylus)-files and scss(less or stylus)-files of plugins
-    watcher('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, false, function(filename) {
-        gulp.start('compile-css');
+    watcher(
+        ['./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor + '/**/*.' + cssPreprocExtension, './markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor + '/**/*.css'],
+        false,
+        function(filename) {
+            gulp.start('compile-css');
 
-        if (gutil.env.ie8) {
-            gulp.start('compile-css-for-ie8');
-        }
+            if (gutil.env.ie8) {
+                gulp.start('compile-css-for-ie8');
+            }
 
-        if (gutil.env.ie9) {
-            gulp.start('compile-css-for-ie9');
+            if (gutil.env.ie9) {
+                gulp.start('compile-css-for-ie9');
+            }
         }
-    });
+    );
 
     // Watcher for modules stylies
     watcher(
