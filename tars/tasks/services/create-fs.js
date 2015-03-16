@@ -1,11 +1,11 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var tarsConfig = require('../../../tars-config');
 
 var paths = [
+            'markup/' + tarsConfig.fs.staticFolderName + '/js/framework',
             'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
             'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
             'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName,
@@ -33,7 +33,7 @@ var paths = [
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('create-fs', function(cb) {
+    return gulp.task('service:create-fs', function(cb) {
 
         if (tarsConfig.fs.staticFolderName != 'static') {
             fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);

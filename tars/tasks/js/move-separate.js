@@ -1,10 +1,8 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var cache = require('gulp-cached');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 
 /**
  * Copy separate Js-files to dev directory
@@ -12,7 +10,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-separate-js', function(cb) {
+    return gulp.task('js:move-separate', function(cb) {
         gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js')
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
@@ -20,17 +18,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js/separate-js'))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Separate js files\'s been copied \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Separate js files\'s been copied')
             );
 
         cb(null);

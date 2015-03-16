@@ -1,13 +1,9 @@
 var gulp = require('gulp');
 var del = require('del');
-var gulpif = require('gulp-if');
-var gutil = require('gulp-util');
-var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 var pathToDel = [
+                 'markup/' + tarsConfig.fs.staticFolderName + '/js/framework',
                  'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
                  'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
                  'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/',
@@ -35,7 +31,7 @@ var pathToDel = [
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('remove-init-fs', function(cb) {
+    return gulp.task('service:remove-init-fs', function(cb) {
         del(pathToDel, cb);
     });
 };

@@ -1,9 +1,5 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 var templaterName = require('../../helpers/templater-name-setter');
 var gutil = require('gulp-util');
 var ncp = require('ncp').ncp;
@@ -15,8 +11,11 @@ var githubConfig = {
     repoPrefix: 'tars-'
 };
 
-var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/master.zip';
-var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/master.zip';
+var templaterVersion = 'version-' + require('../../../package.json').version;
+var cssVersion = 'version-' + require('../../../package.json').version;
+
+var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
+var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
 
 ncp.limit = 16;
 require('./create-fs')();
@@ -28,17 +27,19 @@ require('./create-fs')();
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('init', ['create-fs'], function(cb) {
+    return gulp.task('service:init', ['service:create-fs'], function(cb) {
 
-        var downloadTemplater = new Download({ extract: true})
-            .get(templaterUrl)
-            .dest('./.tmpTemplater')
-            .use();
+        var downloadTemplater,
+            downloadCssPreprocessor,
+            downloadTemplaterTest,
+            downloadCssPreprocessorTest;
 
-        var downloadCssPreprocessor = new Download({ extract: true})
-            .get(cssPreprocessorUrl)
-            .dest('./.tmpPreproc')
-            .use();
+        downloadTemplaterTest = new Download()
+            .get(templaterUrl);
+
+        downloadCssPreprocessorTest = new Download()
+            .get(cssPreprocessorUrl);
+
 
         if (os.platform() === 'darwin') {
             console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
@@ -49,77 +50,99 @@ module.exports = function(buildOptions) {
         console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
         console.log('Start your work with \'gulp dev\'\n\n');
 
-        /**
-         * Including templater
-         * @param  {Object} err
-         * @param  {Array} files
-         * @param  {Stream} stream
-         */
-        downloadTemplater.run(function (err, files, stream) {
-
+        downloadTemplaterTest.run(function (err, files) {
             if (err) {
-                throw err;
+                templaterVersion = 'master'
+                templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
             }
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/markup', './markup', function (err) {
-                if (err) {
-                    gutil.log(gutil.colors.red(err));
-                    gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
-                    gutil.log('Please, repost with message to developer.');
-                    return;
-                }
-            });
+            downloadTemplater = new Download({ extract: true})
+                .get(templaterUrl)
+                .dest('./.tmpTemplater');
 
-            ncp('./.tmpTemplater/tars-' + templaterName() + '-master/tars/tasks', './tars/tasks/html', function (err) {
+            /**
+             * Including templater
+             * @param  {Object} err
+             * @param  {Array} files
+             * @param  {Stream} stream
+             */
+            downloadTemplater.run(function (err, files) {
+
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
-                    gutil.log('Please, repost with message to developer.');
-                    return;
+                    throw err;
                 }
+
+                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/markup', './markup', function (err) {
+                    if (err) {
+                        gutil.log(gutil.colors.red(err));
+                        gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
+                        gutil.log('Please, repost with message to developer.');
+                        return;
+                    }
+                });
+
+                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
+                    if (err) {
+                        gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
+                        gutil.log('Please, repost with message to developer.');
+                        return;
+                    }
+                });
             });
         });
 
-        /**
-         * Including css-preprocessor
-         * @param  {Object} err
-         * @param  {Array} files
-         * @param  {Stream} stream
-         */
-        downloadCssPreprocessor.run(function (err, files, stream) {
-
+        downloadCssPreprocessorTest.run(function (err, files) {
             if (err) {
-                throw err;
+                cssVersion = 'master'
+                cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
             }
 
-            ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-master/tars/tasks', './tars/tasks/css', function (err) {
-                if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy tars css preproc task');
-                    gutil.log('Please, repost with message to developer.');
-                    return;
-                }
-            });
+            downloadCssPreprocessor = new Download({ extract: true})
+                .get(cssPreprocessorUrl)
+                .dest('./.tmpPreproc');
 
-            ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-master/markup/static', './markup/' + tarsConfig.fs.staticFolderName, function (err) {
-                if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
-                    gutil.log('Please, repost with message to developer.');
-                    return;
-                }
-            });
+            /**
+             * Including css-preprocessor
+             * @param  {Object} err
+             * @param  {Array} files
+             * @param  {Stream} stream
+             */
+            downloadCssPreprocessor.run(function (err, files) {
 
-            ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-master/markup/modules/_template', './markup/modules/_template/', function (err) {
                 if (err) {
-                    gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
-                    gutil.log('Please, repost with message to developer.');
-                    return;
+                    throw err;
                 }
 
-                console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
-                console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
-                console.log('You choose:');
-                console.log(gutil.colors.magenta.bold(tarsConfig.cssPreprocessor), ' as css-preprocessor');
-                console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
-                console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
+                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/tars/tasks', './tars/tasks/css', function (err) {
+                    if (err) {
+                        gutil.log(gutil.colors.red('x'), ' Error while copy tars css preproc task');
+                        gutil.log('Please, repost with message to developer.');
+                        return;
+                    }
+                });
+
+                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tarsConfig.fs.staticFolderName, function (err) {
+                    if (err) {
+                        gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
+                        gutil.log('Please, repost with message to developer.');
+                        return;
+                    }
+                });
+
+                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/markup/modules/_template', './markup/modules/_template/', function (err) {
+                    if (err) {
+                        gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
+                        gutil.log('Please, repost with message to developer.');
+                        return;
+                    }
+
+                    console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
+                    console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
+                    console.log('You choose:');
+                    console.log(gutil.colors.magenta.bold(tarsConfig.cssPreprocessor), ' as css-preprocessor');
+                    console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
+                    console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
+                });
             });
         });
     });

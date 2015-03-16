@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var base64 = require('gulp-base64');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var gutil = require('gulp-util');
+var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Convert included svg-files to base64 in css
@@ -13,10 +11,13 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('svg-to-base64', function(cb) {
+    return gulp.task('images:svg-to-base64', function(cb) {
 
         if (tarsConfig.useSVG) {
-            return gulp.src([buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main' + buildOptions.hash + '.css', buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main_ie9' + buildOptions.hash + '.css'])
+            return gulp.src([
+                    buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main' + buildOptions.hash + '.css',
+                    buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/main_ie9' + buildOptions.hash + '.css'
+                ])
                 .pipe(base64({
                     extensions: ['svg']
                 }))
@@ -25,16 +26,7 @@ module.exports = function(buildOptions) {
             }))
                 .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify,
-                        notify({
-                            sound: notifyConfig.sounds.onSuccess,
-                            title: notifyConfig.title,
-                            message: 'SVG includes\'ve been converted to base64 \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                            templateOptions: {
-                                date: modifyDate.getTimeOfModify()
-                            }
-                        })
-                    )
+                    notifier('SVG includes\'ve been converted to base64')
                 );
         } else {
             gutil.log('!SVG is not used!');

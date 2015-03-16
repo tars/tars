@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var HtmlMin = require('gulp-minify-html');
 var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
+var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Minify HTML (optional task)
@@ -14,10 +12,11 @@ var modifyDate = require('../../helpers/modify-date-formatter');
 module.exports = function(buildOptions) {
     var opts = {
         conditionals: true,
-        quotes: true
+        quotes: true,
+        empty: true
     };
 
-    return gulp.task('minify-html', function(cb) {
+    return gulp.task('html:minify-html', function(cb) {
 
         if (tarsConfig.minifyHtml) {
             return gulp.src('./dev/**/*.html')
@@ -27,17 +26,7 @@ module.exports = function(buildOptions) {
                 }))
                 .pipe(gulp.dest('./dev/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify,
-                        notify({
-                            onLast: true,
-                            sound: notifyConfig.sounds.onSuccess,
-                            title: notifyConfig.title,
-                            message: 'Html \'ve been minified \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                            templateOptions: {
-                                date: modifyDate.getTimeOfModify()
-                            }
-                        })
-                    )
+                    notifier('Html \'ve been minified')
                 );
         } else {
             gutil.log('!Html-minify disabled!');

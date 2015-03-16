@@ -2,11 +2,9 @@ var gulp = require('gulp');
 var csso = require('gulp-csso');
 var cmq = require('gulp-combine-media-queries');
 var rename = require('gulp-rename');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
+var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Compress css-files
@@ -14,7 +12,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('compress-css', function() {
+    return gulp.task('css:compress-css', function() {
         return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/*.css')
             .pipe(cmq())
             .pipe(csso())
@@ -26,17 +24,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/'))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Css\'ve been minified \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Css\'ve been minified')
             );
         });
 };

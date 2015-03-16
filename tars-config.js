@@ -97,6 +97,13 @@ var tarsConfig = {
      * @type {Object}
      */
     browserSyncConfig: {
+
+        /**
+         * dir to serve files from
+         * @type {String}
+         */
+        baseDir: './dev',
+
         /**
          * Port of local server for browser-sync
          * @type {Number}
@@ -145,12 +152,22 @@ var tarsConfig = {
     /**
      * Beginning of path for static files
      * You have to use %=staticPrefix=% placeholder in paths to static
-     * Example: %=staticPrefix=%/img/logo.png
-     * Will be replaced to 'static/img/logo.png'
-     * In css you have to use relative path: /%=staticPrefix=%/img/logo.png
-     * @type {String}
+     * Example: %=staticPrefix=%img/logo.png
+     * Will be replaced to '/static/img/logo.png'
+     * @type {String or Object}
      */
-    staticPrefix: 'static',
+    staticPrefix: 'static/',
+
+    /**
+     * Beginning of path for static files
+     * You have to use %=staticPrefix=% placeholder in paths to static
+     * Example: %=staticPrefix=%img/logo.png
+     * Will be replaced to '/static/img/logo.png'
+     * @type {String or Object}
+     */
+    staticPrefixForCss: function() {
+        return '../' + this.fs.imagesFolderName + '/'
+    },
 
     /**
      * Path to build version of project
@@ -214,7 +231,7 @@ var tarsConfig = {
      * and delete unused.
      * @type {Array}
      */
-    useImagesForDisplayWithDpi: [96],
+    useImagesForDisplayWithDpi: [96, 192, 288, 384],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////

@@ -11,12 +11,12 @@ var browserSync = require('browser-sync');
 var os = require('os');
 
 /**
- * Move images from assets modules of modules
+ * Move files from assets modules of modules
  * @param  {object} buildOptions
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-assets', function(cb) {
+    return gulp.task('other:move-assets', function(cb) {
         return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))
             .pipe(rename(function(path) {

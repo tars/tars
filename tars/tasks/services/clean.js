@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var del = require('del');
 var tarsConfig = require('../../../tars-config');
 
@@ -19,7 +18,7 @@ module.exports = function(buildOptions) {
         pathsToDel.push(buildOptions.buildPath);
     }
 
-    return gulp.task('clean', function(cb) {
+    return gulp.task('service:clean', function(cb) {
         del(pathsToDel, cb);
     });
 };

@@ -1,10 +1,8 @@
 var gulp = require('gulp');
 var cache = require('gulp-cached');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
+var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 var browserSync = require('browser-sync');
 
 /**
@@ -13,7 +11,7 @@ var browserSync = require('browser-sync');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-fonts', function() {
+    return gulp.task('other:move-fonts', function() {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*')
             .pipe(cache('move-fonts'))
             .on('error', notify.onError(function (error) {
@@ -22,17 +20,7 @@ module.exports = function(buildOptions) {
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/fonts'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Fonts\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Fonts\'ve been moved')
             );
     });
 };

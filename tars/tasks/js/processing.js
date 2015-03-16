@@ -1,13 +1,12 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 var browserSync = require('browser-sync');
 
 var jsPaths = [
+        './markup/' + tarsConfig.fs.staticFolderName + '/js/framework/**/*.js',
         './markup/' + tarsConfig.fs.staticFolderName + '/js/libraries/**/*.js',
         './markup/' + tarsConfig.fs.staticFolderName + '/js/plugins/**/*.js'
     ];
@@ -18,7 +17,7 @@ var jsPaths = [
         });
     }
 
-    jsPaths.push('./markup/modules/**/*.js');
+    jsPaths.push('./markup/modules/*/*.js');
 
     if (tarsConfig.jsPathsToConcatAfterModulesJs.length) {
         tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
@@ -28,7 +27,7 @@ var jsPaths = [
 
     jsPaths.push('!./markup/modules/**/mData.js');
 
-require('./lint')();
+require('./check')();
 
 /**
  * Concat JS for modules, libs and plugins in common file. Also lint modules' js
@@ -36,7 +35,7 @@ require('./lint')();
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('js-processing', ['lint'], function() {
+    return gulp.task('js:processing', ['js:check'], function() {
         return gulp.src(jsPaths)
             .pipe(concat('main' + buildOptions.hash + '.js'))
             .on('error', notify.onError(function (error) {
@@ -45,17 +44,7 @@ module.exports = function(buildOptions) {
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'JS\'ve been linted and concatinated \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('JS\'ve been linted and concatinated')
             );
     });
 };

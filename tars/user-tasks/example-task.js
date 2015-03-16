@@ -1,15 +1,14 @@
 // This is example of task function
 
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
-var tarsConfig = require('../../tars-сonfig');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../helpers/modify-date-formatter');
+var notifier = require('../helpers/notifier');
+var tarsConfig = require('../../tars-config');
     // Include browserSync, if you need to reload browser
     // var browserSync = require('browser-sync');
 
 // require('./ path to task file, which have to be done before current task');
+// require('./required-task-name');
 
 /**
  * Task description
@@ -17,7 +16,7 @@ var modifyDate = require('../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('task-name', ['required-task-name'], function(cb) {
+    return gulp.task('task-name', /*['required-task-name'],*/ function(cb) {
         return gulp.src(/* path-string or array of path-strings to files */)
             // Do stuff here
             .on('error', notify.onError(function (error) {
@@ -28,18 +27,10 @@ module.exports = function(buildOptions) {
             // If you need to reload browser, uncomment the row below
             // .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true, // Use this, if you need notify only after last file will be processed
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        // You can change text of success message
-                        message: 'Example task is finished \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                // You can change text of success message
+                notifier('Example task is finished')
+                // if you need notify after each file will be processed, you have to use
+                // notifier('Example task is finished', false)
             );
 
         // You can return callback, if you can't return pipe

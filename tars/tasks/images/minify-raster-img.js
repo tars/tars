@@ -1,12 +1,9 @@
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
 var changed = require('gulp-changed');
-var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 
 /**
  * Minify png and jpg images
@@ -14,7 +11,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('minify-raster-img', function(cb) {
+    return gulp.task('images:minify-raster-img', function(cb) {
         return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
             .pipe(changed('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))
             .pipe(imagemin())
@@ -24,17 +21,7 @@ module.exports = function(buildOptions) {
             )
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Raster images\'ve been minified \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Rastered images\'ve been minified')
             );
     });
 };

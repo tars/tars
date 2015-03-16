@@ -1,13 +1,11 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var rename = require('gulp-rename');
 var cache = require('gulp-cached');
 var path = require('path');
 var notify = require('gulp-notify');
+var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Move svg to dev directory (optional task)
@@ -15,7 +13,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-svg', function(cb) {
+    return gulp.task('images:move-svg', function(cb) {
 
         if (tarsConfig.useSVG) {
             return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
@@ -28,17 +26,7 @@ module.exports = function(buildOptions) {
                 }))
                 .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify,
-                        notify({
-                            onLast: true,
-                            sound: notifyConfig.sounds.onSuccess,
-                            title: notifyConfig.title,
-                            message: 'Svg\'ve been moved to dev\n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                            templateOptions: {
-                                date: modifyDate.getTimeOfModify()
-                            }
-                        })
-                    )
+                    notifier('Svg\'ve been moved to dev')
                 );
         } else {
             gutil.log('!SVG is not used!');

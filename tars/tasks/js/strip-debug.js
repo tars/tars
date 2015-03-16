@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var stripDebug = require('gulp-strip-debug');
-var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 
 /**
  * Strip console.log and debugger from main.js (optional task)
@@ -13,7 +11,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('strip-debug', function(cb) {
+    return gulp.task('js:strip-debug', function(cb) {
 
         if (tarsConfig.removeConsoleLog) {
             return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
@@ -23,17 +21,7 @@ module.exports = function(buildOptions) {
                 }))
                 .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify,
-                        notify({
-                            onLast: true,
-                            sound: notifyConfig.sounds.onSuccess,
-                            title: notifyConfig.title,
-                            message: 'JS is ready for minify \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                            templateOptions: {
-                                date: modifyDate.getTimeOfModify()
-                            }
-                        })
-                    )
+                    notifier('JS is ready for minify')
                 );
         } else {
             gutil.log('!Strip debug is not used!');

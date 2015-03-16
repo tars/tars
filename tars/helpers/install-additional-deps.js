@@ -1,5 +1,6 @@
 var os = require('os');
 var exec = require('child_process').exec;
+var templaterName = require('./templater-name-setter')();
 var usersDeps;
 
 if (os.platform() !== 'win32') {
@@ -30,3 +31,17 @@ for (dep in usersDeps.dependencies) {
         });
     }
 }
+
+// Install special deps for selected templater or css-preprocessor
+
+if (templaterName === 'handlebars') {
+    exec('npm i digits@0.1.4', function (error, stdout, stderr) {
+        if (error) {
+            console.log(stderr);
+        } else {
+            console.log(stdout);
+        }
+    });
+}
+
+//"digits": "0.2.0",

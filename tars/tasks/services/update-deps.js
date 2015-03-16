@@ -3,7 +3,6 @@ var gutil = require('gulp-util');
 var exec = require('child_process').exec;
 var Download = require('download');
 var fs = require('fs');
-var tarsConfig = require('../../../tars-config');
 
 /**
  * Update dependencies
@@ -11,7 +10,7 @@ var tarsConfig = require('../../../tars-config');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('update-deps', function(cb) {
+    return gulp.task('service:update-deps', function(cb) {
         var downloadPackage = new Download({ extract: true})
             .get('https://raw.githubusercontent.com/artem-malko/tars/master/package.json')
             .dest('./')

@@ -1,5 +1,5 @@
 var tarsConfig = require('../../tars-config');
-var tarsConfigTemlater = tarsConfig.templater.toLowerCase();
+var tarsConfigTemplater = tarsConfig.templater.toLowerCase();
 var templaterName = '';
 
 /**
@@ -7,12 +7,12 @@ var templaterName = '';
  * @return {string} Templater name
  */
 module.exports = function() {
-    if (tarsConfigTemlater === 'jade') {
+    if (tarsConfigTemplater === 'jade') {
         templaterName = 'jade';
-    } else if (tarsConfigTemlater === 'handlebars'
-            || tarsConfigTemlater === 'handelbars'
-            || tarsConfigTemlater === 'hdb'
-            || tarsConfigTemlater === 'hb') {
+    } else if (tarsConfigTemplater === 'handlebars'
+            || tarsConfigTemplater === 'handelbars'
+            || tarsConfigTemplater === 'hdb'
+            || tarsConfigTemplater === 'hb') {
         templaterName = 'handlebars';
     } else {
         templaterName = 'jade';

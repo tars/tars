@@ -1,12 +1,11 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
+var notifier = require('../../helpers/notifier');
+var changed = require('gulp-changed');
 var cache = require('gulp-cached');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
 var svg2png = require('gulp-svg2png');
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 /**
  * Raster SVG-files (optional task)
@@ -14,31 +13,30 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('raster-svg', function(cb) {
+    return gulp.task('images:raster-svg', function(cb) {
 
         if (tarsConfig.useSVG && gutil.env.ie8) {
-            return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
+            return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
+                .pipe(
+                    changed(
+                        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images',
+                        {
+                            hasChanged: changed.compareLastModifiedTime,
+                            extension: '.png'
+                        }
+                    )
+                )
                 .pipe(svg2png())
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while rastering svg.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rasterSvgImages/'))
+                .pipe(gulp.dest('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images'))
                 .pipe(
-                    gulpif(notifyConfig.useNotify,
-                        notify({
-                            onLast: true,
-                            sound: notifyConfig.sounds.onSuccess,
-                            title: notifyConfig.title,
-                            message: 'SVG\'ve been rastered \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                            templateOptions: {
-                                date: modifyDate.getTimeOfModify()
-                            }
-                        })
-                    )
+                    notifier('SVG\'ve been rastered')
                 );
         } else {
-            gutil.log('!SVG is not used!');
+            gutil.log('!Rastering SVG is not used!');
             cb(null);
         }
     });

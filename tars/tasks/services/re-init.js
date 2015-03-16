@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var tarsConfig = require('../../../tars-config');
-var gutil = require('gulp-util');
 
 require('./remove-init-fs')();
 require('./init')();
@@ -11,7 +9,7 @@ require('./init')();
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('re-init', ['remove-init-fs'], function() {
-        gulp.start('init');
+    return gulp.task('service:re-init', ['service:remove-init-fs'], function() {
+        gulp.start('service:init');
     });
 };

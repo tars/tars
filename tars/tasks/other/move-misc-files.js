@@ -1,9 +1,7 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 var browserSync = require('browser-sync');
 
 /**
@@ -12,7 +10,7 @@ var browserSync = require('browser-sync');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('move-misc-files', function(cb) {
+    return gulp.task('other:move-misc-files', function(cb) {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
@@ -20,17 +18,7 @@ module.exports = function(buildOptions) {
             .pipe(gulp.dest('./dev/'))
             .pipe(browserSync.reload({stream:true}))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Misc files\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Misc files\'ve been moved')
             );
     });
 };

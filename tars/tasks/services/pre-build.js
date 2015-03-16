@@ -4,8 +4,7 @@ var notify = require('gulp-notify');
 var gutil = require('gulp-util');
 var fs = require('fs');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 
 /**
  * Copy files from dev to build directory. Create build directory with new build version
@@ -13,7 +12,7 @@ var modifyDate = require('../../helpers/modify-date-formatter');
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('pre-build', function() {
+    return gulp.task('service:pre-build', function() {
 
         if (tarsConfig.useBuildVersioning) {
             console.log('\n----------------------------------------------------------------------');
@@ -27,17 +26,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest(buildOptions.buildPath))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'Pre-build task is finished\n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('Pre-build task is finished')
             );
         });
 };

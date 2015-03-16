@@ -1,10 +1,8 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglifyjs');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
+var notifier = require('../../helpers/notifier');
 
 /**
  * Compress js-files
@@ -14,7 +12,7 @@ module.exports = function(buildOptions) {
 
     require('./strip-debug')(buildOptions);
 
-    return gulp.task('compress-js', ['strip-debug'], function() {
+    return gulp.task('js:compress', ['js:strip-debug'], function() {
         return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
             .pipe(uglify('main' + buildOptions.hash + '.min.js', {
                 mangle: false
@@ -24,17 +22,7 @@ module.exports = function(buildOptions) {
             }))
             .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/'))
             .pipe(
-                gulpif(notifyConfig.useNotify,
-                    notify({
-                        onLast: true,
-                        sound: notifyConfig.sounds.onSuccess,
-                        title: notifyConfig.title,
-                        message: 'JS\'ve been minified \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-                        templateOptions: {
-                            date: modifyDate.getTimeOfModify()
-                        }
-                    })
-                )
+                notifier('JS\'ve been minified')
             );
         });
 };

@@ -5,8 +5,6 @@ var cache = require('gulp-cached');
 var jscs = require('gulp-jscs');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../../helpers/modify-date-formatter');
 
 var jsPathsToLint = [
                      './markup/modules/**/*.js',
@@ -32,18 +30,18 @@ if (tarsConfig.lintJsCodeAfterModules) {
  */
 module.exports = function(buildOptions) {
 
-    return gulp.task('lint', function(cb) {
+    return gulp.task('js:check', function(cb) {
         if (tarsConfig.useJsLintAndHint) {
             return gulp.src(jsPathsToLint)
-                .pipe(cache('linting'))
+                .pipe(cache('hinting'))
                 .pipe(jshint())
                 .pipe(jshint.reporter('jshint-stylish'))
                 .pipe(jscs())
                 .on('error', notify.onError(function (error) {
-                    return 'An error occurred while linting js.\nLook in the console for details.\n';
+                    return 'An error occurred while checking js.\nLook in the console for details.\n';
                 }));
         } else {
-            gutil.log('!JS-lint and hint is not used!');
+            gutil.log('!JS-style-check and hinting is not used!');
             cb(null);
         }
     });
