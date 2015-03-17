@@ -16,7 +16,7 @@ module.exports = function(buildOptions) {
         if (tarsConfig.useSVG) {
             return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(changed(
-                        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/minified-svg',
+                        'dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/minified-svg',
                         {
                             hasChanged: changed.compareLastModifiedTime,
                             extension: '.svg'
@@ -38,7 +38,7 @@ module.exports = function(buildOptions) {
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifying svg.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/minified-svg/'))
+                .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/minified-svg/'))
                 .pipe(
                     notifier('SVG\'ve been minified')
                 );

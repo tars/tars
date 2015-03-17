@@ -10,10 +10,6 @@ npm-debug.log
 phantomjsdriver.log
 /nbproject/*
 
-sprite96.less
-sprite192.less
-sprite288.less
-sprite384.less
-svg-fallback-sprite.less
-**/rastered-svg-images
-**/minified-svg
+**/sprite_96.*
+**/svg-fallback-sprite.*
+**/svg-sprite.*

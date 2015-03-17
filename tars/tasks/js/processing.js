@@ -25,7 +25,7 @@ var jsPaths = [
         });
     }
 
-    jsPaths.push('!./markup/modules/**/mData.js');
+    jsPaths.push('!./markup/modules/**/data/data.js');
 
 require('./check')();
 

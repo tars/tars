@@ -11,7 +11,7 @@ var tarsConfig = require('../../../tars-config');
 module.exports = function(buildOptions) {
 
     return gulp.task('html:concat-modules-data', function(cb) {
-        return gulp.src('./markup/modules/**/mData.js')
+        return gulp.src('./markup/modules/**/data/data.js')
             .pipe(concat('modulesData.js', {newLine: ',\n\n'}))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while concating module\'s data.\nLook in the console for details.\n' + error;

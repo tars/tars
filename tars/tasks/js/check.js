@@ -9,7 +9,7 @@ var tarsConfig = require('../../../tars-config');
 var jsPathsToLint = [
                      './markup/modules/**/*.js',
                      '!./markup/modules/**/_*.js',
-                     '!./markup/modules/**/mData.js'
+                     '!./markup/modules/**/data/data.js'
                     ];
 
 if (tarsConfig.lintJsCodeBeforeModules) {

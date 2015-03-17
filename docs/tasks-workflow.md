@@ -1,14 +1,14 @@
 Работа с тасками и вотчерами
 ============================
 
-TARS – набор gulp-тасков, организованных особым образом. Каждый таск — отдельный файл (кроме основных и вспомогательных тасков внутри gulpfile.js). Все системные таски находятся в `tars/tasks`, разбиты по папкам в зависимости от типа таска.
+TARS – набор gulp-тасков, организованных особым образом. Каждый таск — отдельный файл (кроме составных, таких как build, dev и т.п.). Все системные таски находятся в `tars/tasks`, разбиты по папкам в зависимости от типа таска.
 
-Все вотчеры для тасков находятся в gulpfile.js Пример вотчера также находится в gulpfile.
+Все вотчеры для тасков находятся в `tars/watchers`.
 
 Таски в TARS
 -------------
 
-Каждый таск представляет из себя <a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank">commonJS-модуль</a>. Все таски включаются в gulpfile в корне проекта.
+Каждый таск представляет из себя <a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank">commonJS-модуль</a>. Все таски включаются в gulpfile в корне проекта автоматически.
 
 Свои таски можно создавать в директории user-tasks. По умолчанию там уже находится пример таска. Разберем его подробнее.
 
@@ -16,11 +16,9 @@ TARS – набор gulp-тасков, организованных особым
 
 ```javascript
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var notify = require('gulp-notify');
+var notifier = require('../helpers/notifier');
 var tarsConfig = require('../../tars-config');
-var notifyConfig = tarsConfig.notifyConfig;
-var modifyDate = require('../helpers/modifyDateFormatter');
 ```
 
 Также, если требуется использовать livereload для данного таска, подключаем модуль browserSync:
@@ -46,45 +44,53 @@ require('./ path to task file from current task');
 // If you need to reload browser, uncomment the row below
 // .pipe(browserSync.reload({stream:true}))
 .pipe(
-    gulpif(notifyConfig.useNotify,
-        notify({
-            onLast: true, // Use this, if you need notify only after last file will be processed
-            sound: notifyConfig.sounds.onSuccess,
-            title: notifyConfig.title,
-            // You can change text of success message
-            message: 'Example task is finished \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
-            templateOptions: {
-                date: modifyDate.getTimeOfModify()
-            }
-        })
-    )
+    notifier('Example task is finished \n')
 );
 ```
 
+В notifier передается строка, которая будет показываться в уведомлениях.
+
 Также можно вызвать callback, или вернуть основной поток, если требуется выполнять таски в определенном порядке. Более подробно <a href="http://frontender.info/handling-sync-tasks-with-gulp-js/" target="_blank">здесь</a>.
 
-Также не забываем подключить таск в gulpfile.
-
-```javascript
-require('./tars/user-tasks/example-task')();
-```
-
 Может показаться, что в некторых местах есть излишний код, есть обращения к файлам, а не потокам. Такие места есть, но это сделано в угоду модульности и легкой расширяемости. На самом деле, на скорость работы сборщика именно эти места не влияют.
+
+Вообще, в TARS можно подключить любой gulp-task.
 
 Вотчеры в TARS
 ---------------
 
-Как уже было сказанно выше, все вотчеры описывются внутри gulpfile.js в dev-таске. Вотчер имеет следующую структуру:
+Как и таски, вотчеры представляют из себя <a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank">commonJS-модуль</a>. Все вотчеры включаются в gulpfile в корне проекта автоматически.
+
+Свои вотчеры можно создавать в директории user-watchers. По умолчанию там уже находится пример таска. Разберем его подробнее.
+
+По умолчанию каждому вотчеру требуется набор модулей для корректной работы:
 
 ```javascript
-watcher(
-    строка или массив строк с путями или паттернами путей до файлов, за которыми нужно следить,
-    строка или массив строк с путями или паттернами путей до файлов, которые нужно отфильтровать или false, если фильтрация не требуется,
-    function(filename) {
-        gulp.start('example-task');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var chokidar = require('chokidar');
+var tarsConfig = require('../../tars-config');
+var watcherLog = require('../helpers/watcher-log');
+```
+
+```javascript
+    return chokidar.watch(/* String of path pattern or array of strings */, {
+        ignored: /* String of path pattern or array of strings to ignore. If nothing to igonre — just set it to ''*/,
+        persistent: true,
+        ignoreInitial: true
+    }).on('all', function(event, path) {
+        watcherLog(event, path);
+        // You could start many tasks
+        gulp.start(/* Task name (String) to start */);
     });
 ```
 
-Если вы хотите добавить вотчер, который следит за файлами в статике, то рекомендуется использовать переменные:
+В chokidar.watch можно передать паттерн или массив паттернов путей до файлов, за которыми нужно следить.
+В опцию ignored можно передать паттерн или массив паттернов путей до файлов, которые нужно отфильтровать от слежки в рамках данного вотчера.
+В gulp.start передается имя таска, который необходимо запустить при изменениях в файлах, за которыми следит данный вотчер. По умолчанию вотчер срабатывает на все операции с файлами (удаление, создание, переименовывание). Можно ихменить это поведение, поменяв .on('all', function(event, path) all на нужное событие. Список доступных событий можно узнать в <a href="https://github.com/paulmillr/chokidar#getting-started" target="_blank">документации к chokidar</a>.
+
+При добавлении вотчеров рекомендуется использовать переменные:
 * tarsConfig.fs.staticFolderName — для имени папки со статикой
 * tarsConfig.fs.imagesFolderName — для имени папки с изображениями
+* watchOptions.templateExtension – содержит расширение для файлов выбранного шаблонизатора
+* watchOptions.cssPreprocExtension – содержит расширение для файлов выбранного css-препроцессора

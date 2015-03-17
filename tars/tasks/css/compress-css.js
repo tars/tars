@@ -14,7 +14,8 @@ module.exports = function(buildOptions) {
 
     return gulp.task('css:compress-css', function() {
         return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/*.css')
-            .pipe(cmq())
+            // @TODO: fix problems with cmq
+            // .pipe(cmq())
             .pipe(csso())
             .pipe(rename({
                 suffix: '.min'

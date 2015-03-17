@@ -8,7 +8,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * @param  {Object} watchOptions
  */
 module.exports = function(watchOptions) {
-    return chokidar.watch('markup/modules/**/mData.js', {
+    return chokidar.watch('markup/modules/**/data/data.js', {
         ignored: '',
         persistent: true,
         ignoreInitial: true

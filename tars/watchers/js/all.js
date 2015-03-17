@@ -33,7 +33,7 @@ module.exports = function(watchOptions) {
     );
 
     return chokidar.watch(jsPathToWatch, {
-        ignored: 'markup/modules/**/mData.js',
+        ignored: 'markup/modules/**/data/data.js',
         persistent: true,
         ignoreInitial: true
     }).on('all', function(event, path) {

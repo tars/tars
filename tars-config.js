@@ -154,16 +154,16 @@ var tarsConfig = {
      * You have to use %=staticPrefix=% placeholder in paths to static
      * Example: %=staticPrefix=%img/logo.png
      * Will be replaced to '/static/img/logo.png'
-     * @type {String or Object}
+     * @type {String}
      */
     staticPrefix: 'static/',
 
     /**
-     * Beginning of path for static files
-     * You have to use %=staticPrefix=% placeholder in paths to static
-     * Example: %=staticPrefix=%img/logo.png
-     * Will be replaced to '/static/img/logo.png'
-     * @type {String or Object}
+     * Beginning of path for static files for using in css
+     * You have to use %=staticPrefixForCss=% placeholder in paths to static in css files
+     * Example: background: url('%=staticPrefixForCss=%logo.png');
+     * Will be replaced to background: url('../img/logo.png');
+     * @type {String}
      */
     staticPrefixForCss: function() {
         return '../' + this.fs.imagesFolderName + '/'
@@ -231,7 +231,7 @@ var tarsConfig = {
      * and delete unused.
      * @type {Array}
      */
-    useImagesForDisplayWithDpi: [96, 192, 288, 384],
+    useImagesForDisplayWithDpi: [96],
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////

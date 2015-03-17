@@ -20,7 +20,7 @@ module.exports = function(buildOptions) {
                 .pipe(cache('raster-svg'))
                 .pipe(
                     changed(
-                        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images',
+                        'dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images',
                         {
                             hasChanged: changed.compareLastModifiedTime,
                             extension: '.png'
@@ -31,7 +31,7 @@ module.exports = function(buildOptions) {
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while rastering svg.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images'))
+                .pipe(gulp.dest('dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images'))
                 .pipe(
                     notifier('SVG\'ve been rastered')
                 );

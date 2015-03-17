@@ -151,17 +151,19 @@ gulp.task('dev', ['build-dev'], function() {
 gulp.task('build-dev', function(cb) {
     runSequence(
         'service:builder-start-screen',
-        ['service:clean', 'images:minify-svg'],
-        ['images:raster-svg', 'images:move-rastered-svg'],
+        'service:clean',
+        ['images:minify-svg', 'images:raster-svg'],
         [
             'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
         ],
         [
             'css:compile-css', 'css:compile-css-for-ie8',
-            'html:concat-modules-data', 'js:move-separate', 'js:processing'
+            'html:concat-modules-data',
+            'js:move-separate', 'js:processing'
         ],
         [
-            'html:compile-templates', 'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
+            'html:compile-templates',
+            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
             'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img'
         ],
         cb
@@ -243,13 +245,16 @@ gulp.task('browsersync', function(cb) {
 gulp.task('svg-actions', function(cb) {
     if (gutil.env.ie8) {
         runSequence(
-            'images:move-svg',
-            'images:raster-svg',
-            'css:make-fallback-for-svg',
+            ['images:minify-svg', 'images:raster-svg'],
+            ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],
             cb
         );
     } else {
-        gulp.start('css:make-sprite-for-svg');
+        runSequence(
+            'images:minify-svg',
+            'css:make-sprite-for-svg',
+            cb
+        );
     }
 });
 
