@@ -86,7 +86,7 @@ gulp init
 
 Важно! Все примеры в документации используют настройки по умолчанию.
 
-* <a href="./tars/blob/master/docs/file-structure.md">Файловая структура</a>
+* <a href="/docs/file-structure.md">Файловая структура</a>
 * <a href="./tars/blob/master/docs/tasks-workflow.md">Работа с тасками и вотчерами</a>
 * <a href="./tars/blob/master/docs/options.md">Опции</a>
 * <a href="./tars/blob/master/docs/html-processing.md">Html</a>
