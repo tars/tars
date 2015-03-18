@@ -102,4 +102,5 @@ gulp init
 -------------------
 Все последние изменения доступны по ссылке: <a href="/docs/changelog.md">История изменений</a>.
 
-По всем вопросам можно писать в <a href="https://github.com/artem-malko/tars/issues/new">issues</a> или на почту artem.malko@gmail.com.
+По всем вопросам можно писать в <a href="https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank">gitter</a> или на почту <a href="mailto:artem.malko@gmail.com">artem.malko@gmail.com</a><br/>
+Баги и фича-реквесты сюда: <a href="https://github.com/artem-malko/tars/issues/new">issues</a>.
