@@ -12,9 +12,8 @@ module.exports = function(buildOptions) {
 
     return gulp.task('service:update-deps', function(cb) {
         var downloadPackage = new Download({ extract: true})
-            .get('https://raw.githubusercontent.com/artem-malko/tars/master/package.json')
-            .dest('./')
-            .use();
+            .get('https://raw.githubusercontent.com/2gis/tars/master/package.json')
+            .dest('./');
 
         function downloadNewPackageJson() {
             fs.rename('./package.json', './_package.json', function() {
