@@ -1,6 +1,6 @@
 <img height="67" width="192" src="https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png">
 =============
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Сборщик html-верстки, основанный на <a href="http://gulpjs.com/" target="_blank">gulp.js</a>. Облегчает и ускоряет процесс html-верстки любой сложности. Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
 
@@ -102,5 +102,5 @@ gulp init
 -------------------
 Все последние изменения доступны по ссылке: <a href="/docs/changelog.md">История изменений</a>.
 
-По всем вопросам можно писать в <a href="https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank">gitter</a> или на почту <a href="mailto:artem.malko@gmail.com">artem.malko@gmail.com</a><br/>
-Баги и фича-реквесты сюда: <a href="https://github.com/artem-malko/tars/issues/new">issues</a>.
+По всем вопросам можно писать в <a href="https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank">gitter</a> или на почту <a href="mailto:artem.malko@gmail.com">artem.malko@gmail.com</a><br/>
+Баги и фича-реквесты сюда: <a href="https://github.com/2gis/tars/issues/new">issues</a>.

@@ -1,7 +1,7 @@
 FAQ
 ===
 
-По всем вопросам жду вас в <a href="https://gitter.im/artem-malko/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank">gitter</a>.
+По всем вопросам жду вас в <a href="https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank">gitter</a>.
 
 <ol>
     <li>
