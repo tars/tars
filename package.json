@@ -24,7 +24,7 @@
     "gulp.spritesmith": "3.1.0",
     "gulp-add-src": "0.2.0",
     "gulp-svg2png": "0.3.0",
-    "gulp-svg-spritesheet": "git://github.com/artem-malko/gulp-svg-spritesheet.git",
+    "gulp-svg-spritesheet": "0.0.3",
     "gulp-strip-debug": "1.0.2",
     "gulp-uglifyjs": "0.6.0",
     "gulp-jscs": "1.4.0",
