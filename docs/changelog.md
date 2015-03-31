@@ -1,12 +1,10 @@
-Changelog
-=========
+# Changelog
 
-Версия 1.2.0
-------------
+## Версия 1.2.0
 
 * Новая версия BrowserSync.
 * Опция baseDir для browser-sync перемещена в tars-config.
-* Вотчеры используют модуль <a href="https://github.com/paulmillr/chokidar" target="_blank">chokidar</a>.
+* Вотчеры используют модуль [chokidar](https://github.com/paulmillr/chokidar)
 * Все вотчеры переехали в отдельные файлы в папку tars/watchers.
 * Сделана автозагрузка вотчеров и тасков в gulpfile.
 * Таск 'builder-start-screen' переехал в tars/tasks/services.
@@ -27,15 +25,13 @@ Changelog
 * Поменялся workflow подготовки svg-графики. Кодирование в base64 было заменено на отдельный svg-sprite. Использование в коде не изменилось. 
 * mData/mData.js –> data/data.js
 
-Версия 1.1.1
-------------
+## Версия 1.1.1
 
 * Исправлен баг в таске переноса js из separate-js. Было указано старое название папки.
 
-Версия 1.1.0
-------------
+## Версия 1.1.0
 
 * Добавлен user-package.json для пользовательских зависимостей. Изменения в tars/helpers/install-additional-deps.js
-* Добавлено <a href="update-guide.md" target="_blank">руководство по обновлению TARS</a>
+* Добавлено [руководство по обновлению TARS](update-guide.md)
 * Обновлен модуль gulp-sass.
 * Генерация версии сборки перенесена в отдельный хелпер, что упрощает ее кастомизацию. Находится тут: tars/helpers/set-build-version.js
