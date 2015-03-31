@@ -25,34 +25,34 @@ var useLiveReload = gutil.env.lr || false,
     watchers = [],
     userWatchers = [];
 
-    // Generate build version
-    if (tarsConfig.useBuildVersioning) {
-        buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
-        buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
-    } else {
-        buildOptions.buildVersion = '';
-        buildOptions.buildPath = tarsConfig.buildPath;
-    }
+// Generate build version
+if (tarsConfig.useBuildVersioning) {
+    buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
+    buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
+} else {
+    buildOptions.buildVersion = '';
+    buildOptions.buildPath = tarsConfig.buildPath;
+}
 
-    // Set template's extension
-    if (templaterName === 'handlebars') {
-        templateExtension = 'html';
-    } else {
-        templateExtension = 'jade';
-    }
+// Set template's extension
+if (templaterName === 'handlebars') {
+    templateExtension = 'html';
+} else {
+    templateExtension = 'jade';
+}
 
-    if (cssPreprocExtension === 'stylus') cssPreprocExtension = 'styl';
+if (cssPreprocExtension === 'stylus') cssPreprocExtension = 'styl';
 
-    if (gutil.env.release) {
-        buildOptions.hash = Math.random().toString(36).substring(7);
-    } else {
-        buildOptions.hash = '';
-    }
+if (gutil.env.release) {
+    buildOptions.hash = Math.random().toString(36).substring(7);
+} else {
+    buildOptions.hash = '';
+}
 
-    watchOptions = {
-        cssPreprocExtension: cssPreprocExtension,
-        templateExtension: templateExtension
-    };
+watchOptions = {
+    cssPreprocExtension: cssPreprocExtension,
+    templateExtension: templateExtension
+};
 
 /***********/
 /* HELPERS */
@@ -152,19 +152,30 @@ gulp.task('build-dev', function(cb) {
     runSequence(
         'service:builder-start-screen',
         'service:clean',
-        ['images:minify-svg', 'images:raster-svg'],
         [
-            'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
+            'images:minify-svg',
+            'images:raster-svg'
         ],
         [
-            'css:compile-css', 'css:compile-css-for-ie8',
+            'css:make-sprite-for-svg',
+            'css:make-fallback-for-svg',
+            'css:make-sprite'
+        ],
+        [
+            'css:compile-css',
+            'css:compile-css-for-ie8',
             'html:concat-modules-data',
-            'js:move-separate', 'js:processing'
+            'js:move-separate',
+            'js:processing'
         ],
         [
             'html:compile-templates',
-            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
-            'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img'
+            'other:move-misc-files',
+            'other:move-fonts',
+            'other:move-assets',
+            'images:move-content-img',
+            'images:move-plugins-img',
+            'images:move-general-img'
         ],
         cb
     );
@@ -176,11 +187,13 @@ gulp.task('build', function() {
     runSequence(
         'build-dev',
         [
-            'html:minify-html', 'images:minify-raster-img'
+            'html:minify-html',
+            'images:minify-raster-img'
         ],
         'service:pre-build',
         [
-            'js:compress', 'css:compress-css'
+            'js:compress',
+            'css:compress-css'
         ],
         'service:zip-build',
         function() {
@@ -245,8 +258,14 @@ gulp.task('browsersync', function(cb) {
 gulp.task('svg-actions', function(cb) {
     if (gutil.env.ie8) {
         runSequence(
-            ['images:minify-svg', 'images:raster-svg'],
-            ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],
+            [
+                'images:minify-svg',
+                'images:raster-svg'
+            ],
+            [
+                'css:make-fallback-for-svg',
+                'css:make-sprite-for-svg'
+            ],
             cb
         );
     } else {
