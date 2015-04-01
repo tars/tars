@@ -18,9 +18,9 @@ module.exports = function () {
 
     // Set template's extension
     switch(config.templater) {
-        case 'handlebars':
-            config.templateExtension = 'hbs';
-            break;
+        // case 'handlebars':
+            // config.templateExtension = 'hbs';
+            // break;
         case 'jade':
             config.templateExtension = 'jade';
             break;
