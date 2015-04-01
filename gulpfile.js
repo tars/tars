@@ -193,24 +193,16 @@ gulp.task('build', function() {
 });
 
 // Default task. Just start build task
-gulp.task('default', function() {
-    gulp.start('build');
-});
+gulp.task('default', ['build']);
 
 // Init task. Just start init task
-gulp.task('init', function() {
-    gulp.start('service:init');
-});
+gulp.task('init', ['service:init']);
 
 // Re-init task. Just start re-init task
-gulp.task('re-init', function() {
-    gulp.start('service:re-init');
-});
+gulp.task('re-init', ['service:re-init']);
 
 // Update-deps task. Just start update-deps task
-gulp.task('update-deps', function() {
-    gulp.start('service:update-deps');
-});
+gulp.task('update-deps', ['service:update-deps']);
 
 // Task for starting browsersync module
 gulp.task('browsersync', function(cb) {

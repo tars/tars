@@ -1,6 +1,6 @@
 var os = require('os');
 var exec = require('child_process').exec;
-var templaterName = require('./templater-name-setter')();
+var templaterName = require('./process-config.js')().templater;
 var usersDeps;
 
 if (os.platform() !== 'win32') {
