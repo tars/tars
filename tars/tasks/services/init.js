@@ -38,7 +38,7 @@ module.exports = function(buildOptions) {
         console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
         console.log('Start your work with \'gulp dev\'\n\n');
 
-        if(templaterUrl) {
+        if (templaterUrl) {
             new Download().get(templaterUrl).run(function (err, files) {
                 var downloadTemplater;
 
@@ -83,7 +83,7 @@ module.exports = function(buildOptions) {
             });
         }
 
-        if(processorUrl) {
+        if (processorUrl) {
             new Download().get(processorUrl).run(function (err, files) {
                 var downloadCssPreprocessor;
 
