@@ -14,8 +14,8 @@ var processorName = tarsConfig.processor;
 var templaterRepo = tarsConfig.templaterRepo;
 var processorRepo = tarsConfig.processorRepo;
 
-var templaterUrl = templaterRepo ? templaterRepo + '/archive/' + templaterVersion + '.zip' : false;
-var processorUrl = processorRepo ? processorRepo + '/archive/' + processorVersion + '.zip' : false;
+var templaterUrl = templaterRepo + '/archive/' + templaterVersion + '.zip';
+var processorUrl = processorRepo + '/archive/' + processorVersion + '.zip';
 
 ncp.limit = 16;
 require('./create-fs')();
