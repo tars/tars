@@ -108,7 +108,7 @@ function downloadModule(repo, map) {
         }
 
         // Download branch
-        new Download({ extract: true }).get(url).run(function (err, files) {
+        Download({ extract: true }).get(url).run(function (err, files) {
             if (err) {
                 throw err;
             }
