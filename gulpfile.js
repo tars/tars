@@ -196,10 +196,14 @@ gulp.task('build', function() {
 gulp.task('default', ['build']);
 
 // Init task. Just start init task
-gulp.task('init', ['service:init']);
+gulp.task('init', function (cb) {
+    runSequence('service:create-fs', 'service:init', cb);
+});
 
 // Re-init task. Just start re-init task
-gulp.task('re-init', ['service:re-init']);
+gulp.task('re-init', function (cb) {
+    runSequence('service:remove-init-fs', 'service:create-fs', 'service:init', cb);
+});
 
 // Update-deps task. Just start update-deps task
 gulp.task('update-deps', ['service:update-deps']);

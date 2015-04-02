@@ -8,15 +8,13 @@ var path = require('path');
 
 var version = 'version-' + require('../../../package.json').version;
 
-require('./create-fs')();
-
 
 /**
  * Init builder, download css-preprocessor and templater
  * @param  {Object} buildOptions
  */
 module.exports = function(buildOptions) {
-    return gulp.task('service:init', ['service:create-fs'], function(cb) {
+    return gulp.task('service:init', function(cb) {
 
         if (os.platform() === 'darwin') {
             console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
