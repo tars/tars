@@ -4,6 +4,7 @@
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
+    "bluebird": "^2.9.24",
     "browser-sync": "2.2.1",
     "chokidar": "1.0.0-rc4",
     "del": "1.1.1",
@@ -41,7 +42,6 @@
     "jshint-stylish": "1.0.0",
     "mkdirp": "0.5.0",
     "ncp": "2.0.0",
-    "q": "^1.2.0",
     "run-sequence": "1.0.2",
     "through2": "0.6.3"
   },

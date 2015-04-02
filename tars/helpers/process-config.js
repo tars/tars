@@ -12,12 +12,14 @@ var tarsModules = {
 };
 
 module.exports = function () {
-    // Names
-    var templater = typeof config.templater === 'string' && config.templater.toLowerCase();
-    var processor = typeof config.cssPreprocessor === 'string' && config.cssPreprocessor.toLowerCase();
+    var subconfig = { config: config };
 
-    // Check modules valid
-    if(typeof tarsModules[templater] !== 'string') {
+    // Module names
+    subconfig.templater = typeof config.templater === 'string' && config.templater.toLowerCase();
+    subconfig.processor = typeof config.cssPreprocessor === 'string' && config.cssPreprocessor.toLowerCase();
+
+    // Check module valid
+    if(typeof tarsModules[subconfig.templater] !== 'string') {
         throw new gutil.PluginError('TARS', [
                 gutil.colors.blue('"' + config.templater + '"'),
                 gutil.colors.red(' is invalid templater, please check '),
@@ -25,7 +27,7 @@ module.exports = function () {
             ].join(''));
     }
 
-    if(typeof tarsModules[processor] !== 'string') {
+    if(typeof tarsModules[subconfig.processor] !== 'string') {
         throw new gutil.PluginError('TARS', [
                 gutil.colors.blue('"' + config.cssPreprocessor + '"'),
                 gutil.colors.red(' is invalid processor, please check '),
@@ -33,42 +35,38 @@ module.exports = function () {
             ].join(''));
     }
 
-    // Apply names to config
-    config.templater = templater;
-    config.processor = processor;
-
     // Repositories
-    config.templaterRepo = tarsModules[templater];
-    config.processorRepo = tarsModules[processor];
+    subconfig.templaterRepo = tarsModules[subconfig.templater];
+    subconfig.processorRepo = tarsModules[subconfig.processor];
 
     // Set template's extension
-    switch(config.templater) {
+    switch(subconfig.templater) {
         // case 'handlebars':
-            // config.templateExtension = 'hbs';
+            // subconfig.templateExtension = 'hbs';
             // break;
         case 'jade':
-            config.templateExtension = 'jade';
+            subconfig.templateExtension = 'jade';
             break;
         default:
-            config.templateExtension = 'html';
+            subconfig.templateExtension = 'html';
             break;
     }
 
     // Set processor's extension
-    switch(config.processor) {
+    switch(subconfig.processor) {
         case 'stylus':
-            config.styleExtention = 'styl';
+            subconfig.styleExtention = 'styl';
             break;
         case 'scss':
-            config.styleExtention = 'scss';
+            subconfig.styleExtention = 'scss';
             break;
         case 'less':
-            config.styleExtention = 'less';
+            subconfig.styleExtention = 'less';
             break;
         default:
-            config.styleExtention = 'css';
+            subconfig.styleExtention = 'css';
             break;
     }
 
-    return config;
+    return subconfig;
 };
