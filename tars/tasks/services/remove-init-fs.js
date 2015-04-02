@@ -27,11 +27,7 @@ var pathToDel = [
 
 /**
  * Remove inited file structure.
- * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
-
-    return gulp.task('service:remove-init-fs', function(cb) {
-        del(pathToDel, cb);
-    });
-};
+gulp.task('service:remove-init-fs', function(cb) {
+    del(pathToDel, cb);
+});
