@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var Download = require('download');
 var Promise = require('bluebird');
 var os = require('os');
-var options = require('../../../tars/helpers/process-config.js')();
+var options = require('../../../tars/helpers/process-config.js');
 var path = require('path');
 
 var version = 'version-' + require('../../../package.json').version;
@@ -11,37 +11,34 @@ var version = 'version-' + require('../../../package.json').version;
 
 /**
  * Init builder, download css-preprocessor and templater
- * @param  {Object} buildOptions
  */
-module.exports = function(buildOptions) {
-    return gulp.task('service:init', function(cb) {
+gulp.task('service:init', function(cb) {
 
-        if (os.platform() === 'darwin') {
-            console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
-        } else {
-            console.log('\n\n' + gutil.colors.bold('T A R S\n'));
-        }
-        console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
-        console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
-        console.log('Start your work with \'gulp dev\'\n\n');
+    if (os.platform() === 'darwin') {
+        console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
+    } else {
+        console.log('\n\n' + gutil.colors.bold('T A R S\n'));
+    }
+    console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
+    console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
+    console.log('Start your work with \'gulp dev\'\n');
 
-        // Check both modules will be done
-        return Promise.all([
-            downloadModule(options.templaterRepo, templaterMap),
-            downloadModule(options.processorRepo, processorMap),
-        ]).then(function () {
-            console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
-            console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
+    // Check both modules will be done
+    return Promise.all([
+        downloadModule(options.templaterRepo, templaterMap),
+        downloadModule(options.processorRepo, processorMap),
+    ]).then(function () {
+        console.log(gutil.colors.green.bold('\n---------------------------------------------------\n'));
+        console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
 
-            console.log('You choose:');
-            console.log(gutil.colors.magenta.bold(options.templater), ' as templater');
-            console.log(gutil.colors.magenta.bold(options.processor), ' as css-processor\n');
+        console.log('You choose:');
+        console.log(gutil.colors.magenta.bold(options.templater), ' as templater');
+        console.log(gutil.colors.magenta.bold(options.processor), ' as css-processor\n');
 
-            console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
-        });
-
+        console.log(gutil.colors.green.bold('---------------------------------------------------\n'));
     });
-};
+
+});
 
 function templaterMap(file) {
     // tars-name-version

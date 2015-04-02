@@ -10,17 +10,12 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
-    tarsSubconfig = require('./tars/helpers/process-config')(),
+    tarsSubconfig = require('./tars/helpers/process-config'),
     tarsConfig = tarsSubconfig.config,
     browserSyncConfig = tarsConfig.browserSyncConfig,
 
     buildOptions = {},
-    watchOptions = {},
-
-    tasks = [],
-    userTasks= [],
-    watchers = [],
-    userWatchers = [];
+    watchOptions = {};
 
 // Generate build version
 if (tarsConfig.useBuildVersioning) {
@@ -70,23 +65,28 @@ var fileLoader = require('./tars/helpers/file-loader');
 // require('./tars/user-tasks/example-task')(buildOptions);
 
 
-// SYSTEM TASKS
-tasks = fileLoader('./tars/tasks');
+// REQUIRE SYSTEM TASKS
+fileLoader('./tars/tasks').forEach(function(file) {
+    var task = require(file);
 
-// You could uncomment the row bellow, to see all required tasks in console
-// console.log(tasks);
+    // You could uncomment the row bellow, to see all required tasks in console
+    // gutil.log('System-Task:', gutil.colors.cyan(file));
 
-// require tasks
-tasks.forEach(function(file) {
-    require(file)(buildOptions);
+    if(typeof task === 'function') {
+        task(buildOptions)
+    }
 });
 
-// USER'S TASKS
-userTasks = fileLoader('./tars/user-tasks');
+// REQUIRE USER'S TASKS
+fileLoader('./tars/user-tasks').forEach(function(file) {
+    var task = require(file);
 
-// require user-tasks
-userTasks.forEach(function(file) {
-    require(file)(buildOptions);
+    // You could uncomment the row bellow, to see all required users tasks in console
+    // gutil.log('User-Task:', gutil.colors.cyan(file));
+
+    if(typeof task === 'function') {
+        task(buildOptions);
+    }
 });
 
 /*************/
@@ -107,7 +107,7 @@ gulp.task('dev', ['build-dev'], function() {
     }
 
     // SYSTEM WATCHERS
-    watchers = fileLoader('./tars/watchers');
+    var watchers = fileLoader('./tars/watchers');
 
     // You could uncomment the row bellow, to see all required watchers in console
     // console.log(watchers);
@@ -118,7 +118,7 @@ gulp.task('dev', ['build-dev'], function() {
     });
 
     // USER'S WATCHERS
-    userWatchers = fileLoader('./tars/user-watchers');
+    var userWatchers = fileLoader('./tars/user-watchers');
 
     // require user-watchers
     userWatchers.forEach(function(file) {

@@ -11,62 +11,61 @@ var tarsModules = {
     'scss': 'https://github.com/artem-malko/tars-scss'
 };
 
-module.exports = function () {
-    var subconfig = { config: config };
+var subconfig = { config: config };
 
-    // Module names
-    subconfig.templater = typeof config.templater === 'string' && config.templater.toLowerCase();
-    subconfig.processor = typeof config.cssPreprocessor === 'string' && config.cssPreprocessor.toLowerCase();
 
-    // Check module valid
-    if(typeof tarsModules[subconfig.templater] !== 'string') {
-        throw new gutil.PluginError('TARS', [
-                gutil.colors.blue('"' + config.templater + '"'),
-                gutil.colors.red(' is invalid templater, please check '),
-                gutil.colors.magenta('tars-config.js')
-            ].join(''));
-    }
+// Module names
+subconfig.templater = typeof config.templater === 'string' && config.templater.toLowerCase();
+subconfig.processor = typeof config.cssPreprocessor === 'string' && config.cssPreprocessor.toLowerCase();
 
-    if(typeof tarsModules[subconfig.processor] !== 'string') {
-        throw new gutil.PluginError('TARS', [
-                gutil.colors.blue('"' + config.cssPreprocessor + '"'),
-                gutil.colors.red(' is invalid processor, please check '),
-                gutil.colors.magenta('tars-config.js')
-            ].join(''));
-    }
+// Check module valid
+if(typeof tarsModules[subconfig.templater] !== 'string') {
+    throw new gutil.PluginError('TARS', [
+            gutil.colors.blue('"' + config.templater + '"'),
+            gutil.colors.red(' is invalid templater, please check '),
+            gutil.colors.magenta('tars-config.js')
+        ].join(''));
+}
 
-    // Repositories
-    subconfig.templaterRepo = tarsModules[subconfig.templater];
-    subconfig.processorRepo = tarsModules[subconfig.processor];
+if(typeof tarsModules[subconfig.processor] !== 'string') {
+    throw new gutil.PluginError('TARS', [
+            gutil.colors.blue('"' + config.cssPreprocessor + '"'),
+            gutil.colors.red(' is invalid processor, please check '),
+            gutil.colors.magenta('tars-config.js')
+        ].join(''));
+}
 
-    // Set template's extension
-    switch(subconfig.templater) {
-        // case 'handlebars':
-            // subconfig.templateExtension = 'hbs';
-            // break;
-        case 'jade':
-            subconfig.templateExtension = 'jade';
-            break;
-        default:
-            subconfig.templateExtension = 'html';
-            break;
-    }
+// Repositories
+subconfig.templaterRepo = tarsModules[subconfig.templater];
+subconfig.processorRepo = tarsModules[subconfig.processor];
 
-    // Set processor's extension
-    switch(subconfig.processor) {
-        case 'stylus':
-            subconfig.styleExtention = 'styl';
-            break;
-        case 'scss':
-            subconfig.styleExtention = 'scss';
-            break;
-        case 'less':
-            subconfig.styleExtention = 'less';
-            break;
-        default:
-            subconfig.styleExtention = 'css';
-            break;
-    }
+// Set template's extension
+switch(subconfig.templater) {
+    // case 'handlebars':
+        // subconfig.templateExtension = 'hbs';
+        // break;
+    case 'jade':
+        subconfig.templateExtension = 'jade';
+        break;
+    default:
+        subconfig.templateExtension = 'html';
+        break;
+}
 
-    return subconfig;
-};
+// Set processor's extension
+switch(subconfig.processor) {
+    case 'stylus':
+        subconfig.styleExtention = 'styl';
+        break;
+    case 'scss':
+        subconfig.styleExtention = 'scss';
+        break;
+    case 'less':
+        subconfig.styleExtention = 'less';
+        break;
+    default:
+        subconfig.styleExtention = 'css';
+        break;
+}
+
+module.exports = subconfig;

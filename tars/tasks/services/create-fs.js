@@ -30,25 +30,21 @@ paths.push(
 
 /**
  * Create fs for project
- * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+gulp.task('service:create-fs', function(cb) {
 
-    return gulp.task('service:create-fs', function(cb) {
+    if (tarsConfig.fs.staticFolderName != 'static') {
+        fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);
+    }
 
-        if (tarsConfig.fs.staticFolderName != 'static') {
-            fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);
-        }
-
-        return Promise.all(paths.map(function(path) {
-            return new Promise(function (resolve, reject) {
-                mkdirp(path, function (err) {
-                    resolve();
-                    if (err) {
-                        console.error(err);
-                    }
-                });
+    return Promise.all(paths.map(function(path) {
+        return new Promise(function (resolve, reject) {
+            mkdirp(path, function (err) {
+                resolve();
+                if (err) {
+                    console.error(err);
+                }
             });
-        }));
-    });
-};
+        });
+    }));
+});
