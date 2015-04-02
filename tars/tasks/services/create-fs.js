@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var Q = require('q');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var tarsConfig = require('../../../tars-config');
@@ -39,14 +40,17 @@ module.exports = function(buildOptions) {
             fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);
         }
 
-        paths.forEach(function(path) {
+        return Q.all(paths.map(function(path) {
+            var d = Q.defer();
+
             mkdirp(path, function (err) {
+                d.resolve();
                 if (err) {
                     console.error(err);
                 }
             });
-        });
 
-        cb(null);
+            return d.promise;
+        }));
     });
 };
