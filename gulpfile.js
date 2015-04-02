@@ -10,7 +10,8 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
-    tarsConfig = require('./tars/helpers/process-config')(),
+    tarsSubconfig = require('./tars/helpers/process-config')(),
+    tarsConfig = tarsSubconfig.config,
     browserSyncConfig = tarsConfig.browserSyncConfig,
 
     buildOptions = {},
@@ -38,8 +39,8 @@ if (gutil.env.release) {
 }
 
 watchOptions = {
-    templateExtension: tarsConfig.templateExtension,
-    cssPreprocExtension: tarsConfig.styleExtention
+    templateExtension: tarsSubconfig.templateExtension,
+    cssPreprocExtension: tarsSubconfig.styleExtention
 };
 
 /***********/

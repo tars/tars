@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var Download = require('download');
-var Q = require('q');
+var Promise = require('bluebird');
 var os = require('os');
-var tarsConfig = require('../../../tars/helpers/process-config.js')();
+var options = require('../../../tars/helpers/process-config.js')();
 var path = require('path');
 
 var version = 'version-' + require('../../../package.json').version;
@@ -26,16 +26,16 @@ module.exports = function(buildOptions) {
         console.log('Start your work with \'gulp dev\'\n\n');
 
         // Check both modules will be done
-        return Q.all([
-            downloadModule(tarsConfig.templaterRepo, templaterMap),
-            downloadModule(tarsConfig.processorRepo, processorMap),
+        return Promise.all([
+            downloadModule(options.templaterRepo, templaterMap),
+            downloadModule(options.processorRepo, processorMap),
         ]).then(function () {
             console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
             console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
 
             console.log('You choose:');
-            console.log(gutil.colors.magenta.bold(tarsConfig.templater), ' as templater');
-            console.log(gutil.colors.magenta.bold(tarsConfig.processor), ' as css-processor\n');
+            console.log(gutil.colors.magenta.bold(options.templater), ' as templater');
+            console.log(gutil.colors.magenta.bold(options.processor), ' as css-processor\n');
 
             console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
         });
@@ -48,17 +48,17 @@ function templaterMap(file) {
     var segments = file.path.split(path.sep).slice(1),
         filepath = segments.join('/');
 
-    // Src
+    // File filter
     if (filepath.indexOf('markup/') === 0) {
         file.path = segments.slice(1).join(path.sep);
-        // Dest
+        // Write file
         return this.createStream(file, 'markup');
     }
 
-    // Src
+    // File filter
     if (filepath.indexOf('tars/tasks/') === 0) {
         file.path = segments.slice(2).join(path.sep);
-        // Dest
+        // Write file
         return this.createStream(file, 'tars/tasks/html');
     }
 
@@ -70,24 +70,24 @@ function processorMap(file) {
     var segments = file.path.split(path.sep).slice(1),
         filepath = segments.join('/');
 
-    // Src
+    // File filter
     if (filepath.indexOf('markup/static/') === 0) {
         file.path = segments.slice(2).join(path.sep);
-        // Dest
-        return this.createStream(file, 'markup/' + tarsConfig.fs.staticFolderName);
+        // Write file
+        return this.createStream(file, 'markup/' + options.config.fs.staticFolderName);
     }
 
-    // Src
+    // File filter
     if (filepath.indexOf('markup/modules/_template/') === 0) {
         file.path = segments.slice(3).join(path.sep);
-        // Dest
+        // Write file
         return this.createStream(file, 'markup/modules/_template');
     }
 
-    // Src
+    // File filter
     if (filepath.indexOf('tars/tasks/') === 0) {
         file.path = segments.slice(2).join(path.sep);
-        // Dest
+        // Write file
         return this.createStream(file, 'tars/tasks/css');
     }
 
@@ -96,29 +96,26 @@ function processorMap(file) {
 }
 
 function downloadModule(repo, map) {
-    var d = Q.defer(),
-        url = repo + '/archive/' + version + '.zip';
+    return new Promise(function (resolve, reject) {
+        var url = repo + '/archive/' + version + '.zip';
 
-    // Check exising version branch
-    Download().get(url).run(function (err, files) {
-        if (err) {
-            url = repo + '/archive/master.zip';
-        }
-
-        // Download branch
-        Download({ extract: true }).get(url).run(function (err, files) {
+        // Check exising version branch
+        Download().get(url).run(function (err, files) {
             if (err) {
-                throw err;
+                url = repo + '/archive/master.zip';
             }
 
-            // Convert files to streams by map and check when all will be done
-            Q.all(files.filter(function (file) {
-                return file.contents.length > 0;
-            }).map(map.bind(new Download))).finally(function () {
-                d.resolve();
+            // Download branch
+            Download({ extract: true }).get(url).run(function (err, files) {
+                if (err) {
+                    throw err;
+                }
+
+                // Convert files to streams by map and check when all will be done
+                Promise.all(files.filter(function (file) {
+                    return file.contents.length > 0;
+                }).map(map.bind(new Download))).then(resolve);
             });
         });
     });
-
-    return d.promise;
 }
