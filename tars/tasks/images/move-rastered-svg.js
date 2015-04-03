@@ -18,7 +18,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving rastered svg images.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Rastered svg images\'ve been moved')
             );

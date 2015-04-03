@@ -42,7 +42,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while concating js-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('JS\'ve been linted and concatinated')
             );

@@ -8,7 +8,6 @@ var path = require('path');
 
 var version = 'version-' + require('../../../package.json').version;
 
-
 /**
  * Init builder, download css-preprocessor and templater
  */
@@ -96,14 +95,16 @@ function downloadModule(repo, map) {
     return new Promise(function (resolve, reject) {
         var url = repo + '/archive/' + version + '.zip';
 
-        // Check exising version branch
+        // Check existing version branch
         Download().get(url).run(function (err, files) {
             if (err) {
                 url = repo + '/archive/master.zip';
             }
 
             // Download branch
-            Download({ extract: true }).get(url).run(function (err, files) {
+            Download({
+                extract: true
+            }).get(url).run(function (err, files) {
                 if (err) {
                     throw err;
                 }
