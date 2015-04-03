@@ -65,27 +65,15 @@ var fileLoader = require('./tars/helpers/file-loader');
 // require('./tars/user-tasks/example-task')(buildOptions);
 
 
-// REQUIRE SYSTEM TASKS
-fileLoader('./tars/tasks').forEach(function(file) {
+// REQUIRE TASKS
+fileLoader('./tars/tasks').concat(fileLoader('./tars/user-tasks')).forEach(function(file) {
     var task = require(file);
 
     // You could uncomment the row bellow, to see all required tasks in console
-    // gutil.log('System-Task:', gutil.colors.cyan(file));
+    // gutil.log('Task:', gutil.colors.cyan(file));
 
     if(typeof task === 'function') {
         task(buildOptions)
-    }
-});
-
-// REQUIRE USER'S TASKS
-fileLoader('./tars/user-tasks').forEach(function(file) {
-    var task = require(file);
-
-    // You could uncomment the row bellow, to see all required users tasks in console
-    // gutil.log('User-Task:', gutil.colors.cyan(file));
-
-    if(typeof task === 'function') {
-        task(buildOptions);
     }
 });
 
@@ -106,23 +94,16 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('browsersync');
     }
 
-    // SYSTEM WATCHERS
-    var watchers = fileLoader('./tars/watchers');
+    // REQUIRE WATCHERS
+    fileLoader('./tars/watchers').concat(fileLoader('./tars/user-watchers')).forEach(function(file) {
+        var watcher = require(file);
 
-    // You could uncomment the row bellow, to see all required watchers in console
-    // console.log(watchers);
+        // You could uncomment the row bellow, to see all required watchers in console
+        // gutil.log('Watcher:', gutil.colors.cyan(file));
 
-    // require watchers
-    watchers.forEach(function(file) {
-        require(file)(watchOptions);
-    });
-
-    // USER'S WATCHERS
-    var userWatchers = fileLoader('./tars/user-watchers');
-
-    // require user-watchers
-    userWatchers.forEach(function(file) {
-        require(file)(watchOptions);
+        if(typeof watcher === 'function') {
+            watcher(watchOptions);
+        }
     });
 });
 
