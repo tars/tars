@@ -4,11 +4,11 @@
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
-    "bluebird": "^2.9.24",
+    "bluebird": "2.9.24",
     "browser-sync": "2.2.1",
     "chokidar": "1.0.0-rc4",
     "del": "1.1.1",
-    "download": "^4.1.2",
+    "download": "4.1.2",
     "gulp": "3.8.11",
     "gulp-add-src": "0.2.0",
     "gulp-autoprefixer": "2.1.0",

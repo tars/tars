@@ -111,9 +111,15 @@ function downloadModule(repo, map) {
 
                 // Convert files to streams by map and check when all will be done
                 Promise.all(files.filter(function (file) {
-                    return file.contents.length > 0;
+                    return !file.isDirectory()
+                        && !isEndOfString(file.path, '.md')
+                        && !isEndOfString(file.path, '.gitignore');
                 }).map(map.bind(new Download))).then(resolve);
             });
         });
     });
+}
+
+function isEndOfString(s, end) {
+    return s.indexOf(end) === s.length - end.length;
 }
