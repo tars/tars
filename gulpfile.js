@@ -26,7 +26,6 @@ if (tarsConfig.useBuildVersioning) {
     buildOptions.buildPath = tarsConfig.buildPath;
 }
 
-
 if (gutil.env.release) {
     buildOptions.hash = Math.random().toString(36).substring(7);
 } else {
@@ -44,7 +43,9 @@ watchOptions = {
 // You can add your own helpers here. Helpers folder is tars/helpers
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-if (os.platform() !== 'win32') require('./tars/helpers/set-ulimit')();
+if (os.platform() !== 'win32') {
+    require('./tars/helpers/set-ulimit')();
+}
 
 // Load files from dir recursively and synchronously
 var fileLoader = require('./tars/helpers/file-loader');
@@ -52,7 +53,6 @@ var fileLoader = require('./tars/helpers/file-loader');
 /***************/
 /* END HELPERS */
 /***************/
-
 
 /*********/
 /* TASKS */
@@ -64,7 +64,6 @@ var fileLoader = require('./tars/helpers/file-loader');
 // Example:
 // require('./tars/user-tasks/example-task')(buildOptions);
 
-
 // REQUIRE TASKS
 fileLoader('./tars/tasks').concat(fileLoader('./tars/user-tasks')).forEach(function(file) {
     var task = require(file);
@@ -72,7 +71,7 @@ fileLoader('./tars/tasks').concat(fileLoader('./tars/user-tasks')).forEach(funct
     // You could uncomment the row bellow, to see all required tasks in console
     // gutil.log('Task:', gutil.colors.cyan(file));
 
-    if(typeof task === 'function') {
+    if (typeof task === 'function') {
         task(buildOptions)
     }
 });
@@ -80,7 +79,6 @@ fileLoader('./tars/tasks').concat(fileLoader('./tars/user-tasks')).forEach(funct
 /*************/
 /* END TASKS */
 /*************/
-
 
 /***********/
 /* WATCHERS */
@@ -101,7 +99,7 @@ gulp.task('dev', ['build-dev'], function() {
         // You could uncomment the row bellow, to see all required watchers in console
         // gutil.log('Watcher:', gutil.colors.cyan(file));
 
-        if(typeof watcher === 'function') {
+        if (typeof watcher === 'function') {
             watcher(watchOptions);
         }
     });
@@ -110,7 +108,6 @@ gulp.task('dev', ['build-dev'], function() {
 /****************/
 /* END WATCHERS */
 /****************/
-
 
 /**************/
 /* MAIN TASKS */
@@ -166,7 +163,7 @@ gulp.task('build', function() {
             'css:compress-css'
         ],
         'service:zip-build',
-        function() {
+        function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
             gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
             console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
@@ -215,7 +212,6 @@ gulp.task('browsersync', function(cb) {
 /******************/
 /* END MAIN TASKS */
 /******************/
-
 
 /*****************/
 /* HELPERS TASKS */
