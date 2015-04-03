@@ -11,7 +11,7 @@ var tarsModules = {
     scss: 'https://github.com/artem-malko/tars-scss'
 };
 
-var subconfig = { config: config };
+var subconfig = {};
 
 // Module names
 subconfig.templater = typeof config.templater === 'string' && config.templater.toLowerCase();

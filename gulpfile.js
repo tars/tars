@@ -10,8 +10,8 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
+    tarsConfig = require('./tars-config.js'),
     tarsSubconfig = require('./tars/helpers/process-config'),
-    tarsConfig = tarsSubconfig.config,
     browserSyncConfig = tarsConfig.browserSyncConfig,
 
     buildOptions = {},
