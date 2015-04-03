@@ -18,7 +18,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving content images.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Content images\'ve been moved')
             );

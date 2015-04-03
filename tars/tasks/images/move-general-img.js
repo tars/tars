@@ -18,7 +18,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving general images.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('General images\'ve been moved')
             );

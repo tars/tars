@@ -15,7 +15,7 @@ if (os.platform() !== 'win32') {
 
 try {
     usersDeps = require('../../user-package');
-} catch(er) {
+} catch (er) {
     console.log('User-package.json is not valid!\n');
     console.log(er);
 }

@@ -30,14 +30,14 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving assets.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/assets/'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 gulpif(notifyConfig.useNotify,
                     notify({
                         onLast: true,
                         sound: notifyConfig.sounds.onSuccess,
                         title: notifyConfig.title,
-                        message: 'Assets\'ve been moved \n'+ notifyConfig.taskFinishedText +'<%= options.date %>',
+                        message: 'Assets\'ve been moved \n' + notifyConfig.taskFinishedText + '<%= options.date %>',
                         templateOptions: {
                             date: modifyDate.getTimeOfModify()
                         }

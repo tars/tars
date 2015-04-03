@@ -18,7 +18,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving fonts.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/fonts'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Fonts\'ve been moved')
             );
