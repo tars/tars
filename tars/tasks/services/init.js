@@ -41,8 +41,7 @@ gulp.task('service:init', function(cb) {
 });
 
 function templaterMap(file) {
-    // tars-name-version
-    var segments = file.path.split(path.sep).slice(1),
+    var segments = file.path.split(path.sep),
         filepath = segments.join('/');
 
     // File filter
@@ -63,8 +62,7 @@ function templaterMap(file) {
 }
 
 function processorMap(file) {
-    // tars-name-version
-    var segments = file.path.split(path.sep).slice(1),
+    var segments = file.path.split(path.sep),
         filepath = segments.join('/');
 
     // File filter
@@ -104,7 +102,8 @@ function downloadModule(repo, map) {
 
             // Download branch
             Download({
-                extract: true
+                extract: true,
+                strip: 1
             }).get(url).run(function (err, files) {
                 if (err) {
                     throw err;
