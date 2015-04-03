@@ -3,7 +3,8 @@ var gutil = require('gulp-util');
 var Download = require('download');
 var Promise = require('bluebird');
 var os = require('os');
-var options = require('../../../tars/helpers/process-config.js');
+var tarsConfig = require('../../../tars-config.js');
+var tarsSubconfig = require('../../../tars/helpers/process-config.js');
 var path = require('path');
 
 var version = 'version-' + require('../../../package.json').version;
@@ -24,15 +25,15 @@ gulp.task('service:init', function(cb) {
 
     // Check both modules will be done
     return Promise.all([
-        downloadModule(options.templaterRepo, templaterMap),
-        downloadModule(options.processorRepo, processorMap),
+        downloadModule(tarsSubconfig.templaterRepo, templaterMap),
+        downloadModule(tarsSubconfig.processorRepo, processorMap),
     ]).then(function () {
         console.log(gutil.colors.green.bold('\n---------------------------------------------------\n'));
         console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
 
         console.log('You choose:');
-        console.log(gutil.colors.magenta.bold(options.templater), ' as templater');
-        console.log(gutil.colors.magenta.bold(options.processor), ' as css-processor\n');
+        console.log(gutil.colors.magenta.bold(tarsSubconfig.templater), ' as templater');
+        console.log(gutil.colors.magenta.bold(tarsSubconfig.processor), ' as css-processor\n');
 
         console.log(gutil.colors.green.bold('---------------------------------------------------\n'));
     });
@@ -70,7 +71,7 @@ function processorMap(file) {
     if (filepath.indexOf('markup/static/') === 0) {
         file.path = segments.slice(2).join(path.sep);
         // Write file
-        return this.createStream(file, 'markup/' + options.config.fs.staticFolderName);
+        return this.createStream(file, 'markup/' + tarsConfig.fs.staticFolderName);
     }
 
     // File filter
