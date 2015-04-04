@@ -32,7 +32,7 @@ gulp.task('service:init', function(cb) {
         console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
 
         console.log('You choose:');
-        console.log(gutil.colors.magenta.bold(tarsSubconfig.templater), ' as templater');
+        console.log(gutil.colors.magenta.bold(tarsSubconfig.templater), ' as html-templater');
         console.log(gutil.colors.magenta.bold(tarsSubconfig.processor), ' as css-processor\n');
 
         console.log(gutil.colors.green.bold('---------------------------------------------------\n'));
