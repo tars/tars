@@ -27,8 +27,6 @@ var jsPaths = [
 
     jsPaths.push('!./markup/modules/**/data/data.js');
 
-require('./check')();
-
 /**
  * Concat JS for modules, libs and plugins in common file. Also lint modules' js
  * @param  {objects} buildOptions
