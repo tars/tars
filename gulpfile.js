@@ -10,17 +10,12 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
-    tarsSubconfig = require('./tars/helpers/process-config')(),
-    tarsConfig = tarsSubconfig.config,
+    tarsConfig = require('./tars-config.js'),
+    tarsSubconfig = require('./tars/helpers/process-config'),
     browserSyncConfig = tarsConfig.browserSyncConfig,
 
     buildOptions = {},
-    watchOptions = {},
-
-    tasks = [],
-    userTasks= [],
-    watchers = [],
-    userWatchers = [];
+    watchOptions = {};
 
 // Generate build version
 if (tarsConfig.useBuildVersioning) {
@@ -30,7 +25,6 @@ if (tarsConfig.useBuildVersioning) {
     buildOptions.buildVersion = '';
     buildOptions.buildPath = tarsConfig.buildPath;
 }
-
 
 if (gutil.env.release) {
     buildOptions.hash = Math.random().toString(36).substring(7);
@@ -49,7 +43,9 @@ watchOptions = {
 // You can add your own helpers here. Helpers folder is tars/helpers
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-if (os.platform() !== 'win32') require('./tars/helpers/set-ulimit')();
+if (os.platform() !== 'win32') {
+    require('./tars/helpers/set-ulimit')();
+}
 
 // Load files from dir recursively and synchronously
 var fileLoader = require('./tars/helpers/file-loader');
@@ -57,7 +53,6 @@ var fileLoader = require('./tars/helpers/file-loader');
 /***************/
 /* END HELPERS */
 /***************/
-
 
 /*********/
 /* TASKS */
@@ -69,30 +64,21 @@ var fileLoader = require('./tars/helpers/file-loader');
 // Example:
 // require('./tars/user-tasks/example-task')(buildOptions);
 
+// REQUIRE TASKS
+fileLoader('./tars/tasks').concat(fileLoader('./tars/user-tasks')).forEach(function(file) {
+    var task = require(file);
 
-// SYSTEM TASKS
-tasks = fileLoader('./tars/tasks');
+    // You could uncomment the row bellow, to see all required tasks in console
+    // gutil.log('Task:', gutil.colors.cyan(file));
 
-// You could uncomment the row bellow, to see all required tasks in console
-// console.log(tasks);
-
-// require tasks
-tasks.forEach(function(file) {
-    require(file)(buildOptions);
-});
-
-// USER'S TASKS
-userTasks = fileLoader('./tars/user-tasks');
-
-// require user-tasks
-userTasks.forEach(function(file) {
-    require(file)(buildOptions);
+    if (typeof task === 'function') {
+        task(buildOptions)
+    }
 });
 
 /*************/
 /* END TASKS */
 /*************/
-
 
 /***********/
 /* WATCHERS */
@@ -106,30 +92,22 @@ gulp.task('dev', ['build-dev'], function() {
         gulp.start('browsersync');
     }
 
-    // SYSTEM WATCHERS
-    watchers = fileLoader('./tars/watchers');
+    // REQUIRE WATCHERS
+    fileLoader('./tars/watchers').concat(fileLoader('./tars/user-watchers')).forEach(function(file) {
+        var watcher = require(file);
 
-    // You could uncomment the row bellow, to see all required watchers in console
-    // console.log(watchers);
+        // You could uncomment the row bellow, to see all required watchers in console
+        // gutil.log('Watcher:', gutil.colors.cyan(file));
 
-    // require watchers
-    watchers.forEach(function(file) {
-        require(file)(watchOptions);
-    });
-
-    // USER'S WATCHERS
-    userWatchers = fileLoader('./tars/user-watchers');
-
-    // require user-watchers
-    userWatchers.forEach(function(file) {
-        require(file)(watchOptions);
+        if (typeof watcher === 'function') {
+            watcher(watchOptions);
+        }
     });
 });
 
 /****************/
 /* END WATCHERS */
 /****************/
-
 
 /**************/
 /* MAIN TASKS */
@@ -185,7 +163,7 @@ gulp.task('build', function() {
             'css:compress-css'
         ],
         'service:zip-build',
-        function() {
+        function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
             gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
             console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
@@ -234,7 +212,6 @@ gulp.task('browsersync', function(cb) {
 /******************/
 /* END MAIN TASKS */
 /******************/
-
 
 /*****************/
 /* HELPERS TASKS */
