@@ -1,18 +1,21 @@
-CSS
-===
+# CSS
 
-В качестве css-препроцессора можно использовать <a href="http://sass-lang.com/" target="_blank">scss</a>, <a href="http://www.lesscss.ru/" target="_blank">less</a> или <a href="http://learnboost.github.io/stylus/" target="_blank">stylus</a>. Css-препроцессор выбирается в <a href="options.md#cssPreprocessor" target="_blank">tars-config.js</a>.
+В качестве css-препроцессора можно использовать
+[scss](http://sass-lang.com),
+[less](http://www.lesscss.ru) или
+[stylus](http://learnboost.github.io/stylus).
+Css-препроцессор выбирается в [tars-config.js](options.md#cssPreprocessor).
 
 В целом, нет каких-либо неожиданностей при использовании css-препроцессора. Используем все возможности, которые предоставляет выбранный инструмент.
 
 Если вы привыкли к обычному css, вы можете использовать css-синтаксис в любом препроцессоре.
 
-Если требуется подключить файлы из директории static (картинки), то необходимо пользоваться плейсхолдером %=staticPrefixForCss=% (значение плейсхолдера настраивается в <a href="options.md#staticPrefixForCss" target="_blank">tars-config.js</a>). Тогда подключение картинки в качестве background (картинка будет взята из вашего модуля main) будет выглядеть следующим образом (в примере используется scss):
+Если требуется подключить файлы из директории static (картинки), то необходимо пользоваться плейсхолдером %=staticPrefixForCss=% (значение плейсхолдера настраивается в [tars-config.js](options.md#staticPrefixForCss)). Тогда подключение картинки в качестве background (картинка будет взята из вашего модуля main) будет выглядеть следующим образом (в примере используется scss):
 
 ```scss
-    .main {
-        background: url('%=staticPrefixForCss=%assets/main/bg.png') repeat;
-    }
+.main {
+    background: url('%=staticPrefixForCss=%assets/main/bg.png') repeat;
+}
 ```
 
 Есть пара моментов по организации scss|less|styl-файлов (далее считаем, что был выбран scss в качестве css-препроцессора):
@@ -41,4 +44,3 @@ CSS
 * Стили из etc.scss
 
 Для браузеров ie8 и ie9 можно размещать отдельные фиксы в папке ie в папке модуля. Нужно создать ie8.scss или ie9.scss, в соответствии с тем, в какой браузер вносится фикс.
-
