@@ -27,8 +27,6 @@ var jsPaths = [
 
     jsPaths.push('!./markup/modules/**/data/data.js');
 
-require('./check')();
-
 /**
  * Concat JS for modules, libs and plugins in common file. Also lint modules' js
  * @param  {objects} buildOptions
@@ -42,7 +40,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while concating js-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('JS\'ve been linted and concatinated')
             );
