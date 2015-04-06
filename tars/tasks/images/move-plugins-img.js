@@ -18,7 +18,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving plugin\'s imgs.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Plugins\' images\'ve been moved')
             );
