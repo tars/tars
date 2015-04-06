@@ -16,7 +16,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Misc files\'ve been moved')
             );

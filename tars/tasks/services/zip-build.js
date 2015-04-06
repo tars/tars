@@ -13,7 +13,7 @@ module.exports = function(buildOptions) {
 
     return gulp.task('service:zip-build', function(cb) {
         if (tarsConfig.useArchiver) {
-            return gulp.src(buildOptions.buildPath + '**', { base : "." })
+            return gulp.src(buildOptions.buildPath + '**', { base: '.' })
                 .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while creating zip-archive.\nLook in the console for details.\n' + error;

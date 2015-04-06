@@ -9,8 +9,8 @@ var watcherLog = require('../helpers/watcher-log');
  * @param  {Object} watchOptions
  */
 module.exports = function(watchOptions) {
-    return chokidar.watch(/* String of path pattern or array of strings */, {
-        ignored: /* String of path pattern or array of strings to ignore. If nothing to igonre — just set it to ''*/,
+    return chokidar.watch('/* String of path pattern or array of strings */', {
+        ignored: '/* String of path pattern or array of strings to ignore. If nothing to igonre — just set it empty string */',
         persistent: true,
         ignoreInitial: true
     }).on('all', function(event, path) {
