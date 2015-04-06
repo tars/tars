@@ -205,24 +205,20 @@ gulp.task('build', function() {
 });
 
 // Default task. Just start build task
-gulp.task('default', function() {
-    gulp.start('build');
-});
+gulp.task('default', ['build']);
 
 // Init task. Just start init task
-gulp.task('init', function() {
-    gulp.start('service:init');
+gulp.task('init', function (cb) {
+    runSequence('service:create-fs', 'service:init', cb);
 });
 
 // Re-init task. Just start re-init task
-gulp.task('re-init', function() {
-    gulp.start('service:re-init');
+gulp.task('re-init', function (cb) {
+    runSequence('service:remove-init-fs', 'service:create-fs', 'service:init', cb);
 });
 
 // Update-deps task. Just start update-deps task
-gulp.task('update-deps', function() {
-    gulp.start('service:update-deps');
-});
+gulp.task('update-deps', ['service:update-deps']);
 
 // Task for starting browsersync module
 gulp.task('browsersync', function(cb) {
