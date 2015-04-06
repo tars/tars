@@ -10,12 +10,9 @@ var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
     // Configs
-    tarsConfig = require('./tars-config'),
+    tarsSubconfig = require('./tars/helpers/process-config')(),
+    tarsConfig = tarsSubconfig.config,
     browserSyncConfig = tarsConfig.browserSyncConfig,
-
-    templaterName = require('./tars/helpers/templater-name-setter')(),
-    templateExtension = 'jade',
-    cssPreprocExtension = tarsConfig.cssPreprocessor.toLowerCase(),
 
     buildOptions = {},
     watchOptions = {},
@@ -34,14 +31,6 @@ if (tarsConfig.useBuildVersioning) {
     buildOptions.buildPath = tarsConfig.buildPath;
 }
 
-// Set template's extension
-if (templaterName === 'handlebars') {
-    templateExtension = 'html';
-} else {
-    templateExtension = 'jade';
-}
-
-if (cssPreprocExtension === 'stylus') cssPreprocExtension = 'styl';
 
 if (gutil.env.release) {
     buildOptions.hash = Math.random().toString(36).substring(7);
@@ -50,8 +39,8 @@ if (gutil.env.release) {
 }
 
 watchOptions = {
-    cssPreprocExtension: cssPreprocExtension,
-    templateExtension: templateExtension
+    templateExtension: tarsSubconfig.templateExtension,
+    cssPreprocExtension: tarsSubconfig.styleExtention
 };
 
 /***********/

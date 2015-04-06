@@ -1,149 +1,125 @@
 var gulp = require('gulp');
-var tarsConfig = require('../../../tars-config');
-var templaterName = require('../../helpers/templater-name-setter');
 var gutil = require('gulp-util');
-var ncp = require('ncp').ncp;
 var Download = require('download');
+var Promise = require('bluebird');
 var os = require('os');
+var tarsConfig = require('../../../tars-config.js');
+var tarsSubconfig = require('../../../tars/helpers/process-config.js');
+var path = require('path');
 
-var githubConfig = {
-    user: 'artem-malko',
-    repoPrefix: 'tars-'
-};
-
-var templaterVersion = 'version-' + require('../../../package.json').version;
-var cssVersion = 'version-' + require('../../../package.json').version;
-
-var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
-var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
-
-ncp.limit = 16;
-require('./create-fs')();
-
+var version = 'version-' + require('../../../package.json').version;
 
 /**
  * Init builder, download css-preprocessor and templater
- * @param  {Object} buildOptions
  */
-module.exports = function(buildOptions) {
+gulp.task('service:init', function(cb) {
 
-    return gulp.task('service:init', ['service:create-fs'], function(cb) {
+    if (os.platform() === 'darwin') {
+        console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
+    } else {
+        console.log('\n\n' + gutil.colors.bold('T A R S\n'));
+    }
+    console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
+    console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
+    console.log('Start your work with \'gulp dev\'\n');
 
-        var downloadTemplater,
-            downloadCssPreprocessor,
-            downloadTemplaterTest,
-            downloadCssPreprocessorTest;
+    // Check both modules will be done
+    return Promise.all([
+        downloadModule(tarsSubconfig.templaterRepo, templaterMap),
+        downloadModule(tarsSubconfig.processorRepo, processorMap),
+    ]).then(function () {
+        console.log(gutil.colors.green.bold('\n---------------------------------------------------\n'));
+        console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
 
-        downloadTemplaterTest = new Download()
-            .get(templaterUrl);
+        console.log('You choose:');
+        console.log(gutil.colors.magenta.bold(tarsSubconfig.templater), ' as html-templater');
+        console.log(gutil.colors.magenta.bold(tarsSubconfig.processor), ' as css-processor\n');
 
-        downloadCssPreprocessorTest = new Download()
-            .get(cssPreprocessorUrl);
+        console.log(gutil.colors.green.bold('---------------------------------------------------\n'));
+    });
 
+});
 
-        if (os.platform() === 'darwin') {
-            console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
-        } else {
-            console.log('\n\n' + gutil.colors.bold('T A R S\n'));
-        }
-        console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
-        console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
-        console.log('Start your work with \'gulp dev\'\n\n');
+function templaterMap(file) {
+    var segments = file.path.split(path.sep),
+        filepath = segments.join('/');
 
-        downloadTemplaterTest.run(function (err, files) {
+    // File filter
+    if (filepath.indexOf('markup/') === 0) {
+        file.path = segments.slice(1).join(path.sep);
+        // Write file
+        return this.createStream(file, 'markup');
+    }
+
+    // File filter
+    if (filepath.indexOf('tars/tasks/') === 0) {
+        file.path = segments.slice(2).join(path.sep);
+        // Write file
+        return this.createStream(file, 'tars/tasks/html');
+    }
+
+    return this.createStream(file);
+}
+
+function processorMap(file) {
+    var segments = file.path.split(path.sep),
+        filepath = segments.join('/');
+
+    // File filter
+    if (filepath.indexOf('markup/static/') === 0) {
+        file.path = segments.slice(2).join(path.sep);
+        // Write file
+        return this.createStream(file, 'markup/' + tarsConfig.fs.staticFolderName);
+    }
+
+    // File filter
+    if (filepath.indexOf('markup/modules/_template/') === 0) {
+        file.path = segments.slice(3).join(path.sep);
+        // Write file
+        return this.createStream(file, 'markup/modules/_template');
+    }
+
+    // File filter
+    if (filepath.indexOf('tars/tasks/') === 0) {
+        file.path = segments.slice(2).join(path.sep);
+        // Write file
+        return this.createStream(file, 'tars/tasks/css');
+    }
+
+    // Pass
+    return this.createStream(file);
+}
+
+function downloadModule(repo, map) {
+    return new Promise(function (resolve, reject) {
+        var url = repo + '/archive/' + version + '.zip';
+
+        // Check existing version branch
+        Download().get(url).run(function (err, files) {
             if (err) {
-                templaterVersion = 'master'
-                templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
+                url = repo + '/archive/master.zip';
             }
 
-            downloadTemplater = new Download({ extract: true})
-                .get(templaterUrl)
-                .dest('./.tmpTemplater');
-
-            /**
-             * Including templater
-             * @param  {Object} err
-             * @param  {Array} files
-             * @param  {Stream} stream
-             */
-            downloadTemplater.run(function (err, files) {
-
+            // Download branch
+            Download({
+                extract: true,
+                strip: 1
+            }).get(url).run(function (err, files) {
                 if (err) {
                     throw err;
                 }
 
-                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/markup', './markup', function (err) {
-                    if (err) {
-                        gutil.log(gutil.colors.red(err));
-                        gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
-                        gutil.log('Please, repost with message to developer.');
-                        return;
-                    }
-                });
-
-                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
-                    if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
-                        gutil.log('Please, repost with message to developer.');
-                        return;
-                    }
-                });
-            });
-        });
-
-        downloadCssPreprocessorTest.run(function (err, files) {
-            if (err) {
-                cssVersion = 'master'
-                cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
-            }
-
-            downloadCssPreprocessor = new Download({ extract: true})
-                .get(cssPreprocessorUrl)
-                .dest('./.tmpPreproc');
-
-            /**
-             * Including css-preprocessor
-             * @param  {Object} err
-             * @param  {Array} files
-             * @param  {Stream} stream
-             */
-            downloadCssPreprocessor.run(function (err, files) {
-
-                if (err) {
-                    throw err;
-                }
-
-                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/tars/tasks', './tars/tasks/css', function (err) {
-                    if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy tars css preproc task');
-                        gutil.log('Please, repost with message to developer.');
-                        return;
-                    }
-                });
-
-                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tarsConfig.fs.staticFolderName, function (err) {
-                    if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
-                        gutil.log('Please, repost with message to developer.');
-                        return;
-                    }
-                });
-
-                ncp('./.tmpPreproc/tars-' + tarsConfig.cssPreprocessor + '-' + cssVersion + '/markup/modules/_template', './markup/modules/_template/', function (err) {
-                    if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
-                        gutil.log('Please, repost with message to developer.');
-                        return;
-                    }
-
-                    console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
-                    console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
-                    console.log('You choose:');
-                    console.log(gutil.colors.magenta.bold(tarsConfig.cssPreprocessor), ' as css-preprocessor');
-                    console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
-                    console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
-                });
+                // Convert files to streams by map and check when all will be done
+                Promise.all(files.filter(function (file) {
+                    return !file.isDirectory()
+                        && !isEndOfString(file.path, '.md')
+                        && !isEndOfString(file.path, '.gitignore');
+                }).map(map.bind(new Download))).then(resolve);
             });
         });
     });
-};
+}
+
+function isEndOfString(s, end) {
+    return s.indexOf(end) === s.length - end.length;
+}
