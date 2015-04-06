@@ -7,9 +7,6 @@ var tarsConfig = require('../../tars-config');
     // Include browserSync, if you need to reload browser
     // var browserSync = require('browser-sync');
 
-// require('./ path to task file, which have to be done before current task');
-// require('./required-task-name');
-
 /**
  * Task description
  * @param  {object} buildOptions
