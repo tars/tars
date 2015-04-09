@@ -1,5 +1,5 @@
 <p align="right">
-English description | [Описание на русском](README_RU.md)
+English description | <a href="README_RU.md">Описание на русском</a>
 </p>
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
@@ -7,8 +7,12 @@ English description | [Описание на русском](README_RU.md)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
-TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work. 
-TARS is the framework for gulp, including a set of gulp-tasks and it allows the ability to easily expand (creating new tasks) and modification of existing tasks.  TARS provides comfortable architecture for storage tasks and watchers in the project. 
+TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work.
+
+TARS is the framework for gulp, including a set of gulp-tasks and it allows the ability to easily expand (creating new tasks) and modification of existing tasks.
+
+TARS provides comfortable architecture for storage tasks and watchers in the project. 
+
 It is not a npm-packet. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves.
 
 

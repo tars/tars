@@ -64,11 +64,11 @@ static/                                     #  Folder for static-files. You can 
         └── framework/                      # js-frameworks (backbone, for example)
         └── libraries/                      # js-libraries (jquery, for-example)
         └── plugins/                        # js-plugins
-        └── separate-js/                     # js-files, which must not be included in ready bundle
+        └── separate-js/                    # js-files, which must not be included in ready bundle
     └── misc/                               # General files, which will be moved to root directory of ready project — favicons, robots.txt and so on  (can contain subdirectories)
     └── scss                  
         └── etc/                            # Styles, which will be included in the end of ready css-file (can contain subdirectories)
-        └── libraries/                        # Styles for libraries (can contain subdirectories)
+        └── libraries/                      # Styles for libraries (can contain subdirectories)
         └── plugins/                        # Styles for plugins (can contain subdirectories)
         └── sprite-generator-templates/     # Templates for sprite generating
         └── sprites-scss                    # Mixins for sprites

@@ -7,7 +7,7 @@ There are several types of updates TARS:
 * update dependencies to the latest stable versions;
 * TARS full update.
 
-You can run the first type of upgrade by command `gulp update-deps` (more details in the [readme](../README.md#%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B)). The second requires several steps. 
+You can run the first type of upgrade by command `gulp update-deps` (more details in the [readme](../README.md#basic-commands)). The second requires several steps. 
 
 Generally, in the major version (for example, 1.\*.\*  ), you can use a markup folder (this is the folder in which should be the sources of your project) in any version. In any version within one major version building will be successful. This is true for TARS above (and including) version 1.2.0. Prior to 1.2.0 there were small changes in the file structure and method of including modules in the handlebars. All changes are available in the [changelog](changelog.md).
 

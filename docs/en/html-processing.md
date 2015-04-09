@@ -7,13 +7,13 @@ You can use all features of jade and handlebars. If you are used to the regular 
 
 If you do not want to compile a particular page, you can simply add the '_' to the begining of the page name, and it will not be compiled.
 
-If you need to include files from the static directory (images, js), you must use the placeholder [%=staticPrefix=%](options.md#staticPrefix). Then including of an image will be as in follow example (in this example handlebars is used):
+If you need to include files from the static directory (images, js), you must use the placeholder [%=staticPrefix=%](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
 
 ```html
 <img src="%=staticPrefix=%img/content/example.jpg"/>
 ```
 
-To include image in css you need to use another placeholder – [">%=staticPrefixForCss=%](options.md#staticPrefixForCss).
+To include image in css you need to use another placeholder – [">%=staticPrefixForCss=%](options.md#staticprefixforcss).
 
 Very important feature is the using of different data types in one template. For example, we have a head module, which has all that you should put in the head tag (different meta, titles, etc.). Suppose that every page should have its own title. Make copies of the same module, which differ only in one line is not the best practice. It would be logical to separate data from view.
 
@@ -90,7 +90,7 @@ Inside the module data is displayed by the jade (for example, the head module):
 
 ```jade
 mixin head(data)
-    title. #{data.title}
+   <title>#{data.title}</title>
 ```
 
 You can use any features that are available in jade.

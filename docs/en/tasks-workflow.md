@@ -57,7 +57,7 @@ Generally, in TARS you can include any gulp-task.
 
 ## Watchers
 
-As tasks, watchers is a commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). All watchers is automatically included in a gulpfile in the root of the project.
+As tasks, watchers is a [commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). All watchers is automatically included in a gulpfile in the root of the project.
 
 You could crate your own watcher in a user-watchers directory. By default, there is already an example of watcher. Let's take a closer look.
 

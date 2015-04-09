@@ -10,7 +10,7 @@ The general approach is described in the [presentation](http://www.slideshare.ne
 
 There will not be described advantages of concatinating interface (and other small or often repeated images) into a single sprite.  If you don't know what is a sprite you can look details [here](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D1%80%D0%B0%D0%B9%D1%82_(%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F_%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0)).
 
-You may miss the theory and go to the [description of work with sprites](images-processing.md#%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%BF%D1%80%D0%B0%D0%B9%D1%82%D0%BE%D0%B2).
+You may miss the theory and go to the [description of work with sprites](images-processing.md#sprites-including).
 
 Сегодня существует много экранов с высокой плотностью пикселей. Разберёмся, что это значит. В качестве примера рассмотрим смартфоны IPhone 3GS и IPhone 4. У 3GS разрешение экрана 320x480, а у 4-ки — 640x960. Как мы видим, разрешение увеличилось ровно в два раза при той же диагонали, а значит пиксель стал меньше. Чтобы нивелировать эту разницу между размерами пикселей (а ведь именно пикселями мы управляем в CSS) появился параметр device-pixel-ratio (или dppx), который показывает, сколько реальных экранных пикселей содержится в неком логическом пикселе, которым мы оперируем в css. Например, для дисплея IPhone 4 этот параметр равен 2.
 
@@ -66,7 +66,7 @@ Builder supports images of any type, but only SVG, PNG, JPG and GIF will be expo
 
 ### Images for module
 
-They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=staticPrefix=%](options.md#staticPrefix)):
+They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=staticPrefixForCss=%](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {

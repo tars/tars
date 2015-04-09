@@ -1,12 +1,12 @@
 # CSS
 
-You can use [scss](http://sass-lang.com), [less](http://www.lesscss.ru) или [stylus](http://learnboost.github.io/stylus) as css-preprocessor. You can choose css-preprocessor in [tars-config.js](options.md#cssPreprocessor).
+You can use [scss](http://sass-lang.com), [less](http://www.lesscss.ru) или [stylus](http://learnboost.github.io/stylus) as css-preprocessor. You can choose css-preprocessor in [tars-config.js](options.md#csspreprocessor).
 
 In general, there are no surprises when using css-preprocessor. Use all the possibilities offered by the selected tool.
 
 If you are used to the usual css, you can use css-syntax in any preprocessor.
 
-If you want to include the files from the static directory (pictures), you must use the placeholder %=staticPrefixForCss=% (value of the placeholder is adjusted in the [tars-config.js](options.md#staticPrefixForCss)). Then including of the image as a background (the picture will be taken from your main module) will be as follows (in this example scss is used):
+If you want to include the files from the static directory (pictures), you must use the placeholder %=staticPrefixForCss=% (value of the placeholder is adjusted in the [tars-config.js](options.md#staticprefixforcss)). Then including of the image as a background (the picture will be taken from your main module) will be as follows (in this example scss is used):
 
 ```scss
 .main {

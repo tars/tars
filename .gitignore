@@ -1,6 +1,7 @@
 node_modules
 dev
 .DS_Store
+._.DS_Store
 
 .tmpTemplater
 .tmpPreproc

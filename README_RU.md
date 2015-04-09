@@ -1,5 +1,5 @@
 <p align="right">
-[English description](README.md) | Описание на русском
+<a href="README.md">English description</a> | Описание на русском
 </p>
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)

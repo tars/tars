@@ -1,8 +1,8 @@
 # Options
 
-All builder configuration is in one file - tars-config.js at the root of the project.
+All builder configuration is in one file — tars-config.js at the root of the project.
 
-You need to restart the assembly to changes are applied.
+You need to restart the assembly to apply changes.
 
 ## Variable options
 
@@ -257,7 +257,7 @@ Type: `String`
 
 Default: `'static'`
 
-The name of the folder where statics of the the project will be. If you are developing a project locally, it is necessary that the value of this option matches with the value of [staticPrefix](#staticPrefix) option.
+The name of the folder where statics of the the project will be. If you are developing a project locally, it is necessary that the value of this option matches with the value of [staticPrefix](#staticprefix) option.
 
 #### imagesFolderName
 
