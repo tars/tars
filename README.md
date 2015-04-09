@@ -104,7 +104,7 @@ It is important! All examples in documentation use the default settings.
 
 ## Last changes
 
-All recent changes are available at the link: [changes history](/docs/en/changelog.md).
+All recent changes are available at the link: [changelog](/docs/en/changelog.md).
 
 If you have a question you can write in [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [artem.malko@gmail.com](mailto:artem.malko@gmail.com)
 
