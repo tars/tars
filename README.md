@@ -1,117 +1,107 @@
+<p align="right">
+English description | [Описание на русском](README_RU.md)
+</p>
+
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Сборщик html-верстки, основанный на [gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
-Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
-
-TARS — сборщик-фреймворк, включающий в себя набор gulp-тасков, предоставляющий возможность легкого расширения (создания новых тасков) и модифицирования уже существующих.
-TARS предоставляет удобную архитектуру хранения тасков и вотчеров в проекте.
-
-Это не npm-пакет. Такое решение было принято, чтобы каждый мог максимально комфортно кастомизировать сборщик под себя.
+TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
+TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work. 
+TARS is the framework for gulp, including a set of gulp-tasks and it allows the ability to easily expand (creating new tasks) and modification of existing tasks.  TARS provides comfortable architecture for storage tasks and watchers in the project. 
+It is not a npm-packet. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves.
 
 
-## Основные фичи
+## Basic features
 
-Ниже перечислена только малая часть особенностей, на самом деле их гораздо больше)
+Listed below are just a little part of the features. In fact builder has much more.
 
-* [Jade](http://jade-lang.com/) или [Handlebars](http://handlebarsjs.com/) на выбор в качестве html-шаблонизатора.
-	Также можно использовать обычный html. Подробности [здесь](/docs/html-processing.md).
-* Использование json (а точнее js-объекта, который может быть описан в json) для передачи данных в шаблоны
-	(опционально, но очень крутая штука, которая позволит избавиться от копипаста). Подробнее [тут](/docs/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
-* [SCSS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) или [Stylus](http://learnboost.github.io/stylus/) в качестве препроцессора для css.
-	Также в комплекте идет небольшой набор миксинов. Также можно использовать обычный css. Подробности [здесь](/docs/css-processing.md).
-* Никаких внешних библиотек и плагинов (кроме [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)).
-	И да, это фича, так как вы вольны сами выбирать, какие библиотеки использовать.
-* Используется модуль [chokidar](https://github.com/paulmillr/chokidar) для вотчинга файлов.
-* Расшариванием верстки с вашего компьютера во внешний веб, опционально.
-	Ну и конечно же livereload в браузере (и не только локально) + графический интерфейс к панели управления устройствами, на которые расшаривается верстка.
-* Можно легко добавлять новые таски и вотчеры. Есть примеры того, как создать и использовать новый таск или вотчер внутри TARS.
-* Умная работа с изображениями. В первую очередь с вектором (svg). Больше не будет ада при верстке сайтов для экранов с высокой плотностью пикселей.
-* Несколько режимов сборки (обычная, с минифицированными файлами, с хешем в названии css- и js-файлов для выкладки в продакшн).
-* Создание архива с готовой сборкой.
+* [Jade](http://jade-lang.com/) or [Handlebars](http://handlebarsjs.com/) as html-templater. You can also use a regular html. Read more [in docs](/docs/en/html-processing.md).
+* Using json (js-object actually, which can be described in json) to transfer data in templates (optional, but it is  very cool thing that will let you to rid of copypast). Read more [in docs](/docs/en/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
+* [SCSS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. You can also use a regular css. Read more [in docs](/docs/en/css-processing.md).
+* No external libraries and plugins (except [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). Yes, this is a feature because you can choose library for using.
+* [Chokidar](https://github.com/paulmillr/chokidar) module is used for watching files
+* Sharing of markup from your local computer to an external web, optional. And of course it has a livereload in browser (and not just locally) + GUI to control panel for devices, on which markup was shearing.
+* You can easy add new tasks and watchers. There are examples of how to create and use a new task or watcher inside the TARS.
+* Smart work with images. First of all with vector(svg). There will be no more hell with markup for screens with high pixel density.
+* Several modes of assembly (common, with minified files, with hash in the title of css- and js-files for deploy).
+* Creating archive with the ready build.
 
 
-## Установка
+## Installation
 
-Необходимо [установить `nodeJS`](http://nodejs.org/) версии >= 0.8.
-Далее необходимо установить gulp глобально. (Возможно потребуются права суперюзера или администратора)
+You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.8 or more. Next you need to install gulp globally. (You may need rights of superuser or administrator).
 
 ```shell
 npm install -g gulp
 ```
 
-[Скачайте TARS](../../../tars/archive/master.zip) и распакуйте в рабочую директорию у себя на компьютере.
-Затем устанавливаем зависимости. Команда запускается из папки с файлами TARS (обычно это tars-master).
+[Download TARS](../../../tars/archive/master.zip) and unzip it in the working directory. Then install dependencies. Command is run from a folder with TARS files (usually it is a tars-master).
 
 ```shell
 npm install
 ```
 
-Если не все зависимости были установлены, то последнюю операцию нужно повторить.
+If not all of the dependencies have been installed, the last operation must be repeated. 
 
-После установки всех зависимостей необходимо открыть tars-config (подробное описание опций [здесь](/docs/options.md)) и настроить проект под себя.
-В конфиге вы можете выбрать шаблонизатор, css-препроцессор, использование уведомлений, имена папок для различной статики и т.д.
-После настройки проекта, выполняем следующую команду:
+After installing of all dependencies you need to open tars-config (detailed description of the options [here](/docs/en/options.md)) and set up the project for yourself. In the config, you can select the templater, css-preprocessor, using the notifications, folder names for different static and etc. After setting up the project, execute the following command:
 
 ```shell
 gulp init
 ```
 
-Данная команда создаст базовую файловую структуру, подтянет таски для выбранных вами шаблонизатора и css-препроцессора.
-
-Все готово, можно колбасить :)
-
-
-## Основные команды
-
-`gulp init` — Инициализирует проект с заданными опциями в tars-config. Создает файловую структуру.
-
-`gulp re-init` — Переинициализирует проект с заданными опциями в tars-config. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. При переинициализации все папки и файлы удаляются.
-
-`gulp` или `gulp build` — делает сборку проекта. Подключаются не минимизированные файлы. Тип сборки зависит от переданных ключей вместе с этой командой. Доступные ключи:
-
-* `--min` – в html подключаются минимизированные файлы.
-* `--release` – в html подключаются минимизированные файлы, в названии которых есть hash. Данный режим полезен, если вы напрямую выкладываете верстку на сервер. 
-
-`gulp dev` — инициализация сборщика в режиме разработки. Создается dev-версия проекта, без всех минификаций. Также запускает вотчеры за файлами проекта. Доступные ключи:
-
-* `--lr` – инициализация livereload (живая презагрузка страницы при изменениях в файлах проекта), если он включен в конфиге проекта.
-* `--tunnel` – инициализация проекта с расшариванием верстки во внешний веб.
-
-Ссылка будет указана в консоли. Также будет указана ссылка на панель управления устройствами, на которые расшарена верстка.
-
-`gulp build-dev` — генерация dev-версии проекта без вотчеров.
-
-Ключи, доступные при любом режиме сборки:
-
-* `--ie8` – включить в сборку стили для ie8.
-
-`gulp update-deps` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды. Желательно выполнять раз в неделю. Команда скопирует текущий package.json, добавит к его имени подчеркивание, скачает новый package.json с репозитория и выполнит npm install. Таким образом, если у вас что-то сломалось с новыми пакетами, то всегда можно вернуться на прошлую версию, просто вернув прошлый package.json
-Также вы можете ознакомиться с [руководством по обновлению](/docs/update-guide.md).
+This command will create the basic file structure, take tasks for selected templater and css-preprocessor. 
+Everything is ready, make it works! :)
 
 
-## Документация
+## Basic commands
 
-Важно! Все примеры в документации используют настройки по умолчанию.
+`gulp init` — initializes project with the specified settings in the tars-config. Creates a file structure.
 
-* [Файловая структура](/docs/file-structure.md)
-* [Работа с тасками и вотчерами](/docs/tasks-workflow.md)
-* [Опции](/docs/options.md)
-* [Html](/docs/html-processing.md)
-* [Css](/docs/css-processing.md)
-* [Js](/docs/js-processing.md)
-* [Работа с изображениями](/docs/images-processing.md)
-* [Работа со шрифтами и misc-файлами](/docs/fonts-and-misc.md)
-* [Сценарии использования](/docs/scenarios.md)
-* [Руководство по обновлению](/docs/update-guide.md)
-* [FAQ](/docs/faq.md)
+`gulp re-init` — reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options.
+
+`gulp` или `gulp build` — make project assembly. There not minimized files are connected. Type of assembly depends on the transmitted keys with this command. Available keys:
+
+* `--min` – minimized files connected to html.
+* `--release` – minimized  files connected to html whose names have hash. This mode is useful if you are directly trying to deploy ready markup to the server.
+
+`gulp dev` — initialization of builder in development mode. Dev-version of the project is created  without any minifications. Also it launches watchers for project files. Available keys:
+
+* `--lr` – initialization livereload (live page reloads with changes in project files), if it is included in the configuration of the project.
+* `--tunnel` – initialization project with sharing markup to an external web.
+
+The link will be shown in the console. There also will be a link to control panel for devices on which markup was sharing.
+
+`gulp build-dev` — generation of dev-version of the project without watchers.
+
+Keys are available in any mode of assembly:
+
+* `--ie8` – to include in the build styles for ie8.
+
+`gulp update-deps` – updates of all assembler dependences to the latest stable. It may take some time to execute this command. It is desirable to execute once a week. Command will copy the current package.json, add underline to its name, download a new package.json from the repository and execute npm install. So, if something was broken with the new package, you can always return to the last version, just rename last package.json. Also you can read a [upgrade guide](/docs/en/update-guide.md).
 
 
-## Последние изменения
+## Documentation
 
-Все последние изменения доступны по ссылке: [История изменений](/docs/changelog.md).
+It is important! All examples in documentation use the default settings.
 
-По всем вопросам можно писать в [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) или на почту [artem.malko@gmail.com](mailto:artem.malko@gmail.com)
+* [File structure](/docs/en/file-structure.md)
+* [Working with tasks and watchers](/docs/en/tasks-workflow.md)
+* [Options](/docs/en/options.md)
+* [Html](/docs/en/html-processing.md)
+* [Css](/docs/en/css-processing.md)
+* [Js](/docs/en/js-processing.md)
+* [Working with images](/docs/en/images-processing.md)
+* [Working with fonts and misc-files](/docs/en/fonts-and-misc.md)
+* [Usage script (scenarios)](/docs/en/scenarios.md)
+* [Upgrade guide](/docs/en/update-guide.md)
+* [FAQ](/docs/en/faq.md)
 
-Баги и фича-реквесты сюда: [issues](https://github.com/2gis/tars/issues/new).
+
+## Last changes
+
+All recent changes are available at the link: [changes history](/docs/en/changelog.md).
+
+If you have a question you can write in [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [artem.malko@gmail.com](mailto:artem.malko@gmail.com)
+
+Bugs and feature-request here: [issues](https://github.com/2gis/tars/issues/new).
