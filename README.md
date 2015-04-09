@@ -13,7 +13,7 @@ TARS is the framework for gulp, including a set of gulp-tasks and it allows the 
 
 TARS provides comfortable architecture for storage tasks and watchers in the project. 
 
-It is not a npm-packet. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves.
+It is not a npm-package. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves.
 
 
 ## Basic features

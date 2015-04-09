@@ -41,7 +41,6 @@
     "jshint-stylish": "1.0.0",
     "mkdirp": "0.5.0",
     "ncp": "2.0.0",
-    "path": "0.11.14",
     "run-sequence": "1.0.2",
     "through2": "0.6.3"
   },
