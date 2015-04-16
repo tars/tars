@@ -9,9 +9,9 @@ var notifier = require('../../helpers/notifier');
  * Create zip archive of build
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('service:zip-build', function(cb) {
+    return gulp.task('service:zip-build', function (cb) {
         if (tarsConfig.useArchiver) {
             return gulp.src(buildOptions.buildPath + '**', { base: '.' })
                 .pipe(zip('build' + buildOptions.buildVersion + '.zip'))

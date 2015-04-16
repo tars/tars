@@ -10,9 +10,9 @@ var notifier = require('../../helpers/notifier');
  * Copy files from dev to build directory. Create build directory with new build version
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('service:pre-build', function() {
+    return gulp.task('service:pre-build', function () {
 
         if (tarsConfig.useBuildVersioning) {
             console.log('\n----------------------------------------------------------------------');
@@ -28,5 +28,5 @@ module.exports = function(buildOptions) {
             .pipe(
                 notifier('Pre-build task is finished')
             );
-        });
+    });
 };

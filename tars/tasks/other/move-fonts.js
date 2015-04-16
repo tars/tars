@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  * Move fonts-files to dev directory
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('other:move-fonts', function() {
+    return gulp.task('other:move-fonts', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*')
             .pipe(cache('move-fonts'))
             .on('error', notify.onError(function (error) {

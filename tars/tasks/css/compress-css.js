@@ -10,9 +10,9 @@ var tarsConfig = require('../../../tars-config');
  * Compress css-files
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('css:compress-css', function() {
+    return gulp.task('css:compress-css', function () {
         return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/*.css')
             // @TODO: fix problems with cmq
             // .pipe(cmq())
@@ -27,5 +27,5 @@ module.exports = function(buildOptions) {
             .pipe(
                 notifier('Css\'ve been minified')
             );
-        });
+    });
 };

@@ -7,14 +7,14 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watch for modules' css-files
  * @param  {Object} watchOptions
  */
-module.exports = function(watchOptions) {
+module.exports = function (watchOptions) {
     return chokidar.watch('markup/modules/**/*.' + watchOptions.cssPreprocExtension, {
         ignored: [
             'markup/modules/**/ie8.' + watchOptions.cssPreprocExtension
         ],
         persistent: true,
         ignoreInitial: true
-    }).on('all', function(event, path) {
+    }).on('all', function (event, path) {
         watcherLog(event, path);
         gulp.start('css:compile-css');
 

@@ -7,13 +7,13 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for ie8 stylies
  * @param  {Object} watchOptions
  */
-module.exports = function(watchOptions) {
+module.exports = function (watchOptions) {
     if (gutil.env.ie8) {
         return chokidar.watch('markup/modules/**/ie8.' + watchOptions.cssPreprocExtension, {
                     ignored: '',
                     persistent: true,
                     ignoreInitial: true
-                }).on('all', function(event, path) {
+                }).on('all', function (event, path) {
                     watcherLog(event, path);
                     gulp.start('css:compile-css-for-ie8');
                 });

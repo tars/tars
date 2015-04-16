@@ -13,14 +13,14 @@ var jsPathsToLint = [
                     ];
 
 if (tarsConfig.lintJsCodeBeforeModules) {
-    tarsConfig.jsPathsToConcatBeforeModulesJs.forEach(function(path) {
-        jsPathsToLint.push(path)
+    tarsConfig.jsPathsToConcatBeforeModulesJs.forEach(function (path) {
+        jsPathsToLint.push(path);
     });
 }
 
 if (tarsConfig.lintJsCodeAfterModules) {
-    tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function(path) {
-        jsPathsToLint.push(path)
+    tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function (path) {
+        jsPathsToLint.push(path);
     });
 }
 
@@ -28,9 +28,9 @@ if (tarsConfig.lintJsCodeAfterModules) {
  * Check JS for style and errors (optional task)
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('js:check', function(cb) {
+    return gulp.task('js:check', function (cb) {
         if (tarsConfig.useJsLintAndHint) {
             return gulp.src(jsPathsToLint)
                 .pipe(cache('hinting'))

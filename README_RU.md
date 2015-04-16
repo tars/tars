@@ -109,6 +109,7 @@ gulp init
 * [Работа со шрифтами и misc-файлами](/docs/fonts-and-misc.md)
 * [Сценарии использования](/docs/ru/scenarios.md)
 * [Руководство по обновлению](/docs/ru/update-guide.md)
+* [Руководство для контрибуторов](/docs/ru/for-contributors.md)
 * [FAQ](/docs/ru/faq.md)
 
 

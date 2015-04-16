@@ -3,7 +3,7 @@ var tarsConfig = require('../../tars-config');
 /**
  * Set ulimit to tarsConfig.ulimit
  */
-module.exports = function() {
+module.exports = function () {
     var limit = tarsConfig.ulimit;
     var posix;
 
@@ -14,10 +14,10 @@ module.exports = function() {
 
     if (posix) {
         try {
-            posix.setrlimit('nofile', {soft: limit});
+            posix.setrlimit('nofile', { soft: limit });
             return true;
         } catch (ex) {
         }
     }
     return false;
-}
+};

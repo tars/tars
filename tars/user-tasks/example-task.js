@@ -4,8 +4,8 @@ var gulp = require('gulp');
 var notify = require('gulp-notify');
 var notifier = require('../helpers/notifier');
 var tarsConfig = require('../../tars-config');
-    // Include browserSync, if you need to reload browser
-    // var browserSync = require('browser-sync');
+// Include browserSync, if you need to reload browser
+// var browserSync = require('browser-sync');
 
 // require('./ path to task file, which have to be done before current task');
 // require('./required-task-name');
@@ -14,9 +14,9 @@ var tarsConfig = require('../../tars-config');
  * Task description
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('task-name', /*['required-task-name'],*/ function(cb) {
+    return gulp.task('task-name', /*['required-task-name'],*/ function (cb) {
         return gulp.src(/* path-string or array of path-strings to files */)
             // Do stuff here
             .on('error', notify.onError(function (error) {

@@ -8,9 +8,9 @@ var notifier = require('../../helpers/notifier');
  * Copy separate Js-files to dev directory
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('js:move-separate', function(cb) {
+    return gulp.task('js:move-separate', function (cb) {
         gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js')
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {

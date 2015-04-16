@@ -11,9 +11,9 @@ var svg2png = require('gulp-svg2png');
  * Raster SVG-files (optional task)
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('images:raster-svg', function(cb) {
+    return gulp.task('images:raster-svg', function (cb) {
 
         if (tarsConfig.useSVG && gutil.env.ie8) {
             return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')

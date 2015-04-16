@@ -15,31 +15,31 @@ var paths = [
             'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite'
         ];
 
-    for (var i = 0; i < tarsConfig.useImagesForDisplayWithDpi.length; i++) {
-        paths.push('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/' + tarsConfig.useImagesForDisplayWithDpi[i] + 'dpi');
-    }
+for (var i = 0; i < tarsConfig.useImagesForDisplayWithDpi.length; i++) {
+    paths.push('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/' + tarsConfig.useImagesForDisplayWithDpi[i] + 'dpi');
+}
 
-    paths.push(
-        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg',
-        'markup/' + tarsConfig.fs.staticFolderName + '/fonts',
-        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor,
-        'markup/modules/_template/assets',
-        'markup/modules/_template/ie'
-    );
+paths.push(
+    'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg',
+    'markup/' + tarsConfig.fs.staticFolderName + '/fonts',
+    'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.cssPreprocessor,
+    'markup/modules/_template/assets',
+    'markup/modules/_template/ie'
+);
 
 /**
  * Create fs for project
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('service:create-fs', function(cb) {
+    return gulp.task('service:create-fs', function (cb) {
 
         if (tarsConfig.fs.staticFolderName != 'static') {
             fs.renameSync('./markup/static/', './markup/' + tarsConfig.fs.staticFolderName);
         }
 
-        paths.forEach(function(path) {
+        paths.forEach(function (path) {
             mkdirp(path, function (err) {
                 if (err) {
                     console.error(err);

@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for js-files before and after modules js
  * @param  {Object} watchOptions
  */
-module.exports = function(watchOptions) {
+module.exports = function (watchOptions) {
     var jsPathsToConcatBeforeModulesJs = tarsConfig.jsPathsToConcatBeforeModulesJs,
         jsPathsToConcatAfterModulesJs = tarsConfig.jsPathsToConcatAfterModulesJs,
         jsPathToWatch = [],
@@ -36,7 +36,7 @@ module.exports = function(watchOptions) {
         ignored: 'markup/modules/**/data/data.js',
         persistent: true,
         ignoreInitial: true
-    }).on('all', function(event, path) {
+    }).on('all', function (event, path) {
         watcherLog(event, path);
         gulp.start('js:processing');
     });

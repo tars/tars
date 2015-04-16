@@ -1,11 +1,11 @@
 var tarsConfig = {
 
-/////////////////////
-// MUTABLE OPTIONS ////////////////////////////////
-// YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
-//                                               //
-// You need to restart builder to apply options. //
-///////////////////////////////////////////////////
+    /////////////////////
+    // MUTABLE OPTIONS ////////////////////////////////
+    // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
+    //                                               //
+    // You need to restart builder to apply options. //
+    ///////////////////////////////////////////////////
 
     /**
      * Autoprefixer config
@@ -24,7 +24,6 @@ var tarsConfig = {
      * @type {Boolean}
      */
     useJsLintAndHint: true,
-
 
     /**
      * Path-strings to js-files, which have to be included before modules' js-files
@@ -50,7 +49,6 @@ var tarsConfig = {
      * @type {Boolean}
      */
     lintJsCodeAfterModules: false,
-
 
     /**
      * Config for Notify module
@@ -80,8 +78,9 @@ var tarsConfig = {
             /**
              * Sound after successfull finishing of task
              * @type {String, undefined}
+             * For example 'Glass' in OS X
              */
-            onSuccess: undefined, // For example 'Glass' in OS X
+            onSuccess: undefined
         },
 
         /**
@@ -90,7 +89,6 @@ var tarsConfig = {
          */
         taskFinishedText: 'Task finished at: '
     },
-
 
     /**
      * Config for browser-sync module
@@ -165,8 +163,8 @@ var tarsConfig = {
      * Will be replaced to background: url('../img/logo.png');
      * @type {String}
      */
-    staticPrefixForCss: function() {
-        return '../' + this.fs.imagesFolderName + '/'
+    staticPrefixForCss: function () {
+        return '../' + this.fs.imagesFolderName + '/';
     },
 
     /**
@@ -195,15 +193,14 @@ var tarsConfig = {
      */
     ulimit: 4096,
 
-//////////////////////////////////////////////
-//////////////////////////////////////////////
+    //////////////////////////////////////////////
+    //////////////////////////////////////////////
 
-
-////////////////////////////////////////////////////////
-// YOU CAN CHANGE THIS OPTIONS AND USE REINIT         //
-//                                                    //
-// Options for technologies, which you'd like to use. //
-////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    // YOU CAN CHANGE THIS OPTIONS AND USE REINIT         //
+    //                                                    //
+    // Options for technologies, which you'd like to use. //
+    ////////////////////////////////////////////////////////
 
     /**
      * Templater
@@ -233,16 +230,15 @@ var tarsConfig = {
      */
     useImagesForDisplayWithDpi: [96],
 
-////////////////////////////////////////////////
-////////////////////////////////////////////////
+    ////////////////////////////////////////////////
+    ////////////////////////////////////////////////
 
-
-////////////////////////////////////////////////////////
-// You have to change with options after manually      //
-// renaming static and img folder                     //
-//                                                    //
-// Do not rename these dirs before reinit             //
-////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    // You have to change with options after manually      //
+    // renaming static and img folder                     //
+    //                                                    //
+    // Do not rename these dirs before reinit             //
+    ////////////////////////////////////////////////////////
 
     /**
      * File structure settings
@@ -263,10 +259,10 @@ var tarsConfig = {
          * @type {String}
          */
         imagesFolderName: 'img'
-    },
+    }
 
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////
 };
 
 module.exports = tarsConfig;

@@ -8,15 +8,15 @@ var fs = require('fs');
  * Update dependencies
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('service:update-deps', function(cb) {
-        var downloadPackage = new Download({ extract: true})
+    return gulp.task('service:update-deps', function (cb) {
+        var downloadPackage = new Download({ extract: true })
             .get('https://raw.githubusercontent.com/2gis/tars/master/package.json')
             .dest('./');
 
         function downloadNewPackageJson() {
-            fs.rename('./package.json', './_package.json', function() {
+            fs.rename('./package.json', './_package.json', function () {
                 downloadPackage.run(function (err, files, stream) {
                     if (err) {
                         throw err;
@@ -33,9 +33,9 @@ module.exports = function(buildOptions) {
             });
         }
 
-        fs.exists('./_package.json', function(exists) {
+        fs.exists('./_package.json', function (exists) {
             if (exists) {
-                fs.unlink('./_package.json', function() {
+                fs.unlink('./_package.json', function () {
                     downloadNewPackageJson();
                 });
             } else {

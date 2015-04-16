@@ -6,17 +6,17 @@ var templaterName = '';
  * Set templates extension
  * @return {string} Templater name
  */
-module.exports = function() {
+module.exports = function () {
     if (tarsConfigTemplater === 'jade') {
         templaterName = 'jade';
-    } else if (tarsConfigTemplater === 'handlebars'
-            || tarsConfigTemplater === 'handelbars'
-            || tarsConfigTemplater === 'hdb'
-            || tarsConfigTemplater === 'hb') {
+    } else if (tarsConfigTemplater === 'handlebars' ||
+        tarsConfigTemplater === 'handelbars' ||
+        tarsConfigTemplater === 'hdb' ||
+        tarsConfigTemplater === 'hb') {
         templaterName = 'handlebars';
     } else {
         templaterName = 'jade';
     }
 
     return templaterName;
-}
+};

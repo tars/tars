@@ -1,11 +1,11 @@
 var fs = require('fs');
 
 // Helper to load files from dir recursively and synchronously
-var loadJsFiles = function(dir) {
+var loadJsFiles = function (dir) {
     var results = [],
         list = fs.readdirSync(dir);
 
-    list.forEach(function(file) {
+    list.forEach(function (file) {
         var stat;
 
         file = dir + '/' + file;
@@ -20,7 +20,7 @@ var loadJsFiles = function(dir) {
         }
     });
 
-    return results
-}
+    return results;
+};
 
 module.exports = loadJsFiles;

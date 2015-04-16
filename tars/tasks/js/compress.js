@@ -8,11 +8,11 @@ var notifier = require('../../helpers/notifier');
  * Compress js-files
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
     require('./strip-debug')(buildOptions);
 
-    return gulp.task('js:compress', ['js:strip-debug'], function() {
+    return gulp.task('js:compress', ['js:strip-debug'], function () {
         return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')
             .pipe(uglify('main' + buildOptions.hash + '.min.js', {
                 mangle: false
@@ -24,5 +24,5 @@ module.exports = function(buildOptions) {
             .pipe(
                 notifier('JS\'ve been minified')
             );
-        });
+    });
 };

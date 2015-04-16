@@ -15,12 +15,12 @@ if (os.platform() !== 'win32') {
 
 try {
     usersDeps = require('../../user-package');
-} catch(er) {
+} catch (er) {
     console.log('User-package.json is not valid!\n');
     console.log(er);
 }
 
-for (dep in usersDeps.dependencies) {
+for (var dep in usersDeps.dependencies) {
     if (dep) {
         exec('npm i ' + dep + '@' + usersDeps.dependencies[dep], function (error, stdout, stderr) {
             if (error) {

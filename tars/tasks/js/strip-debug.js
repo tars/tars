@@ -9,9 +9,9 @@ var notifier = require('../../helpers/notifier');
  * Strip console.log and debugger from main.js (optional task)
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('js:strip-debug', function(cb) {
+    return gulp.task('js:strip-debug', function (cb) {
 
         if (tarsConfig.removeConsoleLog) {
             return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/js/main' + buildOptions.hash + '.js')

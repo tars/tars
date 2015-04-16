@@ -5,7 +5,7 @@ var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 
-    // Flags
+// Flags
 var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
 
@@ -21,38 +21,40 @@ var useLiveReload = gutil.env.lr || false,
     watchOptions = {},
 
     tasks = [],
-    userTasks= [],
+    userTasks = [],
     watchers = [],
     userWatchers = [];
 
-    // Generate build version
-    if (tarsConfig.useBuildVersioning) {
-        buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
-        buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
-    } else {
-        buildOptions.buildVersion = '';
-        buildOptions.buildPath = tarsConfig.buildPath;
-    }
+// Generate build version
+if (tarsConfig.useBuildVersioning) {
+    buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
+    buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
+} else {
+    buildOptions.buildVersion = '';
+    buildOptions.buildPath = tarsConfig.buildPath;
+}
 
-    // Set template's extension
-    if (templaterName === 'handlebars') {
-        templateExtension = 'html';
-    } else {
-        templateExtension = 'jade';
-    }
+// Set template's extension
+if (templaterName === 'handlebars') {
+    templateExtension = 'html';
+} else {
+    templateExtension = 'jade';
+}
 
-    if (cssPreprocExtension === 'stylus') cssPreprocExtension = 'styl';
+if (cssPreprocExtension === 'stylus') {
+    cssPreprocExtension = 'styl';
+}
 
-    if (gutil.env.release) {
-        buildOptions.hash = Math.random().toString(36).substring(7);
-    } else {
-        buildOptions.hash = '';
-    }
+if (gutil.env.release) {
+    buildOptions.hash = Math.random().toString(36).substring(7);
+} else {
+    buildOptions.hash = '';
+}
 
-    watchOptions = {
-        cssPreprocExtension: cssPreprocExtension,
-        templateExtension: templateExtension
-    };
+watchOptions = {
+    cssPreprocExtension: cssPreprocExtension,
+    templateExtension: templateExtension
+};
 
 /***********/
 /* HELPERS */
@@ -60,7 +62,9 @@ var useLiveReload = gutil.env.lr || false,
 // You can add your own helpers here. Helpers folder is tars/helpers
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-if (os.platform() !== 'win32') require('./tars/helpers/set-ulimit')();
+if (os.platform() !== 'win32') {
+    require('./tars/helpers/set-ulimit')();
+}
 
 // Load files from dir recursively and synchronously
 var fileLoader = require('./tars/helpers/file-loader');
@@ -68,7 +72,6 @@ var fileLoader = require('./tars/helpers/file-loader');
 /***************/
 /* END HELPERS */
 /***************/
-
 
 /*********/
 /* TASKS */
@@ -80,7 +83,6 @@ var fileLoader = require('./tars/helpers/file-loader');
 // Example:
 // require('./tars/user-tasks/example-task')(buildOptions);
 
-
 // SYSTEM TASKS
 tasks = fileLoader('./tars/tasks');
 
@@ -88,7 +90,7 @@ tasks = fileLoader('./tars/tasks');
 // console.log(tasks);
 
 // require tasks
-tasks.forEach(function(file) {
+tasks.forEach(function (file) {
     require(file)(buildOptions);
 });
 
@@ -96,7 +98,7 @@ tasks.forEach(function(file) {
 userTasks = fileLoader('./tars/user-tasks');
 
 // require user-tasks
-userTasks.forEach(function(file) {
+userTasks.forEach(function (file) {
     require(file)(buildOptions);
 });
 
@@ -104,14 +106,13 @@ userTasks.forEach(function(file) {
 /* END TASKS */
 /*************/
 
-
 /***********/
 /* WATCHERS */
 /***********/
 
 // Build dev-version with watchers and livereloader.
 // Also could tunnel your markup to web, if you use flag --tunnel
-gulp.task('dev', ['build-dev'], function() {
+gulp.task('dev', ['build-dev'], function () {
 
     if (useLiveReload || useTunnelToWeb) {
         gulp.start('browsersync');
@@ -124,7 +125,7 @@ gulp.task('dev', ['build-dev'], function() {
     // console.log(watchers);
 
     // require watchers
-    watchers.forEach(function(file) {
+    watchers.forEach(function (file) {
         require(file)(watchOptions);
     });
 
@@ -132,7 +133,7 @@ gulp.task('dev', ['build-dev'], function() {
     userWatchers = fileLoader('./tars/user-watchers');
 
     // require user-watchers
-    userWatchers.forEach(function(file) {
+    userWatchers.forEach(function (file) {
         require(file)(watchOptions);
     });
 });
@@ -141,14 +142,13 @@ gulp.task('dev', ['build-dev'], function() {
 /* END WATCHERS */
 /****************/
 
-
 /**************/
 /* MAIN TASKS */
 /**************/
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
-gulp.task('build-dev', function(cb) {
+gulp.task('build-dev', function (cb) {
     runSequence(
         'service:builder-start-screen',
         'service:clean',
@@ -172,7 +172,7 @@ gulp.task('build-dev', function(cb) {
 
 // Build release version
 // Also you can add your own tasks in queue of build task
-gulp.task('build', function() {
+gulp.task('build', function () {
     runSequence(
         'build-dev',
         [
@@ -183,7 +183,7 @@ gulp.task('build', function() {
             'js:compress', 'css:compress-css'
         ],
         'service:zip-build',
-        function() {
+        function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
             gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
             console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
@@ -192,27 +192,27 @@ gulp.task('build', function() {
 });
 
 // Default task. Just start build task
-gulp.task('default', function() {
+gulp.task('default', function () {
     gulp.start('build');
 });
 
 // Init task. Just start init task
-gulp.task('init', function() {
+gulp.task('init', function () {
     gulp.start('service:init');
 });
 
 // Re-init task. Just start re-init task
-gulp.task('re-init', function() {
+gulp.task('re-init', function () {
     gulp.start('service:re-init');
 });
 
 // Update-deps task. Just start update-deps task
-gulp.task('update-deps', function() {
+gulp.task('update-deps', function () {
     gulp.start('service:update-deps');
 });
 
 // Task for starting browsersync module
-gulp.task('browsersync', function(cb) {
+gulp.task('browsersync', function (cb) {
 
     // Serve files and connect browsers
     browserSync({
@@ -237,12 +237,11 @@ gulp.task('browsersync', function(cb) {
 /* END MAIN TASKS */
 /******************/
 
-
 /*****************/
 /* HELPERS TASKS */
 /*****************/
 
-gulp.task('svg-actions', function(cb) {
+gulp.task('svg-actions', function (cb) {
     if (gutil.env.ie8) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
@@ -258,7 +257,7 @@ gulp.task('svg-actions', function(cb) {
     }
 });
 
-gulp.task('compile-templates-with-data-reloading', function(cb) {
+gulp.task('compile-templates-with-data-reloading', function (cb) {
     runSequence(
         'html:concat-modules-data',
         'html:compile-templates',

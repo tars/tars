@@ -9,9 +9,9 @@ var notifier = require('../../helpers/notifier');
  * Minify png and jpg images
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('images:minify-raster-img', function(cb) {
+    return gulp.task('images:minify-raster-img', function (cb) {
         return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
             .pipe(changed('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))
             .pipe(imagemin())

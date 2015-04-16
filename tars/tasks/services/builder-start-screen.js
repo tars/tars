@@ -5,8 +5,8 @@ var gutil = require('gulp-util');
  * Output in the begining
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
-    return gulp.task('service:builder-start-screen', function(cb) {
+module.exports = function (buildOptions) {
+    return gulp.task('service:builder-start-screen', function (cb) {
         var i = 0;
 
         console.log('\n------------------------------------------------------------');
@@ -32,7 +32,7 @@ module.exports = function(buildOptions) {
             console.log(gutil.colors.black.bold('• ie8 maintenance;'));
         }
 
-        for (key in gutil.env) { i++; }
+        for (var key in gutil.env) { i++; }
 
         if (i <= 1) {
             console.log(gutil.colors.black.bold('No modes.'));

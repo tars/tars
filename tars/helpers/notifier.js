@@ -2,7 +2,7 @@ var notify = require('gulp-notify');
 var notifyConfig = require('../../tars-config').notifyConfig;
 var modifyDate = require('./modify-date-formatter');
 
-module.exports = function(message, onLast) {
+module.exports = function (message, onLast) {
     var resultMessage = message + '\n' || 'Task\'ve been finished\n';
 
     resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';

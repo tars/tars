@@ -9,14 +9,14 @@ var tarsConfig = require('../../../tars-config');
  * Minify HTML (optional task)
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
     var opts = {
         conditionals: true,
         quotes: true,
         empty: true
     };
 
-    return gulp.task('html:minify-html', function(cb) {
+    return gulp.task('html:minify-html', function (cb) {
 
         if (tarsConfig.minifyHtml) {
             return gulp.src('./dev/**/*.html')

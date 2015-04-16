@@ -12,13 +12,13 @@ var pathsToDel = [
  * Clean dev directory and cache
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
     if (!tarsConfig.useBuildVersioning) {
         pathsToDel.push(buildOptions.buildPath);
     }
 
-    return gulp.task('service:clean', function(cb) {
+    return gulp.task('service:clean', function (cb) {
         del(pathsToDel, cb);
     });
 };

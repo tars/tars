@@ -8,9 +8,9 @@ var browserSync = require('browser-sync');
  * Move misc files
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('other:move-misc-files', function(cb) {
+    return gulp.task('other:move-misc-files', function (cb) {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*')
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving misc-files.\nLook in the console for details.\n' + error;

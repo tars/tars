@@ -15,7 +15,7 @@ var dateFormatter = {
      * Get time of last modify of something (css, js and etc)
      * @return {string} String with formatted time
      */
-    getTimeOfModify: function() {
+    getTimeOfModify: function () {
         var modifyDate = '',
             currentDate = new Date(),
             hours = currentDate.getHours(),
@@ -26,6 +26,6 @@ var dateFormatter = {
 
         return modifyDate;
     }
-}
+};
 
 module.exports = dateFormatter;

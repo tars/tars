@@ -20,14 +20,13 @@ var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githu
 ncp.limit = 16;
 require('./create-fs')();
 
-
 /**
  * Init builder, download css-preprocessor and templater
  * @param  {Object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('service:init', ['service:create-fs'], function(cb) {
+    return gulp.task('service:init', ['service:create-fs'], function (cb) {
 
         var downloadTemplater,
             downloadCssPreprocessor,
@@ -40,7 +39,6 @@ module.exports = function(buildOptions) {
         downloadCssPreprocessorTest = new Download()
             .get(cssPreprocessorUrl);
 
-
         if (os.platform() === 'darwin') {
             console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
         } else {
@@ -52,11 +50,11 @@ module.exports = function(buildOptions) {
 
         downloadTemplaterTest.run(function (err, files) {
             if (err) {
-                templaterVersion = 'master'
+                templaterVersion = 'master';
                 templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
             }
 
-            downloadTemplater = new Download({ extract: true})
+            downloadTemplater = new Download({ extract: true })
                 .get(templaterUrl)
                 .dest('./.tmpTemplater');
 
@@ -93,11 +91,11 @@ module.exports = function(buildOptions) {
 
         downloadCssPreprocessorTest.run(function (err, files) {
             if (err) {
-                cssVersion = 'master'
+                cssVersion = 'master';
                 cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
             }
 
-            downloadCssPreprocessor = new Download({ extract: true})
+            downloadCssPreprocessor = new Download({ extract: true })
                 .get(cssPreprocessorUrl)
                 .dest('./.tmpPreproc');
 

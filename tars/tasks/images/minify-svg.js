@@ -10,9 +10,9 @@ var notifier = require('../../helpers/notifier');
  * Minify svg-images (optional task)
  * @param  {object} buildOptions
  */
-module.exports = function(buildOptions) {
+module.exports = function (buildOptions) {
 
-    return gulp.task('images:minify-svg', function(cb) {
+    return gulp.task('images:minify-svg', function (cb) {
         if (tarsConfig.useSVG) {
             return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(changed(
@@ -26,10 +26,10 @@ module.exports = function(buildOptions) {
                 .pipe(imagemin(
                         {
                             svgoPlugins: [
-                                {cleanupIDs: false},
-                                {removeViewBox: false},
-                                {convertPathData: false},
-                                {mergePaths: false}
+                                { cleanupIDs: false },
+                                { removeViewBox: false },
+                                { convertPathData: false },
+                                { mergePaths: false }
                             ],
                             use: []
                         }
