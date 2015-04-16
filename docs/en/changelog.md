@@ -3,7 +3,6 @@
 ## Version 1.2.1
 
 * Code-style update. .jscsrc update.
-* Add workflow description for contributors.
 * Remove path from dependencies list.
 * Add docs on english.
 
