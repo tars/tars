@@ -29,7 +29,7 @@ Module is an independent unit on the page. Example module - «header» or «foot
 
 ```
 exampleModule/                              # Module example
-    └── assets/                             # Static files for current module (files with any extension)
+    └── assets/                             # Static files for current module (files with any extension) Subdirectories unsupport
     └── ie/                                 # Stylies for IE9.scss|less|styl и IE8.scss|less|styl)
     └── data/                               # Folder for module's data
         ├── data.js                         # Data for module (there is an example for data in _template module)
