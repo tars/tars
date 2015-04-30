@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.2.3
+
+* Fix build process without notifier
+
 ## Version 1.2.2
 
 * Fix assets' files watcher. Subdirectories unsupport in modules/assets

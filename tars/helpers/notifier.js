@@ -17,5 +17,8 @@ module.exports = function (message, onLast) {
                 date: modifyDate.getTimeOfModify()
             }
         });
+    } else {
+        notify.logLevel(0);
+        return notify();
     }
 };
