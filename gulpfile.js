@@ -36,7 +36,7 @@ if (tarsConfig.useBuildVersioning) {
 
 // Set template's extension
 if (templaterName === 'handlebars') {
-    templateExtension = 'html';
+    templateExtension = ['html', 'hbs'];
 } else {
     templateExtension = 'jade';
 }
