@@ -38,7 +38,7 @@ if (tarsConfig.useBuildVersioning) {
 if (templaterName === 'handlebars') {
     templateExtension = ['html', 'hbs'];
 } else {
-    templateExtension = 'jade';
+    templateExtension = ['jade'];
 }
 
 if (cssPreprocExtension === 'stylus') {

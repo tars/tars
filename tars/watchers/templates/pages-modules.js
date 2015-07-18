@@ -13,19 +13,12 @@ module.exports = function (watchOptions) {
     var filesToWatch = [];
     var templateExtension = watchOptions.templateExtension;
 
-    if (templateExtension instanceof Array) {
-        templateExtension.forEach(function (item) {
-            filesToWatch.push(
-                pagesToWatch + item,
-                moduelsToWatch + item
-            );
-        });
-    } else {
+    templateExtension.forEach(function (item) {
         filesToWatch.push(
-            pagesToWatch + templateExtension,
-            moduelsToWatch + templateExtension
+            pagesToWatch + item,
+            moduelsToWatch + item
         );
-    }
+    });
 
     return chokidar.watch(filesToWatch, {
             ignored: '',
