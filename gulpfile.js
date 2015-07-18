@@ -217,7 +217,8 @@ gulp.task('browsersync', function (cb) {
     // Serve files and connect browsers
     browserSync({
         server: {
-            baseDir: browserSyncConfig.baseDir
+            baseDir: browserSyncConfig.baseDir,
+            directory: true
         },
         logConnections: true,
         debugInfo: true,
@@ -227,7 +228,8 @@ gulp.task('browsersync', function (cb) {
         browser: browserSyncConfig.browser,
         startPath: browserSyncConfig.startUrl,
         notify: browserSyncConfig.useNotifyInBrowser,
-        tunnel: useTunnelToWeb
+        tunnel: useTunnelToWeb,
+        reloadOnRestart: true
     });
 
     cb(null);

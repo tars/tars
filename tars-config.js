@@ -118,9 +118,9 @@ var tarsConfig = {
          * Choose browser to open
          * @type {String|Array}
          * Example: ['google chrome', 'firefox']
-         * Avalible: safari, internet explorer, google chrome, firefox, opera
+         * Avalible: default, safari, internet explorer, google chrome, firefox, opera
          */
-        browser: 'google chrome',
+        browser: 'default',
 
         /**
          * Choose the page to open in browser at first opening
