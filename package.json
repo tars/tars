@@ -34,7 +34,7 @@
     "gulp-changed": "1.1.1",
     "gulp-replace-task": "0.1.0",
     "gulp-plumber": "0.6.6",
-    "browser-sync": "2.2.1",
+    "browser-sync": "2.7.13",
     "chokidar": "1.0.0-rc4",
     "del": "1.1.1",
     "download": "4.1.4",
