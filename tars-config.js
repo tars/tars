@@ -51,6 +51,14 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
+     * Write source maps
+     * @type {Object}
+     */
+    sourcemaps: {
+        js: true
+    },
+
+    /**
      * Config for Notify module
      * @type {Object}
      */

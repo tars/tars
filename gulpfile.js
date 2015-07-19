@@ -25,6 +25,16 @@ var useLiveReload = gutil.env.lr || false,
     watchers = [],
     userWatchers = [];
 
+
+// Seting build options
+buildOptions.isRelease = gutil.env.release;
+buildOptions.generateSourceMaps = function(o) {
+    var baseCondition = !o.isRelease;
+    return {
+        js: tarsConfig.sourcemaps.js && baseCondition
+    };
+}(buildOptions);
+
 // Generate build version
 if (tarsConfig.useBuildVersioning) {
     buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
@@ -45,7 +55,7 @@ if (cssPreprocExtension === 'stylus') {
     cssPreprocExtension = 'styl';
 }
 
-if (gutil.env.release) {
+if (buildOptions.isRelease) {
     buildOptions.hash = Math.random().toString(36).substring(7);
 } else {
     buildOptions.hash = '';
@@ -173,15 +183,15 @@ gulp.task('build-dev', function (cb) {
 // Build release version
 // Also you can add your own tasks in queue of build task
 gulp.task('build', function () {
+    buildOptions.compressJs = true;
+
     runSequence(
         'build-dev',
         [
             'html:minify-html', 'images:minify-raster-img'
         ],
         'service:pre-build',
-        [
-            'js:compress', 'css:compress-css'
-        ],
+        'css:compress-css',
         'service:zip-build',
         function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
