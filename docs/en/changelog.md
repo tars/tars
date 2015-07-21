@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.2.4
+
+* Fixed bug with init.
+* Fixed bug while png-sprite compiling
+
 ## Version 1.2.3
 
 * Fix build process without notifier

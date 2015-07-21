@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
@@ -37,12 +37,13 @@
     "browser-sync": "2.2.1",
     "chokidar": "1.0.0-rc4",
     "del": "1.1.1",
-    "download": "3.1.0",
+    "download": "4.1.4",
     "jshint-stylish": "1.0.0",
     "mkdirp": "0.5.0",
     "ncp": "2.0.0",
     "run-sequence": "1.0.2",
-    "through2": "0.6.3"
+    "through2": "0.6.3",
+    "phantomjssmith": "0.6.0"
   },
   "devDependencies": {},
   "scripts": {
