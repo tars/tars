@@ -55,7 +55,7 @@ gulp init
 ```
 
 This command will create the basic file structure, take tasks for selected templater and css-preprocessor. 
-Everything is ready, make it works! :)
+Everything is ready, make it work! :)
 
 
 ## Basic commands

@@ -19,9 +19,7 @@ Files are collected in the following order:
 * js-files from modules
 * all files, which have paths in the jsPathsToConcatAfterModulesJs option
 
-Перед сборкой в один файл весь js-код (кроме файлов из static/js) проверяется на соответствие code-style (который описан в конфигурационном файле .jscsrc в коре проекта), а также производится поиск ошибок. Данный проверки [опциональны](options.md#usejslintandhint).
-
-Before assembly in one file all js-code (except files from the static/js) is checked for compliance with code-style (which is described in the .jscsrc configuration file in the root of the project) and also is searched for errors. These checks are optional.
+Before assembly into one file all js-code (except files from the static/js) is checked for compliance with code-style (which is described in the .jscsrc configuration file in the root of the project) and also is searched for errors. These checks are optional.
 
 Checking files from jsPathsToConcatBeforeModulesJs and jsPathsToConcatAfterModulesJs can be controlled separately by options lintJsCodeBeforeModules and lintJsCodeAfterModules.
 

@@ -2,7 +2,7 @@
 
 All work with images in TARS can be divided into two parts: "Sprites" and "Individual images."
 
-## Спрайты
+## Sprites
 
 TARS supports two formats for a sprite image: PNG, and SVG.
 
@@ -11,8 +11,6 @@ The general approach is described in the [presentation](http://www.slideshare.ne
 There will not be described advantages of concatinating interface (and other small or often repeated images) into a single sprite.  If you don't know what is a sprite you can look details [here](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D1%80%D0%B0%D0%B9%D1%82_(%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F_%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0)).
 
 You may miss the theory and go to the [description of work with sprites](images-processing.md#sprites-including).
-
-Сегодня существует много экранов с высокой плотностью пикселей. Разберёмся, что это значит. В качестве примера рассмотрим смартфоны IPhone 3GS и IPhone 4. У 3GS разрешение экрана 320x480, а у 4-ки — 640x960. Как мы видим, разрешение увеличилось ровно в два раза при той же диагонали, а значит пиксель стал меньше. Чтобы нивелировать эту разницу между размерами пикселей (а ведь именно пикселями мы управляем в CSS) появился параметр device-pixel-ratio (или dppx), который показывает, сколько реальных экранных пикселей содержится в неком логическом пикселе, которым мы оперируем в css. Например, для дисплея IPhone 4 этот параметр равен 2.
 
 Nowadays there are a lot of displays with different pixel density. So, what does it mean? Let's compare IPhone 3GS and IPhone 4. 3GS has 320x480 display resolution and IPhone 4 has 640x960. How can you see, resolution has been changed twice, but diagonal has not been changed. It means, that pixel became smaller. So, there is a parameter device-pixel-ratio (or dppx), which means, how many real pixels there are in one logical pixel. For IPhone 4 dppx = 2.
 

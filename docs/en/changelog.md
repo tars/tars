@@ -12,7 +12,6 @@
 ## Version 1.2.2
 
 * Fix assets' files watcher. Subdirectories unsupport in modules/assets
-Внесен фикс в вотчер assets-файлов модуля. На данный момент поддиректории в папке assets в модуле не поддерживаются.
 
 ## Version 1.2.1
 
