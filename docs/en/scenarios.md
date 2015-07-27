@@ -10,8 +10,6 @@ In all scenarios, it is mean that the development mode (dev-task) will be availa
 
 ## Development with a transfer to the back-end developer
 
-Для проверки работоспособности минифицированных файлов можно использовать ключ `--min`. 
-
 In this case, in the tars-config is important to set the minifyHtml option to false. You can also disable removeConsoleLog (false), to retain all console.log unchanged.
 
 So, for the convenience of builds versioning you can include the useBuildVersioning and useArchiver options, to have the archive ready for sending in each folder with built project.

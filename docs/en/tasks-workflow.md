@@ -25,8 +25,6 @@ Also, if you want to use livereload for this task, you must to connect browser-s
 var browserSync = require('browser-sync');
 ```
 
-Если требуются какие-либо еще зависимости, подключаем их тут же. При этом, зависимости, которых нет в основном package.json, можно занести в user-package.json, который находится в корне проекта. Формат такой же, как и у основного package.json Это сделано для того, чтобы при обновлении зависимостей tars командой `gulp update-deps` ваши зависимости не перетирались.
-
 If you require any dependences, include them there. Dependencies, which are not in the main package.json, you can add to the `user-package.json`, which is at the root of the project. The format is the same as in the main package.json. This is very useful, when you upgrade tars dependencies by command `gulp update-deps`. Your dependencies in `user-package.json` will be not overwritten.
 
 !Do not put your own dependencies in package.json. Put them into user-package.json!

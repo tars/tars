@@ -67,7 +67,7 @@ There is is syntax:
 {{/strip}}
 ```
 
-Результат:
+Result:
 
 ```html
 <ul><li>qwe</li><li>asd</li></ul>

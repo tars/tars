@@ -29,7 +29,7 @@ There are a couple of points on the organization scss|less|styl-files (scss is s
 
 Union of styles will be in the following order:
 * Normalize
-* Стили для библиотек
+* Styles for libraries
 * Mixins, sprites
 * Fonts
 * Vars
