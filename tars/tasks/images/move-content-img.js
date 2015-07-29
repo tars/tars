@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  * Move images for content
  * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function () {
 
-    return gulp.task('images:move-content-img', function (cb) {
+    return gulp.task('images:move-content-img', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content/**/*.*')
             .pipe(cache('move-content-img'))
             .on('error', notify.onError(function (error) {

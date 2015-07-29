@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  * Move images for content
  * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function () {
 
-    return gulp.task('images:move-rastered-svg', function (cb) {
+    return gulp.task('images:move-rastered-svg', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images/*.png')
             .pipe(cache('move-rastered-svg'))
             .on('error', notify.onError(function (error) {

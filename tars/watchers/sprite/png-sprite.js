@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for images for sprite (png)
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/**/*.png', {
         ignored: '',
         persistent: true,

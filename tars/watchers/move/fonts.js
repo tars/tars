@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for font files
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*', {
         ignored: '',
         persistent: true,

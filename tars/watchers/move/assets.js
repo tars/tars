@@ -6,7 +6,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for images in assets dir of modules
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     return chokidar.watch('markup/modules/**/assets/*.*', {
         ignored: '',
         persistent: true,

@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for images for sprite (svg)
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
 
     if (tarsConfig.useSVG) {
         return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/**/*.svg', {

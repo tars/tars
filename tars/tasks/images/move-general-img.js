@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  * Move general images
  * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function () {
 
-    return gulp.task('images:move-general-img', function (cb) {
+    return gulp.task('images:move-general-img', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general/**/*.*')
             .pipe(cache('move-general-img'))
             .on('error', notify.onError(function (error) {

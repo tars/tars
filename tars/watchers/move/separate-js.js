@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for separate Js files files
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js', {
         ignored: '',
         persistent: true,

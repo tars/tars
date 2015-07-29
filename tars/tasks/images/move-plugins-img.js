@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
  * Move images for plugins
  * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function () {
 
-    return gulp.task('images:move-plugins-img', function (cb) {
+    return gulp.task('images:move-plugins-img', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins/**/*.*')
             .pipe(cache('move-plugins-img'))
             .on('error', notify.onError(function (error) {

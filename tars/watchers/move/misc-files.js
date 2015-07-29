@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for misc files
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*', {
         ignored: '',
         persistent: true,

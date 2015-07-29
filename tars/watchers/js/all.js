@@ -7,7 +7,7 @@ var watcherLog = require('../../helpers/watcher-log');
  * Watcher for js-files before and after modules js
  * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
+module.exports = function () {
     var jsPathsToConcatBeforeModulesJs = tarsConfig.jsPathsToConcatBeforeModulesJs,
         jsPathsToConcatAfterModulesJs = tarsConfig.jsPathsToConcatAfterModulesJs,
         jsPathToWatch = [],
