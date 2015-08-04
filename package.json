@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
@@ -47,6 +47,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "preinstall": "npm install phantomjs",
     "install": "node ./tars/helpers/install-additional-deps.js"
   },
   "repository": {
