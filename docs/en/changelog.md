@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.2.6
+
+* Fixed bug with notify, when it is off.
+
 ## Version 1.2.4
 
 * Fixed bug with init.

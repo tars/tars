@@ -1,4 +1,5 @@
 var notify = require('gulp-notify');
+var gutil = require('gulp-util');
 var notifyConfig = require('../../tars-config').notifyConfig;
 var modifyDate = require('./modify-date-formatter');
 
@@ -18,7 +19,6 @@ module.exports = function (message, onLast) {
             }
         });
     } else {
-        notify.logLevel(0);
-        return notify();
+        return gutil.noop();
     }
 };
