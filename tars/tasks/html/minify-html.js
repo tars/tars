@@ -1,26 +1,27 @@
-var gulp = require('gulp');
-var HtmlMin = require('gulp-minify-html');
-var gutil = require('gulp-util');
-var notify = require('gulp-notify');
-var notifier = require('../../helpers/notifier');
-var tarsConfig = require('../../../tars-config');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var htmlMin = tars.packages.htmlMin;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+
+var opts = {
+    conditionals: true,
+    quotes: true,
+    empty: true
+};
 
 /**
  * Minify HTML (optional task)
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-    var opts = {
-        conditionals: true,
-        quotes: true,
-        empty: true
-    };
-
+module.exports = function () {
     return gulp.task('html:minify-html', function (cb) {
 
         if (tarsConfig.minifyHtml) {
             return gulp.src('./dev/**/*.html')
-                .pipe(HtmlMin(opts))
+                .pipe(htmlMin(opts))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while minifing html-files.\nLook in the console for details.\n' + error;
                 }))

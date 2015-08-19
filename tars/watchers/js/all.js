@@ -1,43 +1,36 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
+
+var tarsConfig = tars.config;
+var staticFolderName = tarsConfig.fs.staticFolderName;
+var watcherLog = tars.helpers.watcherLog;
+
+var jsPathToWatch = [];
+
+if (tarsConfig.jsPathsToConcatBeforeModulesJs.length) {
+    jsPathToWatch = jsPathToWatch.concat(tarsConfig.jsPathsToConcatBeforeModulesJs);
+}
+
+if (tarsConfig.jsPathsToConcatAfterModulesJs.length) {
+    jsPathToWatch = jsPathToWatch.concat(tarsConfig.jsPathsToConcatAfterModulesJs);
+}
+
+jsPathToWatch.push(
+    'markup/' + staticFolderName + '/js/framework/**/*.js',
+    'markup/' + staticFolderName + '/js/libraries/**/*.js',
+    'markup/' + staticFolderName + '/js/plugins/**/*.js',
+    'markup/modules/**/*.js'
+);
 
 /**
  * Watcher for js-files before and after modules js
- * @param  {Object} watchOptions
  */
 module.exports = function () {
-    var jsPathsToConcatBeforeModulesJs = tarsConfig.jsPathsToConcatBeforeModulesJs,
-        jsPathsToConcatAfterModulesJs = tarsConfig.jsPathsToConcatAfterModulesJs,
-        jsPathToWatch = [],
-        i;
-
-    if (jsPathsToConcatBeforeModulesJs.length) {
-        for (i = 0; i < jsPathsToConcatBeforeModulesJs.length; i++) {
-            jsPathToWatch.push(jsPathsToConcatBeforeModulesJs[i]);
-        }
-    }
-
-    if (jsPathsToConcatAfterModulesJs.length) {
-        for (i = 0; i < jsPathsToConcatAfterModulesJs.length; i++) {
-            jsPathToWatch.push(jsPathsToConcatAfterModulesJs[i]);
-        }
-    }
-
-    jsPathToWatch.push(
-        'markup/' + tarsConfig.fs.staticFolderName + '/js/framework/**/*.js',
-        'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries/**/*.js',
-        'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins/**/*.js',
-        'markup/modules/**/*.js'
-    );
-
-    return chokidar.watch(jsPathToWatch, {
+    return tars.packages.chokidar.watch(jsPathToWatch, {
         ignored: 'markup/modules/**/data/data.js',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
         watcherLog(event, path);
-        gulp.start('js:processing');
+        tars.packages.gulp.start('js:processing');
     });
 };

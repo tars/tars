@@ -1,31 +1,26 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
+
+var pagesToWatch = 'markup/pages/**/*.';
+var moduelsToWatch = 'markup/modules/**/*.';
+var filesToWatch = [];
+
+tars.templater.ext.forEach(function (extension) {
+    filesToWatch.push(
+        pagesToWatch + extension,
+        moduelsToWatch + extension
+    );
+});
 
 /**
  * Watcher for templates-files of modules and pages
- * @param  {Object} watchOptions
  */
-module.exports = function (watchOptions) {
-    var pagesToWatch = 'markup/pages/**/*.';
-    var moduelsToWatch = 'markup/modules/**/*.';
-    var filesToWatch = [];
-    var templateExtension = watchOptions.templateExtension;
-
-    templateExtension.forEach(function (item) {
-        filesToWatch.push(
-            pagesToWatch + item,
-            moduelsToWatch + item
-        );
-    });
-
-    return chokidar.watch(filesToWatch, {
+module.exports = function () {
+    return tars.packages.chokidar.watch(filesToWatch, {
             ignored: '',
             persistent: true,
             ignoreInitial: true
         }).on('all', function (event, path) {
-            watcherLog(event, path);
-            gulp.start('html:compile-templates');
+            tars.helpers.watcherLog(event, path);
+            tars.packages.gulp.start('html:compile-templates');
         });
 };

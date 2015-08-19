@@ -1,16 +1,16 @@
-var gulp = require('gulp');
-var cache = require('gulp-cached');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
-var browserSync = require('browser-sync');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var cache = tars.packages.cache;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
 
 /**
  * Move images for content
- * @param  {object} buildOptions
  */
 module.exports = function () {
-
     return gulp.task('images:move-rastered-svg', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/rastered-svg-images/*.png')
             .pipe(cache('move-rastered-svg'))

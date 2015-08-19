@@ -1,70 +1,17 @@
+'use strict';
+
+// Tars main moduels init
+require('./tars/tars');
+
 // Using modules
 var os = require('os');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var runSequence = tars.packages.runSequence.use(gulp);
+var browserSync = tars.packages.browserSync;
 
-// Flags
-var useLiveReload = gutil.env.lr || false,
-    useTunnelToWeb = gutil.env.tunnel || false,
-
-    // Configs
-    tarsConfig = require('./tars-config'),
-    browserSyncConfig = tarsConfig.browserSyncConfig,
-
-    templaterName = require('./tars/helpers/templater-name-setter')(),
-    templateExtension = 'jade',
-    cssPreprocExtension = tarsConfig.cssPreprocessor.toLowerCase(),
-
-    buildOptions = {},
-    watchOptions = {},
-
-    tasks = [],
-    userTasks = [],
-    watchers = [],
-    userWatchers = [];
-
-
-// Seting build options
-buildOptions.isRelease = gutil.env.release;
-buildOptions.generateSourceMaps = function(o) {
-    var baseCondition = !o.isRelease;
-    return {
-        js: tarsConfig.sourcemaps.js && baseCondition
-    };
-}(buildOptions);
-
-// Generate build version
-if (tarsConfig.useBuildVersioning) {
-    buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
-    buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
-} else {
-    buildOptions.buildVersion = '';
-    buildOptions.buildPath = tarsConfig.buildPath;
-}
-
-// Set template's extension
-if (templaterName === 'handlebars') {
-    templateExtension = ['html', 'hbs'];
-} else {
-    templateExtension = ['jade'];
-}
-
-if (cssPreprocExtension === 'stylus') {
-    cssPreprocExtension = 'styl';
-}
-
-if (buildOptions.isRelease) {
-    buildOptions.hash = Math.random().toString(36).substring(7);
-} else {
-    buildOptions.hash = '';
-}
-
-watchOptions = {
-    cssPreprocExtension: cssPreprocExtension,
-    templateExtension: templateExtension
-};
+// Configs
+var browserSyncConfig = tars.config.browserSyncConfig;
 
 /***********/
 /* HELPERS */
@@ -73,11 +20,11 @@ watchOptions = {
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
 if (os.platform() !== 'win32') {
-    require('./tars/helpers/set-ulimit')();
+    tars.helpers.setUlimit();
 }
 
 // Load files from dir recursively and synchronously
-var fileLoader = require('./tars/helpers/file-loader');
+var fileLoader = tars.helpers.fileLoader;
 
 /***************/
 /* END HELPERS */
@@ -87,29 +34,18 @@ var fileLoader = require('./tars/helpers/file-loader');
 /* TASKS */
 /*********/
 
-// USER'S TASKS
-// You can add your own task.
-// Task have to be in tars/user-tasks folder
-// Example:
-// require('./tars/user-tasks/example-task')(buildOptions);
-
-// SYSTEM TASKS
-tasks = fileLoader('./tars/tasks');
-
-// You could uncomment the row bellow, to see all required tasks in console
-// console.log(tasks);
-
-// require tasks
-tasks.forEach(function (file) {
-    require(file)(buildOptions);
+// SYSTEM'S TASKS
+// require system tasks
+fileLoader('./tars/tasks').forEach(function (file) {
+    require(file)();
 });
 
 // USER'S TASKS
-userTasks = fileLoader('./tars/user-tasks');
-
+// You can add your own task.
+// Task have to be in tars/user-tasks folder
 // require user-tasks
-userTasks.forEach(function (file) {
-    require(file)(buildOptions);
+fileLoader('./tars/user-tasks').forEach(function (file) {
+    require(file)();
 });
 
 /*************/
@@ -124,27 +60,20 @@ userTasks.forEach(function (file) {
 // Also could tunnel your markup to web, if you use flag --tunnel
 gulp.task('dev', ['build-dev'], function () {
 
-    if (useLiveReload || useTunnelToWeb) {
+    if (tars.flags.lr || tars.flags.tunnel) {
         gulp.start('browsersync');
     }
 
     // SYSTEM WATCHERS
-    watchers = fileLoader('./tars/watchers');
-
-    // You could uncomment the row bellow, to see all required watchers in console
-    // console.log(watchers);
-
     // require watchers
-    watchers.forEach(function (file) {
-        require(file)(watchOptions);
+    fileLoader('./tars/watchers').forEach(function (file) {
+        require(file)();
     });
 
     // USER'S WATCHERS
-    userWatchers = fileLoader('./tars/user-watchers');
-
     // require user-watchers
-    userWatchers.forEach(function (file) {
-        require(file)(watchOptions);
+    fileLoader('./tars/user-watchers').forEach(function (file) {
+        require(file)();
     });
 });
 
@@ -238,7 +167,7 @@ gulp.task('browsersync', function (cb) {
         browser: browserSyncConfig.browser,
         startPath: browserSyncConfig.startUrl,
         notify: browserSyncConfig.useNotifyInBrowser,
-        tunnel: useTunnelToWeb,
+        tunnel: tars.flags.tunnel,
         reloadOnRestart: true
     });
 
@@ -254,7 +183,7 @@ gulp.task('browsersync', function (cb) {
 /*****************/
 
 gulp.task('svg-actions', function (cb) {
-    if (gutil.env.ie8) {
+    if (tars.flags.ie8) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
             ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],
@@ -279,3 +208,5 @@ gulp.task('compile-templates-with-data-reloading', function (cb) {
 /*********************/
 /* END HELPERS TASKS */
 /*********************/
+
+console.log(gulp);

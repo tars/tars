@@ -1,21 +1,24 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var mkdirp = require('mkdirp');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var mkdirp = tars.packages.mkdirp;
 var fs = require('fs');
-var tarsConfig = require('../../../tars-config');
+var tarsConfig = tars.config;
 
 var paths = [
-            'markup/' + tarsConfig.fs.staticFolderName + '/js/framework',
-            'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
-            'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName,
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content',
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general',
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins',
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite'
-        ];
+        'markup/' + tarsConfig.fs.staticFolderName + '/js/framework',
+        'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
+        'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName,
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content',
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/general',
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/plugins',
+        'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite'
+    ];
+var i = 0;
 
-for (var i = 0; i < tarsConfig.useImagesForDisplayWithDpi.length; i++) {
+for (; i < tarsConfig.useImagesForDisplayWithDpi.length; i++) {
     paths.push('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/' + tarsConfig.useImagesForDisplayWithDpi[i] + 'dpi');
 }
 
@@ -29,10 +32,8 @@ paths.push(
 
 /**
  * Create fs for project
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('service:create-fs', function (cb) {
 
         if (tarsConfig.fs.staticFolderName != 'static') {

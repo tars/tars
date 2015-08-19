@@ -1,15 +1,15 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var Download = tars.packages.download;
 var exec = require('child_process').exec;
-var Download = require('download');
 var fs = require('fs');
 
 /**
  * Update dependencies
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('service:update-deps', function (cb) {
         var downloadPackage = new Download({ extract: true })
             .get('https://raw.githubusercontent.com/2gis/tars/master/package.json')

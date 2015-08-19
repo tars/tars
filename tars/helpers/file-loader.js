@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 
 // Helper to load files from dir recursively and synchronously

@@ -1,19 +1,19 @@
-var gulp = require('gulp');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gulpif = tars.packages.gulpif;
+var cache = tars.packages.cache;
+var rename = tars.packages.rename;
 var path = require('path');
-var rename = require('gulp-rename');
-var cache = require('gulp-cached');
-var gulpif = require('gulp-if');
-var notify = require('gulp-notify');
-var notifier = require('../../helpers/notifier');
-var tarsConfig = require('../../../tars-config');
-var browserSync = require('browser-sync');
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
 
 /**
  * Move files from assets modules of modules
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('other:move-assets', function (cb) {
         return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(cache('move-assets'))

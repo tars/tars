@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Date formatter for Gulp notify. It showes only hours, minutes and seconds
  * @param  {number} timeItem hours, minutes or seconds

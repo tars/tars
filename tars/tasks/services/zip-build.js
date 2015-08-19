@@ -1,24 +1,24 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var zip = require('gulp-zip');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var zip = tars.packages.zip;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 
 /**
  * Create zip archive of build
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('service:zip-build', function (cb) {
         if (tarsConfig.useArchiver) {
-            return gulp.src(buildOptions.buildPath + '**', { base: '.' })
-                .pipe(zip('build' + buildOptions.buildVersion + '.zip'))
+            return gulp.src(tars.options.build.path + '**', { base: '.' })
+                .pipe(zip('build' + tars.options.build.version + '.zip'))
                 .on('error', notify.onError(function (error) {
                     return '\nAn error occurred while creating zip-archive.\nLook in the console for details.\n' + error;
                 }))
-                .pipe(gulp.dest(buildOptions.buildPath))
+                .pipe(gulp.dest(tars.options.build.path))
                 .pipe(
                     notifier('Zip-archive\'s been created')
                 );

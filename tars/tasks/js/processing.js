@@ -1,82 +1,85 @@
-var gulp = require('gulp');
-var notify = require('gulp-notify');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var gulpif = require('gulp-if');
-var uglify = require('gulp-uglify');
-var plumber = require('gulp-plumber');
-var stripDebug = require('gulp-strip-debug');
-var sourcemaps = require('gulp-sourcemaps');
-var Combine = require('stream-combiner');
-var browserSync = require('browser-sync');
-var notifier = require('../../helpers/notifier');
+'use strict';
 
-var tarsConfig = require('../../../tars-config');
-var staticFolder = tarsConfig.fs.staticFolderName;
-var destFolder = './dev/' + staticFolder + '/js';
+var gulp = tars.packages.gulp;
+var concat = tars.packages.concat;
+var Combine = tars.packages.streamCombiner;
+var uglify = tars.packages.uglify;
+var plumber = tars.packages.plumber;
+var gulpif = tars.packages.gulpif;
+var rename = tars.packages.rename;
+var stripDebug = tars.packages.stripDebug;
+var sourcemaps = tars.packages.sourcemaps;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
+
+var staticFolderName = tars.config.fs.staticFolderName;
+var destFolder = './dev/' + staticFolderName + '/js';
+var compressJs = tars.flags.release && tars.flags.min;
+var generateSourceMaps = tars.config.sourcemaps.js && !tars.flags.release;
 var jsPaths = [
         '!./markup/modules/**/data/data.js',
-        './markup/' + staticFolder + '/js/framework/**/*.js',
-        './markup/' + staticFolder + '/js/libraries/**/*.js',
-        './markup/' + staticFolder + '/js/plugins/**/*.js',
-        tarsConfig.jsPathsToConcatBeforeModulesJs,
+        './markup/' + staticFolderName + '/js/framework/**/*.js',
+        './markup/' + staticFolderName + '/js/libraries/**/*.js',
+        './markup/' + staticFolderName + '/js/plugins/**/*.js',
+        tars.config.jsPathsToConcatBeforeModulesJs,
         './markup/modules/*/*.js',
-        tarsConfig.jsPathsToConcatAfterModulesJs
+        tars.config.jsPathsToConcatAfterModulesJs
     ];
 
 jsPaths = [].concat.apply([], jsPaths);
 
-module.exports = function (options) {
-    /**
-     * Stream of base processing with JavaScript.
-     * ------------------------------------------
-     * There are:
-     *  - concat js files;
-     *  - add hash like a suffix of filename;
-     *  - write header in the start of main file;
-     *  - write footer in the end of main file;
-     *  - write source map;
-     *  - write main file at fs.
-     */
-    function base () {
-        return Combine(
-            concat('main.js'),
-            rename({ suffix: options.hash }),
-            gulpif(options.generateSourceMaps.js, sourcemaps.write()),
-            gulp.dest(destFolder)
-        ).on('error', notify.onError(function (error) {
-            return '\nAn error occurred while base processing js-files.\
-                    \nLook in the console for details.\
-                    \n' + error;
-            })
-        );
-    }
+/**
+ * Stream of base processing with JavaScript.
+ * ------------------------------------------
+ * There are:
+ *  - concat js files;
+ *  - add hash like a suffix of filename;
+ *  - write header in the start of main file;
+ *  - write footer in the end of main file;
+ *  - write source map;
+ *  - write main file at fs.
+ */
+function base () {
+    return Combine(
+        concat('main.js'),
+        rename({ suffix: tars.options.build.hash }),
+        gulpif(generateSourceMaps, sourcemaps.write()),
+        gulp.dest(destFolder)
+    ).on('error', notify.onError(function (error) {
+        return 'An error occurred while base processing js-files.\
+                \nLook in the console for details.\
+                \n' + error;
+        })
+    );
+}
 
-    /**
-     * Stream of minimized with JavaScript.
-     * ------------------------------------
-     * There are:
-     *  - removing `condole.log()` and `debug`;
-     *  - uglified code;
-     *  - add '.min' suffix for main file;
-     *  - write source maps;
-     *  - write main file at fs.
-     */
-    function compress () {
-        return Combine(
-            gulpif(tarsConfig.removeConsoleLog, stripDebug()),
-            uglify({ mangle: false }),
-            rename({ suffix: '.min' }),
-            gulpif(options.generateSourceMaps.js, sourcemaps.write()),
-            gulp.dest(destFolder)
-        ).on('error', notify.onError(function (error) {
-            return '\nAn error occurred while compressing js.\
-                    \nLook in the console for details.\
-                    \n' + error;
-            })
-        );
-    }
+/**
+ * Stream of minimized with JavaScript.
+ * ------------------------------------
+ * There are:
+ *  - removing `condole.log()` and `debug`;
+ *  - uglified code;
+ *  - add '.min' suffix for main file;
+ *  - write source maps;
+ *  - write main file at fs.
+ */
+function compress () {
+    return Combine(
+        gulpif(tars.config.removeConsoleLog, stripDebug()),
+        uglify({ mangle: false }),
+        rename({ suffix: '.min' }),
+        gulpif(generateSourceMaps, sourcemaps.write()),
+        gulp.dest(destFolder)
+    ).on('error', notify.onError(function (error) {
+        return 'An error occurred while compressing js.\
+                \nLook in the console for details.\
+                \n' + error;
+        })
+    );
+}
 
+module.exports = function () {
     /**
      * Task for processing with JavaScript files.
      * ------------------------------------------
@@ -91,11 +94,11 @@ module.exports = function (options) {
      *  - reloading browser's page.
      */
     return gulp.task('js:processing', ['js:check'], function () {
-        return gulp.src(jsPaths)
+        return gulp.src(jsPaths, { base: process.cwd() })
             .pipe(plumber())
-            .pipe(gulpif(options.generateSourceMaps.js, sourcemaps.init()))
+            .pipe(gulpif(tars.config.sourcemaps.js, sourcemaps.init()))
             .pipe(base())
-            .pipe(gulpif(options.compressJs, compress(destFolder)))
+            .pipe(gulpif(compressJs, compress(destFolder)))
             .pipe(notifier('JavaScript was processed'))
             .pipe(browserSync.reload({ stream: true }));
     });
