@@ -6,4 +6,5 @@ node_js:
 before_script:
   - npm install -g gulp
   - gulp init
-script: gulp
+script:
+  - gulp --release --ie8

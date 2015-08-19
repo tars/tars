@@ -1,6 +1,6 @@
 'use strict';
 
-require('./tars/tars');
+require('../tars');
 
 var os = require('os');
 var exec = require('child_process').exec;
