@@ -53,53 +53,52 @@ tars.flags = gutil.env;
 
 // Required packages
 tars.packages = {
-    gulp: require('gulp'),
-    gutil: gutil,
-    runSequence: tars.require('run-sequence'),
+    addsrc: tars.require('gulp-add-src'),
+    autoprefixer: tars.require('gulp-autoprefixer'),
     browserSync: tars.require('browser-sync'),
-    notify: tars.require('gulp-notify'),
-    concat: tars.require('gulp-concat'),
-    gulpif: tars.require('gulp-if'),
     cache: tars.require('gulp-cached'),
     changed: tars.require('gulp-changed'),
     chokidar: tars.require('chokidar'),
-    handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
-    gulpHandlebars: tars.require('gulp-compile-handlebars'),
-    digits: tars.require('digits'),
-    sass: tars.require('gulp-sass'),
-    autoprefixer: tars.require('gulp-autoprefixer'),
-    replace: tars.require('gulp-replace-task'),
-    addsrc: tars.require('gulp-add-src'),
+    concat: tars.require('gulp-concat'),
     csso: tars.require('gulp-csso'),
-    rename: tars.require('gulp-rename'),
-    spritesmith: tars.require('gulp.spritesmith'),
-    svgspritesheet: tars.require('gulp-svg-spritesheet'),
-    svg2png: tars.require('gulp-svg2png'),
-    through2: tars.require('through2'),
+    del: tars.require('del'),
+    digits: tars.require('digits'),
+    download: tars.require('download'),
+    gulp: require('gulp'),
+    gulpHandlebars: tars.require('gulp-compile-handlebars'),
+    gulpif: tars.require('gulp-if'),
+    gutil: gutil,
+    handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
     htmlMin: tars.require('gulp-minify-html'),
     imagemin: tars.require('gulp-imagemin'),
-    jshint: tars.require('gulp-jshint'),
     jscs: tars.require('gulp-jscs'),
-    uglify: tars.require('gulp-uglify'),
-    streamCombiner: tars.require('stream-combiner'),
-    stripDebug: tars.require('gulp-strip-debug'),
-    sourcemaps: tars.require('gulp-sourcemaps');
-    del: tars.require('del'),
+    jshint: tars.require('gulp-jshint'),
     mkdirp: tars.require('mkdirp'),
     ncp: tars.require('ncp'),
-    download: tars.require('download'),
-    plumber: tars.require('gulp-plumber'),
+    notify: tars.require('gulp-notify'),
+    rename: tars.require('gulp-rename'),
+    replace: tars.require('gulp-replace-task'),
+    runSequence: tars.require('run-sequence'),
+    sass: tars.require('gulp-sass'),
+    sourcemaps: tars.require('gulp-sourcemaps');
+    spritesmith: tars.require('gulp.spritesmith'),
+    stripDebug: tars.require('gulp-strip-debug'),
+    svg2png: tars.require('gulp-svg2png'),
+    svgspritesheet: tars.require('gulp-svg-spritesheet'),
+    streamCombiner: tars.require('stream-combiner'),
+    through2: tars.require('through2'),
+    uglify: tars.require('gulp-uglify'),
     zip: tars.require('gulp-zip')
 }
 
 // Links to helpers
 tars.helpers = {
     buildVersion: buildVersion,
-    setUlimit: require('./helpers/set-ulimit'),
+    dateFormatter: require('./helpers/modify-date-formatter.js'),
     fileLoader: require('./helpers/file-loader'),
     notifier: require('./helpers/notifier'),
-    watcherLog: require('./helpers/watcher-log'),
-    dateFormatter: require('./helpers/modify-date-formatter.js')
+    setUlimit: require('./helpers/set-ulimit'),
+    watcherLog: require('./helpers/watcher-log')
 }
 
 templaterName = require('./helpers/templater-name-setter')();
@@ -126,8 +125,8 @@ tars.cssPreproc = {
 // Build options
 tars.options = {
     build: {
-        version: buildOptions.buildVersion,
+        hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
         path: buildOptions.buildPath,
-        hash: tars.flags.release ? Math.random().toString(36).substring(7) : ''
+        version: buildOptions.buildVersion
     }
 }

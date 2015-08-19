@@ -208,5 +208,3 @@ gulp.task('compile-templates-with-data-reloading', function (cb) {
 /*********************/
 /* END HELPERS TASKS */
 /*********************/
-
-console.log(gulp);
