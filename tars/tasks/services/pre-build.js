@@ -1,22 +1,22 @@
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var notify = require('gulp-notify');
-var gutil = require('gulp-util');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var gulpif = tars.packages.gulpif;
 var fs = require('fs');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 
 /**
  * Copy files from dev to build directory. Create build directory with new build version
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('service:pre-build', function () {
 
         if (tarsConfig.useBuildVersioning) {
             console.log('\n----------------------------------------------------------------------');
-            gutil.log(gutil.colors.magenta.bold('Build version is: ', buildOptions.buildVersion));
+            gutil.log(gutil.colors.magenta.bold('Build version is: ', tars.options.build.version));
             console.log('----------------------------------------------------------------------\n');
         }
 
@@ -24,7 +24,7 @@ module.exports = function (buildOptions) {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while running pre-build task.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest(buildOptions.buildPath))
+            .pipe(gulp.dest(tars.options.build.path))
             .pipe(
                 notifier('Pre-build task is finished')
             );

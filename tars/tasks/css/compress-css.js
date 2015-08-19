@@ -1,21 +1,18 @@
-var gulp = require('gulp');
-var csso = require('gulp-csso');
-var cmq = require('gulp-combine-media-queries');
-var rename = require('gulp-rename');
-var notify = require('gulp-notify');
-var notifier = require('../../helpers/notifier');
-var tarsConfig = require('../../../tars-config');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var csso = tars.packages.csso;
+var rename = tars.packages.rename;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var tarsConfig = tars.config;
 
 /**
  * Compress css-files
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('css:compress-css', function () {
-        return gulp.src(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/*.css')
-            // @TODO: fix problems with cmq
-            // .pipe(cmq())
+        return gulp.src(tars.options.build.path + tarsConfig.fs.staticFolderName + '/css/*.css')
             .pipe(csso())
             .pipe(rename({
                 suffix: '.min'
@@ -23,7 +20,7 @@ module.exports = function (buildOptions) {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while compressing css.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest(buildOptions.buildPath + tarsConfig.fs.staticFolderName + '/css/'))
+            .pipe(gulp.dest(tars.options.build.path + tarsConfig.fs.staticFolderName + '/css/'))
             .pipe(
                 notifier('Css\'ve been minified')
             );

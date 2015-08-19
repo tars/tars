@@ -1,19 +1,15 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
 
 /**
  * Watcher for misc files
- * @param  {Object} watchOptions
  */
 module.exports = function () {
-    return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*', {
+    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/misc/**/*.*', {
         ignored: '',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
-        watcherLog(event, path);
-        gulp.start('other:move-misc-files');
+        tars.helpers.watcherLog(event, path);
+        tars.packages.gulp.start('other:move-misc-files');
     });
 };

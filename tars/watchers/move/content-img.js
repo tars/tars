@@ -1,19 +1,15 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
 
 /**
  * Watcher for images in assets dir of modules
- * @param  {Object} watchOptions
  */
 module.exports = function () {
-    return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/content/**/*.*', {
+    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/content/**/*.*', {
         ignored: '',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
-        watcherLog(event, path);
-        gulp.start('images:move-content-img');
+        tars.helpers.watcherLog(event, path);
+        tars.packages.gulp.start('images:move-content-img');
     });
 };

@@ -1,10 +1,12 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
-var cache = require('gulp-cached');
-var jscs = require('gulp-jscs');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var cache = tars.packages.cache;
+var jshint = tars.packages.jshint;
+var jscs = tars.packages.jscs;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
 
 var jsPathsToLint = [
                      './markup/modules/**/*.js',
@@ -13,23 +15,17 @@ var jsPathsToLint = [
                     ];
 
 if (tarsConfig.lintJsCodeBeforeModules) {
-    tarsConfig.jsPathsToConcatBeforeModulesJs.forEach(function (path) {
-        jsPathsToLint.push(path);
-    });
+    jsPathsToLint = jsPathsToLint.concat(tarsConfig.jsPathsToConcatBeforeModulesJs);
 }
 
 if (tarsConfig.lintJsCodeAfterModules) {
-    tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function (path) {
-        jsPathsToLint.push(path);
-    });
+    jsPathsToLint = jsPathsToLint.concat(tarsConfig.lintJsCodeAfterModules);
 }
 
 /**
  * Check JS for style and errors (optional task)
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('js:check', function (cb) {
         if (tarsConfig.useJsLintAndHint) {
             return gulp.src(jsPathsToLint)

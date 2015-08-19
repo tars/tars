@@ -1,5 +1,7 @@
-var Handlebars = require('gulp-compile-handlebars/node_modules/handlebars');
-var digits = require('digits');
+'use strict';
+
+var Handlebars = tars.handlebars;
+var digits = tars.digits;
 
 var helpers = {
     /**

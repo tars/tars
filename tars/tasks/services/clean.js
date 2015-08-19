@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var del = require('del');
-var tarsConfig = require('../../../tars-config');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var del = tars.packages.del;
+var tarsConfig = tars.config;
 
 var pathsToDel = [
         './dev/',
@@ -8,16 +10,14 @@ var pathsToDel = [
         './.tmpPreproc/'
     ];
 
+if (!tarsConfig.useBuildVersioning) {
+    pathsToDel.push(tars.options.build.path);
+}
+
 /**
  * Clean dev directory and cache
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
-    if (!tarsConfig.useBuildVersioning) {
-        pathsToDel.push(buildOptions.buildPath);
-    }
-
+module.exports = function () {
     return gulp.task('service:clean', function (cb) {
         del(pathsToDel, cb);
     });

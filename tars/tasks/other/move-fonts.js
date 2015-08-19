@@ -1,16 +1,16 @@
-var gulp = require('gulp');
-var cache = require('gulp-cached');
-var notify = require('gulp-notify');
-var notifier = require('../../helpers/notifier');
-var tarsConfig = require('../../../tars-config');
-var browserSync = require('browser-sync');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var cache = tars.packages.cache;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
 
 /**
  * Move fonts-files to dev directory
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('other:move-fonts', function () {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*')
             .pipe(cache('move-fonts'))

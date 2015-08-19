@@ -1,21 +1,22 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var notify = require('gulp-notify');
-var notifier = require('../../helpers/notifier');
-var changed = require('gulp-changed');
-var cache = require('gulp-cached');
-var tarsConfig = require('../../../tars-config');
-var svg2png = require('gulp-svg2png');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var cache = tars.packages.cache;
+var changed = tars.packages.changed;
+var svg2png = tars.packages.svg2png;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
 
 /**
  * Raster SVG-files (optional task)
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('images:raster-svg', function (cb) {
 
-        if (tarsConfig.useSVG && gutil.env.ie8) {
+        if (tarsConfig.useSVG && tars.flags.ie8) {
             return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
                 .pipe(

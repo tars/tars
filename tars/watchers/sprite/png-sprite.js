@@ -1,19 +1,15 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
 
 /**
  * Watcher for images for sprite (png)
- * @param  {Object} watchOptions
  */
 module.exports = function () {
-    return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/sprite/**/*.png', {
+    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/sprite/**/*.png', {
         ignored: '',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
-        watcherLog(event, path);
-        gulp.start('css:make-sprite');
+        tars.helpers.watcherLog(event, path);
+        tars.packages.gulp.start('css:make-sprite');
     });
 };

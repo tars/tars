@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Generate build version
  * @return {String} build version

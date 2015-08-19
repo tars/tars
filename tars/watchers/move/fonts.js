@@ -1,19 +1,15 @@
-var gulp = require('gulp');
-var chokidar = require('chokidar');
-var tarsConfig = require('../../../tars-config');
-var watcherLog = require('../../helpers/watcher-log');
+'use strict';
 
 /**
  * Watcher for font files
- * @param  {Object} watchOptions
  */
 module.exports = function () {
-    return chokidar.watch('markup/' + tarsConfig.fs.staticFolderName + '/fonts/**/*.*', {
+    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/fonts/**/*.*', {
         ignored: '',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
-        watcherLog(event, path);
-        gulp.start('other:move-fonts');
+        tars.helpers.watcherLog(event, path);
+        tars.packages.gulp.start('other:move-fonts');
     });
 };

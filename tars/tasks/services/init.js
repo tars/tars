@@ -1,31 +1,30 @@
-var gulp = require('gulp');
-var tarsConfig = require('../../../tars-config');
-var templaterName = require('../../helpers/templater-name-setter');
-var gutil = require('gulp-util');
-var ncp = require('ncp').ncp;
-var Download = require('download');
-var os = require('os');
+'use strict';
 
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var ncp = tars.packages.ncp.ncp;
+var Download = tars.packages.download;
+var os = require('os');
+var tarsConfig = tars.config;
+
+var templaterName = tars.templater.name;
 var githubConfig = {
-    user: 'artem-malko',
+    user: 'tars',
     repoPrefix: 'tars-'
 };
-
-var templaterVersion = 'version-' + require('../../../package.json').version;
-var cssVersion = 'version-' + require('../../../package.json').version;
-
-var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
+var templaterVersion = (process.env.tarsVersion ? 'version-' + process.env.tarsVersion : 'version-' + require('../../../package.json').version);
+var cssVersion = templaterVersion;
+var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName + '/archive/' + templaterVersion + '.zip';
 var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tarsConfig.cssPreprocessor + '/archive/' + cssVersion + '.zip';
 
 ncp.limit = 16;
+
 require('./create-fs')();
 
 /**
  * Init builder, download css-preprocessor and templater
- * @param  {Object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('service:init', ['service:create-fs'], function (cb) {
 
         var downloadTemplater,
@@ -45,13 +44,19 @@ module.exports = function (buildOptions) {
             console.log('\n\n' + gutil.colors.bold('T A R S\n'));
         }
         console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
-        console.log('You could find more info about me at https://github.com/artem-malko/tars/blob/master/README.md\n');
-        console.log('Start your work with \'gulp dev\'\n\n');
+        console.log('You could find more info about me at https://github.com/tars/tars/blob/master/README.md');
+
+        if (process.env.tarsVersion) {
+            console.log('Execute ' + gutil.colors.cyan('"tars --help"') + ' to see all avalible options and commands.\n');
+            console.log('Start your work with "tars dev".\n\n');
+        } else {
+            console.log('\nStart your work with "gulp dev".\n\n');
+        }
 
         downloadTemplaterTest.run(function (err, files) {
             if (err) {
                 templaterVersion = 'master';
-                templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName() + '/archive/' + templaterVersion + '.zip';
+                templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName + '/archive/' + templaterVersion + '.zip';
             }
 
             downloadTemplater = new Download({ extract: true, mode: '755' })
@@ -70,7 +75,7 @@ module.exports = function (buildOptions) {
                     throw err;
                 }
 
-                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/markup', './markup', function (err) {
+                ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/markup', './markup', function (err) {
                     if (err) {
                         gutil.log(gutil.colors.red(err));
                         gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
@@ -79,7 +84,7 @@ module.exports = function (buildOptions) {
                     }
                 });
 
-                ncp('./.tmpTemplater/tars-' + templaterName() + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
+                ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
                     if (err) {
                         gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
                         gutil.log('Please, repost with message to developer.');
@@ -138,7 +143,7 @@ module.exports = function (buildOptions) {
                     console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
                     console.log('You choose:');
                     console.log(gutil.colors.magenta.bold(tarsConfig.cssPreprocessor), ' as css-preprocessor');
-                    console.log(gutil.colors.magenta.bold(templaterName()), ' as templater\n');
+                    console.log(gutil.colors.magenta.bold(templaterName), ' as templater\n');
                     console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
                 });
             });

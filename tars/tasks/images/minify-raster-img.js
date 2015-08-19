@@ -1,16 +1,17 @@
-var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var changed = require('gulp-changed');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
+var imagemin = tars.packages.imagemin;
+var changed = tars.packages.changed;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 
 /**
  * Minify png and jpg images
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('images:minify-raster-img', function (cb) {
         return gulp.src('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/**/*.{png, jpg}')
             .pipe(changed('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/'))

@@ -1,7 +1,6 @@
-var notify = require('gulp-notify');
-var gutil = require('gulp-util');
-var notifyConfig = require('../../tars-config').notifyConfig;
-var modifyDate = require('./modify-date-formatter');
+'use strict';
+
+var notifyConfig = tars.config.notifyConfig;
 
 module.exports = function (message, onLast) {
     var resultMessage = message + '\n' || 'Task\'ve been finished\n';
@@ -9,16 +8,16 @@ module.exports = function (message, onLast) {
     resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
 
     if (notifyConfig.useNotify) {
-        return notify({
+        return tars.packages.notify({
             onLast: onLast || true,
             sound: notifyConfig.sounds.onSuccess,
             title: notifyConfig.title,
             message: resultMessage,
             templateOptions: {
-                date: modifyDate.getTimeOfModify()
+                date: tars.helpers.dateFormatter.getTimeOfModify()
             }
         });
     } else {
-        return gutil.noop();
+        return tars.packages.gutil.noop();
     }
 };

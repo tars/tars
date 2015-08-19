@@ -1,15 +1,15 @@
-var gulp = require('gulp');
-var cache = require('gulp-cached');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var cache = tars.packages.cache;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 
 /**
  * Copy separate Js-files to dev directory
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
-
+module.exports = function () {
     return gulp.task('js:move-separate', function (cb) {
         gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js')
             .pipe(cache('separate-js'))

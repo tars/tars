@@ -1,5 +1,6 @@
-var tarsConfig = require('../../tars-config');
-var tarsConfigTemplater = tarsConfig.templater.toLowerCase();
+'use strict';
+
+var tarsConfigTemplater = tars.config.templater.toLowerCase();
 var templaterName = '';
 
 /**

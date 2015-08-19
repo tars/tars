@@ -1,14 +1,21 @@
-var gulp = require('gulp');
-var notify = require('gulp-notify');
-var tarsConfig = require('../../../tars-config');
-var notifier = require('../../helpers/notifier');
-var browserSync = require('browser-sync');
+'use strict';
+
+var gulp = tars.packages.gulp;
+var tarsConfig = tars.config;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
 
 /**
  * Move misc files
- * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function () {
+    var gulp = require('gulp');
+    var notify = tars.packages.notify;
+    var browserSync = tars.packages.browserSync;
+
+    var tarsConfig = tars.config;
+    var notifier = tars.helpers.notifier;
 
     return gulp.task('other:move-misc-files', function (cb) {
         return gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/misc/**/*.*')

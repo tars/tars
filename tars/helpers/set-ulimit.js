@@ -1,10 +1,10 @@
-var tarsConfig = require('../../tars-config');
+'use strict';
 
 /**
  * Set ulimit to tarsConfig.ulimit
  */
 module.exports = function () {
-    var limit = tarsConfig.ulimit;
+    var limit = tars.config.ulimit;
     var posix;
 
     try {
