@@ -1,10 +1,10 @@
 {
   "name": "tars",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Powerfull markup builder",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "3.8.11",
+    "gulp": "3.9.0",
     "gulp-util": "3.0.3",
     "gulp-if": "1.2.5",
     "gulp-concat": "2.5.2",
@@ -24,7 +24,7 @@
     "gulp.spritesmith": "3.1.0",
     "gulp-add-src": "0.2.0",
     "gulp-svg2png": "0.3.0",
-    "gulp-svg-spritesheet": "0.0.3",
+    "gulp-svg-spritesheet": "git://github.com/artem-malko/gulp-svg-spritesheet.git#877e77bb8f098c0922c530267ee3bb3439ce6049",
     "gulp-strip-debug": "1.0.2",
     "gulp-uglifyjs": "0.6.0",
     "gulp-jscs": "1.4.0",
@@ -42,12 +42,10 @@
     "mkdirp": "0.5.0",
     "ncp": "2.0.0",
     "run-sequence": "1.0.2",
-    "through2": "0.6.3",
-    "phantomjssmith": "0.6.0"
+    "through2": "0.6.3"
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "npm install phantomjs",
     "install": "node ./tars/helpers/install-additional-deps.js"
   },
   "repository": {

@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.2.7
+
+* Fixed bug with gulp-svg-spritesheet.
+
 ## Version 1.2.6
 
 * Fixed bug with notify, when it is off.
