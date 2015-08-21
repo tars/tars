@@ -5,14 +5,13 @@ var csso = tars.packages.csso;
 var rename = tars.packages.rename;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
-var tarsConfig = tars.config;
 
 /**
  * Compress css-files
  */
 module.exports = function () {
     return gulp.task('css:compress-css', function () {
-        return gulp.src(tars.options.build.path + tarsConfig.fs.staticFolderName + '/css/*.css')
+        return gulp.src(tars.options.build.path + tars.config.fs.staticFolderName + '/css/*.css')
             .pipe(csso())
             .pipe(rename({
                 suffix: '.min'
@@ -20,7 +19,7 @@ module.exports = function () {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while compressing css.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest(tars.options.build.path + tarsConfig.fs.staticFolderName + '/css/'))
+            .pipe(gulp.dest(tars.options.build.path + tars.config.fs.staticFolderName + '/css/'))
             .pipe(
                 notifier('Css\'ve been minified')
             );

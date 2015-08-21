@@ -5,7 +5,6 @@ var gutil = tars.packages.gutil;
 var cache = tars.packages.cache;
 var jshint = tars.packages.jshint;
 var jscs = tars.packages.jscs;
-var tarsConfig = tars.config;
 var notify = tars.packages.notify;
 
 var jsPathsToLint = [
@@ -14,12 +13,12 @@ var jsPathsToLint = [
                      '!./markup/modules/**/data/data.js'
                     ];
 
-if (tarsConfig.lintJsCodeBeforeModules) {
-    jsPathsToLint = jsPathsToLint.concat(tarsConfig.jsPathsToConcatBeforeModulesJs);
+if (tars.config.lintJsCodeBeforeModules) {
+    jsPathsToLint = jsPathsToLint.concat(tars.config.jsPathsToConcatBeforeModulesJs);
 }
 
-if (tarsConfig.lintJsCodeAfterModules) {
-    jsPathsToLint = jsPathsToLint.concat(tarsConfig.lintJsCodeAfterModules);
+if (tars.config.lintJsCodeAfterModules) {
+    jsPathsToLint = jsPathsToLint.concat(tars.config.lintJsCodeAfterModules);
 }
 
 /**
@@ -27,7 +26,7 @@ if (tarsConfig.lintJsCodeAfterModules) {
  */
 module.exports = function () {
     return gulp.task('js:check', function (cb) {
-        if (tarsConfig.useJsLintAndHint) {
+        if (tars.config.useJsLintAndHint) {
             return gulp.src(jsPathsToLint)
                 .pipe(cache('hinting'))
                 .pipe(jshint())

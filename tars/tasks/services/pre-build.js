@@ -4,7 +4,6 @@ var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var gulpif = tars.packages.gulpif;
 var fs = require('fs');
-var tarsConfig = tars.config;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 
@@ -14,7 +13,7 @@ var notifier = tars.helpers.notifier;
 module.exports = function () {
     return gulp.task('service:pre-build', function () {
 
-        if (tarsConfig.useBuildVersioning) {
+        if (tars.config.useBuildVersioning) {
             console.log('\n----------------------------------------------------------------------');
             gutil.log(gutil.colors.magenta.bold('Build version is: ', tars.options.build.version));
             console.log('----------------------------------------------------------------------\n');

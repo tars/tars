@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Set ulimit to tarsConfig.ulimit
+ * Set ulimit to tars.config.ulimit
  */
 module.exports = function () {
     var limit = tars.config.ulimit;

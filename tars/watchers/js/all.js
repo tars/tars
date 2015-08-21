@@ -1,17 +1,16 @@
 'use strict';
 
-var tarsConfig = tars.config;
-var staticFolderName = tarsConfig.fs.staticFolderName;
+var staticFolderName = tars.config.fs.staticFolderName;
 var watcherLog = tars.helpers.watcherLog;
 
 var jsPathToWatch = [];
 
-if (tarsConfig.jsPathsToConcatBeforeModulesJs.length) {
-    jsPathToWatch = jsPathToWatch.concat(tarsConfig.jsPathsToConcatBeforeModulesJs);
+if (tars.config.jsPathsToConcatBeforeModulesJs.length) {
+    jsPathToWatch = jsPathToWatch.concat(tars.config.jsPathsToConcatBeforeModulesJs);
 }
 
-if (tarsConfig.jsPathsToConcatAfterModulesJs.length) {
-    jsPathToWatch = jsPathToWatch.concat(tarsConfig.jsPathsToConcatAfterModulesJs);
+if (tars.config.jsPathsToConcatAfterModulesJs.length) {
+    jsPathToWatch = jsPathToWatch.concat(tars.config.jsPathsToConcatAfterModulesJs);
 }
 
 jsPathToWatch.push(

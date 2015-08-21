@@ -16,7 +16,6 @@ By default, each task requires a set of npm-modules and configs to work correctl
 var gulp = require('gulp');
 var notify = require('gulp-notify');
 var notifier = require('../helpers/notifier');
-var tarsConfig = require('../../tars-config');
 ```
 
 Also, if you want to use livereload for this task, you must to connect browser-sync module:
@@ -65,7 +64,6 @@ By default, each watcher requires a set of npm-modules and configs to work corre
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var chokidar = require('chokidar');
-var tarsConfig = require('../../tars-config');
 var watcherLog = require('../helpers/watcher-log');
 ```
 
@@ -89,7 +87,7 @@ In gulp.start task name is passed to be started when following by watchers files
 
 When you add watchers it is recommended to use variables:
 
-tarsConfig.fs.staticFolderName - for the name of the folder with statics
-tarsConfig.fs.imagesFolderName - for the name of the folder with images
+tars.config.fs.staticFolderName - for the name of the folder with statics
+tars.config.fs.imagesFolderName - for the name of the folder with images
 watchOptions.templateExtension - contains an extension for files of the selected template
 watchOptions.cssPreprocExtension - contains an extension for files of the selected css-preprocessor
