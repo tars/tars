@@ -1,6 +1,7 @@
 'use strict';
 
 // Tars main moduels init
+// It is a global var
 require('./tars/tars');
 
 // Using modules
@@ -89,7 +90,6 @@ gulp.task('dev', ['build-dev'], function () {
 // You can add your own tasks in queue
 gulp.task('build-dev', function (cb) {
     runSequence(
-        'service:builder-start-screen',
         'service:clean',
         ['images:minify-svg', 'images:raster-svg'],
         [

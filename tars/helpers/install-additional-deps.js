@@ -1,5 +1,6 @@
 'use strict';
 
+// It is a global var
 require('../tars');
 
 var os = require('os');

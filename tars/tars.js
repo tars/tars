@@ -17,8 +17,10 @@ function tarsRequire(packageName) {
     }
 }
 
+// TARS is a global var
 global.tars = {
-    require: tarsRequire
+    require: tarsRequire,
+    cli: (process.env.npmRoot ? true : false)
 };
 
 var gutil = tars.require('gulp-util');
@@ -50,6 +52,9 @@ tars.config = tarsConfig;
 
 // Flags
 tars.flags = gutil.env;
+
+// Generate start screen
+require('./helpers/start-screen-generator')(gutil);
 
 // Required packages
 tars.packages = {
@@ -94,7 +99,7 @@ tars.packages = {
 // Links to helpers
 tars.helpers = {
     buildVersion: buildVersion,
-    dateFormatter: require('./helpers/modify-date-formatter.js'),
+    dateFormatter: require('./helpers/modify-date-formatter'),
     fileLoader: require('./helpers/file-loader'),
     notifier: require('./helpers/notifier'),
     setUlimit: require('./helpers/set-ulimit'),

@@ -2,7 +2,6 @@
 
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
-var tarsConfig = tars.config;
 
 var pathsToDel = [
         './dev/',
@@ -10,7 +9,7 @@ var pathsToDel = [
         './.tmpPreproc/'
     ];
 
-if (!tarsConfig.useBuildVersioning) {
+if (!tars.config.useBuildVersioning) {
     pathsToDel.push(tars.options.build.path);
 }
 

@@ -2,17 +2,17 @@
 
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
-var tarsConfig = tars.config;
+var staticFolderName = tars.config.fs.staticFolderName;
 
 var pathToDel = [
-             'markup/' + tarsConfig.fs.staticFolderName + '/js/framework',
-             'markup/' + tarsConfig.fs.staticFolderName + '/js/libraries',
-             'markup/' + tarsConfig.fs.staticFolderName + '/js/plugins',
-             'markup/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/',
-             'markup/' + tarsConfig.fs.staticFolderName + '/fonts/',
-             'markup/' + tarsConfig.fs.staticFolderName + '/scss/',
-             'markup/' + tarsConfig.fs.staticFolderName + '/stylus/',
-             'markup/' + tarsConfig.fs.staticFolderName + '/less/',
+             'markup/' + staticFolderName + '/js/framework',
+             'markup/' + staticFolderName + '/js/libraries',
+             'markup/' + staticFolderName + '/js/plugins',
+             'markup/' + staticFolderName + '/' + tars.config.fs.imagesFolderName + '/',
+             'markup/' + staticFolderName + '/fonts/',
+             'markup/' + staticFolderName + '/scss/',
+             'markup/' + staticFolderName + '/stylus/',
+             'markup/' + staticFolderName + '/less/',
              'markup/modules/_template/assets/',
              'markup/modules/_template/ie/',
              './markup/modules/head/',

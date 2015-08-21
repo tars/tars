@@ -1,6 +1,5 @@
 'use strict';
 
-var gulp = require('gulp');
 var watcherLog = tars.helpers.watcherLog;
 
 /**
@@ -15,10 +14,10 @@ module.exports = function () {
         ignoreInitial: true
     }).on('all', function (event, path) {
         watcherLog(event, path);
-        gulp.start('css:compile-css');
+        tars.packages.gulp.start('css:compile-css');
 
         if (tars.flags.ie8) {
-            gulp.start('css:compile-css-for-ie8');
+            tars.packages.gulp.start('css:compile-css-for-ie8');
         }
     });
 };

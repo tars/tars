@@ -18,7 +18,6 @@ TARS – набор gulp-тасков, организованных особым
 var gulp = require('gulp');
 var notify = require('gulp-notify');
 var notifier = require('../helpers/notifier');
-var tarsConfig = require('../../tars-config');
 ```
 
 Также, если требуется использовать livereload для данного таска, подключаем модуль browserSync:
@@ -70,7 +69,6 @@ require('./ path to task file from current task');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var chokidar = require('chokidar');
-var tarsConfig = require('../../tars-config');
 var watcherLog = require('../helpers/watcher-log');
 ```
 
@@ -94,7 +92,7 @@ var watcherLog = require('../helpers/watcher-log');
 
 При добавлении вотчеров рекомендуется использовать переменные:
 
-* tarsConfig.fs.staticFolderName — для имени папки со статикой
-* tarsConfig.fs.imagesFolderName — для имени папки с изображениями
+* tars.config.fs.staticFolderName — для имени папки со статикой
+* tars.config.fs.imagesFolderName — для имени папки с изображениями
 * watchOptions.templateExtension – содержит расширение для файлов выбранного шаблонизатора
 * watchOptions.cssPreprocExtension – содержит расширение для файлов выбранного css-препроцессора

@@ -3,7 +3,6 @@
 var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var htmlMin = tars.packages.htmlMin;
-var tarsConfig = tars.config;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 
@@ -19,7 +18,7 @@ var opts = {
 module.exports = function () {
     return gulp.task('html:minify-html', function (cb) {
 
-        if (tarsConfig.minifyHtml) {
+        if (tars.config.minifyHtml) {
             return gulp.src('./dev/**/*.html')
                 .pipe(htmlMin(opts))
                 .on('error', notify.onError(function (error) {

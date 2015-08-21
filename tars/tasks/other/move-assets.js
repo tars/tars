@@ -5,7 +5,6 @@ var gulpif = tars.packages.gulpif;
 var cache = tars.packages.cache;
 var rename = tars.packages.rename;
 var path = require('path');
-var tarsConfig = tars.config;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
@@ -23,7 +22,7 @@ module.exports = function () {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving assets.\nLook in the console for details.\n' + error;
             }))
-            .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/' + tarsConfig.fs.imagesFolderName + '/assets/'))
+            .pipe(gulp.dest('./dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/assets/'))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Assets\'ve been moved')

@@ -1,7 +1,5 @@
 'use strict';
 
-var gulp = require('gulp');
-var tarsConfig = tars.config;
 var watcherLog = tars.helpers.watcherLog;
 
 /**
@@ -9,18 +7,18 @@ var watcherLog = tars.helpers.watcherLog;
  */
 module.exports = function () {
     return tars.packages.chokidar.watch([
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.' + tars.cssPreproc.ext,
-            'markup/' + tarsConfig.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.css'
+            'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.' + tars.cssPreproc.ext,
+            'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.css'
         ], {
             ignored: '',
             persistent: true,
             ignoreInitial: true
         }).on('all', function (event, path) {
             watcherLog(event, path);
-            gulp.start('css:compile-css');
+            tars.packages.gulp.start('css:compile-css');
 
             if (tars.flags.ie8) {
-                gulp.start('css:compile-css-for-ie8');
+                tars.packages.gulp.start('css:compile-css-for-ie8');
             }
         });
 };
