@@ -2,7 +2,11 @@
 
 var fs = require('fs');
 
-// Helper to load files from dir recursively and synchronously
+/**
+ * Load task and watchers
+ * @param  {String} dir directory with files
+ * @return {Array}      Path to dirs
+ */
 var loadJsFiles = function (dir) {
     var results = [],
         list = fs.readdirSync(dir);

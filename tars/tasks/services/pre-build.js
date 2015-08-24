@@ -12,13 +12,6 @@ var notifier = tars.helpers.notifier;
  */
 module.exports = function () {
     return gulp.task('service:pre-build', function () {
-
-        if (tars.config.useBuildVersioning) {
-            console.log('\n----------------------------------------------------------------------');
-            gutil.log(gutil.colors.magenta.bold('Build version is: ', tars.options.build.version));
-            console.log('----------------------------------------------------------------------\n');
-        }
-
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while running pre-build task.\nLook in the console for details.\n' + error;
