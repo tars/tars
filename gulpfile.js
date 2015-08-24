@@ -61,6 +61,8 @@ fileLoader('./tars/user-tasks').forEach(function (file) {
 // Also could tunnel your markup to web, if you use flag --tunnel
 gulp.task('dev', ['build-dev'], function () {
 
+    tars.options.notify = true;
+
     if (tars.flags.lr || tars.flags.tunnel) {
         gulp.start('browsersync');
     }
@@ -89,6 +91,8 @@ gulp.task('dev', ['build-dev'], function () {
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
 gulp.task('build-dev', function (cb) {
+    tars.options.notify = false;
+
     runSequence(
         'service:clean',
         ['images:minify-svg', 'images:raster-svg'],
@@ -112,6 +116,7 @@ gulp.task('build-dev', function (cb) {
 // Build release version
 // Also you can add your own tasks in queue of build task
 gulp.task('build', function () {
+
     runSequence(
         'build-dev',
         [
@@ -124,7 +129,11 @@ gulp.task('build', function () {
         'service:zip-build',
         function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
-            gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
+            tars.say(gutil.colors.green('✔') + gutil.colors.green.bold(' Release version has been created successfully!'));
+
+            if (tars.config.useBuildVersioning) {
+                tars.say(gutil.colors.white.bold('Build version is: ', tars.options.build.version));
+            }
             console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
         }
     );
@@ -201,7 +210,8 @@ gulp.task('compile-templates-with-data-reloading', function (cb) {
     runSequence(
         'html:concat-modules-data',
         'html:compile-templates',
-    cb);
+        cb
+    );
 });
 
 /*********************/

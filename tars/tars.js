@@ -24,6 +24,7 @@ global.tars = {
 };
 
 var gutil = tars.require('gulp-util');
+var os = require('os');
 var tarsConfig = require('../tars-config');
 var templaterName;
 var templaterExtension = 'jade';
@@ -53,6 +54,14 @@ tars.config = tarsConfig;
 // Flags
 tars.flags = gutil.env;
 
+tars.say = function say(message) {
+    if (os.platform() === 'darwin') {
+        console.log(gutil.colors.cyan.bold('🅃 🄰 🅁 🅂 : ') + gutil.colors.white.bold(message));
+    } else {
+        console.log(gutil.colors.cyan.bold('[ TARS ]: ') + gutil.colors.white.bold(message));
+    }
+};
+
 // Generate start screen
 require('./helpers/start-screen-generator')(gutil);
 
@@ -81,11 +90,12 @@ tars.packages = {
     mkdirp: tars.require('mkdirp'),
     ncp: tars.require('ncp'),
     notify: tars.require('gulp-notify'),
+    plumber: tars.require('gulp-plumber'),
     rename: tars.require('gulp-rename'),
     replace: tars.require('gulp-replace-task'),
     runSequence: tars.require('run-sequence'),
     sass: tars.require('gulp-sass'),
-    sourcemaps: tars.require('gulp-sourcemaps');
+    sourcemaps: tars.require('gulp-sourcemaps'),
     spritesmith: tars.require('gulp.spritesmith'),
     stripDebug: tars.require('gulp-strip-debug'),
     svg2png: tars.require('gulp-svg2png'),
@@ -129,6 +139,7 @@ tars.cssPreproc = {
 
 // Build options
 tars.options = {
+    notify: true,
     build: {
         hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
         path: buildOptions.buildPath,

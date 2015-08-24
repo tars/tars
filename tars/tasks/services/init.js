@@ -37,19 +37,29 @@ module.exports = function () {
         downloadCssPreprocessorTest = new Download({ mode: '755' })
             .get(cssPreprocessorUrl);
 
-        if (os.platform() === 'darwin') {
-            console.log('\n\n' + gutil.colors.bold('🅃 🄰 🅁 🅂\n'));
-        } else {
-            console.log('\n\n' + gutil.colors.bold('T A R S\n'));
-        }
-        console.log(gutil.colors.magenta.bold('Hi, I\'m TARS. I will help you to make awesome markup!\n\n'));
-        console.log('You could find more info about me at https://github.com/tars/tars/blob/master/README.md');
+        console.log('\n');
 
         if (tars.cli) {
-            console.log('Execute ' + gutil.colors.cyan('"tars --help"') + ' to see all avalible options and commands.\n');
-            console.log('Start your work with "tars dev".\n\n');
+            tars.say('It\'s almost ready!');
         } else {
-            console.log('\nStart your work with "gulp dev".\n\n');
+            tars.say('Hi!');
+            tars.say('Let\'s create awesome markup!');
+        }
+
+        tars.say('You can find more info about TARS at ' + gutil.colors.cyan('"https://github.com/tars/tars/blob/master/README.md"'));
+
+        if (tars.cli) {
+            tars.say('Run the command ' + gutil.colors.cyan('"tars --help"') + ' to see all avalible options and commands.');
+            tars.say('Start your work with ' + gutil.colors.cyan('"tars dev"') + '.');
+        } else {
+            console.log('\n');
+            tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
+            tars.say(gutil.colors.red.bold('This mode is depricated for developing.'));
+            tars.say(gutil.colors.red.bold('Please, do not use "dev" tasks in with mode.\n'));
+            tars.say('Install tars-cli for developing.');
+            tars.say('Run the command ' + gutil.colors.cyan('"npm i -g tars-cli"') + ', to install tars-cli.');
+            tars.say('More info: https://github.com/tars/tars-cli.');
+            console.log('\n\n');
         }
 
         downloadTemplaterTest.run(function (err, files) {
@@ -76,17 +86,17 @@ module.exports = function () {
 
                 ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/markup', './markup', function (err) {
                     if (err) {
-                        gutil.log(gutil.colors.red(err));
-                        gutil.log(gutil.colors.red('x'), ' Error while copy markup templater');
-                        gutil.log('Please, repost with message to developer.');
+                        tars.say(gutil.colors.red(err));
+                        tars.say(gutil.colors.red('x') + ' Error while copy markup templater');
+                        tars.say('Please, repost with message to developer.');
                         return;
                     }
                 });
 
                 ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
                     if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy tars templater task');
-                        gutil.log('Please, repost with message to developer.');
+                        tars.say(gutil.colors.red('x') + ' Error while copy tars templater task');
+                        tars.say('Please, repost with message to developer.');
                         return;
                     }
                 });
@@ -117,33 +127,33 @@ module.exports = function () {
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/tars/tasks', './tars/tasks/css', function (err) {
                     if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy tars css preproc task');
-                        gutil.log('Please, repost with message to developer.');
+                        tars.say(gutil.colors.red('x') + ' Error while copy tars css preproc task');
+                        tars.say('Please, repost with message to developer.');
                         return;
                     }
                 });
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tars.config.fs.staticFolderName, function (err) {
                     if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy static for css preproc :(');
-                        gutil.log('Please, repost with message to developer.');
+                        tars.say(gutil.colors.red('x') + ' Error while copy static for css preproc :(');
+                        tars.say('Please, repost with message to developer.');
                         return;
                     }
                 });
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/modules/_template', './markup/modules/_template/', function (err) {
                     if (err) {
-                        gutil.log(gutil.colors.red('x'), ' Error while copy modules for css preproc');
-                        gutil.log('Please, repost with message to developer.');
+                        tars.say(gutil.colors.red('x') + ' Error while copy modules for css preproc');
+                        tars.say('Please, repost with message to developer.');
                         return;
                     }
 
-                    console.log(gutil.colors.black.bold('\n---------------------------------------------------'));
-                    console.log(gutil.colors.green.bold('TARS have been inited successfully!\n'));
-                    console.log('You choose:');
-                    console.log(gutil.colors.magenta.bold(tars.config.cssPreprocessor), ' as css-preprocessor');
-                    console.log(gutil.colors.magenta.bold(templaterName), ' as templater\n');
-                    console.log(gutil.colors.black.bold('---------------------------------------------------\n'));
+                    console.log(gutil.colors.black.bold('\n--------------------------------------------------------'));
+                    tars.say(gutil.colors.green.bold('TARS has been inited successfully!\n'));
+                    tars.say('You choosed:');
+                    tars.say(gutil.colors.cyan.bold(tars.config.cssPreprocessor) + ' as css-preprocessor');
+                    tars.say(gutil.colors.cyan.bold(templaterName) + ' as templater\n');
+                    console.log(gutil.colors.black.bold('--------------------------------------------------------\n'));
                 });
             });
         });
