@@ -8,19 +8,10 @@ var watcherLog = require('../../helpers/watcher-log');
  * @param  {Object} watchOptions
  */
 module.exports = function (watchOptions) {
-    var pagesToWatch = 'markup/pages/**/*.';
-    var moduelsToWatch = 'markup/modules/**/*.';
-    var filesToWatch = [];
-    var templateExtension = watchOptions.templateExtension;
-
-    templateExtension.forEach(function (item) {
-        filesToWatch.push(
-            pagesToWatch + item,
-            moduelsToWatch + item
-        );
-    });
-
-    return chokidar.watch(filesToWatch, {
+    return chokidar.watch([
+            'markup/pages/**/*.' + watchOptions.templateExtension,
+            'markup/modules/**/*.' + watchOptions.templateExtension
+        ], {
             ignored: '',
             persistent: true,
             ignoreInitial: true

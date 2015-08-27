@@ -25,16 +25,6 @@ var useLiveReload = gutil.env.lr || false,
     watchers = [],
     userWatchers = [];
 
-
-// Seting build options
-buildOptions.isRelease = gutil.env.release;
-buildOptions.generateSourceMaps = function(o) {
-    var baseCondition = !o.isRelease;
-    return {
-        js: tarsConfig.sourcemaps.js && baseCondition
-    };
-}(buildOptions);
-
 // Generate build version
 if (tarsConfig.useBuildVersioning) {
     buildOptions.buildVersion = require('./tars/helpers/set-build-version')();
@@ -46,16 +36,16 @@ if (tarsConfig.useBuildVersioning) {
 
 // Set template's extension
 if (templaterName === 'handlebars') {
-    templateExtension = ['html', 'hbs'];
+    templateExtension = 'html';
 } else {
-    templateExtension = ['jade'];
+    templateExtension = 'jade';
 }
 
 if (cssPreprocExtension === 'stylus') {
     cssPreprocExtension = 'styl';
 }
 
-if (buildOptions.isRelease) {
+if (gutil.env.release) {
     buildOptions.hash = Math.random().toString(36).substring(7);
 } else {
     buildOptions.hash = '';
@@ -183,15 +173,15 @@ gulp.task('build-dev', function (cb) {
 // Build release version
 // Also you can add your own tasks in queue of build task
 gulp.task('build', function () {
-    buildOptions.compressJs = true;
-
     runSequence(
         'build-dev',
         [
             'html:minify-html', 'images:minify-raster-img'
         ],
         'service:pre-build',
-        'css:compress-css',
+        [
+            'js:compress', 'css:compress-css'
+        ],
         'service:zip-build',
         function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
@@ -227,8 +217,7 @@ gulp.task('browsersync', function (cb) {
     // Serve files and connect browsers
     browserSync({
         server: {
-            baseDir: browserSyncConfig.baseDir,
-            directory: true
+            baseDir: browserSyncConfig.baseDir
         },
         logConnections: true,
         debugInfo: true,
@@ -238,8 +227,7 @@ gulp.task('browsersync', function (cb) {
         browser: browserSyncConfig.browser,
         startPath: browserSyncConfig.startUrl,
         notify: browserSyncConfig.useNotifyInBrowser,
-        tunnel: useTunnelToWeb,
-        reloadOnRestart: true
+        tunnel: useTunnelToWeb
     });
 
     cb(null);

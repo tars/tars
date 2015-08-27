@@ -26,8 +26,7 @@
     "gulp-svg2png": "0.3.0",
     "gulp-svg-spritesheet": "git://github.com/artem-malko/gulp-svg-spritesheet.git#877e77bb8f098c0922c530267ee3bb3439ce6049",
     "gulp-strip-debug": "1.0.2",
-    "gulp-sourcemaps": "1.5.2",
-    "gulp-uglify": "1.2.0",
+    "gulp-uglifyjs": "0.6.0",
     "gulp-jscs": "1.4.0",
     "gulp-jshint": "1.9.2",
     "gulp-notify": "2.2.0",
@@ -35,7 +34,7 @@
     "gulp-changed": "1.1.1",
     "gulp-replace-task": "0.1.0",
     "gulp-plumber": "0.6.6",
-    "browser-sync": "2.7.13",
+    "browser-sync": "2.2.1",
     "chokidar": "1.0.0-rc4",
     "del": "1.1.1",
     "download": "4.1.4",
@@ -43,9 +42,7 @@
     "mkdirp": "0.5.0",
     "ncp": "2.0.0",
     "run-sequence": "1.0.2",
-    "stream-combiner": "0.2.2",
-    "through2": "0.6.3",
-    "phantomjssmith": "0.6.0"
+    "through2": "0.6.3"
   },
   "devDependencies": {},
   "scripts": {
