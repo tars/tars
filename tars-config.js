@@ -51,6 +51,14 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
+     * Write source maps
+     * @type {Object}
+     */
+    sourcemaps: {
+        js: true
+    },
+
+    /**
      * Config for Notify module
      * @type {Object}
      */
@@ -118,9 +126,9 @@ var tarsConfig = {
          * Choose browser to open
          * @type {String|Array}
          * Example: ['google chrome', 'firefox']
-         * Avalible: safari, internet explorer, google chrome, firefox, opera
+         * Avalible: default, safari, internet explorer, google chrome, firefox, opera
          */
-        browser: 'google chrome',
+        browser: 'default',
 
         /**
          * Choose the page to open in browser at first opening
