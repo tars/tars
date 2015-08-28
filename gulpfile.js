@@ -127,7 +127,7 @@ gulp.task('build', function () {
         'service:zip-build',
         function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
-            tars.say(gutil.colors.green('✔') + gutil.colors.green.bold(' Release version has been created successfully!'));
+            tars.say(gutil.colors.green('✔') + gutil.colors.green.bold(' Build has been created successfully!'));
 
             if (tars.config.useBuildVersioning) {
                 tars.say(gutil.colors.white.bold('Build version is: ', tars.options.build.version));

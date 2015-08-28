@@ -15,7 +15,7 @@ var browserSync = tars.packages.browserSync;
 
 var staticFolderName = tars.config.fs.staticFolderName;
 var destFolder = './dev/' + staticFolderName + '/js';
-var compressJs = tars.flags.release && tars.flags.min;
+var compressJs = tars.flags.release || tars.flags.min;
 var generateSourceMaps = tars.config.sourcemaps.js && !tars.flags.release;
 var jsPaths = [
         '!./markup/modules/**/data/data.js',
