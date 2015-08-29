@@ -1,0 +1,36 @@
+# AppVeyor file
+# http://www.appveyor.com/docs/appveyor-yml
+
+# Build version format
+version: "{build}"
+
+clone_depth: 10
+
+# Fix line endings on Windows
+init:
+  - git config --global core.autocrlf true
+
+# What combinations to test
+environment:
+  matrix:
+    - nodejs_version: 0.10
+    - nodejs_version: 0.12
+    - nodejs_version: 1
+
+install:
+  - cmd: npm install -g gulp
+  - cmd: npm install
+
+build:
+  - cmd: gulp init
+
+test_script:
+  - cmd: gulp build --release --ie8
+
+matrix:
+  fast_finish: true
+
+cache:
+  - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
+  - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json         # npm cache
+  - node_modules -> package.json                                        # local npm modules
