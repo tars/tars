@@ -17,6 +17,14 @@ function tarsRequire(packageName) {
     }
 }
 
+/**
+ * Check operation system name
+ * @return {Boolean}
+ */
+function isWindows() {
+    return (/^win/i).test(os.platform());
+}
+
 // TARS is a global var
 global.tars = {
     require: tarsRequire,
