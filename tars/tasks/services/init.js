@@ -20,6 +20,11 @@ ncp.limit = 16;
 
 require('./create-fs')();
 
+function logError(message) {
+    tars.say(gutil.colors.red('x') + ' ' + message);
+    tars.say('Please, repost with message to developer tars.builder@gmail.com');
+}
+
 /**
  * Init builder, download css-preprocessor and templater
  */
@@ -37,11 +42,11 @@ module.exports = function () {
         downloadCssPreprocessorTest = new Download({ mode: '755' })
             .get(cssPreprocessorUrl);
 
-        console.log('\n');
 
         if (tars.cli) {
             tars.say('It\'s almost ready!');
         } else {
+            console.log('\n');
             tars.say('Hi!');
             tars.say('Let\'s create awesome markup!');
         }
@@ -86,17 +91,14 @@ module.exports = function () {
 
                 ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/markup', './markup', function (err) {
                     if (err) {
-                        tars.say(gutil.colors.red(err));
-                        tars.say(gutil.colors.red('x') + ' Error while copy markup templater');
-                        tars.say('Please, repost with message to developer.');
+                        logError('Error while copy markup templater');
                         return;
                     }
                 });
 
                 ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
                     if (err) {
-                        tars.say(gutil.colors.red('x') + ' Error while copy tars templater task');
-                        tars.say('Please, repost with message to developer.');
+                        logError('Error while copy tars templater task');
                         return;
                     }
                 });
@@ -127,24 +129,21 @@ module.exports = function () {
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/tars/tasks', './tars/tasks/css', function (err) {
                     if (err) {
-                        tars.say(gutil.colors.red('x') + ' Error while copy tars css preproc task');
-                        tars.say('Please, repost with message to developer.');
+                        logError('Error while copy tars css preproc task');
                         return;
                     }
                 });
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tars.config.fs.staticFolderName, function (err) {
                     if (err) {
-                        tars.say(gutil.colors.red('x') + ' Error while copy static for css preproc :(');
-                        tars.say('Please, repost with message to developer.');
+                        logError('Error while copy static for css preproc :(');
                         return;
                     }
                 });
 
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/modules/_template', './markup/modules/_template/', function (err) {
                     if (err) {
-                        tars.say(gutil.colors.red('x') + ' Error while copy modules for css preproc');
-                        tars.say('Please, repost with message to developer.');
+                        logError('Error while copy modules for css preproc');
                         return;
                     }
 
