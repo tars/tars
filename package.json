@@ -56,14 +56,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/2gis/tars.git"
+    "url": "https://github.com/tars/tars.git"
   },
   "author": "Artem Malko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/2gis/tars/issues"
+    "url": "https://github.com/tars/tars/issues"
   },
-  "homepage": "https://github.com/2gis/tars",
+  "homepage": "https://github.com/tars/tars",
   "keywords": [
     "gulp",
     "makeup",

@@ -11,7 +11,7 @@ var githubConfig = {
     user: 'tars',
     repoPrefix: 'tars-'
 };
-var templaterVersion = (process.env.tarsVersion ? 'version-' + process.env.tarsVersion : 'version-' + require('../../../package.json').version);
+var templaterVersion = (process.env.tarsVersion ? 'version-' + process.env.tarsVersion : 'version-' + require('../../../tars.json').version);
 var cssVersion = templaterVersion;
 var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName + '/archive/' + templaterVersion + '.zip';
 var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tars.config.cssPreprocessor + '/archive/' + cssVersion + '.zip';
