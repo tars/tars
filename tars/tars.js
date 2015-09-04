@@ -76,7 +76,7 @@ require('./helpers/start-screen-generator')(gutil);
 // Required packages
 tars.packages = {
     addsrc: tars.require('gulp-add-src'),
-    autoprefixer: tars.require('gulp-autoprefixer'),
+    autoprefixer: tars.require('autoprefixer'),
     browserSync: tars.require('browser-sync'),
     cache: tars.require('gulp-cached'),
     changed: tars.require('gulp-changed'),
@@ -102,6 +102,8 @@ tars.packages = {
     ncp: tars.require('ncp'),
     notify: tars.require('gulp-notify'),
     plumber: tars.require('gulp-plumber'),
+    postcss: tars.require('gulp-postcss'),
+    promisePolyfill: tars.require('es6-promise'),
     rename: tars.require('gulp-rename'),
     replace: tars.require('gulp-replace-task'),
     runSequence: tars.require('run-sequence'),

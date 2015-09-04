@@ -7,7 +7,7 @@ module.exports = function (gutil) {
     var currentCommand = process.argv.slice(2)[0];
 
     // Do not show if command was init, re-init or update-deps
-    if (currentCommand === 'init' || currentCommand === 're-init' || currentCommand === 'update-deps') {
+    if (!currentCommand || currentCommand === 'init' || currentCommand === 're-init' || currentCommand === 'update-deps') {
         return;
     }
 

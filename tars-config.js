@@ -14,6 +14,12 @@ var tarsConfig = {
     autoprefixerConfig: ['> 1%', 'last 2 versions', 'opera 12.1', 'android 4'],
 
     /**
+     * Postprocessors for TARS
+     * @type {Array}
+     */
+    postprocessors: [],
+
+    /**
      * Use svg images
      * @type {Boolean}
      */
