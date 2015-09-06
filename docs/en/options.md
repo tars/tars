@@ -17,6 +17,14 @@ In this configuration you do not need to include ie8 and ie9, for them style ass
 You can look [here](https://github.com/postcss/autoprefixer#browsers) which browsers are available.
 If you do not want to use autoprefixer, pass in this option 'false' value.
 
+### postprocessors
+
+Type: `Array`
+
+Default: `[]`
+
+You can add used postprocessors here. Also, you have to require used postprocessor in compile-css and compile-css-for-ie8 (if you need build for ie8).
+
 ### useSVG
 
 Type: `Boolean`
@@ -44,6 +52,16 @@ By default, all js-code of the project is built in one file except js-files, whi
 It will be useful for when building a site on js-framework, with any its entities (controller, router, etc.). You do not need to go into tasks, just create a separate directory and specify for which files you want to watch.
 
 Also you can disable jscs and hinting at these files (lintJsCodeBeforeModules and lintJsCodeAfterModules options).
+
+### sourcemaps
+
+Type: `Object`
+
+Default: `{`
+    `js: true`
+`}`
+
+Config for sourcemaps. Sourcemaps for js work only in dev and min mode.
 
 ### notifyConfig
 

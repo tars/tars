@@ -13,7 +13,9 @@ TARS is the framework for gulp, including a set of gulp-tasks and it allows the 
 
 TARS provides comfortable architecture for storage tasks and watchers in the project. 
 
-It is not a npm-package. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves.
+There is TARS-CLI in order to not install all dependencies all the time, when you are installing TARS. So, TARS is not a npm-package by itself. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves. CLI — just simple interface for builder, which includes all dependencies for TARS. You must use TARS-CLI for developing from with moment.
+
+You can install TARS-CLI via NPM. More info is here.
 
 
 ## Basic features
@@ -34,7 +36,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 
 ## Installation
 
-You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.8 or more. Next you need to install gulp globally. (You may need rights of superuser or administrator).
+You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.10 or more. Next you need to install gulp globally. (You may need rights of superuser or administrator).
 
 ```shell
 npm install -g gulp
@@ -106,6 +108,6 @@ It is important! All examples in documentation use the default settings.
 
 All recent changes are available at the link: [changelog](/docs/en/changelog.md).
 
-If you have a question you can write in [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [artem.malko@gmail.com](mailto:artem.malko@gmail.com)
+If you have a question you can write in [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [tars.builder@gmail.com](mailto:tars.builder@gmail.com)
 
 Bugs and feature-request here: [issues](https://github.com/2gis/tars/issues/new).

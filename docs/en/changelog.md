@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 1.3.0
+
+* Sourcempas for js has been added. So, you can see file name from sources and path to with filename.
+* PostCSS has been added. You can add postprocessors, but you can't use PostCSS without pre-processors.
+* Notification is disabled while build process. You will see it only in that  moment, when you need it.
+* Add .hbs extension support.
+* Padding between images in raster-sprite has been added.
+* Main pages and modules have been refactored.
+* Browser-sync will open default browser in OS, if there is no any other instructions in tars-config.
+* New entity has been added.
+* TARS-CLI has been created.
+* Fixed bugs.
+
 ## Version 1.2.7
 
 * Fixed bug with gulp-svg-spritesheet.
