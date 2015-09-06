@@ -116,7 +116,6 @@ gulp.task('build-dev', function (cb) {
 // Build release version
 // Also you can add your own tasks in queue of build task
 gulp.task('build', function () {
-
     runSequence(
         'build-dev',
         [
@@ -124,7 +123,7 @@ gulp.task('build', function () {
         ],
         'service:pre-build',
         [
-            'js:compress', 'css:compress-css'
+            'css:compress-css'
         ],
         'service:zip-build',
         function () {

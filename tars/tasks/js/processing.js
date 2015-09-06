@@ -27,21 +27,7 @@ var jsPaths = [
         tars.config.jsPathsToConcatAfterModulesJs
     ];
 
-if (tarsConfig.jsPathsToConcatBeforeModulesJs.length) {
-    tarsConfig.jsPathsToConcatBeforeModulesJs.forEach(function (path) {
-        jsPaths.push(path);
-    });
-}
-
-jsPaths.push('./markup/modules/*/*.js');
-
-if (tarsConfig.jsPathsToConcatAfterModulesJs.length) {
-    tarsConfig.jsPathsToConcatAfterModulesJs.forEach(function (path) {
-        jsPaths.push(path);
-    });
-}
-
-jsPaths.push('!./markup/modules/**/data/data.js');
+jsPaths = [].concat.apply([], jsPaths);
 
 /**
  * Stream of base processing with JavaScript.
