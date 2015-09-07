@@ -4,7 +4,7 @@ English description | <a href="README_RU.md">Описание на русско�
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Build Status](https://travis-ci.org/tars/tars.svg?branch=master)](https://travis-ci.org/tars/tars) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/t5ssp1895csdnf7a/branch/master?svg=true)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Build Status](https://travis-ci.org/tars/tars.svg?branch=master)](https://travis-ci.org/tars/tars) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
 TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work.
