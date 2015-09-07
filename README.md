@@ -13,9 +13,9 @@ TARS is the framework for gulp, including a set of gulp-tasks and it allows the 
 
 TARS provides comfortable architecture for storage tasks and watchers in the project. 
 
-There is TARS-CLI in order to not install all dependencies all the time, when you are installing TARS. So, TARS is not a npm-package by itself. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves. CLI — just simple interface for builder, which includes all dependencies for TARS. You must use TARS-CLI for developing from with moment.
+There is [TARS-CLI](https://github.com/tars/tars-cli) in order to not install all dependencies all the time, when you are installing TARS. So, TARS is not a npm-package by itself. This decision was decided so that everyone can customize the builder as comfortable as possible for themselves. CLI — just simple interface for builder, which includes all dependencies for TARS. You must use TARS-CLI for developing from with moment.
 
-You can install TARS-CLI via NPM. More info is here.
+You can install TARS-CLI via NPM. More info in [project's repository](https://github.com/tars/tars-cli).
 
 
 ## Basic features
