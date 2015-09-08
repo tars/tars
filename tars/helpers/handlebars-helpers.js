@@ -1,7 +1,7 @@
 'use strict';
 
-var Handlebars = tars.handlebars;
-var digits = tars.digits;
+var Handlebars = tars.packages.handlebars;
+var digits = tars.packages.digits;
 
 var helpers = {
     /**
