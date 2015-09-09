@@ -22,13 +22,28 @@ Default: `['> 1%', 'last 2 versions', 'opera 12.1', 'android 4']`
 
 Если вы не хотите использовать автопрефиксер, то передайте в данную опцию false.
 
-### postprocessors
+### postcss
 
 Type: `Array`
 
 Default: `[]`
 
-Здесь можно перечислить используемые постпроцессоры. Постпроцессоры также необходимо будет подключить (require) в тасках compile-css и compile-css-for-ie8 (если необходима сборка для ie8).
+Example: 
+````javascript
+postcss: [
+        {
+            name: 'postcss-short',
+            options: {
+                deny: ['text']
+            }
+        }, {
+            name: 'postcss-size',
+            options: {}
+        }
+    ]
+````
+
+Здесь можно перечислить используемые постпроцессоры. Обязательно выполните установку используемых постпроцессоров.
 
 ### useSVG
 

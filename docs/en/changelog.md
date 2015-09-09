@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.3.1
+
+* Fix config for postcss. You do not need to require packages by yourself. You just write them to config and it just works. But don't forget to install all used postprocessors.
+
 ## Version 1.3.0
 
 * Sourcempas for js has been added. So, you can see file name from sources and path to with filename.

@@ -17,13 +17,28 @@ In this configuration you do not need to include ie8 and ie9, for them style ass
 You can look [here](https://github.com/postcss/autoprefixer#browsers) which browsers are available.
 If you do not want to use autoprefixer, pass in this option 'false' value.
 
-### postprocessors
+### postcss
 
 Type: `Array`
 
 Default: `[]`
 
-You can add used postprocessors here. Also, you have to require used postprocessor in compile-css and compile-css-for-ie8 (if you need build for ie8).
+Example: 
+````javascript
+postcss: [
+        {
+            name: 'postcss-short',
+            options: {
+                deny: ['text']
+            }
+        }, {
+            name: 'postcss-size',
+            options: {}
+        }
+    ]
+````
+
+Здесь можно перечислить используемые постпроцессоры. Do not forget to install them.
 
 ### useSVG
 
