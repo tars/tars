@@ -16,8 +16,18 @@ var tarsConfig = {
     /**
      * Postprocessors for TARS
      * @type {Array}
+     * Example:
+     *
+     * postcss: [
+     *     {
+     *         name: 'postcss-short',
+     *         options: {
+     *             deny: ['text']
+     *         }
+     *     }
+     * ]
      */
-    postprocessors: [],
+    postcss: [],
 
     /**
      * Use svg images
