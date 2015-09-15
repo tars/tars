@@ -5,7 +5,7 @@
  */
 module.exports = function () {
     return tars.packages.chokidar.watch('markup/modules/**/assets/*.*', {
-        ignored: '',
+        ignored: 'markup/modules/**/assets/*.tmp',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
