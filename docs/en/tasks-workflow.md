@@ -7,15 +7,17 @@ All watchers for tasks are in the `tars/watchers`.
 ## Tasks
 
 Each task is a [commonJS-module](http://wiki.commonjs.org/wiki/Modules/1.1). All tasks are automatically included in gulpfile in the project root.
-Yours tasks you can create in the user-tasks directory. 
+Your own tasks you can create in the user-tasks directory. User-tasks will be included into gulpfile automatically too, but you have to write them into main-tasks, to use them. 
+
 By default, there is already an example of task. Let us examine it in detail. Let's take a closer look. 
 
 By default, each task requires a set of npm-modules and configs to work correctly:
 
 ```javascript
 var gulp = require('gulp');
-var notify = require('gulp-notify');
-var notifier = require('../helpers/notifier');
+var gutil = tars.packges.gutil;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 ```
 
 Also, if you want to use livereload for this task, you must to connect browser-sync module:
@@ -26,7 +28,7 @@ var browserSync = require('browser-sync');
 
 If you require any dependences, include them there. Dependencies, which are not in the main package.json, you can add to the `user-package.json`, which is at the root of the project. The format is the same as in the main package.json. This is very useful, when you upgrade tars dependencies by command `gulp update-deps`. Your dependencies in `user-package.json` will be not overwritten.
 
-!Do not put your own dependencies in package.json. Put them into user-package.json!
+!Do not put your own dependencies in package.json. Put them into user-package.json! There is only one exclusion — initialization via TARS-CLI. user-package.json won't be created, when you init your project via TARS-CLLI with usual archive with TARS (from current repository). You can use common package.json Also, you can [init TARS with TARS-CLI and your own zip-archive with TARS](https://github.com/tars/tars-cli#tars-init). If you need to use some additional packages and init project via TARS-CLI, you have to add them to user-package.json in your own TARS and all additional packages will be in package.json automatically.
 
 So, if there are dependencies from another tasks, require them to the current:
 
@@ -62,9 +64,9 @@ By default, each watcher requires a set of npm-modules and configs to work corre
 
 ```javascript
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var chokidar = require('chokidar');
-var watcherLog = require('../helpers/watcher-log');
+var gutil = tars.packges.gutil;
+var chokidar = tars.packages.chokidar;
+var watcherLog = tars.helpers.watcherLog;
 ```
 
 ```javascript

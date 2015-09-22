@@ -8,7 +8,7 @@ TARS – набор gulp-тасков, организованных особым
 
 ## Таски в TARS
 
-Каждый таск представляет из себя [commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). Все таски включаются в gulpfile в корне проекта автоматически.
+Каждый таск представляет из себя [commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). Все таски включаются в gulpfile в корне проекта автоматически. Пользовательские таски будут подключены в gulpfile также автоматически, но их необходимо включить в основные-таски в gulpfile, чтобы вы могли их использовать. 
 
 Свои таски можно создавать в директории user-tasks. По умолчанию там уже находится пример таска. Разберем его подробнее.
 
@@ -16,19 +16,20 @@ TARS – набор gulp-тасков, организованных особым
 
 ```javascript
 var gulp = require('gulp');
-var notify = require('gulp-notify');
-var notifier = require('../helpers/notifier');
+var gutil = tars.packges.gutil;
+var notify = tars.packages.notify;
+var notifier = tars.helpers.notifier;
 ```
 
 Также, если требуется использовать livereload для данного таска, подключаем модуль browserSync:
 
 ```javascript
-var browserSync = require('browser-sync');
+var browserSync = tars.packages.browserSync;
 ```
 
 Если требуются какие-либо еще зависимости, подключаем их тут же. При этом, зависимости, которых нет в основном package.json, можно занести в user-package.json, который находится в корне проекта. Формат такой же, как и у основного package.json Это сделано для того, чтобы при обновлении зависимостей tars командой `gulp update-deps` ваши зависимости не перетирались.
 
-!Не помещайте свои собственные зависимости в package.json. Помещайте их user-package.json!
+!Не помещайте свои собственные зависимости в package.json. Помещайте их user-package.json! Исключением здесь может быть использование TARS-CLI. При инициализации проекта с помощью TARS-CLI и стандартного архива с TARS (из текущего репозитория) user-package.json не создается в папке с проектом. Вместо него будет обычный package.json TARS-CLI позволяет [инициализировать TARS с помощью любого zip-архива с TARS](https://github.com/tars/tars-cli#tars-init). Если вам необходимо, чтобы в package.json уже были какие-либо пакеты, то в вашей собственной сборке TARS занесите все пользовательские зависимости в user-package.json и они автоматом окажутся в package.json при инициализации с помощью TARS-CLI.
 
 Далее, если есть зависимости от других тасков, то подключаем их в текущий:
 
@@ -54,7 +55,7 @@ require('./ path to task file from current task');
 
 Может показаться, что в некторых местах есть излишний код, есть обращения к файлам, а не потокам. Такие места есть, но это сделано в угоду модульности и легкой расширяемости. На самом деле, на скорость работы сборщика именно эти места не влияют.
 
-Вообще, в TARS можно подключить любой gulp-task.
+Вообще, в TARS можно подключить любой gulp-task. 
 
 
 ## Вотчеры в TARS
@@ -67,9 +68,9 @@ require('./ path to task file from current task');
 
 ```javascript
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var chokidar = require('chokidar');
-var watcherLog = require('../helpers/watcher-log');
+var gutil = tars.packges.gutil;
+var chokidar = tars.packages.chokidar;
+var watcherLog = tars.helpers.watcherLog;
 ```
 
 ```javascript

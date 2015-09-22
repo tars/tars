@@ -169,7 +169,7 @@ var helpers = {
             _data = Handlebars.createFrame(options._data);
         }
 
-        content = options.fn(this, { data: _data }).replace(/\s+/g, '');
+        content = options.fn(this, {data: _data}).replace(/>(\s+)</g, '');
 
         return new Handlebars.SafeString(content);
     }
