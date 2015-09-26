@@ -24,7 +24,8 @@ var jsPaths = [
         './markup/' + staticFolderName + '/js/plugins/**/*.js',
         tars.config.jsPathsToConcatBeforeModulesJs,
         './markup/modules/*/*.js',
-        tars.config.jsPathsToConcatAfterModulesJs
+        tars.config.jsPathsToConcatAfterModulesJs,
+        '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
     ];
 
 jsPaths = [].concat.apply([], jsPaths);
