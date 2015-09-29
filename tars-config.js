@@ -71,7 +71,8 @@ var tarsConfig = {
      * @type {Boolean}
      */
     sourcemaps: {
-        js: true
+        js: true,
+        css: true
     },
 
     /**
