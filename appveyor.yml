@@ -29,7 +29,4 @@ build_script:
   - gulp init
 
 test_script:
-  - cmd: gulp build --release --ie8
-
-matrix:
-  fast_finish: true
+  - cmd: gulp build --release --ie

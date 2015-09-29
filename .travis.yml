@@ -26,4 +26,4 @@ before_script:
   - gulp re-init
 
 script:
-  - gulp --release --ie8
+  - gulp --release --ie
