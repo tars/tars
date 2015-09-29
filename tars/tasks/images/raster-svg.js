@@ -15,7 +15,7 @@ var browserSync = tars.packages.browserSync;
 module.exports = function () {
     return gulp.task('images:raster-svg', function (cb) {
 
-        if (tars.config.useSVG && tars.flags.ie8) {
+        if (tars.config.useSVG && (tars.flags.ie8 || tars.flags.ie)) {
             return gulp.src('./markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/svg/*.svg')
                 .pipe(cache('raster-svg'))
                 .pipe(

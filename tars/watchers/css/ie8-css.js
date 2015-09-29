@@ -6,7 +6,7 @@ var watcherLog = tars.helpers.watcherLog;
  * Watcher for ie8 stylies
  */
 module.exports = function () {
-    if (tars.flags.ie8) {
+    if (tars.flags.ie8 || tars.flags.ie) {
         return tars.packages.chokidar.watch('markup/modules/**/ie8.' + tars.cssPreproc.ext, {
                     ignored: '',
                     persistent: true,

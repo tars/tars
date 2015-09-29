@@ -190,7 +190,7 @@ gulp.task('browsersync', function (cb) {
 /*****************/
 
 gulp.task('svg-actions', function (cb) {
-    if (tars.flags.ie8) {
+    if (tars.flags.ie8 || tars.flags.ie) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
             ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],
