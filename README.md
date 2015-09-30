@@ -68,7 +68,7 @@ Everything is ready, make it work! :)
 
 `gulp re-init` — reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options.
 
-`gulp` или `gulp build` — make project assembly. There not minimized files are connected. Type of assembly depends on the transmitted keys with this command. Available keys:
+`gulp` or `gulp build` — make project assembly. There not minimized files are connected. Type of assembly depends on the transmitted keys with this command. Available keys:
 
 * `--min` – minimized files connected to html.
 * `--release` – minimized  files connected to html whose names have hash. This mode is useful if you are directly trying to deploy ready markup to the server.
