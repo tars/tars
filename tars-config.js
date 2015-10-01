@@ -67,12 +67,21 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
-     * Write suorcemaps
-     * @type {Boolean}
+     * Write sourcemaps
+     * @type {Object}
+     *
+     * active – is sourcemaps active
+     * inline – use inline sourcemaps or in separate file
      */
     sourcemaps: {
-        js: true,
-        css: true
+        js: {
+            active: true,
+            inline: true
+        },
+        css: {
+            active: true,
+            inline: true
+        }
     },
 
     /**
@@ -105,7 +114,14 @@ var tarsConfig = {
              * @type {String, undefined}
              * For example 'Glass' in OS X
              */
-            onSuccess: undefined
+            onSuccess: undefined,
+
+            /**
+             * Sound after failed finishing of task
+             * @type {String, undefined}
+             * For example 'Glass' in OS X
+             */
+            onError: undefined
         },
 
         /**

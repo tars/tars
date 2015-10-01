@@ -35,7 +35,7 @@
     "gulp-replace-task": "0.2.3",
     "gulp-sass": "2.0.4",
     "gulp-strip-debug": "1.0.2",
-    "gulp-stylus": "2.0.6",
+    "gulp-stylus": "2.0.7",
     "gulp-svg-spritesheet": "git://github.com/artem-malko/gulp-svg-spritesheet.git#877e77bb8f098c0922c530267ee3bb3439ce6049",
     "gulp-svg2png": "0.3.0",
     "gulp-util": "3.0.6",
@@ -44,7 +44,7 @@
     "jshint-stylish": "2.0.1",
     "mkdirp": "0.5.1",
     "ncp": "2.0.0",
-    "stream-combiner": "0.2.2",
+    "stream-combiner2": "1.0.2",
     "run-sequence": "1.1.2",
     "through2": "2.0.0"
   },

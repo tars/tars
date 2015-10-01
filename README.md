@@ -24,8 +24,8 @@ Listed below are just a little part of the features. In fact builder has much mo
 
 * [Jade](http://jade-lang.com/) or [Handlebars](http://handlebarsjs.com/) as html-templater. You can also use a regular html. Read more [in docs](/docs/en/html-processing.md).
 * Using json (js-object actually, which can be described in json) to transfer data in templates (optional, but it is  very cool thing that will let you to rid of copypast). Read more [in docs](/docs/en/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
-* [SCSS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. You can also use a regular css. Read more [in docs](/docs/en/css-processing.md).
-* No external libraries and plugins (except [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). Yes, this is a feature because you can choose library for using.
+* [SCSS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. You can also use a regular css. Sourcemaps is included. Read more [in docs](/docs/en/css-processing.md).
+* No external libraries and plugins (except [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). Yes, this is a feature because you can choose library for using. Sourcemaps is included.
 * [Chokidar](https://github.com/paulmillr/chokidar) module is used for watching files
 * Sharing of markup from your local computer to an external web, optional. And of course it has a livereload in browser (and not just locally) + GUI to control panel for devices, on which markup was shearing.
 * You can easy add new tasks and watchers. There are examples of how to create and use a new task or watcher inside the TARS.
@@ -35,6 +35,9 @@ Listed below are just a little part of the features. In fact builder has much mo
 
 
 ## Installation
+
+**Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably
+ way to work with TARS. It is more comfortable, fast to work with TARS-CLI.**
 
 You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.10 or more. Next you need to install gulp globally. (You may need rights of superuser or administrator).
 
@@ -83,6 +86,8 @@ The link will be shown in the console. There also will be a link to control pane
 Keys are available in any mode of assembly:
 
 * `--ie8` – to include in the build styles for ie8.
+* `--ie9` – to include in the build styles for ie9.
+* `--ie` – to include in the build styles for ie8 and ie9.
 
 `gulp update-deps` – updates of all assembler dependences to the latest stable. It may take some time to execute this command. It is desirable to execute once a week. Command will copy the current package.json, add underline to its name, download a new package.json from the repository and execute npm install. So, if something was broken with the new package, you can always return to the last version, just rename last package.json. Also you can read a [upgrade guide](/docs/en/update-guide.md).
 

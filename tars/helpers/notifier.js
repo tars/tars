@@ -1,29 +1,73 @@
 'use strict';
 
+var notify = tars.packages.notify;
 var notifyConfig = tars.config.notifyConfig;
+var path = require('path');
 
 /**
  * Notify helper
- * @param  {String} message
- * @param  {Boolean} onLast Notify only on last action
- * @return {Pipe}
  */
-module.exports = function (message, onLast) {
-    var resultMessage = message + '\n' || 'Task\'ve been finished\n';
+module.exports = {
+    /**
+     * On error notifier
+     * @param  {String} message Error message
+     * @param  {Error} error    Error object
+     * @return {Pipe}
+     */
+    error: function (message, error) {
 
-    resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
+        var resultMessage;
 
-    if (notifyConfig.useNotify && tars.options.notify) {
-        return tars.packages.notify({
-            onLast: onLast || true,
-            sound: notifyConfig.sounds.onSuccess,
-            title: notifyConfig.title,
-            message: resultMessage,
-            templateOptions: {
-                date: tars.helpers.dateFormatter.getTimeOfModify()
-            }
-        });
-    } else {
-        return tars.packages.gutil.noop();
+        if (message) {
+            resultMessage = '\n' + message + '\nLook in the console for details.\n\n';
+        } else {
+            resultMessage =  '\nSomething is happen while working.\nLook in the console for details.\n\n';
+        }
+
+        if (error) {
+            resultMessage += error;
+        } else {
+            error = new Error();
+        }
+
+        if (notifyConfig.useNotify && tars.options.notify) {
+            return notify.onError({
+                sound: notifyConfig.sounds.onError,
+                title: notifyConfig.title,
+                message: resultMessage,
+                icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars_error.png')),
+                onLast: true
+            })(error);
+        } else {
+            console.error(resultMessage);
+            return tars.packages.gutil.noop();
+        }
+    },
+
+    /**
+     * On success notifier
+     * @param  {String}  message  Success message
+     * @param  {Boolean} onLast   Use notify only on last changed file
+     * @return {Pipe}
+     */
+    success: function (message, onLast) {
+        var resultMessage = message + '\n' || 'Task\'ve been finished\n';
+
+        resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
+
+        if (notifyConfig.useNotify && tars.options.notify) {
+            return notify({
+                onLast: onLast || true,
+                sound: notifyConfig.sounds.onSuccess,
+                title: notifyConfig.title,
+                message: resultMessage,
+                templateOptions: {
+                    date: tars.helpers.dateFormatter.getTimeOfModify()
+                },
+                icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars.png'))
+            });
+        } else {
+            return tars.packages.gutil.noop();
+        }
     }
 };
