@@ -43,6 +43,8 @@ var buildOptions = {};
 
 if (cssPreprocName === 'stylus') {
     cssPreprocExtension = 'styl';
+} else if (cssPreprocName === 'scss') {
+    cssPreprocExtension = '{scss,sass}';
 }
 
 // Generate build version
