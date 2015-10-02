@@ -68,6 +68,14 @@ It will be useful for when building a site on js-framework, with any its entitie
 
 Also you can disable jscs and hinting at these files (lintJsCodeBeforeModules and lintJsCodeAfterModules options).
 
+### useBabel
+
+Type: `Boolean`
+
+Default: `true`
+
+This option allow to use [Babel](https://babeljs.io/) for ES6(ES7) syntax support. Config for Babel is in project root, in .babelrc. See the [babel options](https://babeljs.io/docs/usage/options/), except for sourceMap and filename which is handled for you. you can manage with sourcemaps from [builder-config](#sourcemaps).
+
 ### sourcemaps
 
 Type: `Object`

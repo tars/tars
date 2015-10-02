@@ -7,10 +7,13 @@ var uglify = tars.packages.uglify;
 var plumber = tars.packages.plumber;
 var gulpif = tars.packages.gulpif;
 var rename = tars.packages.rename;
+var babel = tars.packages.babel;
 var stripDebug = tars.packages.stripDebug;
 var sourcemaps = tars.packages.sourcemaps;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
+var cwd = process.cwd();
+var path = require('path');
 
 var staticFolderName = tars.config.fs.staticFolderName;
 var destFolder = './dev/' + staticFolderName + '/js';
@@ -43,7 +46,11 @@ jsPaths = [].concat.apply([], jsPaths);
  */
 function base () {
     return streamCombiner.obj([
-        concat({cwd: process.cwd(), path: 'main.js'}),
+        gulpif(tars.config.useBabel, babel({
+                babelrc: path.resolve(cwd + '/.babelrc')
+            })
+        ),
+        concat({cwd: cwd, path: 'main.js'}),
         rename({ suffix: tars.options.build.hash }),
         gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
@@ -85,7 +92,7 @@ module.exports = function () {
      *  - reloading browser's page.
      */
     return gulp.task('js:processing', ['js:check'], function () {
-        return gulp.src(jsPaths, { base: process.cwd() })
+        return gulp.src(jsPaths, { base: cwd })
             .pipe(plumber({
                 errorHandler: function (error) {
                     notifier.error('An error occurred while processing js-files.', error);

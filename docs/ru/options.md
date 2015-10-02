@@ -73,6 +73,14 @@ Default: `[]`
 
 Также есть возможность отключить linting и hinting в этих файлах (опции `lintJsCodeBeforeModules` и `lintJsCodeAfterModules`).
 
+### useBabel
+
+Type: `Boolean`
+
+Default: `true`
+
+Данная опция позволяет использовать [Babel](https://babeljs.io/) для поддержки ES6(ES7) синтаксиса. Конфиг для babel находит в корне проекта, в файле .babelrc. С доступными опциями .babelc можно ознакомится на [официальном сайте](https://babeljs.io/docs/usage/options/). Вам не нужно задавать опции 'filename' и все что связанно с 'sourcemaps', так как эти оцпии уже заданы в сборщике. Sourcemaps вы можете управлять через опцию в [конфиге сборщика](#sourcemaps).
+
 ### sourcemaps
 
 Type: `Object`

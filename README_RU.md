@@ -23,6 +23,7 @@ TARS предоставляет удобную архитектуру хране
 
 * [Jade](http://jade-lang.com/) или [Handlebars](http://handlebarsjs.com/) на выбор в качестве html-шаблонизатора. Также можно использовать обычный html. Подробности [здесь](/docs/ru/html-processing.md).
 * Использование json (а точнее js-объекта, который может быть описан в json) для передачи данных в шаблоны (опционально, но очень крутая штука, которая позволит избавиться от копипаста). Подробнее [тут](/docs/ru/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
+* Вы можете ипользовать ES6 (и некоторые фичи из ES7) уже сегодня. Подробнее в [документации](/docs/ru/js-processing.md).
 * [SCSS, SASS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) или [Stylus](http://learnboost.github.io/stylus/) в качестве препроцессора для css. Также в комплекте идет небольшой набор миксинов. Также можно использовать обычный css. Доступны sourcemaps. При выборе scss в качестве препроцессора, вы можете использовать как расширение scss, так и sass + можете миксовать их использование. Подробности [здесь](/docs/ru/css-processing.md).
 * Никаких внешних библиотек и плагинов (кроме [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). И да, это фича, так как вы вольны сами выбирать, какие библиотеки использовать. Доступны sourcemaps.
 * Используется модуль [chokidar](https://github.com/paulmillr/chokidar) для вотчинга файлов.

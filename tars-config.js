@@ -67,6 +67,12 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
+     * Use babel for ES6-ES7 syntax support
+     * @type {Boolean}
+     */
+    useBabel: true,
+
+    /**
      * Write sourcemaps
      * @type {Object}
      *
@@ -253,6 +259,7 @@ var tarsConfig = {
     /**
      * Css-preprocessor
      * Available 'scss', 'less' or 'stylus'
+     * .sass extension is supported if cssPreprocessor is 'scss'
      * @type {String}
      */
     cssPreprocessor: 'scss',
