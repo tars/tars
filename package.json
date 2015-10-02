@@ -24,6 +24,7 @@
     "gulp-data": "1.2.0",
     "gulp-if": "1.2.5",
     "gulp-imagemin": "2.3.0",
+    "gulp-html-prettify": "0.0.1",
     "gulp-jade": "1.1.0",
     "gulp-jscs": "2.0.0",
     "gulp-jshint": "1.11.2",

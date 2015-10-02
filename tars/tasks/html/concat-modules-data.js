@@ -9,7 +9,7 @@ var notifier = tars.helpers.notifier;
  * conact data for modules to one file
  */
 module.exports = function () {
-    return gulp.task('html:concat-modules-data', function (cb) {
+    return gulp.task('html:concat-modules-data', function () {
         return gulp.src('./markup/modules/**/data/data.js')
             .pipe(plumber({
                 errorHandler: function (error) {
