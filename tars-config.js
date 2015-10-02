@@ -70,7 +70,7 @@ var tarsConfig = {
      * Use babel for ES6-ES7 syntax support
      * @type {Boolean}
      */
-    useBabel: true,
+    useBabel: false,
 
     /**
      * Write sourcemaps

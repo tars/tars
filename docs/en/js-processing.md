@@ -2,7 +2,7 @@
 
 At the moment assembler works only with the usual js. If you want to use coffeescript or TypeScript or something else, you can fix task 'js-processing' or write me if it does not work. 
 
-ES6(ES7) syntax is supported by using [Babel](https://babeljs.io/). Unfortunately, imports are not supported yet, cause there is no any modules to require all dependencies on client. But we are working on it! Use option [useBabel](options.md#usebabel) to turn on the ES6(ES7) syntax (it is turned on by default).
+ES6(ES7) syntax is supported by using [Babel](https://babeljs.io/). Unfortunately, imports are not supported yet, cause there is no any modules to require all dependencies on client. But we are working on it! Use option [useBabel](options.md#usebabel) to turn on the ES6(ES7) syntax (it is turned off by default).
 
 All config for Babel is in project root. See the [babel options](https://babeljs.io/docs/usage/options/), except for sourceMap and filename which is handled for you. you can manage with sourcemaps from [builder-config](#sourcemaps).
 
