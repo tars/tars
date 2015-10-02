@@ -209,7 +209,7 @@ Type: `Boolean`
 
 Default: `false`
 
-Enabling minifications for html.
+Enabling minifications for html. If is set to false, compiled html will be prettified.
 
 ### staticPrefix
 

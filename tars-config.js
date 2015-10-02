@@ -67,7 +67,7 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
-     * Use babel for ES6-ES7 syntax support
+     * Use babel for ES6(ES7-ESNext) syntax support
      * @type {Boolean}
      */
     useBabel: false,
@@ -190,6 +190,7 @@ var tarsConfig = {
 
     /**
      * Minify result html in build version
+     * If is set to false, compiled html will be prettified
      * @type {Boolean}
      */
     minifyHtml: false,
