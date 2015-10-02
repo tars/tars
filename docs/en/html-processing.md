@@ -57,6 +57,29 @@ Inside the module data is displayed by the handlebars:
 <title>{{title}}</title>
 ```
 
+If you include module without passing data, module gets an access to the global scope. For example, if we include module head without data, we will have to use the follow code to get an access to field "title":
+
+```javascript
+// head/data/data.js
+head: {
+    defaults: {
+        title: 'Default title'
+    }
+}
+```
+
+index.html
+```handlebars
+{{> head/head}}
+```
+
+head.html
+```handlebars
+<title>{{head.defaults.title}}</title>
+```
+
+But, if you have passed the data to module, you will not have an access to the data for child module. You have to pass global scope to the parent module (to not pass any data while including), to pass data for child-module.
+
 Handlebars known as a very simple template, logicless. But for using the handlebars in the static markup in such kind not very comfortable. So, different helpers have been added that extend the capabilities of handlebars.<br/>
 Helpers description can be found [here](handlebars-helpers.md).
 

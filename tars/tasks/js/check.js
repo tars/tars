@@ -31,7 +31,9 @@ module.exports = function () {
                     }
                 }))
                 .pipe(cache('hinting'))
-                .pipe(jshint())
+                .pipe(jshint({
+                    esnext: true
+                }))
                 .pipe(jshint.reporter('jshint-stylish'))
                 .pipe(jscs())
         } else {
