@@ -19,6 +19,6 @@ if (!tars.config.useBuildVersioning) {
  */
 module.exports = function () {
     return gulp.task('service:clean', function (cb) {
-        del(pathToDel).then(function () { cb(); });
+        del(pathsToDel).then(function () { cb(); });
     });
 };
