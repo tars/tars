@@ -4,7 +4,7 @@
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Build Status](https://travis-ci.org/tars/tars.svg?branch=master)](https://travis-ci.org/tars/tars) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Сборщик html-верстки, основанный на [gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
 Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
