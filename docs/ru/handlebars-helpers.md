@@ -1,5 +1,6 @@
 # Handlebars-helpers
 
+Вы можете добавлять свои хелперы в файл /tars/tasks/html/helpers/handlebars-helpers. Вам не нужно регистрировать новый хелпер, необходимо его только объявить как поле объекта helpers, как функцию.
 
 ## repeat
 
@@ -105,3 +106,8 @@ testModule: {
 ```handlebars
 {{capitalizeFirst 'string'}}
 ```
+
+## formatDate, now, i18n
+
+Дополнительные хелперы. Документация по ним досутпна в репозитории проекта https://github.com/assemble/handlebars-helpers
+
