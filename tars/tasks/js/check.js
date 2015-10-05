@@ -36,6 +36,8 @@ module.exports = function () {
                 }))
                 .pipe(jshint.reporter('jshint-stylish'))
                 .pipe(jscs())
+                .pipe(jscs.reporter())
+                .pipe(jscs.reporter('failImmediately'))
         } else {
             gutil.log('!JS-style-check and hinting is not used!');
             cb(null);
