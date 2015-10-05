@@ -38,7 +38,7 @@
     "gulp-sass": "^2.0.4",
     "gulp-strip-debug": "^1.0.2",
     "gulp-stylus": "^2.0.7",
-    "gulp-svg-spritesheet": "git://github.com/artem-malko/gulp-svg-spritesheet.git#877e77bb8f098c0922c530267ee3bb3439ce6049",
+    "gulp-svg-spritesheet": "https://github.com/artem-malko/gulp-svg-spritesheet/archive/master.tar.gz",
     "gulp-svg2png": "0.3.0",
     "gulp-util": "3.0.6",
     "gulp-zip": "^3.0.2",
