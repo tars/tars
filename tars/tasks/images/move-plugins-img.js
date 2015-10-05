@@ -2,24 +2,29 @@
 
 var gulp = tars.packages.gulp;
 var cache = tars.packages.cache;
-var notify = tars.packages.notify;
+var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
+
+var staticFolderName = tars.config.fs.staticFolderName;
+var imagesFolderName = tars.config.fs.imagesFolderName;
 
 /**
  * Move images for plugins
  */
 module.exports = function () {
     return gulp.task('images:move-plugins-img', function () {
-        return gulp.src('./markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/plugins/**/*.*')
-            .pipe(cache('move-plugins-img'))
-            .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while moving plugin\'s imgs.\nLook in the console for details.\n' + error;
+        return gulp.src('./markup/' + staticFolderName + '/' + imagesFolderName + '/plugins/**/*.*')
+            .pipe(plumber({
+                errorHandler: function (error) {
+                    notifier.error('An error occurred while moving plugin\'s imgs.', error);
+                }
             }))
-            .pipe(gulp.dest('./dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/plugins'))
+            .pipe(cache('move-plugins-img'))
+            .pipe(gulp.dest('./dev/' + staticFolderName + '/' + imagesFolderName + '/plugins'))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
-                notifier('Plugins\' images\'ve been moved')
+                notifier.success('Plugins\' images\'ve been moved')
             );
     });
 };

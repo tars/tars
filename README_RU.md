@@ -4,7 +4,7 @@
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Build Status](https://travis-ci.org/tars/tars.svg?branch=master)](https://travis-ci.org/tars/tars) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Dependency Status](https://david-dm.org/tars/tars.svg)](https://david-dm.org/tars/tars) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Сборщик html-верстки, основанный на [gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
 Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
@@ -25,8 +25,9 @@ TARS предоставляет удобную архитектуру хране
 
 * [Jade](http://jade-lang.com/) или [Handlebars](http://handlebarsjs.com/) на выбор в качестве html-шаблонизатора. Также можно использовать обычный html. Подробности [здесь](/docs/ru/html-processing.md).
 * Использование json (а точнее js-объекта, который может быть описан в json) для передачи данных в шаблоны (опционально, но очень крутая штука, которая позволит избавиться от копипаста). Подробнее [тут](/docs/ru/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
-* [SCSS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) или [Stylus](http://learnboost.github.io/stylus/) в качестве препроцессора для css + PostCSS. Также в комплекте идет небольшой набор миксинов. Также можно использовать обычный css. Подробности [здесь](/docs/ru/css-processing.md).
-* Никаких внешних библиотек и плагинов (кроме [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). И да, это фича, так как вы вольны сами выбирать, какие библиотеки использовать.
+* Вы можете ипользовать ES6 (и некоторые фичи из ES7) уже сегодня. Подробнее в [документации](/docs/ru/js-processing.md).
+* [SCSS, SASS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) или [Stylus](http://learnboost.github.io/stylus/) в качестве препроцессора для css. Также в комплекте идет небольшой набор миксинов. Также можно использовать обычный css. Доступны sourcemaps. При выборе scss в качестве препроцессора, вы можете использовать как расширение scss, так и sass + можете миксовать их использование. Подробности [здесь](/docs/ru/css-processing.md).
+* Никаких внешних библиотек и плагинов (кроме [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). И да, это фича, так как вы вольны сами выбирать, какие библиотеки использовать. Доступны sourcemaps.
 * Используется модуль [chokidar](https://github.com/paulmillr/chokidar) для вотчинга файлов.
 * Расшариванием верстки с вашего компьютера во внешний веб, опционально. Ну и конечно же livereload в браузере (и не только локально) + графический интерфейс к панели управления устройствами, на которые расшаривается верстка.
 * Можно легко добавлять новые таски и вотчеры. Есть примеры того, как создать и использовать новый таск или вотчер внутри TARS.
@@ -36,6 +37,8 @@ TARS предоставляет удобную архитектуру хране
 
 
 ## Установка
+
+**Обращаю ваше внимание, что предпочтительно использовать [TARS-CLI](https://github.com/tars/tars-cli). Это удобнее, нагляднее, занимает меньше места.**
 
 Необходимо [установить `Node.js`](http://nodejs.org/) версии >= 0.10.
 Далее необходимо установить gulp глобально. (Возможно потребуются права суперюзера или администратора)
@@ -89,6 +92,8 @@ gulp init
 Ключи, доступные при любом режиме сборки:
 
 * `--ie8` – включить в сборку стили для ie8.
+* `--ie9` – включить в сборку стили для ie9.
+* `--ie` – включить в сборку стили для ie9 и ie8.
 
 `gulp update-deps` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды. Желательно выполнять раз в неделю. Команда скопирует текущий package.json, добавит к его имени подчеркивание, скачает новый package.json с репозитория и выполнит npm install. Таким образом, если у вас что-то сломалось с новыми пакетами, то всегда можно вернуться на прошлую версию, просто вернув прошлый package.json
 Также вы можете ознакомиться с [руководством по обновлению](/docs/ru/update-guide.md).

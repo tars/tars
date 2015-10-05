@@ -73,15 +73,35 @@ Default: `[]`
 
 Также есть возможность отключить linting и hinting в этих файлах (опции `lintJsCodeBeforeModules` и `lintJsCodeAfterModules`).
 
+### useBabel
+
+Type: `Boolean`
+
+Default: `false`
+
+Данная опция позволяет использовать [Babel](https://babeljs.io/) для поддержки ES6(ES7) синтаксиса. Конфиг для babel находит в корне проекта, в файле .babelrc. С доступными опциями .babelc можно ознакомится на [официальном сайте](https://babeljs.io/docs/usage/options/). Вам не нужно задавать опции 'filename' и все что связанно с 'sourcemaps', так как эти оцпии уже заданы в сборщике. Sourcemaps вы можете управлять через опцию в [конфиге сборщика](#sourcemaps).
+
 ### sourcemaps
 
 Type: `Object`
 
-Default: `{`
-    `js: true`
-`}`
+Default: 
+```javascript
+sourcemaps: {
+    js: {
+        active: true,
+        inline: true
+    },
+    css: {
+        active: true,
+        inline: true
+    }
+},
+```
 
-Конфиг для sourcemaps. Sourcemaps для js работают только в dev-режиме и min-моде при сборке.
+Конфиг для sourcemaps. Sourcemaps для js и css работают только в dev-режиме. 
+active {Boolean}: использовать sourcemap или нет.
+inline {Boolean}: использовать встроенные сорсмапы или генерировать их отдельным файлом.
 
 ### notifyConfig
 
@@ -113,11 +133,19 @@ Default: `'TARS notification'`
 
 ##### onSuccess
 
-Type: `String`
+Type: `String, undefined`
 
 Default: `undefined`
 
-В данную опцию передается название системного звука, который будет звучать при нотификации. Если звуков не нужно, то просто оставляйте `undefined`
+В данную опцию передается название системного звука, который будет звучать при нотификации, если сборка прошла успешно. Если звуков не нужно, то просто оставляйте `undefined`
+
+##### onError
+
+Type: `String, undefined`
+
+Default: `undefined`
+
+В данную опцию передается название системного звука, который будет звучать при нотификации, если сборка прошла с ошибками. Если звуков не нужно, то просто оставляйте `undefined`
 
 
 ### browserSyncConfig
@@ -189,7 +217,7 @@ Type: `Boolean`
 
 Default: `false`
 
-Включение минифицирования html.
+Включение минифицирования html. Если опция устанволена в false, то скомпилированный html будет отформатирован.
 
 ### staticPrefix
 

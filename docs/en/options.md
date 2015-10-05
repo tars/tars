@@ -68,15 +68,35 @@ It will be useful for when building a site on js-framework, with any its entitie
 
 Also you can disable jscs and hinting at these files (lintJsCodeBeforeModules and lintJsCodeAfterModules options).
 
+### useBabel
+
+Type: `Boolean`
+
+Default: `false`
+
+This option allow to use [Babel](https://babeljs.io/) for ES6(ES7) syntax support. Config for Babel is in project root, in .babelrc. See the [babel options](https://babeljs.io/docs/usage/options/), except for sourceMap and filename which is handled for you. you can manage with sourcemaps from [builder-config](#sourcemaps).
+
 ### sourcemaps
 
 Type: `Object`
 
-Default: `{`
-    `js: true`
-`}`
+Default: 
+```javascript
+sourcemaps: {
+    js: {
+        active: true,
+        inline: true
+    },
+    css: {
+        active: true,
+        inline: true
+    }
+},
+```
 
-Config for sourcemaps. Sourcemaps for js work only in dev and min mode.
+Config for sourcemaps. Sourcemaps for js and css work only in dev mode.
+active {Boolean}: to use sourcemap or not.
+inline {Boolean}: to use sourcemap inlined into source-file or to use separate file.
 
 ### notifyConfig
 
@@ -108,11 +128,19 @@ Sound notice during the notifications.
 
 ##### onSuccess
 
-Type: `String`
+Type: `String, undefined`
 
 Default: `undefined`
 
-In this option the name of the system sound is passed which will be played during the notification. If you don't need the sounds, you can set it by `undefined` value.
+In this option the name of the system sound is passed which will be played during the notification in case of successful build. If you don't need the sounds, you can set it by `undefined` value.
+
+##### onError
+
+Type: `String, undefined`
+
+Default: `undefined`
+
+In this option the name of the system sound is passed which will be played during the notification in case of failed build. If you don't need the sounds, you can set it by `undefined` value.
 
 ### browserSyncConfig
 
@@ -181,7 +209,7 @@ Type: `Boolean`
 
 Default: `false`
 
-Enabling minifications for html.
+Enabling minifications for html. If is set to false, compiled html will be prettified.
 
 ### staticPrefix
 

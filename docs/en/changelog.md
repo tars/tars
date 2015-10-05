@@ -1,15 +1,29 @@
 # Changelog
 
+## Version 1.4.0
+
+* Added css-import supporting. Css (less, scss, sass, styl) files, began with _ will not be compiled, so it is recommended to import only these files. [More info](css-processing.md).
+* Added .sass supporting.
+* Added correct css-errors logging in console.
+* Tars-config.js has been updated. [Sourcemaps](options.md#sourcemaps) has more options. Added [Babel supporting switcher](options.md#usebabel).
+* Added ES6(ES.Next) syntax supporting with [Babel](options.md#usebabel). [More info](js-processing.md).
+* Autoprefixer is moved to the end in the postprocessors list.
+* Notifier got one interface for failed and successed end of task. 
+* gulp-html-prettify has benn added. Formatted HTML will be created if [minifyHtml](options.md#minifyhtml) will be switched to false.
+* Disabled automatics css-compiling for IE9. You need to use flags `--ie9` or `--ie` to compile stylies for IE9. `--ie` will compile stylies for IE8 and IE9 too.
+* Added more helpers, updated docs for helpers and moved all helpers to task-folder.
+* Fixed bugs.
+
 ## Version 1.3.1
 
-* Fix config for postcss. You do not need to require packages by yourself. You just write them to config and it just works. But don't forget to install all used postprocessors.
+* Fixed config for postcss. You do not need to require packages by yourself. You just write them to config and it just works. But don't forget to install all used postprocessors.
 
 ## Version 1.3.0
 
 * Sourcempas for js has been added. So, you can see file name from sources and path to with filename.
 * PostCSS has been added. You can add postprocessors, but you can't use PostCSS without pre-processors.
 * Notification is disabled while build process. You will see it only in that  moment, when you need it.
-* Add .hbs extension support.
+* Added .hbs extension support.
 * Padding between images in raster-sprite has been added.
 * Main pages and modules have been refactored.
 * Browser-sync will open default browser in OS, if there is no any other instructions in tars-config.
@@ -32,17 +46,17 @@
 
 ## Version 1.2.3
 
-* Fix build process without notifier
+* Fixed build process without notifier
 
 ## Version 1.2.2
 
-* Fix assets' files watcher. Subdirectories unsupport in modules/assets
+* Fixed assets' files watcher. Subdirectories unsupport in modules/assets
 
 ## Version 1.2.1
 
 * Code-style update. .jscsrc update.
-* Remove path from dependencies list.
-* Add docs on english.
+* Removed path from dependencies list.
+* Added docs on english.
 
 ## Version 1.2.0
 

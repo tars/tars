@@ -2,6 +2,7 @@
 
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
+tars.packages.promisePolyfill.polyfill();
 
 var pathsToDel = [
         './dev/',
@@ -18,6 +19,6 @@ if (!tars.config.useBuildVersioning) {
  */
 module.exports = function () {
     return gulp.task('service:clean', function (cb) {
-        del(pathsToDel, cb);
+        del(pathsToDel).then(function () { cb(); });
     });
 };

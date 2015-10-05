@@ -1,10 +1,26 @@
 # CSS
 
-You can use [scss](http://sass-lang.com), [less](http://www.lesscss.ru) или [stylus](http://learnboost.github.io/stylus) as css-preprocessor. You can choose css-preprocessor in [tars-config.js](options.md#csspreprocessor).
+You can use folow css-preprocessors:
+* [scss](http://sass-lang.com) .sass extension is supported;
+* [less](http://www.lesscss.ru);
+* [stylus](http://learnboost.github.io/stylus)  
+
+You can choose css-preprocessor in [tars-config.js](options.md#csspreprocessor).
 
 In general, there are no surprises when using css-preprocessor. Use all the possibilities offered by the selected tool.
 
 If you are used to the usual css, you can use css-syntax in any preprocessor.
+
+All files with _ prefix won't be compiled by builder. You can use these files for importing. Actually, you can import all files, what you want, but if you include file without _ you will have two copies in compiled css-file. So, with is the reason, why files with _ prefix won't be compiled. You can import all type of styles files: scss (sass), less, styl, css.
+Example of import using (scss):
+
+```scss
+// files are located in one directory
+@import '_partial.scss';
+
+// _partial.sass is located in neighbour directory partials
+@import '../partials/_partial.sass';
+```
 
 If you want to include the files from the static directory (pictures), you must use the placeholder %=staticPrefixForCss=% (value of the placeholder is adjusted in the [tars-config.js](options.md#staticprefixforcss)). Then including of the image as a background (the picture will be taken from your main module) will be as follows (in this example scss is used):
 

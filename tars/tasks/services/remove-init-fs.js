@@ -3,8 +3,9 @@
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
 var staticFolderName = tars.config.fs.staticFolderName;
+tars.packages.promisePolyfill.polyfill();
 
-var pathToDel = [
+var pathsToDel = [
              'markup/' + staticFolderName + '/js/framework',
              'markup/' + staticFolderName + '/js/libraries',
              'markup/' + staticFolderName + '/js/plugins',
@@ -32,6 +33,6 @@ var pathToDel = [
  */
 module.exports = function () {
     return gulp.task('service:remove-init-fs', function (cb) {
-        del(pathToDel, cb);
+        del(pathsToDel).then(function () { cb(); });
     });
 };

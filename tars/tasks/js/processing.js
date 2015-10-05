@@ -2,21 +2,24 @@
 
 var gulp = tars.packages.gulp;
 var concat = tars.packages.concat;
-var Combine = tars.packages.streamCombiner;
+var streamCombiner = tars.packages.streamCombiner;
 var uglify = tars.packages.uglify;
 var plumber = tars.packages.plumber;
 var gulpif = tars.packages.gulpif;
 var rename = tars.packages.rename;
+var babel = tars.packages.babel;
 var stripDebug = tars.packages.stripDebug;
 var sourcemaps = tars.packages.sourcemaps;
-var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
+var cwd = process.cwd();
+var path = require('path');
 
 var staticFolderName = tars.config.fs.staticFolderName;
 var destFolder = './dev/' + staticFolderName + '/js';
 var compressJs = tars.flags.release || tars.flags.min;
-var generateSourceMaps = tars.config.sourcemaps.js && !tars.flags.release;
+var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release;
+var sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 var jsPaths = [
         '!./markup/modules/**/data/data.js',
         './markup/' + staticFolderName + '/js/framework/**/*.js',
@@ -24,7 +27,8 @@ var jsPaths = [
         './markup/' + staticFolderName + '/js/plugins/**/*.js',
         tars.config.jsPathsToConcatBeforeModulesJs,
         './markup/modules/*/*.js',
-        tars.config.jsPathsToConcatAfterModulesJs
+        tars.config.jsPathsToConcatAfterModulesJs,
+        '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
     ];
 
 jsPaths = [].concat.apply([], jsPaths);
@@ -41,17 +45,16 @@ jsPaths = [].concat.apply([], jsPaths);
  *  - write main file at fs.
  */
 function base () {
-    return Combine(
-        concat('main.js'),
+    return streamCombiner.obj([
+        gulpif(tars.config.useBabel, babel({
+                babelrc: path.resolve(cwd + '/.babelrc')
+            })
+        ),
+        concat({cwd: cwd, path: 'main.js'}),
         rename({ suffix: tars.options.build.hash }),
-        gulpif(generateSourceMaps, sourcemaps.write()),
+        gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
-    ).on('error', notify.onError(function (error) {
-        return 'An error occurred while base processing js-files.\
-                \nLook in the console for details.\
-                \n' + error;
-        })
-    );
+    ]);
 }
 
 /**
@@ -65,18 +68,13 @@ function base () {
  *  - write main file at fs.
  */
 function compress () {
-    return Combine(
+    return streamCombiner.obj([
         gulpif(tars.config.removeConsoleLog, stripDebug()),
         uglify({ mangle: false }),
         rename({ suffix: '.min' }),
-        gulpif(generateSourceMaps, sourcemaps.write()),
+        gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
-    ).on('error', notify.onError(function (error) {
-        return 'An error occurred while compressing js.\
-                \nLook in the console for details.\
-                \n' + error;
-        })
-    );
+    ]);
 }
 
 module.exports = function () {
@@ -94,12 +92,16 @@ module.exports = function () {
      *  - reloading browser's page.
      */
     return gulp.task('js:processing', ['js:check'], function () {
-        return gulp.src(jsPaths, { base: process.cwd() })
-            .pipe(plumber())
-            .pipe(gulpif(tars.config.sourcemaps.js, sourcemaps.init()))
+        return gulp.src(jsPaths, { base: cwd })
+            .pipe(plumber({
+                errorHandler: function (error) {
+                    notifier.error('An error occurred while processing js-files.', error);
+                }
+            }))
+            .pipe(gulpif(generateSourceMaps, sourcemaps.init()))
             .pipe(base())
             .pipe(gulpif(compressJs, compress(destFolder)))
-            .pipe(notifier('JavaScript was processed'))
+            .pipe(notifier.success('JavaScript has been processed'))
             .pipe(browserSync.reload({ stream: true }));
     });
 };

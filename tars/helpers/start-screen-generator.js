@@ -14,7 +14,7 @@ module.exports = function (gutil) {
     if (!tars.cli) {
         var i = 0;
 
-        if (!tars.flags.release) {
+        if (!tars.flags.release && !tars.flags.min) {
             console.log(gutil.colors.yellow.inverse('\n----------------------------------------------------------------------'));
             tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
             tars.say(gutil.colors.red.bold('This mode is depricated for developing.'));
@@ -44,8 +44,12 @@ module.exports = function (gutil) {
             tars.say(gutil.colors.cyan.bold('• tunnel mode;'));
         }
 
-        if (tars.flags.ie8) {
+        if (tars.flags.ie8 || tars.flags.ie) {
             tars.say(gutil.colors.cyan.bold('• ie8 maintenance;'));
+        }
+
+        if (tars.flags.ie9 || tars.flags.ie) {
+            tars.say(gutil.colors.cyan.bold('• ie9 maintenance;'));
         }
 
         for (var key in tars.flags) { i++; }

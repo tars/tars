@@ -2,24 +2,28 @@
 
 var gulp = tars.packages.gulp;
 var cache = tars.packages.cache;
-var notify = tars.packages.notify;
+var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
+
+var staticFolderName = tars.config.fs.staticFolderName;
 
 /**
  * Move fonts-files to dev directory
  */
 module.exports = function () {
     return gulp.task('other:move-fonts', function () {
-        return gulp.src('./markup/' + tars.config.fs.staticFolderName + '/fonts/**/*.*')
-            .pipe(cache('move-fonts'))
-            .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while moving fonts.\nLook in the console for details.\n' + error;
+        return gulp.src('./markup/' + staticFolderName + '/fonts/**/*.*')
+            .pipe(plumber({
+                errorHandler: function (error) {
+                    notifier.error('An error occurred while moving fonts.', error);
+                }
             }))
-            .pipe(gulp.dest('./dev/' + tars.config.fs.staticFolderName + '/fonts'))
+            .pipe(cache('move-fonts'))
+            .pipe(gulp.dest('./dev/' + staticFolderName + '/fonts'))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
-                notifier('Fonts\'ve been moved')
+                notifier.success('Fonts\'ve been moved')
             );
     });
 };

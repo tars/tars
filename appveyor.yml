@@ -13,8 +13,8 @@ init:
 # What combinations to test
 environment:
   matrix:
-    - nodejs_version: 0.10
     - nodejs_version: 0.12
+    - nodejs_version: 4
 
 install:
   - cmd: npm -v
@@ -28,7 +28,4 @@ build_script:
   - gulp init
 
 test_script:
-  - cmd: gulp build --release --ie8
-
-matrix:
-  fast_finish: true
+  - cmd: gulp build --release --ie

@@ -1,5 +1,6 @@
 # Handlebars-helpers
 
+You can add your own helpers to /tars/tasks/html/helpers/handlebars-helpers. It is not necessary to register your helpers. You just have to add them to exported object "helper" as a function. 
 
 ## repeat
 
@@ -105,3 +106,7 @@ There is is syntax:
 ```handlebars
 {{capitalizeFirst 'string'}}
 ```
+
+## formatDate, now, i18n
+
+Additional helpers. Docs are in https://github.com/assemble/handlebars-helpers

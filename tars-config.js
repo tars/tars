@@ -67,11 +67,27 @@ var tarsConfig = {
     lintJsCodeAfterModules: false,
 
     /**
-     * Write suorcemaps
+     * Use babel for ES6(ES7-ESNext) syntax support
      * @type {Boolean}
      */
+    useBabel: false,
+
+    /**
+     * Write sourcemaps
+     * @type {Object}
+     *
+     * active – is sourcemaps active
+     * inline – use inline sourcemaps or in separate file
+     */
     sourcemaps: {
-        js: true
+        js: {
+            active: true,
+            inline: true
+        },
+        css: {
+            active: true,
+            inline: true
+        }
     },
 
     /**
@@ -104,7 +120,14 @@ var tarsConfig = {
              * @type {String, undefined}
              * For example 'Glass' in OS X
              */
-            onSuccess: undefined
+            onSuccess: undefined,
+
+            /**
+             * Sound after failed finishing of task
+             * @type {String, undefined}
+             * For example 'Glass' in OS X
+             */
+            onError: undefined
         },
 
         /**
@@ -167,6 +190,7 @@ var tarsConfig = {
 
     /**
      * Minify result html in build version
+     * If is set to false, compiled html will be prettified
      * @type {Boolean}
      */
     minifyHtml: false,
@@ -236,6 +260,7 @@ var tarsConfig = {
     /**
      * Css-preprocessor
      * Available 'scss', 'less' or 'stylus'
+     * .sass extension is supported if cssPreprocessor is 'scss'
      * @type {String}
      */
     cssPreprocessor: 'scss',

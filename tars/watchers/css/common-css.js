@@ -17,7 +17,7 @@ module.exports = function () {
             watcherLog(event, path);
             tars.packages.gulp.start('css:compile-css');
 
-            if (tars.flags.ie8) {
+            if (tars.flags.ie8 || tars.flags.ie) {
                 tars.packages.gulp.start('css:compile-css-for-ie8');
             }
         });

@@ -5,7 +5,7 @@ var gulpif = tars.packages.gulpif;
 var cache = tars.packages.cache;
 var rename = tars.packages.rename;
 var path = require('path');
-var notify = tars.packages.notify;
+var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
 
@@ -15,17 +15,19 @@ var browserSync = tars.packages.browserSync;
 module.exports = function () {
     return gulp.task('other:move-assets', function (cb) {
         return gulp.src('./markup/modules/**/assets/**/*.*')
+            .pipe(plumber({
+                errorHandler: function (error) {
+                    notifier.error('An error occurred while moving assets.', error);
+                }
+            }))
             .pipe(cache('move-assets'))
             .pipe(rename(function (filepath) {
                 filepath.dirname = filepath.dirname.split(path.sep)[0];
             }))
-            .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while moving assets.\nLook in the console for details.\n' + error;
-            }))
             .pipe(gulp.dest('./dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/assets/'))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
-                notifier('Assets\'ve been moved')
+                notifier.success('Assets\'ve been moved')
             );
     });
 };

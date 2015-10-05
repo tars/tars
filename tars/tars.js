@@ -10,11 +10,25 @@
  * @return {Object}             Required package
  */
 function tarsRequire(packageName) {
+    var requirePackage;
+
     if (process.env.npmRoot) {
-        return require(process.env.npmRoot + packageName);
+        try {
+            requirePackage = require(process.env.npmRoot + packageName);
+        } catch (error) {
+            console.log('\n\n');
+            tars.say('It seems, that you use old version of TARS-CLI, and some packages are not available.');
+            tars.say('Update TARS-CLI via ' + gutil.colors.cyan.bold('"tars update"') + '.');
+            tars.say('Please, repost the follow log to the tars.builder@gmail.com, if update did\'t help you.\n')
+
+            throw error;
+        }
+
     } else {
-        return require(packageName);
+        requirePackage = require(packageName);
     }
+
+    return requirePackage;
 }
 
 /**
@@ -41,8 +55,18 @@ var cssPreprocExtension = cssPreprocName;
 var buildVersion = require('./helpers/set-build-version')();
 var buildOptions = {};
 
+tars.say = function say(message) {
+    if (os.platform() === 'darwin') {
+        console.log(gutil.colors.cyan.bold('🅃 🄰 🅁 🅂 : ') + gutil.colors.white.bold(message));
+    } else {
+        console.log(gutil.colors.cyan.bold('[ TARS ]: ') + gutil.colors.white.bold(message));
+    }
+};
+
 if (cssPreprocName === 'stylus') {
     cssPreprocExtension = 'styl';
+} else if (cssPreprocName === 'scss') {
+    cssPreprocExtension = '{scss,sass}';
 }
 
 // Generate build version
@@ -62,14 +86,6 @@ tars.config = tarsConfig;
 // Flags
 tars.flags = gutil.env;
 
-tars.say = function say(message) {
-    if (os.platform() === 'darwin') {
-        console.log(gutil.colors.cyan.bold('🅃 🄰 🅁 🅂 : ') + gutil.colors.white.bold(message));
-    } else {
-        console.log(gutil.colors.cyan.bold('[ TARS ]: ') + gutil.colors.white.bold(message));
-    }
-};
-
 // Generate start screen
 require('./helpers/start-screen-generator')(gutil);
 
@@ -77,6 +93,7 @@ require('./helpers/start-screen-generator')(gutil);
 tars.packages = {
     addsrc: tars.require('gulp-add-src'),
     autoprefixer: tars.require('autoprefixer'),
+    babel: tars.require('gulp-babel'),
     browserSync: tars.require('browser-sync'),
     cache: tars.require('gulp-cached'),
     changed: tars.require('gulp-changed'),
@@ -93,6 +110,7 @@ tars.packages = {
     gutil: gutil,
     handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
     htmlMin: tars.require('gulp-minify-html'),
+    htmlPrettify: tars.require('gulp-html-prettify'),
     imagemin: tars.require('gulp-imagemin'),
     jade: tars.require('gulp-jade'),
     jscs: tars.require('gulp-jscs'),
@@ -114,7 +132,7 @@ tars.packages = {
     stylus: tars.require('gulp-stylus'),
     svg2png: tars.require('gulp-svg2png'),
     svgspritesheet: tars.require('gulp-svg-spritesheet'),
-    streamCombiner: tars.require('stream-combiner'),
+    streamCombiner: tars.require('stream-combiner2'),
     through2: tars.require('through2'),
     uglify: tars.require('gulp-uglify'),
     zip: tars.require('gulp-zip')

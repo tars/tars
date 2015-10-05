@@ -6,6 +6,7 @@ require('./tars/tars');
 
 // Using modules
 var os = require('os');
+var path = require('path');
 var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var runSequence = tars.packages.runSequence.use(gulp);
@@ -13,6 +14,7 @@ var browserSync = tars.packages.browserSync;
 
 // Configs
 var browserSyncConfig = tars.config.browserSyncConfig;
+var notify = tars.packages.notify;
 
 /***********/
 /* HELPERS */
@@ -78,6 +80,15 @@ gulp.task('dev', ['build-dev'], function () {
     fileLoader('./tars/user-watchers').forEach(function (file) {
         require(file)();
     });
+
+    if (tars.config.notifyConfig.useNotify) {
+        notify({
+        title: tars.config.notifyConfig.title,
+            icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars.png'))
+        }).write('Build has been created!');
+    } else {
+        tars.say('Build has been created!');
+    }
 });
 
 /****************/
@@ -190,7 +201,7 @@ gulp.task('browsersync', function (cb) {
 /*****************/
 
 gulp.task('svg-actions', function (cb) {
-    if (tars.flags.ie8) {
+    if (tars.flags.ie8 || tars.flags.ie) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
             ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],

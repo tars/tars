@@ -1,23 +1,25 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
+var plumber = tars.packages.plumber;
 var concat = tars.packages.concat;
-var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 
 /**
  * conact data for modules to one file
  */
 module.exports = function () {
-    return gulp.task('html:concat-modules-data', function (cb) {
+    return gulp.task('html:concat-modules-data', function () {
         return gulp.src('./markup/modules/**/data/data.js')
-            .pipe(concat('modulesData.js', { newLine: ',\n\n' }))
-            .on('error', notify.onError(function (error) {
-                return '\nAn error occurred while concating module\'s data.\nLook in the console for details.\n' + error;
+            .pipe(plumber({
+                errorHandler: function (error) {
+                    notifier.error('An error occurred while concating module\'s data.', error);
+                }
             }))
+            .pipe(concat('modulesData.js', { newLine: ',\n\n' }))
             .pipe(gulp.dest('./dev/temp/'))
             .pipe(
-                notifier('Data for modules ready')
+                notifier.success('Data for modules ready')
             );
     });
 };
