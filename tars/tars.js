@@ -19,9 +19,8 @@ function tarsRequire(packageName) {
             console.log('\n\n');
             tars.say('It seems, that you use old version of TARS-CLI, and some packages are not available.');
             tars.say('Update TARS-CLI via ' + gutil.colors.cyan.bold('"tars update"') + '.');
-            tars.say('Please, repost the follow log to the tars.builder@gmail.com, if update did\'t help you.\n')
-
-            throw error;
+            tars.say('Please, write to the tars.builder@gmail.com, if update did\'t help you.')
+            throw new Error('Current version or TARS-CLI is too old for downloaded TARS');
         }
 
     } else {
