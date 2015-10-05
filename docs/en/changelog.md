@@ -4,7 +4,6 @@
 
 * Added css-import supporting. Css (less, scss, sass, styl) files, began with _ will not be compiled, so it is recommended to import only these files. [More info](css-processing.md).
 * Added .sass supporting.
-* Added correct css-errors logging in console.
 * Tars-config.js has been updated. [Sourcemaps](options.md#sourcemaps) has more options. Added [Babel supporting switcher](options.md#usebabel).
 * Added ES6(ES.Next) syntax supporting with [Babel](options.md#usebabel). [More info](js-processing.md).
 * Autoprefixer is moved to the end in the postprocessors list.
