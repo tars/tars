@@ -30,12 +30,12 @@ module.exports = {
             error = new Error();
         }
 
-        if (notifyConfig.useNotify && tars.options.notify) {
+        if (process.env.NODE_ENV !== 'production' && !process.env.DISABLE_NOTIFIER) {
             return notify.onError({
                 sound: notifyConfig.sounds.onError,
                 title: notifyConfig.title,
                 message: resultMessage,
-                icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars_error.png')),
+                icon: path.resolve(process.cwd() + '/tars/icons/tars_error.png'),
                 onLast: true
             })(error);
         } else {
@@ -55,7 +55,7 @@ module.exports = {
 
         resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
 
-        if (notifyConfig.useNotify && tars.options.notify) {
+        if (notifyConfig.useNotify && tars.options.notify && process.env.NODE_ENV !== 'production') {
             return notify({
                 onLast: onLast || true,
                 sound: notifyConfig.sounds.onSuccess,
@@ -64,7 +64,7 @@ module.exports = {
                 templateOptions: {
                     date: tars.helpers.dateFormatter.getTimeOfModify()
                 },
-                icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars.png'))
+                icon: path.resolve(process.cwd() + '/tars/icons/tars.png')
             });
         } else {
             return tars.packages.gutil.noop();

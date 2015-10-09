@@ -11,6 +11,7 @@ var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var runSequence = tars.packages.runSequence.use(gulp);
 var browserSync = tars.packages.browserSync;
+var env = process.env;
 
 // Configs
 var browserSyncConfig = tars.config.browserSyncConfig;
@@ -81,10 +82,10 @@ gulp.task('dev', ['build-dev'], function () {
         require(file)();
     });
 
-    if (tars.config.notifyConfig.useNotify) {
+    if (tars.config.notifyConfig.useNotify && env.NODE_ENV !== 'production' && !env.DISABLE_NOTIFIER) {
         notify({
-        title: tars.config.notifyConfig.title,
-            icon: path.resolve(process.cwd() + path.resolve('/tars/icons/tars.png'))
+            title: tars.config.notifyConfig.title,
+            icon: path.resolve(process.cwd() + '/tars/icons/tars.png')
         }).write('Build has been created!');
     } else {
         tars.say('Build has been created!');

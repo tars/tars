@@ -117,7 +117,13 @@ Type: `Boolean`
 
 Default: `true`
 
-Включение нотификации.
+Включение нотификации. Отключить нотификации можно с помощью переменных окружения:
+```bash
+export DISABLE_NOTIFIER=true;
+#или
+export NODE_ENV=production;
+```
+Переменные окружения имеют больший вес и перезаписывают значение в tars-config.js
 
 #### title
 

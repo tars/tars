@@ -112,7 +112,13 @@ Type: `Boolean`
 
 Default: `true`
 
-Enabling of notification.
+Enabling of notification. You can disable notifications by using environment variables:
+```bash
+export DISABLE_NOTIFIER=true;
+#or
+export NODE_ENV=production;
+```
+Environment variables will overwrite useNotify value from tars-config.js
 
 #### title
 
