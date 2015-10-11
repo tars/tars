@@ -90,7 +90,6 @@ require('./helpers/start-screen-generator')(gutil);
 
 // Required packages
 tars.packages = {
-    addsrc: tars.require('gulp-add-src'),
     autoprefixer: tars.require('autoprefixer'),
     babel: tars.require('gulp-babel'),
     browserSync: tars.require('browser-sync'),
@@ -111,6 +110,7 @@ tars.packages = {
     htmlMin: tars.require('gulp-minify-html'),
     htmlPrettify: tars.require('gulp-html-prettify'),
     imagemin: tars.require('gulp-imagemin'),
+    importify: tars.require('gulp-importify'),
     jade: tars.require('gulp-jade'),
     jscs: tars.require('gulp-jscs'),
     jshint: tars.require('gulp-jshint'),
