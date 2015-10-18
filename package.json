@@ -24,7 +24,7 @@
     "gulp-data": "^1.2.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "2.3.0",
-    "gulp-importify": "^0.0.3",
+    "gulp-importify": "^0.0.4",
     "gulp-html-prettify": "https://github.com/artem-malko/gulp-html-prettify/archive/master.tar.gz",
     "gulp-jade": "^1.1.0",
     "gulp-jscs": "^3.0.1",
