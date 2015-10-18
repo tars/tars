@@ -131,7 +131,7 @@ tars.packages = {
     stylus: tars.require('gulp-stylus'),
     svg2png: tars.require('gulp-svg2png'),
     svgspritesheet: tars.require('gulp-svg-spritesheet'),
-    streamCombiner: tars.require('stream-combiner2'),
+    streamCombiner: tars.require('stream-combiner'),
     through2: tars.require('through2'),
     uglify: tars.require('gulp-uglify'),
     zip: tars.require('gulp-zip')
