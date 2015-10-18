@@ -9,7 +9,7 @@
     "chokidar": "^1.2.0",
     "del": "^2.0.2",
     "digits": "0.1.4",
-    "download": "4.2.1",
+    "download": "^4.3.1",
     "es6-promise": "^3.0.2",
     "gulp": "^3.9.0",
     "gulp-add-src": "0.2.0",
@@ -46,7 +46,7 @@
     "jshint-stylish": "^2.0.1",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
-    "stream-combiner2": "^1.0.2",
+    "stream-combiner": "0.2.2",
     "run-sequence": "^1.1.4",
     "through2": "^2.0.0"
   },

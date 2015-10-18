@@ -45,7 +45,7 @@ jsPaths = [].concat.apply([], jsPaths);
  *  - write main file at fs.
  */
 function base () {
-    return streamCombiner.obj([
+    return streamCombiner(
         gulpif(tars.config.useBabel, babel({
                 babelrc: path.resolve(cwd + '/.babelrc')
             })
@@ -54,7 +54,7 @@ function base () {
         rename({ suffix: tars.options.build.hash }),
         gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
-    ]);
+    );
 }
 
 /**
@@ -68,13 +68,13 @@ function base () {
  *  - write main file at fs.
  */
 function compress () {
-    return streamCombiner.obj([
+    return streamCombiner(
         gulpif(tars.config.removeConsoleLog, stripDebug()),
         uglify({ mangle: false }),
         rename({ suffix: '.min' }),
         gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
-    ]);
+    );
 }
 
 module.exports = function () {
