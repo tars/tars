@@ -21,7 +21,9 @@ var prettifyOpts = {
     preserve_newlines: true,
     max_preserve_newlines: 0,
     unformatted: true,
-    end_with_newline: true
+    end_with_newline: true,
+    condensed: true,
+    padcomments: false
 };
 
 /**

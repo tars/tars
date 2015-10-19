@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 1.4.1
+
+* Added verbose css-logs  on Error.
+* Docs-update about [Babel using](js-processing.md).
+* Fix of html-prettify config html-prettify.
+* Notification will appear on Error even all notifications has been disabled.
+* Deps have been updated, bugs have been fixed.
+
 ## Version 1.4.0
 
 * Added css-import supporting. Css (less, scss, sass, styl) files, began with _ will not be compiled, so it is recommended to import only these files. [More info](css-processing.md).
