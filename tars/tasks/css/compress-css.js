@@ -17,7 +17,7 @@ module.exports = function () {
                     notifier.error('An error occurred while compressing css.', error);
                 }
             }))
-            .pipe(csso())
+            .pipe(csso(true))
             .pipe(rename({
                 suffix: '.min'
             }))
