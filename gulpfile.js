@@ -121,6 +121,7 @@ gulp.task('build-dev', function (cb) {
             'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
             'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img'
         ],
+        'css:generate-critical-path',
         cb
     );
 });
@@ -135,7 +136,8 @@ gulp.task('build', function () {
         ],
         'service:pre-build',
         [
-            'css:compress-css'
+            'css:compress-css',
+            'css:generate-critical-path'
         ],
         'service:zip-build',
         function () {
