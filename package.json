@@ -44,6 +44,7 @@
     "gulp-zip": "^3.0.2",
     "gulp.spritesmith": "^4.1.1",
     "jshint-stylish": "^2.0.1",
+    "handlebars": "^3.0.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "stream-combiner": "^0.2.2",
