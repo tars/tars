@@ -110,7 +110,7 @@ gulp init
 * [Css](/docs/ru/css-processing.md)
 * [Js](/docs/ru/js-processing.md)
 * [Работа с изображениями](/docs/ru/images-processing.md)
-* [Работа со шрифтами и misc-файлами](/docs/fonts-and-misc.md)
+* [Работа со шрифтами и misc-файлами](/docs/ru/fonts-and-misc.md)
 * [Сценарии использования](/docs/ru/scenarios.md)
 * [Руководство по обновлению](/docs/ru/update-guide.md)
 * [Руководство для контрибуторов](/docs/ru/for-contributors.md)
