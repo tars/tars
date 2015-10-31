@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.5.0
+
+* Fix installation in npm3.
+* Use Handlebars from its own pacakge, not frrom gulp-handlebars.
+* Add css extension for using in etc folder.
+
 ## Version 1.4.1
 
 * Added verbose css-logs  on Error.
