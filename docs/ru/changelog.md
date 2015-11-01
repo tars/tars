@@ -2,8 +2,13 @@
 
 ## Version 1.5.0
 
-* Пофиксил установку в npm3.
-* Исопльузется Handlebars из отдельно установленного пакета, а не из gulp-handlebars.
+* Пофиксил установку в npm3. В том случае, если у вас есть проект, который был разработан на TARS 1.4.1 и npm2, а сейчас вы используете npm3, необходимо заменить одну строку в tars/tars.js:
+```javascript
+handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
+// заменить на 
+handlebars: tars.require('handlebars'),
+```
+* Используется Handlebars из отдельно установленного пакета, а не из gulp-handlebars.
 * Добавлена возможность использования css-файлов в папке etc.
 
 ## Version 1.4.1

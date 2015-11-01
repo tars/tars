@@ -2,8 +2,13 @@
 
 ## Version 1.5.0
 
-* Fix installation in npm3.
-* Use Handlebars from its own pacakge, not frrom gulp-handlebars.
+* Fix installation in npm3. IF you have a project, which has been made width TARS 1.4.1 and npm2, and you want to develop this project in npm3, you have to fix 1 line in tars/tars.js
+```javascript
+handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
+// replace with 
+handlebars: tars.require('handlebars'),
+```
+* Use Handlebars from its own pacakge, not from gulp-handlebars.
 * Add css extension for using in etc folder.
 
 ## Version 1.4.1
