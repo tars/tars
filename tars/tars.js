@@ -106,7 +106,7 @@ tars.packages = {
     gulpHandlebars: tars.require('gulp-compile-handlebars'),
     gulpif: tars.require('gulp-if'),
     gutil: gutil,
-    handlebars: tars.require('gulp-compile-handlebars/node_modules/handlebars'),
+    handlebars: tars.require('handlebars'),
     htmlMin: tars.require('gulp-minify-html'),
     htmlPrettify: tars.require('gulp-html-prettify'),
     imagemin: tars.require('gulp-imagemin'),
