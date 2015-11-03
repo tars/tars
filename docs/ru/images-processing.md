@@ -67,12 +67,20 @@ png-image-name или svg-image-name — название соответсвую
 
 ### Картинки модуля
 
-Находятся в папке assets внутри модуля. Для подключения используется следующий шаблон (для подключения картинки в html, необходимо использовать плейсхолдер [%=staticPrefixForCss=%](options.md#staticprefixforcss)):
+Находятся в папке assets внутри модуля. Для подключения используется следующий шаблон (для подключения картинки в css, необходимо использовать плейсхолдер [%=staticPrefixForCss=%](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {
     background: url('%=staticPrefixForCss=%assets/moduleName/sample-image-name.png') no-repeat;
 }
+```
+
+В html подключение выглядит иначе, используется плейсхолдер [%=staticPrefix=%](options.md#staticprefix):
+
+```handlebars
+<div class="news__item">
+    <img src="%=staticPrefix=%img/assets/moduleName/sample-image-name.png'" alt="">
+</div>
 ```
 
 В картинки модуля стоит складывать только те картинки, которые больше нигде не встречаются. Вложенность директорий поддерживается.
