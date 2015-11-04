@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.6.0
+
+* Sourcemaps are created only in dev-mode.
+
 ## Version 1.5.0
 
 * Fix installation in npm3. IF you have a project, which has been made width TARS 1.4.1 and npm2, and you want to develop this project in npm3, you have to fix 1 line in tars/tars.js

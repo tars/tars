@@ -18,7 +18,7 @@ var path = require('path');
 var staticFolderName = tars.config.fs.staticFolderName;
 var destFolder = './dev/' + staticFolderName + '/js';
 var compressJs = tars.flags.release || tars.flags.min;
-var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release;
+var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release && !tars.flags.min;
 var sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 var jsPaths = [
         '!./markup/modules/**/data/data.js',
@@ -72,7 +72,6 @@ function compress () {
         gulpif(tars.config.removeConsoleLog, stripDebug()),
         uglify({ mangle: false }),
         rename({ suffix: '.min' }),
-        gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
         gulp.dest(destFolder)
     );
 }
