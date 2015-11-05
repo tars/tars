@@ -30,7 +30,7 @@ module.exports = function () {
             .pipe(gulp.dest(/* path-string to destination directory. Only directory, not a file! */))
 
             // If you need to reload browser, uncomment the row below
-            // .pipe(browserSync.reload({stream:true}))
+            // .pipe(browserSync.reload({ stream:true }))
             .pipe(
                 // You can change text of success message
                 notifier.success('Example task has been finished')
