@@ -127,13 +127,6 @@ module.exports = function () {
                     throw err;
                 }
 
-                ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/tars/tasks', './tars/tasks/css', function (err) {
-                    if (err) {
-                        logError('Error while copy tars css preproc task');
-                        return;
-                    }
-                });
-
                 ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tars.config.fs.staticFolderName, function (err) {
                     if (err) {
                         logError('Error while copy static for css preproc :(');

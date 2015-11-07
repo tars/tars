@@ -47,13 +47,23 @@ global.tars = {
 var gutil = tars.require('gulp-util');
 var os = require('os');
 var tarsConfig = require('../tars-config');
+
+var helpersDirPath = './helpers';
+
 var templaterName;
 var templaterExtension = 'jade';
+var preprocessor;
 var cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 var cssPreprocExtension = cssPreprocName;
-var buildVersion = require('./helpers/set-build-version')();
+var cssPreprocMainExtension = cssPreprocExtension;
+
+var buildVersion = require(helpersDirPath + '/set-build-version')();
 var buildOptions = {};
 
+/**
+ * Log messages from TARS
+ * @param  {String} message Message to say
+ */
 tars.say = function say(message) {
     if (os.platform() === 'darwin') {
         console.log(gutil.colors.cyan.bold('🅃 🄰 🅁 🅂 : ') + gutil.colors.white.bold(message));
@@ -62,8 +72,18 @@ tars.say = function say(message) {
     }
 };
 
+/**
+ * Log info about skipped task
+ * @param  {String} taskName Skipped task name
+ * @param  {String} reason   Reason ot the skip
+ */
+tars.skipTaskLog = function skipTaskLog(taskName, reason) {
+    gutil.log(gutil.colors.white.bold('Skipped  \'' + gutil.colors.cyan(taskName) + '\' ' + reason));
+};
+
 if (cssPreprocName === 'stylus') {
     cssPreprocExtension = 'styl';
+    cssPreprocMainExtension = 'styl';
 } else if (cssPreprocName === 'scss') {
     cssPreprocExtension = '{scss,sass}';
 }
@@ -86,7 +106,7 @@ tars.config = tarsConfig;
 tars.flags = gutil.env;
 
 // Generate start screen
-require('./helpers/start-screen-generator')(gutil);
+require(helpersDirPath + '/start-screen-generator')(gutil);
 
 // Required packages
 tars.packages = {
@@ -114,21 +134,17 @@ tars.packages = {
     jade: tars.require('gulp-jade'),
     jscs: tars.require('gulp-jscs'),
     jshint: tars.require('gulp-jshint'),
-    less: tars.require('gulp-less'),
     mkdirp: tars.require('mkdirp'),
     ncp: tars.require('ncp'),
     notify: tars.require('gulp-notify'),
     plumber: tars.require('gulp-plumber'),
     postcss: tars.require('gulp-postcss'),
-    promisePolyfill: tars.require('es6-promise'),
     rename: tars.require('gulp-rename'),
     replace: tars.require('gulp-replace-task'),
     runSequence: tars.require('run-sequence'),
-    sass: tars.require('gulp-sass'),
     sourcemaps: tars.require('gulp-sourcemaps'),
     spritesmith: tars.require('gulp.spritesmith'),
     stripDebug: tars.require('gulp-strip-debug'),
-    stylus: tars.require('gulp-stylus'),
     svg2png: tars.require('gulp-svg2png'),
     svgspritesheet: tars.require('gulp-svg-spritesheet'),
     streamCombiner: tars.require('stream-combiner'),
@@ -140,20 +156,50 @@ tars.packages = {
 // Links to helpers
 tars.helpers = {
     buildVersion: buildVersion,
-    dateFormatter: require('./helpers/modify-date-formatter'),
-    fileLoader: require('./helpers/file-loader'),
-    notifier: require('./helpers/notifier'),
-    setUlimit: require('./helpers/set-ulimit'),
-    watcherLog: require('./helpers/watcher-log')
+    dateFormatter: require(helpersDirPath + '/modify-date-formatter'),
+    fileLoader: require(helpersDirPath + '/file-loader'),
+    notifier: require(helpersDirPath + '/notifier'),
+    setUlimit: require(helpersDirPath + '/set-ulimit'),
+    watcherLog: require(helpersDirPath + '/watcher-log'),
+    skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe')
 }
 
-templaterName = require('./helpers/templater-name-setter')();
+templaterName = require(helpersDirPath + '/templater-name-setter')();
 
 // Set template's extension
 if (templaterName === 'handlebars') {
     templaterExtension = ['html', 'hbs'];
 } else {
     templaterExtension = ['jade'];
+}
+
+// Set preprocessor function
+switch (cssPreprocName) {
+    case 'scss':
+        preprocessor = function () {
+            return tars.require('gulp-sass')({
+                outputStyle: 'expanded',
+                includePaths: process.cwd()
+            });
+        };
+        break;
+    case 'stylus':
+        preprocessor = function () {
+            return tars.require('gulp-stylus')({
+                'resolve url': true,
+                'include css': true
+            });
+        };
+        break;
+    case 'less':
+        preprocessor = function () {
+            return tars.require('gulp-less')({
+                path: [process.cwd()]
+            });
+        };
+        break;
+    default:
+        break;
 }
 
 // Info about templater
@@ -165,8 +211,10 @@ tars.templater = {
 // Info about css preprocessor
 tars.cssPreproc = {
     name: cssPreprocName,
-    ext: cssPreprocExtension
-}
+    ext: cssPreprocExtension,
+    mainExt: cssPreprocMainExtension,
+    preprocessor: preprocessor
+};
 
 // Build options
 tars.options = {
@@ -176,4 +224,4 @@ tars.options = {
         path: buildOptions.buildPath,
         version: buildOptions.buildVersion
     }
-}
+};

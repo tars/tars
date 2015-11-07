@@ -41,7 +41,7 @@ module.exports = function () {
                     notifier.success('SVG\'ve been rastered')
                 );
         } else {
-            gutil.log('!Rastering SVG is not used!');
+            tars.skipTaskLog('images:raster-svg', 'Rastering SVG is not used');
             cb(null);
         }
     });

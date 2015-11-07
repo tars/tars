@@ -24,7 +24,7 @@ module.exports = function () {
                     notifier.success('Zip-archive\'s been created')
                 );
         } else {
-            gutil.log('!Archiver is not used!');
+            tars.skipTaskLog('service:zip-build', 'Archiver is not used');
             cb(null);
         }
     });

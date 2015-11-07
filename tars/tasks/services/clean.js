@@ -2,7 +2,6 @@
 
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
-tars.packages.promisePolyfill.polyfill();
 
 var pathsToDel = [
         './dev/',

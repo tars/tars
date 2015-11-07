@@ -39,7 +39,7 @@ module.exports = function () {
                 .pipe(jscs.reporter())
                 .pipe(jscs.reporter('failImmediately'))
         } else {
-            gutil.log('!JS-style-check and hinting is not used!');
+            tars.skipTaskLog('js:check', 'JavaScript style-check and hinting is not used');
             cb(null);
         }
     });

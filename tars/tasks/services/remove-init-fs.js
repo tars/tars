@@ -3,7 +3,6 @@
 var gulp = tars.packages.gulp;
 var del = tars.packages.del;
 var staticFolderName = tars.config.fs.staticFolderName;
-tars.packages.promisePolyfill.polyfill();
 
 var pathsToDel = [
              'markup/' + staticFolderName + '/js/framework',
