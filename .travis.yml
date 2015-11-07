@@ -6,6 +6,7 @@ os:
 
 env:
   matrix:
+    - export NODE_VERSION="5"
     - export NODE_VERSION="4"
     - export NODE_VERSION="0.12"
 
@@ -13,16 +14,19 @@ matrix:
   fast_finish: true
 
 before_install:
+  - echo $TRAVIS_OS_NAME
   - git clone https://github.com/creationix/nvm.git ./.nvm
   - source ./.nvm/nvm.sh
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
 
 before_script:
+  - if [ ${NODE_VERSION} = "5" ]; then npm install -g npm; fi
+  - npm -v
   - npm install
   - npm install -g gulp
-  - gulp init
-  - gulp re-init
 
 script:
+  - gulp init
+  - gulp re-init
   - gulp --release --ie
