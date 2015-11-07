@@ -15,8 +15,10 @@ environment:
   matrix:
     - nodejs_version: 0.12
     - nodejs_version: 4
+    - nodejs_version: 5
 
 install:
+  - cmd: npm install -g npm
   - cmd: npm -v
   - cmd: node -v
   - cmd: npm install -g gulp
@@ -26,6 +28,7 @@ build: off
 
 build_script:
   - gulp init
+  - gulp re-init
 
 test_script:
   - cmd: gulp build --release --ie
