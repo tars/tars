@@ -20,7 +20,9 @@ var loadJsFiles = function (dir) {
         if (stat && stat.isDirectory()) {
             results = results.concat(loadJsFiles(file));
         } else {
-            if (!file.match(/(example-task)/) && !file.match(/(example-watcher)/) && !file.match(/^_/) && !file.match(/\/helpers\//) && file.match(/(.js*)/)) {
+            if (!file.match(/(example-task)/) && !file.match(/(example-watcher)/)
+                    && !file.match(/^_/) && !file.match(/\/helpers\//)
+                    && file.match(/(.js*)/)) {
                 results.push(file);
             }
         }

@@ -47,7 +47,7 @@ module.exports = function () {
                     notifier.success('SVG\'ve been minified')
                 );
         } else {
-            gutil.log('!SVG is not used!');
+            tars.skipTaskLog('images:minify-svg', 'SVG is not used');
             cb(null);
         }
     });

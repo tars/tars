@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('gulp');
+var gulp = tars.packges.gulp;
 var gutil = tars.packages.gutil;
 var chokidar = tars.packages.chokidar;
 var watcherLog = tars.helpers.watcherLog;

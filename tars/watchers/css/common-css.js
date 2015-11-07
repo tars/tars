@@ -20,5 +20,9 @@ module.exports = function () {
             if (tars.flags.ie8 || tars.flags.ie) {
                 tars.packages.gulp.start('css:compile-css-for-ie8');
             }
+
+            if (tars.flags.ie9 || tars.flags.ie) {
+                tars.packages.gulp.start('css:compile-css-for-ie9');
+            }
         });
 };
