@@ -5,7 +5,7 @@
  */
 module.exports = function () {
     return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/general/**/*.*', {
-        ignored: '',
+        ignored: 'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/general/**/*.tmp',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
