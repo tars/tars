@@ -19,6 +19,7 @@ var preprocName = tars.cssPreproc.name;
 module.exports = function () {
 
     return gulp.task('css:make-sprite-for-svg', function (cb) {
+
         if (tars.config.useSVG) {
             return gulp.src('./dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg/*.svg')
                 .pipe(plumber({

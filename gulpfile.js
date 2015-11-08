@@ -180,7 +180,7 @@ gulp.task('browsersync', function (cb) {
         },
         logConnections: true,
         debugInfo: true,
-        injectChanges: false,
+        injectChanges: browserSyncConfig.injectChanges || false,
         port: browserSyncConfig.port,
         open: browserSyncConfig.open,
         browser: browserSyncConfig.browser,

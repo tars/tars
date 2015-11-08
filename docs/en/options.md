@@ -201,6 +201,14 @@ Default: `true`
 
 By default, the browser displays a notification that the browser has been restarted, js or css has been updated, etc.
 
+#### injectChanges
+
+Type: `Boolean`
+
+Default: `false`
+
+Inject css on livereload or just reload page.
+
 ### removeConsoleLog
 
 Type: `Boolean`
