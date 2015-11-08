@@ -15,14 +15,12 @@ var browserSync = tars.packages.browserSync;
 
 module.exports = function generateTaskContent(browser) {
 
-    var postcssProcessors = tars.config.postcss;
     var postProcessors = [];
     var preprocExtensions = tars.cssPreproc.ext;
     var preprocName = tars.cssPreproc.name;
     var stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
-    var patterns = [];
-    var generateSourceMaps = tars.config.sourcemaps.css.active && !tars.flags.release && !tars.flags.min;
     var sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
+    var generateSourceMaps;
 
     var stylesFilesToConcatinate = [];
     var firstStylesFilesToConcatinate = [
@@ -54,10 +52,16 @@ module.exports = function generateTaskContent(browser) {
     var errorMessage = 'An error occurred while compiling css';
     var compiledFileName = 'main';
 
-    if (postcssProcessors && postcssProcessors.length) {
-        postcssProcessors.forEach(function (postProcessor) {
+    if (tars.config.postcss && tars.config.postcss.length) {
+        tars.config.postcss.forEach(function (postProcessor) {
             postProcessors.push(require(postProcessor.name)(postProcessor.options));
         });
+    }
+
+    if (preprocName === 'less' || preprocName === 'stylus') {
+        firstStylesFilesToConcatinate.push(
+            stylesFolderPath + '/sprites-' + preprocName + '/sprite-png.' + preprocExtensions
+        );
     }
 
     browser = browser || '';
@@ -138,6 +142,8 @@ module.exports = function generateTaskContent(browser) {
                     autoprefixer({browsers: tars.config.autoprefixerConfig})
                 );
             }
+
+            generateSourceMaps = tars.config.sourcemaps.css.active && !tars.flags.release && !tars.flags.min;
 
             break;
     };

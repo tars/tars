@@ -38,9 +38,9 @@ There are a couple of points on the organization scss|less|styl-files (scss is s
 * Mixins are in mixins.scss
 * UI-elements styles are in GUI.scss
 * Variables are in vars.scss
-* Libraries styles are in static/scss/libraries (may contains sub-folders).
-* Styles for plugins are in static/scss/plugins (may contains sub-folders).
-* Styles that we don't now where determine have to be put in static/scss/etc/etc.scss.
+* Libraries styles are in static/scss/libraries (may contains sub-folders and css-files).
+* Styles for plugins are in static/scss/plugins (may contains sub-folders and css-files).
+* Styles that we don't now where determine have to be put in static/scss/etc/etc.{scss,css}.
 * In the main folder with css (in this case, scss folder) you can not create new files (except when you correct task by yourselves connected with working with css). New files can be created only in the static/scss/plugins and libraries.
 
 Union of styles will be in the following order:
@@ -52,7 +52,7 @@ Union of styles will be in the following order:
 * GUI
 * Common stylies (common.scss)
 * Styles for plugins (static/scss/plugins, including all subdirectories)
-* Modules' styles
-* Styles of etc.scss
+* Modules' styles (css is supported)
+* Styles of etc.{scss,css}
 
-For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need to create ie8.scss or ie9.scss
+For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need to create ie8.{scss,css} or ie9.{scss,css}
