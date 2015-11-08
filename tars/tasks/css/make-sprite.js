@@ -4,6 +4,7 @@ var gulp = tars.packages.gulp;
 var spritesmith = tars.packages.spritesmith;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
+var skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
 var staticFolderName = tars.config.fs.staticFolderName;
 var imagesFolderName = tars.config.fs.imagesFolderName;
@@ -16,7 +17,7 @@ var preprocName = tars.cssPreproc.name;
  */
 module.exports = function () {
 
-    return gulp.task('css:make-sprite', function () {
+    return gulp.task('css:make-sprite', function (cb) {
 
         var spriteData = [];
         var dpiLength = dpi.length;
@@ -42,6 +43,7 @@ module.exports = function () {
                         notifier.error('An error occurred while making png-sprite.', error);
                     }
                 }))
+                .pipe(skipTaskWithEmptyPipe('css:make-sprite', cb))
                 .pipe(
                     spritesmith(
                         {

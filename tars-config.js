@@ -179,7 +179,14 @@ var tarsConfig = {
          * If you don't need to see notification in browser, switch to false
          * @type {Boolean}
          */
-        useNotifyInBrowser: true
+        useNotifyInBrowser: true,
+
+
+        /**
+         * Inject CSS changes
+         * @type {Boolean}
+         */
+        injectChanges: false
     },
 
     /**
