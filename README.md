@@ -42,7 +42,20 @@ Listed below are just a little part of the features. In fact builder has much mo
 **Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably
  way to work with TARS. It is more comfortable, fast to work with TARS-CLI.**
 
-You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.12 or more. Next you need to install gulp globally. (You may need rights of superuser or administrator).
+You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.12 or more. If you use Node.js version 5.x.x, please, be sure, that you use npm version 3.3.10 and higher. Otherwise update npm by using command:
+
+```bash
+npm i -g npm
+```
+
+For Windows you have to do some more steps:
+
+* navigate to C:\Program Files (x86)\nodejs or C:\Program Files\nodejs via cmd.exe or any available terminal. The path depends on how Node.js was installed;
+* run command `npm install npm@latest`.
+
+If you get a **Permission denied** or **Error: EACCES** error, you should run the previous command again in sudo.
+
+Next you need to install gulp globally. (You may need rights of superuser or administrator).
 
 ```shell
 npm install -g gulp

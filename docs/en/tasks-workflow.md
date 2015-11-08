@@ -14,7 +14,7 @@ By default, there is already an example of task. Let us examine it in detail. Le
 By default, each task requires a set of npm-modules and configs to work correctly:
 
 ```javascript
-var gulp = require('gulp');
+var gulp = tars.packges.gulp;
 var gutil = tars.packges.gutil;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
@@ -23,7 +23,7 @@ var notifier = tars.helpers.notifier;
 Also, if you want to use livereload for this task, you must to connect browser-sync module:
 
 ```javascript
-var browserSync = require('browser-sync');
+var browserSync = tars.packages.browserSync;
 ```
 
 If you require any dependences, include them there. Dependencies, which are not in the main package.json, you can add to the `user-package.json`, which is at the root of the project. The format is the same as in the main package.json. This is very useful, when you upgrade tars dependencies by command `gulp update-deps`. Your dependencies in `user-package.json` will be not overwritten.
@@ -42,9 +42,9 @@ If you need notification, a task must be ended as follows:
 
 ```javascript
 // If you need to reload browser, uncomment the row below
-// .pipe(browserSync.reload({stream:true}))
+// .pipe(browserSync.reload({ stream:true }))
 .pipe(
-    notifier('Example task is finished \n')
+    notifier.success('Example task is finished \n')
 );
 ```
 
@@ -63,7 +63,7 @@ You could crate your own watcher in a user-watchers directory. By default, there
 By default, each watcher requires a set of npm-modules and configs to work correctly:
 
 ```javascript
-var gulp = require('gulp');
+var gulp = tars.packges.gulp;
 var gutil = tars.packges.gutil;
 var chokidar = tars.packages.chokidar;
 var watcherLog = tars.helpers.watcherLog;
