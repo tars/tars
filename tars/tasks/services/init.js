@@ -4,7 +4,6 @@ var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var ncp = tars.packages.ncp.ncp;
 var Download = tars.packages.download;
-var os = require('os');
 
 var templaterName = tars.templater.name;
 var githubConfig = {
@@ -29,7 +28,7 @@ function logError(message) {
  * Init builder, download css-preprocessor and templater
  */
 module.exports = function () {
-    return gulp.task('service:init', ['service:create-fs'], function (cb) {
+    return gulp.task('service:init', ['service:create-fs'], function () {
 
         var downloadTemplater,
             downloadCssPreprocessor,

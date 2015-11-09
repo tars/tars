@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var zip = tars.packages.zip;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;

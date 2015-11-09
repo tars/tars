@@ -20,13 +20,12 @@
     "gulp-concat": "2.6.0",
     "gulp-csso": "1.0.1",
     "gulp-data": "^1.2.0",
+    "gulp-eslint": "^1.0.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "2.4.0",
     "gulp-importify": "^0.0.5",
     "gulp-html-prettify": "https://github.com/artem-malko/gulp-html-prettify/archive/master.tar.gz",
     "gulp-jade": "^1.1.0",
-    "gulp-jscs": "^3.0.2",
-    "gulp-jshint": "^1.12.0",
     "gulp-less": "^3.0.3",
     "gulp-minify-html": "^1.0.4",
     "gulp-notify": "^2.2.0",
@@ -42,7 +41,6 @@
     "gulp-util": "3.0.6",
     "gulp-zip": "^3.0.2",
     "gulp.spritesmith": "^4.2.2",
-    "jshint-stylish": "^2.0.1",
     "handlebars": "^3.0.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
@@ -56,7 +54,8 @@
     "fsevents": "^1.0.2"
   },
   "scripts": {
-    "install": "node ./tars/helpers/install-additional-deps.js"
+    "install": "node ./tars/helpers/install-additional-deps.js",
+    "lint": "eslint tars/*.js tars/tasks/**/*.js tars/watchers/**/*.js tars/helpers/**/*.js gulpfile.js --rule 'valid-jsdoc: [0, {}]'"
   },
   "repository": {
     "type": "git",

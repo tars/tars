@@ -27,7 +27,7 @@ module.exports = function () {
         var i = 0;
 
         for (i = 0; i < dpiLength; i++) {
-            if (dpi[i] == 192) {
+            if (dpi[i] === 192) {
                 dpi192 = true;
             } else if (dpi[i] === 288) {
                 dpi288 = true;
@@ -35,6 +35,8 @@ module.exports = function () {
                 dpi384 = true;
             }
         }
+
+        /* eslint-disable no-loop-func */
 
         for (i = 0; i < dpiLength; i++) {
             spriteData.push(gulp.src('./markup/' + staticFolderName + '/' + imagesFolderName + '/sprite/' + dpi[i] + 'dpi/*.png')
@@ -74,6 +76,8 @@ module.exports = function () {
                     notifier.success('Sprite img with dpi = ' + dpi[i] + ' is ready')
                 );
         }
+
+        /* eslint-enable no-loop-func */
 
         return spriteData[0].css
                 .pipe(

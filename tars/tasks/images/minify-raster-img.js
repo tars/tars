@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var imagemin = tars.packages.imagemin;
 var changed = tars.packages.changed;
 var plumber = tars.packages.plumber;
@@ -14,7 +13,7 @@ var imagesFolderName = tars.config.fs.imagesFolderName;
  * Minify png and jpg images
  */
 module.exports = function () {
-    return gulp.task('images:minify-raster-img', function (cb) {
+    return gulp.task('images:minify-raster-img', function () {
         return gulp.src('./dev/' + staticFolderName + '/' + imagesFolderName + '/**/*.{png, jpg}')
             .pipe(plumber({
                 errorHandler: function (error) {

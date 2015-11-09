@@ -1,11 +1,12 @@
 'use strict';
 
 var through2 = tars.packages.through2;
-var gutil = tars.packages.gutil;
 
 /**
  * Skip task if there are no any files in pipe
- * @return {cb}
+ * @param  {String}   taskName        The name of task to skip
+ * @param  {Callback} skipCallback    Callback for task skipping
+ * @return {Object}                   Pipe
  */
 module.exports = function skipTaskWithEmptyPipe(taskName, skipCallback) {
     var filesCount = 0;
@@ -16,7 +17,7 @@ module.exports = function skipTaskWithEmptyPipe(taskName, skipCallback) {
             filesCount++;
         }
 
-        this.push(file);
+        this.push(file); // eslint-disable-line no-invalid-this
 
         return callback();
     }, function (continueCallback) {

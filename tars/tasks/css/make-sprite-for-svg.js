@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var svgspritesheet = tars.packages.svgspritesheet;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;

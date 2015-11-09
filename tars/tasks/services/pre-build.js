@@ -1,9 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var gulpif = tars.packages.gulpif;
-var fs = require('fs');
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
 

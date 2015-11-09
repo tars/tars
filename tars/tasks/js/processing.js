@@ -21,15 +21,15 @@ var compressJs = tars.flags.release || tars.flags.min;
 var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release && !tars.flags.min;
 var sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 var jsPaths = [
-        '!./markup/modules/**/data/data.js',
-        './markup/' + staticFolderName + '/js/framework/**/*.js',
-        './markup/' + staticFolderName + '/js/libraries/**/*.js',
-        './markup/' + staticFolderName + '/js/plugins/**/*.js',
-        tars.config.jsPathsToConcatBeforeModulesJs,
-        './markup/modules/*/*.js',
-        tars.config.jsPathsToConcatAfterModulesJs,
-        '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
-    ];
+    '!./markup/modules/**/data/data.js',
+    './markup/' + staticFolderName + '/js/framework/**/*.js',
+    './markup/' + staticFolderName + '/js/libraries/**/*.js',
+    './markup/' + staticFolderName + '/js/plugins/**/*.js',
+    tars.config.jsPathsToConcatBeforeModulesJs,
+    './markup/modules/*/*.js',
+    tars.config.jsPathsToConcatAfterModulesJs,
+    '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
+];
 
 jsPaths = [].concat.apply([], jsPaths);
 
@@ -44,12 +44,11 @@ jsPaths = [].concat.apply([], jsPaths);
  *  - write source map;
  *  - write main file at fs.
  */
-function base () {
+function base() {
     return streamCombiner(
         gulpif(tars.config.useBabel, babel({
-                babelrc: path.resolve(cwd + '/.babelrc')
-            })
-        ),
+            babelrc: path.resolve(cwd + '/.babelrc')
+        })),
         concat({cwd: cwd, path: 'main.js'}),
         rename({ suffix: tars.options.build.hash }),
         gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)),
@@ -67,7 +66,7 @@ function base () {
  *  - write source maps;
  *  - write main file at fs.
  */
-function compress () {
+function compress() {
     return streamCombiner(
         gulpif(tars.config.removeConsoleLog, stripDebug()),
         uglify({ mangle: false }),

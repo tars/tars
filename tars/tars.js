@@ -18,8 +18,8 @@ function tarsRequire(packageName) {
         } catch (error) {
             console.log('\n\n');
             tars.say('It seems, that you use old version of TARS-CLI, and some packages are not available.');
-            tars.say('Update TARS-CLI via ' + gutil.colors.cyan.bold('"tars update"') + '.');
-            tars.say('Please, write to the tars.builder@gmail.com, if update did\'t help you.')
+            tars.say('Update TARS-CLI via "tars update".');
+            tars.say('Please, write to the tars.builder@gmail.com, if update did\'t help you.');
             throw new Error('Current version or TARS-CLI is too old for downloaded TARS');
         }
 
@@ -28,14 +28,6 @@ function tarsRequire(packageName) {
     }
 
     return requirePackage;
-}
-
-/**
- * Check operation system name
- * @return {Boolean}
- */
-function isWindows() {
-    return (/^win/i).test(os.platform());
 }
 
 // TARS is a global var
@@ -122,6 +114,7 @@ tars.packages = {
     del: tars.require('del'),
     digits: tars.require('digits'),
     download: tars.require('download'),
+    eslint: tars.require('gulp-eslint'),
     gulp: require('gulp'),
     gulpHandlebars: tars.require('gulp-compile-handlebars'),
     gulpif: tars.require('gulp-if'),
@@ -132,8 +125,6 @@ tars.packages = {
     imagemin: tars.require('gulp-imagemin'),
     importify: tars.require('gulp-importify'),
     jade: tars.require('gulp-jade'),
-    jscs: tars.require('gulp-jscs'),
-    jshint: tars.require('gulp-jshint'),
     mkdirp: tars.require('mkdirp'),
     ncp: tars.require('ncp'),
     notify: tars.require('gulp-notify'),
@@ -151,7 +142,7 @@ tars.packages = {
     through2: tars.require('through2'),
     uglify: tars.require('gulp-uglify'),
     zip: tars.require('gulp-zip')
-}
+};
 
 // Links to helpers
 tars.helpers = {
@@ -162,7 +153,7 @@ tars.helpers = {
     setUlimit: require(helpersDirPath + '/set-ulimit'),
     watcherLog: require(helpersDirPath + '/watcher-log'),
     skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe')
-}
+};
 
 templaterName = require(helpersDirPath + '/templater-name-setter')();
 

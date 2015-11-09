@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var gulpif = tars.packages.gulpif;
 var minify = tars.packages.htmlMin;
 var prettify = tars.packages.htmlPrettify;
@@ -14,6 +13,8 @@ var minifyOpts = {
     empty: true
 };
 
+/* eslint-disable camelcase */
+
 var prettifyOpts = {
     indent_char: ' ',
     indent_size: 4,
@@ -25,6 +26,8 @@ var prettifyOpts = {
     condensed: true,
     padcomments: false
 };
+
+/* eslint-enable camelcase */
 
 /**
  * Minify HTML (optional task)

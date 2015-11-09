@@ -1,13 +1,11 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var cache = tars.packages.cache;
 var changed = tars.packages.changed;
 var svg2png = tars.packages.svg2png;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
 
 var staticFolderName = tars.config.fs.staticFolderName;
 var imagesFolderName = tars.config.fs.imagesFolderName;

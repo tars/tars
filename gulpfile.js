@@ -17,9 +17,9 @@ var env = process.env;
 var browserSyncConfig = tars.config.browserSyncConfig;
 var notify = tars.packages.notify;
 
-/***********/
+/* ******* */
 /* HELPERS */
-/***********/
+/* ******* */
 // You can add your own helpers here. Helpers folder is tars/helpers
 
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
@@ -30,13 +30,13 @@ if (os.platform() !== 'win32') {
 // Load files from dir recursively and synchronously
 var fileLoader = tars.helpers.fileLoader;
 
-/***************/
+/* *********** */
 /* END HELPERS */
-/***************/
+/* *********** */
 
-/*********/
+/* ***** */
 /* TASKS */
-/*********/
+/* ***** */
 
 // SYSTEM'S TASKS
 // require system tasks
@@ -52,13 +52,13 @@ fileLoader('./tars/user-tasks').forEach(function (file) {
     require(file)();
 });
 
-/*************/
+/* ********* */
 /* END TASKS */
-/*************/
+/* ********* */
 
-/***********/
+/* ******** */
 /* WATCHERS */
-/***********/
+/* ******** */
 
 // Build dev-version with watchers and livereloader.
 // Also could tunnel your markup to web, if you use flag --tunnel
@@ -92,13 +92,13 @@ gulp.task('dev', ['build-dev'], function () {
     }
 });
 
-/****************/
+/* ************ */
 /* END WATCHERS */
-/****************/
+/* ************ */
 
-/**************/
+/* ********** */
 /* MAIN TASKS */
-/**************/
+/* ********** */
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
@@ -193,13 +193,13 @@ gulp.task('browsersync', function (cb) {
     cb(null);
 });
 
-/******************/
+/* ************** */
 /* END MAIN TASKS */
-/******************/
+/* ************** */
 
-/*****************/
+/* ************* */
 /* HELPERS TASKS */
-/*****************/
+/* ************* */
 
 gulp.task('svg-actions', function (cb) {
     if (tars.flags.ie8 || tars.flags.ie) {
@@ -225,6 +225,6 @@ gulp.task('compile-templates-with-data-reloading', function (cb) {
     );
 });
 
-/*********************/
+/* ***************** */
 /* END HELPERS TASKS */
-/*********************/
+/* ***************** */

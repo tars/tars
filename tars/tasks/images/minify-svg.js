@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
 var imagemin = tars.packages.imagemin;
 var changed = tars.packages.changed;
 var plumber = tars.packages.plumber;
@@ -23,25 +22,23 @@ module.exports = function () {
                     }
                 }))
                 .pipe(changed(
-                        'dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg',
-                        {
-                            hasChanged: changed.compareLastModifiedTime,
-                            extension: '.svg'
-                        }
-                    )
-                )
+                    'dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg',
+                    {
+                        hasChanged: changed.compareLastModifiedTime,
+                        extension: '.svg'
+                    }
+                ))
                 .pipe(imagemin(
-                        {
-                            svgoPlugins: [
-                                { cleanupIDs: false },
-                                { removeViewBox: false },
-                                { convertPathData: false },
-                                { mergePaths: false }
-                            ],
-                            use: []
-                        }
-                    )
-                )
+                    {
+                        svgoPlugins: [
+                            { cleanupIDs: false },
+                            { removeViewBox: false },
+                            { convertPathData: false },
+                            { mergePaths: false }
+                        ],
+                        use: []
+                    }
+                ))
                 .pipe(gulp.dest('./dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg/'))
                 .pipe(
                     notifier.success('SVG\'ve been minified')

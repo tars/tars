@@ -16,11 +16,11 @@ tars.templater.ext.forEach(function (extension) {
  */
 module.exports = function () {
     return tars.packages.chokidar.watch(filesToWatch, {
-            ignored: '',
-            persistent: true,
-            ignoreInitial: true
-        }).on('all', function (event, path) {
-            tars.helpers.watcherLog(event, path);
-            tars.packages.gulp.start('html:compile-templates');
-        });
+        ignored: '',
+        persistent: true,
+        ignoreInitial: true
+    }).on('all', function (event, path) {
+        tars.helpers.watcherLog(event, path);
+        tars.packages.gulp.start('html:compile-templates');
+    });
 };
