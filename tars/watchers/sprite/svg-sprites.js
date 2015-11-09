@@ -15,6 +15,6 @@ module.exports = function () {
             tars.packages.gulp.start('svg-actions');
         });
     } else {
-        return;
+        return false;
     }
 };

@@ -2,6 +2,7 @@
 
 /**
  * Output in the begining
+ * @param  {Object} gutil Utils for gulp
  */
 module.exports = function (gutil) {
     var currentCommand = process.argv.slice(2)[0];
@@ -52,7 +53,11 @@ module.exports = function (gutil) {
             tars.say(gutil.colors.cyan.bold('• ie9 maintenance;'));
         }
 
-        for (var key in tars.flags) { i++; }
+        for (var key in tars.flags) {
+            if (tars.flags.hasOwnProperty(key)) {
+                i++;
+            }
+        }
 
         if (i <= 1) {
             tars.say(gutil.colors.black.bold('No modes.'));

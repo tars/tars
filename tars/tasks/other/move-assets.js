@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = tars.packages.gulp;
-var gulpif = tars.packages.gulpif;
 var cache = tars.packages.cache;
 var rename = tars.packages.rename;
 var path = require('path');
@@ -13,7 +12,7 @@ var browserSync = tars.packages.browserSync;
  * Move files from assets modules of modules
  */
 module.exports = function () {
-    return gulp.task('other:move-assets', function (cb) {
+    return gulp.task('other:move-assets', function () {
         return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(plumber({
                 errorHandler: function (error) {

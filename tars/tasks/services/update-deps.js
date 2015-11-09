@@ -12,22 +12,22 @@ var fs = require('fs');
 module.exports = function () {
     return gulp.task('service:update-deps', function (cb) {
         var downloadPackage = new Download({ extract: true })
-            .get('https://raw.githubusercontent.com/2gis/tars/master/package.json')
+            .get('https://raw.githubusercontent.com/tars/tars/master/package.json')
             .dest('./');
 
         function downloadNewPackageJson() {
             fs.rename('./package.json', './_package.json', function () {
-                downloadPackage.run(function (err, files, stream) {
+                downloadPackage.run(function (err) {
                     if (err) {
                         throw err;
                     }
-                    exec('npm i', function (err, stdout, stderr) {
+                    exec('npm i', function (error, stdout, stderr) {
                         console.log(stdout);
                         console.log(stderr);
                         console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
                         gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Deps update has been finished successfully!'));
                         console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
-                        cb(err);
+                        cb(error);
                     });
                 });
             });

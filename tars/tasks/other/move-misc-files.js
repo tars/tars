@@ -9,7 +9,7 @@ var browserSync = tars.packages.browserSync;
  * Move misc files
  */
 module.exports = function () {
-    return gulp.task('other:move-misc-files', function (cb) {
+    return gulp.task('other:move-misc-files', function () {
         return gulp.src('./markup/' + tars.config.fs.staticFolderName + '/misc/**/*.*')
             .pipe(plumber({
                 errorHandler: function (error) {

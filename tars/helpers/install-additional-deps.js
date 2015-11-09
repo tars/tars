@@ -3,9 +3,7 @@
 // It is a global var
 require('../tars');
 
-var os = require('os');
 var exec = require('child_process').exec;
-var templaterName = tars.templaterName;
 var usersDeps;
 
 try {
@@ -14,6 +12,8 @@ try {
     console.log('User-package.json is not valid!\n');
     console.log(er);
 }
+
+/* eslint-disable no-loop-func */
 
 for (var dep in usersDeps.dependencies) {
     if (dep) {
@@ -26,3 +26,5 @@ for (var dep in usersDeps.dependencies) {
         });
     }
 }
+
+/* eslint-enable no-loop-func */

@@ -21,7 +21,7 @@ module.exports = {
         if (message) {
             resultMessage = '\n' + message + '\nLook in the console for details.\n\n';
         } else {
-            resultMessage =  '\nSomething is happen while working.\nLook in the console for details.\n\n';
+            resultMessage = '\nSomething is happen while working.\nLook in the console for details.\n\n';
         }
 
         if (error) {
