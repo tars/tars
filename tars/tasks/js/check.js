@@ -34,7 +34,7 @@ module.exports = function () {
                 .pipe(eslint.formatEach())
                 .pipe(eslint.failAfterError());
         } else {
-            tars.skipTaskLog('js:check', 'JavaScript style-check and hinting is not used');
+            tars.skipTaskLog('js:check', 'JavaScript check is not used');
             cb(null);
         }
     });
