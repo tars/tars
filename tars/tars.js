@@ -44,6 +44,7 @@ var helpersDirPath = './helpers';
 
 var templaterName;
 var templaterExtension = 'jade';
+var templaterMainExtension = 'jade';
 var preprocessor;
 var cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 var cssPreprocExtension = cssPreprocName;
@@ -159,9 +160,9 @@ templaterName = require(helpersDirPath + '/templater-name-setter')();
 
 // Set template's extension
 if (templaterName === 'handlebars') {
-    templaterExtension = ['html', 'hbs'];
+    templaterExtension = '{html,hbs}';
 } else {
-    templaterExtension = ['jade'];
+    templaterExtension = 'jade';
 }
 
 // Set preprocessor function
