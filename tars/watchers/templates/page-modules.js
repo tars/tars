@@ -1,22 +1,16 @@
 'use strict';
 
-var pagesToWatch = 'markup/pages/**/*.';
-var moduelsToWatch = 'markup/modules/**/*.';
-var filesToWatch = [];
-
-tars.templater.ext.forEach(function (extension) {
-    filesToWatch.push(
-        pagesToWatch + extension,
-        moduelsToWatch + extension
-    );
-});
+var filesToWatch = [
+    'markup/pages/**/*.' + tars.templater.ext,
+    'markup/modules/**/*.' + tars.templater.ext
+];
 
 /**
  * Watcher for templates-files of modules and pages
  */
 module.exports = function () {
     return tars.packages.chokidar.watch(filesToWatch, {
-        ignored: '',
+        ignored: 'markup/**/_*.' + tars.templater.ext,
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {

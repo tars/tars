@@ -46,6 +46,7 @@ var templaterName;
 var templaterExtension = 'jade';
 var templaterMainExtension = 'jade';
 var preprocessor;
+var templaterFn;
 var cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 var cssPreprocExtension = cssPreprocName;
 var cssPreprocMainExtension = cssPreprocExtension;
@@ -117,7 +118,6 @@ tars.packages = {
     download: tars.require('download'),
     eslint: tars.require('gulp-eslint'),
     gulp: require('gulp'),
-    gulpHandlebars: tars.require('gulp-compile-handlebars'),
     gulpif: tars.require('gulp-if'),
     gutil: gutil,
     handlebars: tars.require('handlebars'),
@@ -125,7 +125,6 @@ tars.packages = {
     htmlPrettify: tars.require('gulp-html-prettify'),
     imagemin: tars.require('gulp-imagemin'),
     importify: tars.require('gulp-importify'),
-    jade: tars.require('gulp-jade'),
     mkdirp: tars.require('mkdirp'),
     ncp: tars.require('ncp'),
     notify: tars.require('gulp-notify'),
@@ -194,10 +193,33 @@ switch (cssPreprocName) {
         break;
 }
 
+// Set templater function
+switch (templaterName) {
+    case 'handlebars':
+        templaterFn = function (modulesData) {
+            return tars.require('gulp-compile-handlebars')(modulesData, {
+                batch: ['./markup/modules'],
+                helpers: require('./tasks/html/helpers/handlebars-helpers.js')
+            });
+        };
+        break;
+    case 'jade':
+        templaterFn = function (modulesData) {
+            return tars.require('gulp-jade')({
+                pretty: true,
+                locals: modulesData
+            });
+        };
+        break;
+    default:
+        break;
+}
+
 // Info about templater
 tars.templater = {
     name: templaterName,
-    ext: templaterExtension
+    ext: templaterExtension,
+    fn: templaterFn
 };
 
 // Info about css preprocessor
