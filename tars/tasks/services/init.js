@@ -94,13 +94,6 @@ module.exports = function () {
                         return;
                     }
                 });
-
-                ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/tars/tasks', './tars/tasks/html', function (err) {
-                    if (err) {
-                        logError('Error while copy tars templater task');
-                        return;
-                    }
-                });
             });
         });
 

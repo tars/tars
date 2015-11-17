@@ -1,1 +1,143 @@
-module.exports = function () {};
+'use strict';
+
+var gulp = tars.packages.gulp;
+var replace = tars.packages.replace;
+var plumber = tars.packages.plumber;
+var rename = tars.packages.rename;
+var through2 = tars.packages.through2;
+var fs = require('fs');
+var notifier = tars.helpers.notifier;
+var browserSync = tars.packages.browserSync;
+var patterns = [];
+
+/**
+ * Concat all data for all modules to one file
+ * @return {Object} Object with data for modules
+ */
+function concatModulesData() {
+    var dataEntry;
+    var readyModulesData;
+
+    try {
+        dataEntry = fs.readFileSync('./dev/temp/modulesData.js', 'utf8');
+    } catch (er) {
+        dataEntry = false;
+    }
+
+    if (dataEntry) {
+        eval('readyModulesData = {' + dataEntry + '}');
+    } else {
+        readyModulesData = '{}';
+    }
+
+    return readyModulesData;
+}
+
+if (!tars.flags.ie8 && !tars.flags.ie) {
+    patterns.push(
+        {
+            match: '<link href="%=staticPrefix=%css/main_ie8%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
+            replacement: ''
+        }
+    );
+}
+
+if (!tars.flags.ie9 && !tars.flags.ie) {
+    patterns.push(
+        {
+            match: '<link href="%=staticPrefix=%css/main_ie9%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
+            replacement: ''
+        }
+    );
+}
+
+if (tars.flags.min || tars.flags.release) {
+    patterns.push(
+        {
+            match: '%=min=%',
+            replacement: '.min'
+        }
+    );
+} else {
+    patterns.push(
+        {
+            match: '%=min=%',
+            replacement: ''
+        }
+    );
+}
+
+if (tars.flags.release) {
+    patterns.push(
+        {
+            match: '%=hash=%',
+            replacement: tars.options.build.hash
+        }
+    );
+} else {
+    patterns.push(
+        {
+            match: '%=hash=%',
+            replacement: ''
+        }
+    );
+}
+
+patterns.push(
+    {
+        match: '%=staticPrefix=%',
+        replacement: tars.config.staticPrefix
+    }
+);
+
+/**
+ * HTML compilation of pages templates.
+ * Templates with _ prefix won't be compiled
+ */
+module.exports = function () {
+    return gulp.task('html:compile-templates', function () {
+        var modulesData;
+        var error;
+
+        try {
+            modulesData = concatModulesData();
+        } catch (er) {
+            error = er;
+            modulesData = false;
+        }
+
+        return gulp.src(['./markup/pages/**/*.' + tars.templater.ext,
+                         '!./markup/pages/**/_*.' + tars.templater.ext])
+            .pipe(plumber({
+                errorHandler: function (pipeError) {
+                    notifier.error('An error occurred while compiling to html.', pipeError);
+                    this.emit('end');
+                }
+            }))
+            .pipe(
+                modulesData
+                    ? tars.templater.fn(modulesData)
+                    : through2.obj(
+                        function () {
+                            /* eslint-disable no-invalid-this */
+
+                            this.emit('error', new Error('An error occurred with data-files!\n' + error));
+
+                            /* eslint-enable no-invalid-this */
+                        }
+                    )
+            )
+            .pipe(replace({
+                patterns: patterns,
+                usePrefix: false
+            }))
+            .pipe(rename(function (pathToFileToRename) {
+                pathToFileToRename.extname = '.html'
+            }))
+            .pipe(gulp.dest('./dev/'))
+            .pipe(browserSync.reload({ stream: true }))
+            .pipe(
+                notifier.success('Templates\'ve been compiled')
+            );
+    });
+};
