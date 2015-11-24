@@ -11,6 +11,27 @@ var browserSync = tars.packages.browserSync;
 var patterns = [];
 
 /**
+ * Traverse recursively through data-object
+ * If any property is a funciton,
+ * this function will be called
+ * @param  {Object} obj     Current object to traverse in current step
+ * @param  {Object} context Object with all data
+ */
+function traverseThroughObject(obj, context) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] === 'object') {
+                traverseThroughObject(obj[property], context);
+            }
+
+            if (typeof obj[property] === 'function') {
+                obj[property] = obj[property].call(context)
+            }
+        }
+    }
+}
+
+/**
  * Concat all data for all modules to one file
  * @return {Object} Object with data for modules
  */
@@ -26,6 +47,7 @@ function concatModulesData() {
 
     if (dataEntry) {
         eval('readyModulesData = {' + dataEntry + '}');
+        traverseThroughObject(readyModulesData, readyModulesData);
     } else {
         readyModulesData = '{}';
     }

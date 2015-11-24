@@ -78,7 +78,63 @@ head.html
 <title>{{head.defaults.title}}</title>
 ```
 
-But, if you have passed the data to module, you will not have an access to the data for child module. You have to pass global scope to the parent module (to not pass any data while including), to pass data for child-module.
+But, if you have passed the data to module, you will not have an access to the data for child module. You have to pass global scope to the parent module (to not pass any data while including), to pass data for child-module. Or you can use another variant:
+
+index.html
+```handlebars
+{{> module1/module1 module1.main}}
+```
+
+module1.html
+```handlebars
+
+<h1>{{title}}</h1>
+
+{{> module2/module2 module2.main}}
+```
+
+```javascript
+// module1/data/data.js
+module1: {
+    main: {
+        title: 'Title of module1',
+        module2: function () {
+            return this.module2;
+        }
+    }
+}
+```
+
+module2.html
+```handlebars
+
+<h2>{{title}}</h2>
+```
+
+```javascript
+// module2/data/data.js
+module2: {
+    main: {
+        title: 'Title of module2'
+    }
+}
+```
+
+So, you can get access to data of any module from data-file of current-module by using really simple construction:
+
+```javascript
+// module/data/data.js
+module: {
+    main: {
+        title: 'Title of module',
+        innerModuleData: function () {
+            // this is pointed to the global object 
+            // with all data of the application
+            return this.moduleName.ModuleType;
+        }
+    }
+}
+```
 
 Handlebars known as a very simple template, logicless. But for using the handlebars in the static markup in such kind not very comfortable. So, different helpers have been added that extend the capabilities of handlebars.<br/>
 Helpers description can be found [here](handlebars-helpers.md).
@@ -116,4 +172,4 @@ mixin head(data)
    <title>#{data.title}</title>
 ```
 
-You can use any features that are available in jade.
+You can use any features that are available in jade. You can include modules with any nesting of child-modules and with any data by using inlude and '+'. And you can use functions in data.js like in examples for handlebars.
