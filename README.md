@@ -83,7 +83,7 @@ Everything is ready, make it work! :)
 
 `gulp init` — initializes project with the specified settings in the tars-config. Creates a file structure.
 
-`gulp re-init` — reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options.
+`gulp re-init` — reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options. **Attention, files from pages and static folder will be deleted.**
 
 `gulp` or `gulp build` — make project assembly. There not minimized files are connected. Type of assembly depends on the transmitted keys with this command. Available keys:
 
