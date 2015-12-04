@@ -25,7 +25,7 @@ function traverseThroughObject(obj, context) {
             }
 
             if (typeof obj[property] === 'function') {
-                obj[property] = obj[property].call(context)
+                obj[property] = obj[property].call(context);
             }
         }
     }
@@ -154,7 +154,7 @@ module.exports = function () {
                 usePrefix: false
             }))
             .pipe(rename(function (pathToFileToRename) {
-                pathToFileToRename.extname = '.html'
+                pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))
             .pipe(browserSync.reload({ stream: true }))

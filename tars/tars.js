@@ -44,7 +44,6 @@ var helpersDirPath = './helpers';
 
 var templaterName;
 var templaterExtension = 'jade';
-var templaterMainExtension = 'jade';
 var preprocessor;
 var templaterFn;
 var cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
