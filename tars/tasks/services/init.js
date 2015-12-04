@@ -25,9 +25,9 @@ function makeUrl(type, version) {
     var urlTemplate = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix;
 
     if (type === 'templater') {
-        return urlTemplate + tars.templater.name + '/archive/' + version + '.zip'
+        return urlTemplate + tars.templater.name + '/archive/' + version + '.zip';
     } else {
-        return urlTemplate + tars.cssPreproc.name + '/archive/' + version + '.zip'
+        return urlTemplate + tars.cssPreproc.name + '/archive/' + version + '.zip';
     }
 }
 
@@ -43,8 +43,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function getVersionToDownload(type) {
-            return new Promise(function (resolve, reject) {
-                var url;
+            return new Promise(function (resolve) {
                 var version;
 
                 if (process.env.tarsVersion) {
@@ -55,7 +54,7 @@ module.exports = function () {
 
                 new Download({ mode: '755' })
                     .get(makeUrl(type, version))
-                    .run(function (error, files) {
+                    .run(function (error) {
                         if (error) {
                             version = 'master';
                         }
@@ -86,7 +85,7 @@ module.exports = function () {
                 new Download({ extract: true, mode: '755' })
                     .get(makeUrl(params.type, params.version))
                     .dest(destPath)
-                    .run(function (error, files) {
+                    .run(function (error) {
                         if (error) {
                             reject(error);
                         }
@@ -114,7 +113,7 @@ module.exports = function () {
 
                 ncp(downloadedPartsPath, './markup', function (error) {
                     if (error) {
-                        reject(error)
+                        reject(error);
                         return;
                     }
                     resolve();
@@ -127,7 +126,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function generateStartScreen() {
-            return new Promise(function (resolve, reject) {
+            return new Promise(function (resolve) {
                 if (tars.cli) {
                     tars.say('It\'s almost ready!');
                 } else {
@@ -164,11 +163,11 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function removeTmpFolders() {
-            return new Promise(function (resolve, reject) {
+            return new Promise(function (resolve) {
                 del(['./.tmpTemplater/', './.tmpPreproc/']).then(function () {
                     resolve();
                 });
-            })
+            });
         }
 
         /**
