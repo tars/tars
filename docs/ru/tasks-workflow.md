@@ -15,8 +15,8 @@ TARS – набор gulp-тасков, организованных особым
 По умолчанию каждому таску требуется набор модулей для корректной работы:
 
 ```javascript
-var gulp = tars.packges.gulp;
-var gutil = tars.packges.gutil;
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 ```
@@ -67,8 +67,8 @@ require('./ path to task file from current task');
 По умолчанию каждому вотчеру требуется набор модулей для корректной работы:
 
 ```javascript
-var gulp = tars.packges.gulp;
-var gutil = tars.packges.gutil;
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
 var chokidar = tars.packages.chokidar;
 var watcherLog = tars.helpers.watcherLog;
 ```

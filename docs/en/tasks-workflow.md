@@ -14,8 +14,8 @@ By default, there is already an example of task. Let us examine it in detail. Le
 By default, each task requires a set of npm-modules and configs to work correctly:
 
 ```javascript
-var gulp = tars.packges.gulp;
-var gutil = tars.packges.gutil;
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
 var notify = tars.packages.notify;
 var notifier = tars.helpers.notifier;
 ```
@@ -63,8 +63,8 @@ You could crate your own watcher in a user-watchers directory. By default, there
 By default, each watcher requires a set of npm-modules and configs to work correctly:
 
 ```javascript
-var gulp = tars.packges.gulp;
-var gutil = tars.packges.gutil;
+var gulp = tars.packages.gulp;
+var gutil = tars.packages.gutil;
 var chokidar = tars.packages.chokidar;
 var watcherLog = tars.helpers.watcherLog;
 ```
