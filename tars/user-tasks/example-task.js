@@ -2,7 +2,7 @@
 
 // This is example of task function
 
-var gulp = tars.packges.gulp;
+var gulp = tars.packages.gulp;
 var tarsConfig = tars.config;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
