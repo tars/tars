@@ -4,24 +4,31 @@ var gulp = tars.packages.gulp;
 var gutil = tars.packages.gutil;
 var ncp = tars.packages.ncp.ncp;
 var Download = tars.packages.download;
+var del = tars.packages.del;
 
-var templaterName = tars.templater.name;
 var githubConfig = {
     user: 'tars',
     repoPrefix: 'tars-'
 };
-var templaterVersion = (process.env.tarsVersion ? 'version-' + process.env.tarsVersion : 'version-' + require('../../../tars.json').version);
-var cssVersion = templaterVersion;
-var templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName + '/archive/' + templaterVersion + '.zip';
-var cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tars.config.cssPreprocessor + '/archive/' + cssVersion + '.zip';
 
 ncp.limit = 16;
 
 require('./create-fs')();
 
-function logError(message) {
-    tars.say(gutil.colors.red('x') + ' ' + message);
-    tars.say('Please, repost with message to developer tars.builder@gmail.com');
+/**
+ * Make url to download TARS parts
+ * @param  {String} type    Type of the generated link
+ * @param  {String} version Used version of TARS
+ * @return {String}         Url to download
+ */
+function makeUrl(type, version) {
+    var urlTemplate = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix;
+
+    if (type === 'templater') {
+        return urlTemplate + tars.templater.name + '/archive/' + version + '.zip'
+    } else {
+        return urlTemplate + tars.cssPreproc.name + '/archive/' + version + '.zip'
+    }
 }
 
 /**
@@ -30,116 +37,169 @@ function logError(message) {
 module.exports = function () {
     return gulp.task('service:init', ['service:create-fs'], function () {
 
-        var downloadTemplater,
-            downloadCssPreprocessor,
-            downloadTemplaterTest,
-            downloadCssPreprocessorTest;
+        /**
+         * Get used version of TARS parts
+         * @param  {String} type Type of TARS part
+         * @return {Object}        Promise
+         */
+        function getVersionToDownload(type) {
+            return new Promise(function (resolve, reject) {
+                var url;
+                var version;
 
-        downloadTemplaterTest = new Download({ mode: '755' })
-            .get(templaterUrl);
-
-        downloadCssPreprocessorTest = new Download({ mode: '755' })
-            .get(cssPreprocessorUrl);
-
-
-        if (tars.cli) {
-            tars.say('It\'s almost ready!');
-        } else {
-            console.log('\n');
-            tars.say('Hi!');
-            tars.say('Let\'s create awesome markup!');
-        }
-
-        tars.say('You can find more info about TARS at ' + gutil.colors.cyan('"https://github.com/tars/tars/blob/master/README.md"'));
-
-        if (tars.cli) {
-            tars.say('Run the command ' + gutil.colors.cyan('"tars --help"') + ' to see all avalible options and commands.');
-            tars.say('Start your work with ' + gutil.colors.cyan('"tars dev"') + '.');
-        } else {
-            console.log('\n');
-            tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
-            tars.say(gutil.colors.red.bold('This mode is depricated for developing.'));
-            tars.say(gutil.colors.red.bold('Please, do not use "dev" tasks in with mode.\n'));
-            tars.say('Install tars-cli for developing.');
-            tars.say('Run the command ' + gutil.colors.cyan('"npm i -g tars-cli"') + ', to install tars-cli.');
-            tars.say('More info: https://github.com/tars/tars-cli.');
-            console.log('\n\n');
-        }
-
-        downloadTemplaterTest.run(function (err, files) {
-            if (err) {
-                templaterVersion = 'master';
-                templaterUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + templaterName + '/archive/' + templaterVersion + '.zip';
-            }
-
-            downloadTemplater = new Download({ extract: true, mode: '755' })
-                .get(templaterUrl)
-                .dest('./.tmpTemplater');
-
-            /**
-             * Including templater
-             * @param  {Object} err
-             * @param  {Array} files
-             * @param  {Stream} stream
-             */
-            downloadTemplater.run(function (err, files) {
-
-                if (err) {
-                    throw err;
+                if (process.env.tarsVersion) {
+                    version = 'version-' + process.env.tarsVersion;
+                } else {
+                    version = 'version-' + require('../../../tars.json').version;
                 }
 
-                ncp('./.tmpTemplater/tars-' + templaterName + '-' + templaterVersion + '/markup', './markup', function (err) {
-                    if (err) {
-                        logError('Error while copy markup templater');
-                        return;
-                    }
-                });
+                new Download({ mode: '755' })
+                    .get(makeUrl(type, version))
+                    .run(function (error, files) {
+                        if (error) {
+                            version = 'master';
+                        }
+
+                        resolve({
+                            version: version,
+                            type: type
+                        });
+                    });
             });
-        });
+        }
 
-        downloadCssPreprocessorTest.run(function (err, files) {
-            if (err) {
-                cssVersion = 'master';
-                cssPreprocessorUrl = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix + tars.config.cssPreprocessor + '/archive/' + cssVersion + '.zip';
-            }
+        /**
+         * Download parts
+         * @param  {Object} params Version and type of the part
+         * @return {Object}        Promise
+         */
+        function download(params) {
+            return new Promise(function (resolve, reject) {
+                var destPath;
 
-            downloadCssPreprocessor = new Download({ extract: true, mode: '755' })
-                .get(cssPreprocessorUrl)
-                .dest('./.tmpPreproc');
-
-            /**
-             * Including css-preprocessor
-             * @param  {Object} err
-             * @param  {Array} files
-             * @param  {Stream} stream
-             */
-            downloadCssPreprocessor.run(function (err, files) {
-
-                if (err) {
-                    throw err;
+                if (params.type === 'templater') {
+                    destPath = './.tmpTemplater';
+                } else {
+                    destPath = './.tmpPreproc';
                 }
 
-                ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/static', './markup/' + tars.config.fs.staticFolderName, function (err) {
-                    if (err) {
-                        logError('Error while copy static for css preproc :(');
+                new Download({ extract: true, mode: '755' })
+                    .get(makeUrl(params.type, params.version))
+                    .dest(destPath)
+                    .run(function (error, files) {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(params);
+                    });
+            });
+        }
+
+        /**
+         * Apply downloaded files
+         * @param  {Object} params Version and type of the part
+         * @return {Object}        Promise
+         */
+        function applyDownloadedParts(params) {
+            return new Promise(function (resolve, reject) {
+                var downloadedPartsPath;
+
+                if (params.type === 'templater') {
+                    downloadedPartsPath = './.tmpTemplater/tars-' + tars.templater.name;
+                } else {
+                    downloadedPartsPath = './.tmpPreproc/tars-' + tars.cssPreproc.name;
+                }
+
+                downloadedPartsPath += '-' + params.version + '/markup';
+
+                ncp(downloadedPartsPath, './markup', function (error) {
+                    if (error) {
+                        reject(error)
                         return;
                     }
-                });
-
-                ncp('./.tmpPreproc/tars-' + tars.config.cssPreprocessor + '-' + cssVersion + '/markup/modules/_template', './markup/modules/_template/', function (err) {
-                    if (err) {
-                        logError('Error while copy modules for css preproc');
-                        return;
-                    }
-
-                    console.log(gutil.colors.black.bold('\n--------------------------------------------------------'));
-                    tars.say(gutil.colors.green.bold('TARS has been inited successfully!\n'));
-                    tars.say('You choosed:');
-                    tars.say(gutil.colors.cyan.bold(tars.config.cssPreprocessor) + ' as css-preprocessor');
-                    tars.say(gutil.colors.cyan.bold(templaterName) + ' as templater\n');
-                    console.log(gutil.colors.black.bold('--------------------------------------------------------\n'));
+                    resolve();
                 });
             });
-        });
+        }
+
+        /**
+         * Generate start screen
+         * @return {Object}        Promise
+         */
+        function generateStartScreen() {
+            return new Promise(function (resolve, reject) {
+                if (tars.cli) {
+                    tars.say('It\'s almost ready!');
+                } else {
+                    console.log('\n');
+                    tars.say('Hi!');
+                    tars.say('Let\'s create awesome markup!');
+                }
+
+                tars.say('You can find more info about TARS at ' +
+                            gutil.colors.cyan('"https://github.com/tars/tars/blob/master/README.md"'));
+
+                if (tars.cli) {
+                    tars.say('Run the command ' + gutil.colors.cyan('"tars --help"') +
+                                ' to see all avalible options and commands.');
+                    tars.say('Start your work with ' + gutil.colors.cyan('"tars dev"') + '.');
+                } else {
+                    console.log('\n');
+                    tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
+                    tars.say(gutil.colors.red.bold('This mode is depricated for developing.'));
+                    tars.say(gutil.colors.red.bold('Please, do not use "dev" tasks in with mode.\n'));
+                    tars.say('Install tars-cli for developing.');
+                    tars.say('Run the command ' + gutil.colors.cyan('"npm i -g tars-cli"') +
+                                ', to install tars-cli.');
+                    tars.say('More info: https://github.com/tars/tars-cli.');
+                    console.log('\n\n');
+                }
+
+                resolve();
+            });
+        }
+
+        /**
+         * Remove temp folders
+         * @return {Object}        Promise
+         */
+        function removeTmpFolders() {
+            return new Promise(function (resolve, reject) {
+                del(['./.tmpTemplater/', './.tmpPreproc/']).then(function () {
+                    resolve();
+                });
+            })
+        }
+
+        /**
+         * Generate last screen after success downloading
+         */
+        function finishInit() {
+            console.log(gutil.colors.black.bold('\n--------------------------------------------------------'));
+            tars.say(gutil.colors.green.bold('TARS has been inited successfully!\n'));
+            tars.say('You choosed:');
+            tars.say(gutil.colors.cyan.bold(tars.cssPreproc.name) + ' as css-preprocessor');
+            tars.say(gutil.colors.cyan.bold(tars.templater.name) + ' as templater\n');
+            console.log(gutil.colors.black.bold('--------------------------------------------------------\n'));
+        }
+
+        // Start init
+        Promise
+            .all([
+                generateStartScreen(),
+                getVersionToDownload('templater')
+                    .then(download)
+                    .then(applyDownloadedParts),
+                getVersionToDownload('preprocessor')
+                    .then(download)
+                    .then(applyDownloadedParts)
+            ])
+            .then(removeTmpFolders)
+            .then(finishInit)
+            .catch(function (error) {
+                tars.say(gutil.colors.red(error));
+                tars.say('Please, repost with message and the stack trace to developer tars.builder@gmail.com');
+                console.error(error.stack);
+            });
     });
 };
