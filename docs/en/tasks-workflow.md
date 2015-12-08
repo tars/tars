@@ -36,7 +36,8 @@ So, if there are dependencies from another tasks, require them to the current:
 require('./ path to task file from current task');
 ```
 
-Then there is module body, which will export a task. Each task is described in the exported function which receives as a parameter builder configuration (buildOptions). Hash is in the build config (if the build key is `--release`), also there is a current build version, if you use versioning. Exported function returns the complete gulp-task. Next do everything as with usual task for gulp.
+Then there is module body, which will export a task. Each task is described in the exported function. You have an access to global var tars in all tasks and watchers. You can get any info about your current project (config, used prepocessor and so on) from that var.
+Exported function returns the complete gulp-task. Next do everything as with usual task for gulp.
 
 If you need notification, a task must be ended as follows:
 
@@ -91,5 +92,5 @@ When you add watchers it is recommended to use variables:
 
 tars.config.fs.staticFolderName - for the name of the folder with statics
 tars.config.fs.imagesFolderName - for the name of the folder with images
-watchOptions.templateExtension - contains an extension for files of the selected template
-watchOptions.cssPreprocExtension - contains an extension for files of the selected css-preprocessor
+tars.templater.ext - contains an extensions (Array) for files of the selected template
+tars.cssPreproc.ext - contains an extension for files of the selected css-preprocessor
