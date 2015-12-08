@@ -55,4 +55,10 @@ Union of styles will be in the following order:
 * Modules' styles (css is supported)
 * Styles of etc.{scss,css}
 
-For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need to create ie8.{scss,css} or ie9.{scss,css}
+For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need to create ie8.{scss,css} or ie9.{scss,css}.
+
+Also, you can use css-files and not to include them to bundle. There is folder separate-css in static/scss, where you can store all files, which have to be included manually. There is an example of including in any template:
+
+```handlebars
+<link href="%=staticPrefix=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
+```

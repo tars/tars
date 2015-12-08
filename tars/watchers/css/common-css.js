@@ -11,7 +11,7 @@ var globsToWatch = [
  */
 module.exports = function () {
     return tars.packages.chokidar.watch(globsToWatch, {
-        ignored: '',
+        ignored: ['markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css'],
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {
