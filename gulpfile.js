@@ -112,7 +112,7 @@ gulp.task('build-dev', function (cb) {
             'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
         ],
         [
-            'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9',
+            'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',
             'html:concat-modules-data',
             'js:move-separate', 'js:processing'
         ],
