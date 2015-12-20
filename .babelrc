@@ -4,6 +4,7 @@
   "blacklist": ["es6.tailCall"],
   "optional": ["optimisation.flow.forOf", "bluebirdCoroutines"],
   "ignore": [
-    "**/babel_ignore_*.js"
+    "**/babel_ignore_*.js",
+    "static/**/*.js"
   ]
 }

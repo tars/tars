@@ -119,7 +119,6 @@ tars.packages = {
     gulp: require('gulp'),
     gulpif: tars.require('gulp-if'),
     gutil: gutil,
-    handlebars: tars.require('handlebars'),
     htmlMin: tars.require('gulp-minify-html'),
     htmlPrettify: tars.require('gulp-html-prettify'),
     imagemin: tars.require('gulp-imagemin'),
@@ -195,6 +194,7 @@ switch (cssPreprocName) {
 // Set templater function
 switch (templaterName) {
     case 'handlebars':
+        tars.packages.handlebars = tars.require('gulp-compile-handlebars').Handlebars;
         templaterFn = function (modulesData) {
             return tars.require('gulp-compile-handlebars')(modulesData, {
                 batch: ['./markup/modules'],
