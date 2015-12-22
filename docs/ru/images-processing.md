@@ -67,13 +67,15 @@ png-image-name или svg-image-name — название соответсвую
 
 ### Картинки модуля
 
-Находятся в папке assets внутри модуля. Для подключения используется следующий шаблон (для подключения картинки в html, необходимо использовать плейсхолдер [%=staticPrefixForCss=%](options.md#staticprefixforcss)):
+Находятся в папке assets внутри модуля. Для подключения используется следующий шаблон (для подключения картинки в html, необходимо использовать плейсхолдер [%=static=%](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {
-    background: url('%=staticPrefixForCss=%assets/moduleName/sample-image-name.png') no-repeat;
+    background: url('%=static=%assets/moduleName/sample-image-name.png') no-repeat;
 }
 ```
+
+**Префикс %=staticPrefixForCss=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**
 
 В картинки модуля стоит складывать только те картинки, которые больше нигде не встречаются. Вложенность директорий поддерживается.
 
@@ -86,10 +88,11 @@ png-image-name или svg-image-name — название соответсвую
 
 ```handlebars
 <div class="news__item">
-    <img src="%=staticPrefix=%img/content/sample-image-name.jpg" alt="">
+    <img src="%=static=%img/content/sample-image-name.jpg" alt="">
 </div>
 ```
 
+**Префикс %=staticPrefix=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**
 
 ### Картинки для плагинов
 

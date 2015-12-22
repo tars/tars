@@ -204,18 +204,20 @@ var tarsConfig = {
 
     /**
      * Beginning of path for static files
-     * You have to use %=staticPrefix=% placeholder in paths to static
-     * Example: %=staticPrefix=%img/logo.png
+     * You have to use %=static=% placeholder in paths to static
+     * Example: %=static=%img/logo.png
      * Will be replaced to '/static/img/logo.png'
+     * %=staticPrefix=% prefix works, but it is deprecated!
      * @type {String}
      */
     staticPrefix: 'static/',
 
     /**
      * Beginning of path for static files for using in css
-     * You have to use %=staticPrefixForCss=% placeholder in paths to static in css files
-     * Example: background: url('%=staticPrefixForCss=%logo.png');
+     * You have to use %=static=% placeholder in paths to static in css files
+     * Example: background: url('%=static=%logo.png');
      * Will be replaced to background: url('../img/logo.png');
+     * %=staticPrefixForCss=% prefix works, but it is deprecated!
      * @type {String}
      */
     staticPrefixForCss: function () {

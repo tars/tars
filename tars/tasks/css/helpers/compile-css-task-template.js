@@ -167,6 +167,9 @@ module.exports = function generateTaskContent(browser) {
                 {
                     match: '%=staticPrefixForCss=%',
                     replacement: tars.config.staticPrefixForCss()
+                }, {
+                    match: '%=static=%',
+                    replacement: tars.config.staticPrefixForCss()
                 }
             ],
             usePrefix: false

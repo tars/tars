@@ -22,13 +22,15 @@ Css-препроцессор выбирается в [tars-config.js](options.md
 @import '../partials/_partial.sass';
 ```
 
-Если требуется подключить файлы из директории static (картинки), то необходимо пользоваться плейсхолдером %=staticPrefixForCss=% (значение плейсхолдера настраивается в [tars-config.js](options.md#staticprefixforcss)). Тогда подключение картинки в качестве background (картинка будет взята из вашего модуля main) будет выглядеть следующим образом (в примере используется scss):
+Если требуется подключить файлы из директории static (картинки), то необходимо пользоваться плейсхолдером %=static=% (значение плейсхолдера настраивается в [tars-config.js](options.md#staticprefixforcss)). Тогда подключение картинки в качестве background (картинка будет взята из вашего модуля main) будет выглядеть следующим образом (в примере используется scss):
 
 ```scss
 .main {
-    background: url('%=staticPrefixForCss=%assets/main/bg.png') repeat;
+    background: url('%=static=%assets/main/bg.png') repeat;
 }
 ```
+
+**Префикс %=staticPrefixForCss=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**
 
 Есть пара моментов по организации scss|less|styl-файлов (далее считаем, что был выбран scss в качестве css-препроцессора):
 
@@ -60,5 +62,7 @@ Css-препроцессор выбирается в [tars-config.js](options.md
 Также есть возможность использовать css-файлы, не включая их в общий бандл. Для этого в папке static/scss есть папка separate-css, в которой вы можете положить все css-файлы, подключением которых вы будете управлять самостоятельно. Пример подключения такого файла в любом шаблоне:
 
 ```handlebars
-<link href="%=staticPrefix=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
+<link href="%=static=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
 ```
+
+**Префикс %=staticPrefix=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**

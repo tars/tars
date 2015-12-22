@@ -22,13 +22,15 @@ Example of import using (scss):
 @import '../partials/_partial.sass';
 ```
 
-If you want to include the files from the static directory (pictures), you must use the placeholder %=staticPrefixForCss=% (value of the placeholder is adjusted in the [tars-config.js](options.md#staticprefixforcss)). Then including of the image as a background (the picture will be taken from your main module) will be as follows (in this example scss is used):
+If you want to include the files from the static directory (pictures), you must use the placeholder %=static=% (value of the placeholder is adjusted in the [tars-config.js](options.md#staticprefixforcss)). Then including of the image as a background (the picture will be taken from your main module) will be as follows (in this example scss is used):
 
 ```scss
 .main {
-    background: url('%=staticPrefixForCss=%assets/main/bg.png') repeat;
+    background: url('%=static=%assets/main/bg.png') repeat;
 }
 ```
+
+**%=staticPrefixForCss=% prefix works, but this prefix is depricated! Use just %=static=%!**
 
 There are a couple of points on the organization scss|less|styl-files (scss is selected):
 
@@ -60,5 +62,7 @@ For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need 
 Also, you can use css-files and not to include them to bundle. There is folder separate-css in static/scss, where you can store all files, which have to be included manually. There is an example of including in any template:
 
 ```handlebars
-<link href="%=staticPrefix=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
+<link href="%=static=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
 ```
+
+**%=staticPrefix=% prefixe works, but this prefixe is depricated! Use just %=static=%!**
