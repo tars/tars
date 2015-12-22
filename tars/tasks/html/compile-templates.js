@@ -60,6 +60,9 @@ if (!tars.flags.ie8 && !tars.flags.ie) {
         {
             match: '<link href="%=staticPrefix=%css/main_ie8%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
             replacement: ''
+        }, {
+            match: '<link href="%=static=%css/main_ie8%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
+            replacement: ''
         }
     );
 }
@@ -69,37 +72,8 @@ if (!tars.flags.ie9 && !tars.flags.ie) {
         {
             match: '<link href="%=staticPrefix=%css/main_ie9%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
             replacement: ''
-        }
-    );
-}
-
-if (tars.flags.min || tars.flags.release) {
-    patterns.push(
-        {
-            match: '%=min=%',
-            replacement: '.min'
-        }
-    );
-} else {
-    patterns.push(
-        {
-            match: '%=min=%',
-            replacement: ''
-        }
-    );
-}
-
-if (tars.flags.release) {
-    patterns.push(
-        {
-            match: '%=hash=%',
-            replacement: tars.options.build.hash
-        }
-    );
-} else {
-    patterns.push(
-        {
-            match: '%=hash=%',
+        }, {
+            match: '<link href="%=static=%css/main_ie9%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
             replacement: ''
         }
     );
@@ -107,7 +81,16 @@ if (tars.flags.release) {
 
 patterns.push(
     {
+        match: '%=min=%',
+        replacement: tars.flags.min || tars.flags.release ? '.min' : ''
+    }, {
+        match: '%=hash=%',
+        replacement: tars.flags.release ? tars.options.build.hash : ''
+    }, {
         match: '%=staticPrefix=%',
+        replacement: tars.config.staticPrefix
+    }, {
+        match: '%=static=%',
         replacement: tars.config.staticPrefix
     }
 );

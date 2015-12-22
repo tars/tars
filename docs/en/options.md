@@ -238,7 +238,9 @@ Also this option can be usefull if static in your project are taken from a parti
 
 For example, in the markup static is taken from ./public/img/content/img.png, but in the backend it is taken from http://static-server.com. Then, before assembly of the project, staticPrefix must be set to http://static-server.com/. Then all static files will be in following path (for the example images in html) - http://static-server.com/img/content/sample.jpg
 
-The value of this option sets the value of the placeholder %=staticPrefix=%, which can be used in any project files, except style files.
+The value of this option sets the value of the placeholder %=static=%, which can be used in any project files, except style files.
+
+**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=%!**
 
 If you do not need this you can set this option is the same as [staticFolderName](#staticfoldername)
 

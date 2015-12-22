@@ -67,21 +67,23 @@ png-image-name или svg-image-name — название соответсвую
 
 ### Картинки модуля
 
-Находятся в папке assets внутри модуля. Для подключения используется следующий шаблон (для подключения картинки в css, необходимо использовать плейсхолдер [%=staticPrefixForCss=%](options.md#staticprefixforcss)):
+Находятся в папке assets внутри модуля. Для подключения используется следующий плейсхолдер [%=static=% или __static__](options.md#staticprefixforcss):
 
 ```css
 .moduleName {
-    background: url('%=staticPrefixForCss=%assets/moduleName/sample-image-name.png') no-repeat;
+    background: url('%=static=%assets/moduleName/sample-image-name.png') no-repeat;
 }
 ```
 
-В html подключение выглядит иначе, используется плейсхолдер [%=staticPrefix=%](options.md#staticprefix):
+В html подключение выглядит чуть иначе, но используется тот же плейсхолдер [%=static=% __static__](options.md#staticprefix):
 
 ```handlebars
 <div class="news__item">
-    <img src="%=staticPrefix=%img/assets/moduleName/sample-image-name.png'" alt="">
+    <img src="%=static=%img/assets/moduleName/sample-image-name.png'" alt="">
 </div>
 ```
+
+**Префикс %=staticPrefixForCss=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**
 
 В картинки модуля стоит складывать только те картинки, которые больше нигде не встречаются. Вложенность директорий поддерживается.
 
@@ -94,10 +96,11 @@ png-image-name или svg-image-name — название соответсвую
 
 ```handlebars
 <div class="news__item">
-    <img src="%=staticPrefix=%img/content/sample-image-name.jpg" alt="">
+    <img src="%=static=%img/content/sample-image-name.jpg" alt="">
 </div>
 ```
 
+**Префикс %=staticPrefix=% все еще работает, но крайне не желательно его использовать, так как в будущих версиях он будет удален! Используйте просто %=static=%!**
 
 ### Картинки для плагинов
 
