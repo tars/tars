@@ -3,7 +3,7 @@
 // It is a global var
 require('../tars');
 
-var exec = require('child_process').exec;
+const exec = require('child_process').exec;
 var usersDeps;
 
 try {

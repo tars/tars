@@ -1,7 +1,7 @@
 'use strict';
 
-var watcherLog = tars.helpers.watcherLog;
-var globsToWatch = [
+const watcherLog = tars.helpers.watcherLog;
+const globsToWatch = [
     'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.' + tars.cssPreproc.ext,
     'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.css'
 ];

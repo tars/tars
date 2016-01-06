@@ -1,7 +1,8 @@
 'use strict';
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var watcherLog = tars.helpers.watcherLog;
+const watcherLog = tars.helpers.watcherLog;
+
+const jsFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/js';
 
 var jsPathToWatch = [];
 
@@ -14,9 +15,9 @@ if (tars.config.jsPathsToConcatAfterModulesJs.length) {
 }
 
 jsPathToWatch.push(
-    'markup/' + staticFolderName + '/js/framework/**/*.js',
-    'markup/' + staticFolderName + '/js/libraries/**/*.js',
-    'markup/' + staticFolderName + '/js/plugins/**/*.js',
+    jsFolderPath + '/framework/**/*.js',
+    jsFolderPath + '/libraries/**/*.js',
+    jsFolderPath + '/plugins/**/*.js',
     'markup/modules/**/*.js'
 );
 

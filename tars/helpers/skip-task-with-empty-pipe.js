@@ -1,6 +1,6 @@
 'use strict';
 
-var through2 = tars.packages.through2;
+const through2 = tars.packages.through2;
 
 /**
  * Skip task if there are no any files in pipe

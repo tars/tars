@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var plumber = tars.packages.plumber;
-var concat = tars.packages.concat;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const concat = tars.packages.concat;
+const notifier = tars.helpers.notifier;
 
 /**
  * conact data for modules to one file

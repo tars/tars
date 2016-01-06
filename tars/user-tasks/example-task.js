@@ -2,12 +2,13 @@
 
 // This is example of task function
 
-var gulp = tars.packages.gulp;
-var tarsConfig = tars.config;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+
+const tarsConfig = tars.config;
 // Include browserSync, if you need to reload browser:
-// var browserSync = tars.packages.browserSync;
+// const browserSync = tars.packages.browserSync;
 
 // require('path to task file, which have to be done before current task');
 // For example:

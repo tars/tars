@@ -12,21 +12,18 @@ function formatTime(timeItem) {
     return timeItem;
 }
 
-var dateFormatter = {
+const dateFormatter = {
     /**
      * Get time of last modify of something (css, js and etc)
      * @return {string} String with formatted time
      */
     getTimeOfModify: function () {
-        var modifyDate = '',
-            currentDate = new Date(),
-            hours = currentDate.getHours(),
-            minutes = currentDate.getMinutes(),
-            seconds = currentDate.getSeconds();
+        const currentDate = new Date();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
 
-        modifyDate = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
-
-        return modifyDate;
+        return formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
     }
 };
 

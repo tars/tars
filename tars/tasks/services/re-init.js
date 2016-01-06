@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
+const gulp = tars.packages.gulp;
 
 require('./remove-init-fs')();
 require('./init')();

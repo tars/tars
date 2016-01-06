@@ -1,15 +1,14 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var svgspritesheet = tars.packages.svgspritesheet;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
-var skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
-var preprocExtension = tars.cssPreproc.mainExt;
-var preprocName = tars.cssPreproc.name;
+const staticFolderName = tars.config.fs.staticFolderName;
+const imagesFolderName = tars.config.fs.imagesFolderName;
+const preprocExtension = tars.cssPreproc.mainExt;
+const preprocName = tars.cssPreproc.name;
 
 /**
  * Make sprite for svg and styles for this sprite
@@ -27,7 +26,7 @@ module.exports = function () {
                     }
                 }))
                 .pipe(skipTaskWithEmptyPipe('css:make-sprite-for-svg', cb))
-                .pipe(svgspritesheet({
+                .pipe(tars.require('gulp-svg-spritesheet')({
                     cssPathSvg: '',
                     templateSrc: './markup/' + staticFolderName
                                     + '/' + preprocName + '/sprite-generator-templates/'

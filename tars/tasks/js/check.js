@@ -1,12 +1,11 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var cache = tars.packages.cache;
-var eslint = tars.packages.eslint;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const cache = tars.packages.cache;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
-var jsPathsToLint = [
+var jsPathesToLint = [
     './markup/modules/**/*.js',
     '!./markup/modules/**/_*.js',
     '!./markup/modules/**/data/data.js',
@@ -14,7 +13,7 @@ var jsPathsToLint = [
     tars.config.lintJsCodeAfterModules ? tars.config.jsPathsToConcatAfterModulesJs : []
 ];
 
-jsPathsToLint = [].concat.apply([], jsPathsToLint);
+jsPathesToLint = [].concat.apply([], jsPathesToLint);
 
 /**
  * Check JS for style and errors (optional task)
@@ -23,7 +22,9 @@ module.exports = function () {
     return gulp.task('js:check', function (cb) {
 
         if (tars.config.useJsLintAndHint) {
-            return gulp.src(jsPathsToLint)
+            const eslint = tars.require('gulp-eslint');
+
+            return gulp.src(jsPathesToLint)
                 .pipe(plumber({
                     errorHandler: function () {
                         notifier.error('An error occurred while checking js.');

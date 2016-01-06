@@ -1,17 +1,17 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var Download = tars.packages.download;
-var exec = require('child_process').exec;
-var fs = require('fs');
+const gulp = tars.packages.gulp;
+const gutil = tars.packages.gutil;
 
 /**
  * Update dependencies
  */
 module.exports = function () {
     return gulp.task('service:update-deps', function (cb) {
-        var downloadPackage = new Download({ extract: true })
+        const Download = tars.require('download');
+        const exec = require('child_process').exec;
+        const fs = require('fs');
+        const downloadPackage = new Download({ extract: true })
             .get('https://raw.githubusercontent.com/tars/tars/master/package.json')
             .dest('./');
 

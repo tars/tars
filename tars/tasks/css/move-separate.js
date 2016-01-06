@@ -1,17 +1,17 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var cache = tars.packages.cache;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const cache = tars.packages.cache;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
-var staticFolderName = tars.config.fs.staticFolderName;
+const staticFolderName = tars.config.fs.staticFolderName;
 
 /**
  * Copy separate Css-files to dev directory
  */
 module.exports = function () {
-    return gulp.task('css:move-separate', function (cb) {
+    return gulp.task('css:move-separate', function () {
         gulp.src('./markup/' + staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css')
             .pipe(plumber({
                 errorHandler: function (error) {
@@ -23,7 +23,5 @@ module.exports = function () {
             .pipe(
                 notifier.success('Separate css files\'s been copied')
             );
-
-        cb(null);
     });
 };

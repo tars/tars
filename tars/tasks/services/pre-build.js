@@ -1,8 +1,8 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
 /**
  * Copy files from dev to build directory. Create build directory with new build version

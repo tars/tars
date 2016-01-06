@@ -5,7 +5,7 @@
  * @return {Boolean}
  */
 module.exports = function () {
-    var limit = tars.config.ulimit;
+    const limit = tars.config.ulimit;
     var posix;
 
     try {

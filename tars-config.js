@@ -1,4 +1,6 @@
-var tarsConfig = {
+'use strict';
+
+const tarsConfig = {
 
     /////////////////////
     // MUTABLE OPTIONS ////////////////////////////////

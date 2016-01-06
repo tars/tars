@@ -1,27 +1,27 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var spritesmith = tars.packages.spritesmith;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
-var skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
-var preprocExtension = tars.cssPreproc.mainExt;
-var preprocName = tars.cssPreproc.name;
+const staticFolderName = tars.config.fs.staticFolderName;
+const imagesFolderName = tars.config.fs.imagesFolderName;
+const preprocExtension = tars.cssPreproc.mainExt;
+const preprocName = tars.cssPreproc.name;
 
 /**
  * Make sprite for svg-fallback and styles for this sprite
  * Return pipe with styles for sprite
  */
 module.exports = function () {
+
     return gulp.task('css:make-fallback-for-svg', function (cb) {
-        var spriteData = '';
 
         if (tars.config.useSVG && (tars.flags.ie8 || tars.flags.ie)) {
-
-            spriteData = gulp.src('./dev/' + staticFolderName + '/' + imagesFolderName + '/rastered-svg-images/*.png')
+            const spriteData = gulp.src(
+                    './dev/' + staticFolderName + '/' + imagesFolderName + '/rastered-svg-images/*.png'
+                )
                 .pipe(plumber({
                     errorHandler: function (error) {
                         notifier.error('An error occurred while making fallback for svg.', error);
@@ -29,7 +29,7 @@ module.exports = function () {
                 }))
                 .pipe(skipTaskWithEmptyPipe('css:make-fallback-for-svg', cb))
                 .pipe(
-                    spritesmith(
+                    tars.require('gulp.spritesmith')(
                         {
                             imgName: 'svg-fallback-sprite.png',
                             cssName: 'svg-fallback-sprite.' + preprocExtension,

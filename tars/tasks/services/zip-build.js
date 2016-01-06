@@ -1,16 +1,18 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var zip = tars.packages.zip;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
 /**
  * Create zip archive of build
  */
 module.exports = function () {
     return gulp.task('service:zip-build', function (cb) {
+
         if (tars.config.useArchiver) {
+            const zip = tars.require('gulp-zip');
+
             return gulp.src(tars.options.build.path + '**', { base: tars.options.build.path })
                 .pipe(plumber({
                     errorHandler: function (error) {

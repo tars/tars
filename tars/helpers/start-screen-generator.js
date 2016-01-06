@@ -5,16 +5,17 @@
  * @param  {Object} gutil Utils for gulp
  */
 module.exports = function (gutil) {
-    var currentCommand = process.argv.slice(2)[0];
+    const currentCommand = process.argv.slice(2)[0];
+    const silentCommands = ['init', 're-init', 'update-deps'];
+    const usedFlagsArray = Object.keys(tars.flags);
 
     // Do not show if command was init, re-init or update-deps
-    if (!currentCommand || currentCommand === 'init' || currentCommand === 're-init' || currentCommand === 'update-deps') {
+    if (silentCommands.indexOf(currentCommand) > -1) {
         return;
     }
 
+    // Log warning, if it is not CLI-mode
     if (!tars.cli) {
-        var i = 0;
-
         if (!tars.flags.release && !tars.flags.min) {
             console.log(gutil.colors.yellow.inverse('\n----------------------------------------------------------------------'));
             tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
@@ -27,45 +28,39 @@ module.exports = function (gutil) {
         }
 
         console.log('\n----------------------------------------------------------------------------');
-        tars.say(gutil.colors.white.bold('Build have been started. You are using:\n'));
+        tars.say('Build have been started. You are using:\n');
 
         if (tars.flags.release) {
-            tars.say(gutil.colors.cyan.bold('• release mode;'));
+            tars.say('• release mode;');
         }
 
         if (tars.flags.min) {
-            tars.say(gutil.colors.cyan.bold('• minify mode;'));
+            tars.say('• minify mode;');
         }
 
         if (tars.flags.lr) {
-            tars.say(gutil.colors.cyan.bold('• livereload mode;'));
+            tars.say('• livereload mode;');
         }
 
         if (tars.flags.tunnel) {
-            tars.say(gutil.colors.cyan.bold('• tunnel mode;'));
+            tars.say('• tunnel mode;');
         }
 
         if (tars.flags.ie8 || tars.flags.ie) {
-            tars.say(gutil.colors.cyan.bold('• ie8 maintenance;'));
+            tars.say('• ie8 maintenance;');
         }
 
         if (tars.flags.ie9 || tars.flags.ie) {
-            tars.say(gutil.colors.cyan.bold('• ie9 maintenance;'));
+            tars.say('• ie9 maintenance;');
         }
 
-        for (var key in tars.flags) {
-            if (tars.flags.hasOwnProperty(key)) {
-                i++;
-            }
-        }
-
-        if (i <= 1) {
+        if (usedFlagsArray.length === 1) {
             tars.say(gutil.colors.black.bold('No modes.'));
         }
 
         console.log('\n');
-        tars.say(gutil.colors.white.bold('Have a nice work!'));
-        tars.say(gutil.colors.white.bold('Please wait for a moment, while I\'m preparing builder for working...'));
+        tars.say('Have a nice work!');
+        tars.say('Please wait for a moment, while I\'m preparing builder for working...');
 
         console.log('----------------------------------------------------------------------------\n');
     }

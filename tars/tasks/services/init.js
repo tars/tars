@@ -1,17 +1,13 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var ncp = tars.packages.ncp.ncp;
-var Download = tars.packages.download;
-var del = tars.packages.del;
+const gulp = tars.packages.gulp;
+const gutil = tars.packages.gutil;
+const del = tars.packages.del;
 
-var githubConfig = {
+const githubConfig = {
     user: 'tars',
     repoPrefix: 'tars-'
 };
-
-ncp.limit = 16;
 
 require('./create-fs')();
 
@@ -22,7 +18,7 @@ require('./create-fs')();
  * @return {String}         Url to download
  */
 function makeUrl(type, version) {
-    var urlTemplate = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix;
+    const urlTemplate = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix;
 
     if (type === 'templater') {
         return urlTemplate + tars.templater.name + '/archive/' + version + '.zip';
@@ -36,6 +32,11 @@ function makeUrl(type, version) {
  */
 module.exports = function () {
     return gulp.task('service:init', ['service:create-fs'], function () {
+
+        const ncp = tars.require('ncp');
+        const Download = tars.require('download');
+
+        ncp.limit = 16;
 
         /**
          * Get used version of TARS parts
