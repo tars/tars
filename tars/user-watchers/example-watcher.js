@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = tars.packges.gulp;
-var gutil = tars.packages.gutil;
-var chokidar = tars.packages.chokidar;
-var watcherLog = tars.helpers.watcherLog;
+const gulp = tars.packges.gulp;
+const gutil = tars.packages.gutil;
+const chokidar = tars.packages.chokidar;
+const watcherLog = tars.helpers.watcherLog;
 
 /**
  * This is an example of watcher

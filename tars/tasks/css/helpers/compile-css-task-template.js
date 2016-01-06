@@ -1,27 +1,34 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var gulpif = tars.packages.gulpif;
-var concat = tars.packages.concat;
-var autoprefixer = tars.packages.autoprefixer;
-var postcss = tars.packages.postcss;
-var replace = tars.packages.replace;
-var sourcemaps = tars.packages.sourcemaps;
-var plumber = tars.packages.plumber;
-var importify = tars.packages.importify;
-var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
+const gulp = tars.packages.gulp;
+const gutil = tars.packages.gutil;
+const gulpif = tars.packages.gulpif;
+const concat = tars.packages.concat;
+const autoprefixer = tars.packages.autoprefixer;
+const importify = tars.packages.importify;
+const postcss = tars.packages.postcss;
+const replace = tars.packages.replace;
+const sourcemaps = tars.packages.sourcemaps;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const browserSync = tars.packages.browserSync;
 
 module.exports = function generateTaskContent(browser) {
 
-    var postProcessors = [];
-    var preprocExtensions = tars.cssPreproc.ext;
-    var preprocName = tars.cssPreproc.name;
-    var stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
-    var sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
+    browser = browser || '';
+
+    const preprocExtensions = tars.cssPreproc.ext;
+    const preprocName = tars.cssPreproc.name;
+    const capitalizePreprocName = preprocName.charAt(0).toUpperCase() + preprocName.slice(1);
+    const stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
+    const sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
+
+    var successMessage = capitalizePreprocName + '-files have been compiled';
+    var errorMessage = 'An error occurred while compiling css';
+    var compiledFileName = 'main';
     var generateSourceMaps;
 
+    var postProcessors = [];
     var stylesFilesToConcatinate = [];
     var firstStylesFilesToConcatinate = [
         stylesFolderPath + '/normalize.' + preprocExtensions,
@@ -47,11 +54,6 @@ module.exports = function generateTaskContent(browser) {
         '!./**/_*.css',
     ];
 
-    var capitalizePreprocName = preprocName.charAt(0).toUpperCase() + preprocName.slice(1);
-    var successMessage = capitalizePreprocName + '-files have been compiled';
-    var errorMessage = 'An error occurred while compiling css';
-    var compiledFileName = 'main';
-
     if (tars.config.postcss && tars.config.postcss.length) {
         tars.config.postcss.forEach(function (postProcessor) {
             postProcessors.push(require(postProcessor.name)(postProcessor.options));
@@ -63,8 +65,6 @@ module.exports = function generateTaskContent(browser) {
             stylesFolderPath + '/sprites-' + preprocName + '/sprite-png.' + preprocExtensions
         );
     }
-
-    browser = browser || '';
 
     switch (browser) {
         case 'ie8':

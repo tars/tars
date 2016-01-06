@@ -1,7 +1,7 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var del = tars.packages.del;
+const gulp = tars.packages.gulp;
+const del = tars.packages.del;
 
 var pathsToDel = [
     './dev/',

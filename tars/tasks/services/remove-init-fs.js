@@ -1,27 +1,29 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var del = tars.packages.del;
-var staticFolderName = tars.config.fs.staticFolderName;
+const gulp = tars.packages.gulp;
+const del = tars.packages.del;
+const staticFolderName = tars.config.fs.staticFolderName;
+const staticFolderPath = 'markup/' + staticFolderName;
+const modulesFolderPath = './markup/modules';
 
-var pathsToDel = [
-    'markup/' + staticFolderName + '/js/framework',
-    'markup/' + staticFolderName + '/js/libraries',
-    'markup/' + staticFolderName + '/js/plugins',
-    'markup/' + staticFolderName + '/' + tars.config.fs.imagesFolderName + '/',
-    'markup/' + staticFolderName + '/fonts/',
-    'markup/' + staticFolderName + '/scss/',
-    'markup/' + staticFolderName + '/stylus/',
-    'markup/' + staticFolderName + '/less/',
-    'markup/modules/_template/assets/',
-    'markup/modules/_template/ie/',
-    './markup/modules/head/',
-    './markup/modules/footer/',
-    './markup/modules/_template/_template.scss',
-    './markup/modules/_template/_template.less',
-    './markup/modules/_template/_template.styl',
-    './markup/modules/_template/_template.html',
-    './markup/modules/_template/_template.jade',
+const pathsToDel = [
+    staticFolderPath + '/js/framework',
+    staticFolderPath + '/js/libraries',
+    staticFolderPath + '/js/plugins',
+    staticFolderPath + '/' + tars.config.fs.imagesFolderName + '/',
+    staticFolderPath + '/fonts/',
+    staticFolderPath + '/scss/',
+    staticFolderPath + '/stylus/',
+    staticFolderPath + '/less/',
+    modulesFolderPath + '/_template/assets/',
+    modulesFolderPath + '/_template/ie/',
+    modulesFolderPath + '/head/',
+    modulesFolderPath + '/footer/',
+    modulesFolderPath + '/_template/_template.scss',
+    modulesFolderPath + '/_template/_template.less',
+    modulesFolderPath + '/_template/_template.styl',
+    modulesFolderPath + '/_template/_template.html',
+    modulesFolderPath + '/_template/_template.jade',
     './markup/pages/',
     './.tmpTemplater/',
     './.tmpPreproc/'

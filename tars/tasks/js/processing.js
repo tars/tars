@@ -1,25 +1,23 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var concat = tars.packages.concat;
-var streamCombiner = tars.packages.streamCombiner;
-var uglify = tars.packages.uglify;
-var plumber = tars.packages.plumber;
-var gulpif = tars.packages.gulpif;
-var rename = tars.packages.rename;
-var babel = tars.packages.babel;
-var stripDebug = tars.packages.stripDebug;
-var sourcemaps = tars.packages.sourcemaps;
-var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
-var cwd = process.cwd();
-var path = require('path');
+const gulp = tars.packages.gulp;
+const concat = tars.packages.concat;
+const streamCombiner = tars.packages.streamCombiner;
+const plumber = tars.packages.plumber;
+const gulpif = tars.packages.gulpif;
+const rename = tars.packages.rename;
+const sourcemaps = tars.packages.sourcemaps;
+const notifier = tars.helpers.notifier;
+const browserSync = tars.packages.browserSync;
+const cwd = process.cwd();
+const path = require('path');
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var destFolder = './dev/' + staticFolderName + '/js';
-var compressJs = tars.flags.release || tars.flags.min;
-var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release && !tars.flags.min;
-var sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
+const staticFolderName = tars.config.fs.staticFolderName;
+const destFolder = './dev/' + staticFolderName + '/js';
+const compressJs = tars.flags.release || tars.flags.min;
+const generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release && !tars.flags.min;
+const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
+
 var jsPaths = [
     '!./markup/modules/**/data/data.js',
     './markup/' + staticFolderName + '/js/framework/**/*.js',
@@ -46,7 +44,7 @@ jsPaths = [].concat.apply([], jsPaths);
  */
 function base() {
     return streamCombiner(
-        gulpif(tars.config.useBabel, babel({
+        gulpif(tars.config.useBabel, tars.require('gulp-babel')({
             babelrc: path.resolve(cwd + '/.babelrc')
         })),
         concat({cwd: cwd, path: 'main.js'}),
@@ -60,7 +58,7 @@ function base() {
  * Stream of minimized with JavaScript.
  * ------------------------------------
  * There are:
- *  - removing `condole.log()` and `debug`;
+ *  - removing `console.log()` and `debug`;
  *  - uglified code;
  *  - add '.min' suffix for main file;
  *  - write source maps;
@@ -68,8 +66,8 @@ function base() {
  */
 function compress() {
     return streamCombiner(
-        gulpif(tars.config.removeConsoleLog, stripDebug()),
-        uglify({ mangle: false }),
+        gulpif(tars.config.removeConsoleLog, tars.require('gulp-strip-debug')()),
+        tars.require('gulp-uglify')({ mangle: false }),
         rename({ suffix: '.min' }),
         gulp.dest(destFolder)
     );

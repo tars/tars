@@ -1,28 +1,26 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var imagemin = tars.packages.imagemin;
-var changed = tars.packages.changed;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const changed = tars.packages.changed;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
+const rasterImagesPath = './dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/';
 
 /**
  * Minify png and jpg images
  */
 module.exports = function () {
     return gulp.task('images:minify-raster-img', function () {
-        return gulp.src('./dev/' + staticFolderName + '/' + imagesFolderName + '/**/*.{png, jpg}')
+        return gulp.src(rasterImagesPath + '**/*.{png, jpg}')
             .pipe(plumber({
                 errorHandler: function (error) {
                     notifier.error('An error occurred while minifying raster images.', error);
                 }
             }))
-            .pipe(changed('./dev/' + staticFolderName + '/' + imagesFolderName + '/'))
-            .pipe(imagemin())
-            .pipe(gulp.dest('./dev/' + staticFolderName + '/' + imagesFolderName + '/'))
+            .pipe(changed(rasterImagesPath))
+            .pipe(tars.require('gulp-imagemin')())
+            .pipe(gulp.dest(rasterImagesPath))
             .pipe(
                 notifier.success('Rastered images\'ve been minified')
             );

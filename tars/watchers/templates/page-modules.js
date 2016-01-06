@@ -1,6 +1,6 @@
 'use strict';
 
-var filesToWatch = [
+const filesToWatch = [
     'markup/pages/**/*.' + tars.templater.ext,
     'markup/modules/**/*.' + tars.templater.ext
 ];

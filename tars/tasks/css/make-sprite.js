@@ -1,16 +1,16 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var spritesmith = tars.packages.spritesmith;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
-var skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
+const gulp = tars.packages.gulp;
+const spritesmith = tars.packages.spritesmith;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
-var dpi = tars.config.useImagesForDisplayWithDpi;
-var preprocExtension = tars.cssPreproc.mainExt;
-var preprocName = tars.cssPreproc.name;
+const staticFolderName = tars.config.fs.staticFolderName;
+const imagesFolderName = tars.config.fs.imagesFolderName;
+const dpi = tars.config.useImagesForDisplayWithDpi;
+const preprocExtension = tars.cssPreproc.mainExt;
+const preprocName = tars.cssPreproc.name;
 
 /**
  * Make sprite and styles for this sprite
@@ -19,8 +19,9 @@ module.exports = function () {
 
     return gulp.task('css:make-sprite', function (cb) {
 
+        const dpiLength = dpi.length;
+
         var spriteData = [];
-        var dpiLength = dpi.length;
         var dpi192 = false;
         var dpi288 = false;
         var dpi384 = false;
@@ -39,7 +40,9 @@ module.exports = function () {
         /* eslint-disable no-loop-func */
 
         for (i = 0; i < dpiLength; i++) {
-            spriteData.push(gulp.src('./markup/' + staticFolderName + '/' + imagesFolderName + '/sprite/' + dpi[i] + 'dpi/*.png')
+            spriteData.push(gulp.src(
+                    './markup/' + staticFolderName + '/' + imagesFolderName + '/sprite/' + dpi[i] + 'dpi/*.png'
+                )
                 .pipe(plumber({
                     errorHandler: function (error) {
                         notifier.error('An error occurred while making png-sprite.', error);
@@ -47,7 +50,7 @@ module.exports = function () {
                 }))
                 .pipe(skipTaskWithEmptyPipe('css:make-sprite', cb))
                 .pipe(
-                    spritesmith(
+                    tars.require('gulp.spritesmith')(
                         {
                             imgName: 'sprite.png',
                             cssName: 'sprite_' + dpi[i] + '.' + preprocExtension,

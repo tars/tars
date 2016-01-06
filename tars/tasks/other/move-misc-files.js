@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const browserSync = tars.packages.browserSync;
 
 /**
  * Move misc files

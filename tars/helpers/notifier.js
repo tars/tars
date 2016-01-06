@@ -1,8 +1,8 @@
 'use strict';
 
-var notify = tars.packages.notify;
-var notifyConfig = tars.config.notifyConfig;
-var path = require('path');
+const notify = tars.packages.notify;
+const notifyConfig = tars.config.notifyConfig;
+const path = require('path');
 
 /**
  * Notify helper
@@ -15,7 +15,6 @@ module.exports = {
      * @return {Pipe}
      */
     error: function (message, error) {
-
         var resultMessage;
 
         if (message) {

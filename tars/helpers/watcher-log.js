@@ -1,6 +1,6 @@
 'use strict';
 
-var gutil = tars.packages.gutil;
+const gutil = tars.packages.gutil;
 
 /**
  * Helper for watcher logging

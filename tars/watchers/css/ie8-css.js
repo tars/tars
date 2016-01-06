@@ -1,6 +1,6 @@
 'use strict';
 
-var watcherLog = tars.helpers.watcherLog;
+const watcherLog = tars.helpers.watcherLog;
 
 /**
  * Watcher for ie8 stylies

@@ -1,13 +1,14 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var replace = tars.packages.replace;
-var plumber = tars.packages.plumber;
-var rename = tars.packages.rename;
-var through2 = tars.packages.through2;
-var fs = require('fs');
-var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
+const gulp = tars.packages.gulp;
+const replace = tars.packages.replace;
+const plumber = tars.packages.plumber;
+const rename = tars.packages.rename;
+const through2 = tars.packages.through2;
+const fs = require('fs');
+const notifier = tars.helpers.notifier;
+const browserSync = tars.packages.browserSync;
+
 var patterns = [];
 
 /**

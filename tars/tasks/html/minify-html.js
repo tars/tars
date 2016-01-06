@@ -1,13 +1,11 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gulpif = tars.packages.gulpif;
-var minify = tars.packages.htmlMin;
-var prettify = tars.packages.htmlPrettify;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const gulpif = tars.packages.gulpif;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
-var minifyOpts = {
+const minifyOpts = {
     conditionals: true,
     quotes: true,
     empty: true
@@ -15,7 +13,7 @@ var minifyOpts = {
 
 /* eslint-disable camelcase */
 
-var prettifyOpts = {
+const prettifyOpts = {
     indent_char: ' ',
     indent_size: 4,
     indent_inner_html: true,
@@ -40,7 +38,11 @@ module.exports = function () {
                         notifier.error('An error occurred while processing compiled html-files.', error);
                     }
                 }))
-                .pipe(gulpif(tars.config.minifyHtml, minify(minifyOpts), prettify(prettifyOpts)))
+                .pipe(gulpif(
+                    tars.config.minifyHtml,
+                    tars.require('gulp-minify-html')(minifyOpts),
+                    tars.require('gulp-html-prettify')(prettifyOpts)
+                ))
                 .pipe(gulp.dest('./dev/'))
                 .pipe(
                     notifier.success('Compiled html\'ve been processed.')

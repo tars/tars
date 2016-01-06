@@ -1,11 +1,13 @@
 'use strict';
 
+const imagesFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+
 /**
  * Watcher for images in assets dir of modules
  */
 module.exports = function () {
-    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/content/**/*.*', {
-        ignored: 'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/content/**/*.tmp',
+    return tars.packages.chokidar.watch(imagesFolderPath + '/content/**/*.*', {
+        ignored: imagesFolderPath + '/content/**/*.tmp',
         persistent: true,
         ignoreInitial: true
     }).on('all', function (event, path) {

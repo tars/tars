@@ -5,17 +5,17 @@
 require('./tars/tars');
 
 // Using modules
-var os = require('os');
-var path = require('path');
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var runSequence = tars.packages.runSequence.use(gulp);
-var browserSync = tars.packages.browserSync;
-var env = process.env;
+const os = require('os');
+const path = require('path');
+const gulp = tars.packages.gulp;
+const gutil = tars.packages.gutil;
+const notify = tars.packages.notify;
+const runSequence = tars.packages.runSequence.use(gulp);
+const browserSync = tars.packages.browserSync;
+const env = process.env;
 
 // Configs
-var browserSyncConfig = tars.config.browserSyncConfig;
-var notify = tars.packages.notify;
+const browserSyncConfig = tars.config.browserSyncConfig;
 
 /* ******* */
 /* HELPERS */
@@ -27,8 +27,8 @@ if (os.platform() !== 'win32') {
     tars.helpers.setUlimit();
 }
 
-// Load files from dir recursively and synchronously
-var fileLoader = tars.helpers.fileLoader;
+// Get file's path from dir recursively and synchronously
+const getFilesFromDir = tars.helpers.getFilesFromDir;
 
 /* *********** */
 /* END HELPERS */
@@ -40,7 +40,7 @@ var fileLoader = tars.helpers.fileLoader;
 
 // SYSTEM'S TASKS
 // require system tasks
-fileLoader('./tars/tasks').forEach(function (file) {
+getFilesFromDir('./tars/tasks').forEach(function (file) {
     require(file)();
 });
 
@@ -48,7 +48,7 @@ fileLoader('./tars/tasks').forEach(function (file) {
 // You can add your own task.
 // Task have to be in tars/user-tasks folder
 // require user-tasks
-fileLoader('./tars/user-tasks').forEach(function (file) {
+getFilesFromDir('./tars/user-tasks').forEach(function (file) {
     require(file)();
 });
 
@@ -63,7 +63,6 @@ fileLoader('./tars/user-tasks').forEach(function (file) {
 // Build dev-version with watchers and livereloader.
 // Also could tunnel your markup to web, if you use flag --tunnel
 gulp.task('dev', ['build-dev'], function () {
-
     tars.options.notify = true;
 
     if (tars.flags.lr || tars.flags.tunnel) {
@@ -72,13 +71,13 @@ gulp.task('dev', ['build-dev'], function () {
 
     // SYSTEM WATCHERS
     // require watchers
-    fileLoader('./tars/watchers').forEach(function (file) {
+    getFilesFromDir('./tars/watchers').forEach(function (file) {
         require(file)();
     });
 
     // USER'S WATCHERS
     // require user-watchers
-    fileLoader('./tars/user-watchers').forEach(function (file) {
+    getFilesFromDir('./tars/user-watchers').forEach(function (file) {
         require(file)();
     });
 
@@ -114,12 +113,13 @@ gulp.task('build-dev', function (cb) {
         [
             'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',
             'html:concat-modules-data',
-            'js:move-separate', 'js:processing'
+            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
+            'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img',
+            'js:move-separate'
         ],
         [
-            'html:compile-templates',
-            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
-            'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img'
+            'js:processing',
+            'html:compile-templates'
         ],
         cb
     );

@@ -1,12 +1,12 @@
 'use strict';
 
-var Handlebars = tars.packages.handlebars;
-var digits = tars.packages.digits;
+const Handlebars = tars.packages.handlebars;
+const digits = tars.require('digits');
 
-var Dates = require('./utils/dates');
-var Utils = require('./utils/utils');
+const Dates = require('./utils/dates');
+const Utils = require('./utils/utils');
 
-var helpers = {
+const helpers = {
     /**
      * Repeat  helper
      * @param  {Number} n       number of iterations
@@ -15,9 +15,10 @@ var helpers = {
      */
     repeat: function (n, options) {
         options = options || {};
-        var _data = {},
-            content = '',
-            count = n - 1;
+
+        var _data = {};
+        var content = '';
+        var count = n - 1;
 
         if (options._data) {
             _data = Handlebars.createFrame(options._data);
@@ -40,8 +41,8 @@ var helpers = {
      * @return {[type]}          [description]
      */
     is: function (leftOperand, operation, rightOperand, options) {
-        var a = leftOperand || false,
-            b = rightOperand || false;
+        const a = leftOperand || false;
+        const b = rightOperand || false;
 
         if (operation && typeof operation === 'string') {
             switch (operation) {
@@ -124,7 +125,7 @@ var helpers = {
      * @return {[type]}     [description]
      */
     toLowerCase: function (str) {
-        if (typeof str != 'string') {
+        if (typeof str !== 'string') {
             str.toString();
         }
 
@@ -137,7 +138,7 @@ var helpers = {
      * @return {[type]}     [description]
      */
     toUpperCase: function (str) {
-        if (typeof str != 'string') {
+        if (typeof str !== 'string') {
             str.toString();
         }
 
@@ -165,8 +166,8 @@ var helpers = {
     strip: function (options) {
         options = options || {};
 
-        var _data = {},
-            content = '';
+        var _data = {};
+        var content = '';
 
         if (options._data) {
             _data = Handlebars.createFrame(options._data);
@@ -195,7 +196,8 @@ var helpers = {
      * @return {[type]}        [description]
      */
     now: function (format) {
-        var date = new Date();
+        const date = new Date();
+
         if (Utils.isUndefined(format)) {
             return date;
         } else {
