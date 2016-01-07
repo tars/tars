@@ -14,7 +14,7 @@ module.exports = {
      * @param  {Error} error    Error object
      * @return {Pipe}
      */
-    error: function (message, error) {
+    error: (message, error) => {
         var resultMessage;
 
         if (message) {
@@ -49,7 +49,7 @@ module.exports = {
      * @param  {Boolean} onLast   Use notify only on last changed file
      * @return {Pipe}
      */
-    success: function (message, onLast) {
+    success: (message, onLast) => {
         var resultMessage = message + '\n' || 'Task\'ve been finished\n';
 
         resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';

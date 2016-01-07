@@ -30,11 +30,11 @@ const prettifyOpts = {
 /**
  * Minify HTML (optional task)
  */
-module.exports = function () {
-    return gulp.task('html:minify-html', function () {
+module.exports = () => {
+    return gulp.task('html:minify-html', () => {
         return gulp.src('./dev/**/*.html')
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while processing compiled html-files.', error);
                     }
                 }))

@@ -6,7 +6,7 @@ const digits = tars.require('digits');
 const Dates = require('./utils/dates');
 const Utils = require('./utils/utils');
 
-const helpers = {
+module.exports = {
     /**
      * Repeat  helper
      * @param  {Number} n       number of iterations
@@ -24,7 +24,7 @@ const helpers = {
             _data = Handlebars.createFrame(options._data);
         }
 
-        for (var i = 0; i <= count; i++) {
+        for (let i = 0; i <= count; i++) {
             _data = {
                 index: digits.pad((i + 1), { auto: n })
             };
@@ -124,10 +124,8 @@ const helpers = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    toLowerCase: function (str) {
-        if (typeof str !== 'string') {
-            str.toString();
-        }
+    toLowerCase: (str) => {
+        str = Utils.castToString(str);
 
         return str.toLowerCase();
     },
@@ -137,10 +135,8 @@ const helpers = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    toUpperCase: function (str) {
-        if (typeof str !== 'string') {
-            str.toString();
-        }
+    toUpperCase: (str) => {
+        str = Utils.castToString(str);
 
         return str.toUpperCase();
     },
@@ -150,10 +146,8 @@ const helpers = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    capitalizeFirst: function (str) {
-        if (typeof str != 'string') {
-            str.toString();
-        }
+    capitalizeFirst: (str) => {
+        str = Utils.castToString(str);
 
         return str.charAt(0).toUpperCase() + str.slice(1);
     },
@@ -185,9 +179,8 @@ const helpers = {
      * @param  {[type]} format [description]
      * @return {[type]}        [description]
     */
-    formatDate: function (date, format) {
-        date = new Date(date);
-        return Dates.format(date, format);
+    formatDate: (date, format) => {
+        return Dates.format(new Date(date), format);
     },
 
     /**
@@ -195,7 +188,7 @@ const helpers = {
      * @param  {[type]} format [description]
      * @return {[type]}        [description]
      */
-    now: function (format) {
+    now: (format) => {
         const date = new Date();
 
         if (Utils.isUndefined(format)) {
@@ -237,5 +230,3 @@ const helpers = {
         return this[language][context];
       }
 };
-
-module.exports = helpers;

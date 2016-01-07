@@ -18,15 +18,15 @@ jsPathesToLint = [].concat.apply([], jsPathesToLint);
 /**
  * Check JS for style and errors (optional task)
  */
-module.exports = function () {
-    return gulp.task('js:check', function (cb) {
+module.exports = () => {
+    return gulp.task('js:check', (cb) => {
 
         if (tars.config.useJsLintAndHint) {
             const eslint = tars.require('gulp-eslint');
 
             return gulp.src(jsPathesToLint)
                 .pipe(plumber({
-                    errorHandler: function () {
+                    errorHandler: () => {
                         notifier.error('An error occurred while checking js.');
                     }
                 }))

@@ -8,16 +8,16 @@ var usersDeps;
 
 try {
     usersDeps = require('../../user-package');
-} catch (er) {
-    console.log('User-package.json is not valid!\n');
-    console.log(er);
+} catch (error) {
+    console.error('User-package.json is not valid!\n');
+    console.error(error);
 }
 
 /* eslint-disable no-loop-func */
 
-for (var dep in usersDeps.dependencies) {
+for (let dep in usersDeps.dependencies) {
     if (dep) {
-        exec('npm i ' + dep + '@' + usersDeps.dependencies[dep], function (error, stdout, stderr) {
+        exec('npm i ' + dep + '@' + usersDeps.dependencies[dep], (error, stdout, stderr) => {
             if (error) {
                 console.log(stderr);
             } else {

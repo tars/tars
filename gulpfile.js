@@ -40,7 +40,7 @@ const getFilesFromDir = tars.helpers.getFilesFromDir;
 
 // SYSTEM'S TASKS
 // require system tasks
-getFilesFromDir('./tars/tasks').forEach(function (file) {
+getFilesFromDir('./tars/tasks').forEach((file) => {
     require(file)();
 });
 
@@ -48,7 +48,7 @@ getFilesFromDir('./tars/tasks').forEach(function (file) {
 // You can add your own task.
 // Task have to be in tars/user-tasks folder
 // require user-tasks
-getFilesFromDir('./tars/user-tasks').forEach(function (file) {
+getFilesFromDir('./tars/user-tasks').forEach((file) => {
     require(file)();
 });
 
@@ -62,7 +62,7 @@ getFilesFromDir('./tars/user-tasks').forEach(function (file) {
 
 // Build dev-version with watchers and livereloader.
 // Also could tunnel your markup to web, if you use flag --tunnel
-gulp.task('dev', ['build-dev'], function () {
+gulp.task('dev', ['build-dev'], () => {
     tars.options.notify = true;
 
     if (tars.flags.lr || tars.flags.tunnel) {
@@ -71,13 +71,13 @@ gulp.task('dev', ['build-dev'], function () {
 
     // SYSTEM WATCHERS
     // require watchers
-    getFilesFromDir('./tars/watchers').forEach(function (file) {
+    getFilesFromDir('./tars/watchers').forEach((file) => {
         require(file)();
     });
 
     // USER'S WATCHERS
     // require user-watchers
-    getFilesFromDir('./tars/user-watchers').forEach(function (file) {
+    getFilesFromDir('./tars/user-watchers').forEach((file) => {
         require(file)();
     });
 
@@ -101,7 +101,7 @@ gulp.task('dev', ['build-dev'], function () {
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
-gulp.task('build-dev', function (cb) {
+gulp.task('build-dev', (cb) => {
     tars.options.notify = false;
 
     runSequence(
@@ -127,7 +127,7 @@ gulp.task('build-dev', function (cb) {
 
 // Build release version
 // Also you can add your own tasks in queue of build task
-gulp.task('build', function () {
+gulp.task('build', () => {
     runSequence(
         'build-dev',
         [
@@ -138,7 +138,7 @@ gulp.task('build', function () {
             'css:compress-css'
         ],
         'service:zip-build',
-        function () {
+        () => {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
             tars.say(gutil.colors.green('✔') + gutil.colors.green.bold(' Build has been created successfully!'));
 
@@ -151,27 +151,27 @@ gulp.task('build', function () {
 });
 
 // Default task. Just start build task
-gulp.task('default', function () {
+gulp.task('default', () => {
     gulp.start('build');
 });
 
 // Init task. Just start init task
-gulp.task('init', function () {
+gulp.task('init', () => {
     gulp.start('service:init');
 });
 
 // Re-init task. Just start re-init task
-gulp.task('re-init', function () {
+gulp.task('re-init', () => {
     gulp.start('service:re-init');
 });
 
 // Update-deps task. Just start update-deps task
-gulp.task('update-deps', function () {
+gulp.task('update-deps', () => {
     gulp.start('service:update-deps');
 });
 
 // Task for starting browsersync module
-gulp.task('browsersync', function (cb) {
+gulp.task('browsersync', (cb) => {
 
     // Serve files and connect browsers
     browserSync({
@@ -201,7 +201,7 @@ gulp.task('browsersync', function (cb) {
 /* HELPERS TASKS */
 /* ************* */
 
-gulp.task('svg-actions', function (cb) {
+gulp.task('svg-actions', (cb) => {
     if (tars.flags.ie8 || tars.flags.ie) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
@@ -217,7 +217,7 @@ gulp.task('svg-actions', function (cb) {
     }
 });
 
-gulp.task('compile-templates-with-data-reloading', function (cb) {
+gulp.task('compile-templates-with-data-reloading', (cb) => {
     runSequence(
         'html:concat-modules-data',
         'html:compile-templates',

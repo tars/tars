@@ -12,12 +12,12 @@ function formatTime(timeItem) {
     return timeItem;
 }
 
-const dateFormatter = {
+module.exports = {
     /**
      * Get time of last modify of something (css, js and etc)
      * @return {string} String with formatted time
      */
-    getTimeOfModify: function () {
+    getTimeOfModify: () => {
         const currentDate = new Date();
         const hours = currentDate.getHours();
         const minutes = currentDate.getMinutes();
@@ -26,5 +26,3 @@ const dateFormatter = {
         return formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
     }
 };
-
-module.exports = dateFormatter;

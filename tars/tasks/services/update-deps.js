@@ -2,26 +2,26 @@
 
 const gulp = tars.packages.gulp;
 const gutil = tars.packages.gutil;
+const fs = require('fs');
 
 /**
  * Update dependencies
  */
-module.exports = function () {
-    return gulp.task('service:update-deps', function (cb) {
+module.exports = () => {
+    return gulp.task('service:update-deps', (cb) => {
         const Download = tars.require('download');
         const exec = require('child_process').exec;
-        const fs = require('fs');
         const downloadPackage = new Download({ extract: true })
             .get('https://raw.githubusercontent.com/tars/tars/master/package.json')
             .dest('./');
 
         function downloadNewPackageJson() {
-            fs.rename('./package.json', './_package.json', function () {
-                downloadPackage.run(function (err) {
+            fs.rename('./package.json', './_package.json', () => {
+                downloadPackage.run((err) => {
                     if (err) {
                         throw err;
                     }
-                    exec('npm i', function (error, stdout, stderr) {
+                    exec('npm i', (error, stdout, stderr) => {
                         console.log(stdout);
                         console.log(stderr);
                         console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
@@ -33,9 +33,9 @@ module.exports = function () {
             });
         }
 
-        fs.exists('./_package.json', function (exists) {
+        fs.exists('./_package.json', (exists) => {
             if (exists) {
-                fs.unlink('./_package.json', function () {
+                fs.unlink('./_package.json', () => {
                     downloadNewPackageJson();
                 });
             } else {

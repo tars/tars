@@ -10,11 +10,11 @@ const rasterImagesPath = './dev/' + tars.config.fs.staticFolderName + '/' + tars
 /**
  * Minify png and jpg images
  */
-module.exports = function () {
-    return gulp.task('images:minify-raster-img', function () {
+module.exports = () => {
+    return gulp.task('images:minify-raster-img', () => {
         return gulp.src(rasterImagesPath + '**/*.{png, jpg}')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while minifying raster images.', error);
                 }
             }))

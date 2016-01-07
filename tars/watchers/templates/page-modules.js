@@ -8,12 +8,15 @@ const filesToWatch = [
 /**
  * Watcher for templates-files of modules and pages
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch(filesToWatch, {
-        ignored: 'markup/**/_*.' + tars.templater.ext,
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        filesToWatch,
+        {
+            ignored: 'markup/**/_*.' + tars.templater.ext,
+            persistent: true,
+            ignoreInitial: true
+        }
+    ).on('all', (event, path) => {
         tars.helpers.watcherLog(event, path);
         tars.packages.gulp.start('html:compile-templates');
     });

@@ -4,7 +4,7 @@
  * Set ulimit to tars.config.ulimit
  * @return {Boolean}
  */
-module.exports = function () {
+module.exports = function setUlimit() {
     const limit = tars.config.ulimit;
     var posix;
 

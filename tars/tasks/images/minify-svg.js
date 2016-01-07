@@ -5,18 +5,18 @@ const changed = tars.packages.changed;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-const svgImagesPath =  tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+const svgImagesPath = tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
 
 /**
  * Minify svg-images (optional task)
  */
-module.exports = function () {
-    return gulp.task('images:minify-svg', function (cb) {
+module.exports = () => {
+    return gulp.task('images:minify-svg', (cb) => {
 
         if (tars.config.useSVG) {
             return gulp.src('./markup/' + svgImagesPath + '/svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while minifying svg.', error);
                     }
                 }))

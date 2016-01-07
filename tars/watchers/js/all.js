@@ -24,12 +24,15 @@ jsPathToWatch.push(
 /**
  * Watcher for js-files before and after modules js
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch(jsPathToWatch, {
-        ignored: 'markup/modules/**/data/data.js',
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        jsPathToWatch,
+        {
+            ignored: 'markup/modules/**/data/data.js',
+            persistent: true,
+            ignoreInitial: true
+        }
+    ).on('all', (event, path) => {
         watcherLog(event, path);
         tars.packages.gulp.start('js:processing');
     });

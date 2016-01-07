@@ -1,13 +1,10 @@
 'use strict';
 
-const gulp = tars.packages.gulp;
-
 /**
  * Styles compilation for IE8
  */
-module.exports = function () {
-    return gulp.task('css:compile-css-for-ie8', function (cb) {
-
+module.exports = () => {
+    return tars.packages.gulp.task('css:compile-css-for-ie8', (cb) => {
         if (tars.flags.ie8 || tars.flags.ie) {
             return require('./helpers/compile-css-task-template')('ie8');
         } else {

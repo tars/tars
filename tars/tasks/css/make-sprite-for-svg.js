@@ -14,14 +14,14 @@ const preprocName = tars.cssPreproc.name;
  * Make sprite for svg and styles for this sprite
  * Return pipe with styles for sprite
  */
-module.exports = function () {
+module.exports = () => {
 
-    return gulp.task('css:make-sprite-for-svg', function (cb) {
+    return gulp.task('css:make-sprite-for-svg', (cb) => {
 
         if (tars.config.useSVG) {
             return gulp.src('./dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while making sprite for svg.', error);
                     }
                 }))

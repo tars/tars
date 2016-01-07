@@ -1,64 +1,66 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
-const spritesmith = tars.packages.spritesmith;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
-const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
 const staticFolderName = tars.config.fs.staticFolderName;
 const imagesFolderName = tars.config.fs.imagesFolderName;
-const dpi = tars.config.useImagesForDisplayWithDpi;
+const usedDpiArray = tars.config.useImagesForDisplayWithDpi;
 const preprocExtension = tars.cssPreproc.mainExt;
 const preprocName = tars.cssPreproc.name;
 
 /**
  * Make sprite and styles for this sprite
  */
-module.exports = function () {
+module.exports = () => {
 
-    return gulp.task('css:make-sprite', function (cb) {
-
-        const dpiLength = dpi.length;
+    return gulp.task('css:make-sprite', () => {
+        const dpiLength = usedDpiArray.length;
 
         var spriteData = [];
         var dpi192 = false;
         var dpi288 = false;
         var dpi384 = false;
-        var i = 0;
 
-        for (i = 0; i < dpiLength; i++) {
-            if (dpi[i] === 192) {
-                dpi192 = true;
-            } else if (dpi[i] === 288) {
-                dpi288 = true;
-            } else if (dpi[i] === 384) {
-                dpi384 = true;
+        usedDpiArray.forEach((value) => {
+            switch (value) {
+                case 192:
+                    dpi192 = true;
+                    break;
+                case 288:
+                    dpi288 = true;
+                    break;
+                case 384:
+                    dpi384 = true;
+                    break;
+                default:
+                    break;
             }
-        }
+        });
 
         /* eslint-disable no-loop-func */
 
-        for (i = 0; i < dpiLength; i++) {
+        for (let i = 0; i < dpiLength; i++) {
             spriteData.push(gulp.src(
-                    './markup/' + staticFolderName + '/' + imagesFolderName + '/sprite/' + dpi[i] + 'dpi/*.png'
+                    './markup/' + staticFolderName + '/' + imagesFolderName
+                    + '/sprite/' + usedDpiArray[i] + 'dpi/*.png'
                 )
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while making png-sprite.', error);
                     }
                 }))
-                .pipe(skipTaskWithEmptyPipe('css:make-sprite', cb))
                 .pipe(
                     tars.require('gulp.spritesmith')(
                         {
                             imgName: 'sprite.png',
-                            cssName: 'sprite_' + dpi[i] + '.' + preprocExtension,
+                            cssName: 'sprite_' + usedDpiArray[i] + '.' + preprocExtension,
                             Algorithms: 'diagonal',
                             cssOpts: {
-                                dpi192: dpi192,
-                                dpi288: dpi288,
-                                dpi384: dpi384
+                                dpi192,
+                                dpi288,
+                                dpi384
                             },
                             padding: (i + 1) * 4,
                             cssTemplate: './markup/' + staticFolderName + '/'
@@ -72,16 +74,18 @@ module.exports = function () {
             spriteData[i].img
                 .pipe(
                     gulp.dest(
-                        './dev/' + staticFolderName + '/' + imagesFolderName + '/png-sprite/' + dpi[i] + 'dpi/'
+                        './dev/' + staticFolderName + '/' + imagesFolderName
+                        + '/png-sprite/' + usedDpiArray[i] + 'dpi/'
                     )
                 )
                 .pipe(
-                    notifier.success('Sprite img with dpi = ' + dpi[i] + ' is ready')
+                    notifier.success('Sprite img with dpi = ' + usedDpiArray[i] + ' is ready')
                 );
         }
 
         /* eslint-enable no-loop-func */
 
+        // Returns css for dpi 96
         return spriteData[0].css
                 .pipe(
                     gulp.dest('./markup/' + staticFolderName + '/' + preprocName + '/sprites-' + preprocName + '/')

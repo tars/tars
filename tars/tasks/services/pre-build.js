@@ -7,11 +7,11 @@ const notifier = tars.helpers.notifier;
 /**
  * Copy files from dev to build directory. Create build directory with new build version
  */
-module.exports = function () {
-    return gulp.task('service:pre-build', function () {
+module.exports = () => {
+    return gulp.task('service:pre-build', () => {
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while running pre-build task.', error);
                 }
             }))

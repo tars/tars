@@ -16,9 +16,9 @@ if (!tars.config.useBuildVersioning) {
 /**
  * Clean dev directory and cache
  */
-module.exports = function () {
-    return gulp.task('service:clean', function (cb) {
-        del(pathsToDel).then(function () {
+module.exports = () => {
+    return gulp.task('service:clean', (cb) => {
+        del(pathsToDel).then(() => {
             cb();
         });
     });
