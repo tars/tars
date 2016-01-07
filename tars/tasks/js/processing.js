@@ -73,7 +73,7 @@ function compress() {
     );
 }
 
-module.exports = function () {
+module.exports = () => {
     /**
      * Task for processing with JavaScript files.
      * ------------------------------------------
@@ -87,10 +87,10 @@ module.exports = function () {
      *  - notify about end of task;
      *  - reloading browser's page.
      */
-    return gulp.task('js:processing', ['js:check'], function () {
+    return gulp.task('js:processing', ['js:check'], () => {
         return gulp.src(jsPaths, { base: cwd })
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while processing js-files.', error);
                 }
             }))

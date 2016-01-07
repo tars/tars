@@ -46,7 +46,7 @@ const cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 const templaterName = require(helpersDirPath + '/get-templater-name')(tarsConfig.templater.toLowerCase());
 const buildVersion = require(helpersDirPath + '/set-build-version')();
 
-var buildOptions = {};
+let buildOptions = {};
 
 // Tars config
 tars.config = tarsConfig;
@@ -92,7 +92,7 @@ tars.options = {
     notify: true,
     build: {
         hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
-        path: tarsConfig.buildPath,
+        path: buildOptions.buildPath,
         version: buildOptions.buildVersion
     }
 };
@@ -125,7 +125,7 @@ tars.packages = {
 
 // Links to helpers
 tars.helpers = {
-    buildVersion: buildVersion,
+    buildVersion,
     dateFormatter: require(helpersDirPath + '/modify-date-formatter'),
     getFilesFromDir: require(helpersDirPath + '/get-files-from-dir'),
     notifier: require(helpersDirPath + '/notifier'),
@@ -147,7 +147,7 @@ switch (cssPreprocName) {
             name: 'stylus',
             ext: 'styl',
             mainExt: 'styl',
-            preprocessor: function () {
+            preprocessor: () => {
                 return tars.require('gulp-stylus')({
                     'resolve url': true,
                     'include css': true
@@ -160,7 +160,7 @@ switch (cssPreprocName) {
             name: 'less',
             ext: 'less',
             mainExt: 'less',
-            preprocessor: function () {
+            preprocessor: () => {
                 return tars.require('gulp-less')({
                     path: [process.cwd()]
                 });
@@ -173,7 +173,7 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: function () {
+            preprocessor: () => {
                 return tars.require('gulp-sass')({
                     outputStyle: 'expanded',
                     includePaths: process.cwd()
@@ -195,7 +195,7 @@ switch (templaterName) {
         tars.templater = {
             name: 'handlebars',
             ext: '{html,hbs}',
-            fn: function (modulesData) {
+            fn: (modulesData) => {
                 return tars.require('gulp-compile-handlebars')(modulesData, {
                     batch: ['./markup/modules'],
                     helpers: require('./tasks/html/helpers/handlebars-helpers.js')
@@ -208,7 +208,7 @@ switch (templaterName) {
         tars.templater = {
             name: 'jade',
             ext: 'jade',
-            fn: function (modulesData) {
+            fn: (modulesData) => {
                 return tars.require('gulp-jade')({
                     pretty: true,
                     locals: modulesData
@@ -216,4 +216,4 @@ switch (templaterName) {
             }
         };
         break;
-};
+}

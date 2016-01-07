@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
+const fs = require('fs');
 
 const staticFolderName = tars.config.fs.staticFolderName;
 const staticFolderPath = 'markup/' + staticFolderName;
@@ -34,18 +35,16 @@ paths.push(
 /**
  * Create fs for project
  */
-module.exports = function () {
-    return gulp.task('service:create-fs', function (cb) {
-
+module.exports = () => {
+    return gulp.task('service:create-fs', (cb) => {
         const mkdirp = tars.require('mkdirp');
-        const fs = require('fs');
 
         if (staticFolderName !== 'static') {
             fs.renameSync('./markup/static/', './markup/' + staticFolderName);
         }
 
-        paths.forEach(function (path) {
-            mkdirp(path, function (error) {
+        paths.forEach((path) => {
+            mkdirp(path, (error) => {
                 if (error) {
                     console.error(error);
                 }

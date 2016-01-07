@@ -10,11 +10,11 @@ const staticFolderName = tars.config.fs.staticFolderName;
 /**
  * Copy separate Css-files to dev directory
  */
-module.exports = function () {
-    return gulp.task('css:move-separate', function () {
+module.exports = () => {
+    return gulp.task('css:move-separate', () => {
         gulp.src('./markup/' + staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while moving separate css-files.', error);
                 }
             }))

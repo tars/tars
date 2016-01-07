@@ -7,15 +7,15 @@ const notifier = tars.helpers.notifier;
 /**
  * Create zip archive of build
  */
-module.exports = function () {
-    return gulp.task('service:zip-build', function (cb) {
+module.exports = () => {
+    return gulp.task('service:zip-build', (cb) => {
 
         if (tars.config.useArchiver) {
             const zip = tars.require('gulp-zip');
 
             return gulp.src(tars.options.build.path + '**', { base: tars.options.build.path })
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while creating zip-archive.', error);
                     }
                 }))

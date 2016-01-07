@@ -19,7 +19,7 @@ var patterns = [];
  * @param  {Object} context Object with all data
  */
 function traverseThroughObject(obj, context) {
-    for (var property in obj) {
+    for (let property in obj) {
         if (obj.hasOwnProperty(property)) {
             if (typeof obj[property] === 'object') {
                 traverseThroughObject(obj[property], context);
@@ -100,8 +100,8 @@ patterns.push(
  * HTML compilation of pages templates.
  * Templates with _ prefix won't be compiled
  */
-module.exports = function () {
-    return gulp.task('html:compile-templates', function () {
+module.exports = () => {
+    return gulp.task('html:compile-templates', () => {
         var modulesData;
         var error;
 

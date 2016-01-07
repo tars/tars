@@ -8,11 +8,11 @@ const notifier = tars.helpers.notifier;
 /**
  * conact data for modules to one file
  */
-module.exports = function () {
-    return gulp.task('html:concat-modules-data', function () {
+module.exports = () => {
+    return gulp.task('html:concat-modules-data', () => {
         return gulp.src('./markup/modules/**/data/data.js')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while concating module\'s data.', error);
                 }
             }))

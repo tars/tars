@@ -11,11 +11,11 @@ const fontsFolderPath = tars.config.fs.staticFolderName + '/fonts';
 /**
  * Move fonts-files to dev directory
  */
-module.exports = function () {
-    return gulp.task('other:move-fonts', function () {
+module.exports = () => {
+    return gulp.task('other:move-fonts', () => {
         return gulp.src('./markup/' + fontsFolderPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while moving fonts.', error);
                 }
             }))

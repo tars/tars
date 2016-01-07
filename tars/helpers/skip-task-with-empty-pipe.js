@@ -20,7 +20,7 @@ module.exports = function skipTaskWithEmptyPipe(taskName, skipCallback) {
         this.push(file); // eslint-disable-line no-invalid-this
 
         return callback();
-    }, function (continueCallback) {
+    }, (continueCallback) => {
 
         if (filesCount) {
             return continueCallback();

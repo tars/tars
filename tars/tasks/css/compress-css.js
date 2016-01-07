@@ -8,12 +8,11 @@ const notifier = tars.helpers.notifier;
 /**
  * Compress css-files
  */
-module.exports = function () {
-
-    return gulp.task('css:compress-css', function () {
+module.exports = () => {
+    return gulp.task('css:compress-css', () => {
         return gulp.src(tars.options.build.path + tars.config.fs.staticFolderName + '/css/*.css')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while compressing css.', error);
                 }
             }))

@@ -7,11 +7,11 @@ const fs = require('fs');
  * @param  {String} dir directory with files
  * @return {Array}      Path to dirs
  */
-function getFilesFromDir(dir) {
-    var results = [],
-        list = fs.readdirSync(dir);
+module.exports = function getFilesFromDir(dir) {
+    var results = [];
+    var list = fs.readdirSync(dir);
 
-    list.forEach(function (file) {
+    list.forEach((file) => {
         file = dir + '/' + file;
         const stat = fs.statSync(file);
 
@@ -28,5 +28,3 @@ function getFilesFromDir(dir) {
 
     return results;
 };
-
-module.exports = getFilesFromDir;

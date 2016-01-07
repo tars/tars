@@ -5,7 +5,7 @@ const watcherLog = tars.helpers.watcherLog;
 /**
  * Watcher for ie9 stylies
  */
-module.exports = function () {
+module.exports = () => {
     if (tars.flags.ie9 || tars.flags.ie) {
         return tars.packages.chokidar.watch(
             [
@@ -15,7 +15,7 @@ module.exports = function () {
                 ignored: '',
                 persistent: true,
                 ignoreInitial: true
-            }).on('all', function (event, path) {
+            }).on('all', (event, path) => {
                 watcherLog(event, path);
                 tars.packages.gulp.start('css:compile-css-for-ie9');
             });

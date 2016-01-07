@@ -1,20 +1,24 @@
 'use strict';
 
 const watcherLog = tars.helpers.watcherLog;
+const cssPreprocFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name;
 const globsToWatch = [
-    'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.' + tars.cssPreproc.ext,
-    'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/**/*.css'
+    cssPreprocFolderPath + '/**/*.' + tars.cssPreproc.ext,
+    cssPreprocFolderPath + '/**/*.css'
 ];
 
 /**
  * Watcher for common scss(less or stylus)-files and scss(less or stylus)-files of plugins
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch(globsToWatch, {
-        ignored: ['markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css'],
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        globsToWatch,
+        {
+            ignored: [cssPreprocFolderPath + '/separate-css/**/*.css'],
+            persistent: true,
+            ignoreInitial: true
+        }
+    ).on('all', (event, path) => {
         watcherLog(event, path);
         tars.packages.gulp.start('css:compile-css');
 

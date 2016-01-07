@@ -30,13 +30,11 @@ function makeUrl(type, version) {
 /**
  * Init builder, download css-preprocessor and templater
  */
-module.exports = function () {
-    return gulp.task('service:init', ['service:create-fs'], function () {
+module.exports = () => {
+    return gulp.task('service:init', ['service:create-fs'], () => {
 
         const ncp = tars.require('ncp');
         const Download = tars.require('download');
-
-        ncp.limit = 16;
 
         /**
          * Get used version of TARS parts
@@ -44,7 +42,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function getVersionToDownload(type) {
-            return new Promise(function (resolve) {
+            return new Promise((resolve) => {
                 var version;
 
                 if (process.env.tarsVersion) {
@@ -55,14 +53,14 @@ module.exports = function () {
 
                 new Download({ mode: '755' })
                     .get(makeUrl(type, version))
-                    .run(function (error) {
+                    .run((error) => {
                         if (error) {
                             version = 'master';
                         }
 
                         resolve({
-                            version: version,
-                            type: type
+                            version,
+                            type
                         });
                     });
             });
@@ -74,7 +72,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function download(params) {
-            return new Promise(function (resolve, reject) {
+            return new Promise((resolve, reject) => {
                 var destPath;
 
                 if (params.type === 'templater') {
@@ -86,7 +84,7 @@ module.exports = function () {
                 new Download({ extract: true, mode: '755' })
                     .get(makeUrl(params.type, params.version))
                     .dest(destPath)
-                    .run(function (error) {
+                    .run((error) => {
                         if (error) {
                             reject(error);
                         }
@@ -101,7 +99,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function applyDownloadedParts(params) {
-            return new Promise(function (resolve, reject) {
+            return new Promise((resolve, reject) => {
                 var downloadedPartsPath;
 
                 if (params.type === 'templater') {
@@ -112,7 +110,7 @@ module.exports = function () {
 
                 downloadedPartsPath += '-' + params.version + '/markup';
 
-                ncp(downloadedPartsPath, './markup', function (error) {
+                ncp(downloadedPartsPath, './markup', (error) => {
                     if (error) {
                         reject(error);
                         return;
@@ -127,7 +125,7 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function generateStartScreen() {
-            return new Promise(function (resolve) {
+            return new Promise((resolve) => {
                 if (tars.cli) {
                     tars.say('It\'s almost ready!');
                 } else {
@@ -164,8 +162,8 @@ module.exports = function () {
          * @return {Object}        Promise
          */
         function removeTmpFolders() {
-            return new Promise(function (resolve) {
-                del(['./.tmpTemplater/', './.tmpPreproc/']).then(function () {
+            return new Promise((resolve) => {
+                del(['./.tmpTemplater/', './.tmpPreproc/']).then(() => {
                     resolve();
                 });
             });
@@ -196,7 +194,7 @@ module.exports = function () {
             ])
             .then(removeTmpFolders)
             .then(finishInit)
-            .catch(function (error) {
+            .catch((error) => {
                 tars.say(gutil.colors.red(error));
                 tars.say('Please, repost with message and the stack trace to developer tars.builder@gmail.com');
                 console.error(error.stack);

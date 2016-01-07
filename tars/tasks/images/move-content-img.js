@@ -12,11 +12,11 @@ const contentImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
 /**
  * Move images for content
  */
-module.exports = function () {
-    return gulp.task('images:move-content-img', function () {
+module.exports = () => {
+    return gulp.task('images:move-content-img', () => {
         return gulp.src(contentImagesPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while moving content images.', error);
                 }
             }))

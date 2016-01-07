@@ -55,7 +55,7 @@ module.exports = function generateTaskContent(browser) {
     ];
 
     if (tars.config.postcss && tars.config.postcss.length) {
-        tars.config.postcss.forEach(function (postProcessor) {
+        tars.config.postcss.forEach((postProcessor) => {
             postProcessors.push(require(postProcessor.name)(postProcessor.options));
         });
     }

@@ -12,11 +12,11 @@ const generalImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
 /**
  * Move general images
  */
-module.exports = function () {
-    return gulp.task('images:move-general-img', function () {
+module.exports = () => {
+    return gulp.task('images:move-general-img', () => {
         return gulp.src(generalImagesPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler: (error) => {
                     notifier.error('An error occurred while moving general images.', error);
                 }
             }))

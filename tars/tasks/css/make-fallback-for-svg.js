@@ -14,16 +14,16 @@ const preprocName = tars.cssPreproc.name;
  * Make sprite for svg-fallback and styles for this sprite
  * Return pipe with styles for sprite
  */
-module.exports = function () {
+module.exports = () => {
 
-    return gulp.task('css:make-fallback-for-svg', function (cb) {
+    return gulp.task('css:make-fallback-for-svg', (cb) => {
 
         if (tars.config.useSVG && (tars.flags.ie8 || tars.flags.ie)) {
             const spriteData = gulp.src(
                     './dev/' + staticFolderName + '/' + imagesFolderName + '/rastered-svg-images/*.png'
                 )
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler: (error) => {
                         notifier.error('An error occurred while making fallback for svg.', error);
                     }
                 }))

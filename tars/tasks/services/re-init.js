@@ -8,8 +8,8 @@ require('./init')();
 /**
  * Re-init builder
  */
-module.exports = function () {
-    return gulp.task('service:re-init', ['service:remove-init-fs'], function () {
+module.exports = () => {
+    return gulp.task('service:re-init', ['service:remove-init-fs'], () => {
         gulp.start('service:init');
     });
 };

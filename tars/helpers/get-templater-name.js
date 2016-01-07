@@ -4,7 +4,7 @@
  * Set templates extension
  * @return {string} Templater name
  */
-module.exports = function (templaterNameFromConfig) {
+module.exports = function getTemplaterName(templaterNameFromConfig) {
     switch (templaterNameFromConfig) {
         case 'jade':
             return 'jade';
@@ -15,5 +15,5 @@ module.exports = function (templaterNameFromConfig) {
             return 'handlebars';
         default:
             return 'jade';
-    };
+    }
 };
