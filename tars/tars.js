@@ -46,7 +46,7 @@ const cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 const templaterName = require(helpersDirPath + '/get-templater-name')(tarsConfig.templater.toLowerCase());
 const buildVersion = require(helpersDirPath + '/set-build-version')();
 
-let buildOptions = {};
+var buildOptions = {};
 
 // Tars config
 tars.config = tarsConfig;
@@ -127,7 +127,7 @@ tars.packages = {
 tars.helpers = {
     buildVersion,
     dateFormatter: require(helpersDirPath + '/modify-date-formatter'),
-    getFilesFromDir: require(helpersDirPath + '/get-files-from-dir'),
+    tarsFsHelper: require(helpersDirPath + '/tars-fs-helper'),
     notifier: require(helpersDirPath + '/notifier'),
     setUlimit: require(helpersDirPath + '/set-ulimit'),
     watcherLog: require(helpersDirPath + '/watcher-log'),
@@ -195,7 +195,7 @@ switch (templaterName) {
         tars.templater = {
             name: 'handlebars',
             ext: '{html,hbs}',
-            fn: (modulesData) => {
+            fn: modulesData => {
                 return tars.require('gulp-compile-handlebars')(modulesData, {
                     batch: ['./markup/modules'],
                     helpers: require('./tasks/html/helpers/handlebars-helpers.js')
@@ -208,7 +208,7 @@ switch (templaterName) {
         tars.templater = {
             name: 'jade',
             ext: 'jade',
-            fn: (modulesData) => {
+            fn: modulesData => {
                 return tars.require('gulp-jade')({
                     pretty: true,
                     locals: modulesData
