@@ -28,7 +28,7 @@ if (os.platform() !== 'win32') {
 }
 
 // Get file's path from dir recursively and synchronously
-const getFilesFromDir = tars.helpers.getFilesFromDir;
+const tarsFsHelper = tars.helpers.tarsFsHelper;
 
 /* *********** */
 /* END HELPERS */
@@ -38,17 +38,10 @@ const getFilesFromDir = tars.helpers.getFilesFromDir;
 /* TASKS */
 /* ***** */
 
-// SYSTEM'S TASKS
-// require system tasks
-getFilesFromDir('./tars/tasks').forEach((file) => {
-    require(file)();
-});
-
-// USER'S TASKS
+// require system and user tasks
 // You can add your own task.
 // Task have to be in tars/user-tasks folder
-// require user-tasks
-getFilesFromDir('./tars/user-tasks').forEach((file) => {
+tarsFsHelper.getTasks().forEach(file => {
     require(file)();
 });
 
@@ -69,15 +62,8 @@ gulp.task('dev', ['build-dev'], () => {
         gulp.start('browsersync');
     }
 
-    // SYSTEM WATCHERS
-    // require watchers
-    getFilesFromDir('./tars/watchers').forEach((file) => {
-        require(file)();
-    });
-
-    // USER'S WATCHERS
-    // require user-watchers
-    getFilesFromDir('./tars/user-watchers').forEach((file) => {
+    // require system and user watchers
+    tarsFsHelper.getWatchers().forEach(file => {
         require(file)();
     });
 
@@ -101,7 +87,7 @@ gulp.task('dev', ['build-dev'], () => {
 
 // Build dev-version (without watchers)
 // You can add your own tasks in queue
-gulp.task('build-dev', (cb) => {
+gulp.task('build-dev', cb => {
     tars.options.notify = false;
 
     runSequence(
@@ -171,7 +157,7 @@ gulp.task('update-deps', () => {
 });
 
 // Task for starting browsersync module
-gulp.task('browsersync', (cb) => {
+gulp.task('browsersync', cb => {
 
     // Serve files and connect browsers
     browserSync({
@@ -201,7 +187,7 @@ gulp.task('browsersync', (cb) => {
 /* HELPERS TASKS */
 /* ************* */
 
-gulp.task('svg-actions', (cb) => {
+gulp.task('svg-actions', cb => {
     if (tars.flags.ie8 || tars.flags.ie) {
         runSequence(
             ['images:minify-svg', 'images:raster-svg'],
@@ -217,7 +203,7 @@ gulp.task('svg-actions', (cb) => {
     }
 });
 
-gulp.task('compile-templates-with-data-reloading', (cb) => {
+gulp.task('compile-templates-with-data-reloading', cb => {
     runSequence(
         'html:concat-modules-data',
         'html:compile-templates',
