@@ -116,7 +116,7 @@ gulp init
 Важно! Все примеры в документации используют настройки по умолчанию.
 
 * [Файловая структура](/docs/ru/file-structure.md)
-* [Работа с тасками и вотчерами](/docs/ru/tasks-workflow.md)
+* [Работа с тасками и вотчерами](/docs/ru/tasks-and-watchers.md)
 * [Опции](/docs/ru/options.md)
 * [Html](/docs/ru/html-processing.md)
 * [Css](/docs/ru/css-processing.md)
