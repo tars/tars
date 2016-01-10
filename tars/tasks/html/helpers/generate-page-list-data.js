@@ -13,9 +13,9 @@ module.exports = function generatePageStructure() {
 
     return through2.obj(function (file, enc, callback) {
         const pageNameRegExp = /([\/\w]+).[\w]+$/i;
-        const jsFileRegExp = /\.js$/;
+        const jsFileRegExp = /data\.js$/;
 
-        // If current file is .js file, just pass it through
+        // If current file is data.js file, just pass it through
         if (jsFileRegExp.test(file.path)) {
             this.push(file); // eslint-disable-line no-invalid-this
         } else {

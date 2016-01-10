@@ -10,11 +10,11 @@
  * @return {Object}             Required package
  */
 function tarsRequire(packageName) {
-    var requirePackage;
+    var requiredPackage;
 
     if (process.env.npmRoot) {
         try {
-            requirePackage = require(process.env.npmRoot + packageName);
+            requiredPackage = require(process.env.npmRoot + packageName);
         } catch (error) {
             console.log('\n\n');
             tars.say('It seems, that you use old version of TARS-CLI!');
@@ -26,10 +26,10 @@ function tarsRequire(packageName) {
         }
 
     } else {
-        requirePackage = require(packageName);
+        requiredPackage = require(packageName);
     }
 
-    return requirePackage;
+    return requiredPackage;
 }
 
 // TARS is a global var
@@ -46,8 +46,7 @@ const helpersDirPath = './helpers';
 const cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
 const templaterName = require(helpersDirPath + '/get-templater-name')(tarsConfig.templater.toLowerCase());
 const buildVersion = require(helpersDirPath + '/set-build-version')();
-
-var buildOptions = {};
+const useBuildVersioning = tarsConfig.useBuildVersioning;
 
 // Tars config
 tars.config = tarsConfig;
@@ -82,22 +81,13 @@ tars.skipTaskLog = function skipTaskLog(taskName, reason) {
     gutil.log(gutil.colors.white.bold('Skipped  \'' + gutil.colors.cyan(taskName) + '\' ' + reason));
 };
 
-// Generate build version
-if (tarsConfig.useBuildVersioning) {
-    buildOptions.buildVersion = buildVersion;
-    buildOptions.buildPath = tarsConfig.buildPath + 'build' + buildOptions.buildVersion + '/';
-} else {
-    buildOptions.buildVersion = '';
-    buildOptions.buildPath = tarsConfig.buildPath;
-}
-
 // Build options
 tars.options = {
     notify: true,
     build: {
         hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
-        path: buildOptions.buildPath,
-        version: buildOptions.buildVersion
+        path: useBuildVersioning ? tarsConfig.buildPath + 'build' + buildVersion + '/' : tarsConfig.buildPath,
+        version: useBuildVersioning ? buildVersion : ''
     }
 };
 

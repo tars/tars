@@ -5,7 +5,7 @@
  * @return {String} build version
  */
 module.exports = function setBuildVersion() {
-    let buildVerion = '_ver-' + (new Date()).toString();
+    var buildVerion = '_ver-' + (new Date()).toString();
 
     // build version is current date without spaces (replaced to _) and without time zone info.
     // You could change it.

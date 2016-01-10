@@ -176,7 +176,7 @@ module.exports = () => {
         function finishInit() {
             console.log(gutil.colors.black.bold('\n--------------------------------------------------------'));
             tars.say(gutil.colors.green.bold('TARS has been inited successfully!\n'));
-            tars.say('You choosed:');
+            tars.say('You choose:');
             tars.say(gutil.colors.cyan.bold(tars.cssPreproc.name) + ' as css-preprocessor');
             tars.say(gutil.colors.cyan.bold(tars.templater.name) + ' as templater\n');
             console.log(gutil.colors.black.bold('--------------------------------------------------------\n'));

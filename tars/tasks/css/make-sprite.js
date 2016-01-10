@@ -19,24 +19,10 @@ module.exports = () => {
         const dpiLength = usedDpiArray.length;
 
         var spriteData = [];
-        var dpi192 = false;
-        var dpi288 = false;
-        var dpi384 = false;
+        var dpiConfig = {};
 
         usedDpiArray.forEach(dpiValue => {
-            switch (dpiValue) {
-                case 192:
-                    dpi192 = true;
-                    break;
-                case 288:
-                    dpi288 = true;
-                    break;
-                case 384:
-                    dpi384 = true;
-                    break;
-                default:
-                    break;
-            }
+            dpiConfig['dpi' + dpiValue] = true;
         });
 
         /* eslint-disable no-loop-func */
@@ -57,11 +43,7 @@ module.exports = () => {
                             imgName: 'sprite.png',
                             cssName: 'sprite_' + usedDpiArray[i] + '.' + preprocExtension,
                             Algorithms: 'diagonal',
-                            cssOpts: {
-                                dpi192,
-                                dpi288,
-                                dpi384
-                            },
+                            cssOpts: dpiConfig,
                             padding: (i + 1) * 4,
                             cssTemplate: './markup/' + staticFolderName + '/'
                                             + preprocName + '/sprite-generator-templates/'

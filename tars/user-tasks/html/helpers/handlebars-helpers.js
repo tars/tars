@@ -15,7 +15,7 @@ const handlebarsHelpers = {
      * @param  {String} str Source string
      * @return {String}     Result string
      */
-    exampleHelper: str => {
+    exampleHelper: function (str) {
         return str;
     }
 };

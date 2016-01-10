@@ -7,7 +7,7 @@ In general, TARS works in developer-mode as follows:
 * all tasks, which is used to build your project are started;
 * after build-proccess all watchers will be started. They will watch for files in your project and start tasks after file-change.
 
-All build-in tasks are in the `tars/tasks` directory. They are divided into folders according to the task type. Build-in watchers are in the `tars/watchers` directory. You can add your own tasks and watchers in `tars/user-tasks`/`tars/user-watchers`.
+All built-in tasks are in the `tars/tasks` directory. They are divided into folders according to the task type. built-in watchers are in the `tars/watchers` directory. You can add your own tasks and watchers in `tars/user-tasks`/`tars/user-watchers`.
 
 When you add tasks or watchers it is recommended to use:
 
@@ -16,13 +16,13 @@ When you add tasks or watchers it is recommended to use:
 * tars.templater.ext - contains an extensions for files of the selected templater;
 * tars.cssPreproc.ext - contains an extensions for files of the selected css-preprocessor.
 
-If you need to replace build-in task/watcher, you have to call you own task/watcher like build-in and do not forget to repeat file structure. There is small example, which is true for tasks and watchers, let's imagen, that there is build-in task `minify-html.js`:
+If you need to replace built-in task/watcher, you have to call you own task/watcher like built-in and do not forget to repeat file structure. There is small example, which is true for tasks and watchers, let's imagen, that there is built-in task `minify-html.js`:
 
 ```
 tars/tasks/html/minify-html.js
 ```
 
-And you need to use your own `minify-html.js`. So, you have to create folder `html` inside `user-tasks` and create file `minify-html.js` there (repeat file structure of build-in task):
+And you need to use your own `minify-html.js`. So, you have to create folder `html` inside `user-tasks` and create file `minify-html.js` there (repeat file structure of built-in task):
 
 ```
 tars/user-tasks/html/minify-html.js
