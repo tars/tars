@@ -5,21 +5,19 @@ const cache = tars.packages.cache;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-var jsPathesToLint = [
+const jsPathesToLint = [].concat.apply([], [
     './markup/modules/**/*.js',
     '!./markup/modules/**/_*.js',
     '!./markup/modules/**/data/data.js',
     tars.config.lintJsCodeBeforeModules ? tars.config.jsPathsToConcatBeforeModulesJs : [],
     tars.config.lintJsCodeAfterModules ? tars.config.jsPathsToConcatAfterModulesJs : []
-];
-
-jsPathesToLint = [].concat.apply([], jsPathesToLint);
+]);
 
 /**
  * Check JS for style and errors (optional task)
  */
 module.exports = () => {
-    return gulp.task('js:check', (cb) => {
+    return gulp.task('js:check', cb => {
 
         if (tars.config.useJsLintAndHint) {
             const eslint = tars.require('gulp-eslint');

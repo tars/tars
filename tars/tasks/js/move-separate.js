@@ -14,7 +14,7 @@ module.exports = () => {
     return gulp.task('js:move-separate', () => {
         gulp.src('./markup/' + separateJsFilesPath + '/**/*.js')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving separate js-files.', error);
                 }
             }))

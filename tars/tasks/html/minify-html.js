@@ -34,7 +34,7 @@ module.exports = () => {
     return gulp.task('html:minify-html', () => {
         return gulp.src('./dev/**/*.html')
                 .pipe(plumber({
-                    errorHandler: (error) => {
+                    errorHandler: error => {
                         notifier.error('An error occurred while processing compiled html-files.', error);
                     }
                 }))

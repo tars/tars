@@ -12,7 +12,7 @@ module.exports = () => {
     return gulp.task('css:compress-css', () => {
         return gulp.src(tars.options.build.path + tars.config.fs.staticFolderName + '/css/*.css')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while compressing css.', error);
                 }
             }))

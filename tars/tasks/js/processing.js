@@ -17,8 +17,7 @@ const destFolder = './dev/' + staticFolderName + '/js';
 const compressJs = tars.flags.release || tars.flags.min;
 const generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release && !tars.flags.min;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
-
-var jsPaths = [
+const jsPaths = [].concat.apply([], [
     '!./markup/modules/**/data/data.js',
     './markup/' + staticFolderName + '/js/framework/**/*.js',
     './markup/' + staticFolderName + '/js/libraries/**/*.js',
@@ -27,9 +26,7 @@ var jsPaths = [
     './markup/modules/*/*.js',
     tars.config.jsPathsToConcatAfterModulesJs,
     '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
-];
-
-jsPaths = [].concat.apply([], jsPaths);
+]);
 
 /**
  * Stream of base processing with JavaScript.
@@ -90,7 +87,7 @@ module.exports = () => {
     return gulp.task('js:processing', ['js:check'], () => {
         return gulp.src(jsPaths, { base: cwd })
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while processing js-files.', error);
                 }
             }))

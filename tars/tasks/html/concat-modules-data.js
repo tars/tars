@@ -12,7 +12,7 @@ module.exports = () => {
     return gulp.task('html:concat-modules-data', () => {
         return gulp.src('./markup/modules/**/data/data.js')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while concating module\'s data.', error);
                 }
             }))

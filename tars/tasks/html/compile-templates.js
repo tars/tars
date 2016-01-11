@@ -137,7 +137,7 @@ module.exports = () => {
                 patterns: patterns,
                 usePrefix: false
             }))
-            .pipe(rename(function (pathToFileToRename) {
+            .pipe(rename(pathToFileToRename => {
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))

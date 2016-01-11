@@ -16,7 +16,7 @@ module.exports = () => {
     return gulp.task('images:move-general-img', () => {
         return gulp.src(generalImagesPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving general images.', error);
                 }
             }))

@@ -16,7 +16,7 @@ module.exports = () => {
     return gulp.task('images:move-plugins-img', () => {
         return gulp.src(pluginsImagesPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving plugin\'s imgs.', error);
                 }
             }))

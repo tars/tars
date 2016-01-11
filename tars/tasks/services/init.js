@@ -42,7 +42,7 @@ module.exports = () => {
          * @return {Object}        Promise
          */
         function getVersionToDownload(type) {
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 var version;
 
                 if (process.env.tarsVersion) {
@@ -53,7 +53,7 @@ module.exports = () => {
 
                 new Download({ mode: '755' })
                     .get(makeUrl(type, version))
-                    .run((error) => {
+                    .run(error => {
                         if (error) {
                             version = 'master';
                         }
@@ -84,7 +84,7 @@ module.exports = () => {
                 new Download({ extract: true, mode: '755' })
                     .get(makeUrl(params.type, params.version))
                     .dest(destPath)
-                    .run((error) => {
+                    .run(error => {
                         if (error) {
                             reject(error);
                         }
@@ -110,7 +110,7 @@ module.exports = () => {
 
                 downloadedPartsPath += '-' + params.version + '/markup';
 
-                ncp(downloadedPartsPath, './markup', (error) => {
+                ncp(downloadedPartsPath, './markup', error => {
                     if (error) {
                         reject(error);
                         return;
@@ -125,7 +125,8 @@ module.exports = () => {
          * @return {Object}        Promise
          */
         function generateStartScreen() {
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
+
                 if (tars.cli) {
                     tars.say('It\'s almost ready!');
                 } else {
@@ -162,7 +163,7 @@ module.exports = () => {
          * @return {Object}        Promise
          */
         function removeTmpFolders() {
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 del(['./.tmpTemplater/', './.tmpPreproc/']).then(() => {
                     resolve();
                 });
@@ -194,7 +195,7 @@ module.exports = () => {
             ])
             .then(removeTmpFolders)
             .then(finishInit)
-            .catch((error) => {
+            .catch(error => {
                 tars.say(gutil.colors.red(error));
                 tars.say('Please, repost with message and the stack trace to developer tars.builder@gmail.com');
                 console.error(error.stack);

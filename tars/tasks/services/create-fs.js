@@ -18,7 +18,7 @@ var paths = [
     imagesFolderPath + '/sprite'
 ];
 
-tars.config.useImagesForDisplayWithDpi.forEach(function (dpiValue) {
+tars.config.useImagesForDisplayWithDpi.forEach(dpiValue => {
     paths.push(
         imagesFolderPath + '/sprite/' + dpiValue + 'dpi'
     );
@@ -36,7 +36,7 @@ paths.push(
  * Create fs for project
  */
 module.exports = () => {
-    return gulp.task('service:create-fs', (cb) => {
+    return gulp.task('service:create-fs', cb => {
         const mkdirp = tars.require('mkdirp');
 
         if (staticFolderName !== 'static') {
@@ -44,7 +44,7 @@ module.exports = () => {
         }
 
         paths.forEach((path) => {
-            mkdirp(path, (error) => {
+            mkdirp(path, error => {
                 if (error) {
                     console.error(error);
                 }

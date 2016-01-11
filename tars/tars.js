@@ -59,6 +59,7 @@ tars.flags = gutil.env;
  * @param  {String} message Message to say
  */
 tars.say = function say(message) {
+    // Use «nice» output only for OSX
     if (os.platform() === 'darwin') {
         console.log(gutil.colors.cyan.bold('🅃 🄰 🅁 🅂 : ') + gutil.colors.white.bold(message));
     } else {
