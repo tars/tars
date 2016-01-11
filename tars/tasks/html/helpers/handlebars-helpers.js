@@ -124,7 +124,7 @@ module.exports = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    toLowerCase: (str) => {
+    toLowerCase: str => {
         str = Utils.castToString(str);
 
         return str.toLowerCase();
@@ -135,7 +135,7 @@ module.exports = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    toUpperCase: (str) => {
+    toUpperCase: str => {
         str = Utils.castToString(str);
 
         return str.toUpperCase();
@@ -146,7 +146,7 @@ module.exports = {
      * @param  {String} str [description]
      * @return {[type]}     [description]
      */
-    capitalizeFirst: (str) => {
+    capitalizeFirst: str => {
         str = Utils.castToString(str);
 
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -161,13 +161,12 @@ module.exports = {
         options = options || {};
 
         var _data = {};
-        var content = '';
 
         if (options._data) {
             _data = Handlebars.createFrame(options._data);
         }
 
-        content = options.fn(this, {data: _data}).replace(/>(\s+)</g, '><');
+        const content = options.fn(this, {data: _data}).replace(/>(\s+)</g, '><');
 
         return new Handlebars.SafeString(content);
     },
@@ -188,7 +187,7 @@ module.exports = {
      * @param  {[type]} format [description]
      * @return {[type]}        [description]
      */
-    now: (format) => {
+    now: format => {
         const date = new Date();
 
         if (Utils.isUndefined(format)) {

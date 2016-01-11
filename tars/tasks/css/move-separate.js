@@ -14,7 +14,7 @@ module.exports = () => {
     return gulp.task('css:move-separate', () => {
         gulp.src('./markup/' + staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving separate css-files.', error);
                 }
             }))

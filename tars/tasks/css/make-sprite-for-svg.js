@@ -16,12 +16,12 @@ const preprocFoldePath = './markup/' + tars.config.fs.staticFolderName + '/' + p
  * Return pipe with styles for sprite
  */
 module.exports = () => {
-    return gulp.task('css:make-sprite-for-svg', (cb) => {
+    return gulp.task('css:make-sprite-for-svg', cb => {
 
         if (tars.config.useSVG) {
             return gulp.src(imagesFolderPath + '/minified-svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: (error) => {
+                    errorHandler: error => {
                         notifier.error('An error occurred while making sprite for svg.', error);
                     }
                 }))

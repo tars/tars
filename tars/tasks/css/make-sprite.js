@@ -23,8 +23,8 @@ module.exports = () => {
         var dpi288 = false;
         var dpi384 = false;
 
-        usedDpiArray.forEach((value) => {
-            switch (value) {
+        usedDpiArray.forEach(dpiValue => {
+            switch (dpiValue) {
                 case 192:
                     dpi192 = true;
                     break;
@@ -47,7 +47,7 @@ module.exports = () => {
                     + '/sprite/' + usedDpiArray[i] + 'dpi/*.png'
                 )
                 .pipe(plumber({
-                    errorHandler: (error) => {
+                    errorHandler: error => {
                         notifier.error('An error occurred while making png-sprite.', error);
                     }
                 }))

@@ -8,7 +8,7 @@ const fs = require('fs');
  * Update dependencies
  */
 module.exports = () => {
-    return gulp.task('service:update-deps', (cb) => {
+    return gulp.task('service:update-deps', cb => {
         const Download = tars.require('download');
         const exec = require('child_process').exec;
         const downloadPackage = new Download({ extract: true })
@@ -17,23 +17,36 @@ module.exports = () => {
 
         function downloadNewPackageJson() {
             fs.rename('./package.json', './_package.json', () => {
-                downloadPackage.run((err) => {
-                    if (err) {
-                        throw err;
+                downloadPackage.run(downloadError => {
+
+                    if (downloadError) {
+                        throw downloadError;
                     }
-                    exec('npm i', (error, stdout, stderr) => {
+
+                    exec('npm i', (execError, stdout, stderr) => {
                         console.log(stdout);
                         console.log(stderr);
-                        console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
-                        gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Deps update has been finished successfully!'));
-                        console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
-                        cb(error);
+                        console.log(
+                            gutil.colors.black.bold(
+                                '\n------------------------------------------------------------'
+                            )
+                        );
+                        gutil.log(
+                            gutil.colors.green('✔'),
+                            gutil.colors.green.bold('Deps update has been finished successfully!')
+                        );
+                        console.log(
+                            gutil.colors.black.bold(
+                                '------------------------------------------------------------\n'
+                            )
+                        );
+                        cb(execError);
                     });
                 });
             });
         }
 
-        fs.exists('./_package.json', (exists) => {
+        fs.exists('./_package.json', exists => {
             if (exists) {
                 fs.unlink('./_package.json', () => {
                     downloadNewPackageJson();

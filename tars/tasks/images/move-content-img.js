@@ -16,7 +16,7 @@ module.exports = () => {
     return gulp.task('images:move-content-img', () => {
         return gulp.src(contentImagesPath + '/**/*.*')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving content images.', error);
                 }
             }))

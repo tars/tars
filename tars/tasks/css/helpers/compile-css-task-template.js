@@ -26,7 +26,7 @@ module.exports = function generateTaskContent(browser) {
     var successMessage = capitalizePreprocName + '-files have been compiled';
     var errorMessage = 'An error occurred while compiling css';
     var compiledFileName = 'main';
-    var generateSourceMaps;
+    var generateSourceMaps = false;
 
     var postProcessors = [];
     var stylesFilesToConcatinate = [];
@@ -37,7 +37,7 @@ module.exports = function generateTaskContent(browser) {
         stylesFolderPath + '/mixins.' + preprocExtensions,
         stylesFolderPath + '/sprites-' + preprocName + '/sprite_96.' + preprocExtensions
     ];
-    var generalStylesFilesToConcatinate = [
+    const generalStylesFilesToConcatinate = [
         stylesFolderPath + '/fonts.' + preprocExtensions,
         stylesFolderPath + '/vars.' + preprocExtensions,
         stylesFolderPath + '/GUI.' + preprocExtensions,
@@ -47,7 +47,7 @@ module.exports = function generateTaskContent(browser) {
         './markup/modules/*/*.' + preprocExtensions,
         './markup/modules/*/*.css'
     ];
-    var lastStylesFilesToConcatinate = [
+    const lastStylesFilesToConcatinate = [
         stylesFolderPath + '/etc/**/*.' + preprocExtensions,
         stylesFolderPath + '/etc/**/*.css',
         '!./**/_*.' + preprocExtensions,
@@ -55,7 +55,7 @@ module.exports = function generateTaskContent(browser) {
     ];
 
     if (tars.config.postcss && tars.config.postcss.length) {
-        tars.config.postcss.forEach((postProcessor) => {
+        tars.config.postcss.forEach(postProcessor => {
             postProcessors.push(require(postProcessor.name)(postProcessor.options));
         });
     }

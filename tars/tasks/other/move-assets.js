@@ -15,7 +15,7 @@ module.exports = () => {
     return gulp.task('other:move-assets', () => {
         return gulp.src('./markup/modules/**/assets/**/*.*')
             .pipe(plumber({
-                errorHandler: (error) => {
+                errorHandler: error => {
                     notifier.error('An error occurred while moving assets.', error);
                 }
             }))

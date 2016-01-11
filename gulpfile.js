@@ -4,7 +4,7 @@
 // It is a global var
 require('./tars/tars');
 
-// Using modules
+// Used modules
 const os = require('os');
 const path = require('path');
 const gulp = tars.packages.gulp;
@@ -14,7 +14,6 @@ const runSequence = tars.packages.runSequence.use(gulp);
 const browserSync = tars.packages.browserSync;
 const env = process.env;
 
-// Configs
 const browserSyncConfig = tars.config.browserSyncConfig;
 
 /* ******* */
