@@ -43,7 +43,7 @@ module.exports = () => {
             fs.renameSync('./markup/static/', './markup/' + staticFolderName);
         }
 
-        paths.forEach((path) => {
+        paths.forEach(path => {
             mkdirp(path, error => {
                 if (error) {
                     console.error(error);
