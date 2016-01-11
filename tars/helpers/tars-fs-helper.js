@@ -66,8 +66,8 @@ function getReadyUniqueItemsArray(systemItems, usersItems) {
   * @return {Array} Array of unique system/user's tasks
   */
 exports.getTasks = () => {
-    const systemTasks = getFilesFromDir('./tars/tasks');
-    const userTasks = getFilesFromDir('./tars/user-tasks');
+    const systemTasks = getFilesFromDir(tars.root + '/tasks');
+    const userTasks = getFilesFromDir(tars.root + '/user-tasks');
     const readyTasksArray = getReadyUniqueItemsArray(systemTasks, userTasks);
 
     return readyTasksArray;
@@ -78,8 +78,8 @@ exports.getTasks = () => {
   * @return {Array} Array of unique system/user's watchers
   */
 exports.getWatchers = () => {
-    const systemWatchers = getFilesFromDir('./tars/watchers');
-    const userWatchers = getFilesFromDir('./tars/user-watchers');
+    const systemWatchers = getFilesFromDir(tars.root + '/watchers');
+    const userWatchers = getFilesFromDir(tars.root + '/user-watchers');
     const readyWatchersArray = getReadyUniqueItemsArray(systemWatchers, userWatchers);
 
     return readyWatchersArray;

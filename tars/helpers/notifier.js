@@ -34,7 +34,7 @@ module.exports = {
                 sound: notifyConfig.sounds.onError,
                 title: notifyConfig.title,
                 message: resultMessage,
-                icon: path.resolve(process.cwd() + '/tars/icons/tars_error.png'),
+                icon: path.resolve(tars.root + '/icons/tars_error.png'),
                 onLast: true
             })(error);
         } else {
@@ -63,7 +63,7 @@ module.exports = {
                 templateOptions: {
                     date: tars.helpers.dateFormatter.getTimeOfModify()
                 },
-                icon: path.resolve(process.cwd() + '/tars/icons/tars.png')
+                icon: path.resolve(tars.root + '/icons/tars.png')
             });
         } else {
             return tars.packages.gutil.noop();

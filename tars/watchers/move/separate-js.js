@@ -5,7 +5,8 @@
  */
 module.exports = () => {
     return tars.packages.chokidar.watch(
-        'markup/' + tars.config.fs.staticFolderName + '/js/separate-js/**/*.js', {
+        'markup/' + tars.config.fs.staticFolderName + '/js/separate-js/**/*.js',
+        {
             ignored: '',
             persistent: true,
             ignoreInitial: true
