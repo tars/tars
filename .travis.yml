@@ -2,18 +2,22 @@ language: c
 
 os:
   - linux
-  - osx
+  # - osx
 
 env:
   matrix:
     - export NODE_VERSION="5"
-    - export NODE_VERSION="4"
+    # - export NODE_VERSION="4"
 
 matrix:
   fast_finish: true
 
 before_install:
   - echo $TRAVIS_OS_NAME
+  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
+  - echo "$TRAVIS_COMMIT_MSG"
+  - "export TWBS_DO_VALIDATOR=\"$(echo $TRAVIS_COMMIT_MSG | grep '\[full\]')\""
+  - echo "$TWBS_DO_VALIDATOR"
   - git clone https://github.com/creationix/nvm.git ./.nvm
   - source ./.nvm/nvm.sh
   - nvm install $NODE_VERSION
