@@ -35,7 +35,8 @@ function tarsRequire(packageName) {
 // TARS is a global var
 global.tars = {
     require: tarsRequire,
-    cli: (process.env.npmRoot ? true : false)
+    cli: (process.env.npmRoot ? true : false),
+    root: __dirname
 };
 
 const gutil = tars.require('gulp-util');

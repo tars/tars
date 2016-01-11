@@ -1,6 +1,8 @@
 # Handlebars-helpers
 
-You can add your own helpers to /tars/tasks/html/helpers/handlebars-helpers. It is not necessary to register your helpers. You just have to add them to exported object "helper" as a function. 
+There are some usefull built-in helpers. You can add your own helpers to /tars/user-tasks/html/helpers/handlebars-helpers. It is not necessary to register your helpers. You just have to add them to exported object "handlebarsHelpers" as a function. All custom (user's) helpers will be available in tempalates automatically. Besides, all custom helpers will be moved automatically after update of your project via TARS-CLI.
+
+Let's describe built-in helpers.
 
 ## repeat
 

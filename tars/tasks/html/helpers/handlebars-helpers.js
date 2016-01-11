@@ -1,12 +1,11 @@
 'use strict';
 
 const Handlebars = tars.packages.handlebars;
-const digits = tars.require('digits');
 
 const Dates = require('./utils/dates');
 const Utils = require('./utils/utils');
 
-module.exports = {
+const builtInHandlebarsHelpers = {
     /**
      * Repeat  helper
      * @param  {Number} n       number of iterations
@@ -24,10 +23,8 @@ module.exports = {
             _data = Handlebars.createFrame(options._data);
         }
 
-        for (let i = 0; i <= count; i++) {
-            _data = {
-                index: digits.pad((i + 1), { auto: n })
-            };
+        for (let index = 0; index <= count; index++) {
+            _data = { index };
             content += options.fn(this, { data: _data });
         }
         return new Handlebars.SafeString(content);
@@ -229,3 +226,8 @@ module.exports = {
         return this[language][context];
       }
 };
+
+module.exports = Object.assign(
+    builtInHandlebarsHelpers,
+    require(tars.root + '/user-tasks/html/helpers/handlebars-helpers')
+);
