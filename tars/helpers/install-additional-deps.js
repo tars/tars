@@ -7,7 +7,7 @@ const exec = require('child_process').exec;
 var usersDeps;
 
 try {
-    usersDeps = require('../../user-package');
+    usersDeps = require(process.cwd() + '/user-package');
 } catch (error) {
     console.error('User-package.json is not valid!\n');
     console.error(error);

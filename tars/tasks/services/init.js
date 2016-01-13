@@ -48,7 +48,7 @@ module.exports = () => {
                 if (process.env.tarsVersion) {
                     version = 'version-' + process.env.tarsVersion;
                 } else {
-                    version = 'version-' + require('../../../tars.json').version;
+                    version = 'version-' + require(process.cwd() + '/tars.json').version;
                 }
 
                 new Download({ mode: '755' })
