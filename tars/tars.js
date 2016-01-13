@@ -55,6 +55,8 @@ tars.config = tarsConfig;
 // Flags
 tars.flags = gutil.env;
 
+tars.isDevMode = !tars.flags.release && !tars.flags.min;
+
 /**
  * Log messages from TARS
  * @param  {String} message Message to say

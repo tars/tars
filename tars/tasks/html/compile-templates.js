@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
+const gulpif = tars.packages.gulpif;
 const replace = tars.packages.replace;
 const plumber = tars.packages.plumber;
 const rename = tars.packages.rename;
@@ -8,6 +9,7 @@ const through2 = tars.packages.through2;
 const fs = require('fs');
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
+const generatePageList = require('./helpers/generate-page-list');
 
 var patterns = [];
 
@@ -141,6 +143,11 @@ module.exports = () => {
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))
+            .pipe(gulpif(
+                    tars.isDevMode,
+                    generatePageList()
+                )
+            )
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Templates\'ve been compiled')

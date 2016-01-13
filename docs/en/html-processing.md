@@ -7,6 +7,10 @@ You can use all features of jade and handlebars. If you are used to the regular 
 
 If you do not want to compile a particular page, you can simply add the '_' to the begining of the page name, and it will not be compiled.
 
+В режиме разработки генерируется страница со ссылками на все страницы проекта. По умолчанию она будет открываться в браузере при использовании livereload и доступна под именем __index.html
+
+The page with links to all pages of project will be generated in dev-mode. This page will be opened in browser then livereload is used. This page has name __index.html
+
 If you need to include files from the static directory (images, js), you must use the placeholder [%=static=%](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
 
 ```html

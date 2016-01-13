@@ -16,7 +16,7 @@ module.exports = gutil => {
 
     // Log warning, if it is not CLI-mode
     if (!tars.cli) {
-        if (!tars.flags.release && !tars.flags.min) {
+        if (tars.isDevMode) {
             console.log(gutil.colors.yellow.inverse('\n----------------------------------------------------------------------'));
             tars.say(gutil.colors.red.bold('You\'ve started TARS via gulp.'));
             tars.say(gutil.colors.red.bold('This mode is depricated for developing.'));

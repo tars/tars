@@ -2,12 +2,12 @@ language: c
 
 os:
   - linux
-  # - osx
+  - osx
 
 env:
   matrix:
     - export NODE_VERSION="5"
-    # - export NODE_VERSION="4"
+    - export NODE_VERSION="4"
 
 matrix:
   fast_finish: true
@@ -15,9 +15,7 @@ matrix:
 before_install:
   - echo $TRAVIS_OS_NAME
   - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
-  - echo $TRAVIS_COMMIT_MSG
   - export START_FULL_TESTS=$(echo $TRAVIS_COMMIT_MSG | grep '\[full\]' -c)
-  - echo $START_FULL_TESTS
   - if [ ${START_FULL_TESTS} = "1" ]; then echo "FULL TESTS!"; fi
   - git clone https://github.com/creationix/nvm.git ./.nvm
   - source ./.nvm/nvm.sh

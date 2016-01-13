@@ -143,7 +143,7 @@ module.exports = function generateTaskContent(browser) {
                 );
             }
 
-            generateSourceMaps = tars.config.sourcemaps.css.active && !tars.flags.release && !tars.flags.min;
+            generateSourceMaps = tars.config.sourcemaps.css.active && tars.isDevMode;
 
             break;
     };
