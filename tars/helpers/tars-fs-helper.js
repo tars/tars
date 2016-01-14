@@ -32,7 +32,7 @@ function getFilesFromDir(dir) {
         const stat = fs.statSync(fullPathToFile);
 
         if (stat && stat.isDirectory()) {
-            results = Object.assign(results, getFilesFromDir(fullPathToFile))
+            results = Object.assign(results, getFilesFromDir(fullPathToFile));
         } else {
             if (isValidFile(fullPathToFile, file)) {
                 results[dir.match(/([\w-]+)$/i)[1] + file] = fullPathToFile;

@@ -7,8 +7,6 @@ You can use all features of jade and handlebars. If you are used to the regular 
 
 If you do not want to compile a particular page, you can simply add the '_' to the begining of the page name, and it will not be compiled.
 
-В режиме разработки генерируется страница со ссылками на все страницы проекта. По умолчанию она будет открываться в браузере при использовании livereload и доступна под именем __index.html
-
 The page with links to all pages of project will be generated in dev-mode. This page will be opened in browser then livereload is used. This page has name __index.html
 
 If you need to include files from the static directory (images, js), you must use the placeholder [%=static=%](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
@@ -33,6 +31,19 @@ moduleName: {
     }
 }
 ```
+
+There are in data will be data from _template module and a list of all pages of project in array like this:
+
+```javascript
+__pages: [
+    {
+        name: 'pageName',
+        href: 'pageHref'
+    }
+]
+```
+
+You can use with array to render a list of links to all pages of project.
 
 Connecting modules with different data looks differently in jade and handlebars.
 
@@ -104,8 +115,8 @@ module1.html
 module1: {
     main: {
         title: 'Title of module1',
-        module2: function () {
-            return this.module2;
+        module2: function (fullData) {
+            return fullData.module2;
         }
     }
 }
@@ -133,10 +144,23 @@ So, you can get access to data of any module from data-file of current-module by
 module: {
     main: {
         title: 'Title of module',
-        innerModuleData: function () {
-            // this is pointed to the global object 
+        innerModuleData: function (fullData) {
+            // fullData is an object 
             // with all data of the application
-            return this.moduleName.ModuleType;
+            return fullData.moduleName.ModuleType;
+        }
+    }
+}
+```
+
+Everything will be musch more easy with arrow functions ES6:
+
+```javascript
+// module/data/data.js
+module: {
+    main: {
+        title: 'Title of module',
+        innerModuleData: fullData => fullData.moduleName.ModuleType
         }
     }
 }

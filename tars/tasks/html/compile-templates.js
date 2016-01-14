@@ -1,7 +1,6 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
-const gulpif = tars.packages.gulpif;
 const replace = tars.packages.replace;
 const plumber = tars.packages.plumber;
 const rename = tars.packages.rename;
@@ -9,7 +8,6 @@ const through2 = tars.packages.through2;
 const fs = require('fs');
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
-const generatePageList = require('./helpers/generate-page-list');
 
 var patterns = [];
 
@@ -17,18 +15,18 @@ var patterns = [];
  * Traverse recursively through data-object
  * If any property is a funciton,
  * this function will be called
- * @param  {Object} obj     Current object to traverse in current step
- * @param  {Object} context Object with all data
+ * @param  {Object} obj      Current object to traverse in current step
+ * @param  {Object} fullData Object with all data
  */
-function traverseThroughObject(obj, context) {
+function traverseThroughObject(obj, fullData) {
     for (let property in obj) {
         if (obj.hasOwnProperty(property)) {
             if (typeof obj[property] === 'object') {
-                traverseThroughObject(obj[property], context);
+                traverseThroughObject(obj[property], fullData);
             }
 
             if (typeof obj[property] === 'function') {
-                obj[property] = obj[property].call(context);
+                obj[property] = obj[property].call(null, fullData);
             }
         }
     }
@@ -143,11 +141,6 @@ module.exports = () => {
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))
-            .pipe(gulpif(
-                    tars.isDevMode,
-                    generatePageList()
-                )
-            )
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Templates\'ve been compiled')

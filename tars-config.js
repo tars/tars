@@ -175,7 +175,7 @@ module.exports = {
          * Choose the page to open in browser at first opening
          * @type {String}
          */
-        startUrl: '/__index.html',
+        startUrl: '/index.html',
 
         /**
          * If you don't need to see notification in browser, switch to false

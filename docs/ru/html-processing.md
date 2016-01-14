@@ -7,8 +7,6 @@
 
 Если не требуется компиляция определенной страницы, то можно просто добавить '_' в начало названия страницы, и она не будет скомпилирована.
 
-В режиме разработки генерируется страница со ссылками на все страницы проекта. По умолчанию она будет открываться в браузере при использовании livereload и доступна под именем __index.html
-
 Если необходимо подключить файлы из директории static (картинки, js), то необходимо пользоваться плейсхолдером [%=static=%](options.md#staticprefix). Тогда подключение картинки в контенте будет выглядеть следующим образом (в примере используется handlebars):
 
 ```html
@@ -32,6 +30,19 @@ moduleName: {
     }
 }
 ```
+
+По умолчанию в данных будут находится данные из модуля _template и список всех страниц проекта в виде:
+
+```javascript
+__pages: [
+    {
+        name: 'pageName',
+        href: 'pageHref'
+    }
+]
+```
+
+Этот массив можно использовать для генерации списка ссылок всех страниц проекта.
 
 Подключение модулей с различными данными выглядит по-разному в jade и handlebars.
 
@@ -103,8 +114,8 @@ module1.html
 module1: {
     main: {
         title: 'Title of module1',
-        module2: function () {
-            return this.module2;
+        module2: function (fullData) {
+            return fullData.module2;
         }
     }
 }
@@ -132,9 +143,22 @@ module2: {
 module: {
     main: {
         title: 'Title of module',
-        innerModuleData: function () {
-            // this указывает на объект, который содержит все данные проекта
-            return this.moduleName.ModuleType;
+        innerModuleData: function (fullData) {
+            // fullData — объект, который содержит все данные проекта
+            return fullData.moduleName.ModuleType;
+        }
+    }
+}
+```
+
+А если использовать стрелочные функции ES6, то все становится еще проще:
+
+```javascript
+// module/data/data.js
+module: {
+    main: {
+        title: 'Title of module',
+        innerModuleData: fullData => fullData.moduleName.ModuleType
         }
     }
 }
