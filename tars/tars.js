@@ -36,24 +36,32 @@ function tarsRequire(packageName) {
 global.tars = {
     require: tarsRequire,
     cli: (process.env.npmRoot ? true : false),
-    root: __dirname
+    root: __dirname,
+    config: require('../tars-config')
 };
 
 const gutil = tars.require('gulp-util');
 const os = require('os');
-const tarsConfig = require('../tars-config');
 const helpersDirPath = './helpers';
-const cssPreprocName = tarsConfig.cssPreprocessor.toLowerCase();
-const templaterName = require(helpersDirPath + '/get-templater-name')(tarsConfig.templater.toLowerCase());
+const cssPreprocName = tars.config.cssPreprocessor.toLowerCase();
+const templaterName = require(helpersDirPath + '/get-templater-name')(tars.config.templater.toLowerCase());
 const buildVersion = require(helpersDirPath + '/set-build-version')();
-const useBuildVersioning = tarsConfig.useBuildVersioning;
+const setUlimit = require(helpersDirPath + '/set-ulimit');
+const useBuildVersioning = tars.config.useBuildVersioning;
 
-// Tars config
-tars.config = tarsConfig;
+/**
+ * Beginning of a path for static files for using in css
+ * You have to use %=static=% or __static__ placeholder in paths to static in css files
+ * Example: background: url('%=static=%logo.png');
+ * Will be replaced to background: url('../img/logo.png');
+ * %=staticPrefixForCss=% prefix works, but it is deprecated!
+ */
+tars.config.staticPrefixForCss = '../' + tars.config.fs.imagesFolderName + '/';
 
 // Flags
 tars.flags = gutil.env;
 
+// Dev mode flag
 tars.isDevMode = !tars.flags.release && !tars.flags.min;
 
 /**
@@ -70,7 +78,14 @@ tars.say = function say(message) {
 };
 
 // Generate start screen
+// We have to call it here, cause it has to be before all actions
 require(helpersDirPath + '/start-screen-generator')(gutil);
+
+// Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
+// But you can set any value in config
+if (os.platform() !== 'win32') {
+    setUlimit();
+}
 
 /**
  * Log info about skipped task
@@ -86,8 +101,13 @@ tars.options = {
     notify: true,
     build: {
         hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
-        path: useBuildVersioning ? tarsConfig.buildPath + 'build' + buildVersion + '/' : tarsConfig.buildPath,
+        path: useBuildVersioning ? tars.config.buildPath + 'build' + buildVersion + '/' : tars.config.buildPath,
         version: useBuildVersioning ? buildVersion : ''
+    },
+    watch: {
+        ignored: '',
+        persistent: true,
+        ignoreInitial: true
     }
 };
 
@@ -120,12 +140,13 @@ tars.packages = {
 // Links to helpers
 tars.helpers = {
     buildVersion,
+    setUlimit,
     dateFormatter: require(helpersDirPath + '/modify-date-formatter'),
     tarsFsHelper: require(helpersDirPath + '/tars-fs-helper'),
     notifier: require(helpersDirPath + '/notifier'),
-    setUlimit: require(helpersDirPath + '/set-ulimit'),
     watcherLog: require(helpersDirPath + '/watcher-log'),
-    skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe')
+    skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe'),
+    stringHelper: require(helpersDirPath + '/string-helper')
 };
 
 /**
@@ -141,12 +162,10 @@ switch (cssPreprocName) {
             name: 'stylus',
             ext: 'styl',
             mainExt: 'styl',
-            preprocessor: () => {
-                return tars.require('gulp-stylus')({
-                    'resolve url': true,
-                    'include css': true
-                });
-            }
+            preprocessor: () => tars.require('gulp-stylus')({
+                'resolve url': true,
+                'include css': true
+            })
         };
         break;
     case 'less':
@@ -154,11 +173,9 @@ switch (cssPreprocName) {
             name: 'less',
             ext: 'less',
             mainExt: 'less',
-            preprocessor: () => {
-                return tars.require('gulp-less')({
-                    path: [process.cwd()]
-                });
-            }
+            preprocessor: () => tars.require('gulp-less')({
+                path: [process.cwd()]
+            })
         };
         break;
     case 'scss':
@@ -167,12 +184,10 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: () => {
-                return tars.require('gulp-sass')({
-                    outputStyle: 'expanded',
-                    includePaths: process.cwd()
-                });
-            }
+            preprocessor: () => tars.require('gulp-sass')({
+                outputStyle: 'expanded',
+                includePaths: process.cwd()
+            })
         };
         break;
 }
@@ -189,12 +204,10 @@ switch (templaterName) {
         tars.templater = {
             name: 'handlebars',
             ext: '{html,hbs}',
-            fn: modulesData => {
-                return tars.require('gulp-compile-handlebars')(modulesData, {
-                    batch: ['./markup/modules'],
-                    helpers: require('./tasks/html/helpers/handlebars-helpers.js')
-                });
-            }
+            fn: modulesData => tars.require('gulp-compile-handlebars')(modulesData, {
+                batch: ['./markup/modules'],
+                helpers: require('./tasks/html/helpers/handlebars-helpers.js')
+            })
         };
         break;
     case 'jade':
@@ -202,12 +215,10 @@ switch (templaterName) {
         tars.templater = {
             name: 'jade',
             ext: 'jade',
-            fn: modulesData => {
-                return tars.require('gulp-jade')({
-                    pretty: true,
-                    locals: modulesData
-                });
-            }
+            fn: modulesData => tars.require('gulp-jade')({
+                pretty: true,
+                locals: modulesData
+            })
         };
         break;
 }

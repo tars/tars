@@ -9,8 +9,6 @@ const githubConfig = {
     repoPrefix: 'tars-'
 };
 
-require('./create-fs')();
-
 /**
  * Make url to download TARS parts
  * @param  {String} type    Type of the generated link

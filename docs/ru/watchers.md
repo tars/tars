@@ -14,18 +14,25 @@ const watcherLog = tars.helpers.watcherLog;
 ```
 
 ```javascript
-    return chokidar.watch(/* String of path pattern or array of strings */, {
-        ignored: /* String of path pattern or array of strings to ignore. If nothing to igonre — just set it to ''*/,
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function(event, path) {
+    return chokidar.watch(
+        /* String of path pattern or array of strings */,
+        Object.assign(tars.options.watch, {
+            // Options set bellow will override default from tars.options.watch
+            // If you need default options, you can use just tars.options.watch
+            ignored: /* String of path pattern or array of strings to ignore. If nothing to igonre — just set it to ''*/,
+            persistent: /* Boolean, true by default*/,
+            ignoreInitial: /* Boolean, true by default*/
+        })
+    ).on('all', function(event, path) {
         watcherLog(event, path);
-        // You could start many tasks
+        // You could as start many tasks as you need
         gulp.start(/* Task name (String) to start */);
     });
 ```
 
 В chokidar.watch можно передать паттерн или массив паттернов путей до файлов, за которыми нужно следить.
+
+После паттернов передаются опции для chokidar. Если вам подходят опции по умолчанию, просто передайте вторым аргументов в chokidar.watch tars.options.watch. Если каки-либо свойства необходимо переопределить, используйте [Object.assign](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). Первым параметром assign принимает то, чем мы будем переопределять, а вторым — что.
 
 В опцию ignored можно передать паттерн или массив паттернов путей до файлов, которые нужно отфильтровать от слежки в рамках данного вотчера.
 

@@ -5,25 +5,21 @@ const gulpif = tars.packages.gulpif;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-const minifyOpts = {
+const usersModifyOptions = require(tars.root + '/user-tasks/html/helpers/modify-options');
+
+const minifyOpts = Object.assign({
     conditionals: true,
     quotes: true,
     empty: true
-};
+}, usersModifyOptions.minifyOpts);
 
 /* eslint-disable camelcase */
 
-const prettifyOpts = {
+const prettifyOpts = Object.assign({
     indent_char: ' ',
     indent_size: 4,
-    indent_inner_html: true,
-    preserve_newlines: true,
-    max_preserve_newlines: 0,
-    unformatted: true,
-    end_with_newline: true,
-    condensed: true,
-    padcomments: false
-};
+    indent_inner_html: true
+}, usersModifyOptions.prettifyOpts);
 
 /* eslint-enable camelcase */
 
@@ -31,7 +27,7 @@ const prettifyOpts = {
  * Minify HTML (optional task)
  */
 module.exports = () => {
-    return gulp.task('html:minify-html', () => {
+    return gulp.task('html:modify-html', () => {
         return gulp.src('./dev/**/*.html')
                 .pipe(plumber({
                     errorHandler: error => {

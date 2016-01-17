@@ -6,11 +6,7 @@
 module.exports = () => {
     return tars.packages.chokidar.watch(
         'markup/' + tars.config.fs.staticFolderName + '/js/separate-js/**/*.js',
-        {
-            ignored: '',
-            persistent: true,
-            ignoreInitial: true
-        }
+        tars.options.watch
     ).on('all', (event, path) => {
         tars.helpers.watcherLog(event, path);
         tars.packages.gulp.start('js:move-separate');

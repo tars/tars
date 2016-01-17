@@ -4,6 +4,7 @@ const gulp = tars.packages.gulp;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
+const stringHelper = tars.helpers.stringHelper;
 
 const staticFolderName = tars.config.fs.staticFolderName;
 const imagesFolderName = tars.config.fs.imagesFolderName;
@@ -57,13 +58,13 @@ module.exports = () => {
                     )
                     .pipe(
                         notifier.success(
-                            preprocName.charAt(0).toUpperCase() + preprocName.slice(1) + ' for svg-sprite is ready'
+                            stringHelper.capitalizeFirstLetter(preprocName) + ' for svg-sprite is ready'
                         )
                     );
 
-        } else {
-            tars.skipTaskLog('css:make-fallback-for-svg', 'Svg-fallback is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('css:make-fallback-for-svg', 'Svg-fallback is not used');
+        cb(null);
     });
 };

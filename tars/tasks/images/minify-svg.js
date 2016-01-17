@@ -42,9 +42,9 @@ module.exports = () => {
                 .pipe(
                     notifier.success('SVG\'ve been minified')
                 );
-        } else {
-            tars.skipTaskLog('images:minify-svg', 'SVG is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('images:minify-svg', 'SVG is not used');
+        cb(null);
     });
 };

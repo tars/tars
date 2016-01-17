@@ -36,9 +36,9 @@ module.exports = () => {
                 .pipe(
                     notifier.success('SVG\'ve been rastered')
                 );
-        } else {
-            tars.skipTaskLog('images:raster-svg', 'Rastering SVG is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('images:raster-svg', 'Rastering SVG is not used');
+        cb(null);
     });
 };

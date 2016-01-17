@@ -32,9 +32,9 @@ module.exports = () => {
                 .pipe(eslint())
                 .pipe(eslint.formatEach())
                 .pipe(eslint.failAfterError());
-        } else {
-            tars.skipTaskLog('js:check', 'JavaScript check is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('js:check', 'JavaScript check is not used');
+        cb(null);
     });
 };

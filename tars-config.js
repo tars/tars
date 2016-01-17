@@ -206,25 +206,13 @@ module.exports = {
 
     /**
      * Beginning of path for static files
-     * You have to use %=static=% placeholder in paths to static
-     * Example: %=static=%img/logo.png
+     * You have to use %=static=% or __static__ placeholder in paths to static
+     * Example: %=static=%img/logo.png or __static__img/logo.png
      * Will be replaced to '/static/img/logo.png'
      * %=staticPrefix=% prefix works, but it is deprecated!
      * @type {String}
      */
     staticPrefix: 'static/',
-
-    /**
-     * Beginning of path for static files for using in css
-     * You have to use %=static=% placeholder in paths to static in css files
-     * Example: background: url('%=static=%logo.png');
-     * Will be replaced to background: url('../img/logo.png');
-     * %=staticPrefixForCss=% prefix works, but it is deprecated!
-     * @type {String}
-     */
-    staticPrefixForCss: function () {
-        return '../' + this.fs.imagesFolderName + '/';
-    },
 
     /**
      * Path to build version of project

@@ -1,5 +1,8 @@
 'use strict';
 
+const gulp = tars.packages.gulp;
+const runSequence = tars.packages.runSequence.use(gulp);
+
 const filesToWatch = [
     'markup/pages/**/*.' + tars.templater.ext,
     'markup/modules/**/*.' + tars.templater.ext
@@ -11,18 +14,20 @@ const filesToWatch = [
 module.exports = () => {
     return tars.packages.chokidar.watch(
         filesToWatch,
-        {
-            ignored: 'markup/**/_*.' + tars.templater.ext,
-            persistent: true,
-            ignoreInitial: true
-        }
+        Object.assign(tars.options.watch, {
+            ignored: 'markup/**/_*.' + tars.templater.ext
+        })
     ).on('all', (event, path) => {
         tars.helpers.watcherLog(event, path);
 
         if (path.indexOf('markup/pages') > -1 && (event === 'unlink' || event === 'add')) {
-            tars.packages.gulp.start('compile-templates-with-data-reloading');
+            runSequence(
+                'html:concat-modules-data',
+                'html:compile-templates',
+                () => {}
+            );
         } else {
-            tars.packages.gulp.start('html:compile-templates');
+            gulp.start('html:compile-templates');
         }
     });
 };

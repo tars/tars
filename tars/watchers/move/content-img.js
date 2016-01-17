@@ -8,11 +8,9 @@ const imagesFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/' + tar
 module.exports = () => {
     return tars.packages.chokidar.watch(
         imagesFolderPath + '/content/**/*.*',
-        {
-            ignored: imagesFolderPath + '/content/**/*.tmp',
-            persistent: true,
-            ignoreInitial: true
-        }
+        Object.assign(tars.options.watch, {
+            ignored: imagesFolderPath + '/content/**/*.tmp'
+        })
     ).on('all', (event, path) => {
         tars.helpers.watcherLog(event, path);
         tars.packages.gulp.start('images:move-content-img');

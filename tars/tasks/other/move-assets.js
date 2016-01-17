@@ -20,7 +20,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-assets'))
-            .pipe(rename((filepath) => {
+            .pipe(rename(filepath => {
                 filepath.dirname = filepath.dirname.split(path.sep)[0];
             }))
             .pipe(

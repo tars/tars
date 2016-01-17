@@ -10,10 +10,6 @@ const tarsConfig = tars.config;
 // Include browserSync, if you need to reload browser:
 // const browserSync = tars.packages.browserSync;
 
-// require('path to task file, which have to be done before current task');
-// For example:
-// require('./required-task-name');
-
 /**
  * Task description
  */

@@ -257,6 +257,8 @@ Default: `../imageFolderName/`
 
 Кастомный пути до папки со статикой из css-файлов. imageFolderName берется из опции [imagesFolderName](options.md#imagesFolderName)
 
+*Значение задается в tars/tars.js*
+
 ### buildPath
 
 Type: `String`

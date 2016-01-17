@@ -11,15 +11,13 @@ module.exports = () => {
             [
                 'markup/modules/**/ie8.' + tars.cssPreproc.ext,
                 'markup/modules/**/ie8.css'
-            ], {
-                ignored: '',
-                persistent: true,
-                ignoreInitial: true
-            }).on('all', (event, path) => {
-                watcherLog(event, path);
-                tars.packages.gulp.start('css:compile-css-for-ie8');
-            });
-    } else {
-        return false;
+            ],
+            tars.options.watch
+        ).on('all', (event, path) => {
+            watcherLog(event, path);
+            tars.packages.gulp.start('css:compile-css-for-ie8');
+        });
     }
+
+    return false;
 };

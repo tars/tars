@@ -13,11 +13,9 @@ const globsToWatch = [
 module.exports = () => {
     return tars.packages.chokidar.watch(
         globsToWatch,
-        {
-            ignored: [cssPreprocFolderPath + '/separate-css/**/*.css'],
-            persistent: true,
-            ignoreInitial: true
-        }
+        Object.assign(tars.options.watch, {
+            ignored: [cssPreprocFolderPath + '/separate-css/**/*.css']
+        })
     ).on('all', (event, path) => {
         watcherLog(event, path);
         tars.packages.gulp.start('css:compile-css');

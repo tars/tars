@@ -93,6 +93,9 @@ patterns.push(
     }, {
         match: '%=static=%',
         replacement: tars.config.staticPrefix
+    }, {
+        match: '__static__',
+        replacement: tars.config.staticPrefix
     }
 );
 

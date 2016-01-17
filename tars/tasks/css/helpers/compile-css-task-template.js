@@ -12,6 +12,7 @@ const sourcemaps = tars.packages.sourcemaps;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
+const stringHelper = tars.helpers.stringHelper;
 
 module.exports = function generateTaskContent(browser) {
 
@@ -19,7 +20,7 @@ module.exports = function generateTaskContent(browser) {
 
     const preprocExtensions = tars.cssPreproc.ext;
     const preprocName = tars.cssPreproc.name;
-    const capitalizePreprocName = preprocName.charAt(0).toUpperCase() + preprocName.slice(1);
+    const capitalizePreprocName = stringHelper.capitalizeFirstLetter(preprocName);
     const stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
     const sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
 
@@ -166,10 +167,13 @@ module.exports = function generateTaskContent(browser) {
             patterns: [
                 {
                     match: '%=staticPrefixForCss=%',
-                    replacement: tars.config.staticPrefixForCss()
+                    replacement: tars.config.staticPrefixForCss
                 }, {
                     match: '%=static=%',
-                    replacement: tars.config.staticPrefixForCss()
+                    replacement: tars.config.staticPrefixForCss
+                }, {
+                    match: '__static__',
+                    replacement: tars.config.staticPrefixForCss
                 }
             ],
             usePrefix: false

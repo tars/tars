@@ -1,143 +1,31 @@
 'use strict';
 
-// Tars main moduels init
+// Tars main-module init
 // It is a global var
 require('./tars/tars');
 
-// Used modules
-const os = require('os');
-const path = require('path');
 const gulp = tars.packages.gulp;
-const gutil = tars.packages.gutil;
-const notify = tars.packages.notify;
-const runSequence = tars.packages.runSequence.use(gulp);
-const browserSync = tars.packages.browserSync;
-const env = process.env;
 
-const browserSyncConfig = tars.config.browserSyncConfig;
-
-/* ******* */
-/* HELPERS */
-/* ******* */
-// You can add your own helpers here. Helpers folder is tars/helpers
-
-// Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
-if (os.platform() !== 'win32') {
-    tars.helpers.setUlimit();
-}
-
-// Get file's path from dir recursively and synchronously
-const tarsFsHelper = tars.helpers.tarsFsHelper;
-
-/* *********** */
-/* END HELPERS */
-/* *********** */
-
-/* ***** */
-/* TASKS */
-/* ***** */
-
-// require system and user tasks
-// You can add your own task.
-// Task have to be in tars/user-tasks folder
-tarsFsHelper.getTasks().forEach(file => {
+// require system and user's tasks
+// You can add your own tasks.
+// All your tasks have to be in tars/user-tasks folder
+tars.helpers.tarsFsHelper.getTasks().forEach(file => {
     require(file)();
 });
 
-/* ********* */
-/* END TASKS */
-/* ********* */
-
-/* ******** */
-/* WATCHERS */
-/* ******** */
-
-// Build dev-version with watchers and livereloader.
-// Also could tunnel your markup to web, if you use flag --tunnel
-gulp.task('dev', ['build-dev'], () => {
-    tars.options.notify = true;
-
-    if (tars.flags.lr || tars.flags.tunnel) {
-        gulp.start('browsersync');
-    }
-
-    // require system and user watchers
-    tarsFsHelper.getWatchers().forEach(file => {
-        require(file)();
-    });
-
-    if (tars.config.notifyConfig.useNotify && env.NODE_ENV !== 'production' && !env.DISABLE_NOTIFIER) {
-        notify({
-            title: tars.config.notifyConfig.title,
-            icon: path.resolve(process.cwd() + '/tars/icons/tars.png')
-        }).write('Build has been created!');
-    } else {
-        tars.say('Build has been created!');
-    }
+// Build-dev task. Build dev-version (without watchers)
+gulp.task('build-dev', () => {
+    gulp.start('main:build-dev');
 });
 
-/* ************ */
-/* END WATCHERS */
-/* ************ */
-
-/* ********** */
-/* MAIN TASKS */
-/* ********** */
-
-// Build dev-version (without watchers)
-// You can add your own tasks in queue
-gulp.task('build-dev', cb => {
-    tars.options.notify = false;
-
-    runSequence(
-        'service:clean',
-        ['images:minify-svg', 'images:raster-svg'],
-        [
-            'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
-        ],
-        [
-            'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',
-            'html:concat-modules-data',
-            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
-            'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img',
-            'js:move-separate'
-        ],
-        [
-            'js:processing',
-            'html:compile-templates'
-        ],
-        cb
-    );
+// Dev task. Build dev-version with watchers and livereload
+gulp.task('dev', () => {
+    gulp.start('main:dev');
 });
 
-// Build release version
-// Also you can add your own tasks in queue of build task
+// Build task. Build release version
 gulp.task('build', () => {
-    runSequence(
-        'build-dev',
-        [
-            'html:minify-html', 'images:minify-raster-img'
-        ],
-        'service:pre-build',
-        [
-            'css:compress-css'
-        ],
-        'service:zip-build',
-        () => {
-            console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
-            tars.say(gutil.colors.green('✔') + gutil.colors.green.bold(' Build has been created successfully!'));
-
-            if (tars.config.useBuildVersioning) {
-                tars.say(gutil.colors.white.bold('Build version is: ', tars.options.build.version));
-            }
-            console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
-        }
-    );
-});
-
-// Default task. Just start build task
-gulp.task('default', () => {
-    gulp.start('build');
+    gulp.start('main:build');
 });
 
 // Init task. Just start init task
@@ -155,61 +43,7 @@ gulp.task('update-deps', () => {
     gulp.start('service:update-deps');
 });
 
-// Task for starting browsersync module
-gulp.task('browsersync', cb => {
-
-    // Serve files and connect browsers
-    browserSync({
-        server: {
-            baseDir: browserSyncConfig.baseDir
-        },
-        logConnections: true,
-        debugInfo: true,
-        injectChanges: browserSyncConfig.injectChanges || false,
-        port: browserSyncConfig.port,
-        open: browserSyncConfig.open,
-        browser: browserSyncConfig.browser,
-        startPath: browserSyncConfig.startUrl,
-        notify: browserSyncConfig.useNotifyInBrowser,
-        tunnel: tars.flags.tunnel,
-        reloadOnRestart: true
-    });
-
-    cb(null);
+// Default task. Just start build task
+gulp.task('default', () => {
+    gulp.start('build');
 });
-
-/* ************** */
-/* END MAIN TASKS */
-/* ************** */
-
-/* ************* */
-/* HELPERS TASKS */
-/* ************* */
-
-gulp.task('svg-actions', cb => {
-    if (tars.flags.ie8 || tars.flags.ie) {
-        runSequence(
-            ['images:minify-svg', 'images:raster-svg'],
-            ['css:make-fallback-for-svg', 'css:make-sprite-for-svg'],
-            cb
-        );
-    } else {
-        runSequence(
-            'images:minify-svg',
-            'css:make-sprite-for-svg',
-            cb
-        );
-    }
-});
-
-gulp.task('compile-templates-with-data-reloading', cb => {
-    runSequence(
-        'html:concat-modules-data',
-        'html:compile-templates',
-        cb
-    );
-});
-
-/* ***************** */
-/* END HELPERS TASKS */
-/* ***************** */

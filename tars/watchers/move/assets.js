@@ -6,11 +6,9 @@
 module.exports = () => {
     return tars.packages.chokidar.watch(
         'markup/modules/**/assets/*.*',
-        {
-            ignored: 'markup/modules/**/assets/*.tmp',
-            persistent: true,
-            ignoreInitial: true
-        }
+        Object.assign(tars.options.watch, {
+            ignored: 'markup/modules/**/assets/*.tmp'
+        })
     ).on('all', (event, path) => {
         tars.helpers.watcherLog(event, path);
         tars.packages.gulp.start('other:move-assets');

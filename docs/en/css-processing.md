@@ -30,7 +30,7 @@ If you want to include the files from the static directory (pictures), you must 
 }
 ```
 
-**%=staticPrefixForCss=% prefix works, but this prefix is depricated! Use just %=static=%!**
+**%=staticPrefixForCss=% prefix works, but this prefix is depricated! Use just %=static=% or __static__!**
 
 There are a couple of points on the organization scss|less|styl-files (scss is selected):
 
@@ -65,4 +65,4 @@ Also, you can use css-files and not to include them to bundle. There is folder s
 <link href="%=static=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
 ```
 
-**%=staticPrefix=% prefixe works, but this prefixe is depricated! Use just %=static=%!**
+**%=staticPrefix=% prefixe works, but this prefixe is depricated! Use just %=static=% or __static__!**

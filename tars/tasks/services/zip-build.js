@@ -24,9 +24,9 @@ module.exports = () => {
                 .pipe(
                     notifier.success('Zip-archive\'s been created')
                 );
-        } else {
-            tars.skipTaskLog('service:zip-build', 'Archiver is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('service:zip-build', 'Archiver is not used');
+        cb(null);
     });
 };

@@ -4,6 +4,7 @@ const gulp = tars.packages.gulp;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
+const stringHelper = tars.helpers.stringHelper;
 
 const preprocName = tars.cssPreproc.name;
 const preprocExtension = tars.cssPreproc.mainExt;
@@ -36,12 +37,12 @@ module.exports = () => {
                 .pipe(gulp.dest(imagesFolderPath + '/svg-sprite/sprite.svg'))
                 .pipe(
                     notifier.success(
-                        preprocName.charAt(0).toUpperCase() + preprocName.slice(1) + ' for svg-sprite is ready.'
+                        stringHelper.capitalizeFirstLetter(preprocName) + ' for svg-sprite is ready.'
                     )
                 );
-        } else {
-            tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used');
-            cb(null);
         }
+
+        tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used');
+        cb(null);
     });
 };

@@ -11,15 +11,13 @@ module.exports = () => {
             [
                 'markup/modules/**/ie9.' + tars.cssPreproc.ext,
                 'markup/modules/**/ie9.css'
-            ], {
-                ignored: '',
-                persistent: true,
-                ignoreInitial: true
-            }).on('all', (event, path) => {
-                watcherLog(event, path);
-                tars.packages.gulp.start('css:compile-css-for-ie9');
-            });
-    } else {
-        return false;
+            ],
+            tars.options.watch
+        ).on('all', (event, path) => {
+            watcherLog(event, path);
+            tars.packages.gulp.start('css:compile-css-for-ie9');
+        });
     }
+
+    return false;
 };

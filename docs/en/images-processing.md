@@ -64,7 +64,7 @@ Builder supports images of any type, but only SVG, PNG, JPG and GIF will be expo
 
 ### Images for module
 
-They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=static=%](options.md#staticprefixforcss)):
+They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=static=% or __static__](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {
@@ -81,7 +81,7 @@ If you would like to insert images in html, you have to use placeholder [%=stati
 ```
 
 
-**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or __static__!**
+**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but these prefixes are depricated! Use just %=static=% or __static__!**
 
 Nested directories are supported.
 
@@ -97,7 +97,7 @@ Including images inside html:
 </div>
 ```
 
-**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=%!**
+**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or __static__!**
 
 ### Images for plugins
 

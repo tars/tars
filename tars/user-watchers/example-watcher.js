@@ -11,14 +11,16 @@ const watcherLog = tars.helpers.watcherLog;
 module.exports = function () {
     return chokidar.watch(
         '/* String of path pattern or array of strings */',
-        {
-            ignored: '/* String of path pattern or array of strings to ignore. If nothing to igonre — just set it empty string */',
-            persistent: true,
-            ignoreInitial: true
+        Object.assign(tars.options.watch, {
+            // Options set bellow will override default from tars.options.watch
+            // If you need default options, you can use just tars.options.watch
+            ignored: '/* String of path pattern or array of strings to ignore. If nothing to igonre — just set it with empty string */',
+            persistent: /* Boolean, true by default*/,
+            ignoreInitial: /* Boolean, true by default*/
         }
     ).on('all', function (event, path) {
         watcherLog(event, path);
-        // You could start many tasks
+        // You could as start many tasks as you need
         gulp.start(/* Task name (String) to start */);
     });
 };

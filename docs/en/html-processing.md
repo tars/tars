@@ -9,13 +9,13 @@ If you do not want to compile a particular page, you can simply add the '_' to t
 
 The page with links to all pages of project will be generated in dev-mode. This page will be opened in browser then livereload is used. This page has name __index.html
 
-If you need to include files from the static directory (images, js), you must use the placeholder [%=static=%](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
+If you need to include files from the static directory (images, js), you must use the placeholder [%=static=% or __static__](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
 
 ```html
 <img src="%=static=%img/content/example.jpg"/>
 ```
 
-To include image in css you need to use the same placeholder – %=static=%. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
+To include image in css you need to use the same placeholder – %=static=% __static__. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
 
 **%=staticPrefixForCss=% and %=staticPrefix=% prefixes work, but this prefixes are depricated! Use just %=static=%!**
 
