@@ -1,3 +1,7 @@
+<p align="right">
+<a href="../en/images-processing.md">English description</a> | Описание на русском
+</p>
+
 # Images
 
 Всю работу с изображениями в TARS можно разбить на две части: «Спрайты» и «Отдельные изображения».

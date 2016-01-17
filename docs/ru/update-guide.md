@@ -1,3 +1,7 @@
+<p align="right">
+<a href="../en/update-guide.md">English description</a> | Описание на русском
+</p>
+
 # Руководство по обновлению TARS
 
 Как уже упоминалось в [readme](../README_RU.md), TARS — не npm-модуль, поэтому его обновление не происходит одной командой в консоли.

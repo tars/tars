@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/tasks.md">Описание на русском</a>
+</p>
+
 # Tasks
 
 Each task is a [commonJS-module](http://wiki.commonjs.org/wiki/Modules/1.1). All tasks are automatically included in gulpfile in the project root.

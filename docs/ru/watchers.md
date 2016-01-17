@@ -1,3 +1,7 @@
+<p align="right">
+<a href="../en/watchers.md">English description</a> | Описание на русском
+</p>
+
 # Вотчеры в TARS
 
 Как и таски, вотчеры представляют из себя [commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). Все вотчеры включаются в gulpfile в корне проекта автоматически.

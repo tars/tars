@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/tasks-and-watchers.md">Описание на русском</a>
+</p>
+
 # Tasks and watchers
 
 TARS is a set of gulp-tasks organized in a special way. Each task is a separate file (except a components files, such as build, dev, etc.), where you can describe transformations of set of files. Also, where are watchers in TARS, which allow you to start tasks after any file of your project was changed. Tasks and watchers can be system (build in TARS by default) and user's. You can use it to add more features to TARS.

@@ -1,5 +1,8 @@
-# HTML
+<p align="right">
+<a href="../en/html-processing.md">English description</a> | Описание на русском
+</p>
 
+# HTML
 
 В качестве шаблонизатора для html можно использовать [jade](http://jade-lang.com) или [handlebars](http://handlebarsjs.com). Шаблонизатор выбирается в [tars-config.js](options.md#templater).
 

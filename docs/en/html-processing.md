@@ -1,5 +1,8 @@
-# HTML
+<p align="right">
+English description | <a href="../ru/html-processing.md">Описание на русском</a>
+</p>
 
+# HTML
 
 As a template for html can be used [jade](http://jade-lang.com) or [handlebars](http://handlebarsjs.com). You could choose template in [tars-config.js](options.md#templater).
 

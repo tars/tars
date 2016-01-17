@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/js-processing.md">Описание на русском</a>
+</p>
+
 # JS-processing
 
 At the moment assembler works only with the usual js. If you want to use coffeescript or TypeScript or something else, you can fix task 'js-processing' or write me if it does not work. 

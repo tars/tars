@@ -1,3 +1,7 @@
+<p align="right">
+<a href="../en/fonts-and-misc.md">English description</a> | Описание на русском
+</p>
+
 # Работы со шрифтами и misc-файлами
 
 Все шрифты размещаются в папке fonts в папке со статикой для проекта.

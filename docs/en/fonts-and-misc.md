@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/fonts-and-misc.md">Описание на русском</a>
+</p>
+
 # Working with fonts and misc-files
 
 All fonts are placed in the fonts folder with statics for the project.

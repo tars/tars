@@ -42,7 +42,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 **Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably
  way to work with TARS. It is more comfortable, fast to work with TARS-CLI.**
 
-You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.12 or more. If you use Node.js version 5.x.x, please, be sure, that you use npm version 3.3.10 and higher. Otherwise update npm by using command:
+You need to [install `Node.js`](http://nodejs.org/) with version equal to 4.x.x or more. If you use Node.js version 5.x.x, please, be sure, that you use npm version 3.3.10 and higher. Otherwise update npm by using command:
 
 ```bash
 npm i -g npm

@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/faq.md">Описание на русском</a>
+</p>
+
 # FAQ
 
 For all questions I am waiting for you in the [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge).

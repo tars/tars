@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/update-guide.md">Описание на русском</a>
+</p>
+
 # TARS update guide 
 
 As I mentioned in the [readme](../README.md), TARS is not a npm-module, you can't upgrade it with single command in the console.

@@ -1,3 +1,7 @@
+<p align="right">
+<a href="../en/css-processing.md">English description</a> | Описание на русском
+</p>
+
 # CSS
 
 В качестве css-препроцессора можно использовать:

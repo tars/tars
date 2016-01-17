@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/images-processing.md">Описание на русском</a>
+</p>
+
 # Images
 
 All work with images in TARS can be divided into two parts: "Sprites" and "Individual images."

@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/handlebars-helpers.md">Описание на русском</a>
+</p>
+
 # Handlebars-helpers
 
 There are some usefull built-in helpers. You can add your own helpers to /tars/user-tasks/html/helpers/handlebars-helpers. It is not necessary to register your helpers. You just have to add them to exported object "handlebarsHelpers" as a function. All custom (user's) helpers will be available in tempalates automatically. Besides, all custom helpers will be moved automatically after update of your project via TARS-CLI.

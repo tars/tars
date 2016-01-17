@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/options.md">Описание на русском</a>
+</p>
+
 # Options
 
 All builder configuration is in one file — tars-config.js at the root of the project.

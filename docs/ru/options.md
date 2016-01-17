@@ -1,5 +1,8 @@
-# Опции
+<p align="right">
+<a href="../en/options.md">English description</a> | Описание на русском
+</p>
 
+# Опции
 
 Вся конфигураци сборщика находится в одном файле — tars-config.js в корне проекта.
 
