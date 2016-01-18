@@ -1,7 +1,6 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
-const runSequence = tars.packages.runSequence.use(gulp);
 const notify = tars.packages.notify;
 const browserSync = tars.packages.browserSync;
 const path = require('path');
@@ -13,7 +12,7 @@ const env = process.env;
  * Build dev-version with watchers and livereload.
  */
 module.exports = () => {
-    return gulp.task('main:dev', ['main:build-dev'], cb => {
+    return gulp.task('main:dev', ['main:build-dev'], () => {
         tars.options.notify = true;
 
         if (tars.flags.lr || tars.flags.tunnel) {

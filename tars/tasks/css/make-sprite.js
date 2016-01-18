@@ -41,7 +41,7 @@ module.exports = () => {
                 .pipe(
                     tars.require('gulp.spritesmith')(
                         {
-                            imgName: 'sprite.png',
+                            imgName: 'sprite' + tars.options.build.hash + '.png',
                             cssName: 'sprite_' + usedDpiArray[i] + '.' + preprocExtension,
                             Algorithms: 'diagonal',
                             cssOpts: dpiConfig,

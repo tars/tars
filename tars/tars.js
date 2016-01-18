@@ -46,7 +46,6 @@ const helpersDirPath = './helpers';
 const cssPreprocName = tars.config.cssPreprocessor.toLowerCase();
 const templaterName = require(helpersDirPath + '/get-templater-name')(tars.config.templater.toLowerCase());
 const buildVersion = require(helpersDirPath + '/set-build-version')();
-const setUlimit = require(helpersDirPath + '/set-ulimit');
 const useBuildVersioning = tars.config.useBuildVersioning;
 
 /**
@@ -84,7 +83,7 @@ require(helpersDirPath + '/start-screen-generator')(gutil);
 // Set ulimit to 4096 for *nix FS. It needs to work with big amount of files
 // But you can set any value in config
 if (os.platform() !== 'win32') {
-    setUlimit();
+    require(helpersDirPath + '/set-ulimit')();
 }
 
 /**
@@ -140,7 +139,6 @@ tars.packages = {
 // Links to helpers
 tars.helpers = {
     buildVersion,
-    setUlimit,
     dateFormatter: require(helpersDirPath + '/modify-date-formatter'),
     tarsFsHelper: require(helpersDirPath + '/tars-fs-helper'),
     notifier: require(helpersDirPath + '/notifier'),

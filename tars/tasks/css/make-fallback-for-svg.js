@@ -32,7 +32,7 @@ module.exports = () => {
                 .pipe(
                     tars.require('gulp.spritesmith')(
                         {
-                            imgName: 'svg-fallback-sprite.png',
+                            imgName: 'svg-fallback-sprite' + tars.options.build.hash + '.png',
                             cssName: 'svg-fallback-sprite.' + preprocExtension,
                             Algorithms: 'diagonal',
                             cssTemplate: './markup/' + staticFolderName

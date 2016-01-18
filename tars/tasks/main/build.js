@@ -10,11 +10,11 @@ const runSequence = tars.packages.runSequence.use(gulp);
 module.exports = () => {
     return gulp.task('main:build', () => {
         runSequence(
-            'build-dev',
+            'main:build-dev',
             [
                 'html:modify-html', 'images:minify-raster-img'
             ],
-            'service:pre-build',
+            'main:create-build',
             [
                 'css:compress-css'
             ],

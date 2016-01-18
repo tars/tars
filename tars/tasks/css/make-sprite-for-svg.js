@@ -32,9 +32,10 @@ module.exports = () => {
                     templateSrc: preprocFoldePath + '/sprite-generator-templates/'
                                     + preprocName + '.svg-sprite.mustache',
                     templateDest: preprocFoldePath + '/sprites-' + preprocName
-                                    + '/svg-sprite.' + preprocExtension
+                                    + '/svg-sprite.' + preprocExtension,
+                    imgName: 'sprite' + tars.options.build.hash + '.svg'
                 }))
-                .pipe(gulp.dest(imagesFolderPath + '/svg-sprite/sprite.svg'))
+                .pipe(gulp.dest(imagesFolderPath + '/svg-sprite/sprite' + tars.options.build.hash + '.svg'))
                 .pipe(
                     notifier.success(
                         stringHelper.capitalizeFirstLetter(preprocName) + ' for svg-sprite is ready.'
