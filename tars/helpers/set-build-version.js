@@ -5,11 +5,8 @@
  * @return {String} build version
  */
 module.exports = function setBuildVersion() {
-    var buildVerion = '_ver-' + (new Date()).toString();
+    var buildVerion = '_ver-' + (new Date()).toUTCString();
 
     // build version is current date without spaces (replaced to _) and without time zone info.
-    // You could change it.
-    buildVerion = buildVerion.replace(/ /g, '_').replace(/:/g, '-').match(/.*\d\d-\d\d-\d\d/)[0];
-
-    return buildVerion;
+    return buildVerion.replace(/[,]?\s[,]?/g, '_').replace(/:/g, '-').replace(/_[\w]*$/, '');
 };

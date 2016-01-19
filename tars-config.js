@@ -13,7 +13,7 @@ module.exports = {
      * Autoprefixer config
      * @type {Array}
      */
-    autoprefixerConfig: ['> 1%', 'last 2 versions', 'opera 12.1', 'android 4'],
+    autoprefixerConfig: ['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4'],
 
     /**
      * Postprocessors for TARS
@@ -153,6 +153,8 @@ module.exports = {
 
         /**
          * Port of local server for browser-sync
+         * You can set port via env var BROWSERSYNC_PORT
+         * This var will override port from config
          * @type {Number}
          */
         port: 3004,

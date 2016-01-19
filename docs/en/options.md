@@ -171,6 +171,7 @@ Type: `Number`
 Default: `3004`
 
 Port on which markup will be available when you turn on local server. If the specified port is in use, it will automatically take next free.
+You can set port via env var BROWSERSYNC_PORT. This var will override port from config.
 
 #### open
 

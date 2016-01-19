@@ -8,6 +8,7 @@ const through2 = tars.packages.through2;
 const fs = require('fs');
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
+const generateStaticPath = require(tars.root + '/tasks/html/helpers/generate-static-path');
 
 var patterns = [];
 
@@ -87,15 +88,6 @@ patterns.push(
     }, {
         match: '%=hash=%',
         replacement: tars.flags.release ? tars.options.build.hash : ''
-    }, {
-        match: '%=staticPrefix=%',
-        replacement: tars.config.staticPrefix
-    }, {
-        match: '%=static=%',
-        replacement: tars.config.staticPrefix
-    }, {
-        match: '__static__',
-        replacement: tars.config.staticPrefix
     }
 );
 
@@ -140,6 +132,7 @@ module.exports = () => {
                 patterns: patterns,
                 usePrefix: false
             }))
+            .pipe(generateStaticPath())
             .pipe(rename(pathToFileToRename => {
                 pathToFileToRename.extname = '.html';
             }))

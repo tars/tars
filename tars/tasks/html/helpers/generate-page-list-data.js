@@ -2,6 +2,7 @@
 
 const through2 = tars.packages.through2;
 const File = tars.packages.gutil.File;
+const path = require('path');
 const Buffer = require('buffer').Buffer;
 
 /**
@@ -12,15 +13,18 @@ module.exports = function generatePageStructure() {
     var pageNameArray = [];
 
     return through2.obj(function (file, enc, callback) {
-        const pageNameRegExp = /([\/\w]+).[\w]+$/i;
-        const jsFileRegExp = /data\.js$/;
+        const parsedFileRelativePath = path.parse(file.relative);
 
         // If current file is data.js file, just pass it through
-        if (jsFileRegExp.test(file.path)) {
+        if (parsedFileRelativePath.base === 'data.js') {
             this.push(file); // eslint-disable-line no-invalid-this
         } else {
-            hrefArray.push('./' + file.relative.replace(/(\.[\w]+)$/, '.html'));
-            pageNameArray.push(file.relative.match(pageNameRegExp)[1]);
+            if (parsedFileRelativePath.dir) {
+                parsedFileRelativePath.dir += '/';
+            }
+
+            hrefArray.push('./' + parsedFileRelativePath.dir + parsedFileRelativePath.name + '.html');
+            pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
         }
 
         return callback();

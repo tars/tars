@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 
 /**
  * Check, that file is task or watcher
@@ -14,8 +15,8 @@ const fs = require('fs');
  * @return {Boolean}            Is file task or watcher
  */
 function isValidFile(pathToFile, file) {
-    return !pathToFile.match(/example-/) && !pathToFile.match(/\/helpers\//)
-            && !file.match(/^_/) && pathToFile.match(/.js$/);
+    return !pathToFile.match(/example-|[\/\\]helpers[\/\\]/i)
+            && !file.match(/^_/) && pathToFile.match(/js$/i);
 }
 
 /**
@@ -35,7 +36,7 @@ function getFilesFromDir(dir) {
             results = Object.assign(results, getFilesFromDir(fullPathToFile));
         } else {
             if (isValidFile(fullPathToFile, file)) {
-                results[dir.match(/([\w-]+)$/i)[1] + file] = fullPathToFile;
+                results[path.parse(dir).name + '/' + file] = fullPathToFile;
             }
         }
     });

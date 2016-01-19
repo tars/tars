@@ -5,7 +5,7 @@ const plumber = tars.packages.plumber;
 const concat = tars.packages.concat;
 const notifier = tars.helpers.notifier;
 
-const generatePageListData = require('./helpers/generate-page-list-data');
+const generatePageListData = require(tars.root + '/tasks/html/helpers/generate-page-list-data');
 
 /**
  * conact data for modules to one file

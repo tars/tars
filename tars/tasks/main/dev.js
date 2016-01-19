@@ -23,7 +23,7 @@ module.exports = () => {
                 logConnections: true,
                 debugInfo: true,
                 injectChanges: browserSyncConfig.injectChanges || false,
-                port: browserSyncConfig.port,
+                port: env.BROWSERSYNC_PORT || browserSyncConfig.port,
                 open: browserSyncConfig.open,
                 browser: browserSyncConfig.browser,
                 startPath: browserSyncConfig.startUrl,
