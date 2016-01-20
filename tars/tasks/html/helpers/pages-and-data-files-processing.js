@@ -6,17 +6,30 @@ const path = require('path');
 const Buffer = require('buffer').Buffer;
 
 /**
+ * Strip 'data = {' and '};' from data-file content
+ * @param  {String} content Content of data-file to processing
+ * @return {String}         Processed data-file content
+ */
+function dataFileProcessing(content) {
+    return content.replace(/^[\w-]+?\s?=\s?{([\S\s]*)};?$/m, '$1');
+}
+
+/**
  * Generate a list of all pages in project
  */
-module.exports = function generatePageStructure() {
+module.exports = function pagesAndDataFilesProcessing() {
     var hrefArray = [];
     var pageNameArray = [];
 
     return through2.obj(function (file, enc, callback) {
         const parsedFileRelativePath = path.parse(file.relative);
+        const fileContent = file.contents.toString();
 
         // If current file is data.js file, just pass it through
         if (parsedFileRelativePath.base === 'data.js') {
+            if (fileContent.search(/^[\w-]+?\s?=/) === 0) {
+                file.contents = new Buffer(dataFileProcessing(fileContent));
+            }
             this.push(file); // eslint-disable-line no-invalid-this
         } else {
             if (parsedFileRelativePath.dir) {

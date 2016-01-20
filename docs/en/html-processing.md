@@ -35,7 +35,21 @@ moduleName: {
 }
 ```
 
-There are in data will be data from _template module and a list of all pages of project in array like this:
+In case of syntax errors inf data-files from your IDE  you can use another syntax, just simple JavaScript-object:
+
+```javascript
+data = {
+    moduleName: {
+        dataType: {
+            property: value
+        }
+    }
+};
+```
+
+TARS supports both syntaxes by default. 
+
+There will be in full-data data from _template module and a list of all pages of current project in array like this:
 
 ```javascript
 __pages: [
@@ -46,7 +60,7 @@ __pages: [
 ]
 ```
 
-You can use with array to render a list of links to all pages of project.
+You can use this array to render a list of links to all pages of project.
 
 Connecting modules with different data looks differently in jade and handlebars.
 

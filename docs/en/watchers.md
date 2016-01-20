@@ -29,7 +29,7 @@ const watcherLog = tars.helpers.watcherLog;
         })
     ).on('all', function(event, path) {
         watcherLog(event, path);
-        // You could as start many tasks as you need
+        // You could start as many tasks as you need
         gulp.start(/* Task name (String) to start */);
     });
 ```

@@ -60,10 +60,7 @@ function concatModulesData() {
 if (!tars.flags.ie8 && !tars.flags.ie) {
     patterns.push(
         {
-            match: '<link href="%=staticPrefix=%css/main_ie8%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
-            replacement: ''
-        }, {
-            match: '<link href="%=static=%css/main_ie8%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
+            match: /<!--\[if IE 8[\s\S]*endif\]-->|<!--\[if lt IE 9[\s\S]*endif\]-->/gi,
             replacement: ''
         }
     );
@@ -72,10 +69,7 @@ if (!tars.flags.ie8 && !tars.flags.ie) {
 if (!tars.flags.ie9 && !tars.flags.ie) {
     patterns.push(
         {
-            match: '<link href="%=staticPrefix=%css/main_ie9%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
-            replacement: ''
-        }, {
-            match: '<link href="%=static=%css/main_ie9%=hash=%%=min=%.css" rel="stylesheet" type="text/css">',
+            match: /<!--\[if IE 9[\s\S]*endif\]-->/gi,
             replacement: ''
         }
     );
