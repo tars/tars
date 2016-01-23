@@ -12,6 +12,8 @@ var stripDebug = tars.packages.stripDebug;
 var sourcemaps = tars.packages.sourcemaps;
 var notifier = tars.helpers.notifier;
 var browserSync = tars.packages.browserSync;
+var bowerFiles = tars.packages.bowerFiles();
+
 var cwd = process.cwd();
 var path = require('path');
 
@@ -21,6 +23,7 @@ var compressJs = tars.flags.release || tars.flags.min;
 var generateSourceMaps = tars.config.sourcemaps.js.active && !tars.flags.release;
 var sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 var jsPaths = [
+        bowerFiles.ext('js').files,
         '!./markup/modules/**/data/data.js',
         './markup/' + staticFolderName + '/js/framework/**/*.js',
         './markup/' + staticFolderName + '/js/libraries/**/*.js',

@@ -5,13 +5,15 @@ var csso = tars.packages.csso;
 var rename = tars.packages.rename;
 var plumber = tars.packages.plumber;
 var notifier = tars.helpers.notifier;
+var bowerFiles = tars.packages.bowerFiles();
+
 
 /**
  * Compress css-files
  */
 module.exports = function () {
     return gulp.task('css:compress-css', function () {
-        return gulp.src(tars.options.build.path + tars.config.fs.staticFolderName + '/css/*.css')
+        return gulp.src([bowerFiles.ext('js').files, tars.options.build.path + tars.config.fs.staticFolderName + '/css/*.css'])
             .pipe(plumber({
                 errorHandler: function (error) {
                     notifier.error('An error occurred while compressing css.', error);
