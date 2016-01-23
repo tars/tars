@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "autoprefixer": "^6.0.3",
+    "bower-files": "^3.11.3",
     "browser-sync": "^2.9.11",
     "chokidar": "^1.2.0",
     "del": "2.0.2",

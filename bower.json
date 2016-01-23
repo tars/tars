@@ -1,0 +1,21 @@
+{
+  "name": "Tars",
+  "version": "0.0.0",
+  "authors": [
+    "a-voroshilov <twojuly89@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0"
+  },
+  "overrides": {
+
+  }
+}

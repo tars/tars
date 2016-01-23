@@ -134,7 +134,8 @@ tars.packages = {
     streamCombiner: tars.require('stream-combiner'),
     through2: tars.require('through2'),
     uglify: tars.require('gulp-uglify'),
-    zip: tars.require('gulp-zip')
+    zip: tars.require('gulp-zip'),
+    bowerFiles: tars.require('bower-files')
 }
 
 // Links to helpers
