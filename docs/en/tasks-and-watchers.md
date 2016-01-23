@@ -26,7 +26,7 @@ If you need to replace built-in task/watcher, you have to call you own task/watc
 tars/tasks/html/minify-html.js
 ```
 
-And you need to use your own `minify-html.js`. So, you have to create folder `html` inside `user-tasks` and create file `minify-html.js` there (repeat file structure of built-in task):
+And you need to use your own `minify-html.js`. So, you have to create folder `html` inside `user-tasks` and create file `minify-html.js` there (repeat file structure of built-in task and use the same name of a task):
 
 ```
 tars/user-tasks/html/minify-html.js

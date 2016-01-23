@@ -68,7 +68,7 @@ Builder supports images of any type, but only SVG, PNG, JPG and GIF will be expo
 
 ### Images for module
 
-They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=static=% or __static__](options.md#staticprefixforcss)):
+They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {
@@ -76,7 +76,7 @@ They are located in the assets folder inside the module. To include image using 
 }
 ```
 
-If you would like to insert images in html, you have to use placeholder [%=static=% or __static__](options.md#staticprefix):
+If you would like to insert images in html, you have to use placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix):
 
 ```handlebars
 <div class="news__item">
@@ -85,7 +85,7 @@ If you would like to insert images in html, you have to use placeholder [%=stati
 ```
 
 
-**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but these prefixes are depricated! Use just %=static=% or __static__!**
+**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but these prefixes are depricated! Use just %=static=% or \_\_static\_\_!**
 
 Nested directories are supported.
 
@@ -101,7 +101,7 @@ Including images inside html:
 </div>
 ```
 
-**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or __static__!**
+**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or \_\_static\_\_!**
 
 ### Images for plugins
 
