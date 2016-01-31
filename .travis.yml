@@ -30,5 +30,4 @@ before_script:
 
 script:
   - gulp init
-  - gulp re-init
   - gulp --release --ie

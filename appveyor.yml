@@ -32,7 +32,6 @@ build: off
 
 build_script:
   - gulp init
-  - gulp re-init
 
 test_script:
   - cmd: gulp build --release --ie
