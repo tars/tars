@@ -34,9 +34,9 @@ module.exports = {
     svg: {
         active: true,
         // symbols, sprite
-        workflow: 'symbols',
+        workflow: 'sprite',
         symbolsConfig: {
-            // separate-file, separate-file-with-link, inject, inject-from-localstorage
+            // separate-file, separate-file-with-link, inject
             loadingType: 'separate-file-with-link',
             usePolyfillForExternalSymbols: true,
             pathToExternalSymbolsFile: ''

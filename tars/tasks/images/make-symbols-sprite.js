@@ -5,6 +5,7 @@ const gulpif = tars.packages.gulpif;
 const rename = tars.packages.rename;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
+const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
 const svgImagesPath = './dev/' + tars.config.fs.staticFolderName + '/'
     + tars.config.fs.imagesFolderName + '/minified-svg/';
@@ -27,6 +28,7 @@ module.exports = () => {
                         notifier.error('An error occurred while creating symbols sprite.', error);
                     }
                 }))
+                .pipe(skipTaskWithEmptyPipe('images:make-symbols-sprite', cb))
                 .pipe(tars.require('gulp-svg-symbols')(
                     {
                         templates: [
