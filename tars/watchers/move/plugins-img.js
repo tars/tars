@@ -11,8 +11,8 @@ module.exports = () => {
         Object.assign(tars.options.watch, {
             ignored: imagesFolderPath + '/plugins/**/*.tmp'
         })
-    ).on('all', (event, path) => {
-        tars.helpers.watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
         tars.packages.gulp.start('images:move-plugins-img');
     });
 };

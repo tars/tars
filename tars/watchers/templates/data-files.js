@@ -10,8 +10,8 @@ module.exports = () => {
     return tars.packages.chokidar.watch(
         'markup/modules/**/data/data.js',
         tars.options.watch
-    ).on('all', (event, path) => {
-        tars.helpers.watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
 
         runSequence(
             'html:concat-modules-data',

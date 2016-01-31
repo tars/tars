@@ -30,8 +30,8 @@ module.exports = () => {
         Object.assign(tars.options.watch, {
             ignored: 'markup/modules/**/data/data.js'
         })
-    ).on('all', (event, path) => {
-        watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        watcherLog(event, watchedPath);
         tars.packages.gulp.start('js:processing');
     });
 };

@@ -16,8 +16,8 @@ module.exports = () => {
         Object.assign(tars.options.watch, {
             ignored: [cssPreprocFolderPath + '/separate-css/**/*.css']
         })
-    ).on('all', (event, path) => {
-        watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        watcherLog(event, watchedPath);
         tars.packages.gulp.start('css:compile-css');
 
         if (tars.flags.ie8 || tars.flags.ie) {

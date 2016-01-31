@@ -16,8 +16,8 @@ module.exports = () => {
                 'markup/modules/**/ie9.css'
             ]
         })
-    ).on('all', (event, path) => {
-        watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        watcherLog(event, watchedPath);
         tars.packages.gulp.start('css:compile-css');
 
         if (tars.flags.ie8 || tars.flags.ie) {

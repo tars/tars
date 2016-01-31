@@ -18,8 +18,8 @@ module.exports = function () {
             persistent: /* Boolean, true by default*/,
             ignoreInitial: /* Boolean, true by default*/
         }
-    ).on('all', function (event, path) {
-        watcherLog(event, path);
+    ).on('all', function (event, watchedPath) {
+        watcherLog(event, watchedPath);
         // You could start as many tasks as you need
         gulp.start(/* Task name (String) to start */);
     });

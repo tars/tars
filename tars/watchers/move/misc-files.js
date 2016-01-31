@@ -9,8 +9,8 @@ module.exports = () => {
         Object.assign(tars.options.watch, {
             ignored: 'markup/' + tars.config.fs.staticFolderName + '/misc/**/*.tmp'
         })
-    ).on('all', (event, path) => {
-        tars.helpers.watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
         tars.packages.gulp.start('other:move-misc-files');
     });
 };

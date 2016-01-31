@@ -13,8 +13,8 @@ module.exports = () => {
                 'markup/modules/**/ie8.css'
             ],
             tars.options.watch
-        ).on('all', (event, path) => {
-            watcherLog(event, path);
+        ).on('all', (event, watchedPath) => {
+            watcherLog(event, watchedPath);
             tars.packages.gulp.start('css:compile-css-for-ie8');
         });
     }

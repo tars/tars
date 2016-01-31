@@ -13,29 +13,29 @@ module.exports = () => {
         return tars.packages.chokidar.watch(
             'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/svg/**/*.svg',
             tars.options.watch
-        ).on('all', (event, path) => {
-            tars.helpers.watcherLog(event, path);
-
-            let tasksSequence = ['images:minify-svg'];
+        ).on('all', (event, watchedPath) => {
+            tars.helpers.watcherLog(event, watchedPath);
 
             switch (tars.config.svg.symbolsConfig.loadingType) {
                 case 'separate-file':
                 case 'separate-file-with-link':
-                    tasksSequence.push(
+                    runSequence(
+                        'images:minify-svg',
                         'images:make-symbols-sprite',
-                        'html:concat-modules-data'
+                        'html:concat-modules-data',
+                        () => {}
                     );
                 case 'inject':
-                    tasksSequence.push(
-                        'html:compile-templates'
+                default:
+                    runSequence(
+                        'images:minify-svg',
+                        'images:make-symbols-sprite',
+                        'html:concat-modules-data',
+                        'html:compile-templates',
+                        () => {}
                     );
                     break;
-                default:
-                    break;
             }
-
-            tasksSequence.push(() => {});
-            runSequence(tasksSequence);
         });
     }
 

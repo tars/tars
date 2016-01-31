@@ -2,6 +2,7 @@
 
 const gulp = tars.packages.gulp;
 const runSequence = tars.packages.runSequence.use(gulp);
+const path = require('path');
 
 const filesToWatch = [
     'markup/pages/**/*.' + tars.templater.ext,
@@ -17,10 +18,10 @@ module.exports = () => {
         Object.assign(tars.options.watch, {
             ignored: 'markup/**/_*.' + tars.templater.ext
         })
-    ).on('all', (event, path) => {
-        tars.helpers.watcherLog(event, path);
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
 
-        if (path.indexOf('markup/pages') > -1 && (event === 'unlink' || event === 'add')) {
+        if (path.indexOf(`markup${path.sep}pages`) > -1 && (event === 'unlink' || event === 'add')) {
             runSequence(
                 'html:concat-modules-data',
                 'html:compile-templates',

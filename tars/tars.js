@@ -55,9 +55,9 @@ const useBuildVersioning = tars.config.useBuildVersioning;
 tars.config.staticPrefixForCss = '../' + tars.config.fs.imagesFolderName + '/';
 
 // Fix svg config
-if (tars.config.hasOwnProperty('useSvg')) {
+if (tars.config.hasOwnProperty('useSVG')) {
     tars.config.svg = {
-        active: tars.config.useSvg,
+        active: tars.config.useSVG,
         workflow: 'sprite'
     }
 }

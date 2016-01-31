@@ -11,8 +11,8 @@ module.exports = () => {
         return tars.packages.chokidar.watch(
             'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/svg/**/*.svg',
             tars.options.watch
-        ).on('all', (event, path) => {
-            tars.helpers.watcherLog(event, path);
+        ).on('all', (event, watchedPath) => {
+            tars.helpers.watcherLog(event, watchedPath);
 
             if (tars.flags.ie8 || tars.flags.ie) {
                 runSequence(
