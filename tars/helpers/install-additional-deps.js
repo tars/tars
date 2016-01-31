@@ -4,7 +4,7 @@
 require('../tars');
 
 const exec = require('child_process').exec;
-var usersDeps;
+let usersDeps;
 
 try {
     usersDeps = require(process.cwd() + '/user-package');

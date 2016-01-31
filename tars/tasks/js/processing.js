@@ -87,7 +87,7 @@ module.exports = () => {
     return gulp.task('js:processing', ['js:check'], () => {
         return gulp.src(jsPaths, { base: cwd })
             .pipe(plumber({
-                errorHandler: error => {
+                errorHandler(error) {
                     notifier.error('An error occurred while processing js-files.', error);
                 }
             }))

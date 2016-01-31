@@ -29,19 +29,19 @@ const prettifyOpts = Object.assign({
 module.exports = () => {
     return gulp.task('html:modify-html', () => {
         return gulp.src('./dev/**/*.html')
-                .pipe(plumber({
-                    errorHandler: error => {
-                        notifier.error('An error occurred while processing compiled html-files.', error);
-                    }
-                }))
-                .pipe(gulpif(
-                    tars.config.minifyHtml,
-                    tars.require('gulp-minify-html')(minifyOpts),
-                    tars.require('gulp-html-prettify')(prettifyOpts)
-                ))
-                .pipe(gulp.dest('./dev/'))
-                .pipe(
-                    notifier.success('Compiled html\'ve been processed.')
-                );
+            .pipe(plumber({
+                errorHandler(error) {
+                    notifier.error('An error occurred while processing compiled html-files.', error);
+                }
+            }))
+            .pipe(gulpif(
+                tars.config.minifyHtml,
+                tars.require('gulp-minify-html')(minifyOpts),
+                tars.require('gulp-html-prettify')(prettifyOpts)
+            ))
+            .pipe(gulp.dest('./dev/'))
+            .pipe(
+                notifier.success('Compiled html\'ve been processed.')
+            );
     });
 };

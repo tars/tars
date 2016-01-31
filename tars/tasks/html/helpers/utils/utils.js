@@ -7,11 +7,11 @@
 'use strict';
 
 module.exports = {
-    isUndefined: value => {
+    isUndefined(value) {
         return typeof value === 'undefined' || value.toString() === '[object Function]' || (value.hash != null);
     },
 
-    castToString: value => {
+    castToString(value) {
         if (typeof value !== 'string') {
             value.toString();
         }

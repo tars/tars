@@ -10,26 +10,23 @@
  * @return {Object}             Required package
  */
 function tarsRequire(packageName) {
-    var requiredPackage;
 
     if (process.env.npmRoot) {
         try {
-            requiredPackage = require(process.env.npmRoot + packageName);
+            return require(process.env.npmRoot + packageName);
         } catch (error) {
             console.log('\n\n');
-            tars.say('It seems, that you use old version of TARS-CLI!');
-            tars.say('Package ' + packageName + 'is not available.');
-            tars.say('Update TARS-CLI via "tars update".');
+            tars.say('It seems, that TARS in current project is not compatible with current TARS-CLI!');
+            tars.say(`'Package ${packageName} is not available.`);
+            tars.say('Update TARS-CLI via "tars update" and your project via "tars update-project"');
             tars.say('Please, write to the tars.builder@gmail.com, if update did\'t help you.');
 
-            throw new Error('Package ' + packageName + 'is not available.');
+            throw new Error(`'Package ${packageName} is not available.`);
         }
 
-    } else {
-        requiredPackage = require(packageName);
     }
 
-    return requiredPackage;
+    return require(packageName);
 }
 
 // TARS is a global var
@@ -56,6 +53,14 @@ const useBuildVersioning = tars.config.useBuildVersioning;
  * %=staticPrefixForCss=% prefix works, but it is deprecated!
  */
 tars.config.staticPrefixForCss = '../' + tars.config.fs.imagesFolderName + '/';
+
+// Fix svg config
+if (tars.config.hasOwnProperty('useSvg')) {
+    tars.config.svg = {
+        active: tars.config.useSvg,
+        workflow: 'sprite'
+    }
+}
 
 // Flags
 tars.flags = gutil.env;

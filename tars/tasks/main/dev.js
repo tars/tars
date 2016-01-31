@@ -34,9 +34,7 @@ module.exports = () => {
         }
 
         // require system and user's watchers
-        tars.helpers.tarsFsHelper.getWatchers().forEach(file => {
-            require(file)();
-        });
+        tars.helpers.tarsFsHelper.getWatchers().forEach(file => require(file)());
 
         if (tars.config.notifyConfig.useNotify && env.NODE_ENV !== 'production' && !env.DISABLE_NOTIFIER) {
             notify({

@@ -6,7 +6,7 @@
  */
 module.exports = function setUlimit() {
     const limit = tars.config.ulimit;
-    var posix;
+    let posix;
 
     try {
         posix = require('posix');

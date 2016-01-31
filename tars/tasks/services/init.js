@@ -41,7 +41,7 @@ module.exports = () => {
          */
         function getVersionToDownload(type) {
             return new Promise(resolve => {
-                var version;
+                let version;
 
                 if (process.env.tarsVersion) {
                     version = 'version-' + process.env.tarsVersion;
@@ -71,7 +71,7 @@ module.exports = () => {
          */
         function download(params) {
             return new Promise((resolve, reject) => {
-                var destPath;
+                let destPath;
 
                 if (params.type === 'templater') {
                     destPath = './.tmpTemplater';
@@ -98,7 +98,15 @@ module.exports = () => {
          */
         function applyDownloadedParts(params) {
             return new Promise((resolve, reject) => {
-                var downloadedPartsPath;
+                let downloadedPartsPath;
+
+                if (
+                    (params.type === 'templater' && tars.flags['exclude-html']) ||
+                    (params.type === 'preprocessor' && tars.flags['exclude-css'])
+                ) {
+                    resolve();
+                    return;
+                }
 
                 if (params.type === 'templater') {
                     downloadedPartsPath = './.tmpTemplater/tars-' + tars.templater.name;
@@ -177,6 +185,14 @@ module.exports = () => {
             tars.say('You choose:');
             tars.say(gutil.colors.cyan.bold(tars.cssPreproc.name) + ' as css-preprocessor');
             tars.say(gutil.colors.cyan.bold(tars.templater.name) + ' as templater\n');
+
+            if (tars.flags['exclude-html']) {
+                tars.say('Your templater-files were not changed');
+            }
+
+            if (tars.flags['exclude-css']) {
+                tars.say('Your ' + tars.templater.name + '-files were not changed');
+            }
             console.log(gutil.colors.black.bold('--------------------------------------------------------\n'));
         }
 

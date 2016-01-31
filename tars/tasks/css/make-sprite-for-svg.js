@@ -19,10 +19,10 @@ const preprocFoldePath = './markup/' + tars.config.fs.staticFolderName + '/' + p
 module.exports = () => {
     return gulp.task('css:make-sprite-for-svg', cb => {
 
-        if (tars.config.useSVG) {
+        if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
             return gulp.src(imagesFolderPath + '/minified-svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while making sprite for svg.', error);
                     }
                 }))
@@ -43,7 +43,7 @@ module.exports = () => {
                 );
         }
 
-        tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used');
+        tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used or you prefer symbols workflow');
         cb(null);
     });
 };

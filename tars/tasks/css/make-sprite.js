@@ -19,8 +19,8 @@ module.exports = () => {
     return gulp.task('css:make-sprite', () => {
         const dpiLength = usedDpiArray.length;
 
-        var spriteData = [];
-        var dpiConfig = {};
+        let spriteData = [];
+        let dpiConfig = {};
 
         usedDpiArray.forEach(dpiValue => {
             dpiConfig['dpi' + dpiValue] = true;
@@ -34,7 +34,7 @@ module.exports = () => {
                     + '/sprite/' + usedDpiArray[i] + 'dpi/*.png'
                 )
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while making png-sprite.', error);
                     }
                 }))

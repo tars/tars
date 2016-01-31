@@ -24,14 +24,14 @@ module.exports = function generateTaskContent(browser) {
     const stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
     const sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
 
-    var successMessage = capitalizePreprocName + '-files have been compiled';
-    var errorMessage = 'An error occurred while compiling css';
-    var compiledFileName = 'main';
-    var generateSourceMaps = false;
+    let successMessage = capitalizePreprocName + '-files have been compiled';
+    let errorMessage = 'An error occurred while compiling css';
+    let compiledFileName = 'main';
+    let generateSourceMaps = false;
 
-    var postProcessors = [];
-    var stylesFilesToConcatinate = [];
-    var firstStylesFilesToConcatinate = [
+    let postProcessors = [];
+    let stylesFilesToConcatinate = [];
+    let firstStylesFilesToConcatinate = [
         stylesFolderPath + '/normalize.' + preprocExtensions,
         stylesFolderPath + '/libraries/**/*.' + preprocExtensions,
         stylesFolderPath + '/libraries/**/*.css',
@@ -96,7 +96,7 @@ module.exports = function generateTaskContent(browser) {
                 firstStylesFilesToConcatinate
             );
 
-            if (tars.config.useSVG) {
+            if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
                 stylesFilesToConcatinate.push(
                     stylesFolderPath + '/sprites-' + preprocName + '/svg-sprite.' + preprocExtensions
                 );
@@ -127,7 +127,7 @@ module.exports = function generateTaskContent(browser) {
                 firstStylesFilesToConcatinate
             );
 
-            if (tars.config.useSVG) {
+            if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
                 stylesFilesToConcatinate.push(
                     stylesFolderPath + '/sprites-' + preprocName + '/svg-sprite.' + preprocExtensions
                 );
@@ -154,7 +154,7 @@ module.exports = function generateTaskContent(browser) {
     return gulp.src(stylesFilesToConcatinate, { base: process.cwd() })
         .pipe(gulpif(generateSourceMaps, sourcemaps.init()))
         .pipe(plumber({
-            errorHandler: function (error) {
+            errorHandler(error) {
                 notifier.error(errorMessage, error);
                 this.emit('end');
             }
@@ -166,13 +166,7 @@ module.exports = function generateTaskContent(browser) {
         .pipe(replace({
             patterns: [
                 {
-                    match: '%=staticPrefixForCss=%',
-                    replacement: tars.config.staticPrefixForCss
-                }, {
-                    match: '%=static=%',
-                    replacement: tars.config.staticPrefixForCss
-                }, {
-                    match: '__static__',
+                    match: /%=staticPrefixForCss=%|%=static=%|__static__/gim,
                     replacement: tars.config.staticPrefixForCss
                 }
             ],

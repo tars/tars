@@ -11,7 +11,7 @@ module.exports = {
      * @param  {String} str String to modify
      * @return {String}     String, with the first letter capitalized
      */
-    capitalizeFirstLetter: str => {
+    capitalizeFirstLetter(str) {
         str = str && String(str) || '';
 
         return str.charAt(0).toUpperCase() + str.substr(1);

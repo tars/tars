@@ -9,7 +9,7 @@ const through2 = tars.packages.through2;
  * @return {Object}                   Pipe
  */
 module.exports = function skipTaskWithEmptyPipe(taskName, skipCallback) {
-    var filesCount = 0;
+    let filesCount = 0;
 
     return through2.obj(function (file, enc, callback) {
 

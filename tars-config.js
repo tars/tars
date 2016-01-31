@@ -31,11 +31,17 @@ module.exports = {
      */
     postcss: [],
 
-    /**
-     * Use svg images
-     * @type {Boolean}
-     */
-    useSVG: true,
+    svg: {
+        active: true,
+        // symbols, sprite
+        workflow: 'symbols',
+        symbolsConfig: {
+            // separate-file, separate-file-with-link, inject, inject-from-localstorage
+            loadingType: 'separate-file-with-link',
+            usePolyfillForExternalSymbols: true,
+            pathToExternalSymbolsFile: ''
+        }
+    },
 
     /**
      * Use linting and hinting of js-files

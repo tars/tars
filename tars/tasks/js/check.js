@@ -24,7 +24,7 @@ module.exports = () => {
 
             return gulp.src(jsPathesToLint)
                 .pipe(plumber({
-                    errorHandler: () => {
+                    errorHandler() {
                         notifier.error('An error occurred while checking js.');
                     }
                 }))

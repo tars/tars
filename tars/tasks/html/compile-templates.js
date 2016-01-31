@@ -10,7 +10,7 @@ const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 const generateStaticPath = require(tars.root + '/tasks/html/helpers/generate-static-path');
 
-var patterns = [];
+let patterns = [];
 
 /**
  * Traverse recursively through data-object
@@ -38,8 +38,8 @@ function traverseThroughObject(obj, fullData) {
  * @return {Object} Object with data for modules
  */
 function concatModulesData() {
-    var dataEntry;
-    var readyModulesData;
+    let dataEntry;
+    let readyModulesData;
 
     try {
         dataEntry = fs.readFileSync('./dev/temp/modulesData.js', 'utf8');
@@ -54,13 +54,20 @@ function concatModulesData() {
         readyModulesData = '{}';
     }
 
+    // Add helpers for Jade into readyModulesData in case of using Jade as templater
+    if (tars.templater.name === 'jade') {
+        readyModulesData = Object.assign(readyModulesData, {
+            jadeHelpers: require(tars.root + '/tasks/html/helpers/jade-helpers')
+        });
+    }
+
     return readyModulesData;
 }
 
 if (!tars.flags.ie8 && !tars.flags.ie) {
     patterns.push(
         {
-            match: /<!--\[if IE 8[\s\S]*endif\]-->|<!--\[if lt IE 9[\s\S]*endif\]-->/gi,
+            match: /<!--\[if IE 8.*endif\]-->|<!--\[if lt IE 9.*endif\]-->/gm,
             replacement: ''
         }
     );
@@ -69,7 +76,7 @@ if (!tars.flags.ie8 && !tars.flags.ie) {
 if (!tars.flags.ie9 && !tars.flags.ie) {
     patterns.push(
         {
-            match: /<!--\[if IE 9[\s\S]*endif\]-->/gi,
+            match: /<!--\[if IE 9.*endif\]-->/gm,
             replacement: ''
         }
     );
@@ -85,14 +92,49 @@ patterns.push(
     }
 );
 
+if (
+    tars.config.svg.active && tars.config.svg.workflow === 'symbols' &&
+    tars.config.svg.symbolsConfig.loadingType === 'inject'
+) {
+    patterns.push(
+        {
+            match: '%=symbols=%',
+            replacement: (() => fs.readFileSync('./dev/temp/svg-symbols.svg', 'utf8'))
+        }
+    );
+} else {
+    patterns.push(
+        {
+            match: '%=symbols=%',
+            replacement: ''
+        }
+    );
+}
+
+if (
+    !tars.config.svg.active || !tars.config.svg.workflow === 'symbols' ||
+    !tars.config.svg.symbolsConfig.loadingType === 'separate-file-with-link' ||
+    !tars.config.svg.symbolsConfig.usePolyfillForExternalSymbols
+) {
+    patterns.push(
+        {
+            match: '<script src="%=static=%js/separate-js/svg4everybody.min.js"></script>',
+            replacement: ''
+        }, {
+            match: '<script>svg4everybody();</script>',
+            replacement: ''
+        }
+    )
+}
+
 /**
  * HTML compilation of pages templates.
  * Templates with _ prefix won't be compiled
  */
 module.exports = () => {
     return gulp.task('html:compile-templates', () => {
-        var modulesData;
-        var error;
+        let modulesData;
+        let error;
 
         try {
             modulesData = concatModulesData();
@@ -104,7 +146,7 @@ module.exports = () => {
         return gulp.src(['./markup/pages/**/*.' + tars.templater.ext,
                          '!./markup/pages/**/_*.' + tars.templater.ext])
             .pipe(plumber({
-                errorHandler: function (pipeError) {
+                errorHandler(pipeError) {
                     notifier.error('An error occurred while compiling to html.', pipeError);
                     this.emit('end');
                 }

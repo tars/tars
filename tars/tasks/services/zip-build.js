@@ -15,7 +15,7 @@ module.exports = () => {
 
             return gulp.src(tars.options.build.path + '**', { base: tars.options.build.path })
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while creating zip-archive.', error);
                     }
                 }))

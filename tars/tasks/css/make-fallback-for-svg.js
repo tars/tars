@@ -19,12 +19,12 @@ module.exports = () => {
 
     return gulp.task('css:make-fallback-for-svg', cb => {
 
-        if (tars.config.useSVG && (tars.flags.ie8 || tars.flags.ie)) {
+        if (tars.config.svg.active && tars.config.svg.workflow === 'sprite' && (tars.flags.ie8 || tars.flags.ie)) {
             const spriteData = gulp.src(
                     './dev/' + staticFolderName + '/' + imagesFolderName + '/rastered-svg-images/*.png'
                 )
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while making fallback for svg.', error);
                     }
                 }))

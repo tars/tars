@@ -11,7 +11,7 @@ module.exports = () => {
     return gulp.task('main:create-build', () => {
         return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
             .pipe(plumber({
-                errorHandler: error => {
+                errorHandler(error) {
                     notifier.error('An error occurred while running create-build task.', error);
                 }
             }))

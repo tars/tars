@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Set templates extension
+ * Get correct templater name
  * @return {string} Templater name
  */
 module.exports = function getTemplaterName(templaterNameFromConfig) {

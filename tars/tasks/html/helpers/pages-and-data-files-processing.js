@@ -14,19 +14,17 @@ function dataFileProcessing(content) {
     return content.replace(/^[\w-]+?\s?=\s?{([\S\s]*)};?$/m, '$1');
 }
 
-/**
- * Generate a list of all pages in project
- */
 module.exports = function pagesAndDataFilesProcessing() {
-    var hrefArray = [];
-    var pageNameArray = [];
+    let hrefArray = [];
+    let pageNameArray = [];
 
     return through2.obj(function (file, enc, callback) {
         const parsedFileRelativePath = path.parse(file.relative);
+        const fileName = parsedFileRelativePath.base;
         const fileContent = file.contents.toString();
 
-        // If current file is data.js file, just pass it through
-        if (parsedFileRelativePath.base === 'data.js') {
+        // If current file is data.js or symbols-data-template.js file, just pass it through
+        if (fileName === 'data.js' || fileName === 'symbols-data-template.js') {
             if (fileContent.search(/^[\w-]+?\s?=/) === 0) {
                 file.contents = new Buffer(dataFileProcessing(fileContent));
             }
@@ -36,13 +34,13 @@ module.exports = function pagesAndDataFilesProcessing() {
                 parsedFileRelativePath.dir += '/';
             }
 
-            hrefArray.push('./' + parsedFileRelativePath.dir + parsedFileRelativePath.name + '.html');
+            hrefArray.push('/' + parsedFileRelativePath.dir + parsedFileRelativePath.name + '.html');
             pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
         }
 
         return callback();
     }, function (callback)  {
-        var pagesListFileContent =  '__pages: [';
+        let pagesListFileContent =  '__pages: [';
 
         hrefArray.forEach((value, index) => {
             if (index) {

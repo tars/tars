@@ -14,7 +14,8 @@ module.exports = () => {
             'service:clean',
             ['images:minify-svg', 'images:raster-svg'],
             [
-                'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
+                'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite',
+                'images:make-symbols-sprite'
             ],
             [
                 'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',

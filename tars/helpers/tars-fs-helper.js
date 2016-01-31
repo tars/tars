@@ -26,7 +26,7 @@ function isValidFile(pathToFile, file) {
  */
 function getFilesFromDir(dir) {
     const list = fs.readdirSync(dir);
-    var results = {};
+    let results = {};
 
     list.forEach(file => {
         const fullPathToFile = dir + '/' + file;
@@ -56,32 +56,28 @@ function getReadyUniqueItemsArray(systemItems, usersItems) {
     return Object.keys(uniqueItems).map(key => uniqueItems[key]);
 }
 
-/**
- * Load tasks
- * @param  {String} dir directory with files
- * @return {Array}      Path to dirs
- */
+module.exports = {
+    /**
+      * Get paths to all tasks, user's and system
+      * @return {Array} Array of unique system/user's tasks
+      */
+    getTasks() {
+        const systemTasks = getFilesFromDir(tars.root + '/tasks');
+        const userTasks = getFilesFromDir(tars.root + '/user-tasks');
+        const readyTasksArray = getReadyUniqueItemsArray(systemTasks, userTasks);
 
- /**
-  * Get paths to all tasks, user's and system
-  * @return {Array} Array of unique system/user's tasks
-  */
-exports.getTasks = () => {
-    const systemTasks = getFilesFromDir(tars.root + '/tasks');
-    const userTasks = getFilesFromDir(tars.root + '/user-tasks');
-    const readyTasksArray = getReadyUniqueItemsArray(systemTasks, userTasks);
+        return readyTasksArray;
+    },
 
-    return readyTasksArray;
-};
+    /**
+      * Get paths to all watchers, user's and system
+      * @return {Array} Array of unique system/user's watchers
+      */
+    getWatchers() {
+        const systemWatchers = getFilesFromDir(tars.root + '/watchers');
+        const userWatchers = getFilesFromDir(tars.root + '/user-watchers');
+        const readyWatchersArray = getReadyUniqueItemsArray(systemWatchers, userWatchers);
 
-/**
-  * Get paths to all watchers, user's and system
-  * @return {Array} Array of unique system/user's watchers
-  */
-exports.getWatchers = () => {
-    const systemWatchers = getFilesFromDir(tars.root + '/watchers');
-    const userWatchers = getFilesFromDir(tars.root + '/user-watchers');
-    const readyWatchersArray = getReadyUniqueItemsArray(systemWatchers, userWatchers);
-
-    return readyWatchersArray;
+        return readyWatchersArray;
+    }
 };

@@ -4,7 +4,7 @@ const watcherLog = tars.helpers.watcherLog;
 
 const jsFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/js';
 
-var jsPathToWatch = [];
+let jsPathToWatch = [];
 
 if (tars.config.jsPathsToConcatBeforeModulesJs.length) {
     jsPathToWatch = jsPathToWatch.concat(tars.config.jsPathsToConcatBeforeModulesJs);

@@ -14,8 +14,8 @@ module.exports = {
      * @param  {Error} error    Error object
      * @return {Pipe}
      */
-    error: (message, error) => {
-        var resultMessage;
+    error(message, error) {
+        let resultMessage;
 
         if (message) {
             resultMessage = '\n' + message + '\nLook in the console for details.\n\n';
@@ -37,10 +37,10 @@ module.exports = {
                 icon: path.resolve(tars.root + '/icons/tars_error.png'),
                 onLast: true
             })(error);
-        } else {
-            console.error(resultMessage);
-            return tars.packages.gutil.noop();
         }
+
+        console.error(resultMessage);
+        return tars.packages.gutil.noop();
     },
 
     /**
@@ -49,8 +49,8 @@ module.exports = {
      * @param  {Boolean} onLast   Use notify only on last changed file
      * @return {Pipe}
      */
-    success: (message, onLast) => {
-        var resultMessage = message + '\n' || 'Task\'ve been finished\n';
+    success(message, onLast) {
+        let resultMessage = message + '\n' || 'Task\'ve been finished\n';
 
         resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
 
@@ -65,8 +65,8 @@ module.exports = {
                 },
                 icon: path.resolve(tars.root + '/icons/tars.png')
             });
-        } else {
-            return tars.packages.gutil.noop();
         }
+
+        return tars.packages.gutil.noop();
     }
 };

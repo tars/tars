@@ -8,15 +8,16 @@ const notifier = tars.helpers.notifier;
 const pagesAndDataFilesProcessing = require(tars.root + '/tasks/html/helpers/pages-and-data-files-processing');
 
 /**
- * conact data for modules to one file
+ * concat data for modules and some other sources to one file
  */
 module.exports = () => {
     return gulp.task('html:concat-modules-data', () => {
         return gulp.src(['./markup/pages/**/*.' + tars.templater.ext,
                          '!./markup/pages/**/_*.' + tars.templater.ext,
-                         './markup/modules/**/data/data.js'])
+                         './markup/modules/**/data/data.js',
+                         './dev/temp/symbols-data-template.js'])
             .pipe(plumber({
-                errorHandler: error => {
+                errorHandler(error) {
                     notifier.error('An error occurred while concating module\'s data.', error);
                 }
             }))

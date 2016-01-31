@@ -17,7 +17,7 @@ module.exports = {
      * Get time of last modify of something (css, js and etc)
      * @return {string} String with formatted time
      */
-    getTimeOfModify: () => {
+    getTimeOfModify() {
         const currentDate = new Date();
         const hours = currentDate.getHours();
         const minutes = currentDate.getMinutes();

@@ -14,10 +14,10 @@ const imagesPath = tars.config.fs.staticFolderName + '/' + tars.config.fs.images
 module.exports = () => {
     return gulp.task('images:raster-svg', cb => {
 
-        if (tars.config.useSVG && (tars.flags.ie8 || tars.flags.ie)) {
+        if (tars.config.svg.active && tars.config.svg.workflow === 'sprite' && (tars.flags.ie8 || tars.flags.ie)) {
             return gulp.src('./markup/' + imagesPath + '/svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while rastering svg.', error);
                     }
                 }))

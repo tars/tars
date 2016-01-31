@@ -13,10 +13,10 @@ const svgImagesPath = tars.config.fs.staticFolderName + '/' + tars.config.fs.ima
 module.exports = () => {
     return gulp.task('images:minify-svg', cb => {
 
-        if (tars.config.useSVG) {
+        if (tars.config.svg.active) {
             return gulp.src('./markup/' + svgImagesPath + '/svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: error => {
+                    errorHandler(error) {
                         notifier.error('An error occurred while minifying svg.', error);
                     }
                 }))
