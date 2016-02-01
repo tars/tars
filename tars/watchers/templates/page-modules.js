@@ -21,7 +21,7 @@ module.exports = () => {
     ).on('all', (event, watchedPath) => {
         tars.helpers.watcherLog(event, watchedPath);
 
-        if (path.indexOf(`markup${path.sep}pages`) > -1 && (event === 'unlink' || event === 'add')) {
+        if (watchedPath.indexOf(`markup${path.sep}pages`) > -1 && (event === 'unlink' || event === 'add')) {
             runSequence(
                 'html:concat-modules-data',
                 'html:compile-templates',

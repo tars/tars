@@ -99,10 +99,12 @@ if (tars.config.hasOwnProperty('useSVG')) {
         workflow: 'sprite'
     }
 } else {
+    const symbolsLoadingType = tars.config.svg.symbolsConfig.loadingType;
+
     if (
-        tars.config.svg.symbolsConfig.loadingType !== 'inject' ||
-        tars.config.svg.symbolsConfig.loadingType !== 'separate-file-with-link' ||
-        tars.config.svg.symbolsConfig.loadingType !== 'separate-file'
+        symbolsLoadingType !== 'inject' &&
+        symbolsLoadingType !== 'separate-file-with-link' &&
+        symbolsLoadingType !== 'separate-file'
     ) {
         tars.say(
             gutil.colors.yellow(
