@@ -45,23 +45,6 @@ const templaterName = require(helpersDirPath + '/get-templater-name')(tars.confi
 const buildVersion = require(helpersDirPath + '/set-build-version')();
 const useBuildVersioning = tars.config.useBuildVersioning;
 
-/**
- * Beginning of a path for static files for using in css
- * You have to use %=static=% or __static__ placeholder in paths to static in css files
- * Example: background: url('%=static=%logo.png');
- * Will be replaced to background: url('../img/logo.png');
- * %=staticPrefixForCss=% prefix works, but it is deprecated!
- */
-tars.config.staticPrefixForCss = '../' + tars.config.fs.imagesFolderName + '/';
-
-// Fix svg config
-if (tars.config.hasOwnProperty('useSVG')) {
-    tars.config.svg = {
-        active: tars.config.useSVG,
-        workflow: 'sprite'
-    }
-}
-
 // Flags
 tars.flags = gutil.env;
 
@@ -99,6 +82,46 @@ if (os.platform() !== 'win32') {
 tars.skipTaskLog = function skipTaskLog(taskName, reason) {
     gutil.log(gutil.colors.white.bold('Skipped  \'' + gutil.colors.cyan(taskName) + '\' ' + reason));
 };
+
+/**
+ * Beginning of a path for static files for using in css
+ * You have to use %=static=% or __static__ placeholder in paths to static in css files
+ * Example: background: url('%=static=%logo.png');
+ * Will be replaced to background: url('../img/logo.png');
+ * %=staticPrefixForCss=% prefix works, but it is deprecated!
+ */
+tars.config.staticPrefixForCss = '../' + tars.config.fs.imagesFolderName + '/';
+
+// Fix svg config
+if (tars.config.hasOwnProperty('useSVG')) {
+    tars.config.svg = {
+        active: tars.config.useSVG,
+        workflow: 'sprite'
+    }
+} else {
+    if (
+        tars.config.svg.symbolsConfig.loadingType !== 'inject' ||
+        tars.config.svg.symbolsConfig.loadingType !== 'separate-file-with-link' ||
+        tars.config.svg.symbolsConfig.loadingType !== 'separate-file'
+    ) {
+        tars.say(
+            gutil.colors.yellow(
+                `TARS does not support option ${tars.config.svg.symbolsConfig.loadingType} for symbols loading`
+            )
+        );
+        tars.say(
+            gutil.colors.yellow(
+                'You can use only "inject", "separate-file" and "separate-file-with-link"'
+            )
+        );
+        tars.say(
+            gutil.colors.yellow(
+                '"inject" will be used now!'
+            )
+        );
+        tars.config.svg.symbolsConfig.loadingType = 'inject';
+    }
+}
 
 // Build options
 tars.options = {
