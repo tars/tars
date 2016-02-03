@@ -4,8 +4,6 @@ English description | <a href="../ru/update-guide.md">Описание на ру
 
 # TARS update guide 
 
-As I mentioned in the [readme](../README.md), TARS is not a npm-module, you can't upgrade it with single command in the console.
-
 There are several types of updates TARS:
 
 * update dependencies to the latest stable versions;

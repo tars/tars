@@ -33,7 +33,8 @@ module.exports = () => {
                                     + preprocName + '.svg-sprite.mustache',
                     templateDest: preprocFoldePath + '/sprites-' + preprocName
                                     + '/svg-sprite.' + preprocExtension,
-                    imgName: 'sprite' + tars.options.build.hash + '.svg'
+                    imgName: 'sprite' + tars.options.build.hash + '.svg',
+                    padding: 4
                 }))
                 .pipe(gulp.dest(imagesFolderPath + '/svg-sprite/sprite' + tars.options.build.hash + '.svg'))
                 .pipe(

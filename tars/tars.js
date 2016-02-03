@@ -97,7 +97,7 @@ if (tars.config.hasOwnProperty('useSVG')) {
     tars.config.svg = {
         active: tars.config.useSVG,
         workflow: 'sprite'
-    }
+    };
 } else {
     const symbolsLoadingType = tars.config.svg.symbolsConfig.loadingType;
 
@@ -123,6 +123,14 @@ if (tars.config.hasOwnProperty('useSVG')) {
         );
         tars.config.svg.symbolsConfig.loadingType = 'inject';
     }
+}
+
+if (tars.config.svg.active && tars.config.svg.workflow === 'symbols' && (tars.flags.ie || tars.flags.ie8)) {
+    tars.say(
+        gutil.colors.yellow(
+            'Build for IE8 is not available, then svg-symbols is used!'
+        )
+    );
 }
 
 // Build options

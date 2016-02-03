@@ -36,29 +36,23 @@ Unfortunately SVG has several disadvantages:
 
 Total we have two approaches: SVG for all where we can use it. For the rest prepare of PNG-images for those screens that you are going to support. For IE8 will simply rasterize SVG-image.
 
+**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](./images-processing.md)**
 
 ## Sprites including
 
-SVG images are concatenated to the SVG-sprite.
-
-SVG-images in the release-version is minified. Images that will be included in such way must be put in a folder (Set default path): 'static/img/svg/'. Nested directories are not supported.
-
 Images that can not be rendered in SVG is added up to 'static/img/sprite/96dpi|192dpi|288dpi|384dpi'. 96dpi folder is for images to screens with dppx = 1, 192dpi folder is for images twice as much of the original, with the names of the originals. These images will be displayed to the screens with dppx = 2. And it's similar for other dppx.
 
-Used screens and SVG-supporting is configured in the configuration of the project.
+Used screens is configured in the configuration of the project.
 
-Including images to css-code is produced by two mixins (example on scss, mixins name and other input parameters for the different css-preprocessors are the same):
+Including images to css-code is produced by a mixins (example on scss, mixins name and other input parameters for the different css-preprocessors are the same):
 
 ```scss
 @include bg($png-image-name);         // Sprite with png-images including
-@include bg-svg($svg-image-name);     // Sprite with svg-images including
 ```
 
-png-image-name or svg-image-name — is the name of corresponding image without the extension.
+Attention, $png-image-name is a **var**, that has the same name as the icon, which you'd like to use (without extension).
 
-!It is important that when you save the image in SVG there is have to be viewBox attribute! Save SVG as an object that can be inserted into html without changing (in Adobe Illustrator Image location option — Embed).
-
-`bg` mixin will include background into the css, picture size, background-size and sets positioning inside png-sprite. It is not necessary to add nothing more, mixin will set media expression for screens with different dppx. `bg-svg` mixin will include svg-sprite as a background, will set all necessary offsets and sizes into the css.
+`bg` mixin will include background into the css, picture size, background-size and sets positioning inside png-sprite. It is not necessary to add nothing more, mixin will set media expression for screens with different dppx.
 
 ## Separate images
 

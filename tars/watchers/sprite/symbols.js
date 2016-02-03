@@ -25,6 +25,7 @@ module.exports = () => {
                         'html:concat-modules-data',
                         () => {}
                     );
+                    break;
                 case 'inject':
                 default:
                     runSequence(

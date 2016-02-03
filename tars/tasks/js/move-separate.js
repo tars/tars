@@ -1,7 +1,6 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
-const gulpif = tars.packages.gulpif;
 const cache = tars.packages.cache;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;

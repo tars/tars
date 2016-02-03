@@ -50,11 +50,75 @@ postcss: [
 
 ### useSVG
 
+**Опция больше не поддерживается, используйте svg.active**
+
 Type: `Boolean`
 
 Default: `true`
 
 Включение поддержки сборщиком svg-изображений.
+
+### svg
+
+Type: `Object`
+
+Конфиг для работы с svg-графикой в TARS.
+
+#### active
+
+Type: `Boolean`
+
+Default: `true`
+
+Включение поддержки svg в проекте.
+
+#### workflow
+
+Type: `String`
+
+Default: `sprite`
+
+Способ работы с svg-графикой. Доступны SVG-спрайт и SVG-symbols. 
+Поддерживаются значения "sprite" для использования SVG-спрайтов и "symbols" для svg-symbols.
+
+**При выборе "symbols", сборка для IE8 недоступна**
+
+#### symbolsConfig
+
+Type: `Object`
+
+Описывает конфиг для работы с svg-symbols.
+
+##### loadingType
+
+Type: `String`
+
+Default: `inject`
+
+Устанавливает способ подключения svg-symbols на странице.
+
+Поддерживаются значения:
+* инжект в тело html — "inject";
+* хранение в отдельном файле — "separate-file";
+* хранение в отдельном файле, при этом каждая иконка подключается из этого файла — "separate-file-with-link".
+
+##### usePolyfillForExternalSymbols
+
+Type: `Boolean`
+
+Default: `true`
+
+Хранение в отдельном файле нативно поддерживается во всех современных браузерах, кроме IE9-Edge. Для них используется полифл. Если вы не поддерживаете эти браузеры, то можете выставить false.
+
+##### pathToExternalSymbolsFile
+
+Type: `String`
+
+Default: `''`
+
+Вы можете задать путь, по которому файл с svg-symbols будет находится в проекте. По умолчанию файл создается в корне готовой сборки.
+
+Пример значения: "static/images/".
 
 ### useJsLintAndHint
 
@@ -176,6 +240,7 @@ Type: `Number`
 Default: `3004`
 
 Порт, по которому будет доступна верстка при включении локального сервера. Если заданный порт будет занят, то автоматом будет выбран следующий свободный.
+Также можно задать порт с помощью переменной окружения BROWSERSYNC_PORT. Значение этой переменной переопределит значение из конфига.
 
 #### open
 
@@ -254,13 +319,13 @@ Default: `./static/`
 
 ### staticPrefixForCss
 
+**Опция больше не поддерживается, а значение задается в tars/tars.js**
+
 Type: `String`
 
 Default: `../imageFolderName/`
 
 Кастомный пути до папки со статикой из css-файлов. imageFolderName берется из опции [imagesFolderName](options.md#imagesFolderName)
-
-*Значение задается в tars/tars.js*
 
 ### buildPath
 

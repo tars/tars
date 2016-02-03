@@ -124,7 +124,7 @@ if (
             match: '<script>svg4everybody();</script>',
             replacement: ''
         }
-    )
+    );
 }
 
 /**

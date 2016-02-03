@@ -46,11 +46,74 @@ postcss: [
 
 ### useSVG
 
+**Option is depricated! Use svg.active**
+
 Type: `Boolean`
 
 Default: `true`
 
 Enabling svg-image support.
+
+### svg
+
+Type: `Object`
+
+Config for working with svg in TARS.
+
+#### active
+
+Type: `Boolean`
+
+Default: `true`
+
+Activate svg-processing.
+
+#### workflow
+
+Type: `String`
+
+Default: `sprite`
+
+Available workflows of working with SVG in TARS. You can use SVG-sprite ("sprite") and SVG-symbols ("symbols").
+
+**Build for IE8 won't be created then "symbols" is used**
+
+#### symbolsConfig
+
+Type: `Object`
+
+Config for working with svg then "symbols" workflow is selected.
+
+##### loadingType
+
+Type: `String`
+
+Default: `inject`
+
+This option set type of svg-symbols loading workflow.
+
+You can set:
+* inject into the page code — "inject";
+* just separate file — "separate-file";
+* separate file with link from each use to that file — "separate-file-with-link".
+
+##### usePolyfillForExternalSymbols
+
+Type: `Boolean`
+
+Default: `true`
+
+SVG-symbols loading from separate file is supported in all modern browsers natively except IE9-Edge. You have to use polyfill for them. If you do not support IE, you can set false to this option.
+
+##### pathToExternalSymbolsFile
+
+Type: `String`
+
+Default: `''`
+
+You can set a path to file with svg-symbols. File will be created in that directory, which was set in option. It will be created in the root of your build by default.
+
+Possible value: "static/images/".
 
 ### useJsLintAndHint
 
@@ -251,13 +314,13 @@ If you do not need this you can set this option is the same as [staticFolderName
 
 ### staticPrefixForCss
 
+**Option is depricated! Value is set in tars/tars.js**
+
 Type: `String`
 
 Default: `../imageFolderName/`
 
 Custom path to the folder with the statics of the css-files. imageFolderName is taken from the [imagesFolderName](options.md#imagesFolderName) option.
-
-*Values are set in tars/tars.js*
 
 ### buildPath
 
