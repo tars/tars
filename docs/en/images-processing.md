@@ -36,7 +36,7 @@ Unfortunately SVG has several disadvantages:
 
 Total we have two approaches: SVG for all where we can use it. For the rest prepare of PNG-images for those screens that you are going to support. For IE8 will simply rasterize SVG-image.
 
-**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](./images-processing.md)**
+**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](./svg-processing.md)**
 
 ## Sprites including
 
