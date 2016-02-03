@@ -14,7 +14,7 @@ You need to restart the assembly to apply changes.
 
 Type: `Array or Boolean`
 
-Default: `['> 1%', 'last 2 versions', 'opera 12.1', 'android 4']`
+Default: `['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4']`
 
 Configuration for autoprefixer (read more [here](http://css-tricks.com/autoprefixer)). In short, this module allows you not to write vendor prefixes.
 In this configuration you do not need to include ie8 and ie9, for them style assembly is done by another way.

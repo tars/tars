@@ -10,6 +10,8 @@ All work with images in TARS can be divided into two parts: "Sprites" and "Indiv
 
 TARS supports two formats for a sprite image: PNG, and SVG.
 
+**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](./svg-processing.md)**
+
 The general approach is described in the [presentation](http://www.slideshare.net/codefest/codefest-2014-2) of web developer [Timofey Chaptykov](https://github.com/Chaptykov).  Approach is briefly described below. The advantage of this approach is disclosed in the presentation and will not be explained below.
 
 There will not be described advantages of concatinating interface (and other small or often repeated images) into a single sprite.  If you don't know what is a sprite you can look details [here](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D1%80%D0%B0%D0%B9%D1%82_(%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F_%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0)).

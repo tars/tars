@@ -15,7 +15,7 @@
 
 Type: `Array or Boolean`
 
-Default: `['> 1%', 'last 2 versions', 'opera 12.1', 'android 4']`
+Default: `['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4']`
 
 Конфиг для автопрефиксера (если не знаете, что это, то бегом [сюда](http://css-tricks.com/autoprefixer)). Если кратко, то данный модуль позволяет не писать вендорные префиксы.
 

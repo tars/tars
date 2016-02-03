@@ -7,6 +7,50 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 ## Version 1.6.0
 
 * Sourcemaps are created only in dev-mode.
+* Skipped tasks are highlighted in log of gulp.
+* There is only one task for css pre- and postporcessing for all preprocessors.
+* Stylies for IE9 are compiled in separate task.
+* Watchers became much more smarter.
+* There is only one task to work with templaters.
+* **TARS supports only Node.js 4.x.x and higher**.
+* Option for stylies-inject during livereload is [in tars-config now](options.md#injectchanges).
+* jscs + jshint replaces with eslint.
+* **[You can pass data of one module to another by using functions](html-processing.md#working-with-modules-and-data-handlebars). So, it is really easy to init module with any data.**
+* Great refactoring. 
+    - Add ES6, all tasks refactoring.
+    - Build process starts much more fast. All dependencies are required only at that moment then they are really needed.
+    - Some methods and helpers have been added:
+        + skipTaskLog method — add info about skipped tasks into gulp log;
+        + skipTaskWithEmptyPipe helper — it allows you to skip task, if no files were passed through that task;
+        + root property — you can get absolute path to tars folder from this property.
+        + isDevMode property — it returns !tars.flags.release && !tars.flags.min
+    - There are only links to tasks in gulpfile. All main tasks (like build, dev) have been moved from gulpfile to tasks/main and to watchers.
+    - Task browsersync has been removed. Browsersync starts in main:dev task.
+    - Tasks svg-action and compile-html-with-data-reloading have been moved to watchers.
+    - Task minify-html has been renamed to modify-html.
+    - Task pre-build has been renamed and removed into namespace main (main:pre-build).
+* [You can use css-files, that won't be combined to one file](css-processing.md).
+* All js-code from static folder is in ignore section in babelrc by default. Babel has been updated to version 6.
+* Page template and head module update. All useless attributes has been removed. Template looks like page in [html5boilerplate](https://github.com/h5bp/html5-boilerplate).
+* You can use %=static=% or \_\_static\_\_ in css and html instead of %=staticPrefixForCss=% and %=staticPrefix=%. Old prefixes are supported, but it is strongly recommended to use new prefixes.
+* staticPrefixForCss property has been removed from tars-config and it is generated in tars/tars.js automatically.
+* Normalize has been updated to version 3.0.3
+* **[You can use custom Jade and Handlebars helpers](html-processing.md).**
+* Helper icon for Jade and Handlebars has been added to TARS. This helper generates template for svg-symbol including.
+* You can use [svg-symbols](svg-processing.md#svg-symbols). TARS supports three ways to include svg-symbols. Build for IE8 not supported in that workflow. And there is a polyfill in separate-js for svg-symbols correct loading for IE9 - Edge and all browsers, which don't support with flow.
+* useSVG property has been removed from tars-config. You have to configure svg workflow by [new property in config](options.md#svg). In case of using old config (that has useSVG property), svg config-object will be generated automatically.
+* [Data about all used pages will be add to full-data of your project](html-processing.md#html).
+* All sprite will have hash in their names then flag --release is used.
+* You can set port for Browsersync by using [env var](options.md#open).
+* [Default autoprefixer config has been updated](options.md#autoprefixerconfig).
+* Path to static folder generates automatically and depends on pages fs.
+* All useless tags, labels will be removed from build automatically. For example, if don't build with `--ie` or `--ie8` flag, html5shiv won't be copied to ready build.
+* hml5shiv-print has been removed.
+* You can use plane JavaScript-object in data files (aka json syntax).
+* [You can init your project without templater and preprocessor files mutation](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-init). It would be useful for forks.
+* [You can automatically update your project with TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-update-project).
+* Task re-init is depricated now. This comand will be removed from TARS in new version, cause there is пreat chance to broke your project.
+* Documentation update.
 
 ## Version 1.5.0
 

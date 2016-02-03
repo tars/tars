@@ -53,11 +53,11 @@ In case of using separate file with link, path to svg-symbols file and Icon ID w
 
 In that case svg-symbols file will be cached in browser. You can set the path to file by using option pathToExternalSymbolsFile in tars-config. File will be generated in that directory. File will be created in the root directory of build by default.
 
-SVG-symbols loading from separate file is supported in all modern browsers natively except IE9-Edge. You can use polyfill for them. You can exclude it from build by using option usePolyfillForExternalSymbols if you don't support IE. The code of polyfill including is in templates by default. **It is not necessary to remove that labels and scripts from tempaltes, cause they will be deleted from build automatically, if they are not used!**
+SVG-symbols loading from separate file is supported in all modern browsers natively except IE9 - Edge. You can use polyfill for them. You can exclude it from build by using option usePolyfillForExternalSymbols if you don't support IE. The code of polyfill including is in templates by default. **It is not necessary to remove that labels and scripts from tempaltes, cause they will be deleted from build automatically, if they are not used!**
 
 In the third one you have to implement your own workflow of svg-symbols injecting to html. You have to write some code to load svg-symbols file and inject it into the page-code. There are two useful articles, which describe the best ways to implement it: [css-tricks](https://css-tricks.com/ajaxing-svg-sprite/) and [osvaldas.info](http://osvaldas.info/caching-svg-sprite-in-localstorage). The last is the most cool.
 
-More info about symbols configuration you can get from options docs.
+More info about symbols configuration you can get from [options docs](options#svg).
 
 ## SVG-sprites
 
