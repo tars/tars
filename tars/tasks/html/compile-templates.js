@@ -99,7 +99,18 @@ if (
     patterns.push(
         {
             match: '%=symbols=%',
-            replacement: (() => fs.readFileSync('./dev/temp/svg-symbols.svg', 'utf8'))
+            replacement: (() => {
+
+                /* eslint-disable no-unused-vars */
+
+                try {
+                    return fs.readFileSync('./dev/temp/svg-symbols.svg', 'utf8');
+                } catch(error) {
+                    return '';
+                }
+
+                /* eslint-enable no-unused-vars */
+            })
         }
     );
 } else {
@@ -112,8 +123,8 @@ if (
 }
 
 if (
-    !tars.config.svg.active || !tars.config.svg.workflow === 'symbols' ||
-    !tars.config.svg.symbolsConfig.loadingType === 'separate-file-with-link' ||
+    !tars.config.svg.active || tars.config.svg.workflow !== 'symbols' ||
+    tars.config.svg.symbolsConfig.loadingType !== 'separate-file-with-link' ||
     !tars.config.svg.symbolsConfig.usePolyfillForExternalSymbols
 ) {
     patterns.push(
