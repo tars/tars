@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/options.md">Описание на русском</a>
+</p>
+
 # Options
 
 All builder configuration is in one file — tars-config.js at the root of the project.
@@ -10,7 +14,7 @@ You need to restart the assembly to apply changes.
 
 Type: `Array or Boolean`
 
-Default: `['> 1%', 'last 2 versions', 'opera 12.1', 'android 4']`
+Default: `['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4']`
 
 Configuration for autoprefixer (read more [here](http://css-tricks.com/autoprefixer)). In short, this module allows you not to write vendor prefixes.
 In this configuration you do not need to include ie8 and ie9, for them style assembly is done by another way.
@@ -42,11 +46,74 @@ postcss: [
 
 ### useSVG
 
+**Option is depricated! Use svg.active**
+
 Type: `Boolean`
 
 Default: `true`
 
 Enabling svg-image support.
+
+### svg
+
+Type: `Object`
+
+Config for working with svg in TARS.
+
+#### active
+
+Type: `Boolean`
+
+Default: `true`
+
+Activate svg-processing.
+
+#### workflow
+
+Type: `String`
+
+Default: `sprite`
+
+Available workflows of working with SVG in TARS. You can use SVG-sprite ("sprite") and SVG-symbols ("symbols").
+
+**Build for IE8 won't be created then "symbols" is used**
+
+#### symbolsConfig
+
+Type: `Object`
+
+Config for working with svg then "symbols" workflow is selected.
+
+##### loadingType
+
+Type: `String`
+
+Default: `inject`
+
+This option set type of svg-symbols loading workflow.
+
+You can set:
+* inject into the page code — "inject";
+* just separate file — "separate-file";
+* separate file with link from each use to that file — "separate-file-with-link".
+
+##### usePolyfillForExternalSymbols
+
+Type: `Boolean`
+
+Default: `true`
+
+SVG-symbols loading from separate file is supported in all modern browsers natively except IE9-Edge. You have to use polyfill for them. If you do not support IE, you can set false to this option.
+
+##### pathToExternalSymbolsFile
+
+Type: `String`
+
+Default: `''`
+
+You can set a path to file with svg-symbols. File will be created in that directory, which was set in option. It will be created in the root of your build by default.
+
+Possible value: "static/images/".
 
 ### useJsLintAndHint
 
@@ -167,6 +234,7 @@ Type: `Number`
 Default: `3004`
 
 Port on which markup will be available when you turn on local server. If the specified port is in use, it will automatically take next free.
+You can set port via env var BROWSERSYNC_PORT. This var will override port from config.
 
 #### open
 
@@ -201,6 +269,14 @@ Default: `true`
 
 By default, the browser displays a notification that the browser has been restarted, js or css has been updated, etc.
 
+#### injectChanges
+
+Type: `Boolean`
+
+Default: `false`
+
+Inject css on livereload or just reload page.
+
 ### removeConsoleLog
 
 Type: `Boolean`
@@ -230,11 +306,15 @@ Also this option can be usefull if static in your project are taken from a parti
 
 For example, in the markup static is taken from ./public/img/content/img.png, but in the backend it is taken from http://static-server.com. Then, before assembly of the project, staticPrefix must be set to http://static-server.com/. Then all static files will be in following path (for the example images in html) - http://static-server.com/img/content/sample.jpg
 
-The value of this option sets the value of the placeholder %=staticPrefix=%, which can be used in any project files, except style files.
+The value of this option sets the value of the placeholder %=static=% or \_\_static\_\_, which can be used in any project files, except style files.
+
+**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or \_\_static\_\_!**
 
 If you do not need this you can set this option is the same as [staticFolderName](#staticfoldername)
 
 ### staticPrefixForCss
+
+**Option is depricated! Value is set in tars/tars.js**
 
 Type: `String`
 

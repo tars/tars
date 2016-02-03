@@ -1,15 +1,18 @@
 'use strict';
 
+const imagesFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+
 /**
  * Watcher for images in assets dir of modules
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/content/**/*.*', {
-        ignored: '',
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
-        tars.helpers.watcherLog(event, path);
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        imagesFolderPath + '/content/**/*.*',
+        Object.assign(tars.options.watch, {
+            ignored: imagesFolderPath + '/content/**/*.tmp'
+        })
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
         tars.packages.gulp.start('images:move-content-img');
     });
 };

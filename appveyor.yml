@@ -4,6 +4,10 @@
 # Build version format
 version: "{build}"
 
+platform:
+  - x64
+  - x86
+
 clone_depth: 10
 
 # Fix line endings on Windows
@@ -13,14 +17,16 @@ init:
 # What combinations to test
 environment:
   matrix:
-    - nodejs_version: 0.12
+    - nodejs_version: 5
     - nodejs_version: 4
 
 install:
-  - cmd: npm -v
-  - cmd: node -v
-  - cmd: npm install -g gulp
-  - cmd: npm install
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - node --version
+  - npm install -g npm
+  - npm --version
+  - npm install -g gulp
+  - npm install
 
 build: off
 

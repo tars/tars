@@ -1,20 +1,21 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var zip = tars.packages.zip;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
 /**
  * Create zip archive of build
  */
-module.exports = function () {
-    return gulp.task('service:zip-build', function (cb) {
+module.exports = () => {
+    return gulp.task('service:zip-build', cb => {
+
         if (tars.config.useArchiver) {
-            return gulp.src(tars.options.build.path + '**', { base: '.' })
+            const zip = tars.require('gulp-zip');
+
+            return gulp.src(tars.options.build.path + '**', { base: tars.options.build.path })
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler(error) {
                         notifier.error('An error occurred while creating zip-archive.', error);
                     }
                 }))
@@ -23,9 +24,9 @@ module.exports = function () {
                 .pipe(
                     notifier.success('Zip-archive\'s been created')
                 );
-        } else {
-            gutil.log('!Archiver is not used!');
-            cb(null);
         }
+
+        tars.skipTaskLog('service:zip-build', 'Archiver is not used');
+        cb(null);
     });
 };

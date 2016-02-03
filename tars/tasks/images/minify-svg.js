@@ -1,54 +1,50 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var imagemin = tars.packages.imagemin;
-var changed = tars.packages.changed;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
+const gulp = tars.packages.gulp;
+const changed = tars.packages.changed;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
+const svgImagesPath = tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
 
 /**
  * Minify svg-images (optional task)
  */
-module.exports = function () {
-    return gulp.task('images:minify-svg', function (cb) {
-        if (tars.config.useSVG) {
-            return gulp.src('./markup/' + staticFolderName + '/' + imagesFolderName + '/svg/*.svg')
+module.exports = () => {
+    return gulp.task('images:minify-svg', cb => {
+
+        if (tars.config.svg.active) {
+            return gulp.src('./markup/' + svgImagesPath + '/svg/*.svg')
                 .pipe(plumber({
-                    errorHandler: function (error) {
+                    errorHandler(error) {
                         notifier.error('An error occurred while minifying svg.', error);
                     }
                 }))
                 .pipe(changed(
-                        'dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg',
-                        {
-                            hasChanged: changed.compareLastModifiedTime,
-                            extension: '.svg'
-                        }
-                    )
-                )
-                .pipe(imagemin(
-                        {
-                            svgoPlugins: [
-                                { cleanupIDs: false },
-                                { removeViewBox: false },
-                                { convertPathData: false },
-                                { mergePaths: false }
-                            ],
-                            use: []
-                        }
-                    )
-                )
-                .pipe(gulp.dest('./dev/' + staticFolderName + '/' + imagesFolderName + '/minified-svg/'))
+                    'dev/' + svgImagesPath + '/minified-svg',
+                    {
+                        hasChanged: changed.compareLastModifiedTime,
+                        extension: '.svg'
+                    }
+                ))
+                .pipe(tars.require('gulp-imagemin')(
+                    {
+                        svgoPlugins: [
+                            { cleanupIDs: false },
+                            { removeViewBox: false },
+                            { convertPathData: false },
+                            { mergePaths: false }
+                        ],
+                        use: []
+                    }
+                ))
+                .pipe(gulp.dest('./dev/' + svgImagesPath + '/minified-svg/'))
                 .pipe(
                     notifier.success('SVG\'ve been minified')
                 );
-        } else {
-            gutil.log('!SVG is not used!');
-            cb(null);
         }
+
+        tars.skipTaskLog('images:minify-svg', 'SVG is not used');
+        cb(null);
     });
 };

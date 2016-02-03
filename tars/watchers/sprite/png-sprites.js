@@ -3,13 +3,12 @@
 /**
  * Watcher for images for sprite (png)
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch('markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/sprite/**/*.png', {
-        ignored: '',
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
-        tars.helpers.watcherLog(event, path);
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/sprite/**/*.png',
+        tars.options.watch
+    ).on('all', (event, watchedPath) => {
+        tars.helpers.watcherLog(event, watchedPath);
         tars.packages.gulp.start('css:make-sprite');
     });
 };

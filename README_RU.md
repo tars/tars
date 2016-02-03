@@ -4,7 +4,7 @@
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://badges.gitter.im/Join%20Chat.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Сборщик html-верстки, основанный на [gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
 Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
@@ -31,7 +31,7 @@ TARS предоставляет удобную архитектуру хране
 * Используется модуль [chokidar](https://github.com/paulmillr/chokidar) для вотчинга файлов.
 * Расшариванием верстки с вашего компьютера во внешний веб, опционально. Ну и конечно же livereload в браузере (и не только локально) + графический интерфейс к панели управления устройствами, на которые расшаривается верстка.
 * Можно легко добавлять новые таски и вотчеры. Есть примеры того, как создать и использовать новый таск или вотчер внутри TARS.
-* Умная работа с изображениями. В первую очередь с вектором (svg). Больше не будет ада при верстке сайтов для экранов с высокой плотностью пикселей.
+* Умная работа с изображениями. В первую очередь с вектором (svg). Больше не будет ада при верстке сайтов для экранов с высокой плотностью пикселей. Для работы с SVG поддерживаются два подхода: [SVG-спрайты](docs/en/svg-processing.md#svg-спрайты) и [SVG-symbols](docs/ru/svg-processing.md#svg-symbols).
 * Несколько режимов сборки (обычная, с минифицированными файлами, с хешем в названии css- и js-файлов для выкладки в продакшн).
 * Создание архива с готовой сборкой.
 
@@ -40,7 +40,7 @@ TARS предоставляет удобную архитектуру хране
 
 **Обращаю ваше внимание, что предпочтительно использовать [TARS-CLI](https://github.com/tars/tars-cli). Это удобнее, нагляднее, занимает меньше места.**
 
-Необходимо [установить `Node.js`](http://nodejs.org/) версии >= 0.12 Если вы используете Node.js версии 5.x.x, убедитесь, что вы используете npm версии 3.3.10 и выше. В противном случае обновите npm:
+Необходимо [установить `Node.js`](http://nodejs.org/) версии >= 4.x.x Если вы используете Node.js версии 5.x.x, убедитесь, что вы используете npm версии 3.3.10 и выше. В противном случае обновите npm:
 
 ```bash
 npm i -g npm
@@ -85,7 +85,7 @@ gulp init
 
 `gulp init` — Инициализирует проект с заданными опциями в tars-config. Создает файловую структуру.
 
-`gulp re-init` — Переинициализирует проект с заданными опциями в tars-config. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. **Внимание, при переинициализации все папки и файлы удаляются.**
+`gulp re-init` — **команда будет удалена в одном из следующих релизов** Переинициализирует проект с заданными опциями в tars-config. Предлагается использовать данную команду, если вы инициализировали проект с неверными опциями. **Внимание, при переинициализации все папки и файлы удаляются.**
 
 `gulp` или `gulp build` — делает сборку проекта. Подключаются не минимизированные файлы. Тип сборки зависит от переданных ключей вместе с этой командой. Доступные ключи:
 
@@ -116,7 +116,7 @@ gulp init
 Важно! Все примеры в документации используют настройки по умолчанию.
 
 * [Файловая структура](/docs/ru/file-structure.md)
-* [Работа с тасками и вотчерами](/docs/ru/tasks-workflow.md)
+* [Работа с тасками и вотчерами](/docs/ru/tasks-and-watchers.md)
 * [Опции](/docs/ru/options.md)
 * [Html](/docs/ru/html-processing.md)
 * [Css](/docs/ru/css-processing.md)

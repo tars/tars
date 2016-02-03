@@ -3,21 +3,21 @@
 // It is a global var
 require('../tars');
 
-var os = require('os');
-var exec = require('child_process').exec;
-var templaterName = tars.templaterName;
-var usersDeps;
+const exec = require('child_process').exec;
+let usersDeps;
 
 try {
-    usersDeps = require('../../user-package');
-} catch (er) {
-    console.log('User-package.json is not valid!\n');
-    console.log(er);
+    usersDeps = require(process.cwd() + '/user-package');
+} catch (error) {
+    console.error('User-package.json is not valid!\n');
+    console.error(error);
 }
 
-for (var dep in usersDeps.dependencies) {
+/* eslint-disable no-loop-func */
+
+for (let dep in usersDeps.dependencies) {
     if (dep) {
-        exec('npm i ' + dep + '@' + usersDeps.dependencies[dep], function (error, stdout, stderr) {
+        exec('npm i ' + dep + '@' + usersDeps.dependencies[dep], (error, stdout, stderr) => {
             if (error) {
                 console.log(stderr);
             } else {
@@ -26,3 +26,5 @@ for (var dep in usersDeps.dependencies) {
         });
     }
 }
+
+/* eslint-enable no-loop-func */

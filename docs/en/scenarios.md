@@ -1,3 +1,7 @@
+<p align="right">
+English description | <a href="../ru/scenarios.md">Описание на русском</a>
+</p>
+
 # Usage scenarios
 
 There are 3 scenarios of using TARS. In fact, you can up with another scenarios. The main scenarios will be listed here:

@@ -4,7 +4,7 @@ English description | <a href="README_RU.md">Описание на русско�
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://badges.gitter.im/Join%20Chat.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
 TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work.
@@ -32,7 +32,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 * [Chokidar](https://github.com/paulmillr/chokidar) module is used for watching files
 * Sharing of markup from your local computer to an external web, optional. And of course it has a livereload in browser (and not just locally) + GUI to control panel for devices, on which markup was shearing.
 * You can easy add new tasks and watchers. There are examples of how to create and use a new task or watcher inside the TARS.
-* Smart work with images. First of all with vector(svg). There will be no more hell with markup for screens with high pixel density.
+* Smart work with images. First of all with vector(svg). There will be no more hell with markup for screens with high pixel density. TARS supports two workflows of working with SVG: [SVG-sprites](docs/en/svg-processing.md#svg-sprites) and [SVG-symbols](docs/en/svg-processing.md#svg-symbols).
 * Several modes of assembly (common, with minified files, with hash in the title of css- and js-files for deploy).
 * Creating archive with the ready build.
 
@@ -42,7 +42,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 **Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably
  way to work with TARS. It is more comfortable, fast to work with TARS-CLI.**
 
-You need to [install `Node.js`](http://nodejs.org/) with version equal to 0.12 or more. If you use Node.js version 5.x.x, please, be sure, that you use npm version 3.3.10 and higher. Otherwise update npm by using command:
+You need to [install `Node.js`](http://nodejs.org/) with version equal to 4.x.x or more. If you use Node.js version 5.x.x, please, be sure, that you use npm version 3.3.10 and higher. Otherwise update npm by using command:
 
 ```bash
 npm i -g npm
@@ -83,7 +83,7 @@ Everything is ready, make it work! :)
 
 `gulp init` — initializes project with the specified settings in the tars-config. Creates a file structure.
 
-`gulp re-init` — reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options. **Attention, files from pages and static folder will be deleted.**
+`gulp re-init` — **This command is depricated!** reinitialize the project with specified settings in the tars-config. It is proposed to use this command if you initialize the project with incorrect options. **Attention, files from pages and static folder will be deleted.**
 
 `gulp` or `gulp build` — make project assembly. There not minimized files are connected. Type of assembly depends on the transmitted keys with this command. Available keys:
 
@@ -113,7 +113,7 @@ Keys are available in any mode of assembly:
 It is important! All examples in documentation use the default settings.
 
 * [File structure](/docs/en/file-structure.md)
-* [Working with tasks and watchers](/docs/en/tasks-workflow.md)
+* [Working with tasks and watchers](/docs/en/tasks-and-watchers.md)
 * [Options](/docs/en/options.md)
 * [Html](/docs/en/html-processing.md)
 * [Css](/docs/en/css-processing.md)

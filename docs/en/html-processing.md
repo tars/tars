@@ -1,5 +1,8 @@
-# HTML
+<p align="right">
+English description | <a href="../ru/html-processing.md">Описание на русском</a>
+</p>
 
+# HTML
 
 As a template for html can be used [jade](http://jade-lang.com) or [handlebars](http://handlebarsjs.com). You could choose template in [tars-config.js](options.md#templater).
 
@@ -7,13 +10,17 @@ You can use all features of jade and handlebars. If you are used to the regular 
 
 If you do not want to compile a particular page, you can simply add the '_' to the begining of the page name, and it will not be compiled.
 
-If you need to include files from the static directory (images, js), you must use the placeholder [%=staticPrefix=%](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
+The page with links to all pages of project will be generated in dev-mode. This page will be opened in browser then livereload is used. This page has name __index.html
+
+If you need to include files from the static directory (images, js), you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
 
 ```html
-<img src="%=staticPrefix=%img/content/example.jpg"/>
+<img src="%=static=%img/content/example.jpg"/>
 ```
 
-To include image in css you need to use another placeholder – [">%=staticPrefixForCss=%](options.md#staticprefixforcss).
+To include image in css you need to use the same placeholder – %=static=% \_\_static\_\_. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
+
+**%=staticPrefixForCss=% and %=staticPrefix=% prefixes work, but this prefixes are depricated! Use just %=static=%!**
 
 Very important feature is the using of different data types in one template. For example, we have a head module, which has all that you should put in the head tag (different meta, titles, etc.). Suppose that every page should have its own title. Make copies of the same module, which differ only in one line is not the best practice. It would be logical to separate data from view.
 
@@ -27,6 +34,33 @@ moduleName: {
     }
 }
 ```
+
+In case of syntax errors inf data-files from your IDE  you can use another syntax, just simple JavaScript-object:
+
+```javascript
+data = {
+    moduleName: {
+        dataType: {
+            property: value
+        }
+    }
+};
+```
+
+TARS supports both syntaxes by default. 
+
+There will be in full-data data from _template module and a list of all pages of current project in array like this:
+
+```javascript
+__pages: [
+    {
+        name: 'pageName',
+        href: 'pageHref'
+    }
+]
+```
+
+You can use this array to render a list of links to all pages of project.
 
 Connecting modules with different data looks differently in jade and handlebars.
 
@@ -78,7 +112,76 @@ head.html
 <title>{{head.defaults.title}}</title>
 ```
 
-But, if you have passed the data to module, you will not have an access to the data for child module. You have to pass global scope to the parent module (to not pass any data while including), to pass data for child-module.
+But, if you have passed the data to module, you will not have an access to the data for child module. You have to pass global scope to the parent module (to not pass any data while including), to pass data for child-module. Or you can use another variant:
+
+index.html
+```handlebars
+{{> module1/module1 module1.main}}
+```
+
+module1.html
+```handlebars
+
+<h1>{{title}}</h1>
+
+{{> module2/module2 module2.main}}
+```
+
+```javascript
+// module1/data/data.js
+module1: {
+    main: {
+        title: 'Title of module1',
+        module2: function (fullData) {
+            return fullData.module2;
+        }
+    }
+}
+```
+
+module2.html
+```handlebars
+
+<h2>{{title}}</h2>
+```
+
+```javascript
+// module2/data/data.js
+module2: {
+    main: {
+        title: 'Title of module2'
+    }
+}
+```
+
+So, you can get access to data of any module from data-file of current-module by using really simple construction:
+
+```javascript
+// module/data/data.js
+module: {
+    main: {
+        title: 'Title of module',
+        innerModuleData: function (fullData) {
+            // fullData is an object 
+            // with all data of the application
+            return fullData.moduleName.ModuleType;
+        }
+    }
+}
+```
+
+Everything will be musch more easy with arrow functions ES6:
+
+```javascript
+// module/data/data.js
+module: {
+    main: {
+        title: 'Title of module',
+        innerModuleData: fullData => fullData.moduleName.ModuleType
+        }
+    }
+}
+```
 
 Handlebars known as a very simple template, logicless. But for using the handlebars in the static markup in such kind not very comfortable. So, different helpers have been added that extend the capabilities of handlebars.<br/>
 Helpers description can be found [here](handlebars-helpers.md).
@@ -116,4 +219,13 @@ mixin head(data)
    <title>#{data.title}</title>
 ```
 
-You can use any features that are available in jade.
+You can use any features that are available in jade. You can include modules with any nesting of child-modules and with any data by using inlude and '+'. And you can use functions in data.js like in examples for handlebars.
+
+There is one built-in helper for Jade in TARS — icon. This helper genereate template for svg-symbol include. You can add your own helpers to /tars/user-tasks/html/helpers/jade-helpers. There is an example of user-helper. You can use that helpers in template like:
+
+```jade
+= jadeHelpers.helperName(params)
+
+<!-- If your helper returns unescaped code -->
+!= jadeHelpers.helperName(params)
+```

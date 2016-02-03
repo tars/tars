@@ -1,18 +1,18 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var plumber = tars.packages.plumber;
-var notifier = tars.helpers.notifier;
-var browserSync = tars.packages.browserSync;
+const gulp = tars.packages.gulp;
+const plumber = tars.packages.plumber;
+const notifier = tars.helpers.notifier;
+const browserSync = tars.packages.browserSync;
 
 /**
  * Move misc files
  */
-module.exports = function () {
-    return gulp.task('other:move-misc-files', function (cb) {
+module.exports = () => {
+    return gulp.task('other:move-misc-files', () => {
         return gulp.src('./markup/' + tars.config.fs.staticFolderName + '/misc/**/*.*')
             .pipe(plumber({
-                errorHandler: function (error) {
+                errorHandler(error) {
                     notifier.error('An error occurred while moving misc-files.', error);
                 }
             }))

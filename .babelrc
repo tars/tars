@@ -1,9 +1,7 @@
 {
-  "stage": 0,
-  "loose": ["all"],
-  "blacklist": ["es6.tailCall"],
-  "optional": ["optimisation.flow.forOf", "bluebirdCoroutines"],
+  "presets": ["es2015"],
   "ignore": [
-    "**/babel_ignore_*.js"
+    "**/babel_ignore_*.js",
+    "static/**/*.js"
   ]
 }

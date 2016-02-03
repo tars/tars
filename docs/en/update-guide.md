@@ -1,6 +1,10 @@
+<p align="right">
+English description | <a href="../ru/update-guide.md">Описание на русском</a>
+</p>
+
 # TARS update guide 
 
-As I mentioned in the [readme](../README.md), TARS is not a npm-module, you can't upgrade it with single command in the console.
+**Automatic project-update is available via TARS-CLI and TARS from version 1.5.0. You can get more info from [documentation of TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/en/update-actions.md)**
 
 There are several types of updates TARS:
 

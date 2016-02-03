@@ -1,9 +1,10 @@
 'use strict';
 
-var staticFolderName = tars.config.fs.staticFolderName;
-var watcherLog = tars.helpers.watcherLog;
+const watcherLog = tars.helpers.watcherLog;
 
-var jsPathToWatch = [];
+const jsFolderPath = 'markup/' + tars.config.fs.staticFolderName + '/js';
+
+let jsPathToWatch = [];
 
 if (tars.config.jsPathsToConcatBeforeModulesJs.length) {
     jsPathToWatch = jsPathToWatch.concat(tars.config.jsPathsToConcatBeforeModulesJs);
@@ -14,22 +15,23 @@ if (tars.config.jsPathsToConcatAfterModulesJs.length) {
 }
 
 jsPathToWatch.push(
-    'markup/' + staticFolderName + '/js/framework/**/*.js',
-    'markup/' + staticFolderName + '/js/libraries/**/*.js',
-    'markup/' + staticFolderName + '/js/plugins/**/*.js',
+    jsFolderPath + '/framework/**/*.js',
+    jsFolderPath + '/libraries/**/*.js',
+    jsFolderPath + '/plugins/**/*.js',
     'markup/modules/**/*.js'
 );
 
 /**
  * Watcher for js-files before and after modules js
  */
-module.exports = function () {
-    return tars.packages.chokidar.watch(jsPathToWatch, {
-        ignored: 'markup/modules/**/data/data.js',
-        persistent: true,
-        ignoreInitial: true
-    }).on('all', function (event, path) {
-        watcherLog(event, path);
+module.exports = () => {
+    return tars.packages.chokidar.watch(
+        jsPathToWatch,
+        Object.assign(tars.options.watch, {
+            ignored: 'markup/modules/**/data/data.js'
+        })
+    ).on('all', (event, watchedPath) => {
+        watcherLog(event, watchedPath);
         tars.packages.gulp.start('js:processing');
     });
 };

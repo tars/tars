@@ -1,32 +1,33 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var gutil = tars.packages.gutil;
-var mkdirp = tars.packages.mkdirp;
-var fs = require('fs');
-var staticFolderName = tars.config.fs.staticFolderName;
-var imagesFolderName = tars.config.fs.imagesFolderName;
+const gulp = tars.packages.gulp;
+const fs = require('fs');
 
-var paths = [
-        'markup/' + staticFolderName + '/js/framework',
-        'markup/' + staticFolderName + '/js/libraries',
-        'markup/' + staticFolderName + '/js/plugins',
-        'markup/' + staticFolderName + '/' + imagesFolderName,
-        'markup/' + staticFolderName + '/' + imagesFolderName + '/content',
-        'markup/' + staticFolderName + '/' + imagesFolderName + '/general',
-        'markup/' + staticFolderName + '/' + imagesFolderName + '/plugins',
-        'markup/' + staticFolderName + '/' + imagesFolderName + '/sprite'
-    ];
-var i = 0;
+const staticFolderName = tars.config.fs.staticFolderName;
+const staticFolderPath = 'markup/' + staticFolderName;
+const imagesFolderPath = staticFolderPath + '/' + tars.config.fs.imagesFolderName;
 
-for (; i < tars.config.useImagesForDisplayWithDpi.length; i++) {
-    paths.push('markup/' + staticFolderName + '/' + imagesFolderName + '/sprite/' + tars.config.useImagesForDisplayWithDpi[i] + 'dpi');
-}
+let paths = [
+    staticFolderPath + '/js/framework',
+    staticFolderPath + '/js/libraries',
+    staticFolderPath + '/js/plugins',
+    imagesFolderPath,
+    imagesFolderPath + '/content',
+    imagesFolderPath + '/general',
+    imagesFolderPath + '/plugins',
+    imagesFolderPath + '/sprite'
+];
+
+tars.config.useImagesForDisplayWithDpi.forEach(dpiValue => {
+    paths.push(
+        imagesFolderPath + '/sprite/' + dpiValue + 'dpi'
+    );
+});
 
 paths.push(
-    'markup/' + staticFolderName + '/' + imagesFolderName + '/svg',
-    'markup/' + staticFolderName + '/fonts',
-    'markup/' + staticFolderName + '/' + tars.config.cssPreprocessor,
+    imagesFolderPath + '/svg',
+    staticFolderPath + '/fonts',
+    staticFolderPath + '/' + tars.config.cssPreprocessor,
     'markup/modules/_template/assets',
     'markup/modules/_template/ie'
 );
@@ -34,17 +35,18 @@ paths.push(
 /**
  * Create fs for project
  */
-module.exports = function () {
-    return gulp.task('service:create-fs', function (cb) {
+module.exports = () => {
+    return gulp.task('service:create-fs', cb => {
+        const mkdirp = tars.require('mkdirp');
 
-        if (staticFolderName != 'static') {
+        if (staticFolderName !== 'static') {
             fs.renameSync('./markup/static/', './markup/' + staticFolderName);
         }
 
-        paths.forEach(function (path) {
-            mkdirp(path, function (err) {
-                if (err) {
-                    console.error(err);
+        paths.forEach(path => {
+            mkdirp(path, error => {
+                if (error) {
+                    console.error(error);
                 }
             });
         });

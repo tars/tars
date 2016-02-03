@@ -1,8 +1,8 @@
 'use strict';
 
-var notify = tars.packages.notify;
-var notifyConfig = tars.config.notifyConfig;
-var path = require('path');
+const notify = tars.packages.notify;
+const notifyConfig = tars.config.notifyConfig;
+const path = require('path');
 
 /**
  * Notify helper
@@ -14,14 +14,13 @@ module.exports = {
      * @param  {Error} error    Error object
      * @return {Pipe}
      */
-    error: function (message, error) {
-
-        var resultMessage;
+    error(message, error) {
+        let resultMessage;
 
         if (message) {
             resultMessage = '\n' + message + '\nLook in the console for details.\n\n';
         } else {
-            resultMessage =  '\nSomething is happen while working.\nLook in the console for details.\n\n';
+            resultMessage = '\nSomething is happen while working.\nLook in the console for details.\n\n';
         }
 
         if (error) {
@@ -35,13 +34,13 @@ module.exports = {
                 sound: notifyConfig.sounds.onError,
                 title: notifyConfig.title,
                 message: resultMessage,
-                icon: path.resolve(process.cwd() + '/tars/icons/tars_error.png'),
+                icon: path.resolve(tars.root + '/icons/tars_error.png'),
                 onLast: true
             })(error);
-        } else {
-            console.error(resultMessage);
-            return tars.packages.gutil.noop();
         }
+
+        console.error(resultMessage);
+        return tars.packages.gutil.noop();
     },
 
     /**
@@ -50,8 +49,8 @@ module.exports = {
      * @param  {Boolean} onLast   Use notify only on last changed file
      * @return {Pipe}
      */
-    success: function (message, onLast) {
-        var resultMessage = message + '\n' || 'Task\'ve been finished\n';
+    success(message, onLast) {
+        let resultMessage = message + '\n' || 'Task\'ve been finished\n';
 
         resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
 
@@ -64,10 +63,10 @@ module.exports = {
                 templateOptions: {
                     date: tars.helpers.dateFormatter.getTimeOfModify()
                 },
-                icon: path.resolve(process.cwd() + '/tars/icons/tars.png')
+                icon: path.resolve(tars.root + '/icons/tars.png')
             });
-        } else {
-            return tars.packages.gutil.noop();
         }
+
+        return tars.packages.gutil.noop();
     }
 };

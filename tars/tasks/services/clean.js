@@ -1,14 +1,20 @@
 'use strict';
 
-var gulp = tars.packages.gulp;
-var del = tars.packages.del;
-tars.packages.promisePolyfill.polyfill();
+const gulp = tars.packages.gulp;
+const del = tars.packages.del;
+const preProcName = tars.cssPreproc.name;
+const preprocExtension = tars.cssPreproc.mainExt;
+const spritesCssPath = './markup/' + tars.config.fs.staticFolderName
+    + '/' + preProcName + '/sprites-' + preProcName;
 
-var pathsToDel = [
-        './dev/',
-        './.tmpTemplater/',
-        './.tmpPreproc/'
-    ];
+let pathsToDel = [
+    './dev/',
+    spritesCssPath + '/sprite_96.' + preprocExtension,
+    spritesCssPath + '/svg-fallback-sprite.' + preprocExtension,
+    spritesCssPath + '/svg-sprite.' + preprocExtension,
+    './.tmpTemplater/',
+    './.tmpPreproc/'
+];
 
 if (!tars.config.useBuildVersioning) {
     pathsToDel.push(tars.options.build.path);
@@ -17,8 +23,10 @@ if (!tars.config.useBuildVersioning) {
 /**
  * Clean dev directory and cache
  */
-module.exports = function () {
-    return gulp.task('service:clean', function (cb) {
-        del(pathsToDel).then(function () { cb(); });
+module.exports = () => {
+    return gulp.task('service:clean', cb => {
+        del(pathsToDel).then(() => {
+            cb();
+        });
     });
 };

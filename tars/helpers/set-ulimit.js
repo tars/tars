@@ -2,14 +2,16 @@
 
 /**
  * Set ulimit to tars.config.ulimit
+ * @return {Boolean}
  */
-module.exports = function () {
-    var limit = tars.config.ulimit;
-    var posix;
+module.exports = function setUlimit() {
+    const limit = tars.config.ulimit;
+    let posix;
 
     try {
         posix = require('posix');
     } catch (ex) {
+        return false;
     }
 
     if (posix) {
@@ -17,6 +19,8 @@ module.exports = function () {
             posix.setrlimit('nofile', { soft: limit });
             return true;
         } catch (ex) {
+            console.log('Error while ulimit setting');
+            return false;
         }
     }
     return false;
