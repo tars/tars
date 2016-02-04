@@ -10,7 +10,7 @@ const builtInJadeHelpers = {
      * @param  {String} options.className   Classname for svg element
      * @return {String}                     Ready template for svg-symbols including
      */
-    icon(options) {
+    Icon(options) {
         const iconName = options.iconName;
         let pathToSymbolsSprite = '';
 

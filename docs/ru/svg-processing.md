@@ -22,12 +22,12 @@
 
 Подключение в handlebars:
 ```handlebars
-{{icon iconName='%iconName%' className='%customClass%'}}
+{{Icon iconName='%iconName%' className='%customClass%'}}
 ```
 
 Подключение в jade:
 ```jade
-!= jadeHelpers.icon.call(locals, {iconName: '%iconName%', className: '%customClass%'})
+!= jadeHelpers.Icon.call(locals, {iconName: '%iconName%', className: '%customClass%'})
 ```
 
 При подключении иконки вы можете задать два параметра: имя иконки (%iconName%), которая подключается (без расширения) и имя класса (%customClass%). Если класс не будет указан, то класс сгенерируется автоматом по шаблону icon__%iconName%. Иконки можно подключать как в шаблонах страниц, так и в модулях. Данные хелперы сгенерируют следующий код:

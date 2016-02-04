@@ -22,12 +22,12 @@ Symbols are created to use it in tempaltes (html|jade|hbs). In css you can chang
 
 Using in handlebars:
 ```handlebars
-{{icon iconName='%iconName%' className='%customClass%'}}
+{{Icon iconName='%iconName%' className='%customClass%'}}
 ```
 
 Using in jade:
 ```jade
-!= jadeHelpers.icon.call(locals, {iconName: '%iconName%', className: '%customClass%'})
+!= jadeHelpers.Icon.call(locals, {iconName: '%iconName%', className: '%customClass%'})
 ```
 
 You can set two properites: icon name (%iconName%), which is included (without extension) and classname for that icon (%customClass%). TARS generate class automatically by using template icon__%iconName% in case you have not passed it to helper. You can use that helper in pages and modules too. That helper will generate html like:

@@ -4,6 +4,11 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.6.2
+
+* Icon helper has been renamed from icon to Icon
+* is helper has been updated. != and !== operation has been added.
+
 ## Version 1.6.1
 
 * Fix tasks for content images copy process.

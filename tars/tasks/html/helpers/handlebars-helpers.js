@@ -98,6 +98,24 @@ const builtInHandlebarsHelpers = {
                     }
                     break;
 
+                // a != b checking
+                case '!=':
+                    if (a != b) {
+                        return options.fn(this);
+                    } else {
+                        return options.inverse(this);
+                    }
+                    break;
+
+                // a !== b checking
+                case '!==':
+                    if (a !== b) {
+                        return options.fn(this);
+                    } else {
+                        return options.inverse(this);
+                    }
+                    break;
+
                 // Action, if operation is unknown
                 default:
                     throw new Error(
@@ -107,7 +125,9 @@ const builtInHandlebarsHelpers = {
                         '">",\n' +
                         '">=",\n' +
                         '"<",\n' +
-                        '"<=",\n'
+                        '"<=",\n' +
+                        '"!=",\n' +
+                        '"!==",\n'
                     );
             }
         } else {
@@ -175,7 +195,7 @@ const builtInHandlebarsHelpers = {
      * @param  {String} options.className   Classname for svg element
      * @return {String}                     Compiled Handlebars template
      */
-    icon(options) {
+    Icon(options) {
         const iconName = options.hash.iconName;
         let pathToSymbolsSprite = '';
 

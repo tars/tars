@@ -33,6 +33,8 @@ It is used to extend the standard if. Built if is able to check only a value exi
 * `>=` Greater or equal.
 * `<` Strictly less.
 * `<=` Less or equal.
+* `!=` Not strict inequality.
+* `!==` Strict inequality.
 
 test is the variable passed to the template.
 
