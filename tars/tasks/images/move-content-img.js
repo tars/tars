@@ -6,7 +6,7 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 
-const contentImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
+const contentImagesFolder = tars.config.fs.staticFolderName + '/'
                             + tars.config.fs.imagesFolderName + '/content';
 
 /**
@@ -14,14 +14,14 @@ const contentImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
  */
 module.exports = () => {
     return gulp.task('images:move-content-img', () => {
-        return gulp.src(contentImagesPath + '/**/*.*')
+        return gulp.src('./markup/' + contentImagesFolder + '/**/*.*')
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving content images.', error);
                 }
             }))
             .pipe(cache('move-content-img'))
-            .pipe(gulp.dest(contentImagesPath))
+            .pipe(gulp.dest('./dev/' + contentImagesFolder))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Content images\'ve been moved')

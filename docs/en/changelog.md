@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.6.1
+
+* Fix tasks for content images copy process.
+
 ## Version 1.6.0
 
 * Sourcemaps are created only in dev-mode.

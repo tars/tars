@@ -6,7 +6,7 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 
-const generalImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
+const generalImagesFolder = tars.config.fs.staticFolderName + '/'
                             + tars.config.fs.imagesFolderName + '/general';
 
 /**
@@ -14,14 +14,14 @@ const generalImagesPath = './markup/' + tars.config.fs.staticFolderName + '/'
  */
 module.exports = () => {
     return gulp.task('images:move-general-img', () => {
-        return gulp.src(generalImagesPath + '/**/*.*')
+        return gulp.src('./markup/' + generalImagesFolder + '/**/*.*')
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving general images.', error);
                 }
             }))
             .pipe(cache('move-general-img'))
-            .pipe(gulp.dest(generalImagesPath))
+            .pipe(gulp.dest('./dev/' + generalImagesFolder))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('General images\'ve been moved')
