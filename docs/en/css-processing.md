@@ -34,7 +34,7 @@ If you want to include the files from the static directory (pictures), you must 
 }
 ```
 
-**%=staticPrefixForCss=% prefix works, but this prefix is depricated! Use just %=static=% or \_\_static\_\_!**
+**%=staticPrefixForCss=% prefix works, but this prefix is depricated! Use just %=static=% or \_\_static\_\_! This prefixes work in TARS from version 1.6.0**
 
 There are a couple of points on the organization scss|less|styl-files (scss is selected):
 

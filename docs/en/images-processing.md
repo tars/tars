@@ -81,7 +81,7 @@ If you would like to insert images in html, you have to use placeholder [%=stati
 ```
 
 
-**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but these prefixes are depricated! Use just %=static=% or \_\_static\_\_!**
+**%=staticPrefixForCss=% and %=staticPrefix=% prefix works, but these prefixes are depricated! Use just %=static=% or \_\_static\_\_! New prefixes work in TARS from version 1.6.0**
 
 Nested directories are supported.
 

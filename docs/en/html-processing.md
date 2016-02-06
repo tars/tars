@@ -20,7 +20,7 @@ If you need to include files from the static directory (images, js), you must us
 
 To include image in css you need to use the same placeholder – %=static=% \_\_static\_\_. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
 
-**%=staticPrefixForCss=% and %=staticPrefix=% prefixes work, but this prefixes are depricated! Use just %=static=%!**
+**%=staticPrefixForCss=% and %=staticPrefix=% prefixes work, but this prefixes are depricated! Use just %=static=%! New prefixes work in TARS from version 1.6.0**
 
 Very important feature is the using of different data types in one template. For example, we have a head module, which has all that you should put in the head tag (different meta, titles, etc.). Suppose that every page should have its own title. Make copies of the same module, which differ only in one line is not the best practice. It would be logical to separate data from view.
 
