@@ -14,7 +14,12 @@ const pluginsImagesFolder = tars.config.fs.staticFolderName + '/'
  */
 module.exports = () => {
     return gulp.task('images:move-plugins-img', () => {
-        return gulp.src('./markup/' + pluginsImagesFolder + '/**/*.*')
+        return gulp.src(
+                [
+                    './markup/' + pluginsImagesFolder + '/**/*.*',
+                    '!./markup/' + pluginsImagesFolder + '/**/*.tmp'
+                ]
+            )
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving plugin\'s imgs.', error);

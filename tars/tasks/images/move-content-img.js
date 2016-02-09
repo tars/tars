@@ -14,7 +14,12 @@ const contentImagesFolder = tars.config.fs.staticFolderName + '/'
  */
 module.exports = () => {
     return gulp.task('images:move-content-img', () => {
-        return gulp.src('./markup/' + contentImagesFolder + '/**/*.*')
+        return gulp.src(
+                [
+                    './markup/' + contentImagesFolder + '/**/*.*',
+                    '!./markup/' + contentImagesFolder + '/**/*.tmp'
+                ]
+            )
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving content images.', error);
