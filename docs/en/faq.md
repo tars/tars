@@ -4,7 +4,7 @@ English description | <a href="../ru/faq.md">Описание на русско�
 
 # FAQ
 
-For all questions I am waiting for you in the [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge).
+For all questions I am waiting for you in the [gitter](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge).
 
 1. **I have OS X (Ubuntu, Linux Mint …).Not all project files are get in the finished build.**
 You have to increase the [ulimit](options.md#ulimit) in tars-config.js

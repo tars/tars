@@ -4,7 +4,7 @@
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Сборщик html-верстки, основанный на [gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
 Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
@@ -122,9 +122,6 @@ gulp init
 * `--ie9` – включить в сборку стили для ie9.
 * `--ie` – включить в сборку стили для ie9 и ie8.
 
-`gulp update-deps` – обновление всех зависимостей сборщика до последних стабильных. Может потребоваться какое-то время на выполнение данной команды. Желательно выполнять раз в неделю. Команда скопирует текущий package.json, добавит к его имени подчеркивание, скачает новый package.json с репозитория и выполнит npm install. Таким образом, если у вас что-то сломалось с новыми пакетами, то всегда можно вернуться на прошлую версию, просто вернув прошлый package.json
-Также вы можете ознакомиться с [руководством по обновлению](/docs/ru/update-guide.md).
-
 
 ## Документация
 
@@ -148,6 +145,6 @@ gulp init
 
 Все последние изменения доступны по ссылке: [История изменений](/docs/ru/changelog.md).
 
-По всем вопросам можно писать в [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) или на почту [tars.builder@gmail.com](mailto:tars.builder@gmail.com)
+По всем вопросам можно писать в [gitter](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) или на почту [tars.builder@gmail.com](mailto:tars.builder@gmail.com)
 
-Баги и фича-реквесты сюда: [issues](https://github.com/2gis/tars/issues/new).
+Баги и фича-реквесты сюда: [issues](https://github.com/tars/tars/issues/new).

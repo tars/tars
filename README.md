@@ -4,7 +4,7 @@ English description | <a href="README_RU.md">Описание на русско�
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
-[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
 TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work.
@@ -119,8 +119,6 @@ Keys are available in any mode of assembly:
 * `--ie9` – to include in the build styles for ie9.
 * `--ie` – to include in the build styles for ie8 and ie9.
 
-`gulp update-deps` – updates of all assembler dependences to the latest stable. It may take some time to execute this command. It is desirable to execute once a week. Command will copy the current package.json, add underline to its name, download a new package.json from the repository and execute npm install. So, if something was broken with the new package, you can always return to the last version, just rename last package.json. Also you can read a [upgrade guide](/docs/en/update-guide.md).
-
 
 ## Documentation
 
@@ -143,6 +141,6 @@ It is important! All examples in documentation use the default settings.
 
 All recent changes are available at the link: [changelog](/docs/en/changelog.md).
 
-If you have a question you can write in [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [tars.builder@gmail.com](mailto:tars.builder@gmail.com)
+If you have a question you can write in [gitter](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) or mail [tars.builder@gmail.com](mailto:tars.builder@gmail.com)
 
-Bugs and feature-request here: [issues](https://github.com/2gis/tars/issues/new).
+Bugs and feature-request here: [issues](https://github.com/tars/tars/issues/new).

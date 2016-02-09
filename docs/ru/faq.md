@@ -4,7 +4,7 @@
 
 # FAQ
 
-По всем вопросам жду вас в [gitter](https://gitter.im/2gis/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge).
+По всем вопросам жду вас в [gitter](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge).
 
 1. **У меня OS X (Ubuntu, Linux Mint ...) В готовую сборку попадают не все файлы проекта.**
 Нужно увеличить [ulimit](options.md#ulimit) в tars-config.js
