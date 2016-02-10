@@ -57,7 +57,7 @@ SVG-symbols loading from separate file is supported in all modern browsers nativ
 
 In the third one you have to implement your own workflow of svg-symbols injecting to html. You have to write some code to load svg-symbols file and inject it into the page-code. There are two useful articles, which describe the best ways to implement it: [css-tricks](https://css-tricks.com/ajaxing-svg-sprite/) and [osvaldas.info](http://osvaldas.info/caching-svg-sprite-in-localstorage). The last is the most cool.
 
-More info about symbols configuration you can get from [options docs](options#svg).
+More info about symbols configuration you can get from [options docs](options.md#svg).
 
 ## SVG-sprites
 
