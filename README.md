@@ -6,7 +6,7 @@ English description | <a href="README_RU.md">Описание на русско�
 
 [![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-TARS is a markup builder, which is based on [gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
+TARS is a markup builder, which is based on [Gulp.js](http://gulpjs.com/). It facilitates and accelerates process of html-markup of any complexity.
 TARS will be suitable for teams and individual developer. It solves the most routine cases associated with a markup and it brings you more pleasure from work.
 
 TARS is the framework for gulp, including a set of gulp-tasks and it allows the ability to easily expand (creating new tasks) and modification of existing tasks,  provides comfortable architecture for storage tasks and watchers in the project. 
@@ -25,7 +25,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 * [Jade](http://jade-lang.com/) or [Handlebars](http://handlebarsjs.com/) as html-templater. You can also use a regular html. Read more [in docs](/docs/en/html-processing.md).
 * Using json (js-object actually, which can be described in json) to transfer data in templates (optional, but it is  very cool thing that will let you to rid of copypast). Read more [in docs](/docs/en/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
 * You can use ES6 (and some experimental features from ES7) right now. [More info](/docs/en/js-processing.md).
-* [SCSS, SASS](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. Sourcemaps is included. You can use .scss and .sass extension then scss is selected as preprocessor. You can use .scss and .sass files together. Read more [in docs](/docs/en/css-processing.md). [PostCSS](https://github.com/postcss/postcss) with [autoprefixer](https://github.com/postcss/autoprefixer) is supported by default and it is really easy [to use additional plugins for PostCSS](/docs/en/options.md#postcss).
+* [SCSS (SASS)](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. Sourcemaps is included. You can use .scss and .sass extension then scss is selected as preprocessor. You can use .scss and .sass files together. Read more [in docs](/docs/en/css-processing.md). [PostCSS](https://github.com/postcss/postcss) with [autoprefixer](https://github.com/postcss/autoprefixer) is supported by default and it is really easy [to use additional plugins for PostCSS](/docs/en/options.md#postcss).
 * No external libraries and plugins (except [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). Yes, this is a feature because you can choose library for using. Sourcemaps for JavaScript is included.
 * [Chokidar](https://github.com/paulmillr/chokidar) module is used for watching files
 * Sharing of markup from your local computer to an external web, optional. And of course it has a livereload in browser (and not just locally) + GUI to control panel for devices, on which markup was shearing.
@@ -94,6 +94,9 @@ Everything is ready, make it work! :)
 
 
 ## Basic commands
+
+**Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably
+ way to work with TARS. It is more comfortable, fast to work with TARS-CLI. All commands are available and [described in TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md), so use only TARS-CLI for working with your project. TARS used Gulp to start tasks, when CLI was not created.**
 
 `gulp init` — initializes project with the specified settings in the tars-config. Creates a file structure.
 
