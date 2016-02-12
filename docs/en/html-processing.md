@@ -180,13 +180,13 @@ module: {
 }
 ```
 
-Handlebars known as a very simple template, logicless. But for using the handlebars in the static markup in such kind not very comfortable. So, different helpers have been added that extend the capabilities of handlebars.<br/>
+Handlebars known as a very simple template. But it is not comfortable to use Handlebars in markup process without frameworks or something like that. So, different helpers have been added that expand Handlebars.<br/>
 Helpers description can be found [here](handlebars-helpers.md).
 
 
-## Working with modules and data in jade
+## Working with modules and data in Jade
 
-When using jade, each module is a mixin, which is included to a file with the page. Mixin in the jade can receive data.
+When using Jade, each module is a mixin, which is included to a file with the page. Mixin in Jade can receive data.
 
 Including module on the page:
 
@@ -209,16 +209,16 @@ include ../modules/head/head
 +head(head.defaults)
 ```
 
-Inside the module data is displayed by the jade (for example, the head module):
+Inside the module data is displayed by Jade (for example, the head module):
 
 ```jade
 mixin head(data)
    <title>#{data.title}</title>
 ```
 
-You can use any features that are available in jade. You can include modules with any nesting of child-modules and with any data by using inlude and '+'. And you can use functions in data.js like in examples for handlebars.
+You can use any features that are available in Jade. You can include modules with any nesting of child-modules and with any data by using inlude and '+'. And you can use functions in data.js like in examples for Handlebars.
 
-There is one built-in helper for Jade in TARS — icon. This helper genereate template for svg-symbol include. You can add your own helpers to /tars/user-tasks/html/helpers/jade-helpers. There is an example of user-helper. You can use that helpers in template like:
+There is one built-in helper for Jade in TARS — Icon. This helper genereate template for svg-symbol include. You can add your own helpers to /tars/user-tasks/html/helpers/jade-helpers. There is an example of user-helper. You can use that helpers in template like:
 
 ```jade
 = jadeHelpers.helperName(params)
