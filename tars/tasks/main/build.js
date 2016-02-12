@@ -12,7 +12,7 @@ module.exports = () => {
         runSequence(
             'main:build-dev',
             [
-                'html:modify-html', 'images:minify-raster-img'
+                'html:modify-html', 'images:minify-images'
             ],
             'main:create-build',
             [

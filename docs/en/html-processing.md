@@ -4,21 +4,19 @@ English description | <a href="../ru/html-processing.md">Описание на �
 
 # HTML
 
-As a template for html can be used [jade](http://jade-lang.com) or [handlebars](http://handlebarsjs.com). You could choose template in [tars-config.js](options.md#templater).
+As a template for HTML can be used [Jade](http://jade-lang.com) or [Handlebars](http://handlebarsjs.com). You can choose template in [tars-config.js](options.md#templater) or [during initialization of TARS via TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-init).
 
-You can use all features of jade and handlebars. If you are used to the regular html, choose the handlebars and write the html as before.
+You can use all features of Jade and Handlebars. If you are used to the regular HTML, choose the handlebars and write the HTML as before.
 
 If you do not want to compile a particular page, you can simply add the '_' to the begining of the page name, and it will not be compiled.
 
-The page with links to all pages of project will be generated in dev-mode. This page will be opened in browser then livereload is used. This page has name __index.html
-
-If you need to include files from the static directory (images, js), you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix). Then including of an image will be as in follow example (in this example handlebars is used):
+If you need to include files from the static directory (images, js-files), you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix). Then including of an image will be as in follow example (in this example Handlebars is used):
 
 ```html
 <img src="%=static=%img/content/example.jpg"/>
 ```
 
-To include image in css you need to use the same placeholder – %=static=% \_\_static\_\_. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
+To include image in CSS you need to use the same placeholder – %=static=% \_\_static\_\_. This placeholder will be replaced with string from [staticprefixforcss](options.md#staticprefixforcss) from config.
 
 **%=staticPrefixForCss=% and %=staticPrefix=% prefixes work, but this prefixes are depricated! Use just %=static=%! New prefixes work in TARS from version 1.6.0**
 
@@ -35,7 +33,7 @@ moduleName: {
 }
 ```
 
-In case of syntax errors inf data-files from your IDE  you can use another syntax, just simple JavaScript-object:
+In case of syntax errors in data-files from your IDE  you can use another syntax, just simple JavaScript-object:
 
 ```javascript
 data = {
@@ -62,10 +60,9 @@ __pages: [
 
 You can use this array to render a list of links to all pages of project.
 
-Connecting modules with different data looks differently in jade and handlebars.
+Connecting modules with different data looks differently in Jade and Handlebars.
 
-
-##Working with modules and data handlebars
+##Working with modules and data Handlebars
 
 Including module on the page:
 

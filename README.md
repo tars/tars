@@ -89,6 +89,9 @@ After installing of all dependencies you need to open tars-config (detailed desc
 gulp init
 ```
 
+**Attention, [TARS-CLI](https://github.com/tars/tars-cli) is the preferably 
+way to work with TARS. [Init command is available in TARS-CLI too](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-init).**
+
 This command will create the basic file structure, download tasks for selected templater and css-preprocessor. 
 Everything is ready, make it work! :)
 

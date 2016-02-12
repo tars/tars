@@ -4,6 +4,12 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.6.3
+
+* Bug with images minification has been fixed.
+* Taks minify-raster-img has been renamed to minify-images. SVG-images will be minified in that task.
+* Docs fixup.
+
 ## Version 1.6.2
 
 * Icon helper has been renamed from icon to Icon

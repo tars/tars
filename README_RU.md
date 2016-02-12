@@ -91,6 +91,8 @@ npm install
 gulp init
 ```
 
+**Обращаем ваше внимание, что предпочтительно использовать [TARS-CLI](https://github.com/tars/tars-cli). [Команда инициализации доступна в TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/ru/commands.md#tars-init).**
+
 Данная команда создаст базовую файловую структуру, подтянет таски для выбранных вами шаблонизатора и css-препроцессора.
 
 Все готово, можно колбасить :)
