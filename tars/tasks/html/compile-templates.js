@@ -184,9 +184,9 @@ module.exports = () => {
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))
-            .pipe(browserSync.reload({ stream: true }))
-            .pipe(
+            .on('end', function(){
                 notifier.success('Templates\'ve been compiled')
-            );
+                browserSync.reload();
+            });
     });
 };
