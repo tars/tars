@@ -109,20 +109,53 @@ module.exports = () => {
                 }
 
                 if (params.type === 'templater') {
-                    downloadedPartsPath = './.tmpTemplater/tars-' + tars.templater.name;
+                    ncp(
+                        './.tmpTemplater/tars-' + tars.templater.name + '-' + params.version + '/markup',
+                        './markup',
+                        error => {
+                            if (error) {
+                                reject(error);
+                                return;
+                            }
+                            resolve();
+                        }
+                    );
                 } else {
-                    downloadedPartsPath = './.tmpPreproc/tars-' + tars.cssPreproc.name;
+                    const downloadedPreprocPartsPath = `./.tmpPreproc/tars-${tars.cssPreproc.name}-${params.version}/markup`;
+                    Promise
+                        .all(
+                            [
+                                new Promise((resolve, reject) => {
+                                    ncp(
+                                        `${downloadedPreprocPartsPath}/static`,
+                                        `./markup/${tars.config.fs.staticFolderName}`,
+                                        error => {
+                                            if (error) {
+                                                reject(error);
+                                                return;
+                                            }
+                                            resolve();
+                                        }
+                                    );
+                                }),
+                                new Promise((resolve, reject) => {
+                                    ncp(
+                                        `${downloadedPreprocPartsPath}/modules`,
+                                        `./markup/modules`,
+                                        error => {
+                                            if (error) {
+                                                reject(error);
+                                                return;
+                                            }
+                                            resolve();
+                                        }
+                                    );
+                                })
+                            ]
+                        )
+                        .then(() => resolve())
+                        .catch(error => reject(error))
                 }
-
-                downloadedPartsPath += '-' + params.version + '/markup';
-
-                ncp(downloadedPartsPath, './markup', error => {
-                    if (error) {
-                        reject(error);
-                        return;
-                    }
-                    resolve();
-                });
             });
         }
 
