@@ -105,7 +105,7 @@ if (
 
                 try {
                     return fs.readFileSync('./dev/temp/svg-symbols' + tars.options.build.hash + '.svg', 'utf8');
-                } catch(error) {
+                } catch (error) {
                     return '';
                 }
 
