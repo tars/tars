@@ -187,7 +187,7 @@ module.exports = () => {
             }))
             .pipe(gulp.dest('./dev/'))
             .on('end', () => {
-                if(!compileError) {
+                if (!compileError) {
                     browserSync.reload();
                     notifier.success('Templates\'ve been compiled');
                 }
