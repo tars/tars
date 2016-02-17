@@ -146,6 +146,7 @@ module.exports = () => {
     return gulp.task('html:compile-templates', () => {
         let modulesData;
         let error;
+        let compileError;
 
         try {
             modulesData = concatModulesData();
@@ -160,6 +161,7 @@ module.exports = () => {
                 errorHandler(pipeError) {
                     notifier.error('An error occurred while compiling to html.', pipeError);
                     this.emit('end');
+                    compileError = true;
                 }
             }))
             .pipe(
@@ -184,9 +186,11 @@ module.exports = () => {
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))
-            .pipe(browserSync.reload({ stream: true }))
-            .pipe(
-                notifier.success('Templates\'ve been compiled')
-            );
+            .on('end', () => {
+                if (!compileError) {
+                    browserSync.reload();
+                    notifier.success('Templates\'ve been compiled');
+                }
+            });
     });
 };
