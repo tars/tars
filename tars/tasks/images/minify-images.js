@@ -5,7 +5,7 @@ const changed = tars.packages.changed;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-const imagesFolderPath = './dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+const imagesFolderPath = 'dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
 
 /**
  * Minify png and jpg images
@@ -18,7 +18,7 @@ module.exports = () => {
                     `!${imagesFolderPath}/minified-svg/*.svg`,
                     `!${imagesFolderPath}/**/svg-symbols${tars.options.build.hash}.svg`
                 ],
-                { base: process.cwd() }
+                { base: process.cwd() + '/' }
             )
             .pipe(plumber({
                 errorHandler(error) {
@@ -37,7 +37,7 @@ module.exports = () => {
                     use: []
                 }
             ))
-            .pipe(gulp.dest(imagesFolderPath + '/'))
+            .pipe(gulp.dest('./'))
             .pipe(
                 notifier.success('Rastered images\'ve been minified')
             );
