@@ -16,27 +16,13 @@ module.exports = () => {
         ).on('all', (event, watchedPath) => {
             tars.helpers.watcherLog(event, watchedPath);
 
-            switch (tars.config.svg.symbolsConfig.loadingType) {
-                case 'separate-file':
-                case 'separate-file-with-link':
-                    runSequence(
-                        'images:minify-svg',
-                        'images:make-symbols-sprite',
-                        'html:concat-modules-data',
-                        () => {}
-                    );
-                    break;
-                case 'inject':
-                default:
-                    runSequence(
-                        'images:minify-svg',
-                        'images:make-symbols-sprite',
-                        'html:concat-modules-data',
-                        'html:compile-templates',
-                        () => {}
-                    );
-                    break;
-            }
+            runSequence(
+                'images:minify-svg',
+                'images:make-symbols-sprite',
+                'html:concat-modules-data',
+                'html:compile-templates',
+                () => {}
+            );
         });
     }
 
