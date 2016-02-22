@@ -24,7 +24,7 @@ More details can be found [here](http://stackoverflow.com/questions/21971331/wha
 
 Suppose we have a sprite of PNG-images. These pictures have a fixed size. If we will blurry this picture on the number of pixels in a 3 times greater than the size of the image, the image will be blurry.
 
-To get rid of this problem, you can use an image is in 3 times larger for such display, and the size of the image in css you must set based on the size of the original image (the property background-size).
+To get rid of this problem, you can use an image is in 3 times larger for such display, and the size of the image in CSS you must set based on the size of the original image (the property background-size).
 
 At the moment there are screens with dppx from 1 to 4 (and will soon be higher). To prepare sprites for the 4 screen sizes is a lot of work.
 
@@ -46,7 +46,7 @@ Images that can not be rendered in SVG is added up to 'static/img/sprite/96dpi|1
 
 Used screens is configured in the configuration of the project.
 
-Including images to css-code is produced by a mixins (example on scss, mixins name and other input parameters for the different css-preprocessors are the same):
+Including images to CSS-code is produced by a mixins (example on SCSS, mixins name and other input parameters for the different CSS-preprocessors are the same):
 
 ```scss
 @include bg($png-image-name);         // Sprite with png-images including
@@ -54,13 +54,13 @@ Including images to css-code is produced by a mixins (example on scss, mixins na
 
 Attention, $png-image-name is a **var**, that has the same name as the icon, which you'd like to use (without extension).
 
-`bg` mixin will include background into the css, picture size, background-size and sets positioning inside png-sprite. It is not necessary to add nothing more, mixin will set media expression for screens with different dppx.
+`bg` mixin will include background into the CSS, picture size, background-size and sets positioning inside png-sprite. It is not necessary to add nothing more, mixin will set media expression for screens with different dppx.
 
 ## Separate images
 
 Working with separate images is very simple. Separate images are divided into several categories. Depending on the category images are placed in different locations.
 
-Builder supports images of any type, but only SVG, PNG, JPG and GIF will be exposed to minification. !All described below is only a recommendation, you can organize the images so as you wish!
+Builder supports images of any type, but only SVG, PNG, JPG will be exposed to minification. !All described below is only a recommendation, you can organize the images so as you wish!
 
 ### Images for module
 
