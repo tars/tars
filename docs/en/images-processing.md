@@ -4,13 +4,13 @@ English description | <a href="../ru/images-processing.md">Описание на
 
 # Images
 
-All work with images in TARS can be divided into two parts: "Sprites" and "Individual images."
+All work with images in TARS can be divided into two parts: "Sprites" and "Separate images."
 
 ## Sprites
 
 TARS supports two formats for a sprite image: PNG, and SVG.
 
-**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](./svg-processing.md)**
+**TARS supports two workflows of working with SVG. You can get more info from [docs about working with SVG](./svg-processing.md)**
 
 The general approach is described in the [presentation](http://www.slideshare.net/codefest/codefest-2014-2) of web developer [Timofey Chaptykov](https://github.com/Chaptykov).  Approach is briefly described below. The advantage of this approach is disclosed in the presentation and will not be explained below.
 
@@ -38,15 +38,15 @@ Unfortunately SVG has several disadvantages:
 
 Total we have two approaches: SVG for all where we can use it. For the rest prepare of PNG-images for those screens that you are going to support. For IE8 will simply rasterize SVG-image.
 
-**TARS supports two workflows ot working with SVG. You can get more info fom [docs about working with SVG](svg-processing.md)**
+**TARS supports two workflows of working with SVG. You can get more info from [docs about working with SVG](svg-processing.md)**
 
 ## Sprites including
 
 Images that can not be rendered in SVG is added up to 'static/img/sprite/96dpi|192dpi|288dpi|384dpi'. 96dpi folder is for images to screens with dppx = 1, 192dpi folder is for images twice as much of the original, with the names of the originals. These images will be displayed to the screens with dppx = 2. And it's similar for other dppx.
 
-Used screens is configured in the configuration of the project.
+Used screens is configured [in the tars-config](options.md#useimagesfordisplaywithdpi).
 
-Including images to CSS-code is produced by a mixins (example on SCSS, mixins name and other input parameters for the different CSS-preprocessors are the same):
+Including icon from raster-sprite to CSS-code is produced by a mixins (example on SCSS, mixins name and other input parameters for the different CSS-preprocessors are the same):
 
 ```scss
 @include bg($png-image-name);         // Sprite with png-images including
@@ -64,7 +64,7 @@ Builder supports images of any type, but only SVG, PNG, JPG will be exposed to m
 
 ### Images for module
 
-They are located in the assets folder inside the module. To include image using the following template (for connecting images to html you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefixforcss)):
+They are located in the assets folder inside the module. To include image using the following template (for connecting images to HTML you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefixforcss)):
 
 ```css
 .moduleName {
@@ -72,7 +72,7 @@ They are located in the assets folder inside the module. To include image using 
 }
 ```
 
-If you would like to insert images in html, you have to use placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix):
+If you would like to insert images in HTML, you have to use placeholder [%=static=% or \_\_static\_\_](options.md#staticprefix):
 
 ```handlebars
 <div class="news__item">
@@ -87,9 +87,9 @@ Nested directories are supported.
 
 ### Images for content
 
-They are on the path (the path by default): 'static/img/content/'. In this folder you should put images that you will use in the content area on the site, for example, on news page. Nested directories it supported.
+They are on the path (the path by default): 'static/img/content/'. In this folder you should put images that you will use in the content area on the site, for example, on news page. Nested directories are supported.
 
-Including images inside html:
+Including images inside HTML:
 
 ```handlebars
 <div class="news__item">
@@ -101,8 +101,8 @@ Including images inside html:
 
 ### Images for plugins
 
-They are on the path (the path by default): 'static/img/plugins/'. In this folder you should put images that are used in different plugins. Nested directories it supported.
+They are on the path (the path by default): 'static/img/plugins/'. In this folder you should put images that are used in different plugins. Nested directories are supported.
 
 ### General images
 
-They are on the way (the path by default): 'static/img/general/'. In this folder you should put images that are used for the whole project, such as the general background of the site. Nested directories it supported.
+They are on the way (the path by default): 'static/img/general/'. In this folder you should put images that are used for the whole project, such as the general background of the site. Nested directories are supported.
