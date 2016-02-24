@@ -36,7 +36,7 @@ const watcherLog = tars.helpers.watcherLog;
 
 В chokidar.watch можно передать паттерн или массив паттернов путей до файлов, за которыми нужно следить.
 
-После паттернов передаются опции для chokidar. Если вам подходят опции по умолчанию, просто передайте вторым аргументов в chokidar.watch tars.options.watch. Если каки-либо свойства необходимо переопределить, используйте [Object.assign](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). Первым параметром assign принимает то, чем мы будем переопределять, а вторым — что.
+После паттернов передаются опции для chokidar. Если вам подходят опции по умолчанию, просто передайте вторым аргументом в chokidar.watch tars.options.watch. Если какие-либо свойства необходимо переопределить, используйте [Object.assign](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). Первым параметром assign принимает то, чем мы будем переопределять, а вторым — что будем переопределять.
 
 В опцию ignored можно передать паттерн или массив паттернов путей до файлов, которые нужно отфильтровать от слежки в рамках данного вотчера.
 

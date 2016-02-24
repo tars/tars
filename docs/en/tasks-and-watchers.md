@@ -14,7 +14,6 @@ In general, TARS works in developer-mode as follows:
 All built-in tasks are in the `tars/tasks` directory. They are divided into folders according to the task type. built-in watchers are in the `tars/watchers` directory. You can add your own tasks and watchers in `tars/user-tasks`/`tars/user-watchers`.
 
 When you add tasks or watchers it is recommended to use:
-
 * tars.config.fs.staticFolderName - for the name of the folder with statics;
 * tars.config.fs.imagesFolderName - for the name of the folder with images; 
 * tars.templater.ext - contains an extensions for files of the selected templater;

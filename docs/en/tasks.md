@@ -4,12 +4,11 @@ English description | <a href="../ru/tasks.md">Описание на русск�
 
 # Tasks
 
-Each task is a [commonJS-module](http://wiki.commonjs.org/wiki/Modules/1.1). All tasks are automatically included in gulpfile in the project root.
-Your own tasks you can create in the user-tasks directory. User-tasks will be included into gulpfile automatically too, but you have to write them into main-tasks, to use them. 
+Each task is a [commonJS-module](http://wiki.commonjs.org/wiki/Modules/1.1). All tasks are automatically included in gulpfile. You can create your own tasks in the user-tasks directory.
 
-By default, there are in gulpfile.js only links to main tasks. For example, build is a link to main:build. So, you can override any task in TARS really easy.
+By default, there are in gulpfile.js only links to main tasks. For example, build is a link to main:build. So, you can override any task in TARS quite easy.
 
-By default, there is already an example of task. Let us examine it in detail. Let's take a closer look. Generally, in TARS you can include any gulp-task.
+By default, there is already an example of task. Let's take a closer look. Generally, in TARS you can include any gulp-task.
 
 By default, each task requires a set of npm-modules and configs to work correctly:
 
@@ -19,7 +18,7 @@ const gutil = tars.packages.gutil;
 const notifier = tars.helpers.notifier;
 ```
 
-Also, if you want to use livereload for this task, you must to connect browser-sync module:
+Also, if you want to use livereload for this task, you must to connect browserSync module:
 
 ```javascript
 const browserSync = tars.packages.browserSync;

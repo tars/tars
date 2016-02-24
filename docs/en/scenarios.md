@@ -6,9 +6,11 @@ English description | <a href="../ru/scenarios.md">Описание на рус�
 
 There are 3 scenarios of using TARS. In fact, you can up with another scenarios. The main scenarios will be listed here:
 
-* development with a transfer to the back-end for to implement;
+* development with a transfer to the back-end for implementing;
 * development of a static site locally.
-* development of a static site that is immediately ready for deploy.
+* development of a static site that is ready to deploy.
+
+You can get more info from [FAQ](faq.md).
 
 In all scenarios, it is mean that the development mode (dev-task) will be available with any keys.
 
