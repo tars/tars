@@ -34,7 +34,7 @@ module.exports = function pagesAndDataFilesProcessing() {
                 parsedFileRelativePath.dir += '/';
             }
 
-            hrefArray.push('/' + parsedFileRelativePath.dir + parsedFileRelativePath.name + '.html');
+            hrefArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name + '.html');
             pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
         }
 
