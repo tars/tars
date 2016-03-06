@@ -19,6 +19,7 @@ const generateSourceMaps = tars.config.sourcemaps.js.active && tars.isDevMode;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 const jsPaths = [].concat.apply([], [
     '!./markup/modules/**/data/data.js',
+    '!./markup/modules/**/_*.js',
     './markup/' + staticFolderName + '/js/framework/**/*.js',
     './markup/' + staticFolderName + '/js/libraries/**/*.js',
     './markup/' + staticFolderName + '/js/plugins/**/*.js',
