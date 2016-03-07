@@ -16,21 +16,29 @@ module.exports = () => {
         tars.options.notify = true;
 
         if (tars.flags.lr || tars.flags.tunnel) {
-            browserSync({
-                server: {
-                    baseDir: browserSyncConfig.baseDir
-                },
-                logConnections: true,
-                debugInfo: true,
-                injectChanges: browserSyncConfig.injectChanges || false,
-                port: env.BROWSERSYNC_PORT || browserSyncConfig.port,
-                open: browserSyncConfig.open,
-                browser: browserSyncConfig.browser,
-                startPath: browserSyncConfig.startUrl,
-                notify: browserSyncConfig.useNotifyInBrowser,
-                tunnel: tars.flags.tunnel,
-                reloadOnRestart: true
-            });
+
+            if (browserSyncConfig.startUrl) {
+                browserSyncConfig.startPath = browserSyncConfig.startUrl;
+                browserSyncConfig.startUrl = undefined;
+            }
+
+            if (browserSyncConfig.useNotifyInBrowser) {
+                browserSyncConfig.notify = browserSyncConfig.useNotifyInBrowser;
+                browserSyncConfig.useNotifyInBrowser = undefined;
+            }
+
+            if (!browserSyncConfig.server) {
+                browserSyncConfig.server = {}
+            }
+
+            if (browserSyncConfig.baseDir) {
+                browserSyncConfig.server.baseDir = browserSyncConfig.baseDir;
+                browserSyncConfig.baseDir = undefined;
+            }
+
+            browserSyncConfig.port = env.BROWSERSYNC_PORT || browserSyncConfig.port;
+
+            browserSync(browserSyncConfig);
         }
 
         // require system and user's watchers

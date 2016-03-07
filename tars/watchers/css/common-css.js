@@ -8,7 +8,7 @@ const globsToWatch = [
 ];
 
 /**
- * Watcher for common scss(less or stylus)-files and scss(less or stylus)-files of plugins
+ * Watcher for all scss(less or stylus)-files
  */
 module.exports = () => {
     return tars.packages.chokidar.watch(
