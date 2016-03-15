@@ -34,6 +34,7 @@ global.tars = {
     require: tarsRequire,
     cli: (process.env.npmRoot ? true : false),
     root: __dirname,
+    packageInfo: require('../package.json'),
     config: require('../tars-config')
 };
 
@@ -50,6 +51,9 @@ tars.flags = gutil.env;
 
 // Dev mode flag
 tars.isDevMode = !tars.flags.release && !tars.flags.min;
+
+// Package name
+tars.packageInfo.name = !tars.packageInfo.name ? 'awesome_project': tars.packageInfo.name.replace(/[\s?+<>:*|"\\]/g, '_');
 
 /**
  * Log messages from TARS
