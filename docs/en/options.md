@@ -317,7 +317,7 @@ Type: `Boolean`
 
 Default: `true`
 
-Creating the archive of the build. The archive is created in the folder with the build.
+Creating the archive of the build. The archive is created in the folder with the build. If package.json given the project name, the archive will be called by that name, otherwise it will 'build' by default. There will also be added to date creation build (accurate to second).
 
 ### ulimit
 
