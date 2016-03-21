@@ -45,7 +45,9 @@ data = {
 };
 ```
 
-TARS supports both syntaxes by default. 
+TARS supports both syntaxes by default.
+
+In file data.js supported comments within the data object.
 
 There will be in full-data data from _template module and a list of all pages of current project in array like this:
 
