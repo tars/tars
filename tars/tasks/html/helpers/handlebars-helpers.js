@@ -15,17 +15,13 @@ const builtInHandlebarsHelpers = {
     repeat(n, options) {
         options = options || {};
 
-        let _data = {};
+        const count = n - 1;
         let content = '';
-        let count = n - 1;
 
-        if (options._data) {
-            _data = Handlebars.createFrame(options._data);
-        }
 
         for (let index = 0; index <= count; index++) {
-            _data = { index };
-            content += options.fn(this, { data: _data });
+            options.data.index = index;
+            content += options.fn(this, { data: options.data });
         }
         return new Handlebars.SafeString(content);
     },
