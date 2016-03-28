@@ -79,7 +79,7 @@ TARS поддерживает работу с двумя форматами из
 
 ```handlebars
 <div class="news__item">
-    <img src="%=static=%img/assets/moduleName/sample-image-name.png'" alt="">
+    <img src="%=static=%img/assets/moduleName/sample-image-name.png" alt="">
 </div>
 ```
 
