@@ -8,9 +8,8 @@ const runSequence = tars.packages.runSequence.use(gulp);
  * Build release version
  */
 module.exports = () => {
-    return gulp.task('main:build', () => {
+    return gulp.task('main:build', ['main:build-dev'], () => {
         runSequence(
-            'main:build-dev',
             [
                 'html:modify-html', 'images:minify-images'
             ],

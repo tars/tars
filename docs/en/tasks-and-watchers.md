@@ -33,6 +33,8 @@ tars/user-tasks/html/minify-html.js
 
 In that case only user's task will be included in gulpfile.js
 
+If you need to use your own task in exist task-chain, for example in dev-task, you have to override main:dev task by your custom version of it with chain, that will useful for you.
+
 Also, you can switch-off any task/watcher by adding `_` sign in the begginng of the name of that task/watcher.
 
 You can get more info in docs for [tasks](tasks.md) and [watchers](watchers.md).

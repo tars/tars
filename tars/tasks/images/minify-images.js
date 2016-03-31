@@ -13,11 +13,13 @@ const imagesFolderPath = 'dev/' + tars.config.fs.staticFolderName + '/' + tars.c
 module.exports = () => {
     return gulp.task('images:minify-images', () => {
         return gulp.src(
+                /* eslint-disable indent */
                 [
                     `${imagesFolderPath}/**/*.{png,jpg,svg}`,
                     `!${imagesFolderPath}/minified-svg/*.svg`,
                     `!${imagesFolderPath}/**/svg-symbols${tars.options.build.hash}.svg`
                 ],
+                /* eslint-enable indent */
                 { base: process.cwd() + '/' }
             )
             .pipe(plumber({

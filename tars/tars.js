@@ -13,6 +13,7 @@ function tarsRequire(packageName) {
 
     if (process.env.npmRoot) {
         try {
+            console.log('MODULE: ', packageName);
             return require(process.env.npmRoot + packageName);
         } catch (error) {
             console.log('\n\n');
@@ -142,6 +143,7 @@ tars.options = {
         version: useBuildVersioning ? buildVersion : ''
     },
     watch: {
+        isActive: false,
         ignored: '',
         persistent: true,
         ignoreInitial: true
@@ -200,7 +202,12 @@ switch (cssPreprocName) {
             mainExt: 'styl',
             preprocessor: () => tars.require('gulp-stylus')({
                 'resolve url': true,
-                'include css': true
+                'include css': true,
+                'include': [
+                    process.cwd(),
+                    process.cwd() + '/node_modules/',
+                    process.cwd() + '/bower_components/'
+                ]
             })
         };
         break;
@@ -210,7 +217,11 @@ switch (cssPreprocName) {
             ext: 'less',
             mainExt: 'less',
             preprocessor: () => tars.require('gulp-less')({
-                path: [process.cwd()]
+                paths: [
+                    process.cwd(),
+                    process.cwd() + '/node_modules/',
+                    process.cwd() + '/bower_components/'
+                ]
             })
         };
         break;
@@ -222,7 +233,11 @@ switch (cssPreprocName) {
             mainExt: 'scss',
             preprocessor: () => tars.require('gulp-sass')({
                 outputStyle: 'expanded',
-                includePaths: process.cwd()
+                includePaths: [
+                    process.cwd(),
+                    process.cwd() + '/node_modules/',
+                    process.cwd() + '/bower_components/'
+                ]
             })
         };
         break;

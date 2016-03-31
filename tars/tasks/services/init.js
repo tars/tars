@@ -97,14 +97,13 @@ module.exports = () => {
          * @return {Object}        Promise
          */
         function applyDownloadedParts(params) {
-            return new Promise((resolve, reject) => {
-                let downloadedPartsPath;
+            return new Promise((resolveDownloadedPartsApplying, rejectDownloadedPartsApplying) => {
 
                 if (
                     (params.type === 'templater' && tars.flags['exclude-html']) ||
                     (params.type === 'preprocessor' && tars.flags['exclude-css'])
                 ) {
-                    resolve();
+                    resolveDownloadedPartsApplying();
                     return;
                 }
 
@@ -114,47 +113,45 @@ module.exports = () => {
                         './markup',
                         error => {
                             if (error) {
-                                reject(error);
+                                rejectDownloadedPartsApplying(error);
                                 return;
                             }
-                            resolve();
+                            resolveDownloadedPartsApplying();
                         }
                     );
                 } else {
                     const downloadedPreprocPartsPath = `./.tmpPreproc/tars-${tars.cssPreproc.name}-${params.version}/markup`;
                     Promise
-                        .all(
-                            [
-                                new Promise((resolve, reject) => {
-                                    ncp(
-                                        `${downloadedPreprocPartsPath}/static`,
-                                        `./markup/${tars.config.fs.staticFolderName}`,
-                                        error => {
-                                            if (error) {
-                                                reject(error);
-                                                return;
-                                            }
-                                            resolve();
+                        .all([
+                            new Promise((resolve, reject) => {
+                                ncp(
+                                    `${downloadedPreprocPartsPath}/static`,
+                                    `./markup/${tars.config.fs.staticFolderName}`,
+                                    error => {
+                                        if (error) {
+                                            reject(error);
+                                            return;
                                         }
-                                    );
-                                }),
-                                new Promise((resolve, reject) => {
-                                    ncp(
-                                        `${downloadedPreprocPartsPath}/modules`,
-                                        `./markup/modules`,
-                                        error => {
-                                            if (error) {
-                                                reject(error);
-                                                return;
-                                            }
-                                            resolve();
+                                        resolve();
+                                    }
+                                );
+                            }),
+                            new Promise((resolve, reject) => {
+                                ncp(
+                                    `${downloadedPreprocPartsPath}/modules`,
+                                    './markup/modules',
+                                    error => {
+                                        if (error) {
+                                            reject(error);
+                                            return;
                                         }
-                                    );
-                                })
-                            ]
-                        )
-                        .then(() => resolve())
-                        .catch(error => reject(error))
+                                        resolve();
+                                    }
+                                );
+                            })
+                        ])
+                        .then(() => resolveDownloadedPartsApplying())
+                        .catch(error => rejectDownloadedPartsApplying(error));
                 }
             });
         }

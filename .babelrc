@@ -2,6 +2,9 @@
   "presets": ["es2015"],
   "ignore": [
     "**/babel_ignore_*.js",
-    "static/**/*.js"
+    "static/framework/*.js",
+    "static/libraries/*.js",
+    "static/plugins/*.js",
+    "static/separate-js/*.js"
   ]
 }

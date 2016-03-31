@@ -25,13 +25,17 @@ jsPathToWatch.push(
  * Watcher for js-files before and after modules js
  */
 module.exports = () => {
-    return tars.packages.chokidar.watch(
-        jsPathToWatch,
-        Object.assign(tars.options.watch, {
-            ignored: 'markup/modules/**/data/data.js'
-        })
-    ).on('all', (event, watchedPath) => {
-        watcherLog(event, watchedPath);
-        tars.packages.gulp.start('js:processing');
-    });
+    if (tars.config.js.type === 'concat') {
+        return tars.packages.chokidar.watch(
+            jsPathToWatch,
+            Object.assign(tars.options.watch, {
+                ignored: 'markup/modules/**/data/data.js'
+            })
+        ).on('all', (event, watchedPath) => {
+            watcherLog(event, watchedPath);
+            tars.packages.gulp.start('js:processing');
+        });
+    }
+
+    return false;
 };

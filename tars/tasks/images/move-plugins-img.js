@@ -15,10 +15,12 @@ const pluginsImagesFolder = tars.config.fs.staticFolderName + '/'
 module.exports = () => {
     return gulp.task('images:move-plugins-img', () => {
         return gulp.src(
+                /* eslint-disable indent */
                 [
                     './markup/' + pluginsImagesFolder + '/**/*.*',
                     '!./markup/' + pluginsImagesFolder + '/**/*.tmp'
                 ]
+                /* eslint-enable indent */
             )
             .pipe(plumber({
                 errorHandler(error) {

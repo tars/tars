@@ -189,7 +189,7 @@ module.exports = () => {
             .on('end', () => {
                 if (!compileError) {
                     browserSync.reload();
-                    notifier.success('Templates\'ve been compiled');
+                    notifier.success('Templates\'ve been compiled', { notStream: true });
                 }
             });
     });

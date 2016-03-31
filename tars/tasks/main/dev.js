@@ -19,21 +19,21 @@ module.exports = () => {
 
             if (browserSyncConfig.startUrl) {
                 browserSyncConfig.startPath = browserSyncConfig.startUrl;
-                browserSyncConfig.startUrl = undefined;
+                browserSyncConfig.startUrl = undefined; // eslint-disable-line no-undefined
             }
 
             if (browserSyncConfig.useNotifyInBrowser) {
                 browserSyncConfig.notify = browserSyncConfig.useNotifyInBrowser;
-                browserSyncConfig.useNotifyInBrowser = undefined;
+                browserSyncConfig.useNotifyInBrowser = undefined; // eslint-disable-line no-undefined
             }
 
             if (!browserSyncConfig.server) {
-                browserSyncConfig.server = {}
+                browserSyncConfig.server = {};
             }
 
             if (browserSyncConfig.baseDir) {
                 browserSyncConfig.server.baseDir = browserSyncConfig.baseDir;
-                browserSyncConfig.baseDir = undefined;
+                browserSyncConfig.baseDir = undefined; // eslint-disable-line no-undefined
             }
 
             browserSyncConfig.port = env.BROWSERSYNC_PORT || browserSyncConfig.port;

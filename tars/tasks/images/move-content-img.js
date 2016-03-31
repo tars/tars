@@ -15,10 +15,12 @@ const contentImagesFolder = tars.config.fs.staticFolderName + '/'
 module.exports = () => {
     return gulp.task('images:move-content-img', () => {
         return gulp.src(
+                /* eslint-disable indent */
                 [
                     './markup/' + contentImagesFolder + '/**/*.*',
                     '!./markup/' + contentImagesFolder + '/**/*.tmp'
                 ]
+                /* eslint-enable indent */
             )
             .pipe(plumber({
                 errorHandler(error) {

@@ -1,8 +1,13 @@
 'use strict';
 
 const notify = tars.packages.notify;
+const gutil = tars.packages.gutil;
 const notifyConfig = tars.config.notifyConfig;
 const path = require('path');
+
+function cutUselessLog(error) {
+    return error.message.replace(/(at\sParser\.pp\.raise[\s\S]*)/, '');
+}
 
 /**
  * Notify helper
@@ -14,32 +19,35 @@ module.exports = {
      * @param  {Error} error    Error object
      * @return {Pipe}
      */
-    error(message, error) {
-        let resultMessage;
+    error(message, error, params) {
+        message = message || 'Something is happen while working.';
+        error = error || new Error();
+        params = params || {};
 
-        if (message) {
-            resultMessage = '\n' + message + '\nLook in the console for details.\n\n';
-        } else {
-            resultMessage = '\nSomething is happen while working.\nLook in the console for details.\n\n';
-        }
+        const resultMessage = '\n' + message + '\nLook in the console for details.\n';
 
-        if (error) {
-            resultMessage += error;
-        } else {
-            error = new Error();
+        if (!(error instanceof(Error))) {
+            error = new Error(error);
         }
 
         if (process.env.NODE_ENV !== 'production' && !process.env.DISABLE_NOTIFIER) {
-            return notify.onError({
+            notify.onError({
                 sound: notifyConfig.sounds.onError,
                 title: notifyConfig.title,
                 message: resultMessage,
                 icon: path.resolve(tars.root + '/icons/tars_error.png'),
                 onLast: true
             })(error);
+        } else {
+            console.error(gutil.colors.red(message + '\n'));
         }
 
-        console.error(resultMessage);
+        if (error.message) {
+            console.log(gutil.colors.underline.red('Error details:\n'));
+            console.error(cutUselessLog(error));
+            console.log(gutil.colors.red('_______________\n'));
+        }
+
         return tars.packages.gutil.noop();
     },
 
@@ -49,22 +57,36 @@ module.exports = {
      * @param  {Boolean} onLast   Use notify only on last changed file
      * @return {Pipe}
      */
-    success(message, onLast) {
-        let resultMessage = message + '\n' || 'Task\'ve been finished\n';
-
-        resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
+    success(message, params) {
 
         if (notifyConfig.useNotify && tars.options.notify && process.env.NODE_ENV !== 'production') {
-            return notify({
-                onLast: onLast || true,
+            params = params || {};
+
+            const defaultConfig = {
                 sound: notifyConfig.sounds.onSuccess,
                 title: notifyConfig.title,
-                message: resultMessage,
                 templateOptions: {
                     date: tars.helpers.dateFormatter.getTimeOfModify()
                 },
                 icon: path.resolve(tars.root + '/icons/tars.png')
-            });
+            };
+            let resultMessage = message + '\n' || 'Task\'ve been finished\n';
+
+            resultMessage += notifyConfig.taskFinishedText + '<%= options.date %>';
+
+            if (params.notStream) {
+                return notify(defaultConfig).write(resultMessage);
+            }
+
+            return notify(
+                Object.assign(
+                    defaultConfig,
+                    {
+                        onLast: params.onLast || true,
+                        message: resultMessage
+                    }
+                )
+            );
         }
 
         return tars.packages.gutil.noop();

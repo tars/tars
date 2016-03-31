@@ -43,11 +43,26 @@ module.exports = {
         }
     },
 
-    /**
-     * Use linting and hinting of js-files
-     * @type {Boolean}
-     */
-    useJsLintAndHint: true,
+    js: {
+        // concat, modular
+        workflow: 'concat',
+        bundler: 'webpack',
+        /**
+         * Use linting of js-files
+         * @type {Boolean}
+         */
+        lint: true,
+        /**
+         * Use babel for ES6(ES7-ESNext) syntax support
+         * @type {Boolean}
+         */
+        useBabel: false,
+        /**
+         * Remove console.log and debugger from js code in release mode
+         * @type {Boolean}
+         */
+        removeConsoleLog: true
+    },
 
     /**
      * Path-strings to js-files, which have to be included before modules' js-files
@@ -73,12 +88,6 @@ module.exports = {
      * @type {Boolean}
      */
     lintJsCodeAfterModules: false,
-
-    /**
-     * Use babel for ES6(ES7-ESNext) syntax support
-     * @type {Boolean}
-     */
-    useBabel: false,
 
     /**
      * Write sourcemaps
@@ -198,12 +207,6 @@ module.exports = {
          */
         injectChanges: false
     },
-
-    /**
-     * Remove console.log and debugger from js code in release mode
-     * @type {Boolean}
-     */
-    removeConsoleLog: true,
 
     /**
      * Minify result html in build version
