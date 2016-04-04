@@ -9,8 +9,8 @@ const jsPathesToLint = [].concat.apply([], [
     './markup/modules/**/*.js',
     '!./markup/modules/**/_*.js',
     '!./markup/modules/**/data/data.js',
-    tars.config.lintJsCodeBeforeModules ? tars.config.jsPathsToConcatBeforeModulesJs : [],
-    tars.config.lintJsCodeAfterModules ? tars.config.jsPathsToConcatAfterModulesJs : []
+    tars.config.js.lintJsCodeBeforeModules ? tars.config.js.jsPathsToConcatBeforeModulesJs : [],
+    tars.config.js.lintJsCodeAfterModules ? tars.config.js.jsPathsToConcatAfterModulesJs : []
 ]);
 
 /**

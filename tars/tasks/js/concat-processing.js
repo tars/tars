@@ -15,16 +15,17 @@ const path = require('path');
 const staticFolderName = tars.config.fs.staticFolderName;
 const destFolder = './dev/' + staticFolderName + '/js';
 const compressJs = tars.flags.release || tars.flags.min;
-const generateSourceMaps = tars.config.sourcemaps.js.active && tars.isDevMode;
+const generateSourceMaps = tars.config.sourcemaps.js.active && tars.options.watch.isActive;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 const jsPaths = [].concat.apply([], [
     '!./markup/modules/**/data/data.js',
+    '!./markup/modules/**/_*.js',
     './markup/' + staticFolderName + '/js/framework/**/*.js',
     './markup/' + staticFolderName + '/js/libraries/**/*.js',
     './markup/' + staticFolderName + '/js/plugins/**/*.js',
-    tars.config.jsPathsToConcatBeforeModulesJs,
+    tars.config.js.jsPathsToConcatBeforeModulesJs,
     './markup/modules/*/*.js',
-    tars.config.jsPathsToConcatAfterModulesJs,
+    tars.config.js.jsPathsToConcatAfterModulesJs,
     '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
 ]);
 

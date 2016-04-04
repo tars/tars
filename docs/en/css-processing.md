@@ -26,6 +26,14 @@ Example of import using (scss):
 @import '../partials/_partial.sass';
 ```
 
+If you need to include files from node_modules or bower_components, you do not have to write full path to node_modules, you can use short syntax, TARS will expand path like this:
+
+```scss
+@import 'bootstrap/dist/bootstrap.scss';
+```
+
+In case if that import TARS will try to find bootstrap/dist/bootstrap.scss in node_modules and bower_components. This feature is implemented in TARS from version 1.7.0
+
 If you want to include the files from the static directory (pictures), you should use the placeholder %=static=%. Then including of the image as a background (in current example the picture will be taken from your main module) will be as follows (in this example scss is used):
 
 ```scss

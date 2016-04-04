@@ -25,7 +25,7 @@ module.exports = () => {
 
                 notifier.success('JavaScript has been processed', { notStream: true });
 
-                if (tars.flags.lr || tars.flags.tunnel) {
+                if (tars.useLiveReload) {
                     browserSync.reload();
                 }
             }

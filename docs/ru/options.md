@@ -88,9 +88,9 @@ Default: `inject`
 Устанавливает способ подключения svg-symbols на странице.
 
 Поддерживаются значения:
-* инжект в тело HTML — `inject`;
-* хранение в отдельном файле — `separate-file`;
-* хранение в отдельном файле, при этом каждая иконка подключается из этого файла — `separate-file-with-link`.
+* `inject` — инжект в тело HTML;
+* `separate-file` — хранение в отдельном файле;
+* `separate-file-with-link` — хранение в отдельном файле, при этом каждая иконка подключается из этого файла.
 
 ##### usePolyfillForExternalSymbols
 
@@ -110,33 +110,83 @@ Default: `''`
 
 Пример значения: `static/images/`.
 
-### useJsLintAndHint
+### js
+
+Type: `Object`
+
+Конфиг для работы с JavaScript в TARS. Доступен с версии TARS 1.7.0.
+
+#### workflow
+
+Type: `String`
+
+Default: `concat`
+
+Способ обработки JavaScript-кода.
+
+Доступны:
+* `concat` — конкатинация JavaScript-файлов в один в определенном порядке;
+* `modular` — использование банлера, который будет разрешать зависимости между JavaScript-файлами.
+
+#### bundler
+
+Type: `String`
+
+Default: `webpack`
+
+В bundler можно указать используемый сборщик JavaScript-кода, если в качестве workflow был выбран `modular`.
+
+Пока что доступен только `webpack`.
+
+#### lint
 
 Type: `Boolean`
 
 Default: `true`
 
-Включение проверки ошибок в js-коде и code-style (опции для code-style находятся в корне, в файле `.eslintrc`. Весь список доступных опций можно найти [тут](http://eslint.org/)). Также, вы можете точечно отключить линтинг файлов используя `.eslintignore` в корне проекта. 
+Включение проверки ошибок в JavaScript-коде и code-style (опции для eslint находятся в корне, в файле `.eslintrc`. Весь список доступных опций можно найти [тут](http://eslint.org/)). Также, вы можете точечно отключить линтинг файлов используя `.eslintignore` в корне проекта. 
 
-### jsPathsToConcatBeforeModulesJs и jsPathsToConcatAfterModulesJs
-
-Type: `Array of Strings`
-
-Default: `[]`
-
-По умолчанию, весь js-код проекта собирается в 1 файл, кроме js-файлов, которые находятся в директории separate-js. Если необходимо включить в сборку файлы из других мест (например, вы создали отдельную директорию для js-файлов), то можно прописать в эту опцию путь или массив путей (паттернов путей, типа controllers/\*\*/\*.js) до js-файлов, которые должны попасть в сборку до js-модулей (jsPathsToConcatBeforeModulesJs) и js-файлов, которые должны быть подключены после js модулей (jsPathsToConcatAfterModulesJs). 
-
-Это будет полезно, при разработке сайта на js-фреймворке с какими-либо своими сущностями (контроллер, роутер и т.д.). Вам не требуется лезть в таски, просто создавайте отдельные директории, указывайте, за какими файлами следить.
-
-Также есть возможность отключить eslint для этих файлах (опции `lintJsCodeBeforeModules` и `lintJsCodeAfterModules`).
-
-### useBabel
+#### useBabel
 
 Type: `Boolean`
 
 Default: `false`
 
-Данная опция позволяет использовать [Babel](https://babeljs.io/) для поддержки ES6(ES7) синтаксиса. Конфиг для babel находит в корне проекта, в файле `.babelrc`. С доступными опциями .babelc можно ознакомится на [официальном сайте](https://babeljs.io/docs/usage/options/). Вам не нужно задавать опции 'filename' и все что связанно с 'sourcemaps', так как эти оцпии уже заданы в сборщике. Sourcemaps вы можете управлять через опцию в [конфиге сборщика](#sourcemaps).
+Данная опция позволяет использовать [Babel](https://babeljs.io/) для поддержки ES6(ES7) синтаксиса. Конфиг для babel находит в корне проекта, в файле `.babelrc`. С доступными опциями .babelc можно ознакомится на [официальном сайте](https://babeljs.io/docs/usage/options/). Вам не нужно задавать опции 'filename' и все что связанно с 'sourcemaps', так как эти оцпии уже заданы в сборщике.
+
+#### webpack
+
+Type: `Object`
+
+Здесь можно управлять подключением особенных фич для webpack.
+
+##### useHMR
+
+Type: `Boolean`
+
+Default: `false`
+
+Включение технологии горячей замены модулей ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)).
+
+#### removeConsoleLog
+
+Type: `Boolean`
+
+Default: `true`
+
+Удаление console.log, alert и debugger из JavaScript-файлов в сборке. Является опцией, так как иногда требуется оставить console.log в готовой сборке.
+
+#### jsPathsToConcatBeforeModulesJs и jsPathsToConcatAfterModulesJs
+
+Type: `Array of Strings`
+
+Default: `[]`
+
+Данная опция имеет смысл только при выборе concat в качестве workflow. В этом случае весь JavaScript-код проекта собирается в 1 файл, кроме javascript-файлов, которые находятся в директории separate-js. Если необходимо включить в сборку файлы из других мест (например, вы создали отдельную директорию для JavaScript-файлов), то можно прописать в эту опцию путь или массив путей (паттернов путей, типа controllers/\*\*/\*.js) до JavaScript-файлов, которые должны попасть в сборку до js-модулей (jsPathsToConcatBeforeModulesJs) и JavaScript-файлов, которые должны быть подключены после JavaScript-файлов модулей (jsPathsToConcatAfterModulesJs). 
+
+Это будет полезно, при разработке сайта на JavaScript-фреймворке с какими-либо своими сущностями (контроллер, роутер и т.д.). Вам не требуется лезть в таски, просто создавайте отдельные директории, указывайте, за какими файлами следить.
+
+Также есть возможность отключить eslint для этих файлах (опции `lintJsCodeBeforeModules` и `lintJsCodeAfterModules`).
 
 ### sourcemaps
 
@@ -274,14 +324,6 @@ Default: `false`
 
 Оцпия инжекта CSS при лайврелоад. Если вам нужен [ижект стилей при пересборке без перезагрузки страницы](https://www.browsersync.io/docs/options/#option-injectChanges), то необходимо установить эту опцию в true.
 
-### removeConsoleLog
-
-Type: `Boolean`
-
-Default: `true`
-
-Удаление console.log и alert из js-файлов в сборке. Является опцией, так как иногда требуется оставить console.log в готовой сборке.
-
 ### minifyHtml
 
 Type: `Boolean`
@@ -324,7 +366,8 @@ Type: `Boolean`
 
 Default: `true`
 
-Создание архива с готовой версткой. Архив создается внутри папки с билдом.
+Создание архива с готовой версткой. Архив создается внутри папки с билдом. 
+Если вы указали в файле package.json имя проекта, то имя архива будет взято оттуда, иначе по умолчанию будет 'build'. Также будет добавлена дата создания билда (точность до секунды).
 
 ### ulimit
 
@@ -415,3 +458,7 @@ Type: `String`
 Default: `../imageFolderName/`
 
 Кастомный пути до папки со статикой из css-файлов. imageFolderName берется из опции [imagesFolderName](options.md#imagesFolderName)
+
+### useJsLintAndHint
+
+**Опция была переименована в [lint](#lint) и находится в конфиге js.**

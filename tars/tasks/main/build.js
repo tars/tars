@@ -23,7 +23,7 @@ module.exports = () => {
                     gutil.colors.black.bold('\n------------------------------------------------------------')
                 );
                 tars.say(
-                    gutil.colors.green('✔') + gutil.colors.green.bold(' Build has been created successfully!')
+                    gutil.colors.green.bold(' Build has been created successfully!')
                 );
 
                 if (tars.config.useBuildVersioning) {

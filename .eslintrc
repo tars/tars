@@ -41,6 +41,7 @@
         "no-alert": 2,
         "no-array-constructor": 2,
         "no-caller": 2,
+        "no-debugger": 0,
         "no-delete-var": 2,
         "no-eval": 0,
         "no-extra-bind": 2,

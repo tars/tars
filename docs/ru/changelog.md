@@ -10,10 +10,38 @@
 * Обновлен вывод при ошибке. Он стал более понятный, сразу ясно, куда смотреть в логах.
 * notifier.success и notifier.error теперь можно использовать как в pipe, так и в обычных функциях. Сообщение об ошибке легко найти в консоли.
 * Обновлен состав конфига сборщика. Конфиг стал более компактным.
-* Появилась возможность импортить стили из node_modules/bower_components не указывая полный путь до пакета, а использовать сокращенный путь.
-* Добавлен webpack для сборки JavaScript. Также осталась возможность использовать старый workflow для работы с JavaScript — простая склейка файлов. Управление workflow происходит в конфиге сборщика.
+* Появилась [возможность импортить стили из node_modules/bower_components](css-processing.md) не указывая полный путь до пакета, а использовать сокращенный путь.
+* Добавлен [webpack](https://webpack.github.io/) для сборки JavaScript. Также осталась возможность использовать старый workflow для работы с JavaScript — простая склейка файлов. Управление [workflow происходит в конфиге сборщика](oprions.md#workflow-1). Также есть возможность использовать [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html). Эта фича опциональна, управляется из [конфига проекта](options.md#usehmr).
+* Обновлены таски main:dev и js:processing. Обратите внимание на них, если они переопределены в вашем проекте.
 * Обновлен .babelrc.
 * Обновлен .eslintrc, так как был произведен переход на вторую версию eslint.
+```js
+// Обновленные/добавленные правила:
+env: {
+    commonjs: true    
+},
+
+parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module'
+},
+
+rules: {
+    'consistent-return': 0,
+    'keyword-spacing': 2,
+    strict: 0,
+    'no-confusing-arrow': 2,
+    'prefer-arrow-callback': 0,
+    'no-debugger': 0
+}
+
+// Удаленные правила:
+'no-arrow-condition': undefined,
+'space-return-throw-case': undefined,
+'space-after-keywords': undefined,
+'no-empty-label': undefined,
+'no-process-exit': undefined
+```
 * Обновлена документация.
 * Обновлены версии зависимостей.
 

@@ -12,6 +12,8 @@ module.exports = () => {
 
         if (tars.config.useArchiver) {
             const zip = tars.require('gulp-zip');
+            const name = tars.packageInfo.name === 'awesome_project' ? 'build' : tars.packageInfo.name;
+            const version = tars.options.build.version;
 
             return gulp.src(tars.options.build.path + '**', { base: tars.options.build.path })
                 .pipe(plumber({
@@ -19,7 +21,7 @@ module.exports = () => {
                         notifier.error('An error occurred while creating zip-archive.', error);
                     }
                 }))
-                .pipe(zip('build' + tars.options.build.version + '.zip'))
+                .pipe(zip(name + version + '.zip'))
                 .pipe(gulp.dest(tars.options.build.path))
                 .pipe(
                     notifier.success('Zip-archive\'s been created')

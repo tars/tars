@@ -12,9 +12,13 @@ const sourceMapsType = `#${sourceMapsDest}source-map`;
 
 let outputFileNameTemplate = '[name]';
 let modulesDirectories = ['node_modules'];
-let preLoaders = [];
+let preLoaders = [
+    {
+        test: /\.js$/,
+        loader: 'source-map-loader'
+    }
+];
 let loaders = [];
-
 let plugins = [
     new webpack.DefinePlugin({
         'process.env': {
@@ -43,7 +47,7 @@ if (compressJs) {
     );
 }
 
-if (tars.options.watch.isActive) {
+if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
     plugins.push(
         new webpack.HotModuleReplacementPlugin()
     );
@@ -69,10 +73,41 @@ if (tars.config.js.useBabel) {
     );
 }
 
+/**
+ * Add to each entry point entries for webpack dev-server and webpack-hot-middleware
+ * @param  {Object} entryConfig
+ * @return {Object}
+ */
+function prepareEntryPoints(entryConfig) {
+    const useHMR = tars.config.js.webpack.useHMR;
+    let devServerEntryPoints = [
+        'webpack/hot/dev-server',
+        'webpack-hot-middleware/client?reload=true'
+    ];
+
+    if (!useHMR || !tars.useLiveReload) {
+        return entryConfig;
+    }
+
+    // Take webpack dev-server and webpack-hot-middleware from TARS-CLI, if TARS has been started by TARS-CLI
+    if (process.env.npmRoot) {
+        devServerEntryPoints = devServerEntryPoints.map(devServerEntryPoint => process.env.npmRoot + devServerEntryPoint);
+    }
+
+    /* eslint-disable guard-for-in */
+    for (let entryPointName in entryConfig) {
+        entryConfig[entryPointName] = devServerEntryPoints.concat(entryConfig[entryPointName]);
+    }
+    /* eslint-disable guard-for-in */
+
+    return entryConfig;
+}
+
 module.exports = {
-    entry: {
+    // We have to add some pathes to entry point in case of using HMR
+    entry: prepareEntryPoints({
         main: path.resolve(`${cwd}/markup/${staticFolderName}/js/main.js`)
-    },
+    }),
 
     output: {
         path: path.resolve(`${cwd}/dev/${staticFolderName}/js`),
@@ -80,9 +115,9 @@ module.exports = {
         filename: `${outputFileNameTemplate}.js`
     },
 
-    watch: tars.options.watch.isActive,
-
     devtool: generateSourceMaps ? sourceMapsType : null,
+
+    watch: tars.options.watch.isActive && !tars.config.js.webpack.useHMR,
 
     module: {
         preLoaders,

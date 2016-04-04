@@ -105,33 +105,81 @@ You can set a path to file with svg-symbols. File will be created in that direct
 
 Possible value: `static/images/`.
 
-### useJsLintAndHint
+### js
+
+Type: `Object`
+
+Config for JavaScript processing in TARS.
+
+#### workflow
+
+Type: `String`
+
+Default: `concat`
+
+Type of JavaScript-code processing.
+
+You can set:
+* `concat` — concatenation of all JavaScript-files into one budle in specific order;
+* `modular` — using bundler, which will resolve all dependencies between JavaScript-files.
+
+#### bundler
+
+Type: `String`
+
+Default: `webpack`
+
+You can specify bundler, if `modular` workflow is selected. You can choose only webpack at that moment.
+
+#### lint
 
 Type: `Boolean`
 
 Default: `true`
 
-Error checking in js-code and code-style (option for the code-style are in the root, in `.eslintrc` file. Full list of available options can be found [here](http://eslint.org/)). Also, you can manually switch off linting of files and folders by using `.eslintignore` in the root of your project.
+Error checking in JavaScript-code and code-style (option for eslint are in the root, in `.eslintrc` file. Full list of available options can be found [here](http://eslint.org/)). Also, you can manually switch off linting of files and folders by using `.eslintignore` in the root of your project.
 
-### jsPathsToConcatBeforeModulesJs и jsPathsToConcatAfterModulesJs
-
-Type: `Array of Strings`
-
-Default: `[]`
-
-By default, all js-code of the project is built into one file except js-files, which are located in a separate-js directory.  If you want to include files into the build from other locations (for example, you create another folder for js-files), you can register in this option path or array of paths (patterns paths, such as 'controllers/\*\*/\*.js') to js-files, which must be connected into the build before modules' js-files (jsPathsToConcatBeforeModulesJs) and js-files, which must be connected after modules' js-files (jsPathsToConcatAfterModulesJs). 
-
-It will be useful for when building a site on js-framework, with any its entities (controller, router, etc.). You do not need to go into tasks, just create a separate directory and specify for which files you want to watch.
-
-Also you can disable eslint for these files (lintJsCodeBeforeModules and lintJsCodeAfterModules options).
-
-### useBabel
+#### useBabel
 
 Type: `Boolean`
 
 Default: `false`
 
-This option allow to use [Babel](https://babeljs.io/) for ES6(ES7) syntax support. Config for Babel is in project root, in `.babelrc`. See the [babel options](https://babeljs.io/docs/usage/options/), except for `sourcemaps` and `filename` which is handled for you by default. You can manage with sourcemaps from [tars-config](#sourcemaps).
+This option allow to use [Babel](https://babeljs.io/) for ES6(ES7) syntax support. Config for Babel is in project root, in `.babelrc`. See the [babel options](https://babeljs.io/docs/usage/options/), except for `sourcemaps` and `filename` which is handled for you by default.
+
+#### webpack
+
+Type: `Object`
+
+You can switch on/off additional cool features for webpack.
+
+##### useHMR
+
+Type: `Boolean`
+
+Default: `false`
+
+Switch on/off [Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html).
+
+#### removeConsoleLog
+
+Type: `Boolean`
+
+Default: `true`
+
+Removing console.log and alert from js-files in the build. It's an option, because sometimes it is necessary to retain console.log in the ready build.
+
+#### jsPathsToConcatBeforeModulesJs and jsPathsToConcatAfterModulesJs
+
+Type: `Array of Strings`
+
+Default: `[]`
+
+This option makes sense in case of using concat workflow. In that case all JavaScript-code of the project is built into one file except JavaScript-files, which are located in a separate-js directory. If you want to include files into the build from other locations (for example, you create another folder for JavaScript-files), you can register in this option path or array of paths (patterns paths, such as 'controllers/\*\*/\*.js') to JavaScript-files, which must be connected into the build before modules' JavaScript-files (jsPathsToConcatBeforeModulesJs) and JavaScript-files, which must be connected after modules' JavaScript-files (jsPathsToConcatAfterModulesJs). 
+
+It will be useful for when building a site on JavaScript-framework, with any its entities (controller, router, etc.). You do not need to go into tasks, just create a separate directory and specify for which files you want to watch.
+
+Also you can disable eslint for these files (lintJsCodeBeforeModules and lintJsCodeAfterModules options).
 
 ### sourcemaps
 
@@ -265,14 +313,6 @@ Default: `false`
 
 [Inject CSS while livereload](https://www.browsersync.io/docs/options/#option-injectChanges) or just reload page.
 
-### removeConsoleLog
-
-Type: `Boolean`
-
-Default: `true`
-
-Removing console.log and alert from js-files in the build. It's an option, because sometimes it is necessary to retain console.log in the ready build.
-
 ### minifyHtml
 
 Type: `Boolean`
@@ -317,7 +357,7 @@ Type: `Boolean`
 
 Default: `true`
 
-Creating the archive of the build. The archive is created in the folder with the build.
+Creating the archive of the build. The archive is created in the folder with the build. If package.json given the project name, the archive will be called by that name, otherwise it will 'build' by default. There will also be added to date creation build (accurate to second).
 
 ### ulimit
 
@@ -407,3 +447,7 @@ Type: `String`
 Default: `../imageFolderName/`
 
 Custom path to the folder with the statics of the css-files. imageFolderName is taken from the [imagesFolderName](options.md#imagesFolderName) option.
+
+### useJsLintAndHint
+
+**Option has been renamed to [lint](#lint) and moved to js-config object.**

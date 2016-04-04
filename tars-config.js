@@ -46,48 +46,58 @@ module.exports = {
     js: {
         // concat, modular
         workflow: 'concat',
+
+        // Only webpack is available right now
         bundler: 'webpack',
+
         /**
          * Use linting of js-files
          * @type {Boolean}
          */
         lint: true,
+
         /**
          * Use babel for ES6(ES7-ESNext) syntax support
          * @type {Boolean}
          */
         useBabel: false,
+
         /**
          * Remove console.log and debugger from js code in release mode
          * @type {Boolean}
          */
-        removeConsoleLog: true
+        removeConsoleLog: true,
+
+        // Special config for webpack
+        webpack: {
+            useHMR: false
+        },
+
+        /**
+         * Path-strings to js-files, which have to be included before modules' js-files
+         * Example: ['./markup/controller/** /*.js']
+         * @type {Array}
+         */
+        jsPathsToConcatBeforeModulesJs: [],
+
+        /**
+         * Lint additional js before modules
+         * @type {Boolean}
+         */
+        lintJsCodeBeforeModules: false,
+
+        /**
+         * Path-strings to js-files, which have to be included before modules' js-files
+         * @type {Array}
+         */
+        jsPathsToConcatAfterModulesJs: [],
+
+        /**
+         * Lint additional js after modules
+         * @type {Boolean}
+         */
+        lintJsCodeAfterModules: false
     },
-
-    /**
-     * Path-strings to js-files, which have to be included before modules' js-files
-     * Example: ['./markup/controller/** /*.js']
-     * @type {Array}
-     */
-    jsPathsToConcatBeforeModulesJs: [],
-
-    /**
-     * Lint additional js before modules
-     * @type {Boolean}
-     */
-    lintJsCodeBeforeModules: false,
-
-    /**
-     * Path-strings to js-files, which have to be included before modules' js-files
-     * @type {Array}
-     */
-    jsPathsToConcatAfterModulesJs: [],
-
-    /**
-     * Lint additional js after modules
-     * @type {Boolean}
-     */
-    lintJsCodeAfterModules: false,
 
     /**
      * Write sourcemaps

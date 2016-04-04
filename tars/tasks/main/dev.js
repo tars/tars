@@ -5,42 +5,18 @@ const notify = tars.packages.notify;
 const browserSync = tars.packages.browserSync;
 const path = require('path');
 
-const browserSyncConfig = tars.config.browserSyncConfig;
 const env = process.env;
+const cwd = process.cwd();
 
 /**
  * Build dev-version with watchers and livereload.
  */
 module.exports = () => {
-    return gulp.task('main:dev', ['main:build-dev'], () => {
-        tars.options.notify = true;
 
-        if (tars.flags.lr || tars.flags.tunnel) {
-
-            if (browserSyncConfig.startUrl) {
-                browserSyncConfig.startPath = browserSyncConfig.startUrl;
-                browserSyncConfig.startUrl = undefined; // eslint-disable-line no-undefined
-            }
-
-            if (browserSyncConfig.useNotifyInBrowser) {
-                browserSyncConfig.notify = browserSyncConfig.useNotifyInBrowser;
-                browserSyncConfig.useNotifyInBrowser = undefined; // eslint-disable-line no-undefined
-            }
-
-            if (!browserSyncConfig.server) {
-                browserSyncConfig.server = {};
-            }
-
-            if (browserSyncConfig.baseDir) {
-                browserSyncConfig.server.baseDir = browserSyncConfig.baseDir;
-                browserSyncConfig.baseDir = undefined; // eslint-disable-line no-undefined
-            }
-
-            browserSyncConfig.port = env.BROWSERSYNC_PORT || browserSyncConfig.port;
-
-            browserSync(browserSyncConfig);
-        }
-
+    /**
+     * Start watchers and show notify
+     */
+    function devTaskFinallyActions() {
         // require system and user's watchers
         tars.helpers.tarsFsHelper.getWatchers().forEach(file => require(file)());
 
@@ -52,6 +28,64 @@ module.exports = () => {
         } else {
             tars.say('Build has been created!');
         }
+    }
 
+    return gulp.task('main:dev', ['main:build-dev'], () => {
+        tars.options.notify = true;
+
+        if (tars.useLiveReload) {
+            const useHMR = tars.config.js.workflow === 'modular' && tars.config.js.bundler === 'webpack' && tars.config.js.webpack.useHMR;
+            let browserSyncConfig = tars.config.browserSyncConfig;
+
+            /* eslint-disable no-undefined */
+            browserSyncConfig = Object.assign(
+                browserSyncConfig,
+                {
+                    startPath: browserSyncConfig.startPath || browserSyncConfig.startUrl,
+                    startUrl: undefined,
+                    notify: browserSyncConfig.notify || browserSyncConfig.useNotifyInBrowser,
+                    useNotifyInBrowser: undefined,
+                    server: browserSyncConfig.server || {
+                        baseDir: browserSyncConfig.baseDir
+                    },
+                    baseDir: undefined,
+                    middleware: browserSyncConfig.middleware || [],
+                    port: env.BROWSERSYNC_PORT || browserSyncConfig.port
+                }
+            );
+            /* eslint-enable no-undefined */
+
+            if (!useHMR) {
+                browserSync.init(browserSyncConfig);
+                devTaskFinallyActions();
+            } else {
+                const webpackConfig = require(`${cwd}/webpack.config`);
+                const webpackInstance = tars.require('webpack')(webpackConfig);
+                const webpackDevMiddlewareInstance = tars.require('webpack-dev-middleware')(
+                    webpackInstance,
+                    {
+                        publicPath: `/${tars.config.fs.staticFolderName}/js/`,
+                        stats: {
+                            colors: true
+                        }
+                    }
+                );
+                const browserSyncMiddleware = [
+                    webpackDevMiddlewareInstance,
+                    tars.require('webpack-hot-middleware')(webpackInstance)
+                ];
+
+                browserSyncConfig.middleware = browserSyncConfig.middleware.concat(browserSyncMiddleware);
+                tars.say('Wait for a moment, please. Webpack is preparing bundle for you...');
+
+                webpackDevMiddlewareInstance.waitUntilValid(() => {
+                    browserSync.init(browserSyncConfig);
+                    devTaskFinallyActions();
+                });
+            }
+        } else {
+            // Do not start Browser-sync without livereload, just watchers and notify
+            devTaskFinallyActions();
+        }
     });
 };
