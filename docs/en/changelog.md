@@ -11,7 +11,7 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 * You can use notifier.success and notifier.error not in pipe only.
 * Tars-config has been updated. All JavaScript-options in [one object now](options.md#js).
 * You can [import style-files from node_modules/bower_components by using short syntax](css-processing.md).
-* [Webpack](https://webpack.github.io/) has been added. You can use old workflow (concatenation of files) or webpack — this is optional feature, you can manage it [from tars-config](oprions.md#workflow-1). Alse [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html) is available. This feature is [managed from tars-config too](options.md#usehmr).
+* [Webpack](https://webpack.github.io/) has been added. You can use old workflow (concatenation of files) or webpack — this is optional feature, you can manage it [from tars-config](options.md#workflow-1). Alse [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html) is available. This feature is [managed from tars-config too](options.md#usehmr).
 * Tasks main:dev an js:processing have been updated.
 * .babelrc update.
 * .eslintrc update. New version of eslint is used.

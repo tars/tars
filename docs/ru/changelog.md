@@ -11,7 +11,7 @@
 * notifier.success и notifier.error теперь можно использовать как в pipe, так и в обычных функциях. Сообщение об ошибке легко найти в консоли.
 * Обновлен состав конфига сборщика. Конфиг стал более компактным.
 * Появилась [возможность импортить стили из node_modules/bower_components](css-processing.md) не указывая полный путь до пакета, а использовать сокращенный путь.
-* Добавлен [webpack](https://webpack.github.io/) для сборки JavaScript. Также осталась возможность использовать старый workflow для работы с JavaScript — простая склейка файлов. Управление [workflow происходит в конфиге сборщика](oprions.md#workflow-1). Также есть возможность использовать [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html). Эта фича опциональна, управляется из [конфига проекта](options.md#usehmr).
+* Добавлен [webpack](https://webpack.github.io/) для сборки JavaScript. Также осталась возможность использовать старый workflow для работы с JavaScript — простая склейка файлов. Управление [workflow происходит в конфиге сборщика](options.md#workflow-1). Также есть возможность использовать [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html). Эта фича опциональна, управляется из [конфига проекта](options.md#usehmr).
 * Обновлены таски main:dev и js:processing. Обратите внимание на них, если они переопределены в вашем проекте.
 * Обновлен .babelrc.
 * Обновлен .eslintrc, так как был произведен переход на вторую версию eslint.
