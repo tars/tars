@@ -50,7 +50,11 @@ module.exports = () => {
                     },
                     baseDir: undefined,
                     middleware: browserSyncConfig.middleware || [],
-                    port: env.BROWSERSYNC_PORT || browserSyncConfig.port
+                    port: env.BROWSERSYNC_PORT || browserSyncConfig.port,
+                    logConnections: browserSyncConfig.logConnections || true,
+                    debugInfo: browserSyncConfig.debugInfo || true,
+                    reloadOnRestart: browserSyncConfig.reloadOnRestart || true,
+                    tunnel: tars.flags.tunnel
                 }
             );
             /* eslint-enable no-undefined */
