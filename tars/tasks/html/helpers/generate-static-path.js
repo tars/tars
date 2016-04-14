@@ -19,9 +19,12 @@ module.exports = function generateStaticPath() {
             /%=staticPrefix=%|%=static=%|__static__/g, staticPath
         );
 
-        newPageContent = newPageContent.replace(
-            /xlink:href="(.*)"/gim, (str, $1) => `xlink:href="${pageDepth.join('') + $1}"`
-        );
+        if (tars.config.svg.active && tars.config.svg.workflow === 'symbols' &&
+            tars.config.svg.symbolsConfig.loadingType === 'separate-file-with-link') {
+            newPageContent = newPageContent.replace(
+                /xlink:href="(.*)"/gim, (str, $1) => `xlink:href="${pageDepth.join('') + $1}"`
+            );
+        }
 
         file.contents = new Buffer(newPageContent);
 
