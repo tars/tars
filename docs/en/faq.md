@@ -17,7 +17,6 @@ You can get more info from comments of [docs for webpack with Gulp usage](http:/
 Gulp is a stream builder of JavaScript projects. It uses streams and it is really fast. For example, I have a project where about a thousand stylus files, Grunt needs about 2.5 seconds for assembly and 2 seconds for processing by autoprefixer. Gulp makes all stuff for 0.5 seconds winning Grunt at least 4 times.
 
 3. **How to work with TARS?**
-**Как лучше построить процесс разработки с помощью TARS?**
 There are several variants.
     * You have one big project with long period of develop/support. TARS will be extremely useful for you. Create modules, pages. Store it somewhere in GIT, SVN.
     * You have many projects with general modules. So, in taht case you have several options:
