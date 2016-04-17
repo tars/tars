@@ -4,6 +4,11 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.7.1
+
+* Rebuild process of jade-templates became faster.
+* Gulp-csso update to version 2.0.0.
+
 ## Version 1.7.0
 
 * Plugin gulp-strip-debug has been deleted. uglifyJS will strip all useless code.

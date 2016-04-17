@@ -139,6 +139,22 @@ if (
 }
 
 /**
+ * Add some specific functions for Jade-processing
+ * @return {Pipe}
+ */
+function jadeInheritanceProcessing() {
+    if (tars.options.watch.isActive && tars.templater.name === 'jade') {
+        return tars.packages.streamCombiner(
+            tars.packages.cache('templates'),
+            tars.require('gulp-jade-inheritance')({ basedir: './markup/' }),
+            tars.helpers.filterFilesByPath(/\/markup\/modules\//)
+        );
+    }
+
+    return tars.packages.gutil.noop();
+}
+
+/**
  * HTML compilation of pages templates.
  * Templates with _ prefix won't be compiled
  */
@@ -147,6 +163,17 @@ module.exports = () => {
         let modulesData;
         let error;
         let compileError;
+        let filesToCompile = [
+            './markup/pages/**/*.' + tars.templater.ext,
+            '!./markup/pages/**/_*.' + tars.templater.ext
+        ];
+
+        if (tars.templater.name === 'jade') {
+            filesToCompile.push(
+                '!./markup/modules/**/_*.' + tars.templater.ext,
+                './markup/modules/**/*.' + tars.templater.ext
+            );
+        }
 
         try {
             modulesData = concatModulesData();
@@ -155,8 +182,7 @@ module.exports = () => {
             modulesData = false;
         }
 
-        return gulp.src(['./markup/pages/**/*.' + tars.templater.ext,
-                         '!./markup/pages/**/_*.' + tars.templater.ext])
+        return gulp.src(filesToCompile)
             .pipe(plumber({
                 errorHandler(pipeError) {
                     notifier.error('An error occurred while compiling to html.', pipeError);
@@ -164,6 +190,7 @@ module.exports = () => {
                     compileError = true;
                 }
             }))
+            .pipe(jadeInheritanceProcessing())
             .pipe(
                 modulesData
                     ? tars.templater.fn(modulesData)
@@ -183,6 +210,11 @@ module.exports = () => {
             }))
             .pipe(generateStaticPath())
             .pipe(rename(pathToFileToRename => {
+
+                if (tars.templater.name === 'jade') {
+                    pathToFileToRename.dirname = pathToFileToRename.dirname.replace(/^pages/, '');
+                }
+
                 pathToFileToRename.extname = '.html';
             }))
             .pipe(gulp.dest('./dev/'))

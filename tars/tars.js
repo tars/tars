@@ -197,7 +197,8 @@ tars.helpers = {
     notifier: require(helpersDirPath + '/notifier'),
     watcherLog: require(helpersDirPath + '/watcher-log'),
     skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe'),
-    stringHelper: require(helpersDirPath + '/string-helper')
+    stringHelper: require(helpersDirPath + '/string-helper'),
+    filterFilesByPath: require(helpersDirPath + '/filter-files-by-path')
 };
 
 /**
