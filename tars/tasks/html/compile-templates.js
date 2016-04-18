@@ -147,7 +147,7 @@ function jadeInheritanceProcessing() {
         return tars.packages.streamCombiner(
             tars.packages.cache('templates'),
             tars.require('gulp-jade-inheritance')({ basedir: './markup/' }),
-            tars.helpers.filterFilesByPath(/\/markup\/modules\//)
+            tars.helpers.filterFilesByPath([/\/markup\/modules\//, /_[\w]+.jade/])
         );
     }
 
@@ -168,7 +168,7 @@ module.exports = () => {
             '!./markup/pages/**/_*.' + tars.templater.ext
         ];
 
-        if (tars.templater.name === 'jade') {
+        if (tars.templater.name === 'jade' && tars.options.watch.isActive) {
             filesToCompile.push(
                 '!./markup/modules/**/_*.' + tars.templater.ext,
                 './markup/modules/**/*.' + tars.templater.ext
