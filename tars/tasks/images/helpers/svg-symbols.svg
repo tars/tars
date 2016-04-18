@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="border: 0 !important; clip: rect(0 0 0 0) !important; height: 1px !important; margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; width: 1px !important;" class="root-svg-symbols-element"><% if(defs) {%>
+  <defs>
+      <%= defs %>
+  </defs><% } %><% _.forEach( icons, function( icon ){ %>
+    <symbol id="<%= icon.id %>" viewBox="<%= icon.svg.viewBox %>"><% if (icon.title) {%>
+      <title><%= icon.title %></title><% }%>
+      <%= icon.svg.content %>
+    </symbol><%
+}); %></svg>

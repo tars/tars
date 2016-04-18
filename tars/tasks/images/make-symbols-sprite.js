@@ -32,7 +32,7 @@ module.exports = () => {
                 .pipe(tars.require('gulp-svg-symbols')(
                     {
                         templates: [
-                            'default-svg',
+                            tars.root + '/tasks/images/helpers/svg-symbols.svg',
                             tars.root + '/tasks/images/helpers/symbols-data-template.js'
                         ],
                         transformData: (svg, defaultData) => {
