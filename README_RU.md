@@ -6,8 +6,8 @@
 
 [![Mac/Linux Build Status](https://img.shields.io/travis/tars/tars/master.svg?label=Mac%20OSX%20%26%20Linux&style=flat-square)](https://travis-ci.org/tars/tars) [![Windows Build status](https://img.shields.io/appveyor/ci/artem-malko/tars/master.svg?label=Windows&style=flat-square)](https://ci.appveyor.com/project/artem-malko/tars/branch/master) [![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/tars/tars?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Сборщик html-верстки, основанный на [Gulp](http://gulpjs.com/). Облегчает и ускоряет процесс html-верстки любой сложности.
-Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с версткой, чтобы вы получали больше удовольствия от работы.
+TARS — сборщик frontend'а любой сложности, основанный на [Gulp](http://gulpjs.com/). Облегчает и ускоряет процесс разработки веб-сайтов/приложений, делая работу приятной и продуктивной.
+Подойдет как командам, так и отдельному разработчику. TARS решает большинство рутинных дел, связанных с веб-разработкой, чтобы вы получали больше удовольствия от работы.
 
 TARS — сборщик-фреймворк, включающий в себя набор gulp-тасков, предоставляющий возможность легкого расширения (создания новых тасков) и модифицирования уже существующих, предоставляет удобную архитектуру хранения тасков и вотчеров в проекте.
 
