@@ -39,7 +39,7 @@ It is used to expand the standard if. Built if is able to check only a value exi
 test is the variable passed to the template.
 
 ```js
-testModule: {
+testComponent: {
     test: 10
 }
 ```

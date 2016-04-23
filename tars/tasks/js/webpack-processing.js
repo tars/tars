@@ -8,7 +8,7 @@ const cwd = process.cwd();
 
 module.exports = () => {
 
-    return gulp.task('js:webpack-processing', cb => {
+    return gulp.task('js:webpack-processing', done => {
 
         tars.require('webpack')(require(`${cwd}/webpack.config`), (error, stats) => {
 
@@ -32,16 +32,16 @@ module.exports = () => {
 
             // Task never errs in watch mode, it waits and recompiles
             if (!tars.options.watch.isActive && error) {
-                cb(
+                done(
                     new gutil.PluginError(
                         'webpack-processing',
                         new Error('An error occured during webpack build process')
                     )
                 );
             } else {
-                if (!cb.called) {
-                    cb.called = true;
-                    cb();
+                if (!done.called) {
+                    done.called = true;
+                    done();
                 }
             }
         });

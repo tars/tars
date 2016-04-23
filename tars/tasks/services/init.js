@@ -16,12 +16,12 @@ const githubConfig = {
  * @return {String}         Url to download
  */
 function makeUrl(type, version) {
-    const urlTemplate = 'https://github.com/' + githubConfig.user + '/' + githubConfig.repoPrefix;
+    const urlTemplate = `https://github.com/${githubConfig.user}/${githubConfig.repoPrefix}`;
 
     if (type === 'templater') {
-        return urlTemplate + tars.templater.name + '/archive/' + version + '.zip';
+        return `${urlTemplate}${tars.templater.name}/archive/${version}.zip`;
     } else {
-        return urlTemplate + tars.cssPreproc.name + '/archive/' + version + '.zip';
+        return `${urlTemplate}${tars.cssPreproc.name}/archive/${version}.zip`;
     }
 }
 
@@ -44,7 +44,7 @@ module.exports = () => {
                 let version;
 
                 if (process.env.tarsVersion) {
-                    version = 'version-' + process.env.tarsVersion;
+                    version = `version-${process.env.tarsVersion}`;
                 } else {
                     version = 'version-' + require(process.cwd() + '/tars.json').version;
                 }
@@ -109,7 +109,7 @@ module.exports = () => {
 
                 if (params.type === 'templater') {
                     ncp(
-                        './.tmpTemplater/tars-' + tars.templater.name + '-' + params.version + '/markup',
+                        `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup`,
                         './markup',
                         error => {
                             if (error) {
@@ -138,8 +138,8 @@ module.exports = () => {
                             }),
                             new Promise((resolve, reject) => {
                                 ncp(
-                                    `${downloadedPreprocPartsPath}/modules`,
-                                    './markup/modules',
+                                    `${downloadedPreprocPartsPath}/components`,
+                                    './markup/${tars.config.fs.componentsFolderName}',
                                     error => {
                                         if (error) {
                                             reject(error);

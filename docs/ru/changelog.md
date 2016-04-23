@@ -4,6 +4,12 @@
 
 # Changelog
 
+## Version 1.8.0
+
+* modules теперь называются components. При этом это название конфигурируемо.
+* Таск concat-modules-data переименован в concat-mocks-data.
+* В документации modules переименовано на components. 
+
 ## Version 1.7.1
 
 * Значительно ускорена пересборка Jade-шаблонов.

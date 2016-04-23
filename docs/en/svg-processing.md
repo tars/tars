@@ -18,7 +18,7 @@ In that workflow SVG-images will be combined into one SVG-file and every iscon w
 
 Images that will be included in such way must be in a folder (default path): 'static/img/svg/'. Nested directories are **not** supported.
 
-Symbols are created to use it in tempaltes (html|jade|hbs). In CSS you can change colors, size, add stroke and stroke width. You sholud use helpers for symbols using in templates and modules. Helper creates HTML, add size's attributes and custom classname.
+Symbols are created to use it in tempaltes (html|jade|hbs). In CSS you can change colors, size, add stroke and stroke width. You sholud use helpers for symbols using in templates and components. Helper creates HTML, add size's attributes and custom classname.
 
 Using in handlebars:
 ```handlebars
@@ -30,7 +30,7 @@ Using in jade:
 != jadeHelpers.Icon.call(locals, {iconName: '%iconName%', className: '%customClass%'})
 ```
 
-You can set two properites: iconname (%iconName%), which you'd like to include (without extension) and classname for that icon (%customClass%). TARS generate class automatically by using template icon__%iconName% in case you have not passed it to helper. You can use that helper in pages and modules too. That helper will generate HTML like:
+You can set two properites: iconname (%iconName%), which you'd like to include (without extension) and classname for that icon (%customClass%). TARS generate class automatically by using template icon__%iconName% in case you have not passed it to helper. You can use that helper in pages and components too. That helper will generate HTML like:
 ```html
 <svg class="chrome" width="32px" height="32px">
     <use xlink:href="#chrome"></use>

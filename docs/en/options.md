@@ -175,7 +175,7 @@ Type: `Array of Strings`
 
 Default: `[]`
 
-This option makes sense in case of using concat workflow. In that case all JavaScript-code of the project is built into one file except JavaScript-files, which are located in a separate-js directory. If you want to include files into the build from other locations (for example, you create another folder for JavaScript-files), you can register in this option path or array of paths (patterns paths, such as 'controllers/\*\*/\*.js') to JavaScript-files, which must be connected into the build before modules' JavaScript-files (jsPathsToConcatBeforeModulesJs) and JavaScript-files, which must be connected after modules' JavaScript-files (jsPathsToConcatAfterModulesJs). 
+This option makes sense in case of using concat workflow. In that case all JavaScript-code of the project is built into one file except JavaScript-files, which are located in a separate-js directory. If you want to include files into the build from other locations (for example, you create another folder for JavaScript-files), you can register in this option path or array of paths (patterns paths, such as 'controllers/\*\*/\*.js') to JavaScript-files, which must be connected into the build before components' JavaScript-files (jsPathsToConcatBeforeModulesJs) and JavaScript-files, which must be connected after components' JavaScript-files (jsPathsToConcatAfterModulesJs). 
 
 It will be useful for when building a site on JavaScript-framework, with any its entities (controller, router, etc.). You do not need to go into tasks, just create a separate directory and specify for which files you want to watch.
 

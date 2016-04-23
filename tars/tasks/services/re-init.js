@@ -10,7 +10,7 @@ module.exports = () => {
     return gulp.task('service:re-init', ['service:remove-init-fs'], () => {
         if (!tars.cli) {
             tars.say(
-                gutil.colors.yellow('This command is depricated and won\'t be supported in the future!\n')
+                gutil.colors.yellow('This command is depricated and is not supported!\n')
             );
         }
         gulp.start('service:init');

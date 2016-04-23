@@ -166,7 +166,7 @@ Type: `Boolean`
 
 Default: `false`
 
-Включение технологии горячей замены модулей ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)).
+Включение технологии горячей замены компонентов ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)).
 
 #### removeConsoleLog
 
@@ -182,7 +182,7 @@ Type: `Array of Strings`
 
 Default: `[]`
 
-Данная опция имеет смысл только при выборе concat в качестве workflow. В этом случае весь JavaScript-код проекта собирается в 1 файл, кроме javascript-файлов, которые находятся в директории separate-js. Если необходимо включить в сборку файлы из других мест (например, вы создали отдельную директорию для JavaScript-файлов), то можно прописать в эту опцию путь или массив путей (паттернов путей, типа controllers/\*\*/\*.js) до JavaScript-файлов, которые должны попасть в сборку до js-модулей (jsPathsToConcatBeforeModulesJs) и JavaScript-файлов, которые должны быть подключены после JavaScript-файлов модулей (jsPathsToConcatAfterModulesJs). 
+Данная опция имеет смысл только при выборе concat в качестве workflow. В этом случае весь JavaScript-код проекта собирается в 1 файл, кроме javascript-файлов, которые находятся в директории separate-js. Если необходимо включить в сборку файлы из других мест (например, вы создали отдельную директорию для JavaScript-файлов), то можно прописать в эту опцию путь или массив путей (паттернов путей, типа controllers/\*\*/\*.js) до JavaScript-файлов, которые должны попасть в сборку до js-компонентов (jsPathsToConcatBeforeModulesJs) и JavaScript-файлов, которые должны быть подключены после JavaScript-файлов компонентов (jsPathsToConcatAfterModulesJs). 
 
 Это будет полезно, при разработке сайта на JavaScript-фреймворке с какими-либо своими сущностями (контроллер, роутер и т.д.). Вам не требуется лезть в таски, просто создавайте отдельные директории, указывайте, за какими файлами следить.
 

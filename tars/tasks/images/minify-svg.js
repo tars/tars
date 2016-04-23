@@ -5,23 +5,23 @@ const changed = tars.packages.changed;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-const svgImagesPath = tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+const svgImagesPath = `${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}`;
 
 /**
  * Minify svg-images (optional task)
  */
 module.exports = () => {
-    return gulp.task('images:minify-svg', cb => {
+    return gulp.task('images:minify-svg', done => {
 
         if (tars.config.svg.active) {
-            return gulp.src('./markup/' + svgImagesPath + '/svg/*.svg')
+            return gulp.src(`./markup/${svgImagesPath}/svg/*.svg`)
                 .pipe(plumber({
                     errorHandler(error) {
                         notifier.error('An error occurred while minifying svg.', error);
                     }
                 }))
                 .pipe(changed(
-                    'dev/' + svgImagesPath + '/minified-svg',
+                    `dev/${svgImagesPath}/minified-svg`,
                     {
                         hasChanged: changed.compareLastModifiedTime,
                         extension: '.svg'
@@ -38,13 +38,13 @@ module.exports = () => {
                         use: []
                     }
                 ))
-                .pipe(gulp.dest('./dev/' + svgImagesPath + '/minified-svg/'))
+                .pipe(gulp.dest(`./dev/${svgImagesPath}/minified-svg/`))
                 .pipe(
                     notifier.success('SVG\'ve been minified')
                 );
         }
 
         tars.skipTaskLog('images:minify-svg', 'SVG is not used');
-        cb(null);
+        done(null);
     });
 };

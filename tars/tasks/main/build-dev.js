@@ -20,7 +20,7 @@ module.exports = () => {
             ],
             [
                 'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',
-                'html:concat-modules-data',
+                'html:concat-mocks-data',
                 'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
                 'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img',
                 'js:move-separate'

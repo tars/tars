@@ -18,11 +18,11 @@ Gulp is a stream builder of JavaScript projects. It uses streams and it is reall
 
 3. **How to work with TARS?**
 There are several variants.
-    * You have one big project with long period of develop/support. TARS will be extremely useful for you. Create modules, pages. Store it somewhere in GIT, SVN.
-    * You have many projects with general modules. So, in taht case you have several options:
-        - you can create you own library of modules and include in to your own fork of TARS. So you will have all used modules after init;
+    * You have one big project with long period of develop/support. TARS will be extremely useful for you. Create components, pages. Store it somewhere in GIT, SVN.
+    * You have many projects with general components. So, in taht case you have several options:
+        - you can create you own library of components and include in to your own fork of TARS. So you will have all used components after init;
         - you can use git. Every new project is a new branch from master. Inited TARS in master branch;
-        - and the last, you can store your own library of used modules somewhere.
+        - and the last, you can store your own library of used components somewhere.
     * You have many different projects. Just use CVS (GIT, SVN, etc.).
 
 You can choose any option or create your own workflow.

@@ -8,7 +8,7 @@ const fs = require('fs');
  * Update dependencies
  */
 module.exports = () => {
-    return gulp.task('service:update-deps', cb => {
+    return gulp.task('service:update-deps', done => {
         const Download = tars.require('download');
         const exec = require('child_process').exec;
         const downloadPackage = new Download({ extract: true })
@@ -44,7 +44,7 @@ module.exports = () => {
                                 '------------------------------------------------------------\n'
                             )
                         );
-                        cb(execError);
+                        done(execError);
                     });
                 });
             });

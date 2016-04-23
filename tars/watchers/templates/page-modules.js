@@ -5,25 +5,25 @@ const runSequence = tars.packages.runSequence.use(gulp);
 const path = require('path');
 
 const filesToWatch = [
-    'markup/pages/**/*.' + tars.templater.ext,
-    'markup/modules/**/*.' + tars.templater.ext
+    `markup/pages/**/*.${tars.templater.ext}`,
+    `markup/${tars.config.fs.componentsFolderName}/**/*.${tars.templater.ext}`
 ];
 
 /**
- * Watcher for templates-files of modules and pages
+ * Watcher for templates-files of components and pages
  */
 module.exports = () => {
     return tars.packages.chokidar.watch(
         filesToWatch,
         Object.assign(tars.options.watch, {
-            ignored: 'markup/**/_*.' + tars.templater.ext
+            ignored: `markup/**/_*.${tars.templater.ext}`
         })
     ).on('all', (event, watchedPath) => {
         tars.helpers.watcherLog(event, watchedPath);
 
         if (watchedPath.indexOf(`markup${path.sep}pages`) > -1 && (event === 'unlink' || event === 'add')) {
             runSequence(
-                'html:concat-modules-data',
+                'html:concat-mocks-data',
                 'html:compile-templates',
                 () => {}
             );

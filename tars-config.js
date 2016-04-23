@@ -327,7 +327,14 @@ module.exports = {
          * 'img' by default
          * @type {String}
          */
-        imagesFolderName: 'img'
+        imagesFolderName: 'img',
+
+        /**
+         * Name of folder with modules
+         * 'modules' by default
+         * @type {String}
+         */
+        componentsFolderName: 'components'
     }
 
     ////////////////////////////////////////////////////

@@ -18,21 +18,20 @@ module.exports = () => {
 
     return gulp.task('css:make-sprite', () => {
         const dpiLength = usedDpiArray.length;
+        const cssTemplatePath = `./markup/${staticFolderName}/${preprocName}/sprite-generator-templates`;
 
         let spriteData = [];
         let dpiConfig = {};
 
         usedDpiArray.forEach(dpiValue => {
-            dpiConfig['dpi' + dpiValue] = true;
+            dpiConfig[`dpi${dpiValue}`] = true;
         });
 
         /* eslint-disable no-loop-func */
 
         for (let i = 0; i < dpiLength; i++) {
-            spriteData.push(gulp.src(
-                    './markup/' + staticFolderName + '/' + imagesFolderName
-                    + '/sprite/' + usedDpiArray[i] + 'dpi/*.png'
-                )
+            spriteData.push(
+                gulp.src(`./markup/${staticFolderName}/${imagesFolderName}/sprite/${usedDpiArray[i]}dpi/*.png`)
                 .pipe(plumber({
                     errorHandler(error) {
                         notifier.error('An error occurred while making png-sprite.', error);
@@ -49,33 +48,22 @@ module.exports = () => {
                             },
                             cssOpts: dpiConfig,
                             padding: (i + 1) * 4,
-                            cssTemplate: './markup/' + staticFolderName + '/'
-                                            + preprocName + '/sprite-generator-templates/'
-                                            + preprocName + '.sprite.mustache'
+                            cssTemplate: `${cssTemplatePath}/${preprocName}.sprite.mustache`
                         }
                     )
                 )
             );
 
             spriteData[i].img
-                .pipe(
-                    gulp.dest(
-                        './dev/' + staticFolderName + '/' + imagesFolderName
-                        + '/png-sprite/' + usedDpiArray[i] + 'dpi/'
-                    )
-                )
-                .pipe(
-                    notifier.success('Sprite img with dpi = ' + usedDpiArray[i] + ' is ready')
-                );
+                .pipe(gulp.dest(`./dev/${staticFolderName}/${imagesFolderName}/png-sprite/${usedDpiArray[i]}dpi/`))
+                .pipe(notifier.success(`Sprite img with dpi = ${usedDpiArray[i]} is ready`));
         }
 
         /* eslint-enable no-loop-func */
 
         // Returns css for dpi 96
         return spriteData[0].css
-                .pipe(
-                    gulp.dest('./markup/' + staticFolderName + '/' + preprocName + '/sprites-' + preprocName + '/')
-                )
+                .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
                 .pipe(
                     notifier.success(
                         stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'

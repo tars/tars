@@ -12,12 +12,12 @@
 
 По умолчанию используется только одна точка входа: markup/static/js/main.js. Вы можете использовать другой файл и сколь угодоно большое количество точек входа. **Необходимо использовать функцию prepareEntryPoints, в которую будет передаваться объект с информацией о точках входа. Это необходимо для корректной работы Hot Module Replacement!**
 
-По умолчанию webpack умеет разрешать зависмости, объявленные через require (import/export, если включена обработка кода через babel). При этом, в любой точке приложения вы можете подключить файл модуля с помощью алиаса «modules». Предположим, что мы находимся в markup/static/js/main.js и хотим подключить в нем скрипт из модуля «example». Вместо указания относительного пути от main.js до example.js можно написать так:
+По умолчанию webpack умеет разрешать зависмости, объявленные через require (import/export, если включена обработка кода через babel). При этом, в любой точке приложения вы можете подключить файл компонента с помощью алиаса «components». Предположим, что мы находимся в markup/static/js/main.js и хотим подключить в нем скрипт из компонента «example». Вместо указания относительного пути от main.js до example.js можно написать так:
 
 ```js
-import foo from 'modules/example/example'; // useBabel: true
+import foo from 'components/example/example'; // useBabel: true
 // или
-const foo = require('modules/example/example');
+const foo = require('components/example/example');
 ```
 
 Также есть алиас для папки static, который позволит подключить файл из папки static в любой точке приложения:
@@ -42,7 +42,7 @@ const $ = require('jquery');
 
 Вотчинг за изменениями JavaScript-файлов также лежит на плечах webpack.
 
-Также доступна горячая замена модулей ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)). На русском можно прочитать об этом на [habr'е](https://habrahabr.ru/company/Voximplant/blog/270593/) и посмотреть [ролики из скринкаста Ильи Кантора](https://www.youtube.com/watch?v=EQhXtTOxpVk&list=PLDyvV36pndZHfBThhg4Z0822EEG9VGenn&index=40). Данная возможность [опциональна](options.md#usehmr), реализована с помощью middleware для Browser-sync и плагина webpack.HotModuleReplacementPlugin.
+Также доступна горячая замена компонентов ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)). На русском можно прочитать об этом на [habr'е](https://habrahabr.ru/company/Voximplant/blog/270593/) и посмотреть [ролики из скринкаста Ильи Кантора](https://www.youtube.com/watch?v=EQhXtTOxpVk&list=PLDyvV36pndZHfBThhg4Z0822EEG9VGenn&index=40). Данная возможность [опциональна](options.md#usehmr), реализована с помощью middleware для Browser-sync и плагина webpack.HotModuleReplacementPlugin.
 
 По умолчанию встроена поддежка babel (babel-loader) и eslint (eslint-loader), которые работают через webpack. Eslint использует встроенный парсер для разбора JavaScript-кода, но если вам необходимо поддерживать совсем новые фичи (экспериментальные), вам придется использовать парсер babel-eslint. Подробности можно прочесть в [репозитории проекта](https://github.com/babel/babel-eslint) и [документации eslint](http://eslint.org/docs/user-guide/configuring#specifying-parser-options).
 

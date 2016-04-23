@@ -34,7 +34,7 @@ If you need to include files from node_modules or bower_components, you do not h
 
 In case if that import TARS will try to find bootstrap/dist/bootstrap.scss in node_modules and bower_components. This feature is implemented in TARS from version 1.7.0
 
-If you want to include the files from the static directory (pictures), you should use the placeholder %=static=%. Then including of the image as a background (in current example the picture will be taken from your main module) will be as follows (in this example scss is used):
+If you want to include the files from the static directory (pictures), you should use the placeholder %=static=%. Then including of the image as a background (in current example the picture will be taken from your main component) will be as follows (in this example scss is used):
 
 ```scss
 .main {
@@ -46,7 +46,7 @@ If you want to include the files from the static directory (pictures), you shoul
 
 There are a couple of points on the organization scss|sass|less|styl-files (scss is selected):
 
-* Each module has its own css-representation.
+* Each component has its own css-representation.
 * Common styles for the project is recommended to put in common.scss in static/scss
 * Included fonts' styles is in fonts.scss
 * Mixins are in mixins.scss
@@ -68,10 +68,10 @@ Combining of styles will be in the following order:
 * GUI
 * Common stylies (common.scss)
 * Styles for plugins (static/scss/plugins, including all subdirectories)
-* Modules' styles (css is supported)
+* Components' styles (css is supported)
 * Styles of etc.{scss,css}
 
-For IE8 and IE9 you can add fixes in a folder in the ie module folder. You need to create ie8.{scss,sass,css} or ie9.{scss,sass,css}.
+For IE8 and IE9 you can add fixes in a folder in the ie component folder. You need to create ie8.{scss,sass,css} or ie9.{scss,sass,css}.
 
 Also, you can use css-files and not to include them to bundle. There is folder separate-css in static/scss, where you can store all files, which have to be included manually. There is an example of including in any template:
 

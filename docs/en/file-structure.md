@@ -24,33 +24,33 @@ Builder has the following file structure:
     └── user-watchers/      # User's watchers
     └── tars.js             # Main file of the builder
 └── markup/                 # The main project folder
-    └── modules/            # Modules
+    └── components/         # Components
     └── pages/              # Page's templates
     └── static/             # Static-files (css, js and so on)
 └── docs/                   # Documentation
 ```
 
 
-## The structure of the individual module
+## The structure of the individual component
 
-Module is an independent unit of the page. Example module - «header» or «footer». Each page consists of modules. Any module may include other modules.
+Component is an independent unit of the page. Example component - «header» or «footer». Each page consists of components. Any component may include other components.
 
 ```
-exampleModule/                              # Module example
-    └── assets/                             # Static files for current module (files with any extension) Subdirectories unsupport
+exampleComponent/                           # Component example
+    └── assets/                             # Static files for current component (files with any extension) Subdirectories unsupport
     └── ie/                                 # Stylies for IE9.scss|sass|less|styl и IE8.scss|sass|less|styl)
-    └── data/                               # Folder for module's data
-        ├── data.js                         # Data for module (there is an example for data in _template module)
-    ├── exampleModule.html                  # Handlebars-represention of module (it could be jade)
-    ├── exampleModule.scss|less|styl        # Css-representation of module (scss|sass|less|styl)
-    ├── exampleModule.js                    # Js-represent
+    └── data/                               # Folder for component's data
+        ├── data.js                         # Data for component (there is an example for data in _template component)
+    ├── exampleComponent.html               # Handlebars-represention of component (it could be jade)
+    ├── exampleComponent.scss|less|styl     # Css-representation of component (scss|sass|less|styl)
+    ├── exampleComponent.js                 # Js-represent
 
 ```
 
-The basic idea is to make the module as much isolated structure as possible. You can use the [BEM](https://ru.bem.info), [web components](http://webcomponents.org) (and their [realization from Google](https://www.polymer-project.org)), something else. You can do everything by old-fashioned way, all markup is in one module, but it is not recommended.  If we talk in BEM terms, each module is a block. There is an [excellent lecture](https://www.youtube.com/watch?v=pyAYbbDJjPo) on how to organize your code.
+The basic idea is to make the component as much isolated structure as possible. You can use the [BEM](https://ru.bem.info), [web components](http://webcomponents.org) (and their [realization from Google](https://www.polymer-project.org)), something else. You can do everything by old-fashioned way, all markup is in one component, but it is not recommended.  If we talk in BEM terms, each component is a block. There is an [excellent lecture](https://www.youtube.com/watch?v=pyAYbbDJjPo) on how to organize your code.
 
 Page templates are in `pages` folder. Pages are layouts and should contain as little code as possible. To create a new page just copy the existing (or _template) and rename it or run [tars add-page](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-add-page-pagename).
-Also, you can add module via TARS-CLI — [tars add-module](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-add-module-modulename).
+Also, you can add component via TARS-CLI — [tars add-component](https://github.com/tars/tars-cli/blob/master/docs/en/commands.md#tars-add-module-modulename).
 
 ## Folder static for structure
 
@@ -99,8 +99,8 @@ dev/
     └── static/                         # Folder for static-files. You can choose the name for that folder in tars-config.js
         └── css/                        # Ready stylies and stylies for IE9 и IE8, if support is turned on and stylies from separate-css.
         └── img/                        # Images for project
-            └── assets/                 # Static files for modules.
-                └── exampleModule/      
+            └── assets/                 # Static files for components.
+                └── exampleComponent/      
             └── content/                # Images for content
             └── plugins/                # Images for plugins
             └── svg-sprite/             # SVG-sprite
@@ -109,7 +109,7 @@ dev/
             └── minified-svg/           # Minifies svg-images
         └── js/                         # Ready main.js and separate js-files
             └── separate-js/   
-    └── temp/                           # Temp folder for modules' data
+    └── temp/                           # Temp folder for components' data
     ├── Ready pages and misc-files
 ```
 
@@ -121,6 +121,6 @@ When you need to include an image you have to use the path in which they are exi
 
 Immediately after initialization or reinitialization in the root folder can be appeared .tmpPreproc and .tmpTemplater folders, which contain a downloaded template and css-preprocessor. At the first build these folders will be deleted. So just do not pay attention to them. These folders are included in .gitignore, so they won't be in your repository.
 
-This file structure can be changed with the appropriate corrections of tasks and watchers. For some folders you do not need to climb in tasks and watchers. For example, it is possible to create a folder for storing js, [which must be included before and after the modules](options.md#jspathstoconcatbeforemodulesjs-и-jspathstoconcataftermodulesjs). This will be useful in case of using different js-frameworks.
+This file structure can be changed with the appropriate corrections of tasks and watchers. For some folders you do not need to climb in tasks and watchers. For example, it is possible to create a folder for storing js, [which must be included before and after the components](options.md#jspathstoconcatbeforemodulesjs-и-jspathstoconcataftermodulesjs). This will be useful in case of using different js-frameworks.
 
 Also, do not necessary to use all the folders for images or JavaScript. If something is not necessary, it can be removed.

@@ -30,9 +30,9 @@ const builtInJadeHelpers = {
             pathToSymbolsSprite = symbolsConfig.pathToExternalSymbolsFile + symbolsSpriteFileName;
         }
 
-        pathToSymbolsSprite += '#' + iconName;
+        pathToSymbolsSprite += `#${iconName}`;
 
-        const className = options.className || 'icon__' + iconName;
+        const className = options.className || `icon__${iconName}`;
 
         return `
             <svg class="${className}" width="${iconData.width}" height="${iconData.height}">
@@ -44,5 +44,5 @@ const builtInJadeHelpers = {
 
 module.exports = Object.assign(
     builtInJadeHelpers,
-    require(tars.root + '/user-tasks/html/helpers/jade-helpers')
+    require(`${tars.root}/user-tasks/html/helpers/jade-helpers`)
 );

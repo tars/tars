@@ -3,17 +3,17 @@
 const watcherLog = tars.helpers.watcherLog;
 
 /**
- * Watch for modules' css-files
+ * Watch for components' css-files
  */
 module.exports = () => {
     return tars.packages.chokidar.watch(
-        'markup/modules/**/*.' + tars.cssPreproc.ext,
+        `markup/${tars.config.fs.componentsFolderName}/**/*.${tars.cssPreproc.ext}`,
         Object.assign(tars.options.watch, {
             ignored: [
-                'markup/modules/**/ie8.' + tars.cssPreproc.ext,
-                'markup/modules/**/ie9.' + tars.cssPreproc.ext,
-                'markup/modules/**/ie8.css',
-                'markup/modules/**/ie9.css'
+                `markup/${tars.config.fs.componentsFolderName}/**/ie8.${tars.cssPreproc.ext}`,
+                `markup/${tars.config.fs.componentsFolderName}/**/ie9.${tars.cssPreproc.ext}`,
+                `markup/${tars.config.fs.componentsFolderName}/**/ie8.css`,
+                `markup/${tars.config.fs.componentsFolderName}/**/ie9.css`
             ]
         })
     ).on('all', (event, watchedPath) => {

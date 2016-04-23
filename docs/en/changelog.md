@@ -4,6 +4,9 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.8.0
+
+
 ## Version 1.7.1
 
 * Rebuild process of jade-templates became faster.

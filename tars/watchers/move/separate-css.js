@@ -5,7 +5,7 @@
  */
 module.exports = () => {
     return tars.packages.chokidar.watch(
-        'markup/' + tars.config.fs.staticFolderName + '/' + tars.cssPreproc.name + '/separate-css/**/*.css',
+        `markup/${tars.config.fs.staticFolderName}/${tars.cssPreproc.name}/separate-css/**/*.css`,
         tars.options.watch
     ).on('all', (event, watchedPath) => {
         tars.helpers.watcherLog(event, watchedPath);

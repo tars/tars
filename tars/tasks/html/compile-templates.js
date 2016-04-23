@@ -8,7 +8,7 @@ const through2 = tars.packages.through2;
 const fs = require('fs');
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
-const generateStaticPath = require(tars.root + '/tasks/html/helpers/generate-static-path');
+const generateStaticPath = require(`${tars.root}/tasks/html/helpers/generate-static-path`);
 
 let patterns = [];
 
@@ -34,34 +34,34 @@ function traverseThroughObject(obj, fullData) {
 }
 
 /**
- * Concat all data for all modules to one file
- * @return {Object} Object with data for modules
+ * Concat all data for all components to one file
+ * @return {Object} Object with data for components
  */
-function concatModulesData() {
+function concatComponentsData() {
     let dataEntry;
-    let readyModulesData;
+    let readyMocksData;
 
     try {
-        dataEntry = fs.readFileSync('./dev/temp/modulesData.js', 'utf8');
+        dataEntry = fs.readFileSync('./dev/temp/mocksData.js', 'utf8');
     } catch (er) {
         dataEntry = false;
     }
 
     if (dataEntry) {
-        eval('readyModulesData = {' + dataEntry + '}');
-        traverseThroughObject(readyModulesData, readyModulesData);
+        eval(`readyMocksData = {${dataEntry}}`);
+        traverseThroughObject(readyMocksData, readyMocksData);
     } else {
-        readyModulesData = '{}';
+        readyMocksData = '{}';
     }
 
-    // Add helpers for Jade into readyModulesData in case of using Jade as templater
+    // Add helpers for Jade into readyMocksData in case of using Jade as templater
     if (tars.templater.name === 'jade') {
-        readyModulesData = Object.assign(readyModulesData, {
-            jadeHelpers: require(tars.root + '/tasks/html/helpers/jade-helpers')
+        readyMocksData = Object.assign(readyMocksData, {
+            jadeHelpers: require(`${tars.root}/tasks/html/helpers/jade-helpers`)
         });
     }
 
-    return readyModulesData;
+    return readyMocksData;
 }
 
 if (!tars.flags.ie8 && !tars.flags.ie) {
@@ -104,7 +104,7 @@ if (
                 /* eslint-disable no-unused-vars */
 
                 try {
-                    return fs.readFileSync('./dev/temp/svg-symbols' + tars.options.build.hash + '.svg', 'utf8');
+                    return fs.readFileSync(`./dev/temp/svg-symbols${tars.options.build.hash}.svg`, 'utf8');
                 } catch (error) {
                     return '';
                 }
@@ -147,7 +147,10 @@ function jadeInheritanceProcessing() {
         return tars.packages.streamCombiner(
             tars.packages.cache('templates'),
             tars.require('gulp-jade-inheritance')({ basedir: './markup/' }),
-            tars.helpers.filterFilesByPath([/\/markup\/modules\//, /_[\w]+.jade/])
+            tars.helpers.filterFilesByPath([
+                new RegExp(`\/markup\/${tars.config.fs.componentsFolderName}\/`),
+                /_[\w]+.jade/
+            ])
         );
     }
 
@@ -160,26 +163,26 @@ function jadeInheritanceProcessing() {
  */
 module.exports = () => {
     return gulp.task('html:compile-templates', () => {
-        let modulesData;
+        let mocksData;
         let error;
         let compileError;
         let filesToCompile = [
-            './markup/pages/**/*.' + tars.templater.ext,
-            '!./markup/pages/**/_*.' + tars.templater.ext
+            `./markup/pages/**/*.${tars.templater.ext}`,
+            `!./markup/pages/**/_*.${tars.templater.ext}`
         ];
 
         if (tars.templater.name === 'jade' && tars.options.watch.isActive) {
             filesToCompile.push(
-                '!./markup/modules/**/_*.' + tars.templater.ext,
-                './markup/modules/**/*.' + tars.templater.ext
+                `!./markup/${tars.config.fs.componentsFolderName}/**/_*.${tars.templater.ext}`,
+                `./markup/${tars.config.fs.componentsFolderName}/**/*.${tars.templater.ext}`
             );
         }
 
         try {
-            modulesData = concatModulesData();
+            mocksData = concatComponentsData();
         } catch (er) {
             error = er;
-            modulesData = false;
+            mocksData = false;
         }
 
         return gulp.src(filesToCompile)
@@ -192,8 +195,8 @@ module.exports = () => {
             }))
             .pipe(jadeInheritanceProcessing())
             .pipe(
-                modulesData
-                    ? tars.templater.fn(modulesData)
+                mocksData
+                    ? tars.templater.fn(mocksData)
                     : through2.obj(
                         function () {
                             /* eslint-disable no-invalid-this */

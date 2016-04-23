@@ -6,9 +6,9 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
 const jsPathesToLint = [].concat.apply([], [
-    './markup/modules/**/*.js',
-    '!./markup/modules/**/_*.js',
-    '!./markup/modules/**/data/data.js',
+    `./markup/${tars.config.fs.componentsFolderName}/**/*.js`,
+    `!./markup/${tars.config.fs.componentsFolderName}/**/_*.js`,
+    `!./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
     tars.config.js.lintJsCodeBeforeModules ? tars.config.js.jsPathsToConcatBeforeModulesJs : [],
     tars.config.js.lintJsCodeAfterModules ? tars.config.js.jsPathsToConcatAfterModulesJs : []
 ]);
@@ -17,7 +17,7 @@ const jsPathesToLint = [].concat.apply([], [
  * Check JS for style and errors (optional task)
  */
 module.exports = () => {
-    return gulp.task('js:check', cb => {
+    return gulp.task('js:check', done => {
 
         /* eslint-disable no-case-declarations */
         if (tars.config.js.lint) {
@@ -27,7 +27,7 @@ module.exports = () => {
                         case 'webpack':
                         default:
                             tars.skipTaskLog('js:check', 'Code will be linted by built-in linter in bundler');
-                            return cb(null);
+                            return done(null);
                     }
                 case 'concat':
                 default:
@@ -48,6 +48,6 @@ module.exports = () => {
         /* eslint-enable no-case-declarations */
 
         tars.skipTaskLog('js:check', 'JavaScript check is not used');
-        cb(null);
+        done(null);
     });
 };

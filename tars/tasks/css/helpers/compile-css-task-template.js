@@ -20,10 +20,10 @@ module.exports = function generateTaskContent(browser) {
     const preprocExtensions = tars.cssPreproc.ext;
     const preprocName = tars.cssPreproc.name;
     const capitalizePreprocName = stringHelper.capitalizeFirstLetter(preprocName);
-    const stylesFolderPath = './markup/' + tars.config.fs.staticFolderName + '/' + preprocName;
+    const stylesFolderPath = `./markup/${tars.config.fs.staticFolderName}/${preprocName}`;
     const sourceMapsDest = tars.config.sourcemaps.css.inline ? '' : '.';
 
-    let successMessage = capitalizePreprocName + '-files have been compiled';
+    let successMessage = `${capitalizePreprocName}-files have been compiled`;
     let errorMessage = 'An error occurred while compiling css';
     let compiledFileName = 'main';
     let generateSourceMaps = false;
@@ -31,26 +31,26 @@ module.exports = function generateTaskContent(browser) {
     let postProcessors = [];
     let stylesFilesToConcatinate = [];
     let firstStylesFilesToConcatinate = [
-        stylesFolderPath + '/normalize.' + preprocExtensions,
-        stylesFolderPath + '/libraries/**/*.' + preprocExtensions,
-        stylesFolderPath + '/libraries/**/*.css',
-        stylesFolderPath + '/mixins.' + preprocExtensions,
-        stylesFolderPath + '/sprites-' + preprocName + '/sprite_96.' + preprocExtensions
+        `${stylesFolderPath}/normalize.${preprocExtensions}`,
+        `${stylesFolderPath}/libraries/**/*.${preprocExtensions}`,
+        `${stylesFolderPath}/libraries/**/*.css`,
+        `${stylesFolderPath}/mixins.${preprocExtensions}`,
+        `${stylesFolderPath}/sprites-${preprocName}/sprite_96.${preprocExtensions}`
     ];
     const generalStylesFilesToConcatinate = [
-        stylesFolderPath + '/fonts.' + preprocExtensions,
-        stylesFolderPath + '/vars.' + preprocExtensions,
-        stylesFolderPath + '/GUI.' + preprocExtensions,
-        stylesFolderPath + '/common.' + preprocExtensions,
-        stylesFolderPath + '/plugins/**/*.' + preprocExtensions,
-        stylesFolderPath + '/plugins/**/*.css',
-        './markup/modules/*/*.' + preprocExtensions,
-        './markup/modules/*/*.css'
+        `${stylesFolderPath}/fonts.${preprocExtensions}`,
+        `${stylesFolderPath}/vars.${preprocExtensions}`,
+        `${stylesFolderPath}/GUI.${preprocExtensions}`,
+        `${stylesFolderPath}/common.${preprocExtensions}`,
+        `${stylesFolderPath}/plugins/**/*.${preprocExtensions}`,
+        `${stylesFolderPath}/plugins/**/*.css`,
+        `./markup/${tars.config.fs.componentsFolderName}/*/*.${preprocExtensions}`,
+        `./markup/${tars.config.fs.componentsFolderName}/*/*.css`
     ];
     const lastStylesFilesToConcatinate = [
-        stylesFolderPath + '/etc/**/*.' + preprocExtensions,
-        stylesFolderPath + '/etc/**/*.css',
-        '!./**/_*.' + preprocExtensions,
+        `${stylesFolderPath}/etc/**/*.${preprocExtensions}`,
+        `${stylesFolderPath}/etc/**/*.css`,
+        `!./**/_*.${preprocExtensions}`,
         '!./**/_*.css'
     ];
 
@@ -62,7 +62,7 @@ module.exports = function generateTaskContent(browser) {
 
     if (preprocName === 'less' || preprocName === 'stylus') {
         firstStylesFilesToConcatinate.push(
-            stylesFolderPath + '/sprites-' + preprocName + '/sprite-png.' + preprocExtensions
+            `${stylesFolderPath}/sprites-${preprocName}/sprite-png.${preprocExtensions}`
         );
     }
 
@@ -70,11 +70,11 @@ module.exports = function generateTaskContent(browser) {
         case 'ie8':
             stylesFilesToConcatinate.push(
                 firstStylesFilesToConcatinate,
-                stylesFolderPath + '/sprites-' + preprocName + '/svg-fallback-sprite.' + preprocExtensions,
-                stylesFolderPath + '/sprites-' + preprocName + '/sprite-ie.' + preprocExtensions,
+                `${stylesFolderPath}/sprites-${preprocName}/svg-fallback-sprite.${preprocExtensions}`,
+                `${stylesFolderPath}/sprites-${preprocName}/sprite-ie.${preprocExtensions}`,
                 generalStylesFilesToConcatinate,
-                './markup/modules/*/ie/ie8.' + preprocExtensions,
-                './markup/modules/*/ie/ie8.css',
+                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie8.${preprocExtensions}`,
+                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie8.css`,
                 lastStylesFilesToConcatinate
             );
 
@@ -84,9 +84,9 @@ module.exports = function generateTaskContent(browser) {
 
             generateSourceMaps = false;
 
-            compiledFileName += '_' + browser;
+            compiledFileName += `_${browser}`;
 
-            successMessage = capitalizePreprocName + '-files for IE8 have been compiled';
+            successMessage = `${capitalizePreprocName}-files for IE8 have been compiled`;
             errorMessage = 'An error occurred while compiling css for IE8.';
 
             break;
@@ -97,14 +97,14 @@ module.exports = function generateTaskContent(browser) {
 
             if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
                 stylesFilesToConcatinate.push(
-                    stylesFolderPath + '/sprites-' + preprocName + '/svg-sprite.' + preprocExtensions
+                    `${stylesFolderPath}/sprites-${preprocName}/svg-sprite.${preprocExtensions}`
                 );
             }
 
             stylesFilesToConcatinate.push(
                 generalStylesFilesToConcatinate,
-                './markup/modules/*/ie/ie9.' + preprocExtensions,
-                './markup/modules/*/ie/ie9.css',
+                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie9.${preprocExtensions}`,
+                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie9.css`,
                 lastStylesFilesToConcatinate
             );
 
@@ -112,11 +112,11 @@ module.exports = function generateTaskContent(browser) {
                 autoprefixer({browsers: ['ie 9']})
             );
 
-            compiledFileName += '_' + browser;
+            compiledFileName += `_${browser}`;
 
             generateSourceMaps = false;
 
-            successMessage = capitalizePreprocName + '-files for IE9 have been compiled';
+            successMessage = `${capitalizePreprocName}-files for IE9 have been compiled`;
             errorMessage = 'An error occurred while compiling css for IE9.';
 
             break;
@@ -128,7 +128,7 @@ module.exports = function generateTaskContent(browser) {
 
             if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
                 stylesFilesToConcatinate.push(
-                    stylesFolderPath + '/sprites-' + preprocName + '/svg-sprite.' + preprocExtensions
+                    `${stylesFolderPath}/sprites-${preprocName}/svg-sprite.${preprocExtensions}`
                 );
             }
 
@@ -172,9 +172,9 @@ module.exports = function generateTaskContent(browser) {
             usePrefix: false
         }))
         .pipe(postcss(postProcessors))
-        .pipe(concat(compiledFileName + tars.options.build.hash + '.css'))
+        .pipe(concat(`${compiledFileName}${tars.options.build.hash}.css`))
         .pipe(gulpif(generateSourceMaps, sourcemaps.write(sourceMapsDest)))
-        .pipe(gulp.dest('./dev/' + tars.config.fs.staticFolderName + '/css/'))
+        .pipe(gulp.dest(`./dev/${tars.config.fs.staticFolderName}/css/`))
         .pipe(browserSync.reload({ stream: true }))
         .pipe(
             notifier.success(successMessage)

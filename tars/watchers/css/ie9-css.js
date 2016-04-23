@@ -9,8 +9,8 @@ module.exports = () => {
     if (tars.flags.ie9 || tars.flags.ie) {
         return tars.packages.chokidar.watch(
             [
-                'markup/modules/**/ie9.' + tars.cssPreproc.ext,
-                'markup/modules/**/ie9.css'
+                `markup/${tars.config.fs.componentsFolderName}/**/ie9.${tars.cssPreproc.ext}`,
+                `markup/${tars.config.fs.componentsFolderName}/**/ie9.css`
             ],
             tars.options.watch
         ).on('all', (event, watchedPath) => {

@@ -6,8 +6,7 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 
-const pluginsImagesFolder = tars.config.fs.staticFolderName + '/'
-                            + tars.config.fs.imagesFolderName + '/plugins';
+const pluginsImagesFolder = `${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/plugins`;
 
 /**
  * Move images for plugins
@@ -17,8 +16,8 @@ module.exports = () => {
         return gulp.src(
                 /* eslint-disable indent */
                 [
-                    './markup/' + pluginsImagesFolder + '/**/*.*',
-                    '!./markup/' + pluginsImagesFolder + '/**/*.tmp'
+                    `./markup/${pluginsImagesFolder}/**/*.*`,
+                    `!./markup/${pluginsImagesFolder}/**/*.tmp`
                 ]
                 /* eslint-enable indent */
             )
@@ -28,7 +27,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-plugins-img'))
-            .pipe(gulp.dest('./dev/' + pluginsImagesFolder))
+            .pipe(gulp.dest(`./dev/${pluginsImagesFolder}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Plugins\' images\'ve been moved')

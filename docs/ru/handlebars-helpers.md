@@ -39,7 +39,7 @@ n — количество повторений. Number, целое.
 test — переменная, переданная в шаблон
 
 ```js
-testModule: {
+testComponent: {
     test: 10
 }
 ```

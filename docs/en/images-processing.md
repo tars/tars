@@ -62,13 +62,13 @@ Working with separate images is very simple. Separate images are divided into se
 
 Builder supports images of any type, but only SVG, PNG, JPG will be exposed to minification. !All described below is only a recommendation, you can organize the images so as you wish!
 
-### Images for module
+### Images for component
 
-They are located in the assets folder inside the module. To include image using the following template (for connecting images to HTML you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefixforcss)):
+They are located in the assets folder inside the component. To include image using the following template (for connecting images to HTML you must use the placeholder [%=static=% or \_\_static\_\_](options.md#staticprefixforcss)):
 
 ```css
-.moduleName {
-    background: url('%=static=%assets/moduleName/sample-image-name.png') no-repeat;
+.componentName {
+    background: url('%=static=%assets/componentName/sample-image-name.png') no-repeat;
 }
 ```
 
@@ -76,7 +76,7 @@ If you would like to insert images in HTML, you have to use placeholder [%=stati
 
 ```handlebars
 <div class="news__item">
-    <img src="%=static=%img/assets/moduleName/sample-image-name.png" alt="">
+    <img src="%=static=%img/assets/componentName/sample-image-name.png" alt="">
 </div>
 ```
 

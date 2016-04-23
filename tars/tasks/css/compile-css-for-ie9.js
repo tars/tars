@@ -4,12 +4,12 @@
  * Styles compilation for IE9
  */
 module.exports = () => {
-    return tars.packages.gulp.task('css:compile-css-for-ie9', cb => {
+    return tars.packages.gulp.task('css:compile-css-for-ie9', done => {
         if (tars.flags.ie9 || tars.flags.ie) {
-            return require(tars.root + '/tasks/css/helpers/compile-css-task-template')('ie9');
+            return require(`${tars.root}/tasks/css/helpers/compile-css-task-template`)('ie9');
         }
 
         tars.skipTaskLog('css:compile-css-for-ie9', 'Stylies for IE9 are not used');
-        cb(null);
+        done(null);
     });
 };

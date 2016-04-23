@@ -15,7 +15,7 @@ const tarsConfig = tars.config;
  */
 module.exports = function () {
 
-    return gulp.task('task-name', /*['required-task-name'],*/ function (cb) {
+    return gulp.task('task-name', /*['required-task-name'],*/ function (done) {
         return gulp.src(/* path-string or array of path-strings to files */)
             .pipe(plumber({
                 errorHandler: function (error) {
@@ -34,6 +34,6 @@ module.exports = function () {
             );
 
         // You can return callback, if you can't return pipe
-        // cb(null);
+        // done(null);
     });
 };

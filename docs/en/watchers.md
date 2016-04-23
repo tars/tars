@@ -4,7 +4,7 @@ English description | <a href="../ru/watchers.md">Описание на русс
 
 # Watchers
 
-As tasks, watchers is a [commonJS-модуль](http://wiki.commonjs.org/wiki/Modules/1.1). All watchers is automatically included in a gulpfile.
+As tasks, watchers is a [commonJS-module](http://wiki.commonjs.org/wiki/Modules/1.1). All watchers is automatically included in a gulpfile.
 
 You could create your own watcher in a user-watchers directory. By default, there is already an example of watcher. Let's take a closer look.
 

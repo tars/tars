@@ -6,7 +6,7 @@ English description | <a href="../ru/update-guide.md">Описание на ру
 
 **Automatic project-update is available via TARS-CLI and TARS from version 1.5.0. You can get more info from [documentation of TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/en/update-actions.md). It is not necessary to do anything from this artcile in case of using TARS-CLI!**
 
-In one major version (for example, 1.\*.\*  ), you can use a markup folder (this is the folder in which should be the sources of your project) in any version. In any version within one major version building will be successful. This is true for TARS above (and including) version 1.2.0. Prior to 1.2.0 there were small changes in the file structure and method of including modules in the Handlebars. All changes are available in the [changelog](changelog.md).
+In one major version (for example, 1.\*.\*  ), you can use a markup folder (this is the folder in which should be the sources of your project) in any version. In any version within one major version building will be successful. This is true for TARS above (and including) version 1.2.0. Prior to 1.2.0 there were small changes in the file structure and method of including components in the Handlebars. All changes are available in the [changelog](changelog.md).
 
 To get the new functionality, which was released in a new minor version (for example *.4.* ) is enough:
 

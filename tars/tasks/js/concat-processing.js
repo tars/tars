@@ -13,17 +13,17 @@ const cwd = process.cwd();
 const path = require('path');
 let generateSourceMaps = false;
 const staticFolderName = tars.config.fs.staticFolderName;
-const destFolder = './dev/' + staticFolderName + '/js';
+const destFolder = `./dev/${staticFolderName}/js`;
 const compressJs = tars.flags.release || tars.flags.min;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 const jsPaths = [].concat.apply([], [
-    '!./markup/modules/**/data/data.js',
-    '!./markup/modules/**/_*.js',
-    './markup/' + staticFolderName + '/js/framework/**/*.js',
-    './markup/' + staticFolderName + '/js/libraries/**/*.js',
-    './markup/' + staticFolderName + '/js/plugins/**/*.js',
+    `!./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
+    `!./markup/${tars.config.fs.componentsFolderName}/**/_*.js`,
+    `./markup/${staticFolderName}/js/framework/**/*.js`,
+    `./markup/${staticFolderName}/js/libraries/**/*.js`,
+    `./markup/${staticFolderName}/js/plugins/**/*.js`,
     tars.config.js.jsPathsToConcatBeforeModulesJs,
-    './markup/modules/*/*.js',
+    `./markup/${tars.config.fs.componentsFolderName}/*/*.js`,
     tars.config.js.jsPathsToConcatAfterModulesJs,
     '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
 ]);

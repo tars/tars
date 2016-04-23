@@ -5,7 +5,7 @@ const changed = tars.packages.changed;
 const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 
-const imagesFolderPath = 'dev/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName;
+const imagesFolderPath = `dev/${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}`;
 
 /**
  * Minify png and jpg images

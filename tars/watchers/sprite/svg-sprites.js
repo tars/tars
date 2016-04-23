@@ -9,7 +9,7 @@ const runSequence = tars.packages.runSequence.use(gulp);
 module.exports = () => {
     if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
         return tars.packages.chokidar.watch(
-            'markup/' + tars.config.fs.staticFolderName + '/' + tars.config.fs.imagesFolderName + '/svg/**/*.svg',
+            `markup/${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/svg/**/*.svg`,
             tars.options.watch
         ).on('all', (event, watchedPath) => {
             tars.helpers.watcherLog(event, watchedPath);

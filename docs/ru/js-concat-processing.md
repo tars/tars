@@ -9,7 +9,7 @@
 По умолчанию JavaScript находится в 2-ух местах:
 
 * В папке со статикой, в подпапке с именем js
-* В каждом отдельном модуле.
+* В каждом отдельном компоненте.
 
 Можно добавить свои папки для js, используя соответствующую [опцию](options.md#jspathstoconcatbeforemodulesjs-%D0%B8-jspathstoconcataftermodulesjs) в конфиге сборщика.
 
@@ -21,7 +21,7 @@
 * static/js/libraries (включая подпапки)
 * static/js/plugins (включая подпапки)
 * все файлы, пути к которым находятся в опции jsPathsToConcatBeforeModulesJs
-* JavaScript-файлы модулей
+* JavaScript-файлы компонентов
 * все файлы, пути к которым находятся в опции jsPathsToConcatAfterModulesJs
 
 **Файлы с _ в начале файла не будут попадать в общую сборку и не буду проверены линтером.**
