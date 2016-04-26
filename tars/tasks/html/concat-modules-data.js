@@ -12,7 +12,9 @@ const pagesAndDataFilesProcessing = require(tars.root + '/tasks/html/helpers/pag
  */
 module.exports = () => {
     return gulp.task('html:concat-modules-data', () => {
-        delete tars.packages.cache.caches.templates;
+        if (tars.packages.cache.caches && tars.packages.cache.caches.templates) {
+            tars.packages.cache.caches.templates = {};
+        }
 
         return gulp.src(['./markup/pages/**/*.' + tars.templater.ext,
                          '!./markup/pages/**/_*.' + tars.templater.ext,
