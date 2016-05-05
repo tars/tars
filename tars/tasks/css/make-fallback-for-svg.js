@@ -34,7 +34,10 @@ module.exports = () => {
                         {
                             imgName: 'svg-fallback-sprite' + tars.options.build.hash + '.png',
                             cssName: 'svg-fallback-sprite.' + preprocExtension,
-                            Algorithms: 'diagonal',
+                            algorithm: 'binary-tree',
+                            algorithmOpts: {
+                                sort: false
+                            },
                             padding: 4,
                             cssTemplate: './markup/' + staticFolderName
                                             + '/' + preprocName + '/sprite-generator-templates/'

@@ -43,7 +43,10 @@ module.exports = () => {
                         {
                             imgName: 'sprite' + tars.options.build.hash + '.png',
                             cssName: 'sprite_' + usedDpiArray[i] + '.' + preprocExtension,
-                            Algorithms: 'diagonal',
+                            algorithm: 'binary-tree',
+                            algorithmOpts: {
+                                sort: false
+                            },
                             cssOpts: dpiConfig,
                             padding: (i + 1) * 4,
                             cssTemplate: './markup/' + staticFolderName + '/'
