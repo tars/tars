@@ -1,7 +1,6 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
-const gutil = tars.packages.gutil;
 const gulpif = tars.packages.gulpif;
 const concat = tars.packages.concat;
 const autoprefixer = tars.packages.autoprefixer;
@@ -52,7 +51,7 @@ module.exports = function generateTaskContent(browser) {
         stylesFolderPath + '/etc/**/*.' + preprocExtensions,
         stylesFolderPath + '/etc/**/*.css',
         '!./**/_*.' + preprocExtensions,
-        '!./**/_*.css',
+        '!./**/_*.css'
     ];
 
     if (tars.config.postcss && tars.config.postcss.length) {
@@ -147,7 +146,7 @@ module.exports = function generateTaskContent(browser) {
             generateSourceMaps = tars.config.sourcemaps.css.active && tars.options.watch.isActive;
 
             break;
-    };
+    }
 
     stylesFilesToConcatinate = [].concat.apply([], stylesFilesToConcatinate);
 
