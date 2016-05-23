@@ -16,7 +16,7 @@ module.exports = () => {
                     notifier.error('An error occurred while compressing css.', error);
                 }
             }))
-            .pipe(tars.require('gulp-csso')(true))
+            .pipe(tars.require('gulp-csso')(tars.pluginsConfig['gulp-csso']))
             .pipe(rename({
                 suffix: '.min'
             }))

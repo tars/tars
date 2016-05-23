@@ -15,6 +15,14 @@ In general, there are no surprises when using CSS-preprocessor. Use all the poss
 
 If you are used to the usual CSS, you can use CSS-syntax in any preprocessor.
 
+TARS supports two workflows for CSS-code processing:
+* [автоматическая склейка стилей сборщиком](css-concat-processing.md);
+* [Ручное управление подключаемыми стилями](css-manual-processing.md).
+
+All info below is general for both workflows.
+
+Все, что описано ниже справедливо для обоих подходов.
+
 All files with _ prefix won't be compiled by builder. You can use these files for importing. Actually, you can import all files, what you want, but if you include file without _ you will have two copies in compiled CSS-file. So, with is the reason, why files with _ prefix won't be compiled. You can import all type of styles files: scss (sass), less, styl, css.
 Example of import using (scss):
 
@@ -59,24 +67,4 @@ There are a couple of points on the organization scss|sass|less|styl-files (scss
 
 If you'd like to use library from bower- or npm-package, you can import stylies from package by using @import.
 
-Combining of styles will be in the following order:
-* Normalize
-* Styles for libraries
-* Mixins, sprites
-* Fonts
-* Vars
-* GUI
-* Common stylies (common.scss)
-* Styles for plugins (static/scss/plugins, including all subdirectories)
-* Components' styles (css is supported)
-* Styles of etc.{scss,css}
-
 For IE8 and IE9 you can add fixes in a folder in the ie component folder. You need to create ie8.{scss,sass,css} or ie9.{scss,sass,css}.
-
-Also, you can use css-files and not to include them to bundle. There is folder separate-css in static/scss, where you can store all files, which have to be included manually. There is an example of including in any template:
-
-```handlebars
-<link href="%=static=%css/separate-css/your-file.css" rel="stylesheet" type="text/css">
-```
-
-**%=staticPrefix=% prefixe works, but this prefixe is depricated! Use just %=static=% or \_\_static\_\_!**

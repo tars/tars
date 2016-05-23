@@ -8,8 +8,10 @@ const stringHelper = tars.helpers.stringHelper;
 
 const preprocName = tars.cssPreproc.name;
 const preprocExtension = tars.cssPreproc.mainExt;
-const imagesFolderPath = `./dev/${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}`;
-const preprocFoldePath = `./markup/${tars.config.fs.staticFolderName}/${preprocName}`;
+const staticFolderName = tars.config.fs.staticFolderName;
+const imagesFolderPath = `./dev/${staticFolderName}/${tars.config.fs.imagesFolderName}`;
+const preprocFoldePath = `./markup/${staticFolderName}/${preprocName}`;
+const actionsOnSpriteTaskSkipping = require(`${tars.root}/tasks/css/helpers/actions-on-sprite-task-skipping`);
 
 
 /**
@@ -18,27 +20,42 @@ const preprocFoldePath = `./markup/${tars.config.fs.staticFolderName}/${preprocN
  */
 module.exports = () => {
     return gulp.task('css:make-sprite-for-svg', done => {
+        const errorText = 'An error occurred while making sprite for svg.';
+
+        function actionsOnTaskSkipping() {
+            return actionsOnSpriteTaskSkipping({
+                blankFilePath: `${preprocFoldePath}/sprites-${preprocName}/svg-sprite.${preprocExtension}`,
+                fileWithMixinsPath: `${tars.root}/tasks/css/helpers/sprite-mixins/${preprocName}-svg-sprite-mixins.${preprocExtension}`,
+                errorText,
+                done
+            });
+        }
 
         if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
             return gulp.src(`${imagesFolderPath}/minified-svg/*.svg`)
                 .pipe(plumber({
                     errorHandler(error) {
-                        notifier.error('An error occurred while making sprite for svg.', error);
+                        notifier.error(errorText, error);
                     }
                 }))
-                .pipe(skipTaskWithEmptyPipe('css:make-sprite-for-svg', done))
-                .pipe(tars.require('gulp-svg-spritesheet')({
-                    cssPathSvg: '',
-                    templateSrc: `${preprocFoldePath}/sprite-generator-templates/${preprocName}.svg-sprite.mustache`,
-                    templateDest: `${preprocFoldePath}/sprites-${preprocName}/svg-sprite.${preprocExtension}`,
-                    imgName: `sprite${tars.options.build.hash}.svg`,
-                    padding: 4
-                }))
+                .pipe(skipTaskWithEmptyPipe('css:make-sprite-for-svg', actionsOnTaskSkipping))
+                .pipe(tars.require('gulp-svg-spritesheet')(
+                    Object.assign(
+                        {},
+                        {
+                            cssPathSvg: '',
+                            templateSrc: `${preprocFoldePath}/sprite-generator-templates/${preprocName}.svg-sprite.mustache`,
+                            templateDest: `${preprocFoldePath}/sprites-${preprocName}/svg-sprite.${preprocExtension}`,
+                            imgName: `sprite${tars.options.build.hash}.svg`
+                        },
+                        tars.pluginsConfig['gulp-svg-spritesheet']
+                    )
+                ))
                 .pipe(gulp.dest(`${imagesFolderPath}/svg-sprite/sprite${tars.options.build.hash}.svg`))
                 .pipe(notifier.success(`${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready.`));
         }
 
         tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used or you prefer symbols workflow');
-        done(null);
+        actionsOnTaskSkipping();
     });
 };

@@ -1,0 +1,10 @@
+bg-template($sprite, $repeat = no-repeat) {
+    width: $sprite[4];
+    height: $sprite[5];
+    background-position: $sprite[2] $sprite[3];
+    background-image: url('%=static=%png-sprite/96dpi/' + $sprite[8]);
+    background-size: $sprite[6] $sprite[7];
+    background-repeat: $repeat;
+}
+
+highDpiMedia($sprite) {}

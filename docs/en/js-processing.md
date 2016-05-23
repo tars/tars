@@ -5,8 +5,7 @@ English description | <a href="../ru/js-processing.md">Описание на р�
 # JS-processing
 
 TARS supports two workflows for JavaScript-code processing:
-
-* [concatenating all JavaScript-files into one bundle in specific order](js-concat-processing.md);
+* [concatenation all JavaScript-files into one bundle in specific order](js-concat-processing.md);
 * [resolve dependencies between JavaScript-files (from TARS 1.7.0)](js-webpack-processing.md).
 
 Both workflows support style- and error-checking with eslint. Config files for eslint are in the root folder: .eslintrc and .eslintignore. You can switch off eslint by using [js.lint config option in tars-config.js](options.md#lint)

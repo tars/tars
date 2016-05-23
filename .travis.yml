@@ -6,6 +6,7 @@ os:
 
 env:
   matrix:
+    - export NODE_VERSION="6"
     - export NODE_VERSION="5"
     - export NODE_VERSION="4"
 

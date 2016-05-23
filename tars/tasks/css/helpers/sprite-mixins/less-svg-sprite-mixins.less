@@ -1,0 +1,13 @@
+.svg-sprite-position(@svg-sprite) {
+    @svg-sprite-offset-x: ~`"@{svg-sprite}".split(', ')[0].replace('[', '')`;
+    @svg-sprite-offset-y: ~`"@{svg-sprite}".split(', ')[1]`;
+    background-position: @svg-sprite-offset-x  @svg-sprite-offset-y;
+}
+
+.bg-svg(@svg-sprite, @repeat: no-repeat) {
+    background-image: url('%=static=%svg-sprite/{{imgName}}');
+    .svg-sprite-position(@svg-sprite);
+    width: ~`"@{svg-sprite}".split(', ')[2]`;
+    height: ~`"@{svg-sprite}".split(', ')[3]`;
+    background-repeat: @repeat;
+}

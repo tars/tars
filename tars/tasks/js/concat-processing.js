@@ -23,9 +23,9 @@ const jsPaths = [].concat.apply([], [
     `./markup/${staticFolderName}/js/libraries/**/*.js`,
     `./markup/${staticFolderName}/js/plugins/**/*.js`,
     tars.config.js.jsPathsToConcatBeforeModulesJs,
-    `./markup/${tars.config.fs.componentsFolderName}/*/*.js`,
+    `./markup/${tars.config.fs.componentsFolderName}/**/*.js`,
     tars.config.js.jsPathsToConcatAfterModulesJs,
-    '!./markup/' + staticFolderName + '/js/separate-js/**/*.js'
+    `!./markup/${staticFolderName}/js/separate-js/**/*.js`
 ]);
 
 /**
@@ -64,17 +64,7 @@ function base() {
 function compress() {
     if (compressJs) {
         return streamCombiner(
-            tars.require('gulp-uglify')(
-                {
-                    mangle: false,
-                    compress: {
-                        /* eslint-disable camelcase */
-                        drop_console: tars.config.js.removeConsoleLog,
-                        drop_debugger: tars.config.js.removeConsoleLog
-                        /* eslint-enable camelcase */
-                    }
-                }
-            ),
+            tars.require('gulp-uglify')(tars.pluginsConfig['gulp-uglify']),
             rename({ suffix: '.min' }),
             gulp.dest(destFolder)
         );

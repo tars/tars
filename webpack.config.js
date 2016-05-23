@@ -18,7 +18,10 @@ let preLoaders = [
         loader: 'source-map-loader'
     }
 ];
-let loaders = [];
+let loaders = [{
+    test: /\.json$/,
+    loader: 'json'
+}];
 let plugins = [
     new webpack.DefinePlugin({
         'process.env': {
@@ -132,8 +135,9 @@ module.exports = {
 
     resolve: {
         alias: {
-            modules: path.resolve('./markup/modules'),
-            static: path.resolve('./markup/' + staticFolderName)
+            modules: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
+            components: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
+            static: path.resolve(`./markup/${staticFolderName}`)
         }
     },
 

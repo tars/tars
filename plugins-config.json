@@ -1,0 +1,109 @@
+{
+    "autoprefixerConfig": ["> 1%", "last 2 versions", "Firefox ESR", "android 4"],
+
+    "browserSync": {
+        "startPath": "/index.html",
+        "server": {
+            "baseDir": "./dev"
+        },
+        "port": 3004,
+        "open": true,
+        "notify": true,
+
+        // Choose browser to open
+        // @type {String|Array}
+        // Example: ['google chrome', 'firefox']
+        // Avalible: safari, internet explorer, google chrome, firefox, opera
+        "browser": "default",
+        "injectChanges": false
+    },
+
+    "gulp-sass": {
+        "outputStyle": "expanded",
+        "includePaths": [
+            "./",
+            "./node_modules/",
+            "./bower_components/"
+        ]
+    },
+
+    "gulp-less": {
+        "paths": [
+            "./",
+            "./node_modules/",
+            "./bower_components/"
+        ]
+    },
+    "gulp-stylus": {
+        "resolve url": true,
+        "include css": true,
+        "include": [
+            "./",
+            "./node_modules/",
+            "./bower_components/"
+        ]
+    },
+
+    // helpers option is set in make-sprite-for-svg.
+    // It is strongly recommended to not override it!
+    "gulp-compile-handlebars": {
+        "batch": ["./markup/insert(tars.config.fs.componentsFolderName)"]
+    },
+
+    // locals option is set in ./tars.js
+    "gulp-jade": {
+        "pretty": true,
+        "basedir": "markup/insert(tars.config.fs.componentsFolderName)"
+    },
+
+    "gulp-csso": {
+        "restructure": true,
+        "debug": true
+    },
+
+    // cssPathSvg, templateSrc, templateDest and imgName is set in make-sprite-for-svg.
+    // It is strongly recommended to not override these options!
+    "gulp-svg-spritesheet": {
+        "padding": 4
+    },
+
+    "gulp.spritesmith": {
+        // Config for spritesmith in task make-fallback-for-svg
+        // imgName, cssName, cssTemplate is set in task.
+        // It is strongly recommended to not override these options!
+        "svg-fallback": {
+            "algorithm": "binary-tree",
+            "padding": 4
+        },
+
+        // Config for spritesmith in task make-sprite
+        // imgName, cssName, cssTemplate is set in task.
+        // It is strongly recommended to not override these options!
+        "regular-raster-sprite": {
+            "algorithm": "binary-tree",
+            "padding": 4
+        }
+    },
+
+    // This config can be overrided by user-tasks/html/helpers/modify-options
+    "gulp-minify-html": {
+        "conditionals": true,
+        "quotes": true,
+        "empty": true
+    },
+
+    // This config can be overrided by user-tasks/html/helpers/modify-options
+    "gulp-html-prettify": {
+        "indent_char": " ",
+        "indent_size": 4,
+        "indent_inner_html": true
+    },
+
+    "gulp-uglify": {
+        "mangle": false,
+        "compress": {
+            "drop_console": "insert(tars.config.js.removeConsoleLog)",
+            "drop_debugger": "insert(tars.config.js.removeConsoleLog)"
+        }
+    }
+}

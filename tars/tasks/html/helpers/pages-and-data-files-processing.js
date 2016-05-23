@@ -11,7 +11,7 @@ const Buffer = require('buffer').Buffer;
  * @return {String}         Processed data-file content
  */
 function dataFileProcessing(content) {
-    return content.replace(/^[\w-]+?\s?=\s?{([\S\s]*)};?$/m, '$1');
+    return content.replace(/^[\w\s-]+?=\s*?{\s*([\S\s]*)\s*}\s*?;?$/m, '$1');
 }
 
 module.exports = function pagesAndDataFilesProcessing() {
@@ -22,25 +22,39 @@ module.exports = function pagesAndDataFilesProcessing() {
         const parsedFileRelativePath = path.parse(file.relative);
         const fileName = parsedFileRelativePath.base;
         const fileContent = file.contents.toString();
+        const pathParts = parsedFileRelativePath.dir.split('/');
+        let namePrefix = '';
 
-        // If current file is data.js or symbols-data-template.js file, just pass it through
-        if (fileName === 'data.js' || fileName === 'symbols-data-template.js') {
-            if (fileContent.search(/^[\w-]+?\s?=/) === 0) {
-                file.contents = new Buffer(dataFileProcessing(fileContent));
-            }
-            this.push(file); // eslint-disable-line no-invalid-this
-        } else {
-            if (parsedFileRelativePath.dir) {
-                parsedFileRelativePath.dir += '/';
-            }
+        if (pathParts.length > 2) {
+            namePrefix = pathParts.slice(0, -2).join('_') + '_';
+        }
 
-            hrefArray.push(`${parsedFileRelativePath.dir}${parsedFileRelativePath.name}.html`);
-            pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
+        switch (fileName) {
+            case 'data.js':
+                if (fileContent.search(/^[\w\s-]+?=/) === 0) {
+                    file.contents = new Buffer(namePrefix + dataFileProcessing(fileContent));
+                }
+
+                if (file.contents.toString().replace(/\s/g, '').length) {
+                    this.push(file); // eslint-disable-line no-invalid-this
+                }
+                break;
+            case 'symbols-data-template.js':
+                this.push(file); // eslint-disable-line no-invalid-this
+                break;
+            default:
+                if (parsedFileRelativePath.dir) {
+                    parsedFileRelativePath.dir += '/';
+                }
+
+                hrefArray.push(`${parsedFileRelativePath.dir}${parsedFileRelativePath.name}.html`);
+                pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
+                break;
         }
 
         return callback();
-    }, function (callback)  {
-        let pagesListFileContent =  '__pages: [';
+    }, function (callback) {
+        let pagesListFileContent = '__pages: [';
 
         hrefArray.forEach((value, index) => {
             if (index) {
@@ -65,4 +79,4 @@ module.exports = function pagesAndDataFilesProcessing() {
 
         return callback();
     });
-}
+};

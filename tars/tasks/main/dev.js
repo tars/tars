@@ -35,24 +35,16 @@ module.exports = () => {
 
         if (tars.useLiveReload) {
             const useHMR = tars.config.js.workflow === 'modular' && tars.config.js.bundler === 'webpack' && tars.config.js.webpack.useHMR;
-            let browserSyncConfig = tars.config.browserSyncConfig;
+            let browserSyncConfig = tars.pluginsConfig.browserSync;
 
             /* eslint-disable no-undefined */
             browserSyncConfig = Object.assign(
                 browserSyncConfig,
                 {
-                    startPath: browserSyncConfig.startPath || browserSyncConfig.startUrl,
-                    startUrl: undefined,
-                    notify: browserSyncConfig.notify || browserSyncConfig.useNotifyInBrowser,
-                    useNotifyInBrowser: undefined,
-                    server: browserSyncConfig.server || {
-                        baseDir: browserSyncConfig.baseDir
-                    },
-                    baseDir: undefined,
                     middleware: browserSyncConfig.middleware || [],
                     port: env.BROWSERSYNC_PORT || browserSyncConfig.port,
                     logConnections: browserSyncConfig.logConnections || true,
-                    debugInfo: browserSyncConfig.debugInfo || true,
+                    logLevel: browserSyncConfig.logLevel || 'info',
                     reloadOnRestart: browserSyncConfig.reloadOnRestart || true,
                     tunnel: tars.flags.tunnel
                 }
@@ -88,7 +80,7 @@ module.exports = () => {
                 });
             }
         } else {
-            // Do not start Browser-sync without livereload, just watchers and notify
+            // Do not start Browser-sync without livereload, just watchers and notifications
             devTaskFinallyActions();
         }
     });

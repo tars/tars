@@ -10,12 +10,6 @@ module.exports = {
     ///////////////////////////////////////////////////
 
     /**
-     * Autoprefixer config
-     * @type {Array}
-     */
-    autoprefixerConfig: ['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4'],
-
-    /**
      * Postprocessors for TARS
      * @type {Array}
      * Example:
@@ -43,6 +37,11 @@ module.exports = {
         }
     },
 
+    css: {
+        // concat, manual
+        workflow: 'concat'
+    },
+
     js: {
         // concat, modular
         workflow: 'concat',
@@ -60,7 +59,7 @@ module.exports = {
          * Use babel for ES6(ES7-ESNext) syntax support
          * @type {Boolean}
          */
-        useBabel: false,
+        useBabel: true,
 
         /**
          * Remove console.log and debugger from js code in release mode
@@ -162,60 +161,6 @@ module.exports = {
          * @type {String}
          */
         taskFinishedText: 'Task finished at: '
-    },
-
-    /**
-     * Config for browser-sync module
-     * @type {Object}
-     */
-    browserSyncConfig: {
-
-        /**
-         * dir to serve files from
-         * @type {String}
-         */
-        baseDir: './dev',
-
-        /**
-         * Port of local server for browser-sync
-         * You can set port via env var BROWSERSYNC_PORT
-         * This var will override port from config
-         * @type {Number}
-         */
-        port: 3004,
-
-        /**
-         * Switch to false, if you don't need to open browser in dev mode
-         * @type {Boolean}
-         */
-        open: true,
-
-        /**
-         * Choose browser to open
-         * @type {String|Array}
-         * Example: ['google chrome', 'firefox']
-         * Avalible: safari, internet explorer, google chrome, firefox, opera
-         */
-        browser: 'default',
-
-        /**
-         * Choose the page to open in browser at first opening
-         * @type {String}
-         */
-        startUrl: '/index.html',
-
-        /**
-         * If you don't need to see notification in browser, switch to false
-         * @type {Boolean}
-         */
-        useNotifyInBrowser: true,
-
-
-        /**
-         * Inject CSS changes
-         * @type {Boolean}
-         */
-        injectChanges: false
     },
 
     /**

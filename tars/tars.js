@@ -28,7 +28,7 @@ function tarsRequire(packageName) {
             console.dir('It seems, that TARS in current project is not compatible with current TARS-CLI!', { colors: true });
             console.dir(`Package "${packageName}" is not available.`, { colors: true });
             console.dir('Update TARS-CLI via "tars update" and your project via "tars update-project"', { colors: true });
-            console.dir('Please, write to the tars.builder@gmail.com, if update did\'t help you.', { colors: true });
+            console.dir('Please, write to the tars.builder@gmail.com, if update did not help you.', { colors: true });
             console.log('---------------------------------------------------------------------------------\n');
 
             throw new Error(`Package ${packageName} is not available.`);
@@ -55,12 +55,15 @@ const templaterName = require(helpersDirPath + '/get-templater-name')(tars.confi
 const buildVersion = require(helpersDirPath + '/set-build-version')();
 const useBuildVersioning = tars.config.useBuildVersioning;
 
+// Config for plugins and packages, which is used in TARS
+tars.pluginsConfig = require(helpersDirPath + '/plugins-config-processing')();
+
 // Flags
 tars.flags = gutil.env;
 
 // Dev mode flag
 tars.isDevMode = !tars.flags.release && !tars.flags.min;
-tars.useLiveReload = tars.flags.lr || tars.flags.tunnel;
+tars.useLiveReload = tars.flags.lr || tars.flags.livereload || tars.flags.tunnel;
 
 // Package name
 tars.packageInfo.name = !tars.packageInfo.name ? 'awesome_project' : tars.packageInfo.name.replace(/[\s?+<>:*|"\\]/g, '_');
@@ -201,12 +204,6 @@ tars.helpers = {
     filterFilesByPath: require(helpersDirPath + '/filter-files-by-path')
 };
 
-const additionalPathToFindStyliesForPreprocessors = [
-    process.cwd(),
-    `${process.cwd()}/node_modules/`,
-    `${process.cwd()}/bower_components/`
-];
-
 /**
  * Info about css preprocessor
  * @type {String}   cssPreproc.name
@@ -220,11 +217,7 @@ switch (cssPreprocName) {
             name: 'stylus',
             ext: 'styl',
             mainExt: 'styl',
-            preprocessor: () => tars.require('gulp-stylus')({
-                'resolve url': true,
-                'include css': true,
-                'include': additionalPathToFindStyliesForPreprocessors
-            })
+            preprocessor: () => tars.require('gulp-stylus')(tars.pluginsConfig['gulp-stylus'])
         };
         break;
     case 'less':
@@ -232,9 +225,7 @@ switch (cssPreprocName) {
             name: 'less',
             ext: 'less',
             mainExt: 'less',
-            preprocessor: () => tars.require('gulp-less')({
-                paths: additionalPathToFindStyliesForPreprocessors
-            })
+            preprocessor: () => tars.require('gulp-less')(tars.pluginsConfig['gulp-less'])
         };
         break;
     case 'scss':
@@ -243,10 +234,7 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: () => tars.require('gulp-sass')({
-                outputStyle: 'expanded',
-                includePaths: additionalPathToFindStyliesForPreprocessors
-            })
+            preprocessor: () => tars.require('gulp-sass')(tars.pluginsConfig['gulp-sass'])
         };
         break;
 }
@@ -263,10 +251,16 @@ switch (templaterName) {
         tars.templater = {
             name: 'handlebars',
             ext: '{html,hbs}',
-            fn: mocksData => tars.require('gulp-compile-handlebars')(mocksData, {
-                batch: [`./markup/${tars.config.fs.componentsFolderName}`],
-                helpers: require('./tasks/html/helpers/handlebars-helpers.js')
-            })
+            fn: mocksData => tars.require('gulp-compile-handlebars')(
+                mocksData,
+                Object.assign(
+                    {},
+                    tars.pluginsConfig['gulp-compile-handlebars'],
+                    {
+                        helpers: require('./tasks/html/helpers/handlebars-helpers')
+                    }
+                )
+            )
         };
         break;
     case 'jade':
@@ -274,11 +268,15 @@ switch (templaterName) {
         tars.templater = {
             name: 'jade',
             ext: 'jade',
-            fn: mocksData => tars.require('gulp-jade')({
-                pretty: true,
-                locals: mocksData,
-                basedir: 'markup/components'
-            })
+            fn: mocksData => tars.require('gulp-jade')(
+                Object.assign(
+                    {},
+                    tars.pluginsConfig['gulp-jade'],
+                    {
+                        locals: mocksData
+                    }
+                )
+            )
         };
         break;
 }

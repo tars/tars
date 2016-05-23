@@ -44,12 +44,14 @@ module.exports = function generateTaskContent(browser) {
         `${stylesFolderPath}/common.${preprocExtensions}`,
         `${stylesFolderPath}/plugins/**/*.${preprocExtensions}`,
         `${stylesFolderPath}/plugins/**/*.css`,
-        `./markup/${tars.config.fs.componentsFolderName}/*/*.${preprocExtensions}`,
-        `./markup/${tars.config.fs.componentsFolderName}/*/*.css`
+        `./markup/${tars.config.fs.componentsFolderName}/**/*.${preprocExtensions}`,
+        `./markup/${tars.config.fs.componentsFolderName}/**/*.css`
     ];
     const lastStylesFilesToConcatinate = [
         `${stylesFolderPath}/etc/**/*.${preprocExtensions}`,
         `${stylesFolderPath}/etc/**/*.css`,
+        `!${stylesFolderPath}/entry/**/*.${preprocExtensions}`,
+        `!${stylesFolderPath}/entry/**/*.css`,
         `!./**/_*.${preprocExtensions}`,
         '!./**/_*.css'
     ];
@@ -73,8 +75,8 @@ module.exports = function generateTaskContent(browser) {
                 `${stylesFolderPath}/sprites-${preprocName}/svg-fallback-sprite.${preprocExtensions}`,
                 `${stylesFolderPath}/sprites-${preprocName}/sprite-ie.${preprocExtensions}`,
                 generalStylesFilesToConcatinate,
-                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie8.${preprocExtensions}`,
-                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie8.css`,
+                `./markup/${tars.config.fs.componentsFolderName}/**/ie/ie8.${preprocExtensions}`,
+                `./markup/${tars.config.fs.componentsFolderName}/**/ie/ie8.css`,
                 lastStylesFilesToConcatinate
             );
 
@@ -103,8 +105,8 @@ module.exports = function generateTaskContent(browser) {
 
             stylesFilesToConcatinate.push(
                 generalStylesFilesToConcatinate,
-                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie9.${preprocExtensions}`,
-                `./markup/${tars.config.fs.componentsFolderName}/*/ie/ie9.css`,
+                `./markup/${tars.config.fs.componentsFolderName}/**/ie/ie9.${preprocExtensions}`,
+                `./markup/${tars.config.fs.componentsFolderName}/**/ie/ie9.css`,
                 lastStylesFilesToConcatinate
             );
 
@@ -128,7 +130,11 @@ module.exports = function generateTaskContent(browser) {
 
             if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
                 stylesFilesToConcatinate.push(
-                    `${stylesFolderPath}/sprites-${preprocName}/svg-sprite.${preprocExtensions}`
+                    `${stylesFolderPath}/sprites-${preprocName}/svg-sprite.${preprocExtensions}`,
+                    `!./markup/${tars.config.fs.componentsFolderName}/**/ie/ie9.${preprocExtensions}`,
+                    `!./markup/${tars.config.fs.componentsFolderName}/**/ie/ie9.css`,
+                    `!./markup/${tars.config.fs.componentsFolderName}/**/ie/ie8.${preprocExtensions}`,
+                    `!./markup/${tars.config.fs.componentsFolderName}/**/ie/ie8.css`
                 );
             }
 
@@ -137,9 +143,9 @@ module.exports = function generateTaskContent(browser) {
                 lastStylesFilesToConcatinate
             );
 
-            if (tars.config.autoprefixerConfig) {
+            if (tars.pluginsConfig.autoprefixerConfig) {
                 postProcessors.push(
-                    autoprefixer({browsers: tars.config.autoprefixerConfig})
+                    autoprefixer({browsers: tars.pluginsConfig.autoprefixerConfig})
                 );
             }
 

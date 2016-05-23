@@ -9,6 +9,7 @@ const fs = require('fs');
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 const generateStaticPath = require(`${tars.root}/tasks/html/helpers/generate-static-path`);
+const templaterName = require(`${tars.root}/helpers/get-templater-name`)(tars.config.templater.toLowerCase());
 
 let patterns = [];
 
@@ -49,13 +50,15 @@ function concatComponentsData() {
 
     if (dataEntry) {
         eval(`readyMocksData = {${dataEntry}}`);
+        // readyMocksData passed as second argument
+        // to be an argument for each function from data
         traverseThroughObject(readyMocksData, readyMocksData);
     } else {
         readyMocksData = '{}';
     }
 
     // Add helpers for Jade into readyMocksData in case of using Jade as templater
-    if (tars.templater.name === 'jade') {
+    if (templaterName === 'jade') {
         readyMocksData = Object.assign(readyMocksData, {
             jadeHelpers: require(`${tars.root}/tasks/html/helpers/jade-helpers`)
         });
@@ -143,7 +146,7 @@ if (
  * @return {Pipe}
  */
 function jadeInheritanceProcessing() {
-    if (tars.options.watch.isActive && tars.templater.name === 'jade') {
+    if (tars.options.watch.isActive && templaterName === 'jade') {
         return tars.packages.streamCombiner(
             tars.packages.cache('templates'),
             tars.require('gulp-jade-inheritance')({ basedir: './markup/' }),

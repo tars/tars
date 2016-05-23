@@ -16,6 +16,7 @@ There is [TARS-CLI](https://github.com/tars/tars-cli) in order to not install al
 
 You can install TARS-CLI via NPM. More info in [project's repository](https://github.com/tars/tars-cli).
 
+** Attention! All docs from branch "master" are written for the last version of TARS. If you have another version of TARS, please, open appropriate release and take docs from there. Besides, you have all docs, which are 100% compatible with your project in the root folder of your project!**
 
 ## Basic features
 
@@ -24,7 +25,7 @@ Listed below are just a little part of the features. In fact builder has much mo
 * [Jade](http://jade-lang.com/) or [Handlebars](http://handlebarsjs.com/) as html-templater. You can also use a regular html. Read more [in docs](/docs/en/html-processing.md).
 * [Webpack](https://webpack.github.io) (with [Hot Module Replacing](https://webpack.github.io/docs/hot-module-replacement.html)) or simple JavaScript-code concatenation into one bundle.
 * Using json (js-object actually, which can be described in json) to transfer data in templates (optional, but it is  very cool thing that will let you to rid of copypast). Read more [in docs](/docs/en/html-processing.md#%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8F%D0%BC%D0%B8-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B2-handlebars).
-* [TARS-CLI](https://github.com/tars/tars-cli) and auto update of your project.
+* [TARS-CLI](https://github.com/tars/tars-cli) and **auto update of your project**.
 * You can use ES6 (and some experimental features from ES7) right now. [More info](/docs/en/js-processing.md).
 * [SCSS (SASS)](http://sass-lang.com/), [LESS](http://www.lesscss.ru/) or [Stylus](http://learnboost.github.io/stylus/) as a preprocessor for css. Also it includes a small set of mixins. Sourcemaps is included. You can use .scss and .sass extension then scss is selected as preprocessor. You can use .scss and .sass files together. Read more [in docs](/docs/en/css-processing.md). [PostCSS](https://github.com/postcss/postcss) with [autoprefixer](https://github.com/postcss/autoprefixer) is supported by default and it is really easy [to use additional plugins for PostCSS](/docs/en/options.md#postcss).
 * No external libraries and plugins (except [html5shiv](https://ru.wikipedia.org/wiki/Html5_Shiv)). Yes, this is a feature because you can choose library for using. Sourcemaps for JavaScript is included.
@@ -41,7 +42,8 @@ It is important! All examples in documentation use the default settings.
 
 * [File structure](/docs/en/file-structure.md)
 * [Working with tasks and watchers](/docs/en/tasks-and-watchers.md)
-* [Options](/docs/en/options.md)
+* [TARS Options](/docs/en/options.md)
+* [Plugins configuration](/docs/en/plugins-options.md)
 * [Html](/docs/en/html-processing.md)
 * [Css](/docs/en/css-processing.md)
 * [Js](/docs/en/js-processing.md)
@@ -133,7 +135,8 @@ It is important! All examples in documentation use the default settings.
 
 * [File structure](/docs/en/file-structure.md)
 * [Working with tasks and watchers](/docs/en/tasks-and-watchers.md)
-* [Options](/docs/en/options.md)
+* [TARS Options](/docs/en/options.md)
+* [Plugins configuration](/docs/en/plugins-options.md)
 * [Html](/docs/en/html-processing.md)
 * [Css](/docs/en/css-processing.md)
 * [Js](/docs/en/js-processing.md)

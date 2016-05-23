@@ -105,6 +105,24 @@ You can set a path to file with svg-symbols. File will be created in that direct
 
 Possible value: `static/images/`.
 
+### css
+
+Type: `Object`
+
+Config for CSS processing in TARS.
+
+#### workflow
+
+Type: `String`
+
+Default: `concat`
+
+Type of CSS-code processing.
+
+You can set:
+* `concat` — concatenation of all CSS-files into one budle in specific order;
+* `manual` — you have to import all used files into entry points by yourself.
+
 ### js
 
 Type: `Object`
@@ -425,6 +443,14 @@ Type: `String`
 Default: `'img'`
 
 The name of the folder where images of the the project will be. Most often  this folder has different names, so the name of this directory is optional.
+
+#### componentsFolderName
+
+Type: `String`
+
+Default: `'components'`
+
+The name of the folder where components (modules for TARS 1.7.0 and below) of the the project will be.
 
 ## Depricated
 
