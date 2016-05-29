@@ -6,12 +6,15 @@ const path = require('path');
 const Buffer = require('buffer').Buffer;
 
 /**
- * Strip 'data = {' and '};' from data-file content
+ * Strip 'const data = {' and '};' from data-file content or just remove last ;
  * @param  {String} content Content of data-file to processing
  * @return {String}         Processed data-file content
  */
 function dataFileProcessing(content) {
-    return content.replace(/^[\w\s-]+?=\s*?{\s*([\S\s]*)\s*}\s*?;?$/m, '$1');
+    return content
+        .replace(/^[\w\s-]+?=\s*?{\s*([\S\s]*)\s*}\s*?;?$/m, '$1')
+        .replace(/^'([\w\s-]+)'/, '$1')
+        .replace(/;$/m, '');
 }
 
 module.exports = function pagesAndDataFilesProcessing() {
@@ -21,8 +24,8 @@ module.exports = function pagesAndDataFilesProcessing() {
     return through2.obj(function (file, enc, callback) {
         const parsedFileRelativePath = path.parse(file.relative);
         const fileName = parsedFileRelativePath.base;
-        const fileContent = file.contents.toString();
         const pathParts = parsedFileRelativePath.dir.split('/');
+        let fileContent = file.contents.toString();
         let namePrefix = '';
 
         if (pathParts.length > 2) {
@@ -31,11 +34,16 @@ module.exports = function pagesAndDataFilesProcessing() {
 
         switch (fileName) {
             case 'data.js':
-                if (fileContent.search(/^[\w\s-]+?=/) === 0) {
-                    file.contents = new Buffer(namePrefix + dataFileProcessing(fileContent));
+                // Create new component anme for ready data-file
+                fileContent = namePrefix + dataFileProcessing(fileContent);
+
+                // Add '' to ready component name
+                if (fileContent.search(/^([\w\s-]+)/) === 0) {
+                    fileContent = fileContent.replace(/^([\w\s-]+)/, '\'$1\'');
                 }
 
-                if (file.contents.toString().replace(/\s/g, '').length) {
+                if (fileContent.replace(/\s/g, '').length) {
+                    file.contents = new Buffer(fileContent);
                     this.push(file); // eslint-disable-line no-invalid-this
                 }
                 break;

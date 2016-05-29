@@ -139,7 +139,7 @@ module.exports = () => {
                             new Promise((resolve, reject) => {
                                 ncp(
                                     `${downloadedPreprocPartsPath}/components`,
-                                    './markup/${tars.config.fs.componentsFolderName}',
+                                    `./markup/${tars.config.fs.componentsFolderName}`,
                                     error => {
                                         if (error) {
                                             reject(error);

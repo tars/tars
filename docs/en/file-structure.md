@@ -33,7 +33,7 @@ Builder has the following file structure:
 
 ## The structure of the individual component
 
-Component is an independent unit of the page. Example component - «header» or «footer». Each page consists of components. Any component may include other components.
+Component is an independent unit of the page. Example component - «header» or «footer». Each page consists of components. Any component may include other components and can be included into each other.
 
 ```
 exampleComponent/                           # Component example

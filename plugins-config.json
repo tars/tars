@@ -22,6 +22,7 @@
         "outputStyle": "expanded",
         "includePaths": [
             "./",
+            "./markup/",
             "./node_modules/",
             "./bower_components/"
         ]
@@ -30,6 +31,7 @@
     "gulp-less": {
         "paths": [
             "./",
+            "./markup/",
             "./node_modules/",
             "./bower_components/"
         ]
@@ -39,6 +41,7 @@
         "include css": true,
         "include": [
             "./",
+            "./markup/",
             "./node_modules/",
             "./bower_components/"
         ]

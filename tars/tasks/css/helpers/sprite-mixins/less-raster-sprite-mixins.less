@@ -5,7 +5,6 @@
 }
 
 .sprite-image(@sprite) {
-    {{! DEV: We perform a slice due to a trailing brace from string coercion of arrays }}
     @sprite-image: ~`'%=static=%png-sprite/96dpi/' + "@{sprite}".split(', ')[8].replace(']', '').replace(/\'/g, '')`;
     background-image: url(@sprite-image);
 }

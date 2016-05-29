@@ -32,5 +32,5 @@ module.exports = function separateFilesFilter() {
         }
 
         return callback();
-    }, callback =>  callback());
-}
+    }, callback => callback());
+};
