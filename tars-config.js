@@ -171,14 +171,11 @@ module.exports = {
     minifyHtml: false,
 
     /**
-     * Beginning of path for static files
-     * You have to use %=static=% or __static__ placeholder in paths to static
-     * Example: %=static=%img/logo.png or __static__img/logo.png
-     * Will be replaced to '/static/img/logo.png'
-     * %=staticPrefix=% prefix works, but it is deprecated!
-     * @type {String}
+     * TARS will generate relative path from current page
+     * to static files in case of true value
+     * @type {Boolean}
      */
-    staticPrefix: 'static/',
+    generateStaticPath: true,
 
     /**
      * Path to build version of project
