@@ -18,6 +18,9 @@ By default webpack can resolve dependencies, which is required by require (impor
 import foo from 'components/example/example'; // useBabel: true
 // or
 const foo = require('components/example/example');
+
+// Old type will work too
+const foo = require('modules/example/example');
 ```
 
 Also, there is alias for static folder:

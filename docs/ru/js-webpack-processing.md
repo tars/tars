@@ -18,6 +18,9 @@
 import foo from 'components/example/example'; // useBabel: true
 // или
 const foo = require('components/example/example');
+
+// Доступен и прошлый вариант
+const foo = require('modules/example/example');
 ```
 
 Также есть алиас для папки static, который позволит подключить файл из папки static в любой точке приложения:
