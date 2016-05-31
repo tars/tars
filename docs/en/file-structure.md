@@ -44,8 +44,13 @@ exampleComponent/                           # Component example
     ├── exampleComponent.html               # Handlebars-represention of component (it could be jade)
     ├── exampleComponent.scss|less|styl     # Css-representation of component (scss|sass|less|styl)
     ├── exampleComponent.js                 # Js-represent
+    ├── anotherComponentFolder
 
 ```
+
+Any component can be can be embedded into another component.
+
+All images from asstes will be moved to static/img/assets/component_name or static/img/assets/component_name/embedded_component_name, if current component is embedded into another. Images are files with extension svg, png, jpg, jpeg, jpe, gif, tiff and bmp. Other files will be moved to components-assets (the name of folder is depend on option fs.componentsFolderName).
 
 The basic idea is to make the component as much isolated structure as possible. You can use the [BEM](https://ru.bem.info), [web components](http://webcomponents.org) (and their [realization from Google](https://www.polymer-project.org)), something else. You can do everything by old-fashioned way, all markup is in one component, but it is not recommended.  If we talk in BEM terms, each component is a block. There is an [excellent lecture](https://www.youtube.com/watch?v=pyAYbbDJjPo) on how to organize your code.
 
@@ -74,7 +79,8 @@ static/                                     #  Folder for static-files. You can 
         └── plugins/                        # js-plugins
         └── separate-js/                    # js-files, which must not be included in ready bundle
     └── misc/                               # General files, which will be moved to root directory of ready project — favicons, robots.txt and so on  (can contain subdirectories)
-    └── scss                  
+    └── scss  
+        ├── entry/                          # Styles for entry points for css in case of manual css-processing More info [here](css-manual-processing.md).                
         └── etc/                            # Styles, which will be included in the end of ready css-file (can contain subdirectories)
         └── libraries/                      # Styles for libraries (can contain subdirectories)
         └── plugins/                        # Styles for plugins (can contain subdirectories)
@@ -97,9 +103,12 @@ There will be tow folders in the root after assembly of the project: dev and bui
 ```
 dev/
     └── static/                         # Folder for static-files. You can choose the name for that folder in tars-config.js
-        └── css/                        # Ready stylies and stylies for IE9 и IE8, if support is turned on and stylies from separate-css.
+        └── css/                        # Ready stylies and stylies for IE9 и 
+        IE8, if support is turned on and stylies from separate-css.
+        └── components-assets/          # Static files for components.
+                └── exampleComponent/   
         └── img/                        # Images for project
-            └── assets/                 # Static files for components.
+            └── assets/                 # Static files for components. Only images
                 └── exampleComponent/      
             └── content/                # Images for content
             └── plugins/                # Images for plugins

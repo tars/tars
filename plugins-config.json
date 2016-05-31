@@ -1,4 +1,7 @@
 {
+
+    // You can find docs for this file here: ./docs/en|ru/plugins-options.md
+
     "autoprefixerConfig": ["> 1%", "last 2 versions", "Firefox ESR", "android 4"],
 
     "browserSync": {
@@ -60,8 +63,7 @@
     },
 
     "gulp-csso": {
-        "restructure": true,
-        "debug": true
+        "restructure": true
     },
 
     // cssPathSvg, templateSrc, templateDest and imgName is set in make-sprite-for-svg.

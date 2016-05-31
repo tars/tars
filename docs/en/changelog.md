@@ -6,6 +6,18 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 ## Version 1.8.0
 
+* Modules directory was renamed to components. This is optional, you can change it in [tars-config](options.md#componentsfoldername). 
+* Task concat-modules-data was renamed to concat-mocks-data.
+* Log fixing for case, when there is problems with sprite generation.
+* You can configure gulp-plugins bu using [plugins-config.js](plugins-options.md).
+* Jade recompilation became faster.
+* You can crate components inside another components.
+* All images from assets of component will be moved to static/img/assets. Images are files with extensions svg, png, jpg, jpeg, jpe, gif, tiff and bmp.
+Other files will be moved to static/components-assets.
+* staticPrefix was removed from tars-config.
+* Option [generateStaticPath](options.md#generatestaticpath) was added.
+* Build name is based on local date.
+* TARS works in NodeJs 6.x.x version.
 
 ## Version 1.7.1
 

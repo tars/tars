@@ -49,6 +49,30 @@ TARS supports both syntaxes by default.
 
 In file data.js supported comments within the data object.
 
+You can add component into another component folder from TARS 1.8.0. In that case there can be some problems with dublicate names of that components. To prevent this situation, TARS genereate uniq key for each embeded component by the next scheme:
+
+```javascript
+'parentComponentName_anotherParentComponent_currentComponentName' = {
+    dataType: {
+        property: value
+    }
+};
+```
+
+In the embeded component data-file you can write usual code:
+
+```javascript
+const data = {
+    'currentComponentName': {
+        dataType: {
+            property: value
+        }
+    }
+};
+```
+
+Unique key will be generated automatically.
+
 There will be in full-data data from _template component and a list of all pages of current project in array like this:
 
 ```javascript
@@ -181,6 +205,8 @@ component: {
     }
 }
 ```
+
+Do not forget, that embeded components will have uniq key in ready data-file in build.
 
 Handlebars known as a very simple template. But it is not comfortable to use Handlebars in markup process without frameworks or something like that. So, different helpers have been added that expand Handlebars.<br/>
 Helpers description can be found [here](handlebars-helpers.md).

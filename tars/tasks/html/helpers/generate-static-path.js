@@ -9,6 +9,18 @@ const Buffer = require('buffer').Buffer;
  */
 module.exports = function generateStaticPath() {
 
+    function getStaticPrefix(pageDepth) {
+        const staticPrefix = tars.config.fs.staticFolderName;
+
+        if (tars.useLiveReload) {
+            return `/${staticPrefix}/`;
+        }
+
+        if (tars.config.generateStaticPath) {
+            return `${pageDepth.join('')}${staticPrefix}/`;
+        }
+    }
+
     return through2.obj(function (file, enc, callback) {
         // Get all directories array for current page from page directory
         const directoriesArray = path.parse(file.relative).dir.split(path.sep);
@@ -18,20 +30,11 @@ module.exports = function generateStaticPath() {
                 return '../';
             }
         });
-        const staticPrefix = tars.config.fs.staticFolderName;
-        const staticPath = `${pageDepth.join('')}${staticPrefix}/`;
         let newPageContent = file.contents.toString();
 
-        if (tars.useLiveReload && !tars.config.generateStaticPath) {
-            newPageContent = newPageContent.replace(
-                /%=staticPrefix=%|%=static=%|__static__/g, `/${staticPrefix}/`
-            );
-        } else {
-            newPageContent = newPageContent.replace(
-                /%=staticPrefix=%|%=static=%|__static__/g, staticPath
-            );
-        }
-
+        newPageContent = newPageContent.replace(
+            /%=staticPrefix=%|%=static=%|__static__/g, getStaticPrefix(pageDepth)
+        );
 
         if (tars.config.svg.active && tars.config.svg.workflow === 'symbols' &&
             tars.config.svg.symbolsConfig.loadingType === 'separate-file-with-link') {

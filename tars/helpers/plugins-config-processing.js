@@ -11,7 +11,7 @@ module.exports = function makePluginsConfig() {
     const rawPluginsConfig = json.parse(fs.readFileSync(`${cwd}/plugins-config.json`).toString());
     const stringifiedPluginsConfig = json.stringify(rawPluginsConfig, null, 2);
     const processedPluginsConfig = stringifiedPluginsConfig.replace(
-        /insert\(([\w.-_()`\{\/}$\s]+)\)/gi,
+        /insert\(([\w.\-()`\{\/}$\s]+)\)/gi,
         (match, p1) => eval(p1)
     );
 

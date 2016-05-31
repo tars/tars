@@ -4,24 +4,46 @@
 
 # CSS manual processing
 
-Данный подход будет полезен, если вам не хватало контроля над сборкой стилей при автоматической конкатенации.
+Данный подход будет полезен, если вам не хватало контроля над сборкой стилей при автоматической конкатенации. В данном режиме вы полностью управляете процессом (и порядком) сборки стилей в проекте. Ручное управление стилей досутпно с TARS версии 1.8.0 и выше.
 
+Основные точки входа, файлы стилей, в которые будут импортироваться стили вашего проекта, находятся в папке static/scss/entry. По умолчанию там уже находится одна точка входа — main.scss Вы можете добавить еще точек входа, если вам это потребуется. Именно эти файлы будут компилироваться препроцессором. Файлы вашего проекта необходимо подключать в точки входа с помощью конструкции @import.
 
+Подключение точки входа по умолчанию (main) уже описано в шаблонах (components/head/). В случае добавления новых точек входа, их треубется подключать в шаблонах вручную.
 
-# Точка входа для 
+Содержимое main.scss выглядит следующим образом:
 
+```scss
+@import '../normalize.scss';
 
+/* Libraries, which is used in current project. */
+@import 'partials/_libraries.scss';
 
-# Internet Explorer entry points
+/* Libraries, which is used in current project. */
+@import 'built-in-partials/_service.scss';
 
-You can add entry points for Internet Explorer 8 and 9 here. Each entry point have to have special suffix like _ie8 for styles, which is used for IE8 and _ie9 for styles is used for IE9.
+/* Plugins, which is used in current project. */
+@import 'partials/_plugins.scss';
 
-By default, there is one entry points for
+/* Components, which is used in current project. */
+@import 'partials/_components.scss';
 
+/* Additional style files. */
+@import '../etc/etc.scss';
+```
 
+В точку входа импортируется normalize.scss, затем партиал, в который вы можете импортировать библиотеки, затем встроенные партиалы (различные миксины для правильной работы с графикой в проекте и т.д.), партиал с плагинами, партиал с компонентами и другие стили.
 
-# Service stylies
+Партиал с компонентами означает, что именно в этот файл вы будете импортировать стили своих компонентов. При этом вам не обязательно указывать относительный путь до стилей компонентов от файла партиала. Достаточно сделать так:
 
-This folder is used to store serviec styles, like sprite mixins, vars and so on.
+```scss
+@import 'components/_template/_template.scss';
+```
 
-**Please, do not edit any file from this folder! All files can be overwritten by update-project!**
+Подключение стилей для плагинов и библиотек из node_modules и bower_components описано в [общей доке по работе со стилями](css-processing.md).
+
+Большая просьба: **не редактируйте файлы из директории built-in-partials, они могут быть перезаписаны в результате обновления проекта!**.
+
+Также в entry есть директория ie, в которой вы можете добавить точки входа для ie8 и ie9. Точки входа для ie9 должны иметь суффикс _ie9, а для ie8 — _ie8.
+
+Обратите внимание, для этих точек входа вам необходимо подключать стили компонентов, если они есть для этих браузеров. Нет необходимости дублировать содержимое _components и _components-ie9. В _components-ie9 должны быть только стили компонентов для ie9.
+

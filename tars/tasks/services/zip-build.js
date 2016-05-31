@@ -12,7 +12,7 @@ module.exports = () => {
 
         if (tars.config.useArchiver) {
             const zip = tars.require('gulp-zip');
-            const name = tars.packageInfo.name === 'awesome_project' ? 'build' : tars.packageInfo.name;
+            const name = tars.packageInfo.name === 'awesome_project' ? 'build' : tars.packageInfo.name.replace(/[\s?+<>:*|"\\]/g, '_');
             const version = tars.options.build.version;
 
             return gulp.src(`${tars.options.build.path}**`, { base: tars.options.build.path })

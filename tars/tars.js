@@ -66,7 +66,7 @@ tars.isDevMode = !tars.flags.release && !tars.flags.min;
 tars.useLiveReload = tars.flags.lr || tars.flags.livereload || tars.flags.tunnel;
 
 // Package name
-tars.packageInfo.name = !tars.packageInfo.name ? 'awesome_project' : tars.packageInfo.name.replace(/[\s?+<>:*|"\\]/g, '_');
+tars.packageInfo.name = tars.packageInfo.name || 'awesome_project';
 
 /**
  * Log messages from TARS

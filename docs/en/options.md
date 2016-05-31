@@ -10,17 +10,6 @@ You need to restart the assembly to apply changes.
 
 ## Variable options
 
-### autoprefixerConfig
-
-Type: `Array or Boolean`
-
-Default: `['> 1%', 'last 2 versions', 'Firefox ESR', 'android 4']`
-
-Configuration for autoprefixer (read more [here](http://css-tricks.com/autoprefixer)). In short, this module allows you not to write vendor prefixes.
-In this configuration you do not need to include IE8 and IE9, style assembly is done by another way for them .
-You can look [here](https://github.com/postcss/autoprefixer#browsers) which browsers are available.
-If you do not want to use autoprefixer, pass in this option `false` value.
-
 ### postcss
 
 Type: `Array`
@@ -269,68 +258,6 @@ Default: `undefined`
 
 In this option the name of the system sound is passed which will be played during the notification in case of failed build. If you don't need the sounds, you can set it with `undefined` value.
 
-### browserSyncConfig
-
-Config for the Browsersync module. This module implements the possibility livereload in browser, sharing the markup to an external web, creating a local server.
-
-#### baseDir
-
-Type: `String`
-
-Default: `'./dev'`
-
-The directory from which the server will take html-files. The html-file specified in [startUrl](#starturl) should be there.
-
-#### port
-
-Type: `Number`
-
-Default: `3004`
-
-Port on which markup will be available when you turn on local server. If the specified port is in use, it will automatically take the next free.
-You can set port via env var BROWSERSYNC_PORT. This var will override port from config.
-
-#### open
-
-Type: `Boolean`
-
-Default: `true`
-
-Opening the browser when you turn on livereload or sharing markup to an external Web.
-
-#### browser
-
-Type: `String or Array`
-
-Default: `google chrome`
-
-The name of the browser, which will be opened when you turn on livereload or sharing markup to an external Web. You can also specify an array of values to open several browsers.
-Available browsers: `safari`, `internet explorer`, `google chrome`, `firefox`, `opera`.
-
-#### startUrl
-
-Type: `String`
-
-Default: `'/index.html'`
-
-You can set name of the page which you want to load the first using livereload or markup sharing to an external Web. The path is specified from dev folder.
-
-#### useNotifyInBrowser
-
-Type: `Boolean`
-
-Default: `true`
-
-By default, the browser displays a notification that the browser has been restarted, JavaScript or CSS has been updated, etc.
-
-#### injectChanges
-
-Type: `Boolean`
-
-Default: `false`
-
-[Inject CSS while livereload](https://www.browsersync.io/docs/options/#option-injectChanges) or just reload page.
-
 ### minifyHtml
 
 Type: `Boolean`
@@ -339,18 +266,13 @@ Default: `false`
 
 Enabling minifications for HTML. If is set to `false`, compiled html will be prettified.
 
-### staticPrefix
+### generateStaticPath
 
-Type: `String`
+Type: `Boolean`
 
-Default: `static/`
+Default: `true`
 
-It is a custom path to the static.
-This option is used if the markup is given in the introduction in the backend. This option allows you to set the path to the static's files, if during the implementation path must be different. That the backend developer didn't manually change path in the css- and html- files, you can write the necessary prefix to this option.
-
-The value of this option sets the value of the placeholder %=static=% or \_\_static\_\_, which can be used in any project files.
-
-**%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or \_\_static\_\_!**
+This option turns on autogeneration of apth to static directory from current file. In case of using server or livereload, path to static won't ve generated, cause static files is served by server.
 
 ### buildPath
 
@@ -477,3 +399,31 @@ Custom path to the folder with the statics of the css-files. imageFolderName is 
 ### useJsLintAndHint
 
 **Option has been renamed to [lint](#lint) and moved to js-config object.**
+
+### autoprefixerConfig
+
+Configuration for autoprefixer (read more here). In short, this module allows you not to write vendor prefixes. In this configuration you do not need to include IE8 and IE9, style assembly is done by another way for them . You can look here which browsers are available. If you do not want to use autoprefixer, pass in this option false value.
+
+**Option was moved to plugins-config.json.**
+
+### browserSyncConfig
+
+Config for the Browsersync module. This module implements the possibility livereload in browser, sharing the markup to an external web, creating a local server.
+
+#### baseDir
+#### port
+#### open
+#### browser
+#### startUrl
+#### useNotifyInBrowser
+#### injectChanges
+
+**Option was moved to plugins-config.json. You can set any [option, which is supported by browsersync](https://www.browsersync.io/docs/options/).**
+
+### staticPrefix
+
+The value of this option sets the value of the placeholder %=static=% or __static__, which can be used in any project files.
+
+%=staticPrefix=% prefix works, but this prefix is depricated! Use just %=static=% or __static__!
+
+**Option is depricated! Value is set in tars/tars.js**
