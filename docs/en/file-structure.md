@@ -18,7 +18,7 @@ Builder has the following file structure:
 ├── user-package.json       # User dependencies
 └── tars/                   # Tasks and helpers for gulp
     └── helpers/            # Helpers
-    └── tasks/              # Sustem tasks
+    └── tasks/              # System tasks
     └── user-tasks/         # User's tasks
     └── watchers/           # System watchers
     └── user-watchers/      # User's watchers
@@ -38,7 +38,7 @@ Component is an independent unit of the page. Example component - «header» or 
 ```
 exampleComponent/                           # Component example
     └── assets/                             # Static files for current component (files with any extension) Subdirectories unsupport
-    └── ie/                                 # Stylies for IE9.scss|sass|less|styl и IE8.scss|sass|less|styl)
+    └── ie/                                 # Styles for IE9.scss|sass|less|styl и IE8.scss|sass|less|styl)
     └── data/                               # Folder for component's data
         ├── data.js                         # Data for component (there is an example for data in _template component)
     ├── exampleComponent.html               # Handlebars-represention of component (it could be jade)
@@ -87,11 +87,11 @@ static/                                     #  Folder for static-files. You can 
         └── sprite-generator-templates/     # Templates for sprite generating
         └── sprites-scss/                   # Mixins for sprites
         ├── separate-css/                   # Css-files, which must not be included in ready bundle
-        ├── common.scss                     # General stylies
-        ├── fonts.scss                      # Stylies for fons
-        ├── GUI.scss                        # Stylies for GUI elements (inputs, buttons and so on)
+        ├── common.scss                     # General styles
+        ├── fonts.scss                      # Styles for fonts
+        ├── GUI.scss                        # Styles for GUI elements (inputs, buttons and so on)
         ├── mixins.scss                     # Project's mixins
-        ├── normalize.scss                  # Stylies reset
+        ├── normalize.scss                  # Styles reset
         ├── vars.scss                       # Variables
 ```
 
@@ -103,8 +103,8 @@ There will be tow folders in the root after assembly of the project: dev and bui
 ```
 dev/
     └── static/                         # Folder for static-files. You can choose the name for that folder in tars-config.js
-        └── css/                        # Ready stylies and stylies for IE9 и 
-        IE8, if support is turned on and stylies from separate-css.
+        └── css/                        # Ready styles and styles for IE9 and 
+        IE8, if support is turned on and styles from separate-css.
         └── components-assets/          # Static files for components.
                 └── exampleComponent/   
         └── img/                        # Images for project
