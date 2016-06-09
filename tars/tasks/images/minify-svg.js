@@ -14,7 +14,7 @@ module.exports = () => {
     return gulp.task('images:minify-svg', done => {
 
         if (tars.config.svg.active) {
-            return gulp.src(`./markup/${svgImagesPath}/svg/*.svg`)
+            return gulp.src(`./markup/${svgImagesPath}/svg/**/*.svg`)
                 .pipe(plumber({
                     errorHandler(error) {
                         notifier.error('An error occurred while minifying svg.', error);
