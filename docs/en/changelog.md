@@ -4,12 +4,19 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.8.1
+
+* Init process without user-package.json fixed.
+* Autoprefixer was added for IE9.
+* Pathes for IE entry points were fixed.
+* Dependencies update.
+
 ## Version 1.8.0
 
 * Modules directory was renamed to components. This is optional, you can change it in [tars-config](options.md#componentsfoldername). 
 * Task concat-modules-data was renamed to concat-mocks-data.
 * Log fixing for case, when there is problems with sprite generation.
-* You can configure gulp-plugins bu using [plugins-config.js](plugins-options.md).
+* You can configure gulp-plugins by using [plugins-config.js](plugins-options.md).
 * Jade recompilation became faster.
 * You can crate components inside another components.
 * All images from assets of component will be moved to static/img/assets. Images are files with extensions svg, png, jpg, jpeg, jpe, gif, tiff and bmp.
