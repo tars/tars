@@ -55,6 +55,10 @@ module.exports = function generateTaskContent(browser) {
                 `${stylesFolderPath}/entry/ie/*_ie9.${preprocExtensions}`
             );
 
+            postProcessors.push(
+                autoprefixer({browsers: ['ie 9']})
+            );
+
             generateSourceMaps = false;
             successMessage = `${capitalizePreprocName}-files for IE9 have been compiled`;
             errorMessage = 'An error occurred while compiling css for IE9.';
