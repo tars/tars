@@ -16,7 +16,7 @@ There is [TARS-CLI](https://github.com/tars/tars-cli) in order to not install al
 
 You can install TARS-CLI via NPM. More info in [project's repository](https://github.com/tars/tars-cli).
 
-** Attention! All docs from branch "master" are written for the last version of TARS. If you have another version of TARS, please, open appropriate release and take docs from there. Besides, you have all docs, which are 100% compatible with your project in the root folder of your project!**
+**Attention! All docs from branch "master" are written for the last version of TARS. If you have another version of TARS, please, open appropriate release and take docs from there. Besides, you have all docs, which are 100% compatible with your project in the root folder of your project!**
 
 ## Basic features
 
