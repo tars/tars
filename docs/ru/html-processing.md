@@ -4,7 +4,7 @@
 
 # HTML
 
-В качестве шаблонизатора для HTML можно использовать [Jade](http://jade-lang.com) или [Handlebars](http://handlebarsjs.com). Шаблонизатор выбирается в [tars-config.js](options.md#templater) или вов время [инициализации TARS с помощью TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/ru/commands.md#tars-init).
+В качестве шаблонизатора для HTML можно использовать [Jade](http://jade-lang.com) или [Handlebars](http://handlebarsjs.com). Шаблонизатор выбирается в [tars-config.js](options.md#templater) или во время [инициализации TARS с помощью TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/ru/commands.md#tars-init).
 
 Можно использовать любые средства данных шаблонизаторов. Если вы привыкли к ламповому HTML, то смело выбирайте Handlebars и просто пишите HTML как раньше.
 
