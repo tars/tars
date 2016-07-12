@@ -170,8 +170,7 @@ module.exports = () => {
         let error;
         let compileError;
         let filesToCompile = [
-            `./markup/pages/**/*.${tars.templater.ext}`,
-            `!./markup/pages/**/_*.${tars.templater.ext}`
+            `./markup/pages/**/*.${tars.templater.ext}`
         ];
 
         if (tars.templater.name === 'jade' && tars.options.watch.isActive) {
