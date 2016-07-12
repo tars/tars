@@ -15,9 +15,7 @@ const filesToWatch = [
 module.exports = () => {
     return tars.packages.chokidar.watch(
         filesToWatch,
-        Object.assign(tars.options.watch, {
-            ignored: `markup/**/_*.${tars.templater.ext}`
-        })
+        Object.assign(tars.options.watch)
     ).on('all', (event, watchedPath) => {
         tars.helpers.watcherLog(event, watchedPath);
 
