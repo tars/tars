@@ -4,6 +4,12 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.8.2
+
+* Fix watcher for templates with _ in the begining of the name;
+* Default scheme for Jade component has been changed. 
+* Dependencies update. Eslint has been updated to version 3.x.x.
+
 ## Version 1.8.1
 
 * Init process without user-package.json fixed.

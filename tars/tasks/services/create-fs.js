@@ -1,10 +1,13 @@
 'use strict';
 
 const gulp = tars.packages.gulp;
+const del = tars.packages.del;
 const fs = require('fs');
 
 const staticFolderName = tars.config.fs.staticFolderName;
 const staticFolderPath = `markup/${staticFolderName}`;
+const componentsFolderName = tars.config.fs.componentsFolderName;
+const componentsFolderPath = `markup/${componentsFolderName}`;
 const imagesFolderPath = `${staticFolderPath}/${tars.config.fs.imagesFolderName}`;
 
 let paths = [
@@ -26,8 +29,8 @@ paths.push(
     `${imagesFolderPath}/svg`,
     `${staticFolderPath}/fonts`,
     `${staticFolderPath}/${tars.config.cssPreprocessor}`,
-    `markup/${tars.config.fs.componentsFolderName}/_template/assets`,
-    `markup/${tars.config.fs.componentsFolderName}/_template/ie`
+    `${componentsFolderPath}/_template/assets`,
+    `${componentsFolderPath}/_template/ie`
 );
 
 /**
@@ -39,6 +42,10 @@ module.exports = () => {
 
         if (staticFolderName !== 'static') {
             fs.renameSync('./markup/static/', `./markup/${staticFolderName}`);
+        }
+
+        if (componentsFolderName !== 'components') {
+            del.sync('./markup/components/');
         }
 
         paths.forEach(path => {

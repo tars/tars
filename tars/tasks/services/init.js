@@ -84,9 +84,9 @@ module.exports = () => {
                     .dest(destPath)
                     .run(error => {
                         if (error) {
-                            reject(error);
+                            return reject(error);
                         }
-                        resolve(params);
+                        return resolve(params);
                     });
             });
         }
@@ -103,22 +103,41 @@ module.exports = () => {
                     (params.type === 'templater' && tars.flags['exclude-html']) ||
                     (params.type === 'preprocessor' && tars.flags['exclude-css'])
                 ) {
-                    resolveDownloadedPartsApplying();
-                    return;
+                    return resolveDownloadedPartsApplying();
                 }
 
                 if (params.type === 'templater') {
-                    ncp(
-                        `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup`,
-                        './markup',
-                        error => {
-                            if (error) {
-                                rejectDownloadedPartsApplying(error);
-                                return;
-                            }
-                            resolveDownloadedPartsApplying();
-                        }
-                    );
+                    Promise
+                        .all([
+                            new Promise((resolve, reject) => {
+                                ncp(
+                                    `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup/pages`,
+                                    './markup/pages',
+                                    error => {
+                                        if (error) {
+                                            return reject(error);
+                                        }
+                                        return resolve();
+                                    }
+                                );
+                            }),
+                            new Promise((resolve, reject) => {
+                                const componentsFolderName = tars.config.fs.componentsFolderName;
+                                ncp(
+                                    `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup/components`,
+                                    `./markup/${componentsFolderName}`,
+                                    error => {
+                                        if (error) {
+                                            return reject(error);
+                                        }
+
+                                        return resolve();
+                                    }
+                                );
+                            })
+                        ])
+                        .then(() => resolveDownloadedPartsApplying())
+                        .catch(error => rejectDownloadedPartsApplying(error));
                 } else {
                     const downloadedPreprocPartsPath = `./.tmpPreproc/tars-${tars.cssPreproc.name}-${params.version}/markup`;
                     Promise
@@ -129,10 +148,9 @@ module.exports = () => {
                                     `./markup/${tars.config.fs.staticFolderName}`,
                                     error => {
                                         if (error) {
-                                            reject(error);
-                                            return;
+                                            return reject(error);
                                         }
-                                        resolve();
+                                        return resolve();
                                     }
                                 );
                             }),
@@ -142,10 +160,9 @@ module.exports = () => {
                                     `./markup/${tars.config.fs.componentsFolderName}`,
                                     error => {
                                         if (error) {
-                                            reject(error);
-                                            return;
+                                            return reject(error);
                                         }
-                                        resolve();
+                                        return resolve();
                                     }
                                 );
                             })
