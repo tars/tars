@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.8.3
+
+* Fix bug with svg2png in 2.0.0 Use 1.0.2
+
 ## Version 1.8.2
 
 * Fix watcher for templates with _ in the begining of the name;

@@ -15,7 +15,7 @@ module.exports = () => {
     return gulp.task('images:raster-svg', done => {
 
         if (tars.config.svg.active && tars.config.svg.workflow === 'sprite' && (tars.flags.ie8 || tars.flags.ie)) {
-            return gulp.src(`./markup/${imagesPath}svg/*.svg`)
+            return gulp.src(`./markup/${imagesPath}/svg/*.svg`)
                 .pipe(plumber({
                     errorHandler(error) {
                         notifier.error('An error occurred while rastering svg.', error);
