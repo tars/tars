@@ -24,7 +24,7 @@ module.exports = function pagesAndDataFilesProcessing() {
     return through2.obj(function (file, enc, callback) {
         const parsedFileRelativePath = path.parse(file.relative);
         const fileName = parsedFileRelativePath.base;
-        const pathParts = parsedFileRelativePath.dir.split('/');
+        const pathParts = parsedFileRelativePath.dir.split(path.sep);
         let fileContent = file.contents.toString();
         let namePrefix = '';
 

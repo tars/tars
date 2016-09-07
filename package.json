@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "engines": {
     "npm": "^3.x.x",
     "node": "^4.x.x"
