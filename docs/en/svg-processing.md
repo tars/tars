@@ -27,10 +27,10 @@ Using in handlebars:
 
 Using in jade:
 ```jade
-!= jadeHelpers.Icon.call(locals, {iconName: 'iconName', className: 'customClass'})
+!= jadeHelpers.Icon.call(locals, {iconName: 'iconName', className: 'customClass', iconWidth: '25', iconHeight: '25'})
 ```
 
-You can set two properites: iconname (iconName), which you'd like to include (without extension) and classname for that icon (customClass). TARS generate class automatically by using template icon__iconName in case you have not passed it to helper. You can use that helper in pages and components too. That helper will generate HTML like:
+You can set two properites: iconname (iconName), which you'd like to include (without extension), classname for that icon (customClass), sizes(iconWidth, iconHeight). TARS generate class automatically by using template icon__iconName in case you have not passed it to helper. TARS use sizes from svg file if you not passed it to helper. You can use that helper in pages and components too. That helper will generate HTML like:
 ```html
 <svg class="chrome" width="32px" height="32px">
     <use xlink:href="#chrome"></use>
