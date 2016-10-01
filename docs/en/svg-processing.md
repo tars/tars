@@ -22,7 +22,7 @@ Symbols are created to use it in tempaltes (html|jade|hbs). In CSS you can chang
 
 Using in handlebars:
 ```handlebars
-{{Icon iconName='iconName' className='customClass'}}
+{{Icon iconName='iconName' className='customClass'  iconWidth='25' iconHeight='25'}}
 ```
 
 Using in jade:

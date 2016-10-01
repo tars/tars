@@ -23,7 +23,7 @@
 Подключение в Handlebars:
 
 ```handlebars
-{{Icon iconName='iconName' className='customClass'}}
+{{Icon iconName='iconName' className='customClass' iconWidth='25' iconHeight='25'}}
 ```
 
 Подключение в Jade:
