@@ -189,6 +189,8 @@ const builtInHandlebarsHelpers = {
      * @param  {Object} options             Params for template
      * @param  {String} options.iconName    The name of used icon
      * @param  {String} options.className   Classname for svg element
+     * @param  {String} options.iconWidth   Width for svg element
+     * @param  {String} options.iconHeight  Height for svg element
      * @return {String}                     Compiled Handlebars template
      */
     Icon(options) {
@@ -214,8 +216,10 @@ const builtInHandlebarsHelpers = {
         pathToSymbolsSprite += '#' + iconName;
 
         const className = options.hash.className || 'icon__' + iconName;
+        const iconWidth = options.hash.iconWidth || iconData.iconWidth;
+        const iconHeight = options.hash.iconHeight || iconData.iconHeight;
         const content = `
-            <svg class="${className}" width="${iconData.width}" height="${iconData.height}">
+            <svg class="${className}" width="${iconWidth}" height="${iconHeight}">
                 <use xlink:href="${pathToSymbolsSprite}"></use>
             </svg>
         `;
