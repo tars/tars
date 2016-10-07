@@ -4,13 +4,13 @@ English description | <a href="../ru/css-manual-processing.md">Описание 
 
 # CSS manual processing
 
-This workflow will be usefull, if you need to control css-processing by yourself. You can use manual css-processing in TARS fro mversion 1.8.0
+This workflow will be usefull, if you need to control css processing by yourself. You can use manual css processing in TARS from version 1.8.0
 
-Основные точки входа, файлы стилей, в которые будут импортироваться стили вашего проекта, находятся в папке static/scss/entry. По умолчанию там уже находится одна точка входа — main.scss Вы можете добавить еще точек входа, если вам это потребуется. Именно эти файлы будут компилироваться препроцессором. Файлы вашего проекта необходимо подключать в точки входа с помощью конструкции @import.
+Main entry points, style files which will contain imports for project style, are located at `static/scss/entry`. By default there will be one entry point created - `main.scss`. You can add more if you wil need it. These files will be compiled by a preprocessor. Your project files should be connected by adding them to entry point files via `@import` directive.
 
-Подключение точки входа по умолчанию (main) уже описано в шаблонах (components/head/). В случае добавления новых точек входа, их треубется подключать в шаблонах вручную.
+`main.scss` entry point connection is already described in templates (`components/head`). In case you add new entry points, you need to connect them in templates by hand.
 
-Содержимое main.scss выглядит следующим образом:
+`main.css` contents:
 
 ```scss
 @import '../normalize.scss';
@@ -31,19 +31,19 @@ This workflow will be usefull, if you need to control css-processing by yourself
 @import '../etc/etc.scss';
 ```
 
-В точку входа импортируется normalize.scss, затем партиал, в который вы можете импортировать библиотеки, затем встроенные партиалы (различные миксины для правильной работы с графикой в проекте и т.д.), партиал с плагинами, партиал с компонентами и другие стили.
+Entry point imports `normalize.scss`, then partial, where you can import libraries, then build-in partials (mixins for graphics, etc.), then partial with plugins, partial with components and lastly additional styles.
 
-Партиал с компонентами означает, что именно в этот файл вы будете импортировать стили своих компонентов. При этом вам не обязательно указывать относительный путь до стилей компонентов от файла партиала. Достаточно сделать так:
+Partial with components means that you will import your components' styles into that file specifically. But you don't need to use full relative path to compontnts' style from your partial. You can do like this:
 
 ```scss
 @import 'components/_template/_template.scss';
 ```
 
-Подключение стилей для плагинов и библиотек из node_modules и bower_components описано в [общей доке по работе со стилями](css-processing.md).
+Including styles for plugins and libraries from `node_modules` and `bower_components` is described  in [general style documentation](css-processing.md).
 
-Большая просьба: **не редактируйте файлы из директории built-in-partials, они могут быть перезаписаны в результате обновления проекта!**.
+**Warning:** Do not edit files in `build-in-partials` directory as they can be overwritten on project update.
 
-Также в entry есть директория ie, в которой вы можете добавить точки входа для ie8 и ie9. Точки входа для ie9 должны иметь суффикс _ie9, а для ie8 — _ie8.
+Also there is an `ie` directory in entry points, which contains entry points for ie8 (files should have `_ie8` suffix) and ie9 (files should have `_ie9` suffix).
 
-Обратите внимание, для этих точек входа вам необходимо подключать стили компонентов, если они есть для этих браузеров. Нет необходимости дублировать содержимое _components и _components-ie9. В _components-ie9 должны быть только стили компонентов для ie9.
+Take note that only ie8 and ie9 specific styles should be included there, general styles will be added by default.
 

@@ -32,6 +32,12 @@
 != jadeHelpers.Icon.call(locals, {iconName: 'iconName', className: 'customClass', iconWidth: '25', iconHeight: '25'})
 ```
 
+Подключение в Pug:
+
+```jade
+!= pugHelpers.Icon.call(locals, {iconName: 'iconName', className: 'customClass', iconWidth: '25', iconHeight: '25'})
+```
+
 При подключении иконки вы можете задать два параметра: имя иконки (iconName), которая подключается (без расширения), имя класса (customClass), размеры (iconWidth, iconHeight). Если имя класса не будет указано, то оно сгенерируется автоматически - по шаблону icon__iconName. Если не указаны размеры, то будут использованы размеры из svg файла. Иконки можно подключать как в шаблонах страниц, так и в компонентах. Данные хелперы сгенерируют следующий код:
 
 ```html

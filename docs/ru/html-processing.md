@@ -4,7 +4,7 @@
 
 # HTML
 
-В качестве шаблонизатора для HTML можно использовать [Jade](http://jade-lang.com) или [Handlebars](http://handlebarsjs.com). Шаблонизатор выбирается в [tars-config.js](options.md#templater) или во время [инициализации TARS с помощью TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/ru/commands.md#tars-init).
+В качестве шаблонизатора для HTML можно использовать [Jade](http://jade-lang.com), [Pug](https://pugjs.org/api/getting-started.html) или [Handlebars](http://handlebarsjs.com). Шаблонизатор выбирается в [tars-config.js](options.md#templater) или во время [инициализации TARS с помощью TARS-CLI](https://github.com/tars/tars-cli/blob/master/docs/ru/commands.md#tars-init).
 
 Можно использовать любые средства данных шаблонизаторов. Если вы привыкли к ламповому HTML, то смело выбирайте Handlebars и просто пишите HTML как раньше.
 
@@ -87,7 +87,9 @@ __pages: [
 
 Этот массив можно использовать для генерации списка ссылок всех страниц проекта.
 
-Подключение компонентов с различными данными выглядит по-разному в Jade и Handlebars.
+Также, в шаблон можно передать любые данные с помощью переменной окружения TARS_ENV.
+
+Подключение компонентов с различными данными выглядит по-разному в Jade/Pug и Handlebars.
 
 
 ##Работа с компонентами и данными в Handlebars
@@ -213,14 +215,14 @@ Handlebars известен, как очень простой шаблониза
 Описание хелперов можно прочесть [здесь](handlebars-helpers.md).
 
 
-## Работа с компонентами и данными в Jade
+## Работа с компонентами и данными в Jade/Pug
 
-При использовании Jade, каждый компонент — миксин, который подключается в файл страницы. Миксины в Jade могут принимать данные, этим и воспользуемся.
+При использовании Jade/Pug, каждый компонент — миксин, который подключается в файл страницы. Миксины могут принимать данные, этим и воспользуемся.
 
 Подключение компонента на странице:
 
 ```jade
-include ../components/componentFolderName/componentName  // В начале шаблона страницы (пример — index.jade)
+include ../components/componentFolderName/componentName  // В начале шаблона страницы (пример — index.jade|pug)
 
 +componentName()  // Подключение компонента
 ```
@@ -228,7 +230,7 @@ include ../components/componentFolderName/componentName  // В начале ша
 Подключение компонента с передачей данных в шаблон:
 
 ```jade
-include ../components/componentFolderName/componentName  // В начале шаблона страницы (пример — index.jade)
+include ../components/componentFolderName/componentName  // В начале шаблона страницы (пример — index.jade|pug)
 
 +componentName(componentName.dataType)  // Подключение компонента
 ```
@@ -240,20 +242,36 @@ include ../components/head/head
 +head(head.defaults)
 ```
 
-Внутри самого компонента данные выводятся средствами Jade (например, компонент head):
+В случае использования Pug, вам необходимо указать расширение для подключаемого компонента:
+
+```jade
+include ../components/head/head.pug
++head(head.defaults)
+```
+
+Внутри самого компонента данные выводятся средствами Jade/Pug (например, компонент head):
 
 ```jade
 mixin head(data)
     <title>#{data.title}</title>
 ```
 
-Можно использовать любые средства, доступные в Jade. Вы можете подключать компоненты с любой сложностью, с любыми данными. Функции в data.js также доступны, как и в примерах для Handlebars.
+Можно использовать любые средства, доступные в Jade/Pug. Вы можете подключать компоненты с любой сложностью, с любыми данными. Функции в data.js также доступны, как и в примерах для Handlebars.
 
-В TARS есть один встроенный хелпер для Jade — хелпер `Icon`, который вставляет шаблон для подключения svg-symbol в HTML. Также есть возможность добавлять свои хелперы в файл /tars/user-tasks/html/helpers/jade-helpers. Там же есть пример объявления хелпера. Все хелперы доступны в шаблонах следующим образом:
+В TARS есть один встроенный хелпер для Jade/Pug — хелпер `Icon`, который вставляет шаблон для подключения svg-symbol в HTML. Также есть возможность добавлять свои хелперы в файл /tars/user-tasks/html/helpers/jade|pug-helpers. Там же есть пример объявления хелпера. Все хелперы доступны в шаблонах следующим образом:
 
+Для Jade:
 ```jade
 = jadeHelpers.helperName(params)
 
 <!-- Если необходимо вывести не заэскпейпленный HTML -->
 != jadeHelpers.helperName(params)
+```
+
+Для Pug:
+```jade
+= pugHelpers.helperName(params)
+
+<!-- Если необходимо вывести не заэскпейпленный HTML -->
+!= pugHelpers.helperName(params)
 ```
