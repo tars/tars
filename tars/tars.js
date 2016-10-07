@@ -264,7 +264,6 @@ switch (templaterName) {
         };
         break;
     case 'jade':
-    default:
         tars.templater = {
             name: 'jade',
             ext: 'jade',
@@ -272,6 +271,22 @@ switch (templaterName) {
                 Object.assign(
                     {},
                     tars.pluginsConfig['gulp-jade'],
+                    {
+                        locals: mocksData
+                    }
+                )
+            )
+        };
+        break;
+    case 'pug':
+    default:
+        tars.templater = {
+            name: 'pug',
+            ext: 'pug',
+            fn: mocksData => tars.require('gulp-pug')(
+                Object.assign(
+                    {},
+                    tars.pluginsConfig['gulp-pug'],
                     {
                         locals: mocksData
                     }

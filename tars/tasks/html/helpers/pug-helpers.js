@@ -48,7 +48,7 @@ const builtInPugHelpers = {
 let userHelpers;
 
 try {
-    userHelpers = require(`${tars.root}/user-tasks/html/helpers/jade-helpers`);
+    userHelpers = require(`${tars.root}/user-tasks/html/helpers/pug-helpers`);
 } catch (error) {
     userHelpers = {};
 }

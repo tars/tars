@@ -12,7 +12,9 @@ module.exports = function getTemplaterName(templaterNameFromConfig) {
         case 'hb':
             return 'handlebars';
         case 'jade':
-        default:
             return 'jade';
+        case 'pug':
+        default:
+            return 'pug';
     }
 };

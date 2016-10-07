@@ -2,16 +2,7 @@
 // which are set in modify-html task and in minify and prettify packages.
 module.exports = {
 
-    // You can set any options here for html-minify from https://github.com/Swaagie/minimize#usage
-    // That options will override default params for html-minify
-    //
-    // Default params for html-minify, that are set in TARS already:
-    //
-    // conditionals: true,
-    // quotes: true,
-    // empty: true
-    //
-    // All others are taken from https://github.com/Swaagie/minimize#usage with default values
+    // All options are taken from https://github.com/kangax/html-minifier with default values
     minifyOpts: {
 
     },

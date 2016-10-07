@@ -10,6 +10,7 @@ const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 const generateStaticPath = require(`${tars.root}/tasks/html/helpers/generate-static-path`);
 const templaterName = require(`${tars.root}/helpers/get-templater-name`)(tars.config.templater.toLowerCase());
+const templaterIsPugOrJade = templaterName === 'jade' || templaterName === 'pug';
 
 let patterns = [];
 
@@ -57,10 +58,10 @@ function concatComponentsData() {
         readyMocksData = '{}';
     }
 
-    // Add helpers for Jade into readyMocksData in case of using Jade as templater
-    if (templaterName === 'jade') {
+    // Add helpers for Jade and Pug into readyMocksData in case of using Jade as templater
+    if (templaterIsPugOrJade) {
         readyMocksData = Object.assign(readyMocksData, {
-            jadeHelpers: require(`${tars.root}/tasks/html/helpers/jade-helpers`)
+            [`${templaterName}Helpers`]: require(`${tars.root}/tasks/html/helpers/${templaterName}-helpers`)
         });
     }
 
@@ -142,17 +143,24 @@ if (
 }
 
 /**
- * Add some specific functions for Jade-processing
+ * Add some specific functions for Jade/Pug-processing
  * @return {Pipe}
  */
-function jadeInheritanceProcessing() {
-    if (tars.options.watch.isActive && templaterName === 'jade') {
+function jadeAndPugInheritanceProcessing() {
+    const inheritanceOptions = {
+        basedir: './markup/',
+        extension: `.${templaterName}`,
+        skip: ['node_modules']
+    };
+    const isInheritanceEnabled = tars.options.watch.isActive && templaterIsPugOrJade;
+
+    if (isInheritanceEnabled) {
         return tars.packages.streamCombiner(
             tars.packages.cache('templates'),
-            tars.require('gulp-jade-inheritance')({ basedir: './markup/' }),
+            tars.require(`gulp-${templaterName}-inheritance`)(inheritanceOptions),
             tars.helpers.filterFilesByPath([
                 new RegExp(`\/markup\/${tars.config.fs.componentsFolderName}\/`),
-                /_[\w]+.jade/
+                /_[\w]+.(jade|pug)/
             ])
         );
     }
@@ -174,7 +182,7 @@ module.exports = () => {
             `!./markup/pages/**/_*.${tars.templater.ext}`
         ];
 
-        if (tars.templater.name === 'jade' && tars.options.watch.isActive) {
+        if (templaterIsPugOrJade && tars.options.watch.isActive) {
             filesToCompile.push(
                 `!./markup/${tars.config.fs.componentsFolderName}/**/_*.${tars.templater.ext}`,
                 `./markup/${tars.config.fs.componentsFolderName}/**/*.${tars.templater.ext}`
@@ -196,7 +204,7 @@ module.exports = () => {
                     compileError = true;
                 }
             }))
-            .pipe(jadeInheritanceProcessing())
+            .pipe(jadeAndPugInheritanceProcessing())
             .pipe(
                 mocksData
                     ? tars.templater.fn(mocksData)
@@ -217,7 +225,7 @@ module.exports = () => {
             .pipe(generateStaticPath())
             .pipe(rename(pathToFileToRename => {
 
-                if (tars.templater.name === 'jade') {
+                if (templaterIsPugOrJade) {
                     pathToFileToRename.dirname = pathToFileToRename.dirname.replace(/^pages/, '');
                 }
 
