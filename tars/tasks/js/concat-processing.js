@@ -18,7 +18,7 @@ const compressJs = tars.flags.release || tars.flags.min;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 const jsPaths = [].concat.apply([], [
     `!./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
-    `!./markup/${tars.config.fs.componentsFolderName}/**/_*.js`,
+    '!./markup/**/_*.js',
     `./markup/${staticFolderName}/js/framework/**/*.js`,
     `./markup/${staticFolderName}/js/libraries/**/*.js`,
     `./markup/${staticFolderName}/js/plugins/**/*.js`,

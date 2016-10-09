@@ -12,7 +12,7 @@ module.exports = () => {
     return gulp.task('html:modify-html', () => {
         const usersModifyOptions = require(tars.root + '/user-tasks/html/helpers/modify-options');
         const minifyOpts = Object.assign(
-            tars.pluginsConfig['gulp-minify-html'],
+            tars.pluginsConfig['gulp-htmlmin'],
             usersModifyOptions.minifyOpts
         );
         /* eslint-disable camelcase */
@@ -30,7 +30,7 @@ module.exports = () => {
             }))
             .pipe(gulpif(
                 tars.config.minifyHtml,
-                tars.require('gulp-minify-html')(minifyOpts),
+                tars.require('gulp-htmlmin')(minifyOpts),
                 tars.require('gulp-html-prettify')(prettifyOpts)
             ))
             .pipe(gulp.dest('./dev/'))

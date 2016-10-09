@@ -4,6 +4,7 @@ const through2 = tars.packages.through2;
 const File = tars.packages.gutil.File;
 const path = require('path');
 const Buffer = require('buffer').Buffer;
+const tarsEnvValue = process.env.TARS_ENV;
 
 /**
  * Strip 'const data = {' and '};' from data-file content or just remove last ;
@@ -34,7 +35,7 @@ module.exports = function pagesAndDataFilesProcessing() {
 
         switch (fileName) {
             case 'data.js':
-                // Create new component anme for ready data-file
+                // Create new component name for ready data-file
                 fileContent = namePrefix + dataFileProcessing(fileContent);
 
                 // Add '' to ready component name
@@ -84,6 +85,13 @@ module.exports = function pagesAndDataFilesProcessing() {
         });
 
         this.push(pagesListFile); // eslint-disable-line no-invalid-this
+
+        if (tarsEnvValue) {
+            this.push(new File({ // eslint-disable-line no-invalid-this
+                path: '.',
+                contents: new Buffer(`TARS_ENV: '${tarsEnvValue}'`)
+            }));
+        }
 
         return callback();
     });

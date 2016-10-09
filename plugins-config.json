@@ -57,6 +57,12 @@
     },
 
     // locals option is set in ./tars.js
+    "gulp-pug": {
+        "pretty": true,
+        "basedir": "markup/insert(tars.config.fs.componentsFolderName)"
+    },
+
+    // locals option is set in ./tars.js
     "gulp-jade": {
         "pretty": true,
         "basedir": "markup/insert(tars.config.fs.componentsFolderName)"
@@ -91,10 +97,14 @@
     },
 
     // This config can be overrided by user-tasks/html/helpers/modify-options
-    "gulp-minify-html": {
-        "conditionals": true,
-        "quotes": true,
-        "empty": true
+    "gulp-htmlmin": {
+        "minifyCSS": true,
+        "minifyJS": true,
+        "collapseWhitespace": true,
+        "conservativeCollapse": true,
+        "collapseInlineTagWhitespace": true,
+        "removeRedundantAttributes": true,
+        "removeStyleLinkTypeAttributes": true
     },
 
     // This config can be overrided by user-tasks/html/helpers/modify-options
