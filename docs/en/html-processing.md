@@ -86,7 +86,31 @@ __pages: [
 
 You can use this array to render a list of links to all pages of a project.
 
-You can pass any data to templater by using env var TARS_ENV.
+You can pass any data to templater by using env var TARS_ENV. For example, you can pass a simple string:
+
+```bash
+TARS_ENV="Hello World" tars dev --silent
+```
+
+And then you can get it in template (handlebars):
+
+```handlebars
+{{TARS_ENV}}
+```
+
+You can pass object to TARS_ENV too:
+
+```bash
+TARS_ENV="{\"name\": \"Paul\"}" tars dev --silent
+```
+
+And then you can get it in template (handlebars):
+
+```handlebars
+{{TARS_ENV.name}}
+```
+
+**It is important to add double quotes and escape quotes inside object!**
 
 Connecting components with different data looks differently in Jade/Pug and Handlebars.
 
