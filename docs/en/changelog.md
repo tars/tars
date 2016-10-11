@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.9.1
+
+* Use gulp-pug-inheritance from fork because of errors in original.
+
 ## Version 1.9.0
 
 * gulp-minify-html replaced with на gulp-htmlmin.
