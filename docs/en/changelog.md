@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.9.2
+
+* Fix bug with helper Icon in handlebars.
+
 ## Version 1.9.1
 
 * Use gulp-pug-inheritance from fork because of errors in original.

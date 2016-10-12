@@ -1,3 +1,4 @@
+
 <p align="right">
 English description | <a href="../ru/svg-processing.md">Описание на русском</a>
 </p>
@@ -18,7 +19,7 @@ In that workflow SVG-images will be combined into one SVG-file and every iscon w
 
 Images that will be included in such way must be in a folder (default path): 'static/img/svg/'. Nested directories are **not** supported.
 
-Symbols are created to use it in tempaltes (html|jade|hbs). In CSS you can change colors, size, add stroke and stroke width. You sholud use helpers for symbols using in templates and components. Helper creates HTML, add size's attributes and custom classname.
+Symbols are created to use it in tempaltes (html|jade|hbs). In CSS you can change colors, size, add stroke and stroke width. You sholud use helpers for symbols using in templates and components. Helper creates HTML, add size's attributes and custom classname. 
 
 Using in handlebars:
 ```handlebars
@@ -35,7 +36,7 @@ Using in pug:
 != pugHelpers.Icon.call(locals, {iconName: 'iconName', className: 'customClass', iconWidth: '25', iconHeight: '25'})
 ```
 
-You can set two properites: iconname (iconName), which you'd like to include (without extension), classname for that icon (customClass), sizes(iconWidth, iconHeight). TARS generate class automatically by using template icon__iconName in case you have not passed it to helper. TARS use sizes from svg file if you not passed it to helper. You can use that helper in pages and components too. That helper will generate HTML like:
+You can set two properites: iconname (iconName), which you'd like to include (without extension), classname for that icon (customClass), sizes (iconWidth, iconHeight). **Sizes are not required, so you can drop it from helper options**. TARS generate class automatically by using template icon__iconName in case you have not passed it to helper. TARS use sizes from svg file if you not passed it to helper. You can use that helper in pages and components too. That helper will generate HTML like:
 ```html
 <svg class="chrome" width="32px" height="32px">
     <use xlink:href="#chrome"></use>
