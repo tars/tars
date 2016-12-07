@@ -4,6 +4,10 @@
 
 # Changelog
 
+## Version 1.9.4
+
+* Папка build не удаляется при запуске TARS в dev-режиме.
+
 ## Version 1.9.2
 
 * Исправлен баг с работой хелпера Icon в handlebars.

@@ -15,7 +15,7 @@ let pathsToDel = [
     './.tmpPreproc/'
 ];
 
-if (!tars.config.useBuildVersioning) {
+if (!tars.config.useBuildVersioning && !tars.options.watch.isActive) {
     pathsToDel.push(tars.options.build.path);
 }
 

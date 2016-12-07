@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.9.4
+
+* Build won't be deleted in dev-mode.
+
 ## Version 1.9.2
 
 * Fix bug with helper Icon in handlebars.
