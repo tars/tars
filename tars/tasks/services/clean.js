@@ -15,14 +15,14 @@ let pathsToDel = [
     './.tmpPreproc/'
 ];
 
-if (!tars.config.useBuildVersioning && !tars.options.watch.isActive) {
-    pathsToDel.push(tars.options.build.path);
-}
-
 /**
  * Clean dev directory and cache
  */
 module.exports = () => {
+    if (!tars.config.useBuildVersioning && !tars.options.watch.isActive) {
+        pathsToDel.push(tars.options.build.path);
+    }
+
     return gulp.task('service:clean', done => {
         del(pathsToDel).then(() => {
             done();
