@@ -6,7 +6,7 @@
 
 В качестве CSS-препроцессора можно использовать:
 * [Scss](http://sass-lang.com) также поддерживается .sass;
-* [Less](http://www.lesscss.ru);
+* [Less](http://www.lesscss.org);
 * [Stylus](http://learnboost.github.io/stylus).
 
 CSS-препроцессор выбирается в [tars-config.js](options.md#csspreprocessor).
