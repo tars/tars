@@ -172,6 +172,14 @@ Default: `false`
 
 Включение технологии горячей замены компонентов ([Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)).
 
+##### providePlugin
+
+Type: `Object`
+
+Default: `{}`
+
+Параметры для [Provide Plugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin). Автоматически загружаемые модули.
+
 #### removeConsoleLog
 
 Type: `Boolean`
