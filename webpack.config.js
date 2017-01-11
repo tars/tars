@@ -50,6 +50,12 @@ if (compressJs) {
     );
 }
 
+if (tars.config.js.webpack.providePlugin) {
+    plugins.push(
+        new webpack.ProvidePlugin(tars.config.js.webpack.providePlugin)
+    )
+}
+
 if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
     plugins.push(
         new webpack.HotModuleReplacementPlugin()

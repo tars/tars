@@ -4,6 +4,10 @@
 
 # Changelog
 
+## Version 1.9.7
+
+* Добавлена поддержка [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin) у webpack. Настройка происходит в [конфиге](https://github.com/tars/tars/blob/master/docs/ru/options.md#provideplugin).
+
 ## Version 1.9.4
 
 * Папка build не удаляется при запуске TARS в dev-режиме.

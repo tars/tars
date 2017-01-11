@@ -168,6 +168,14 @@ Default: `false`
 
 Switch on/off [Hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html).
 
+##### providePlugin
+
+Type: `Object`
+
+Default: `{}`
+
+[Provide Plugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin) options. Automatically loaded modules.
+
 #### removeConsoleLog
 
 Type: `Boolean`
