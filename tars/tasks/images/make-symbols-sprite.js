@@ -15,7 +15,7 @@ if (tars.config.svg.symbolsConfig.loadingType === 'inject') {
 }
 
 /**
- * Minify png and jpg images
+ * Create svg-symbols sprite
  */
 module.exports = () => {
     return gulp.task('images:make-symbols-sprite', done => {
