@@ -6,9 +6,10 @@ os:
 
 env:
   matrix:
+    - export NODE_VERSION="9"
+    - export NODE_VERSION="8"
+    - export NODE_VERSION="7"
     - export NODE_VERSION="6"
-    - export NODE_VERSION="5"
-    - export NODE_VERSION="4"
 
 matrix:
   fast_finish: true
@@ -24,7 +25,6 @@ before_install:
   - nvm use $NODE_VERSION
 
 before_script:
-  - if [ ${NODE_VERSION} = "5" ]; then npm install -g npm; fi
   - npm -v
   - npm install
   - npm install -g gulp
