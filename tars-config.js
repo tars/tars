@@ -69,7 +69,16 @@ module.exports = {
 
         // Special config for webpack
         webpack: {
-            useHMR: false
+            useHMR: false,
+
+            /**
+             * Automatically loaded modules.
+             * Module (value) is loaded when the identifier (key) is used as free variable in a module.
+             * The identifier is filled with the exports of the loaded module.
+             * Example: {$: "jquery"} or {React: 'react'}
+             * @type {Object}
+             */
+            providePlugin: {}
         },
 
         /**

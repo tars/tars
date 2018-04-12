@@ -4,10 +4,14 @@
 
 # Changelog
 
-## Version 1.9.5
+## Version 1.9.8
 
 * Обновлены версии зависимых пакетов
 * Исправлены: #318,#324, #336, #325
+
+## Version 1.9.7
+
+* Добавлена поддержка [ProvidePlugin](https://webpack.github.io/docs/list-of-plugins.html#provideplugin) у webpack. Настройка происходит в [конфиге](https://github.com/tars/tars/blob/master/docs/ru/options.md#provideplugin).
 
 ## Version 1.9.4
 

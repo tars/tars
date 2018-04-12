@@ -6,7 +6,7 @@ English description | <a href="../ru/css-processing.md">Описание на р
 
 You can use folowing CSS-preprocessors:
 * [Scss](http://sass-lang.com) .sass extension is supported;
-* [Less](http://www.lesscss.ru);
+* [Less](http://www.lesscss.org);
 * [Stylus](http://learnboost.github.io/stylus)  
 
 You can choose CSS-preprocessor in [tars-config.js](options.md#csspreprocessor).
