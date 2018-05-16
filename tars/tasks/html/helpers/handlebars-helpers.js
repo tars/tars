@@ -274,11 +274,11 @@ const builtInHandlebarsHelpers = {
             throw 'The \'language\' parameter is not defined';
         }
 
-        if (typeof this[language] === "undefined") {
+        if (typeof this[language] === 'undefined') {
             throw 'No strings found for language \'" + language + "\'';
         }
 
-        if (typeof this[language][context] === "undefined") {
+        if (typeof this[language][context] === 'undefined') {
             throw 'No string for key \'" + context + "\' for language \'" + language + "\'';
         }
 

@@ -14,13 +14,13 @@ const contentImagesFolder = `${tars.config.fs.staticFolderName}/${tars.config.fs
 module.exports = () => {
     return gulp.task('images:move-content-img', () => {
         return gulp.src(
-                /* eslint-disable indent */
+            /* eslint-disable indent */
                 [
                     `./markup/${contentImagesFolder}/**/*.*`,
                     `!./markup/${contentImagesFolder}/**/*.tmp`
                 ]
                 /* eslint-enable indent */
-            )
+        )
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving content images.', error);

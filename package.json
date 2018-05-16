@@ -2,8 +2,8 @@
   "name": "tars",
   "version": "1.9.8",
   "engines": {
-    "npm": "^3.x.x",
-    "node": "^4.x.x"
+    "npm": ">=3.0.0",
+    "node": ">=4.0.0"
   },
   "os": [
     "darwin",

@@ -1,4 +1,6 @@
 'use strict';
+const path = require('path');
+const fs = require('fs');
 
 /**
  * Main module for TARS
@@ -18,7 +20,10 @@ function tarsRequire(packageName) {
 
     if (process.env.npmRoot) {
         try {
-            return require(process.env.npmRoot + packageName);
+            const yarnPackagePath = path.join(process.env.npmRoot, '../..', packageName),
+                npmPackagePath = path.join(process.env.npmRoot, packageName);
+
+            return require(fs.existsSync(yarnPackagePath) ? yarnPackagePath : npmPackagePath);
         } catch (error) {
             const util = require('util');
 

@@ -33,8 +33,8 @@ module.exports = () => {
         if (tars.config.svg.active && tars.config.svg.workflow === 'sprite' && (tars.flags.ie8 || tars.flags.ie)) {
             const cssTemplatePath = `./markup/${staticFolderName}/${preprocName}/sprite-generator-templates`;
             const spriteData = gulp.src(
-                    `./dev/${staticFolderName}/${imagesFolderName}/rastered-svg-images/*.png`
-                )
+                `./dev/${staticFolderName}/${imagesFolderName}/rastered-svg-images/*.png`
+            )
                 .pipe(plumber({
                     errorHandler(error) {
                         notifier.error(errorText, error);
@@ -65,10 +65,10 @@ module.exports = () => {
                 .pipe(notifier.success('Sprite-img for svg is ready!'));
 
             return spriteData.css
-                    .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
-                    .pipe(
-                        notifier.success(`${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready`)
-                    );
+                .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
+                .pipe(
+                    notifier.success(`${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready`)
+                );
 
         }
 
