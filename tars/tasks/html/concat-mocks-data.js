@@ -13,9 +13,9 @@ const pagesAndDataFilesProcessing = require(`${tars.root}/tasks/html/helpers/pag
 module.exports = () => {
     return gulp.task('html:concat-mocks-data', () => {
         return gulp.src([`./markup/pages/**/*.${tars.templater.ext}`,
-                         `!./markup/pages/**/_*.${tars.templater.ext}`,
-                         `./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
-                         './dev/temp/symbols-data-template.js'])
+            `!./markup/pages/**/_*.${tars.templater.ext}`,
+            `./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
+            './dev/temp/symbols-data-template.js'])
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error(`An error occurred while concating ${tars.config.fs.componentsFolderName}'s data.`, error);

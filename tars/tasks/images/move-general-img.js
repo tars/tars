@@ -14,13 +14,13 @@ const generalImagesFolder = `${tars.config.fs.staticFolderName}/${tars.config.fs
 module.exports = () => {
     return gulp.task('images:move-general-img', () => {
         return gulp.src(
-                /* eslint-disable indent */
+            /* eslint-disable indent */
                 [
                     `./markup/${generalImagesFolder}/**/*.*`,
                     `!./markup/${generalImagesFolder}/**/*.tmp`
                 ]
                 /* eslint-enable indent */
-            )
+        )
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while moving general images.', error);

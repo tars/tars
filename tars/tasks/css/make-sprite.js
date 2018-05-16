@@ -45,33 +45,33 @@ module.exports = () => {
         for (let i = 0; i < dpiLength; i++) {
             spriteData.push(
                 gulp.src(`./markup/${staticFolderName}/${imagesFolderName}/sprite/${usedDpiArray[i]}dpi/*.png`)
-                .pipe(plumber({
-                    errorHandler(error) {
-                        notifier.error(errorText, error);
-                    }
-                }))
-                .pipe(
-                    tars.require('gulp.spritesmith')(
-                        Object.assign(
-                            {},
-                            {
-                                imgName: `sprite${tars.options.build.hash}.png`,
-                                cssName: `sprite_${usedDpiArray[i]}.${preprocExtension}`,
-                                algorithm: 'binary-tree',
-                                algorithmOpts: {
-                                    sort: false
+                    .pipe(plumber({
+                        errorHandler(error) {
+                            notifier.error(errorText, error);
+                        }
+                    }))
+                    .pipe(
+                        tars.require('gulp.spritesmith')(
+                            Object.assign(
+                                {},
+                                {
+                                    imgName: `sprite${tars.options.build.hash}.png`,
+                                    cssName: `sprite_${usedDpiArray[i]}.${preprocExtension}`,
+                                    algorithm: 'binary-tree',
+                                    algorithmOpts: {
+                                        sort: false
+                                    },
+                                    cssOpts: dpiConfig,
+                                    padding: (i + 1) * 4,
+                                    cssTemplate: `${cssTemplatePath}/${preprocName}.sprite.mustache`
                                 },
-                                cssOpts: dpiConfig,
-                                padding: (i + 1) * 4,
-                                cssTemplate: `${cssTemplatePath}/${preprocName}.sprite.mustache`
-                            },
-                            spritesmithConfig,
-                            {
-                                padding: (i + 1) * spritesmithConfig.padding
-                            }
+                                spritesmithConfig,
+                                {
+                                    padding: (i + 1) * spritesmithConfig.padding
+                                }
+                            )
                         )
                     )
-                )
             );
 
             spriteData[i].img
@@ -83,12 +83,12 @@ module.exports = () => {
 
         // Returns css for dpi 96
         return spriteData[0].css
-                .pipe(skipTaskWithEmptyPipe('css:make-sprite', actionsOnTaskSkipping))
-                .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
-                .pipe(
-                    notifier.success(
-                        stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'
-                    )
-                );
+            .pipe(skipTaskWithEmptyPipe('css:make-sprite', actionsOnTaskSkipping))
+            .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
+            .pipe(
+                notifier.success(
+                    stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'
+                )
+            );
     });
 };

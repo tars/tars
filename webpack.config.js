@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs');
 const cwd = process.cwd();
 const webpack = tars.require('webpack');
 
@@ -31,7 +32,10 @@ let plugins = [
 ];
 
 if (process.env.npmRoot) {
-    modulesDirectories.push(process.env.npmRoot);
+    const yarnPackagePath = path.join(process.env.npmRoot, '../..'),
+        npmPackagePath = path.join(process.env.npmRoot);
+
+    modulesDirectories.push(fs.existsSync(yarnPackagePath) ? yarnPackagePath : npmPackagePath);
 }
 
 if (compressJs) {
@@ -53,7 +57,7 @@ if (compressJs) {
 if (tars.config.js.webpack.providePlugin) {
     plugins.push(
         new webpack.ProvidePlugin(tars.config.js.webpack.providePlugin)
-    )
+    );
 }
 
 if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {

@@ -26,7 +26,7 @@ module.exports = {
 
         const resultMessage = '\n' + message + '\nLook in the console for details.\n';
 
-        if (!(error instanceof(Error))) {
+        if (!(error instanceof (Error))) {
             error = new Error(error);
         }
 

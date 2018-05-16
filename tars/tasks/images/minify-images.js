@@ -13,15 +13,15 @@ const imagesFolderPath = `dev/${tars.config.fs.staticFolderName}/${tars.config.f
 module.exports = () => {
     return gulp.task('images:minify-images', () => {
         return gulp.src(
-                /* eslint-disable indent */
+            /* eslint-disable indent */
                 [
                     `${imagesFolderPath}/**/*.{png,jpg,svg}`,
                     `!${imagesFolderPath}/minified-svg/*.svg`,
                     `!${imagesFolderPath}/**/svg-symbols${tars.options.build.hash}.svg`
                 ],
                 /* eslint-enable indent */
-                { base: process.cwd() + '/' }
-            )
+            { base: process.cwd() + '/' }
+        )
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while minifying all images.', error);

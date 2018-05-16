@@ -6,16 +6,16 @@
  */
 'use strict';
 
-var Dates = module.exports = {};
+let Dates = module.exports = {};
 
-Dates.padNumber = function(num, count, padCharacter) {
+Dates.padNumber = function (num, count, padCharacter) {
 
     if (typeof padCharacter === 'undefined') {
         padCharacter = '0';
     }
 
-    var lenDiff = count - String(num).length;
-    var padding = '';
+    let lenDiff = count - String(num).length;
+    let padding = '';
 
     if (lenDiff > 0) {
         while (lenDiff--) {
@@ -25,28 +25,28 @@ Dates.padNumber = function(num, count, padCharacter) {
     return padding + num;
 };
 
-Dates.dayOfYear = function(date) {
-    var oneJan = new Date(date.getFullYear(), 0, 1);
+Dates.dayOfYear = function (date) {
+    let oneJan = new Date(date.getFullYear(), 0, 1);
 
     return Math.ceil((date - oneJan) / 86400000);
 };
 
-Dates.weekOfYear = function(date) {
-    var oneJan = new Date(date.getFullYear(), 0, 1);
+Dates.weekOfYear = function (date) {
+    let oneJan = new Date(date.getFullYear(), 0, 1);
     return Math.ceil((((date - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
 };
 
-Dates.isoWeekOfYear = function(date) {
-    var target = new Date(date.valueOf());
-    var dayNr = (date.getDay() + 6) % 7;
+Dates.isoWeekOfYear = function (date) {
+    let target = new Date(date.valueOf());
+    let dayNr = (date.getDay() + 6) % 7;
     target.setDate(target.getDate() - dayNr + 3);
-    var jan4 = new Date(target.getFullYear(), 0, 4);
-    var dayDiff = (target - jan4) / 86400000;
+    let jan4 = new Date(target.getFullYear(), 0, 4);
+    let dayDiff = (target - jan4) / 86400000;
 
     return 1 + Math.ceil(dayDiff / 7);
 };
 
-Dates.tweleveHour = function(date) {
+Dates.tweleveHour = function (date) {
     if (date.getHours() > 12) {
         return date.getHours() - 12;
     }
@@ -54,16 +54,16 @@ Dates.tweleveHour = function(date) {
     return date.getHours();
 };
 
-Dates.timeZoneOffset = function(date) {
-    var hoursDiff = -date.getTimezoneOffset() / 60;
-    var result = Dates.padNumber(Math.abs(hoursDiff), 4);
+Dates.timeZoneOffset = function (date) {
+    let hoursDiff = -date.getTimezoneOffset() / 60;
+    let result = Dates.padNumber(Math.abs(hoursDiff), 4);
 
     return (hoursDiff > 0 ? '+' : '-') + result;
 };
 
-Dates.format = function(date, format) {
-    var match = null;
-    return format.replace(Dates.formats, function(m, p) {
+Dates.format = function (date, format) {
+    let match = null;
+    return format.replace(Dates.formats, function (m, p) {
         switch (p) {
             case 'a':
                 return Dates.abbreviatedWeekdays[date.getDay()];
