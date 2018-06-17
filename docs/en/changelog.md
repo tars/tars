@@ -4,6 +4,10 @@ English description | <a href="../ru/changelog.md">Описание на рус�
 
 # Changelog
 
+## Version 1.9.9
+
+* Fix bugs: #343
+
 ## Version 1.9.8
 
 * Dependencies update.
