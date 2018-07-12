@@ -15,7 +15,7 @@ module.exports = () => {
         tars.helpers.watcherLog(event, watchedPath);
 
         // Remove cache for components with changed data-files
-        if (templaterName === 'jade' && tars.packages.cache.caches && tars.packages.cache.caches.templates) {
+        if ((templaterName === 'jade' || templaterName === 'pug') && tars.packages.cache.caches && tars.packages.cache.caches.templates) {
             const templateToRecompile = watchedPath.split('/data/data.js').shift();
 
             for (let cacheKey in tars.packages.cache.caches.templates) {
