@@ -62,22 +62,25 @@ if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
     );
 }
 
-if (tars.config.js.lint) {
-    rules.push(
-        {
-            test: /\.js$/,
-            loader: 'eslint-loader',
-            include: `${cwd}/markup`
-        }
-    );
-}
-
 if (tars.config.js.useBabel) {
     rules.push(
         {
             test: /\.js$/,
             loader: 'babel-loader',
             include: /markup/
+        }
+    );
+}
+
+if (tars.config.js.lint) {
+    rules.push(
+        {
+            test: /\.js$/,
+            loader: 'eslint-loader',
+            include: `${cwd}/markup`,
+            options: {
+                configFile: `${cwd}/.eslintrc`
+            }
         }
     );
 }
