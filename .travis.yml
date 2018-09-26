@@ -7,6 +7,10 @@ os:
 env:
   matrix:
     - export NODE_VERSION="10"
+    - export NODE_VERSION="9"
+    - export NODE_VERSION="8"
+    - export NODE_VERSION="7"
+    - export NODE_VERSION="6"
 
 matrix:
   fast_finish: true
