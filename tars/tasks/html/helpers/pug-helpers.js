@@ -20,6 +20,10 @@ const builtInPugHelpers = {
             throw new Error('iconName has to be received to "icon" mixin and has to be a string');
         }
 
+        if (!this.__iconsData) {
+            throw new Error('please, ensure that "symbols" is set in tars.config.svg.workflow');
+        }
+
         const iconData = this.__iconsData[iconName];
         const symbolsConfig = tars.config.svg.symbolsConfig;
         const symbolsSpriteFileName = `svg-symbols${tars.options.build.hash}.svg`;
