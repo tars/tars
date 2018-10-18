@@ -12,7 +12,7 @@ module.exports = () => {
         const download = tars.require('download');
         const exec = require('child_process').exec;
         const downloadPackage = download(
-            'https://raw.githubusercontent.com/tars/tars/master/package.json',
+            'https://raw.githubusercontent.com/bukhalo/tars/master/package.json',
             './',
             { extract: true });
 
