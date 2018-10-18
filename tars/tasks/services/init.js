@@ -5,7 +5,7 @@ const gutil = tars.packages.gutil;
 const del = tars.packages.del;
 
 const githubConfig = {
-    user: 'tars',
+    user: 'bukhalo',
     repoPrefix: 'tars-'
 };
 
