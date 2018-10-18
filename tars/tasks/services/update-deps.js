@@ -9,11 +9,12 @@ const fs = require('fs');
  */
 module.exports = () => {
     return gulp.task('service:update-deps', done => {
-        const Download = tars.require('download');
+        const download = tars.require('download');
         const exec = require('child_process').exec;
-        const downloadPackage = new Download({ extract: true })
-            .get('https://raw.githubusercontent.com/tars/tars/master/package.json')
-            .dest('./');
+        const downloadPackage = download(
+            'https://raw.githubusercontent.com/tars/tars/master/package.json',
+            './',
+            { extract: true });
 
         tars.say(
             gutil.colors.yellow('This command is depricated and won\'t be supported in the future!\n')

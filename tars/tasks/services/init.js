@@ -30,9 +30,8 @@ function makeUrl(type, version) {
  */
 module.exports = () => {
     return gulp.task('service:init', ['service:create-fs'], () => {
-
         const ncp = tars.require('ncp');
-        const Download = tars.require('download');
+        const get = tars.require('download');
 
         /**
          * Get used version of TARS parts
@@ -49,18 +48,14 @@ module.exports = () => {
                     version = 'version-' + require(process.cwd() + '/tars.json').version;
                 }
 
-                new Download({ mode: '755' })
-                    .get(makeUrl(type, version))
-                    .run(error => {
-                        if (error) {
-                            version = 'master';
-                        }
-
-                        resolve({
-                            version,
-                            type
-                        });
+                get(makeUrl(type, version), { mode: '755' }).then(() => {
+                    resolve({
+                        version,
+                        type
                     });
+                }).catch(() => {
+                    version = 'master';
+                })
             });
         }
 
@@ -79,15 +74,11 @@ module.exports = () => {
                     destPath = './.tmpPreproc';
                 }
 
-                new Download({ extract: true, mode: '755' })
-                    .get(makeUrl(params.type, params.version))
-                    .dest(destPath)
-                    .run(error => {
-                        if (error) {
-                            return reject(error);
-                        }
-                        return resolve(params);
-                    });
+                get(makeUrl(params.type, params.version), destPath, { extract: true, mode: '755' }).then(() => {
+                    return resolve(params);
+                }).catch(() => {
+                    return reject(error);
+                });
             });
         }
 
