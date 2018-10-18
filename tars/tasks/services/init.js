@@ -55,7 +55,7 @@ module.exports = () => {
                     });
                 }).catch(() => {
                     version = 'master';
-                })
+                });
             });
         }
 
@@ -76,9 +76,7 @@ module.exports = () => {
 
                 get(makeUrl(params.type, params.version), destPath, { extract: true, mode: '755' }).then(() => {
                     return resolve(params);
-                }).catch(() => {
-                    return reject(error);
-                });
+                }).catch((err) => reject(err));
             });
         }
 
