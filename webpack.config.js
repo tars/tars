@@ -12,16 +12,16 @@ const sourceMapsType = `#${sourceMapsDest}source-map`;
 
 let outputFileNameTemplate = '[name]';
 let modulesDirectories = ['node_modules'];
-let preLoaders = [
+let rules = [
     {
         test: /\.js$/,
         loader: 'source-map-loader'
+    },
+    {
+        test: /\.json$/,
+        loader: 'json'
     }
 ];
-let loaders = [{
-    test: /\.json$/,
-    loader: 'json'
-}];
 let plugins = [
     new webpack.DefinePlugin({
         'process.env': {
@@ -53,7 +53,7 @@ if (compressJs) {
 if (tars.config.js.webpack.providePlugin) {
     plugins.push(
         new webpack.ProvidePlugin(tars.config.js.webpack.providePlugin)
-    )
+    );
 }
 
 if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
@@ -62,22 +62,25 @@ if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
     );
 }
 
-if (tars.config.js.lint) {
-    preLoaders.push(
+if (tars.config.js.useBabel) {
+    rules.push(
         {
             test: /\.js$/,
-            loader: 'eslint-loader',
-            include: `${cwd}/markup`
+            loader: 'babel-loader',
+            include: /markup/
         }
     );
 }
 
-if (tars.config.js.useBabel) {
-    loaders.push(
+if (tars.config.js.lint) {
+    rules.push(
         {
             test: /\.js$/,
-            loader: 'babel',
-            include: /markup/
+            loader: 'eslint-loader',
+            include: `${cwd}/markup`,
+            options: {
+                configFile: `${cwd}/.eslintrc`
+            }
         }
     );
 }
@@ -111,8 +114,8 @@ function prepareEntryPoints(entryConfig) {
 
     return entryConfig;
 }
-
 module.exports = {
+    mode: 'development',
     // We have to add some pathes to entry point in case of using HMR
     entry: prepareEntryPoints({
         main: path.resolve(`${cwd}/markup/${staticFolderName}/js/main.js`)
@@ -129,25 +132,17 @@ module.exports = {
     watch: tars.options.watch.isActive && !tars.config.js.webpack.useHMR,
 
     module: {
-        preLoaders,
-        loaders
+        rules
     },
 
     plugins,
 
-    resolveLoader: {
-        modulesDirectories
-    },
-
     resolve: {
+        modules: modulesDirectories,
         alias: {
             modules: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
             components: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
             static: path.resolve(`./markup/${staticFolderName}`)
         }
-    },
-
-    eslint: {
-        configFile: `${cwd}/.eslintrc`
     }
 };
