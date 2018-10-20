@@ -67,8 +67,8 @@
     "stream-combiner": "^0.2.2",
     "through2": "^2.0.3",
     "webpack": "^4.21.0",
-    "webpack-dev-middleware": "^1.8.2",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3"
   },
   "optionalDependencies": {
     "posix": "^4.1.1",
