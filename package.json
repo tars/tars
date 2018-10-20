@@ -13,7 +13,8 @@
   "main": "gulpfile.js",
   "dependencies": {
     "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0"
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
@@ -25,7 +26,7 @@
     "eslint": "^5.7.0",
     "eslint-loader": "^2.1.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^8.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-changed": "^3.2.0",
     "gulp-compile-handlebars": "0.6.1",
