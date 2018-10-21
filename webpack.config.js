@@ -15,11 +15,8 @@ let modulesDirectories = ['node_modules'];
 let rules = [
     {
         test: /\.js$/,
-        loader: 'source-map-loader'
-    },
-    {
-        test: /\.json$/,
-        loader: 'json'
+        loader: 'source-map-loader',
+        enforce: 'pre'
     }
 ];
 let plugins = [
@@ -62,25 +59,26 @@ if (tars.options.watch.isActive && tars.config.js.webpack.useHMR) {
     );
 }
 
+if (tars.config.js.lint) {
+    rules.push(
+        {
+            test: /\.js$/,
+            loader: 'eslint-loader',
+            enforce: 'pre',
+            include: `${cwd}/markup`,
+            options: {
+                configFile: `${cwd}/.eslintrc`
+            }
+        }
+    );
+}
+
 if (tars.config.js.useBabel) {
     rules.push(
         {
             test: /\.js$/,
             loader: 'babel-loader',
             include: /markup/
-        }
-    );
-}
-
-if (tars.config.js.lint) {
-    rules.push(
-        {
-            test: /\.js$/,
-            loader: 'eslint-loader',
-            include: `${cwd}/markup`,
-            options: {
-                configFile: `${cwd}/.eslintrc`
-            }
         }
     );
 }
@@ -137,8 +135,11 @@ module.exports = {
 
     plugins,
 
+    resolveLoader: {
+        modules: modulesDirectories
+    },
+
     resolve: {
-        modules: modulesDirectories,
         alias: {
             modules: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
             components: path.resolve(`./markup/${tars.config.fs.componentsFolderName}`),
