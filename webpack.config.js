@@ -28,7 +28,7 @@ let plugins = [
         }
     })
 ];
-let minimizeres = [];
+let minimizers = [];
 
 if (process.env.npmRoot) {
     modulesDirectories.push(process.env.npmRoot);
@@ -36,7 +36,7 @@ if (process.env.npmRoot) {
 
 if (compressJs) {
     outputFileNameTemplate += `${tars.options.build.hash}.min`;
-    minimizeres.push(
+    minimizers.push(
         new UglifyJsPlugin({
             uglifyOptions: {
                 compress: {
@@ -116,7 +116,6 @@ function prepareEntryPoints(entryConfig) {
 
     return entryConfig;
 }
-console.log(webpackMode);
 module.exports = {
     mode: webpackMode,
     // We have to add some pathes to entry point in case of using HMR
@@ -145,7 +144,7 @@ module.exports = {
     },
 
     optimization: {
-        minimizer: minimizeres
+        minimizer: minimizers
     },
 
     resolve: {
