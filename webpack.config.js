@@ -6,7 +6,7 @@ const webpack = tars.require('webpack');
 const UglifyJsPlugin = tars.require('uglifyjs-webpack-plugin');
 
 const staticFolderName = tars.config.fs.staticFolderName;
-const compressJs = tars.flags.release || tars.flags.min;
+const compressJs = tars.flags.release || tars.flags.min || tars.flags.m;
 const generateSourceMaps = tars.config.sourcemaps.js.active && tars.isDevMode;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? 'inline-' : '';
 const sourceMapsType = `#${sourceMapsDest}source-map`;

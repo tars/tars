@@ -14,7 +14,7 @@ const path = require('path');
 let generateSourceMaps = false;
 const staticFolderName = tars.config.fs.staticFolderName;
 const destFolder = `./dev/${staticFolderName}/js`;
-const compressJs = tars.flags.release || tars.flags.min;
+const compressJs = tars.flags.release || tars.flags.min || tars.flags.m;
 const sourceMapsDest = tars.config.sourcemaps.js.inline ? '' : '.';
 const jsPaths = [].concat.apply([], [
     `!./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
