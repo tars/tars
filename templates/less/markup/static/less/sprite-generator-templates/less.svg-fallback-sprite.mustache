@@ -1,0 +1,30 @@
+{
+  // Default options
+  'functions': true
+}
+
+{{#items}}
+  @{{name}}: {{px.x}} {{px.y}} {{px.offset_x}} {{px.offset_y}} {{px.width}} {{px.height}} {{px.total_width}} {{px.total_height}} '{{{escaped_image}}}' '{{{name}}}';
+{{/items}}
+
+{{#options.functions}}
+  .svg-sprite-position(@svg-sprite) {
+    @svg-sprite-offset-x: ~`"@{svg-sprite}".split(', ')[2]`;
+    @svg-sprite-offset-y: ~`"@{svg-sprite}".split(', ')[3]`;
+    background-position: @svg-sprite-offset-x  @svg-sprite-offset-y;
+  }
+
+  .svg-sprite-image(@svg-sprite) {
+    @svg-sprite-image-url: ~`'../img/rastered-svg-sprite/' + "@{svg-sprite}".split(', ')[8].replace(']', '').replace(/\'/g, '')`;
+    background-image: url(@svg-sprite-image-url);
+  }
+
+  .bg-svg(@svg-sprite, @repeat: no-repeat) {
+    .svg-sprite-image(@svg-sprite);
+    .svg-sprite-position(@svg-sprite);
+    width: ~`"@{svg-sprite}".split(', ')[4]`;
+    height: ~`"@{svg-sprite}".split(', ')[5]`;
+
+    background-repeat: @repeat;
+  }
+{{/options.functions}}

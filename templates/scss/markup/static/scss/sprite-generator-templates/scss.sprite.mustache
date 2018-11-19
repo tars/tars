@@ -1,0 +1,57 @@
+{
+  // Default options
+  'functions': true
+}
+
+{{#items}}
+  ${{name}}: {{px.x}} {{px.y}} {{px.offset_x}} {{px.offset_y}} {{px.width}} {{px.height}} {{px.total_width}} {{px.total_height}} '{{{escaped_image}}}';
+{{/items}}
+
+{{#options.functions}}
+  @mixin sprite-position($sprite) {
+    $sprite-offset-x: nth($sprite, 3);
+    $sprite-offset-y: nth($sprite, 4);
+    background-position: $sprite-offset-x  $sprite-offset-y;
+  }
+
+  @mixin sprite-image($sprite) {
+    $sprite-image: nth($sprite, 9);
+    background-image: url(%=static=%png-sprite/96dpi/#{$sprite-image});
+  }
+
+  @mixin sprite-mixin-template($sprite) {
+    @include sprite-image($sprite);
+    @include sprite-position($sprite);
+    width: nth($sprite, 5);
+    height: nth($sprite, 6);
+  }
+
+  @mixin bg($sprite, $repeat: no-repeat) {
+    @include sprite-mixin-template($sprite);
+    $sprite-total-width: nth($sprite, 7);
+    $sprite-total-height: nth($sprite, 8);
+    background-size: $sprite-total-width, $sprite-total-height;
+    background-repeat: $repeat;
+
+    {{#options.dpi192}}
+      @media screen and (-webkit-min-device-pixel-ratio: 2), only screen and ( min-resolution: 192dpi), only screen and ( min-resolution: 2dppx), only screen and (min-device-pixel-ratio: 2) {
+          $sprite-image: nth($sprite, 9);
+          background-image: url(%=static=%png-sprite/192dpi/#{$sprite-image});
+      }
+    {{/options.dpi192}}
+
+    {{#options.dpi288}}
+      @media screen and (-webkit-min-device-pixel-ratio: 3), only screen and ( min-resolution: 288dpi), only screen and ( min-resolution: 3dppx), only screen and (min-device-pixel-ratio: 3) {
+          $sprite-image: nth($sprite, 9);
+          background-image: url(%=static=%png-sprite/288dpi/#{$sprite-image});
+      }
+    {{/options.dpi288}}
+
+    {{#options.dpi384}}
+      @media screen and (-webkit-min-device-pixel-ratio: 4), only screen and ( min-resolution: 384dpi), only screen and ( min-resolution: 4dppx), only screen and (min-device-pixel-ratio: 4) {
+          $sprite-image: nth($sprite, 9);
+          background-image: url(%=static=%png-sprite/384dpi/#{$sprite-image});
+      }
+    {{/options.dpi384}}
+  }
+{{/options.functions}}

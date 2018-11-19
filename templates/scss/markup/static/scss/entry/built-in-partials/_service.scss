@@ -1,0 +1,22 @@
+/* Some styles, which is used for correct sprite-generation, vars, mixins and etc */
+/* Please, do not edit with file! */
+/* This file can be overwritten by update-project! */
+
+/* Mixins, which are specific for current project */
+@import '../../mixins.scss';
+
+/* Mixins and vars for sprite generation */
+@import '../../sprites-scss/sprite_96.scss';
+@import '../../sprites-scss/svg-sprite.scss';
+
+/* Scss for used fonts */
+@import '../../fonts.scss';
+
+/* Vars, which are specific for current project */
+@import '../../vars.scss';
+
+/* Styles for UI-elements */
+@import '../../GUI.scss';
+
+/* Common styles for current project */
+@import '../../common.scss';

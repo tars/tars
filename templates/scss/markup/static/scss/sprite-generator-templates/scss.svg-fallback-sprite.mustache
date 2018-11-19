@@ -1,0 +1,30 @@
+{
+  // Default options
+  'functions': true
+}
+
+{{#items}}
+  ${{name}}: {{px.x}} {{px.y}} {{px.offset_x}} {{px.offset_y}} {{px.width}} {{px.height}} {{px.total_width}} {{px.total_height}} '{{{escaped_image}}}' '{{{name}}}';
+{{/items}}
+
+{{#options.functions}}
+  @mixin svg-sprite-position($svg-sprite) {
+    $svg-sprite-offset-x: nth($svg-sprite, 3);
+    $svg-sprite-offset-y: nth($svg-sprite, 4);
+    background-position: $svg-sprite-offset-x  $svg-sprite-offset-y;
+  }
+
+  @mixin svg-sprite-image($svg-sprite) {
+    $svg-sprite-image: nth($svg-sprite, 9);
+    background-image: url(%=static=%rastered-svg-sprite/#{$svg-sprite-image});
+  }
+
+  @mixin bg-svg($svg-sprite, $repeat: no-repeat) {
+    @include svg-sprite-image($svg-sprite);
+    @include svg-sprite-position($svg-sprite);
+    width: nth($svg-sprite, 5);
+    height: nth($svg-sprite, 6);
+
+    background-repeat: $repeat;
+  }
+{{/options.functions}}
