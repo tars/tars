@@ -44,7 +44,7 @@ module.exports = function pagesAndDataFilesProcessing() {
                 }
 
                 if (fileContent.replace(/\s/g, '').length) {
-                    file.contents = new Buffer(fileContent);
+                    file.contents = Buffer.from(fileContent);
                     this.push(file); // eslint-disable-line no-invalid-this
                 }
                 break;
@@ -81,7 +81,7 @@ module.exports = function pagesAndDataFilesProcessing() {
             base: './pages/',
             cwd: __dirname,
             path: './pages/all',
-            contents: new Buffer(pagesListFileContent)
+            contents: Buffer.from(pagesListFileContent)
         });
 
         this.push(pagesListFile); // eslint-disable-line no-invalid-this
@@ -89,7 +89,7 @@ module.exports = function pagesAndDataFilesProcessing() {
         if (tarsEnvValue) {
             this.push(new File({ // eslint-disable-line no-invalid-this
                 path: '.',
-                contents: new Buffer(`TARS_ENV: '${tarsEnvValue}'`)
+                contents: Buffer.from(`TARS_ENV: '${tarsEnvValue}'`)
             }));
         }
 
