@@ -4,115 +4,41 @@ const gulp = tars.packages.gulp;
 const gutil = tars.packages.gutil;
 const del = tars.packages.del;
 
-const githubConfig = {
-    user: 'tars',
-    repoPrefix: 'tars-'
-};
-
 /**
- * Make url to download TARS parts
- * @param  {String} type    Type of the generated link
- * @param  {String} version Used version of TARS
- * @return {String}         Url to download
- */
-function makeUrl(type, version) {
-    const urlTemplate = `https://github.com/${githubConfig.user}/${githubConfig.repoPrefix}`;
-
-    if (type === 'templater') {
-        return `${urlTemplate}${tars.templater.name}/archive/${version}.zip`;
-    } else {
-        return `${urlTemplate}${tars.cssPreproc.name}/archive/${version}.zip`;
-    }
-}
-
-/**
- * Init builder, download css-preprocessor and templater
+ * Init builder, apply css-preprocessor and templater
  */
 module.exports = () => {
     return gulp.task('service:init', ['service:create-fs'], () => {
 
         const ncp = tars.require('ncp');
-        const Download = tars.require('download');
+
+        const TEMPLATES_PATH = './templates';
+        const PAGES_PATH = 'markup/pages';
+        const COMPONENTS_PATH = `markup/${tars.config.fs.componentsFolderName}`;
 
         /**
-         * Get used version of TARS parts
-         * @param  {String} type Type of TARS part
-         * @return {Object}        Promise
+         * Apply templates files
+         * @type  {String} type of template, templater or preprocessor
+         * @return {Object} Promise
          */
-        function getVersionToDownload(type) {
-            return new Promise(resolve => {
-                let version;
-
-                if (process.env.tarsVersion) {
-                    version = `version-${process.env.tarsVersion}`;
-                } else {
-                    version = 'version-' + require(process.cwd() + '/tars.json').version;
-                }
-
-                new Download({ mode: '755' })
-                    .get(makeUrl(type, version))
-                    .run(error => {
-                        if (error) {
-                            version = 'master';
-                        }
-
-                        resolve({
-                            version,
-                            type
-                        });
-                    });
-            });
-        }
-
-        /**
-         * Download parts
-         * @param  {Object} params Version and type of the part
-         * @return {Object}        Promise
-         */
-        function download(params) {
-            return new Promise((resolve, reject) => {
-                let destPath;
-
-                if (params.type === 'templater') {
-                    destPath = './.tmpTemplater';
-                } else {
-                    destPath = './.tmpPreproc';
-                }
-
-                new Download({ extract: true, mode: '755' })
-                    .get(makeUrl(params.type, params.version))
-                    .dest(destPath)
-                    .run(error => {
-                        if (error) {
-                            return reject(error);
-                        }
-                        return resolve(params);
-                    });
-            });
-        }
-
-        /**
-         * Apply downloaded files
-         * @param  {Object} params Version and type of the part
-         * @return {Object}        Promise
-         */
-        function applyDownloadedParts(params) {
-            return new Promise((resolveDownloadedPartsApplying, rejectDownloadedPartsApplying) => {
+        function applyTemplates(type) {
+            return new Promise((resolveTemplatesApplying, rejectTemplatesApplying) => {
 
                 if (
-                    (params.type === 'templater' && tars.flags['exclude-html']) ||
-                    (params.type === 'preprocessor' && tars.flags['exclude-css'])
+                    (type === 'templater' && tars.flags['exclude-html']) ||
+                    (type === 'preprocessor' && tars.flags['exclude-css'])
                 ) {
-                    return resolveDownloadedPartsApplying();
+                    return resolveTemplatesApplying();
                 }
 
-                if (params.type === 'templater') {
+                if (type === 'templater') {
+                    const templaterPartsPath = `${TEMPLATES_PATH}/${tars.templater.name}`;
                     Promise
                         .all([
                             new Promise((resolve, reject) => {
                                 ncp(
-                                    `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup/pages`,
-                                    './markup/pages',
+                                    `${templaterPartsPath}/${PAGES_PATH}`,
+                                    `./${PAGES_PATH}`,
                                     error => {
                                         if (error) {
                                             return reject(error);
@@ -122,10 +48,9 @@ module.exports = () => {
                                 );
                             }),
                             new Promise((resolve, reject) => {
-                                const componentsFolderName = tars.config.fs.componentsFolderName;
                                 ncp(
-                                    `./.tmpTemplater/tars-${tars.templater.name}-${params.version}/markup/components`,
-                                    `./markup/${componentsFolderName}`,
+                                    `${templaterPartsPath}/markup/components`,
+                                    `./${COMPONENTS_PATH}`,
                                     error => {
                                         if (error) {
                                             return reject(error);
@@ -136,15 +61,15 @@ module.exports = () => {
                                 );
                             })
                         ])
-                        .then(() => resolveDownloadedPartsApplying())
-                        .catch(error => rejectDownloadedPartsApplying(error));
+                        .then(() => resolveTemplatesApplying())
+                        .catch(error => rejectTemplatesApplying(error));
                 } else {
-                    const downloadedPreprocPartsPath = `./.tmpPreproc/tars-${tars.cssPreproc.name}-${params.version}/markup`;
+                    const preprocPartsPath = `${TEMPLATES_PATH}/${tars.cssPreproc.name}/markup`;
                     Promise
                         .all([
                             new Promise((resolve, reject) => {
                                 ncp(
-                                    `${downloadedPreprocPartsPath}/static`,
+                                    `${preprocPartsPath}/static`,
                                     `./markup/${tars.config.fs.staticFolderName}`,
                                     error => {
                                         if (error) {
@@ -156,8 +81,8 @@ module.exports = () => {
                             }),
                             new Promise((resolve, reject) => {
                                 ncp(
-                                    `${downloadedPreprocPartsPath}/components`,
-                                    `./markup/${tars.config.fs.componentsFolderName}`,
+                                    `${preprocPartsPath}/components`,
+                                    `./${COMPONENTS_PATH}`,
                                     error => {
                                         if (error) {
                                             return reject(error);
@@ -167,15 +92,15 @@ module.exports = () => {
                                 );
                             })
                         ])
-                        .then(() => resolveDownloadedPartsApplying())
-                        .catch(error => rejectDownloadedPartsApplying(error));
+                        .then(() => resolveTemplatesApplying())
+                        .catch(error => rejectTemplatesApplying(error));
                 }
             });
         }
 
         /**
          * Generate start screen
-         * @return {Object}        Promise
+         * @return {Object} Promise
          */
         function generateStartScreen() {
             return new Promise(resolve => {
@@ -213,18 +138,18 @@ module.exports = () => {
 
         /**
          * Remove temp folders
-         * @return {Object}        Promise
+         * @return {Object} Promise
          */
-        function removeTmpFolders() {
+        function removeTemplatesFolders() {
             return new Promise(resolve => {
-                del(['./.tmpTemplater/', './.tmpPreproc/']).then(() => {
+                del(['./templates']).then(() => {
                     resolve();
                 });
             });
         }
 
         /**
-         * Generate last screen after success downloading
+         * Generate last screen after success applying templates
          */
         function finishInit() {
             console.log(gutil.colors.black.bold('\n--------------------------------------------------------'));
@@ -247,14 +172,10 @@ module.exports = () => {
         Promise
             .all([
                 generateStartScreen(),
-                getVersionToDownload('templater')
-                    .then(download)
-                    .then(applyDownloadedParts),
-                getVersionToDownload('preprocessor')
-                    .then(download)
-                    .then(applyDownloadedParts)
+                applyTemplates('templater'),
+                applyTemplates('preprocessor')
             ])
-            .then(removeTmpFolders)
+            .then(removeTemplatesFolders)
             .then(finishInit)
             .catch(error => {
                 tars.say(gutil.colors.red(error));
