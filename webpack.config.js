@@ -3,7 +3,7 @@
 const path = require('path');
 const cwd = process.cwd();
 const webpack = tars.require('webpack');
-const UglifyJsPlugin = tars.require('uglifyjs-webpack-plugin');
+const TerserJsPlugin = tars.require('terser-webpack-plugin');
 
 const staticFolderName = tars.config.fs.staticFolderName;
 const compressJs = tars.flags.release || tars.flags.min || tars.flags.m;
@@ -37,8 +37,8 @@ if (process.env.npmRoot) {
 if (compressJs) {
     outputFileNameTemplate += `${tars.options.build.hash}.min`;
     minimizers.push(
-        new UglifyJsPlugin({
-            uglifyOptions: {
+        new TerserJsPlugin({
+            terserOptions: {
                 compress: {
                     /* eslint-disable camelcase */
                     drop_console: tars.config.js.removeConsoleLog,
