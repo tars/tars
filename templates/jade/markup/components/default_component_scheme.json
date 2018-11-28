@@ -1,0 +1,26 @@
+{
+    "folders": [
+        {
+            "name": "data",
+            "files": [
+                {
+                    "name": "data.js",
+                    "content": "var data = {__componentName__: {}}"
+                }
+            ]
+        }
+    ],
+
+    "files": [
+        {
+            "name": "__componentName__.__templateExtension__",
+            "content": "mixin __componentName__(data)\n    .__componentName__"
+        }, {
+            "name": "__componentName__.__cssExtension__",
+            "content": ".__componentName__ {}"
+        }, {
+            "name": "__componentName__.js",
+            "content": ""
+        }
+    ]
+}

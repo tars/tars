@@ -1,0 +1,17 @@
+@import '../../normalize.scss';
+
+/* Libraries, which is used in current project. Can be removed! */
+@import '../partials/_libraries.scss';
+
+/* Libraries, which is used in current project. Do not remove! */
+@import '../built-in-partials/_service.scss';
+
+/* Plugins, which is used in current project. Can be removed! */
+@import '../partials/_plugins.scss';
+
+/* Components, which is used in current project. Can be removed! */
+@import '../partials/_components.scss';
+@import '../partials/_components-ie9.scss';
+
+/* Additional style files. Can be removed! */
+@import '../../etc/etc.scss';
