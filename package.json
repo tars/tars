@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "engines": {
     "node": "^6.x.x"
   },
@@ -40,7 +40,7 @@
     "gulp-imagemin": "4.1.0",
     "gulp-importify": "^0.0.7",
     "gulp-jade": "1.1.0",
-    "gulp-jade-inheritance": "^0.5.5",
+    "gulp-jade-inheritance": "https://github.com/tars/gulp-jade-inheritance/archive/master.tar.gz",
     "gulp-less": "^4.0.0",
     "gulp-minify-html": "^1.0.6",
     "gulp-notify": "^3.2.0",
