@@ -43,7 +43,7 @@ module.exports = function generateStaticPath() {
             );
         }
 
-        file.contents = new Buffer(newPageContent);
+        file.contents = Buffer.from(newPageContent);
 
         this.push(file); // eslint-disable-line no-invalid-this
 
