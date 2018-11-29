@@ -31,7 +31,7 @@ module.exports = () => {
             }))
             .pipe(
                 gulpif(
-                    /\.(svg|png|jpg|jpeg|jpe|gif|tiff|bmp)$/i,
+                    /\.(svg|png|jpg|jpeg|jpe|gif|tiff|bmp|webp)$/i,
                     gulp.dest(imgAssets),
                     gulp.dest(otherAssets)
                 )
