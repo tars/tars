@@ -89,7 +89,7 @@ if (!tars.flags.ie9 && !tars.flags.ie) {
 patterns.push(
     {
         match: '%=min=%',
-        replacement: tars.flags.min || tars.flags.release ? '.min' : ''
+        replacement: tars.flags.min || tars.flags.release || tars.flags.m ? '.min' : ''
     }, {
         match: '%=hash=%',
         replacement: tars.flags.release ? tars.options.build.hash : ''
