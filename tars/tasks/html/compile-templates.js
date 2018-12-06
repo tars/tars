@@ -160,7 +160,7 @@ function jadeAndPugInheritanceProcessing() {
             tars.require(`gulp-${templaterName}-inheritance`)(inheritanceOptions),
             tars.helpers.filterFilesByPath([
                 new RegExp(`\/markup\/${tars.config.fs.componentsFolderName}\/`),
-                /_[\w]+.(jade|pug)/
+                /^_[\w]+.(jade|pug)/
             ])
         );
     }
