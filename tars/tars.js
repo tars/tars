@@ -62,7 +62,7 @@ tars.pluginsConfig = require(helpersDirPath + '/plugins-config-processing')();
 tars.flags = gutil.env;
 
 // Dev mode flag
-tars.isDevMode = !tars.flags.release && !tars.flags.min;
+tars.isDevMode = !tars.flags.release && !tars.flags.min && !tars.flags.m;
 tars.useLiveReload = tars.flags.lr || tars.flags.livereload || tars.flags.tunnel;
 
 // Package name
