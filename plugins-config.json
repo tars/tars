@@ -2,8 +2,6 @@
 
     // You can find docs for this file here: ./docs/en|ru/plugins-options.md
 
-    "autoprefixerConfig": ["> 1%", "last 2 versions", "Firefox ESR", "android 4"],
-
     "browserSync": {
         "startPath": "/index.html",
         "server": {

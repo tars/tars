@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.11.7",
+  "version": "1.11.9",
   "engines": {
     "node": "^6.x.x"
   },
@@ -17,7 +17,7 @@
     "babel-loader": "^8.0.4"
   },
   "devDependencies": {
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^9.4.4",
     "browser-sync": "^2.17.0",
     "chokidar": "^2.0.3",
     "comment-json": "^1.1.3",

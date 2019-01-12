@@ -416,7 +416,9 @@ Custom path to the folder with the static for css files. imageFolderName is take
 
 Configuration for autoprefixer ([read more here](https://github.com/postcss/autoprefixer#autoprefixer-)). In short, this module allows you not to write vendor prefixes. In this configuration you do not need to include IE8 and IE9, style assembly is done by another way for them . You can look [here](https://github.com/postcss/autoprefixer#browsers) which browsers are available. If you do not want to use autoprefixer, pass `false` in this option.
 
-**Option was moved to plugins-config.json.**
+~~**Option was moved to plugins-config.json.**~~
+
+**Option was moved to .browserslistrc.**
 
 ### browserSyncConfig
 
