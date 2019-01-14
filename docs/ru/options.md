@@ -424,7 +424,9 @@ Default: `../imageFolderName/`
 
 Какие еще браузеры доступны, можно глянуть [тут](https://github.com/postcss/autoprefixer#browsers).
 
-**Опция была переннесена в plugins-config.json.**
+~~**Опция была переннесена в plugins-config.json.**~~
+
+**Опция была переннесена в .browserslistrc.**
 
 ### browserSyncConfig
 

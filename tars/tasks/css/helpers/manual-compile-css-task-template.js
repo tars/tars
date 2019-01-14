@@ -69,11 +69,9 @@ module.exports = function generateTaskContent(browser) {
                 `${stylesFolderPath}/entry/*.${preprocExtensions}`
             );
 
-            if (tars.pluginsConfig.autoprefixerConfig) {
-                postProcessors.push(
-                    autoprefixer({browsers: tars.pluginsConfig.autoprefixerConfig})
-                );
-            }
+            postProcessors.push(
+                autoprefixer()
+            );
 
             generateSourceMaps = tars.config.sourcemaps.css.active && tars.options.watch.isActive;
             break;
