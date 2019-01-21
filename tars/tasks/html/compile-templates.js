@@ -44,7 +44,7 @@ function concatComponentsData() {
     let readyMocksData;
 
     try {
-        dataEntry = fs.readFileSync('./dev/temp/mocksData.js', 'utf8');
+        dataEntry = fs.readFileSync(`${tars.config.devPath}temp/mocksData.js`, 'utf8');
     } catch (er) {
         dataEntry = false;
     }
@@ -108,7 +108,7 @@ if (
                 /* eslint-disable no-unused-vars */
 
                 try {
-                    return fs.readFileSync(`./dev/temp/svg-symbols${tars.options.build.hash}.svg`, 'utf8');
+                    return fs.readFileSync(`${tars.config.devPath}temp/svg-symbols${tars.options.build.hash}.svg`, 'utf8');
                 } catch (error) {
                     return '';
                 }
@@ -231,7 +231,7 @@ module.exports = () => {
 
                 pathToFileToRename.extname = '.html';
             }))
-            .pipe(gulp.dest('./dev/'))
+            .pipe(gulp.dest(`${tars.config.devPath}`))
             .on('end', () => {
                 if (!compileError) {
                     browserSync.reload();

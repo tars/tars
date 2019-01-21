@@ -42,7 +42,7 @@ module.exports = () => {
                         })
                     ])
                 )
-                .pipe(gulp.dest(`./dev/${svgImagesPath}/minified-svg/`))
+                .pipe(gulp.dest(`${tars.config.devPath}${svgImagesPath}/minified-svg/`))
                 .pipe(notifier.success('SVG\'ve been minified'));
         }
 

@@ -20,7 +20,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-fonts'))
-            .pipe(gulp.dest(`./dev/${fontsFolderPath}`))
+            .pipe(gulp.dest(`${tars.config.devPath}${fontsFolderPath}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Fonts\'ve been moved')

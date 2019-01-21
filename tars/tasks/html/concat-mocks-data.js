@@ -15,7 +15,7 @@ module.exports = () => {
         return gulp.src([`./markup/pages/**/*.${tars.templater.ext}`,
                          `!./markup/pages/**/_*.${tars.templater.ext}`,
                          `./markup/${tars.config.fs.componentsFolderName}/**/data/data.js`,
-                         './dev/temp/symbols-data-template.js'])
+                         `${tars.config.devPath}temp/symbols-data-template.js`])
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error(`An error occurred while concating ${tars.config.fs.componentsFolderName}'s data.`, error);
@@ -23,7 +23,7 @@ module.exports = () => {
             }))
             .pipe(pagesAndDataFilesProcessing())
             .pipe(concat('mocksData.js', { newLine: ',\n\n' }))
-            .pipe(gulp.dest('./dev/temp/'))
+            .pipe(gulp.dest(`${tars.config.devPath}temp/`))
             .pipe(
                 notifier.success(`Data for ${tars.config.fs.componentsFolderName} ready`)
             );

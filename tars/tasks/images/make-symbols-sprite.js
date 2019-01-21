@@ -7,11 +7,11 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const skipTaskWithEmptyPipe = tars.helpers.skipTaskWithEmptyPipe;
 
-const svgImagesPath = `./dev/${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/minified-svg/`;
-let readySymbolSpritePath = `./dev/${tars.config.svg.symbolsConfig.pathToExternalSymbolsFile}`;
+const svgImagesPath = `${tars.config.devPath}${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/minified-svg/`;
+let readySymbolSpritePath = `${tars.config.devPath}${tars.config.svg.symbolsConfig.pathToExternalSymbolsFile}`;
 
 if (tars.config.svg.symbolsConfig.loadingType === 'inject') {
-    readySymbolSpritePath = './dev/temp/';
+    readySymbolSpritePath = `${tars.config.devPath}temp/`;
 }
 
 /**
@@ -53,7 +53,7 @@ module.exports = () => {
                     gulpif(/[.]svg$/, gulp.dest(readySymbolSpritePath))
                 )
                 .pipe(
-                    gulpif(/[.]js$/, gulp.dest('./dev/temp/'))
+                    gulpif(/[.]js$/, gulp.dest(`${tars.config.devPath}temp/`))
                 )
                 .pipe(
                     notifier.success('Symbols sprite\'s been created')

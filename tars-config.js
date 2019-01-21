@@ -187,6 +187,14 @@ module.exports = {
     generateStaticPath: true,
 
     /**
+     * Path to dev version of project
+     * Could be like '../../../dev' or absolute path
+     * If you change the value do not forget to change the 'baseDir' in the file 'plugins-config.json' and .gitignore
+     * @type {String}
+     */
+    devPath: './dev/',
+
+    /**
      * Path to build version of project
      * Could be like '../../../build' or absolute path
      * @type {String}

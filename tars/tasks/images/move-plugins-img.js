@@ -27,7 +27,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-plugins-img'))
-            .pipe(gulp.dest(`./dev/${pluginsImagesFolder}`))
+            .pipe(gulp.dest(`${tars.config.devPath}${pluginsImagesFolder}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Plugins\' images\'ve been moved')

@@ -16,7 +16,7 @@ module.exports = () => {
                     notifier.error('An error occurred while moving misc-files.', error);
                 }
             }))
-            .pipe(gulp.dest('./dev/'))
+            .pipe(gulp.dest(`${tars.config.devPath}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Misc files\'ve been moved')

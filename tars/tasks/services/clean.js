@@ -7,7 +7,7 @@ const preprocExtension = tars.cssPreproc.mainExt;
 const spritesCssPath = `./markup/${tars.config.fs.staticFolderName}/${preProcName}/sprites-${preProcName}`;
 
 let pathsToDel = [
-    './dev/',
+    `${tars.config.devPath}`,
     `${spritesCssPath}/sprite_96.${preprocExtension}`,
     `${spritesCssPath}/svg-fallback-sprite.${preprocExtension}`,
     `${spritesCssPath}/svg-sprite.${preprocExtension}`,

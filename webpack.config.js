@@ -124,7 +124,7 @@ module.exports = {
     }),
 
     output: {
-        path: path.resolve(`${cwd}/dev/${staticFolderName}/js`),
+        path: path.resolve(`${(tars.isDevMode) ? `${tars.config.devPath}` : `${tars.config.buildPath}`}/${staticFolderName}/js`),
         publicPath: `./${staticFolderName}/js/`,
         filename: `${outputFileNameTemplate}.js`
     },

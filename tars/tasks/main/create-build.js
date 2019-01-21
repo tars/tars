@@ -9,7 +9,7 @@ const notifier = tars.helpers.notifier;
  */
 module.exports = () => {
     return gulp.task('main:create-build', () => {
-        return gulp.src(['./dev/**/*.*', '!./dev/temp/**'], { base: './dev/' })
+        return gulp.src([`${tars.config.devPath}**/*.*`, `!${tars.config.devPath}temp/**`], { base: `${tars.config.devPath}` })
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while running create-build task.', error);
