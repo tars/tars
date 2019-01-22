@@ -25,7 +25,7 @@ module.exports = () => {
                     })
                 )
                 .pipe(
-                    changed(`dev/${svgImagesPath}/minified-svg`, {
+                    changed(`${tars.config.devPath}${svgImagesPath}/minified-svg`, {
                         hasChanged: changed.compareLastModifiedTime,
                         extension: '.svg',
                     })
