@@ -18,6 +18,8 @@ In all scenarios, it is mean that the development mode (dev-task) will be availa
 
 In this case, in the tars-config is important to set the minifyHtml option to false. You can also disable removeConsoleLog (false), to retain all console.log unchanged.
 
+In tars-config, in the devPath option, it is also possible to specify a new path for integration with the back-end part of the project.
+
 So, for the convenience of builds versioning you can include the useBuildVersioning and useArchiver options, to have the archive ready for sending in each folder with built project.
 
 During assembly (build-task) is desirable not to use the `-–release` key.
