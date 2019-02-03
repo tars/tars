@@ -75,7 +75,7 @@ module.exports = () => {
             );
 
             spriteData[i].img
-                .pipe(gulp.dest(`./dev/${staticFolderName}/${imagesFolderName}/png-sprite/${usedDpiArray[i]}dpi/`))
+                .pipe(gulp.dest(`${tars.config.devPath}${staticFolderName}/${imagesFolderName}/png-sprite/${usedDpiArray[i]}dpi/`))
                 .pipe(notifier.success(`Sprite img with dpi = ${usedDpiArray[i]} is ready`));
         }
 

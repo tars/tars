@@ -19,7 +19,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('separate-css'))
-            .pipe(gulp.dest(`./dev/${staticFolderName}/css/separate-css`))
+            .pipe(gulp.dest(`${tars.config.devPath}${staticFolderName}/css/separate-css`))
             .pipe(
                 notifier.success('Separate css files\'s been copied')
             );

@@ -9,7 +9,7 @@ const stringHelper = tars.helpers.stringHelper;
 const preprocName = tars.cssPreproc.name;
 const preprocExtension = tars.cssPreproc.mainExt;
 const staticFolderName = tars.config.fs.staticFolderName;
-const imagesFolderPath = `./dev/${staticFolderName}/${tars.config.fs.imagesFolderName}`;
+const imagesFolderPath = `${tars.config.devPath}${staticFolderName}/${tars.config.fs.imagesFolderName}`;
 const preprocFoldePath = `./markup/${staticFolderName}/${preprocName}`;
 const actionsOnSpriteTaskSkipping = require(`${tars.root}/tasks/css/helpers/actions-on-sprite-task-skipping`);
 

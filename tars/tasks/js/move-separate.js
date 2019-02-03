@@ -21,7 +21,7 @@ module.exports = () => {
             }))
             .pipe(separateFilesFilter())
             .pipe(cache('separate-js'))
-            .pipe(gulp.dest(`./dev/${separateJsFilesPath}`))
+            .pipe(gulp.dest(`${tars.config.devPath}${separateJsFilesPath}`))
             .pipe(
                 notifier.success('Separate js files\'s been copied')
             );

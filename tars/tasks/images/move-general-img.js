@@ -27,7 +27,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-general-img'))
-            .pipe(gulp.dest(`./dev/${generalImagesFolder}`))
+            .pipe(gulp.dest(`${tars.config.devPath}${generalImagesFolder}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('General images\'ve been moved')

@@ -32,7 +32,7 @@ module.exports = () => {
                     )
                 )
                 .pipe(tars.require('gulp-svg2png')())
-                .pipe(gulp.dest(`./dev/${imagesPath}/rastered-svg-images`))
+                .pipe(gulp.dest(`${tars.config.devPath}${imagesPath}/rastered-svg-images`))
                 .pipe(
                     notifier.success('SVG\'ve been rastered')
                 );

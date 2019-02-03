@@ -9,8 +9,8 @@ const plumber = tars.packages.plumber;
 const notifier = tars.helpers.notifier;
 const browserSync = tars.packages.browserSync;
 
-const imgAssets = `./dev/${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/assets/`;
-const otherAssets = `./dev/${tars.config.fs.staticFolderName}/${tars.config.fs.componentsFolderName}-assets/`;
+const imgAssets = `${tars.config.devPath}${tars.config.fs.staticFolderName}/${tars.config.fs.imagesFolderName}/assets/`;
+const otherAssets = `${tars.config.devPath}${tars.config.fs.staticFolderName}/${tars.config.fs.componentsFolderName}-assets/`;
 
 /**
  * Move files from components' assets to ready build

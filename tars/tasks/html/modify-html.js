@@ -22,7 +22,7 @@ module.exports = () => {
         );
         /* eslint-enable camelcase */
 
-        return gulp.src('./dev/**/*.html')
+        return gulp.src(`${tars.config.devPath}**/*.html`)
             .pipe(plumber({
                 errorHandler(error) {
                     notifier.error('An error occurred while processing compiled html-files.', error);
@@ -33,7 +33,7 @@ module.exports = () => {
                 tars.require('gulp-htmlmin')(minifyOpts),
                 tars.require('gulp-html-prettify')(prettifyOpts)
             ))
-            .pipe(gulp.dest('./dev/'))
+            .pipe(gulp.dest(`${tars.config.devPath}`))
             .pipe(
                 notifier.success('Compiled html\'ve been processed.')
             );

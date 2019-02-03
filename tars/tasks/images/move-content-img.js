@@ -27,7 +27,7 @@ module.exports = () => {
                 }
             }))
             .pipe(cache('move-content-img'))
-            .pipe(gulp.dest(`./dev/${contentImagesFolder}`))
+            .pipe(gulp.dest(`${tars.config.devPath}${contentImagesFolder}`))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier.success('Content images\'ve been moved')

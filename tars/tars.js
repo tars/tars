@@ -150,6 +150,14 @@ if (tars.config.svg.active && tars.config.svg.workflow === 'symbols' && (tars.fl
     );
 }
 
+// availability check '/'
+if (tars.config.devPath.slice(-1) !== '/') {
+    tars.config.devPath = tars.config.devPath + '/';
+}
+if (tars.config.buildPath.slice(-1) !== '/') {
+    tars.config.buildPath = tars.config.buildPath + '/';
+}
+
 // Build options
 tars.options = {
     notify: true,
