@@ -24,7 +24,7 @@ module.exports = () => {
             pathsToDel.push(tars.options.build.path);
         }
 
-        del(pathsToDel).then(() => {
+        del(pathsToDel, {force: true}).then(() => {
             done();
         });
     });
