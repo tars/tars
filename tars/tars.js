@@ -10,7 +10,6 @@
  * @return {Object}             Required package
  */
 function tarsRequire(packageName) {
-
     // Log for TARS debug
     if (process.env.TARS_DEBUG) {
         console.log('Module required: ', packageName);
@@ -25,11 +24,21 @@ function tarsRequire(packageName) {
             console.log('\n');
             util.inspect.styles.string = 'red';
             console.log('---------------------------------------------------------------------------------');
-            console.dir('It seems, that TARS in current project is not compatible with current TARS-CLI!', { colors: true });
-            console.dir(`Package "${packageName}" is not available.`, { colors: true });
-            console.dir('Update TARS-CLI via "tars update" and your project via "tars update-project"', { colors: true });
-            console.dir('Please, write to the tars.builder@gmail.com, if update did not help you.', { colors: true });
-            console.log('---------------------------------------------------------------------------------\n');
+            console.dir('It seems, that TARS in current project is not compatible with current TARS-CLI!', {
+                colors: true,
+            });
+            console.dir(`Package "${packageName}" is not available.`, {
+                colors: true,
+            });
+            console.dir('Update TARS-CLI via "tars update" and your project via "tars update-project"', {
+                colors: true,
+            });
+            console.dir('Please, write to the tars.builder@gmail.com, if update did not help you.', {
+                colors: true,
+            });
+            console.log(
+                '---------------------------------------------------------------------------------\n',
+            );
 
             throw new Error(`Package ${packageName} is not available.`);
         }
@@ -41,10 +50,10 @@ function tarsRequire(packageName) {
 // TARS is a global var
 global.tars = {
     require: tarsRequire,
-    cli: (process.env.npmRoot ? true : false),
+    cli: process.env.npmRoot ? true : false,
     root: __dirname,
     packageInfo: require('../package.json'),
-    config: require('../tars-config')
+    config: require('../tars-config'),
 };
 
 const gutil = tars.require('gulp-util');
@@ -113,7 +122,7 @@ tars.config.staticPrefixForCss = `../${tars.config.fs.imagesFolderName}/`;
 if (tars.config.hasOwnProperty('useSVG')) {
     tars.config.svg = {
         active: tars.config.useSVG,
-        workflow: 'sprite'
+        workflow: 'sprite',
     };
 } else {
     const symbolsLoadingType = tars.config.svg.symbolsConfig.loadingType;
@@ -125,29 +134,19 @@ if (tars.config.hasOwnProperty('useSVG')) {
     ) {
         tars.say(
             gutil.colors.yellow(
-                `TARS does not support option ${tars.config.svg.symbolsConfig.loadingType} for symbols loading`
-            )
+                `TARS does not support option ${tars.config.svg.symbolsConfig.loadingType} for symbols loading`,
+            ),
         );
         tars.say(
-            gutil.colors.yellow(
-                'You can use only "inject", "separate-file" and "separate-file-with-link"'
-            )
+            gutil.colors.yellow('You can use only "inject", "separate-file" and "separate-file-with-link"'),
         );
-        tars.say(
-            gutil.colors.yellow(
-                '"inject" will be used now!'
-            )
-        );
+        tars.say(gutil.colors.yellow('"inject" will be used now!'));
         tars.config.svg.symbolsConfig.loadingType = 'inject';
     }
 }
 
 if (tars.config.svg.active && tars.config.svg.workflow === 'symbols' && (tars.flags.ie || tars.flags.ie8)) {
-    tars.say(
-        gutil.colors.yellow(
-            'Build for IE8 is not available, then svg-symbols is used!'
-        )
-    );
+    tars.say(gutil.colors.yellow('Build for IE8 is not available, then svg-symbols is used!'));
 }
 
 // availability check '/'
@@ -162,16 +161,20 @@ if (tars.config.buildPath.substr(-1) !== '/') {
 tars.options = {
     notify: true,
     build: {
-        hash: tars.flags.release ? Math.random().toString(36).substring(7) : '',
+        hash: tars.flags.release
+            ? Math.random()
+                  .toString(36)
+                  .substring(7)
+            : '',
         path: useBuildVersioning ? `${tars.config.buildPath}build${buildVersion}/` : tars.config.buildPath,
-        version: useBuildVersioning ? buildVersion : ''
+        version: useBuildVersioning ? buildVersion : '',
     },
     watch: {
         isActive: false,
         ignored: '',
         persistent: true,
-        ignoreInitial: true
-    }
+        ignoreInitial: true,
+    },
 };
 
 // Required packages
@@ -194,10 +197,10 @@ tars.packages = {
     postcss: tars.require('gulp-postcss'),
     rename: tars.require('gulp-rename'),
     replace: tars.require('gulp-replace-task'),
-    runSequence: tars.require('run-sequence'),
+    runSequence: tars.require('gulp4-run-sequence'),
     sourcemaps: tars.require('gulp-sourcemaps'),
     streamCombiner: tars.require('stream-combiner'),
-    through2: tars.require('through2')
+    through2: tars.require('through2'),
 };
 
 // Links to helpers
@@ -209,7 +212,7 @@ tars.helpers = {
     watcherLog: require(helpersDirPath + '/watcher-log'),
     skipTaskWithEmptyPipe: require(helpersDirPath + '/skip-task-with-empty-pipe'),
     stringHelper: require(helpersDirPath + '/string-helper'),
-    filterFilesByPath: require(helpersDirPath + '/filter-files-by-path')
+    filterFilesByPath: require(helpersDirPath + '/filter-files-by-path'),
 };
 
 /**
@@ -225,7 +228,7 @@ switch (cssPreprocName) {
             name: 'stylus',
             ext: 'styl',
             mainExt: 'styl',
-            preprocessor: () => tars.require('gulp-stylus')(tars.pluginsConfig['gulp-stylus'])
+            preprocessor: () => tars.require('gulp-stylus')(tars.pluginsConfig['gulp-stylus']),
         };
         break;
     case 'less':
@@ -233,7 +236,7 @@ switch (cssPreprocName) {
             name: 'less',
             ext: 'less',
             mainExt: 'less',
-            preprocessor: () => tars.require('gulp-less')(tars.pluginsConfig['gulp-less'])
+            preprocessor: () => tars.require('gulp-less')(tars.pluginsConfig['gulp-less']),
         };
         break;
     case 'scss':
@@ -242,7 +245,7 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: () => tars.require('gulp-sass')(tars.pluginsConfig['gulp-sass'])
+            preprocessor: () => tars.require('gulp-sass')(tars.pluginsConfig['gulp-sass']),
         };
         break;
 }
@@ -259,31 +262,25 @@ switch (templaterName) {
         tars.templater = {
             name: 'handlebars',
             ext: '{html,hbs}',
-            fn: mocksData => tars.require('gulp-compile-handlebars')(
-                mocksData,
-                Object.assign(
-                    {},
-                    tars.pluginsConfig['gulp-compile-handlebars'],
-                    {
-                        helpers: require('./tasks/html/helpers/handlebars-helpers')
-                    }
-                )
-            )
+            fn: (mocksData) =>
+                tars.require('gulp-compile-handlebars')(
+                    mocksData,
+                    Object.assign({}, tars.pluginsConfig['gulp-compile-handlebars'], {
+                        helpers: require('./tasks/html/helpers/handlebars-helpers'),
+                    }),
+                ),
         };
         break;
     case 'jade':
         tars.templater = {
             name: 'jade',
             ext: 'jade',
-            fn: mocksData => tars.require('gulp-jade')(
-                Object.assign(
-                    {},
-                    tars.pluginsConfig['gulp-jade'],
-                    {
-                        locals: mocksData
-                    }
-                )
-            )
+            fn: (mocksData) =>
+                tars.require('gulp-jade')(
+                    Object.assign({}, tars.pluginsConfig['gulp-jade'], {
+                        locals: mocksData,
+                    }),
+                ),
         };
         break;
     case 'pug':
@@ -291,15 +288,12 @@ switch (templaterName) {
         tars.templater = {
             name: 'pug',
             ext: 'pug',
-            fn: mocksData => tars.require('gulp-pug')(
-                Object.assign(
-                    {},
-                    tars.pluginsConfig['gulp-pug'],
-                    {
-                        locals: mocksData
-                    }
-                )
-            )
+            fn: (mocksData) =>
+                tars.require('gulp-pug')(
+                    Object.assign({}, tars.pluginsConfig['gulp-pug'], {
+                        locals: mocksData,
+                    }),
+                ),
         };
         break;
 }

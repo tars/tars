@@ -12,6 +12,7 @@ By default, each watcher requires a set of npm-modules and configs to work corre
 
 ```javascript
 const gulp = tars.packages.gulp;
+const runSequence = tars.packages.runSequence.use(gulp);
 const gutil = tars.packages.gutil;
 const chokidar = tars.packages.chokidar;
 const watcherLog = tars.helpers.watcherLog;
@@ -30,7 +31,7 @@ const watcherLog = tars.helpers.watcherLog;
     ).on('all', function(event, path) {
         watcherLog(event, path);
         // You could start as many tasks as you need
-        gulp.start(/* Task name (String) to start */);
+        runSequence(/* Task name (String) to start */);
     });
 ```
 
@@ -41,4 +42,3 @@ You can pass options for `chokidar` after patterns. If default options are ok fo
 You can pass a pattern or an array of patterns of paths to files that you want to filter from watching within current watcher into the option `ignored`.
 
 Task name is passed to `gulp.start`, which should be run on any changes in watched files. By default watchers work for all file operations (delete, create, rename). You can change this behavior by changing the `.on('all', function(event, path)` to the needed event. List of available events is in [chokidar docs](https://github.com/paulmillr/chokidar#getting-started).
-

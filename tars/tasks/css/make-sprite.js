@@ -17,8 +17,7 @@ const actionsOnSpriteTaskSkipping = require(`${tars.root}/tasks/css/helpers/acti
  * Make sprite and styles for this sprite
  */
 module.exports = () => {
-
-    return gulp.task('css:make-sprite', done => {
+    return gulp.task('css:make-sprite', (done) => {
         const dpiLength = usedDpiArray.length;
         const cssTemplatePath = `./markup/${staticFolderName}/${preprocName}/sprite-generator-templates`;
         const spritesmithConfig = tars.pluginsConfig['gulp.spritesmith']['regular-raster-sprite'];
@@ -27,7 +26,7 @@ module.exports = () => {
         let spriteData = [];
         let dpiConfig = {};
 
-        usedDpiArray.forEach(dpiValue => {
+        usedDpiArray.forEach((dpiValue) => {
             dpiConfig[`dpi${dpiValue}`] = true;
         });
 
@@ -36,7 +35,7 @@ module.exports = () => {
                 blankFilePath: `./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/sprite_96.${preprocExtension}`,
                 fileWithMixinsPath: `${tars.root}/tasks/css/helpers/sprite-mixins/${preprocName}-raster-sprite-mixins.${preprocExtension}`,
                 done,
-                errorText
+                errorText,
             });
         }
 
@@ -44,38 +43,47 @@ module.exports = () => {
 
         for (let i = 0; i < dpiLength; i++) {
             spriteData.push(
-                gulp.src(`./markup/${staticFolderName}/${imagesFolderName}/sprite/${usedDpiArray[i]}dpi/*.png`)
-                .pipe(plumber({
-                    errorHandler(error) {
-                        notifier.error(errorText, error);
-                    }
-                }))
-                .pipe(
-                    tars.require('gulp.spritesmith')(
-                        Object.assign(
-                            {},
-                            {
-                                imgName: `sprite${tars.options.build.hash}.png`,
-                                cssName: `sprite_${usedDpiArray[i]}.${preprocExtension}`,
-                                algorithm: 'binary-tree',
-                                algorithmOpts: {
-                                    sort: false
-                                },
-                                cssOpts: dpiConfig,
-                                padding: (i + 1) * 4,
-                                cssTemplate: `${cssTemplatePath}/${preprocName}.sprite.mustache`
-                            },
-                            spritesmithConfig,
-                            {
-                                padding: (i + 1) * spritesmithConfig.padding
-                            }
-                        )
+                gulp
+                    .src(
+                        `./markup/${staticFolderName}/${imagesFolderName}/sprite/${usedDpiArray[i]}dpi/*.png`,
                     )
-                )
+                    .pipe(
+                        plumber({
+                            errorHandler(error) {
+                                notifier.error(errorText, error);
+                            },
+                        }),
+                    )
+                    .pipe(
+                        tars.require('gulp.spritesmith')(
+                            Object.assign(
+                                {},
+                                {
+                                    imgName: `sprite${tars.options.build.hash}.png`,
+                                    cssName: `sprite_${usedDpiArray[i]}.${preprocExtension}`,
+                                    algorithm: 'binary-tree',
+                                    algorithmOpts: {
+                                        sort: false,
+                                    },
+                                    cssOpts: dpiConfig,
+                                    padding: (i + 1) * 4,
+                                    cssTemplate: `${cssTemplatePath}/${preprocName}.sprite.mustache`,
+                                },
+                                spritesmithConfig,
+                                {
+                                    padding: (i + 1) * spritesmithConfig.padding,
+                                },
+                            ),
+                        ),
+                    ),
             );
 
             spriteData[i].img
-                .pipe(gulp.dest(`${tars.config.devPath}${staticFolderName}/${imagesFolderName}/png-sprite/${usedDpiArray[i]}dpi/`))
+                .pipe(
+                    gulp.dest(
+                        `${tars.config.devPath}${staticFolderName}/${imagesFolderName}/png-sprite/${usedDpiArray[i]}dpi/`,
+                    ),
+                )
                 .pipe(notifier.success(`Sprite img with dpi = ${usedDpiArray[i]} is ready`));
         }
 
@@ -83,12 +91,11 @@ module.exports = () => {
 
         // Returns css for dpi 96
         return spriteData[0].css
-                .pipe(skipTaskWithEmptyPipe('css:make-sprite', actionsOnTaskSkipping))
-                .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
-                .pipe(
-                    notifier.success(
-                        stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'
-                    )
-                );
+            .pipe(skipTaskWithEmptyPipe('css:make-sprite', actionsOnTaskSkipping))
+            .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
+            .pipe(notifier.success(stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'))
+            .end(() => {
+                done();
+            });
     });
 };

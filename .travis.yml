@@ -1,34 +1,34 @@
 language: c
 
 os:
-  - linux
-  - osx
+    - linux
+    - osx
 
 env:
-  matrix:
-    - export NODE_VERSION="11"
-    - export NODE_VERSION="10"
-    - export NODE_VERSION="9"
-    - export NODE_VERSION="8"
+    matrix:
+        - export NODE_VERSION="13"
+        - export NODE_VERSION="12"
+        - export NODE_VERSION="11"
+        - export NODE_VERSION="10"
 
 matrix:
-  fast_finish: true
+    fast_finish: true
 
 before_install:
-  - echo $TRAVIS_OS_NAME
-  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
-  - export START_FULL_TESTS=$(echo $TRAVIS_COMMIT_MSG | grep '\[full\]' -c)
-  - if [ ${START_FULL_TESTS} = "1" ]; then echo "FULL TESTS!"; fi
-  - git clone https://github.com/creationix/nvm.git ./.nvm
-  - source ./.nvm/nvm.sh
-  - nvm install $NODE_VERSION
-  - nvm use $NODE_VERSION
+    - echo $TRAVIS_OS_NAME
+    - 'export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"'
+    - export START_FULL_TESTS=$(echo $TRAVIS_COMMIT_MSG | grep '\[full\]' -c)
+    - if [ ${START_FULL_TESTS} = "1" ]; then echo "FULL TESTS!"; fi
+    - git clone https://github.com/creationix/nvm.git ./.nvm
+    - source ./.nvm/nvm.sh
+    - nvm install $NODE_VERSION
+    - nvm use $NODE_VERSION
 
 before_script:
-  - npm -v
-  - npm install
-  - npm install -g gulp
+    - npm -v
+    - npm install
+    - npm install -g gulp
 
 script:
-  - gulp init
-  - gulp --release --ie
+    - gulp init
+    - gulp --release --ie

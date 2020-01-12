@@ -17,8 +17,7 @@ const actionsOnSpriteTaskSkipping = require(`${tars.root}/tasks/css/helpers/acti
  * Return pipe with styles for sprite
  */
 module.exports = () => {
-
-    return gulp.task('css:make-fallback-for-svg', done => {
+    return gulp.task('css:make-fallback-for-svg', (done) => {
         const errorText = 'An error occurred while making fallback for svg.';
 
         function actionsOnTaskSkipping() {
@@ -26,20 +25,27 @@ module.exports = () => {
                 blankFilePath: `./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/svg-fallback-sprite.${preprocExtension}`,
                 fileWithMixinsPath: `${tars.root}/tasks/css/helpers/sprite-mixins/${preprocName}-svg-fallback-sprite-mixins.${preprocExtension}`,
                 errorText,
-                done
+                done,
             });
         }
 
-        if (tars.config.svg.active && tars.config.svg.workflow === 'sprite' && (tars.flags.ie8 || tars.flags.ie)) {
+        if (
+            tars.config.svg.active &&
+            tars.config.svg.workflow === 'sprite' &&
+            (tars.flags.ie8 || tars.flags.ie)
+        ) {
             const cssTemplatePath = `./markup/${staticFolderName}/${preprocName}/sprite-generator-templates`;
-            const spriteData = gulp.src(
-                    `${tars.config.devPath}${staticFolderName}/${imagesFolderName}/rastered-svg-images/*.png`
+            const spriteData = gulp
+                .src(
+                    `${tars.config.devPath}${staticFolderName}/${imagesFolderName}/rastered-svg-images/*.png`,
                 )
-                .pipe(plumber({
-                    errorHandler(error) {
-                        notifier.error(errorText, error);
-                    }
-                }))
+                .pipe(
+                    plumber({
+                        errorHandler(error) {
+                            notifier.error(errorText, error);
+                        },
+                    }),
+                )
                 .pipe(skipTaskWithEmptyPipe('css:make-fallback-for-svg', actionsOnTaskSkipping))
                 .pipe(
                     tars.require('gulp.spritesmith')(
@@ -50,26 +56,34 @@ module.exports = () => {
                                 cssName: `svg-fallback-sprite.${preprocExtension}`,
                                 algorithm: 'binary-tree',
                                 algorithmOpts: {
-                                    sort: false
+                                    sort: false,
                                 },
                                 padding: 4,
-                                cssTemplate: `${cssTemplatePath}/${preprocName}.svg-fallback-sprite.mustache`
+                                cssTemplate: `${cssTemplatePath}/${preprocName}.svg-fallback-sprite.mustache`,
                             },
-                            tars.pluginsConfig['gulp.spritesmith']['svg-fallback']
-                        )
-                    )
+                            tars.pluginsConfig['gulp.spritesmith']['svg-fallback'],
+                        ),
+                    ),
                 );
 
             spriteData.img
-                .pipe(gulp.dest(`${tars.config.devPath}${staticFolderName}/${imagesFolderName}/rastered-svg-sprite/`))
+                .pipe(
+                    gulp.dest(
+                        `${tars.config.devPath}${staticFolderName}/${imagesFolderName}/rastered-svg-sprite/`,
+                    ),
+                )
                 .pipe(notifier.success('Sprite-img for svg is ready!'));
 
-            return spriteData.css
-                    .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
-                    .pipe(
-                        notifier.success(`${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready`)
-                    );
-
+            spriteData.css
+                .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
+                .pipe(
+                    notifier.success(
+                        `${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready`,
+                    ),
+                )
+                .end(() => {
+                    done();
+                });
         }
 
         tars.skipTaskLog('css:make-fallback-for-svg', 'Svg-fallback is not used');
