@@ -167,6 +167,7 @@ module.exports = () => {
                 console.log(
                     gutil.colors.black.bold('--------------------------------------------------------\n'),
                 );
+                done();
             }
 
             // Start init
@@ -179,8 +180,6 @@ module.exports = () => {
                         'Please, repost with message and the stack trace to developer tars.builder@gmail.com',
                     );
                     console.error(error.stack);
-                })
-                .finally(() => {
                     done();
                 });
         }),
