@@ -13,7 +13,10 @@ tars.helpers.tarsFsHelper.getTasks().forEach((file) => require(file)());
 
 // Register links to main tasks without namespace
 // Build-dev task. Build dev-version (without watchers)
-gulp.task('build-dev', () => gulp.start('main:build-dev'));
+gulp.task(
+    'build-dev',
+    gulp.series('main:build-dev', (done) => done()),
+);
 
 // Dev task. Build dev-version with watchers and livereload
 gulp.task(
@@ -22,13 +25,25 @@ gulp.task(
 );
 
 // Build task. Build release version
-gulp.task('build', () => gulp.series('main:build'));
+gulp.task(
+    'build',
+    gulp.series('main:build', (done) => done()),
+);
 
 // Init task. Just start init task
-gulp.task('init', () => gulp.start('service:init'));
+gulp.task(
+    'init',
+    gulp.series('service:init', (done) => done()),
+);
 
 // Update-deps task. Just start update-deps task
-gulp.task('update-deps', () => gulp.start('service:update-deps'));
+gulp.task(
+    'update-deps',
+    gulp.series('service:update-deps', (done) => done()),
+);
 
 // Default task. Just start build task
-gulp.task('default', () => gulp.start('build'));
+gulp.task(
+    'default',
+    gulp.series('build', (done) => done()),
+);

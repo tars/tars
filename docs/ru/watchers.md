@@ -12,6 +12,7 @@
 
 ```javascript
 const gulp = tars.packages.gulp;
+const runSequence = tars.packages.runSequence.use(gulp);
 const gutil = tars.packages.gutil;
 const chokidar = tars.packages.chokidar;
 const watcherLog = tars.helpers.watcherLog;
@@ -30,7 +31,7 @@ const watcherLog = tars.helpers.watcherLog;
     ).on('all', function(event, path) {
         watcherLog(event, path);
         // You could start as many tasks as you need
-        gulp.start(/* Task name (String) to start */);
+        runSequence(/* Task name (String) to start */);
     });
 ```
 

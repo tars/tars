@@ -31,7 +31,6 @@ module.exports = () => {
         }
 
         if (tars.config.svg.active && tars.config.svg.workflow === 'sprite') {
-            console.log('css:make-sprite-for-svg');
             return gulp
                 .src(`${imagesFolderPath}/minified-svg/*.svg`)
                 .pipe(
