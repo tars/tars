@@ -7,29 +7,34 @@ const runSequence = tars.packages.runSequence.use(gulp);
  * Build dev-version (without watchers)
  */
 module.exports = () => {
-    return gulp.task('main:build-dev', function (cb) {
+    return gulp.task('main:build-dev', function(cb) {
         tars.options.notify = false;
-        tars.options.watch.isActive = this.seq.slice(-1)[0] === 'dev' ? true : false; // eslint-disable-line no-invalid-this
 
         runSequence(
             'service:clean',
             ['images:minify-svg', 'images:raster-svg'],
             [
-                'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite',
-                'images:make-symbols-sprite'
+                'css:make-sprite-for-svg',
+                'css:make-fallback-for-svg',
+                'css:make-sprite',
+                'images:make-symbols-sprite',
             ],
             [
-                'css:compile-css', 'css:compile-css-for-ie8', 'css:compile-css-for-ie9', 'css:move-separate',
+                'css:compile-css',
+                'css:compile-css-for-ie8',
+                'css:compile-css-for-ie9',
+                'css:move-separate',
                 'html:concat-mocks-data',
-                'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
-                'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img',
-                'js:move-separate'
+                'other:move-misc-files',
+                'other:move-fonts',
+                'other:move-assets',
+                'images:move-content-img',
+                'images:move-plugins-img',
+                'images:move-general-img',
+                'js:move-separate',
             ],
-            [
-                'js:processing',
-                'html:compile-templates'
-            ],
-            cb
+            ['js:processing', 'html:compile-templates'],
+            cb,
         );
     });
 };
