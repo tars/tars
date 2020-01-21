@@ -93,9 +93,8 @@ module.exports = () => {
         return spriteData[0].css
             .pipe(skipTaskWithEmptyPipe('css:make-sprite', actionsOnTaskSkipping))
             .pipe(gulp.dest(`./markup/${staticFolderName}/${preprocName}/sprites-${preprocName}/`))
-            .pipe(notifier.success(stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'))
-            .end(() => {
-                done();
-            });
+            .pipe(
+                notifier.success(stringHelper.capitalizeFirstLetter(preprocName) + ' for sprites is ready'),
+            );
     });
 };
