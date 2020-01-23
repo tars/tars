@@ -60,10 +60,7 @@ module.exports = () => {
                     notifier.success(
                         `${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready.`,
                     ),
-                )
-                .end(() => {
-                    done();
-                });
+                );
         }
 
         tars.skipTaskLog('css:make-sprite-for-svg', 'SVG is not used or you prefer symbols workflow');

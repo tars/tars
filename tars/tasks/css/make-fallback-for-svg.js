@@ -80,10 +80,9 @@ module.exports = () => {
                     notifier.success(
                         `${stringHelper.capitalizeFirstLetter(preprocName)} for svg-sprite is ready`,
                     ),
-                )
-                .end(() => {
-                    done();
-                });
+                );
+
+            return spriteData;
         }
 
         tars.skipTaskLog('css:make-fallback-for-svg', 'Svg-fallback is not used');
