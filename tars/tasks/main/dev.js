@@ -30,12 +30,11 @@ module.exports = () => {
         done();
     }
 
-    tars.options.watch.isActive = true;
-
     return gulp.task(
         'main:dev',
         gulp.series('main:build-dev', (done) => {
             tars.options.notify = true;
+            tars.options.watch.isActive = true;
 
             if (tars.useLiveReload) {
                 const useHMR =
