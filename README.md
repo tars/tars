@@ -2,7 +2,7 @@
 English description | <a href="README_RU.md">Описание на русском</a>
 </p>
 
-# Maintainer is neeeded!
+# Maintainer is needed!
 
 # ![Tars](https://raw.githubusercontent.com/artem-malko/artwork/master/tars/logo.png)
 
