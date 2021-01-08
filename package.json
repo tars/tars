@@ -1,6 +1,6 @@
 {
   "name": "tars",
-  "version": "1.14.2",
+  "version": "1.14.3",
   "engines": {
     "node": "^8.x.x"
   },

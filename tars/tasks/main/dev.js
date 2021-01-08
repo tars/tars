@@ -8,6 +8,12 @@ const path = require('path');
 const env = process.env;
 const cwd = process.cwd();
 
+function setWatchMode(cb) {
+    tars.options.notify = true;
+    tars.options.watch.isActive = true;
+    cb();
+}
+
 /**
  * Build dev-version with watchers and livereload.
  */
@@ -32,10 +38,7 @@ module.exports = () => {
 
     return gulp.task(
         'main:dev',
-        gulp.series('main:build-dev', (done) => {
-            tars.options.notify = true;
-            tars.options.watch.isActive = true;
-
+        gulp.series(setWatchMode, 'main:build-dev', (done) => {
             if (tars.useLiveReload) {
                 const useHMR =
                     tars.config.js.workflow === 'modular' &&
