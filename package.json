@@ -1,8 +1,8 @@
 {
   "name": "tars",
-  "version": "1.14.3",
+  "version": "1.15.0",
   "engines": {
-    "node": "^8.x.x"
+    "node": "^16.x.x"
   },
   "os": [
     "darwin",
@@ -50,7 +50,7 @@
     "gulp-pug-inheritance": "https://github.com/artem-malko/gulp-pug-inheritance/archive/master.tar.gz",
     "gulp-rename": "^1.4.0",
     "gulp-replace-task": "0.11.0",
-    "gulp-sass": "https://github.com/stof/gulp-sass/archive/7ab018e3678729392978311eef2cb02754650960.tar.gz",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.7.0",
     "gulp-svg-spritesheet": "https://github.com/artem-malko/gulp-svg-spritesheet/archive/master.tar.gz",
@@ -75,8 +75,8 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "optionalDependencies": {
-    "posix": "^4.1.2",
-    "fsevents": "^2.0.7"
+    "fsevents": "^2.0.7",
+    "posix": "^4.2.0"
   },
   "scripts": {
     "install": "node ./tars/helpers/install-additional-deps.js",
