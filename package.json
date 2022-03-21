@@ -65,6 +65,7 @@
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "run-sequence": "^2.2.1",
+    "sass": "^1.49.9",
     "source-map-loader": "^0.2.4",
     "stream-combiner": "^0.2.2",
     "terser-webpack-plugin": "1.4.1",
