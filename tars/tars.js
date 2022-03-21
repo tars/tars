@@ -245,7 +245,7 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: () => tars.require('gulp-sass')(tars.pluginsConfig['gulp-sass']),
+            preprocessor: () => tars.require('gulp-sass')(tars.require('sass'))(tars.pluginsConfig['gulp-sass']),
         };
         break;
 }
