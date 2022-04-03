@@ -245,7 +245,16 @@ switch (cssPreprocName) {
             name: 'scss',
             ext: '{scss,sass}',
             mainExt: 'scss',
-            preprocessor: () => tars.require('gulp-sass')(tars.pluginsConfig['gulp-sass']),
+            preprocessor: () => {
+                const sass = tars.require('gulp-sass')(tars.require('sass'));
+                /**
+                 * FIXME: Dirty hack for fix error:
+                 *  TypeError: Class constructor CommentArray cannot be invoked without 'new'
+                 *  you need to find where the CommentArray comes from and get rid of it
+                 */
+                const { includePaths, ...options } = tars.pluginsConfig['gulp-sass'];
+                return sass({ ...options, includePaths: [...includePaths] })
+            },
         };
         break;
 }
