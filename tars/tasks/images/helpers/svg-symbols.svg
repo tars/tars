@@ -2,7 +2,7 @@
   <defs>
       <%= defs %>
   </defs><% } %><% _.forEach( icons, function( icon ){ %>
-    <symbol id="<%= icon.id %>" viewBox="<%= icon.svg.viewBox %>"><% if (icon.title) {%>
+    <symbol id="<%= icon.id %>" viewBox="<%= icon.svg.viewBox %>"<% if (icon.svg.fill) {%> fill="<%= icon.svg.fill %>"<% }%>><% if (icon.title) {%>
       <title><%= icon.title %></title><% }%>
       <%= icon.svg.content %>
     </symbol><%
